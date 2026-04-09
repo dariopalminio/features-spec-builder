@@ -42,21 +42,22 @@ Todas las historias siguen el template `story-gherkin-template.md`:
 ## ✅ Criterios de aceptación
 
 ### Escenario principal – {título}
-```gherkin
+
 Dado {contexto}
 Cuando {acción}
 Entonces {resultado}
-```
+
 
 ### Escenario alternativo / error – {título}
-```gherkin
+
 Dado {contexto}
 Cuando {acción inválida}
 Entonces {error}
   Pero {excepción}
-```
+
 
 ## ⚙️ Criterios no funcionales (opcional)
+
 ## 📎 Notas / contexto adicional (opcional)
 ```
 
