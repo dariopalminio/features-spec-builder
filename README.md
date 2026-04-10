@@ -88,6 +88,33 @@ references/
 └── invest.md                    # Base teórica de la rúbrica FINVEST
 ```
 
+## Ejemplo de uso en terminal o extensión de VSCode
+
+Debes instalar los skills en tu entorno de Claude Code, Github copilot u otro cliente agente y luego puedes ejecutar los comandos en el chat de tu agente:
+```
+/story-creation
+/story-split
+/finvest-evaluation
+```
+
+## Ejemplo de uso en Jira
+
+Para usar en Jira debes crear tres agentes.
+
+Studio --> Agentes --> Crear un Agente
+
+Nombre
+[coloca un nombre descriptivo según el agente a configurar, ej: "Escritor Historias de Usuario"]
+
+Configura el agente según la información de cada archivo de carpeta rovo.
+
+## Ejemplo de uso en Gemini - Gem
+
+Para usar en Gemini - Gem debes crear tres agentes usando los mismos archivos de carpeta rovo.
+Debes fucionar el comportamiento con las instrucciones.
+
+En el conocimiento de la gema puedes sumar la plantilla canónica de historia de usuario (localizada en templates de skills) y la base teórica de la rúbrica FINVEST.
+
 ## Base teórica
 
 - Mike Cohn — *User Stories Applied* (2004)
