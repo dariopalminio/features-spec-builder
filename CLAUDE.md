@@ -1,14 +1,21 @@
-# features-spec-builder
+# Agile Spec-Driven-Development Framework (SDDF)
+
+Este es un proyecto Agile Spec-Driven-Development Framework (SDDF) que utiliza un sistema de agentes y skills para automatizar el proceso de especificación de proyectos software, desde la intención inicial hasta la planificación del backlog, y escritura de historias de usuario. El sistema está diseñado para ser minimalista, utilizando solo archivos Markdown para definir agentes, skills y documentos de salida, con un enfoque en la claridad, la estructura y la colaboración entre agentes.
+
+Sistema CLI multiagente minimalista que automatiza el ciclo completo de especificación de proyectos software, desde la intención inicial hasta el backlog planificado, siguiendo un workflow secuencial con control de WIP y revisión humana en cada etapa.
 
 Sistema cliente agentico minimalista que automatiza la especificación de features e historias de usuario solo con skills y templates (scripts y agentes si es necesario) para crear historias de usuario, dividirlas y evaluarlas.
 
-# Entorno de Desarrollo con Docker + VSCode Dev Containers
-🎯 Objetivo
-Tener un entorno de desarrollo completamente aislado usando Docker, donde:
-* El proyecto de agentes IA corre dentro de un contenedor
-* VSCode se conecta directamente al contenedor
-* Hot reload funciona correctamente
-* No se ensucia el sistema host
+## Vision
+
+**Para** builders, freelancers, developers y equipos ágiles que usan IA para acelerar el desarrollo de software,
+**quienes** sufren de procesos manuales, prompts inconsistentes y falta de estructura para transformar ideas en código de calidad de manera predecible,
+**nuestro producto** Agile Spec-Driven-Development Framework (SDDF) es un sistema multiagente minimalista que automatiza todo el ciclo de vida del desarrollo de software – desde la intención inicial hasta el código desplegado – utilizando Spec-Driven Development (OpenSpec / SpecKit), agentes especializados, skills reutilizables y comandos simples, todo gestionado con archivos Markdown.
+
+**Que** provee un workflow ágil y secuencial con control de WIP, puntos de compromiso y revisiones humanas integradas: planificación de releases, especificación de features, descomposición en historias de usuario, generación de tareas, implementación con IA y validación automática, garantizando trazabilidad y calidad en cada paso.
+
+**A diferencia de** escribir prompts ad-hoc, usar herramientas monolíticas o frameworks rígidos que no se adaptan al contexto del proyecto ni permiten evolución orgánica de los templates,
+**nuestro producto** es el único sistema que extrae dinámicamente la estructura de los templates en tiempo de ejecución para generar preguntas contextuales y comandos, permitiendo que el framework evolucione junto con tus prácticas de desarrollo sin modificar código subyacente. Además, integra nativamente con OpenSpec y SpecKit, potenciando sus capacidades con agentes y skills personalizables.
 
 ## Project structure
 
@@ -21,9 +28,9 @@ features_spec_builder/
   ├── CLAUDE.md                        # Instrucciones globales del proyecto
   ├── .claude/                          # Fuente única de verdad para agentes y skills
   │   ├── agents/
-  │   │   ├── product-manager.agent.md # PM — Begin Intention, Discovery
-  │   │   ├── architect.agent.md       # Arquitecto — Specifying, Planning
-  │   │   └── ux-designer.agent.md     # UX — apoyo en Discovery y Specifying
+  │   │   ├── project-pm.agent.md      # PM — Begin Intention, Discovery
+  │   │   ├── project-architect.agent.md # Arquitecto — Specifying, Planning
+  │   │   └── project-ux.agent.md      # UX — apoyo en Discovery y Specifying
   │   └── skills/
   │       ├── skill-name/
   │       │   ├── templates/           # Templates específicos para este skill
@@ -33,4 +40,12 @@ features_spec_builder/
   │       └── ...
 ```
 
+
+# Definición y Uso de Agentes, Skills y Comandos
+
+Los **agentes**, las **skills** y los **comandos** son elementos fundamentales para estructurar un el equipo de inteligencia artificial automatizado para Agile Spec-Driven Development Framework (SDDF). Aquí tienes la definición y el uso de cada uno:
+
+*   **Agentes:** Funcionan como **pequeños empleados virtuales especializados** en tareas concretas dentro de un proyecto, como por ejemplo un agente que hace discovery, otro que redacta especificaciones o uno que diseña arquitectura. Técnicamente, son archivos de texto (Markdown) que contienen instrucciones de roly contexto específico sobre cómo deben actuar. Estos agentes pueden trabajar de forma autónoma, simultánea o en equipo, entregando resultados listos para usar.
+*   **Skills (Habilidades):** Son las **habilidades personalizadas o herramientas** que construyes para dárselas a tus agentes. Se definen mediante documentos de texto que actúan como instrucciones continuas para dotar al agente de una especialización deseada, indicándole exactamente cómo debe comportarse o ejecutar una acción exclusiva. Gracias a las skills, los agentes pueden realizar tareas de forma autónoma, como redactar una especificación siguiendo una plantilla, conectarse a aplicaciones externas o aplicar técnicas específicas de escritura.
+*   **Comandos:** Se utilizan para crear **flujos de trabajo automatizados**. Son archivos donde describes con lenguaje natural las secuencias de acciones que normalmente harías tú de forma manual. Por ejemplo, puedes crear un comando o flujo que, a partir de una sola idea, invoque en paralelo a tres agentes distintos (uno de ux-designer, uno de product-owner y otro de arquitecto) para que hagan su trabajo simultáneamente y guarden los resultados de forma automática en una carpeta de tu ordenador. Pueden ser ùtiles para automatizar workflows de desarrollo de software.
 

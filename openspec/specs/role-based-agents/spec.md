@@ -2,30 +2,30 @@
 
 ## Requirements
 
-### Requirement: Product Manager Agent exists as role-based agent
-El sistema SHALL incluir un agente `product-manager-agent` en `.claude/agents/product-manager-agent.md` con frontmatter YAML válido (name, description, tools, model) que lo describa como PM especializado en entrevistas, discovery e intención de producto.
+### Requirement: Project-PM Agent exists as role-based agent
+El sistema SHALL incluir un agente `project-pm` en `.claude/agents/project-pm.agent.md` con frontmatter YAML válido (name: project-pm, description, tools, model) que lo describa como PM especializado en entrevistas, discovery e intención de producto.
 
 #### Scenario: Agent file exists with valid frontmatter
-- **WHEN** se ejecuta cualquier skill del pipeline (ps-funnel, ps-draft, ps-discovery, ps-approval)
-- **THEN** el sistema DEBE poder invocar `product-manager-agent` como subagente desde el SKILL.md correspondiente
+- **WHEN** se ejecuta cualquier skill del pipeline (project-begin-intention, project-discovery)
+- **THEN** el sistema DEBE poder invocar `project-pm` como subagente desde el SKILL.md correspondiente
 
 #### Scenario: PM agent handles multiple pipeline states
-- **WHEN** un skill de los estados Funnel, Draft, Discovery o Approval invoca al agente
-- **THEN** el `product-manager-agent` DEBE ejecutar la tarea correspondiente a ese estado sin errores
+- **WHEN** un skill de los estados Begin Intention o Discovery invoca al agente
+- **THEN** el `project-pm` DEBE ejecutar la tarea correspondiente a ese estado sin errores
 
-### Requirement: Architect Agent exists as role-based agent
-El sistema SHALL incluir un agente `architect-agent` en `.claude/agents/architect-agent.md` con frontmatter YAML válido que lo describa como arquitecto técnico especializado en especificaciones de software y planificación técnica.
+### Requirement: Project-Architect Agent exists as role-based agent
+El sistema SHALL incluir un agente `project-architect` en `.claude/agents/project-architect.agent.md` con frontmatter YAML válido (name: project-architect, description, tools, model) que lo describa como arquitecto técnico especializado en especificaciones de software y planificación técnica.
 
 #### Scenario: Architect agent handles specifying and planning states
-- **WHEN** los skills ps-specifying o ps-planning invocan al agente
-- **THEN** el `architect-agent` DEBE ejecutar la tarea correspondiente con enfoque técnico
+- **WHEN** los skills project-discovery o project-planning invocan al agente
+- **THEN** el `project-architect` DEBE ejecutar la tarea correspondiente con enfoque técnico
 
-### Requirement: UX Designer Agent exists as role-based agent
-El sistema SHALL incluir un agente `ux-designer-agent` en `.claude/agents/ux-designer-agent.md` con frontmatter YAML válido que lo describa como UX Designer especializado en flujos de usuario y usabilidad.
+### Requirement: Project-UX Agent exists as role-based agent
+El sistema SHALL incluir un agente `project-ux` en `.claude/agents/project-ux.agent.md` con frontmatter YAML válido (name: project-ux, description, tools, model) que lo describa como UX Designer especializado en flujos de usuario y usabilidad.
 
 #### Scenario: UX agent supports discovery state
-- **WHEN** el skill ps-discovery invoca al agente UX como agente secundario
-- **THEN** el `ux-designer-agent` DEBE aportar perspectiva de usabilidad al documento de discovery generado
+- **WHEN** el skill project-discovery invoca al agente UX como agente secundario
+- **THEN** el `project-ux` DEBE aportar perspectiva de usabilidad al documento de discovery generado
 
 ### Requirement: Task-based agents are removed
 El sistema NO SHALL contener agentes task-based (`funnel-agent`, `draft-agent`, `discovery-agent`, `specifying-agent`, `approval-agent`, `planning-agent`) en `.claude/agents/` tras la migración.
@@ -37,10 +37,10 @@ El sistema NO SHALL contener agentes task-based (`funnel-agent`, `draft-agent`, 
 ### Requirement: Skills reference role-based agents
 Todos los SKILL.md que previamente referenciaban agentes task-based SHALL actualizarse para referenciar los agentes role-based correspondientes según el mapeo definido en design.md.
 
-#### Scenario: ps-funnel skill uses product-manager-agent
+#### Scenario: ps-funnel skill uses project-pm
 - **WHEN** el usuario ejecuta `/ps-funnel`
-- **THEN** el skill MUST invocar `product-manager-agent` (no `funnel-agent`)
+- **THEN** el skill MUST invocar `project-pm` (no `funnel-agent`)
 
-#### Scenario: ps-specifying skill uses architect-agent
+#### Scenario: ps-specifying skill uses project-architect
 - **WHEN** el usuario ejecuta `/ps-specifying`
-- **THEN** el skill MUST invocar `architect-agent` como agente principal
+- **THEN** el skill MUST invocar `project-architect` como agente principal

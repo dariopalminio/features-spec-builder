@@ -3,7 +3,7 @@
 **Versión**: 1.0
 **Estado**: Doing
 **Fecha**: 2026-04-04
-**Generado por**: architect-agent
+**Generado por**: project-architect
 
 ---
 
@@ -17,9 +17,9 @@ Construir un sistema multiagente minimalista que convierta la intención inicial
 
 - [ ] **FEAT-001: Extracción dinámica de templates** — El agente extrae en runtime los headers `##` y comentarios `<!-- -->` de cada template para derivar secciones y preguntas sin lógica hardcodeada. _(deps: —)_
 - [ ] **FEAT-002: Estructura autónoma de skills** — Cada skill es autónomo con su `SKILL.md` y subdirectorio `templates/`, permitiendo identificar el template de cada fase sin documentación adicional. _(deps: —)_
-- [ ] **FEAT-003: Generación de project-intent.md** — El agente `product-manager-agent` conduce la fase `begin-intention` y genera `docs/specs/project/project-intent.md` con todas las secciones del template completadas. _(deps: FEAT-001, FEAT-002)_
-- [ ] **FEAT-004: Generación de requirement-spec.md** — El agente `architect-agent` conduce la fase `ps-discovery` y genera `docs/specs/project/requirement-spec.md` a partir del project-intent y la entrevista de especificación. _(deps: FEAT-001, FEAT-002, FEAT-003)_
-- [ ] **FEAT-005: Generación de project-plan.md** — El agente `architect-agent` conduce la fase `ps-planning` y genera `docs/specs/project/project-plan.md` con backlog priorizado y releases incrementales. _(deps: FEAT-001, FEAT-002, FEAT-004)_
+- [ ] **FEAT-003: Generación de project-intent.md** — El agente `project-pm` conduce la fase `begin-intention` y genera `docs/specs/project/project-intent.md` con todas las secciones del template completadas. _(deps: FEAT-001, FEAT-002)_
+- [ ] **FEAT-004: Generación de requirement-spec.md** — El agente `project-architect` conduce la fase `project-discovery` y genera `docs/specs/project/requirement-spec.md` a partir del project-intent y la entrevista de especificación. _(deps: FEAT-001, FEAT-002, FEAT-003)_
+- [ ] **FEAT-005: Generación de project-plan.md** — El agente `project-architect` conduce la fase `project-planning` y genera `docs/specs/project/project-plan.md` con backlog priorizado y releases incrementales. _(deps: FEAT-001, FEAT-002, FEAT-004)_
 - [ ] **FEAT-006: Metadatos de trazabilidad** — Cada documento generado incluye nombre del sistema, versión, estado (`Doing`), fecha de generación y agente generador, actualizables al transicionar a `Ready`. _(deps: FEAT-003, FEAT-004, FEAT-005)_
 - [ ] **FEAT-007: Detección automática de estado de fase** — El sistema lee el campo `Estado` del documento de cada fase para determinar si está pendiente, en progreso o completa, sin configuración manual del usuario. _(deps: FEAT-006)_
 - [ ] **FEAT-008: Retoma de proyecto en curso** — El usuario puede retomar cualquier fase ejecutando su comando; el agente lee los documentos existentes y continúa desde el estado detectado. _(deps: FEAT-007)_
@@ -37,7 +37,7 @@ Construir un sistema multiagente minimalista que convierta la intención inicial
 
 ### Release 1: MVP — Workflow completo extremo a extremo
 
-**Objetivo:** Proveer el workflow mínimo funcional que permita a un usuario recorrer las tres fases (begin-intention → ps-discovery → ps-planning) y obtener un project-plan.md listo para ser entregado a un equipo o a la IA para su implementación, con trazabilidad básica en cada documento.
+**Objetivo:** Proveer el workflow mínimo funcional que permita a un usuario recorrer las tres fases (begin-intention → project-discovery → project-planning) y obtener un project-plan.md listo para ser entregado a un equipo o a la IA para su implementación, con trazabilidad básica en cada documento.
 
 - [ ] FEAT-001: Extracción dinámica de templates
 - [ ] FEAT-002: Estructura autónoma de skills
@@ -49,7 +49,7 @@ Construir un sistema multiagente minimalista que convierta la intención inicial
 - [ ] FEAT-011: Inferencia y marcado de contenido faltante
 
 **Criterios de éxito:**
-- [ ] Un usuario puede ejecutar `/ps-begin-intention`, `/ps-discovery` y `/ps-planning` en secuencia y obtener los tres documentos de output sin errores de ejecución ni secciones vacías.
+- [ ] Un usuario puede ejecutar `/project-begin-intention`, `/project-discovery` y `/project-planning` en secuencia y obtener los tres documentos de output sin errores de ejecución ni secciones vacías.
 - [ ] Los documentos generados no requieren reescritura estructural: menos del 30% del contenido generado necesita ser modificado por el usuario para avanzar a la siguiente fase.
 - [ ] Todo contenido no capturado explícitamente del usuario está marcado con `[inferido]`, permitiendo distinguir origen del contenido en revisión.
 

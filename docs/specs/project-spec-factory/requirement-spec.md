@@ -4,7 +4,7 @@
 **Versión**: 1.0
 **Estado**: Doing
 **Fecha**: 2026-04-04
-**Generado por**: architect-agent
+**Generado por**: project-architect
 
 # 1. Definición del proyecto
 
@@ -31,7 +31,7 @@ El impacto es retrabajo, inconsistencia entre proyectos y pérdida de confianza 
 - **Quiénes:** Pierden tiempo y calidad porque no tienen un sistema estructurado para traducir su intención en especificaciones precisas que la IA pueda ejecutar de forma predecible.
 - **Nuestro producto:** ProjectSpecFactory.
 - **Es un/a:** Sistema multiagente minimalista de especificación de proyectos software, implementado como skills, agentes y templates para Claude Code.
-- **Que provee:** Un workflow secuencial (begin-intention → ps-discovery → ps-planning) que convierte la intención inicial en un backlog planificado, con control de WIP y revisión humana en cada etapa.
+- **Que provee:** Un workflow secuencial (begin-intention → project-discovery → project-planning) que convierte la intención inicial en un backlog planificado, con control de WIP y revisión humana en cada etapa.
 - **A diferencia de:** Escribir prompts a mano, usar plantillas sueltas o frameworks genéricos como BMAD que no integran el ciclo completo ni adaptan las preguntas al contexto del proyecto.
 - **Nuestro producto:** Es el único sistema que extrae dinámicamente las secciones de los templates en runtime para derivar las preguntas, garantizando que el proceso de especificación evolucione junto con los templates sin necesidad de actualizar lógica hardcodeada.
 
@@ -45,7 +45,7 @@ El impacto es retrabajo, inconsistencia entre proyectos y pérdida de confianza 
 ## 1.5. Criterios de Éxito
 
 - [ ] Al menos 3 usuarios activos utilizan el sistema dentro de los primeros 3 meses desde el lanzamiento.
-- [ ] Un proyecto completo puede especificarse de inicio a fin (begin-intention → ps-planning) sin intervención manual fuera de las revisiones humanas previstas en el workflow.
+- [ ] Un proyecto completo puede especificarse de inicio a fin (begin-intention → project-planning) sin intervención manual fuera de las revisiones humanas previstas en el workflow.
 - [ ] Los documentos generados no requieren reescritura significativa: el usuario puede avanzar al siguiente estado con ajustes menores o sin ajustes. [inferido: "reescritura significativa" se define como cambios estructurales o de contenido que superen el 30% del documento generado]
 
 ## 1.6. Restricciones
@@ -83,7 +83,7 @@ El impacto es retrabajo, inconsistencia entre proyectos y pérdida de confianza 
 ## 2.1. Gestión del Workflow de Especificación
 
 - **FR-001**: Ejecución del workflow secuencial
-  - **Descripción**: El sistema SHALL soportar un workflow secuencial de tres fases: `begin-intention → ps-discovery → ps-planning`, donde cada fase produce un documento de output que sirve como input de la siguiente.
+  - **Descripción**: El sistema SHALL soportar un workflow secuencial de tres fases: `begin-intention → project-discovery → project-planning`, donde cada fase produce un documento de output que sirve como input de la siguiente.
   - **Prioridad**: Alta
   - **Usuario**: US-001, US-002, US-003, US-004
 
@@ -110,12 +110,12 @@ El impacto es retrabajo, inconsistencia entre proyectos y pérdida de confianza 
   - **Usuario**: US-001, US-002, US-003, US-004
 
 - **FR-006**: Generación de requirement-spec.md
-  - **Descripción**: El sistema SHALL generar el documento `docs/specs/project/requirement-spec.md` durante la fase `ps-discovery`, completando todas las secciones del template con la información del discovery, el project-intent y las respuestas del usuario en la entrevista de especificación.
+  - **Descripción**: El sistema SHALL generar el documento `docs/specs/project/requirement-spec.md` durante la fase `project-discovery`, completando todas las secciones del template con la información del discovery, el project-intent y las respuestas del usuario en la entrevista de especificación.
   - **Prioridad**: Alta
   - **Usuario**: US-001, US-002, US-003, US-004
 
 - **FR-007**: Generación de project-plan.md
-  - **Descripción**: El sistema SHALL generar el documento `docs/specs/project/project-plan.md` durante la fase `ps-planning`, produciendo un backlog de features organizado en releases incrementales con criterios de éxito medibles por release.
+  - **Descripción**: El sistema SHALL generar el documento `docs/specs/project/project-plan.md` durante la fase `project-planning`, produciendo un backlog de features organizado en releases incrementales con criterios de éxito medibles por release.
   - **Prioridad**: Alta
   - **Usuario**: US-001, US-002, US-003, US-004
 
@@ -184,12 +184,12 @@ El impacto es retrabajo, inconsistencia entre proyectos y pérdida de confianza 
 - **NFR-003**: Idempotencia de ejecución
   - **Descripción**: Re-ejecutar un comando sobre una fase ya completada NO SHALL duplicar contenido ni sobrescribir datos sin confirmación del usuario.
   - **Prioridad**: Alta
-  - **Criterio de aceptación**: Ejecutar `/ps-discovery` sobre un `requirement-spec.md` en estado `Ready` genera un aviso al usuario antes de cualquier modificación.
+  - **Criterio de aceptación**: Ejecutar `/project-discovery` sobre un `requirement-spec.md` en estado `Ready` genera un aviso al usuario antes de cualquier modificación.
 
 ### 2.2.3 Usabilidad (CLI)
 
 - **NFR-004**: Comandos mnemónicos y consistentes
-  - **Descripción**: Los comandos del sistema SHALL seguir una convención de nomenclatura consistente con prefijo `/ps-` seguido del nombre del estado (ej: `/ps-begin-intention`, `/ps-discovery`, `/ps-planning`). [inferido]
+  - **Descripción**: Los comandos del sistema SHALL seguir una convención de nomenclatura consistente con prefijo `/ps-` seguido del nombre del estado (ej: `/project-begin-intention`, `/project-discovery`, `/project-planning`). [inferido]
   - **Prioridad**: Media
   - **Criterio de aceptación**: Un usuario que conoce un comando puede inferir los demás por analogía.
 
@@ -231,7 +231,7 @@ No aplica para este proyecto. ProjectSpecFactory es un sistema CLI sin interfaz 
 
 - **Runtime**: Claude Code (CLI) con soporte para agentes y skills.
 - **Lenguaje de definición**: Markdown exclusivamente — templates, documentos de output y definiciones de agentes son archivos `.md`.
-- **Agentes**: Archivos individuales en `.claude/agents/` con frontmatter YAML (`name`, `description`, `tools`, `model`). Tres agentes definidos: `product-manager-agent`, `architect-agent`, `ux-designer-agent`.
+- **Agentes**: Archivos individuales en `.claude/agents/` con frontmatter YAML (`name`, `description`, `tools`, `model`). Tres agentes definidos: `project-pm`, `project-architect`, `project-ux`.
 - **Skills**: Directorios en `.claude/skills/<nombre>/` con un `SKILL.md` y un subdirectorio `templates/` con los templates propios del skill.
 - **Persistencia**: Sistema de archivos local. Los documentos de output se escriben en `docs/specs/project/`. No hay base de datos ni almacenamiento remoto.
 - **Control de flujo**: Campo `Estado: [Doing | Ready]` en los metadatos de cada documento Markdown. La lógica de orquestación reside en los agentes, no en infraestructura externa.
@@ -250,7 +250,7 @@ Esta sección debe ser completada por el usuario cuando existan documentos relev
 | **Template** | Archivo Markdown con headers `##` y comentarios `<!-- -->` que definen la estructura de un documento de output y las guías para completarlo. |
 | **Estado** | Campo de metadatos en cada documento con valor `Doing` (en progreso) o `Ready` (completo y revisado por el usuario). |
 | **WIP** | Work In Progress. El sistema aplica WIP=1: un solo proyecto activo a la vez. |
-| **Workflow** | Secuencia de fases del pipeline: `begin-intention → ps-discovery → ps-planning`. |
+| **Workflow** | Secuencia de fases del pipeline: `begin-intention → project-discovery → project-planning`. |
 | **Pre-relleno** | Proceso por el cual el agente completa secciones de un documento usando información ya capturada en documentos de fases anteriores, sin preguntar al usuario. |
 | **[inferido]** | Etiqueta que indica que el contenido fue generado por el agente a partir del contexto del proyecto, no capturado explícitamente del usuario. |
 | **FR** | Functional Requirement. Requisito funcional del sistema. |

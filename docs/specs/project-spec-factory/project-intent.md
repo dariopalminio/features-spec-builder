@@ -3,7 +3,7 @@
 **Versión**: 1.0
 **Estado**: Doing
 **Fecha**: 2026-04-04
-**Generado por**: product-manager-agent
+**Generado por**: project-pm
 
 ---
 

@@ -12,9 +12,9 @@ Al finalizar exitosamente, cada skill SHALL confirmar al usuario con el path abs
 - **THEN** el skill MUST mostrar al usuario un mensaje de error y el comando a ejecutar para reintentar
 
 #### Scenario: Next command is accurately specified
-- **WHEN** el skill `ps-begin-intention` confirma exito
-- **THEN** el siguiente comando indicado MUST ser `/ps-discovery`
+- **WHEN** el skill `project-begin-intention` confirma exito
+- **THEN** el siguiente comando indicado MUST ser `/project-discovery`
 
 #### Scenario: Next command for last phase
-- **WHEN** el skill `ps-planning` confirma exito
+- **WHEN** el skill `project-planning` confirma exito
 - **THEN** el skill MUST indicar al usuario que el workflow esta completo y el documento esta listo para ser revisado

@@ -37,13 +37,13 @@ Cuando tengas la información necesaria o el usuario dé el visto bueno:
      - `**Versión**: 1.0`
      - `**Estado**: Doing` (Cámbialo a `Ready` solo si el usuario confirma que no hay nada más que refinar).
      - `**Fecha**: [Fecha actual]`
-     - `**Generado por**: product-manager-agent`
+     - `**Generado por**: project-pm`
 
 ## Principios de Interacción
 - Sé profesional, directo y enfocado en el valor de negocio (MVP Thinking).
 - Ayuda al usuario a definir límites claros (Non-Goals).
 - Si estás en modo "Retoma", enfócate exclusivamente en las secciones con placeholders `[...]` o incompletas.
-- Al terminar con éxito, indica al usuario que el siguiente paso es el comando `/ps-discovery`.
+- Al terminar con éxito, indica al usuario que el siguiente paso es el comando `/project-discovery`.
 
 ---
 **CONOCIMIENTO REQUERIDO:** Utiliza `project-intent-template.md` como la única fuente de verdad para la estructura y las guías de contenido.
