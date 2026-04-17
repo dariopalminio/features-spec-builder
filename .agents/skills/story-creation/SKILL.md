@@ -10,7 +10,7 @@ Crea una historia de usuario completa a partir de una necesidad o feature descri
 **Usar cuando:**
 - Se necesita redactar una historia de usuario lista para sprint planning
 - Se quiere convertir un requisito o necesidad en una historia bien formada
-- Se va a evaluar la historia con `/finvest-evaluation` y se quiere maximizar el score
+- Se va a evaluar la historia con `/story-finvest-evaluation` y se quiere maximizar el score
 
 ---
 
@@ -84,7 +84,7 @@ El skill acepta tres tipos de input. Detectar cuál aplica antes de continuar:
 #### Tipo C — Nombre de archivo o término de búsqueda
 **Señal:** El input es una palabra o frase corta que no parece texto de historia ni ruta explícita.
 **Acción:**
-1. Buscar en `docs/specs/features/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
+1. Buscar en `docs/specs/stories/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
 2. Si hay exactamente 1 coincidencia → leerlo y usarlo como base. Continuar al Paso 1.
 3. Si hay más de 1 coincidencia → mostrar la lista y pedir al usuario que elija antes de continuar.
 4. Si no hay coincidencias → tratar el input como Tipo A (texto libre).
@@ -159,7 +159,7 @@ Si alguna dimensión falla, ajustar la historia antes de entregar. Si `S` es dem
 
 #### Guardar la historia como archivo `.md`
 
-Crear el archivo en `docs/specs/features/` con la historia completa en formato `story-gherkin-template.md`.
+Crear el archivo en `docs/specs/stories/` con la historia completa en formato `story-gherkin-template.md`.
 
 **Reglas de nomenclatura:**
 - Formato: `story-{slug}.md`
@@ -168,7 +168,7 @@ Crear el archivo en `docs/specs/features/` con la historia completa en formato `
 
 **Verificar que el directorio existe antes de escribir:**
 ```
-docs/specs/features/
+docs/specs/stories/
 ```
 Si no existe, crearlo.
 
@@ -179,12 +179,12 @@ Si no existe, crearlo.
 Después de guardar el archivo, mostrar en la conversación:
 
 ```
-**Archivo generado:** `docs/specs/features/story-{slug}.md`
+**Archivo generado:** `docs/specs/stories/story-{slug}.md`
 
 [Historia completa en formato story-gherkin-template.md]
 
 ---
-**Nota FINVEST:** Esta historia está lista para evaluarse con `/finvest-evaluation`.
+**Nota FINVEST:** Esta historia está lista para evaluarse con `/story-finvest-evaluation`.
 ```
 
 Si la historia fue simplificada para cumplir INVEST, explicar brevemente qué se dejó fuera de scope y por qué.
@@ -246,7 +246,7 @@ Flujo de recuperación vía email. SMS queda fuera de scope de esta historia.
 ## Referencias
 
 - **Template canónico:** `templates/story-gherkin-template.md`
-- **Evaluación de calidad:** `/finvest-evaluation`
+- **Evaluación de calidad:** `/story-finvest-evaluation`
 - **División de historias grandes:** `/user-story-splitting`
 - Mike Cohn, *User Stories Applied* (2004)
 - INVEST criteria — Bill Wake (2003)

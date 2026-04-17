@@ -18,7 +18,7 @@ Actúa como un Product Owner y crea y ayuda a redactar historias de usuario efec
 **Usar cuando:**
 - Se necesita redactar una historia de usuario lista para sprint planning
 - Se quiere convertir un requisito o necesidad en una historia bien formada
-- Se va a evaluar la historia con `/finvest-evaluation` y se quiere maximizar el score
+- Se va a evaluar la historia con `/story-finvest-evaluation` y se quiere maximizar el score
 
 ---
 
@@ -92,7 +92,7 @@ El skill acepta tres tipos de input. Detectar cuál aplica antes de continuar:
 #### Tipo C — Nombre de archivo o término de búsqueda
 **Señal:** El input es una palabra o frase corta que no parece texto de historia ni ruta explícita.
 **Acción:**
-1. Buscar en `docs/specs/features/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
+1. Buscar en `docs/specs/stories/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
 2. Si hay exactamente 1 coincidencia → leerlo y usarlo como base. Continuar al Paso 1.
 3. Si hay más de 1 coincidencia → mostrar la lista y pedir al usuario que elija antes de continuar.
 4. Si no hay coincidencias → tratar el input como Tipo A (texto libre).
@@ -105,7 +105,7 @@ Actúa como un Product Owner y crea y ayuda a redactar historias de usuario efec
 **Usar cuando:**
 - Se necesita redactar una historia de usuario lista para sprint planning
 - Se quiere convertir un requisito o necesidad en una historia bien formada
-- Se va a evaluar la historia con `/finvest-evaluation` y se quiere maximizar el score
+- Se va a evaluar la historia con `/story-finvest-evaluation` y se quiere maximizar el score
 
 ---
 
@@ -179,7 +179,7 @@ El skill acepta tres tipos de input. Detectar cuál aplica antes de continuar:
 #### Tipo C — Nombre de archivo o término de búsqueda
 **Señal:** El input es una palabra o frase corta que no parece texto de historia ni ruta explícita.
 **Acción:**
-1. Buscar en `docs/specs/features/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
+1. Buscar en `docs/specs/stories/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
 2. Si hay exactamente 1 coincidencia → leerlo y usarlo como base. Continuar al Paso 1.
 3. Si hay más de 1 coincidencia → mostrar la lista y pedir al usuario que elija antes de continuar.
 4. Si no hay coincidencias → tratar el input como Tipo A (texto libre).
@@ -254,7 +254,7 @@ Si alguna dimensión falla, ajustar la historia antes de entregar. Si `S` es dem
 
 #### Guardar la historia como archivo `.md`
 
-Crear el archivo en `docs/specs/features/` con la historia completa en formato `story-gherkin-template.md`.
+Crear el archivo en `docs/specs/stories/` con la historia completa en formato `story-gherkin-template.md`.
 
 **Reglas de nomenclatura:**
 - Formato: `story-{slug}.md`
@@ -273,7 +273,7 @@ Mostrar en la conversación:
 [Historia completa en formato story-gherkin-template.md]
 
 ---
-**Nota FINVEST:** Esta historia está lista para evaluarse con `/finvest-evaluation`.
+**Nota FINVEST:** Esta historia está lista para evaluarse con `/story-finvest-evaluation`.
 ```
 
 Si la historia fue simplificada para cumplir INVEST, explicar brevemente qué se dejó fuera de scope y por qué.

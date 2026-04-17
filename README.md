@@ -96,14 +96,14 @@ Necesidad / feature
  /story-creation          ← Genera la historia en formato canónico
        │
        ▼
- /finvest-evaluation      ← Evalúa la calidad (score S ≤ 2 → dividir)
+ /story-finvest-evaluation      ← Evalúa la calidad (score S ≤ 2 → dividir)
        │
        ├── Ready           → Historia lista para sprint planning
        ├── Refinar         → Aplicar recomendaciones y re-evaluar
        └── Rechazar
              │
              ├── Formato insuficiente → Reescribir con /story-creation
-             └── Historia muy grande  → /story-split → /finvest-evaluation
+             └── Historia muy grande  → /story-split → /story-finvest-evaluation
 ```
 
 ## Comandos
@@ -112,7 +112,7 @@ Necesidad / feature
 |---------|-------------|
 | `/story-creation` | Crea una historia de usuario en formato story-gherkin a partir de una necesidad en lenguaje natural. Aplica Mike Cohn, 3 C's e INVEST. |
 | `/story-split` | Divide una historia grande en historias más pequeñas e independientes usando los 8 patrones de splitting. |
-| `/finvest-evaluation` | Evalúa la calidad de una historia con la rúbrica FINVEST (Formato + INVEST) en escala Likert 1–5. Produce score por dimensión, score global y decisión Ready / Refinar / Rechazar. |
+| `/story-finvest-evaluation` | Evalúa la calidad de una historia con la rúbrica FINVEST (Formato + INVEST) en escala Likert 1–5. Produce score por dimensión, score global y decisión Ready / Refinar / Rechazar. |
 
 ## Template canónico
 
@@ -151,7 +151,7 @@ Entonces {error}
 ├── story-split/
 │   ├── SKILL.md
 │   └── templates/story-gherkin-template.md
-└── finvest-evaluation/
+└── story-finvest-evaluation/
     ├── SKILL.md
     ├── templates/
     │   ├── story-gherkin-template.md
@@ -168,7 +168,7 @@ Entonces {error}
 ```
 /story-creation
 /story-split
-/finvest-evaluation
+/story-finvest-evaluation
 ```
 
 **Jira (Rovo)** — crea un agente en Studio → Agentes → Crear un Agente y configúralo con los prompts de la carpeta `gem/prompts/`.

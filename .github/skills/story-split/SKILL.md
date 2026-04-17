@@ -12,12 +12,20 @@ Toma una historia grande, épica o feature demasiado amplio y lo divide en histo
 - Hay múltiples flujos principales (varios `Cuando` independientes)
 - El equipo no puede estimar la historia con confianza
 - La historia mezcla varios roles, tipos de datos o reglas de negocio distintas
-- `/finvest-evaluation` da score S ≤ 2 (Grande o Épica)
+- `/story-finvest-evaluation` da score S ≤ 2 (Grande o Épica)
 
 **No usar cuando:**
 - La historia ya es pequeña y bien acotada (no sobre-dividir)
 - El splitting crearía dependencias que bloquean entrega
 - Es una tarea técnica sin valor de usuario directo
+
+---
+
+## Restricciones de entrada
+
+**Imágenes adjuntas:** Si el input incluye imágenes adjuntas (wireframes, screenshots u otros archivos binarios de imagen), **ignóralas completamente**. No intentes procesarlas, interpretarlas ni extraer información de ellas. Evalúa únicamente el contenido en texto de la historia de usuario.
+
+Si el usuario adjunta solo una imagen sin proporcionar texto de historia de usuario, responde indicando que el skill requiere el texto de la historia para poder evaluar.
 
 ---
 
@@ -38,7 +46,7 @@ El skill acepta tres tipos de input. Detectar cuál aplica antes de continuar:
 #### Tipo C — Nombre de archivo o término de búsqueda
 **Señal:** El input es una palabra o frase corta que no parece texto de historia ni ruta explícita.
 **Acción:**
-1. Buscar en `docs/specs/features/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
+1. Buscar en `docs/specs/stories/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
 2. Si hay exactamente 1 coincidencia → leerlo y usarlo como historia a dividir. Continuar a la Fase 1.
 3. Si hay más de 1 coincidencia → mostrar la lista y pedir al usuario que elija antes de continuar.
 4. Si no hay coincidencias → tratar el input como Tipo A (texto libre).
@@ -249,7 +257,7 @@ Si alguna historia no cumple **V** (no entrega valor por sí sola), revisar el p
 
 #### Guardar cada historia como archivo `.md`
 
-Por cada historia resultante del split, crear un archivo en `docs/specs/features/`.
+Por cada historia resultante del split, crear un archivo en `docs/specs/stories/`.
 
 **Reglas de nomenclatura:**
 - Formato: `story-{slug}.md`
@@ -258,7 +266,7 @@ Por cada historia resultante del split, crear un archivo en `docs/specs/features
 
 **Verificar que el directorio existe antes de escribir:**
 ```bash
-docs/specs/features/
+docs/specs/stories/
 ```
 Si no existe, crearlo.
 
@@ -278,11 +286,11 @@ Después de guardar los archivos, mostrar el siguiente resumen en la conversaci�
 ## Historias resultantes
 
 ### Historia 1 — {título corto}
-**Archivo:** `docs/specs/features/story-{slug}.md`
+**Archivo:** `docs/specs/stories/story-{slug}.md`
 [Historia completa en formato story-gherkin-template.md]
 
 ### Historia 2 — {título corto}
-**Archivo:** `docs/specs/features/story-{slug}.md`
+**Archivo:** `docs/specs/stories/story-{slug}.md`
 [Historia completa en formato story-gherkin-template.md]
 
 ...
@@ -291,8 +299,8 @@ Después de guardar los archivos, mostrar el siguiente resumen en la conversaci�
 [Qué quedó fuera de scope, dependencias entre historias si las hay, sugerencias de orden de implementación]
 
 ## Archivos generados
-- `docs/specs/features/story-{slug-1}.md`
-- `docs/specs/features/story-{slug-2}.md`
+- `docs/specs/stories/story-{slug-1}.md`
+- `docs/specs/stories/story-{slug-2}.md`
 - ...
 ```
 
@@ -316,7 +324,7 @@ Si se generaron TADs en lugar de historias, explicar claramente que son experime
 
 - **Template canónico:** `templates/story-gherkin-template.md`
 - **Creación de historias:** `/story-creation`
-- **Evaluación de calidad:** `/finvest-evaluation`
+- **Evaluación de calidad:** `/story-finvest-evaluation`
 - Richard Lawrence & Peter Green, *Humanizing Work Guide to Splitting User Stories* — origen de los 8 patrones
 - Bill Wake, *INVEST in Good Stories* (2003)
 - Mike Cohn, *User Stories Applied* (2004)

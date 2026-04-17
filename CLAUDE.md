@@ -23,7 +23,7 @@ Sistema cliente agentico minimalista que automatiza la especificación de featur
 features_spec_builder/   # main package
 tests/                   # pytest tests
 features_spec_builder/
-  ├── docs/specs/features/              # Directorio de salida de documentos generados
+  ├── docs/specs/stories/              # Directorio de salida de documentos generados
   ├── AGENTS.md                        # Convención .agent/ — compatible con Codex, Cursor, etc.
   ├── CLAUDE.md                        # Instrucciones globales del proyecto
   ├── .claude/                          # Fuente única de verdad para agentes y skills

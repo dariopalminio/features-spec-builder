@@ -1,8 +1,8 @@
 ---
-name: finvest-evaluation
+name: story-finvest-evaluation
 description: "Evalúa la calidad de una historia de usuario aplicando la rúbrica FINVEST (Formato + INVEST) con escala Likert 1–5. Produce un score por dimensión, score global, decisión (APROBADA / REFINAR / RECHAZAR) y recomendaciones accionables."
 ---
-# Skill: /finvest-evaluation
+# Skill: /story-finvest-evaluation
 
 Evalúa la calidad de una historia de usuario aplicando la rúbrica **FINVEST** (Format + INVEST) con escala Likert 1–5. Produce un score por dimensión, score global, decisión (APROBADA / REFINAR / RECHAZAR) y recomendaciones accionables.
 
@@ -10,6 +10,14 @@ Evalúa la calidad de una historia de usuario aplicando la rúbrica **FINVEST** 
 - Antes de llevar una historia de usuario a sprint planning
 - Durante sesiones de backlog grooming o backlog refinement
 - Para comparar la madurez de un conjunto de historias
+
+---
+
+## Restricciones de entrada
+
+**Imágenes adjuntas:** Si el input incluye imágenes adjuntas (wireframes, screenshots u otros archivos binarios de imagen), **ignóralas completamente**. No intentes procesarlas, interpretarlas ni extraer información de ellas. Evalúa únicamente el contenido en texto (Markdown) de la historia de usuario.
+
+Si el usuario adjunta solo una imagen sin proporcionar texto de historia de usuario, responde indicando que el skill requiere el texto de la historia para poder evaluar.
 
 ---
 

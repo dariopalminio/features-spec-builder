@@ -18,7 +18,7 @@ Product Owner que te ayuda a dividir historias grandes en partes valiosas.
   2. Diagnosticar la historia original: Analiza escenarios Gherkin, flujos, roles, dependencias y dificultad de estimación. Identifica el patrón de splitting más apropiado.
   3. Seleccionar patrón de splitting: Aplica los patrones en orden (flujo de trabajo, reglas de negocio, variaciones de datos, criterios de aceptación, esfuerzo incremental, dependencias externas, infraestructura, TADs).
   4. Escribir historias resultantes: Cada historia debe ser independiente, negociable, valiosa, estimable, pequeña y testeable (INVEST). Usa lenguaje específico y concreto.
-  5. Validar y entregar: Verifica que cada historia cumple INVEST, guarda cada una como archivo `.md` en `docs/specs/features/` y muestra un resumen con diagnóstico, historias resultantes y notas del splitting.
+  5. Validar y entregar: Verifica que cada historia cumple INVEST, guarda cada una como archivo `.md` en `docs/specs/stories/` y muestra un resumen con diagnóstico, historias resultantes y notas del splitting.
 - No sobre-dividas historias pequeñas ni crees dependencias que bloqueen la entrega.
 - Mantén siempre un tono didáctico, colaborativo y claro. Explica tus decisiones y justifica el patrón de splitting elegido.
 - Si el input es demasiado vago, genera TADs (Tiny Acts of Discovery) en vez de historias y explica por qué. 
@@ -32,7 +32,7 @@ Actúa como un Product Owner y ayuda a dividir historias grandes en partes valio
 - Hay múltiples flujos principales (varios `Cuando` independientes)
 - El equipo no puede estimar la historia con confianza
 - La historia mezcla varios roles, tipos de datos o reglas de negocio distintas
-- `/finvest-evaluation` da score S ≤ 2 (Grande o Épica)
+- `/story-finvest-evaluation` da score S ≤ 2 (Grande o Épica)
 
 **No usar cuando:**
 - La historia ya es pequeña y bien acotada (no sobre-dividir)
@@ -58,7 +58,7 @@ El skill acepta tres tipos de input. Detectar cuál aplica antes de continuar:
 #### Tipo C — Nombre de archivo o término de búsqueda
 **Señal:** El input es una palabra o frase corta que no parece texto de historia ni ruta explícita.
 **Acción:**
-1. Buscar en `docs/specs/features/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
+1. Buscar en `docs/specs/stories/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
 2. Si hay exactamente 1 coincidencia → leerlo y usarlo como historia a dividir. Continuar a la Fase 1.
 3. Si hay más de 1 coincidencia → mostrar la lista y pedir al usuario que elija antes de continuar.
 4. Si no hay coincidencias → tratar el input como Tipo A (texto libre).
@@ -269,7 +269,7 @@ Si alguna historia no cumple **V** (no entrega valor por sí sola), revisar el p
 
 #### Guardar cada historia como archivo `.md`
 
-Por cada historia resultante del split, crear un archivo en `docs/specs/features/`.
+Por cada historia resultante del split, crear un archivo en `docs/specs/stories/`.
 
 **Reglas de nomenclatura:**
 - Formato: `story-{slug}.md`
@@ -278,7 +278,7 @@ Por cada historia resultante del split, crear un archivo en `docs/specs/features
 
 **Verificar que el directorio existe antes de escribir:**
 ```bash
-docs/specs/features/
+docs/specs/stories/
 ```
 Si no existe, crearlo.
 
@@ -298,11 +298,11 @@ Después de guardar los archivos, mostrar el siguiente resumen en la conversaci�
 ## Historias resultantes
 
 ### Historia 1 — {título corto}
-**Archivo:** `docs/specs/features/story-{slug}.md`
+**Archivo:** `docs/specs/stories/story-{slug}.md`
 [Historia completa en formato story-gherkin-template.md]
 
 ### Historia 2 — {título corto}
-**Archivo:** `docs/specs/features/story-{slug}.md`
+**Archivo:** `docs/specs/stories/story-{slug}.md`
 [Historia completa en formato story-gherkin-template.md]
 
 ...
