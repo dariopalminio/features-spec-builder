@@ -33,9 +33,9 @@ Este framework propone y soporta flujos de trabajo a diferentes niveles de granu
 
 Estos niveles tienen cierta semejanza con la jerarquía tradicional de proyectos ágiles (Project --> Epic --> Story), con el modelo "Flight Levels" de Klaus Leopold (L3 -estratégico- --> L2 -coordinación- --> L1 -táctico-) y con los tres niveles que se suelen utilizar en herramientas como Jira software (Initiative --> Epic --> Story).
 
-### Elementos de trabajo (Worki-tems)
+### Elementos de trabajo (Work-items)
 
-Los elementos de trabajo (Worki-tems) representan las unidades de valor o tareas que se gestionan dentro de cada nivel de flujo de trabajo. Cada tipo de elemento de trabajo tiene un propósito específico y se organiza jerárquicamente para reflejar la estructura del proyecto. En este framework, los tipos de elementos de trabajo se organizan de la siguiente manera:
+Los elementos de trabajo (Work-items) representan las unidades de valor o tareas que se gestionan dentro de cada nivel de flujo de trabajo. Cada tipo de elemento de trabajo tiene un propósito específico y se organiza jerárquicamente para reflejar la estructura del proyecto. En este framework, los tipos de elementos de trabajo se organizan de la siguiente manera:
 
 * **Project:** Independientemente que con qué nombre lo implementes en tu herramienta u organización, el Project representa un micro proyecto o iniciativa específica con un objetivo claro, que se divide en releases o entregables. Es el contenedor de más alto nivel dentro del framework.
 * **Release:** Independientemente que con qué nombre lo implementes en tu herramienta u organización, el Release representa un entregable (Epic) o release específico dentro de un proyecto, que se divide en features o stories. Es el contenedor de nivel medio dentro del framework. El release a nivel de gestión de trabajo es independiente del release real y versión de software en herramientas como github. Un entregable Release puede ser liberado de un tirón (acumulativo) o de manera incremental (en varios releases o merges al main). El Release representa un conjunto de features (stories) liberables a producción.
@@ -50,9 +50,9 @@ Las historias Story pueden ser de diferentes tipos según su propósito o natura
 * **Chore:** Tarea técnica no funcional (configuraciones, refactorización, etc.).
 * **Hotfix:** Corrección urgente en producción (flujo especial).
 
-### Jerarquía de elementos de trabajo (Worki-tems)
+### Jerarquía de elementos de trabajo (Work-items)
 
-El modelo jerárquico de elementos de trabajo (Worki-tems) se organiza en tres niveles, reflejando la estructura típica de proyectos ágiles:
+El modelo jerárquico de elementos de trabajo (Work-items) se organiza en tres niveles, reflejando la estructura típica de proyectos ágiles:
 
 ```
 Project (project)
