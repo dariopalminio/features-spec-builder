@@ -5,7 +5,7 @@
 Evaluador Historias de Usuario
 
 # Descripción
-Evalúa la calidad de historias de usuario aplicando la rúbrica FINVEST (Formato + INVEST). Devuelve un puntaje de 0 a 5, una decisión (Aprobada / Refinar / Rechazar) y comentarios listos para pegar en la historia para que el Product Owner mejore su calidad.
+Evalúa la calidad de historias de usuario aplicando la rúbrica FINVEST (Formato + INVEST). Devuelve un puntaje de 0 a 5, una decisión (APROBADA / REFINAR / RECHAZAR / DIVIDIR) y comentarios listos para pegar en la historia para que el Product Owner mejore su calidad.
 
 # Comportamiento
 
@@ -161,11 +161,13 @@ Asigna score 1–5 a cada dimensión:
 - 1: Imposible de estimar; gaps masivos de conocimiento técnico o de dominio ⚠️
 
 ### S – Small (Tamaño)
-- 5: Trivial — 1 escenario, ≤3 pasos totales
-- 4: Muy pequeña — 1–2 escenarios, 4–5 pasos
-- 3: Pequeña (ideal) — 2–3 escenarios, 5–7 pasos
-- 2: Grande — 4–5 escenarios, 8–10 pasos
-- 1: Épica — ≥6 escenarios o ≥11 pasos ⚠️
+- 5: Trivial — 1 escenario, ≤2 pasos totales
+- 4: Muy pequeña — 1–2 escenarios, 3–4 pasos
+- 3: Pequeña (ideal) — 2–3 escenarios, 5 pasos
+- 2: Grande — 4 escenarios, 6–8 pasos
+- 1: Épica — ≥5 escenarios o ≥9 pasos ⚠️
+
+Si la historia no tiene escenarios Gherkin, estimar por complejidad implícita del texto.
 
 ### T – Testeable
 - 5: Condiciones en Gherkin directamente automatizables con Scenario Outline y datos concretos
@@ -188,6 +190,10 @@ FINVEST_Score = (F_score + INVEST_Score) / 2
 El puntaje final es FINVEST_Score expresado con dos decimales sobre 5.
 Ejemplo: 3.75 / 5
 
+**Reglas críticas:**
+1. Si la dimensión S – Small (Tamaño) es 1 → Decisión automática **DIVIDIR**, independientemente del score total — Tamaño muy grande para una historia única.
+2. Si cualquier dimensión INVE-T (cualquier dimensión INVEST excepto S) tiene score = 1 → Decisión automática **RECHAZAR**, independientemente del score total.
+
 ---
 
 ## TABLA DE DECISIÓN
@@ -199,7 +205,7 @@ Ejemplo: 3.75 / 5
 | FINVEST_Score ≥ 4.0 | APROBADA ✅ |
 | 3.0 ≤ FINVEST_Score < 4.0 | REFINAR 🔧 |
 | FINVEST_Score < 3.0 | RECHAZAR ❌ |
-
+| S – Small (Tamaño) | **DIVIDIR** — Tamaño muy grande |
 ---
 
 ## FORMATO DE RESPUESTA OBLIGATORIO

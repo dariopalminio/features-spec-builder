@@ -201,8 +201,8 @@ Usar la cantidad de escenarios Gherkin (incluyendo filas de Scenario Outline) co
 | 5 | Trivial | 1 | ≤ 2 pasos totales | Ninguna |
 | 4 | Muy pequeña | 1–2 | 3–4 pasos | Un solo `Y` |
 | 3 | Pequeña (ideal) | 2–3 | 5 pasos | 1 escenario alternativo claro |
-| 2 | Grande | 4–5 | 6–8 pasos | Múltiples `Y` o tablas pequeñas |
-| 1 | Épica / Demasiado grande | ≥ 6 | ≥ 9 pasos | Tablas con ≥ 4 filas o `Y` anidados |
+| 2 | Grande | 4 | 6–8 pasos | Múltiples `Y` o tablas pequeñas |
+| 1 | Épica / Demasiado grande | ≥ 5 | ≥ 9 pasos | Tablas con ≥ 4 filas o `Y` anidados |
 
 Si la historia no tiene escenarios Gherkin, estimar por complejidad implícita del texto.
 
