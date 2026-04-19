@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.3.2] — 2026-04-18
+
+### Added
+- Skill `/project-flow` as a single entry-point orchestrator for the full ProjectSpecFactory pipeline (`project-begin` → `project-discovery` → `project-planning`) in one interactive session
+- Review gates between phases to enforce explicit confirmation and transition each output document from `**Estado**: Doing` to `**Estado**: Ready`
+- Startup state detection logic in `project-flow` to resume from the appropriate phase based on existing outputs in `docs/specs/project/`
+- Main OpenSpec capability spec for `project-flow-skill` at `openspec/specs/project-flow-skill/spec.md`
+
+---
+
 ## [1.3.1] — 2026-04-17
 
 ### Changed
