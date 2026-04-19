@@ -114,7 +114,7 @@ Sistema CLI multiagente que convierte la intención inicial de un proyecto en un
 ## Workflow
 
 ```
-/project-begin-intention → /project-discovery → /project-planning
+/project-begin → /project-discovery → /project-planning
 ```
 
 Cada comando produce un documento. WIP=1: un proyecto activo a la vez. Cada documento tiene subestados `Doing` y `Ready`.
@@ -123,7 +123,7 @@ Cada comando produce un documento. WIP=1: un proyecto activo a la vez. Cada docu
 
 | Comando | Documento de salida | Agente principal |
 |---------|---------------------|-----------------|
-| `/project-begin-intention` | `docs/specs/project/project-intent.md` | `project-pm` |
+| `/project-begin` | `docs/specs/project/project-intent.md` | `project-pm` |
 | `/project-discovery` | `docs/specs/project/requirement-spec.md` | `project-architect` |
 | `/project-planning` | `docs/specs/project/project-plan.md` | `project-architect` |
 
@@ -151,7 +151,7 @@ Cada comando produce un documento. WIP=1: un proyecto activo a la vez. Cada docu
 │   ├── project-architect.agent.md   # Arquitecto — Discovery, Planning
 │   └── project-ux.agent.md          # UX — apoyo en Discovery
 └── skills/
-    ├── project-begin-intention/
+    ├── project-begin/
     │   ├── SKILL.md
     │   └── templates/project-intent-template.md
     ├── project-discovery/
@@ -182,14 +182,14 @@ Necesidad / feature
  /story-creation          ← Genera la historia en formato canónico
        │
        ▼
- /story-finvest-evaluation      ← Evalúa la calidad (score S ≤ 2 → dividir)
+ /story-evaluation      ← Evalúa la calidad (score S ≤ 2 → dividir)
        │
        ├── Ready           → Historia lista para sprint planning
        ├── Refinar         → Aplicar recomendaciones y re-evaluar
        └── Rechazar
              │
              ├── Formato insuficiente → Reescribir con /story-creation
-             └── Historia muy grande  → /story-split → /story-finvest-evaluation
+             └── Historia muy grande  → /story-split → /story-evaluation
 ```
 
 ## Comandos
@@ -198,7 +198,7 @@ Necesidad / feature
 |---------|-------------|
 | `/story-creation` | Crea una historia de usuario en formato story-gherkin a partir de una necesidad en lenguaje natural. Aplica Mike Cohn, 3 C's e INVEST. |
 | `/story-split` | Divide una historia grande en historias más pequeñas e independientes usando los 8 patrones de splitting. |
-| `/story-finvest-evaluation` | Evalúa la calidad de una historia con la rúbrica FINVEST (Formato + INVEST) en escala Likert 1–5. Produce score por dimensión, score global y decisión Ready / Refinar / Rechazar. |
+| `/story-evaluation` | Evalúa la calidad de una historia con la rúbrica FINVEST (Formato + INVEST) en escala Likert 1–5. Produce score por dimensión, score global y decisión Ready / Refinar / Rechazar. |
 
 ## Template canónico
 
@@ -237,7 +237,7 @@ Entonces {error}
 ├── story-split/
 │   ├── SKILL.md
 │   └── templates/story-gherkin-template.md
-└── story-finvest-evaluation/
+└── story-evaluation/
     ├── SKILL.md
     ├── templates/
     │   ├── story-gherkin-template.md
@@ -254,7 +254,7 @@ Entonces {error}
 ```
 /story-creation
 /story-split
-/story-finvest-evaluation
+/story-evaluation
 ```
 
 **Jira (Rovo)** — crea un agente en Studio → Agentes → Crear un Agente y configúralo con los prompts de la carpeta `gem/prompts/`.

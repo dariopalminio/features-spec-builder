@@ -27,7 +27,7 @@ El skill `/project-discovery` SHALL verificar que `docs/specs/project/project-in
 
 #### Scenario: Input missing or Doing
 - **WHEN** `project-intent.md` no existe o tiene `Estado: Doing`
-- **THEN** el sistema MUST informar al usuario que debe ejecutar `/project-begin-intention` primero y detener la ejecucion
+- **THEN** el sistema MUST informar al usuario que debe ejecutar `/project-begin` primero y detener la ejecucion
 
 ### Requirement: project-discovery produces requirement-spec.md
 El skill `/project-discovery` SHALL producir `docs/specs/project/requirement-spec.md` como unico documento de salida, en una sola sesion que combina discovery de usuarios y especificacion de requisitos.

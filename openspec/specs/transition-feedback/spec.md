@@ -12,7 +12,7 @@ Al finalizar exitosamente, cada skill SHALL confirmar al usuario con el path abs
 - **THEN** el skill MUST mostrar al usuario un mensaje de error y el comando a ejecutar para reintentar
 
 #### Scenario: Next command is accurately specified
-- **WHEN** el skill `project-begin-intention` confirma exito
+- **WHEN** el skill `project-begin` confirma exito
 - **THEN** el siguiente comando indicado MUST ser `/project-discovery`
 
 #### Scenario: Next command for last phase

@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
-### Requirement: project-begin-intention detects active WIP project
-Al ejecutar `/project-begin-intention`, el skill SHALL verificar si existe algun documento en `docs/specs/project/` con `**Estado**: Doing` antes de iniciar la entrevista.
+### Requirement: project-begin detects active WIP project
+Al ejecutar `/project-begin`, el skill SHALL verificar si existe algun documento en `docs/specs/project/` con `**Estado**: Doing` antes de iniciar la entrevista.
 
 #### Scenario: No active project detected
 - **WHEN** ningun documento en `docs/specs/project/` tiene `Estado: Doing`

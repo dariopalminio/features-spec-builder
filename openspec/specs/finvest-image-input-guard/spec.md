@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: El skill ignora adjuntos de imagen
-El skill `story-finvest-evaluation` SHALL evaluar únicamente el contenido en texto (Markdown) de la historia de usuario. Si el input incluye adjuntos de imagen (wireframes, screenshots u otros archivos binarios de imagen), el skill SHALL ignorarlos completamente y no intentar procesarlos ni interpretarlos.
+El skill `story-evaluation` SHALL evaluar únicamente el contenido en texto (Markdown) de la historia de usuario. Si el input incluye adjuntos de imagen (wireframes, screenshots u otros archivos binarios de imagen), el skill SHALL ignorarlos completamente y no intentar procesarlos ni interpretarlos.
 
 #### Scenario: Input con imagen adjunta
 - **WHEN** el usuario invoca el skill con una historia de usuario y una imagen adjunta

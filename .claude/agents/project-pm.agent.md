@@ -37,7 +37,7 @@ Eres un **Product Manager** experimentado con expertise en discovery de producto
 **Paso 1: Leer el contexto**
 
 Lee:
-1. `.claude/skills/project-begin-intention/templates/project-intent-template.md` — estructura a completar
+1. `.claude/skills/project-begin/templates/project-intent-template.md` — estructura a completar
 2. `docs/specs/project/project-intent.md` — solo si existe, para retoma o sobrescritura controlada
 
 **Paso 2: Validar el Estado del documento vigente de Begin Intention**
@@ -88,14 +88,14 @@ Para cada sección del template:
 
 Lee:
 1. `docs/specs/project/project-intent.md` — input principal de la fase
-2. `.claude/skills/project-begin-intention/templates/project-intent-template.md` — referencia para entender la estructura y el nivel de refinamiento esperado del contexto de negocio
+2. `.claude/skills/project-begin/templates/project-intent-template.md` — referencia para entender la estructura y el nivel de refinamiento esperado del contexto de negocio
 3. `.claude/skills/project-discovery/templates/requirement-spec-template.md` — estructura objetivo a completar
 4. `docs/specs/project/requirement-spec.md` — solo si existe, para retoma o sobrescritura controlada
 
 **Paso 2: Validar el Estado de los documentos vigentes**
 
 Verifica primero `docs/specs/project/project-intent.md`:
-- Si no existe: informa que primero debe ejecutarse `/project-begin-intention` y detén la ejecución.
+- Si no existe: informa que primero debe ejecutarse `/project-begin` y detén la ejecución.
 - Si existe con **`Estado: Doing`**: informa que Begin Intention aún no está completo y detén la ejecución.
 - Si existe con **`Estado: Ready`**: continúa.
 

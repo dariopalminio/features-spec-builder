@@ -6,7 +6,7 @@
 El sistema SHALL incluir un agente `project-pm` en `.claude/agents/project-pm.agent.md` con frontmatter YAML válido (name: project-pm, description, tools, model) que lo describa como PM especializado en entrevistas, discovery e intención de producto.
 
 #### Scenario: Agent file exists with valid frontmatter
-- **WHEN** se ejecuta cualquier skill del pipeline (project-begin-intention, project-discovery)
+- **WHEN** se ejecuta cualquier skill del pipeline (project-begin, project-discovery)
 - **THEN** el sistema DEBE poder invocar `project-pm` como subagente desde el SKILL.md correspondiente
 
 #### Scenario: PM agent handles multiple pipeline states

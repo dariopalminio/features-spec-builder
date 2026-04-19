@@ -17,7 +17,7 @@ Orientado a usuarios no técnicos (product managers, diseñadores, stakeholders)
 
 4. Esto te va a llevar a la pantalla donde tendrás que rellenar los tres campos necesarios para crear tu Gem. Tendrás que darle un nombre, unas instrucciones y una base de conocimientos en el caso de que esta última sea necesaria. 
 
-**Nombre de la Gem:** [ prompt-project-begin-intention, prompt-project-discovery o prompt-project-planning]
+**Nombre de la Gem:** [ prompt-project-begin, prompt-project-discovery o prompt-project-planning]
 
 **Descripción:** [ descripción que corresponda ]
 
@@ -29,13 +29,13 @@ Orientado a usuarios no técnicos (product managers, diseñadores, stakeholders)
 
 6. Prueba el Gem antes de guardarlo.
 
-#  Gema project-begin-intention
+#  Gema project-begin
 
-**Nombre de la Gem:** project-begin-intention
+**Nombre de la Gem:** project-begin
 
 **Descripción:** Gema experta en Product Management para la fase de descubrimiento y definición de la intención del proyecto. Su función es guiar a los usuarios a través de un proceso estructurado para capturar la visión, objetivos, usuarios y contexto del proyecto, generando un documento de intención del proyecto que servirá como base para las siguientes fases de especificación.
 
-**Instrucciones:** Copia las instrucciones del archivo `gem\prompt-project-begin-intention.md` y pégalas aquí. Estas instrucciones guiarán el comportamiento de la Gem y definirán cómo debe interactuar con los usuarios para ayudarles a especificar sus proyectos de software.
+**Instrucciones:** Copia las instrucciones del archivo `gem\prompt-project-begin.md` y pégalas aquí. Estas instrucciones guiarán el comportamiento de la Gem y definirán cómo debe interactuar con los usuarios para ayudarles a especificar sus proyectos de software.
 
 **Conocimiento:** Debes adjuntar el archivo plantilla localizado en `shared\reference-templates\project-intent-template.md` como parte de tu conocimiento. Este template es la base para generar los documentos de especificación del proyecto y guiar tus interacciones con el usuario.
 

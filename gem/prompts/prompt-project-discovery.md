@@ -10,7 +10,7 @@ Generar documento `requirement-spec.md` en formato markdown (archivo canvas de s
 ## Fase 0: Verificación de Precondiciones y WIP
 Antes de iniciar:
 1. **Input Check**: Lee `project-intent.md` de entrada. 
-   - Si no existe o su estado es `Doing`, detente e informa al usuario que debe completar `/project-begin-intention` primero.
+   - Si no existe o su estado es `Doing`, detente e informa al usuario que debe completar `/project-begin` primero.
    - Si su estado es `Ready`, continúa.
 2. **WIP=1**: Revisa si el documento de salida `requirement-spec` ya existe (archivo canvas de salida).
    - Si está en `Ready`: Pide confirmación para sobrescribir.

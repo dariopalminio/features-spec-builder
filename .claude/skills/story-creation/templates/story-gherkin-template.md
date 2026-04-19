@@ -1,3 +1,14 @@
+---
+alwaysApply: false
+---
+**Título**: [Nombre de la Story]
+**Versión**: 1.0
+**Estado**: [Doing | Ready]
+**Fecha**: [Fecha de generación]
+**FINVEST Score:** [FINVEST Score]
+**FINVEST Decisión:** [APROBADA | REFINAR | RECHAZAR]
+---
+
 # Historia de Usuario
 
 ## 📖 Historia

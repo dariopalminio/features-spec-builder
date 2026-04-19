@@ -4,7 +4,7 @@ alwaysApply: false
 # Project Intent: [Nombre del Proyecto]
 
 **Versión**: 1.0
-**Estado**: Doing
+**Estado**: [Doing | Ready]
 **Fecha**: [Fecha de generación]
 **Generado por**: project-pm
 

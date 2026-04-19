@@ -10,7 +10,7 @@ Crea una historia de usuario completa a partir de una necesidad o feature descri
 **Usar cuando:**
 - Se necesita redactar una historia de usuario lista para sprint planning
 - Se quiere convertir un requisito o necesidad en una historia bien formada
-- Se va a evaluar la historia con `/story-finvest-evaluation` y se quiere maximizar el score
+- Se va a evaluar la historia con `/story-evaluation` y se quiere maximizar el score
 
 ---
 
@@ -184,7 +184,7 @@ Después de guardar el archivo, mostrar en la conversación:
 [Historia completa en formato story-gherkin-template.md]
 
 ---
-**Nota FINVEST:** Esta historia está lista para evaluarse con `/story-finvest-evaluation`.
+**Nota FINVEST:** Esta historia está lista para evaluarse con `/story-evaluation`.
 ```
 
 Si la historia fue simplificada para cumplir INVEST, explicar brevemente qué se dejó fuera de scope y por qué.
@@ -246,7 +246,7 @@ Flujo de recuperación vía email. SMS queda fuera de scope de esta historia.
 ## Referencias
 
 - **Template canónico:** `templates/story-gherkin-template.md`
-- **Evaluación de calidad:** `/story-finvest-evaluation`
+- **Evaluación de calidad:** `/story-evaluation`
 - **División de historias grandes:** `/user-story-splitting`
 - Mike Cohn, *User Stories Applied* (2004)
 - INVEST criteria — Bill Wake (2003)

@@ -45,7 +45,7 @@ Lee:
 **Paso 2: Validar el estado de los documentos vigentes**
 
 Verifica primero `docs/specs/project/project-intent.md`:
-- Si no existe: informa que primero debe ejecutarse `/project-begin-intention` y detén la ejecución.
+- Si no existe: informa que primero debe ejecutarse `/project-begin` y detén la ejecución.
 - Si existe con `**Estado**: Doing`: informa que Begin Intention aún no está completo y detén la ejecución.
 - Si existe con `**Estado**: Ready`: continúa.
 

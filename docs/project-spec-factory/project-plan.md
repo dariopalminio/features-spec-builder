@@ -49,7 +49,7 @@ Construir un sistema multiagente minimalista que convierta la intención inicial
 - [ ] FEAT-011: Inferencia y marcado de contenido faltante
 
 **Criterios de éxito:**
-- [ ] Un usuario puede ejecutar `/project-begin-intention`, `/project-discovery` y `/project-planning` en secuencia y obtener los tres documentos de output sin errores de ejecución ni secciones vacías.
+- [ ] Un usuario puede ejecutar `/project-begin`, `/project-discovery` y `/project-planning` en secuencia y obtener los tres documentos de output sin errores de ejecución ni secciones vacías.
 - [ ] Los documentos generados no requieren reescritura estructural: menos del 30% del contenido generado necesita ser modificado por el usuario para avanzar a la siguiente fase.
 - [ ] Todo contenido no capturado explícitamente del usuario está marcado con `[inferido]`, permitiendo distinguir origen del contenido en revisión.
 

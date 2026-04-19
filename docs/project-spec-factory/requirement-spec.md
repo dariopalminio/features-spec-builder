@@ -189,7 +189,7 @@ El impacto es retrabajo, inconsistencia entre proyectos y pérdida de confianza 
 ### 2.2.3 Usabilidad (CLI)
 
 - **NFR-004**: Comandos mnemónicos y consistentes
-  - **Descripción**: Los comandos del sistema SHALL seguir una convención de nomenclatura consistente con prefijo `/ps-` seguido del nombre del estado (ej: `/project-begin-intention`, `/project-discovery`, `/project-planning`). [inferido]
+  - **Descripción**: Los comandos del sistema SHALL seguir una convención de nomenclatura consistente con prefijo `/ps-` seguido del nombre del estado (ej: `/project-begin`, `/project-discovery`, `/project-planning`). [inferido]
   - **Prioridad**: Media
   - **Criterio de aceptación**: Un usuario que conoce un comando puede inferir los demás por analogía.
 

@@ -12,7 +12,7 @@ Toma una historia grande, épica o feature demasiado amplio y lo divide en histo
 - Hay múltiples flujos principales (varios `Cuando` independientes)
 - El equipo no puede estimar la historia con confianza
 - La historia mezcla varios roles, tipos de datos o reglas de negocio distintas
-- `/story-finvest-evaluation` da score S ≤ 2 (Grande o Épica)
+- `/story-evaluation` da score S ≤ 2 (Grande o Épica)
 
 **No usar cuando:**
 - La historia ya es pequeña y bien acotada (no sobre-dividir)
@@ -324,7 +324,7 @@ Si se generaron TADs en lugar de historias, explicar claramente que son experime
 
 - **Template canónico:** `templates/story-gherkin-template.md`
 - **Creación de historias:** `/story-creation`
-- **Evaluación de calidad:** `/story-finvest-evaluation`
+- **Evaluación de calidad:** `/story-evaluation`
 - Richard Lawrence & Peter Green, *Humanizing Work Guide to Splitting User Stories* — origen de los 8 patrones
 - Bill Wake, *INVEST in Good Stories* (2003)
 - Mike Cohn, *User Stories Applied* (2004)

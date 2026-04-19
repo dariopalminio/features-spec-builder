@@ -18,7 +18,7 @@ Actúa como un Product Owner y crea y ayuda a redactar historias de usuario efec
 **Usar cuando:**
 - Se necesita redactar una historia de usuario lista para sprint planning
 - Se quiere convertir un requisito o necesidad en una historia bien formada
-- Se va a evaluar la historia con `/story-finvest-evaluation` y se quiere maximizar el score
+- Se va a evaluar la historia con `/story-evaluation` y se quiere maximizar el score
 
 ---
 
@@ -105,7 +105,7 @@ Actúa como un Product Owner y crea y ayuda a redactar historias de usuario efec
 **Usar cuando:**
 - Se necesita redactar una historia de usuario lista para sprint planning
 - Se quiere convertir un requisito o necesidad en una historia bien formada
-- Se va a evaluar la historia con `/story-finvest-evaluation` y se quiere maximizar el score
+- Se va a evaluar la historia con `/story-evaluation` y se quiere maximizar el score
 
 ---
 
@@ -273,7 +273,7 @@ Mostrar en la conversación:
 [Historia completa en formato story-gherkin-template.md]
 
 ---
-**Nota FINVEST:** Esta historia está lista para evaluarse con `/story-finvest-evaluation`.
+**Nota FINVEST:** Esta historia está lista para evaluarse con `/story-evaluation`.
 ```
 
 Si la historia fue simplificada para cumplir INVEST, explicar brevemente qué se dejó fuera de scope y por qué.

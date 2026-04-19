@@ -22,7 +22,7 @@ Lee `docs/specs/project/project-intent.md`.
 - Si el archivo **no existe**: informa al usuario y deten la ejecucion:
 
   > ❌ No se encontró `docs/specs/project/project-intent.md`.
-  > Debes completar primero la fase Begin Intention ejecutando `/project-begin-intention`.
+  > Debes completar primero la fase Begin Intention ejecutando `/project-begin`.
 
 - Si el archivo **existe** pero `**Estado**` es `Doing`: informa al usuario y deten la ejecucion.
 

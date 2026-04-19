@@ -4,7 +4,7 @@ description: >-
   el agente project-pm para capturar la intención del proyecto y refinarla,
   produciendo docs/specs/project/project-intent.md en una sola sesión.
 alwaysApply: false
-name: project-begin-intention
+name: project-begin
 ---
 Eres el orchestrator del estado **Begin Intention** del pipeline de ProjectSpecFactory.
 
@@ -37,19 +37,19 @@ Lee `docs/specs/project/project-intent.md` (si existe) y detecta el valor de `**
 
 ### 3. Verificar que el template existe
 
-Lee `.agent/skills/project-begin-intention/templates/project-intent-template.md`.
+Lee `.agent/skills/project-begin/templates/project-intent-template.md`.
 
 - Si el archivo **existe**: continua al paso 4.
 - Si el archivo **no existe**: informa al usuario y detén la ejecución:
 
-  > ❌ No se encontró el template requerido en `.agent/skills/project-begin-intention/templates/project-intent-template.md`.
+  > ❌ No se encontró el template requerido en `.agent/skills/project-begin/templates/project-intent-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 ### 4. Delegar al project-pm
 
 Invoca al agente `project-pm` con la siguiente instrucción:
 
-> Lee el template en `.agent/skills/project-begin-intention/templates/project-intent-template.md`. Extrae las secciones del template en runtime.
+> Lee el template en `.agent/skills/project-begin/templates/project-intent-template.md`. Extrae las secciones del template en runtime.
 >
 > Si estas en flujo de retoma (documento existente en `Estado: Doing`), primero lee `docs/specs/project/project-intent.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continua solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
@@ -76,4 +76,4 @@ Cuando el `project-pm` termine:
   > ✅ Documento generado correctamente.
   > Path: `D:\code\project-spec-factory\docs\specs\project\project-intent.md`
   > Siguiente comando: `/project-discovery`.
-3. Si no existe, informa al usuario que algo salió mal y sugiere ejecutar `/project-begin-intention` nuevamente.
+3. Si no existe, informa al usuario que algo salió mal y sugiere ejecutar `/project-begin` nuevamente.

@@ -32,7 +32,7 @@ Actúa como un Product Owner y ayuda a dividir historias grandes en partes valio
 - Hay múltiples flujos principales (varios `Cuando` independientes)
 - El equipo no puede estimar la historia con confianza
 - La historia mezcla varios roles, tipos de datos o reglas de negocio distintas
-- `/story-finvest-evaluation` da score S ≤ 2 (Grande o Épica)
+- `/story-evaluation` da score S ≤ 2 (Grande o Épica)
 
 **No usar cuando:**
 - La historia ya es pequeña y bien acotada (no sobre-dividir)
