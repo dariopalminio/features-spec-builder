@@ -1,9 +1,9 @@
 ---
 alwaysApply: false
 ---
-**Título**: Refactor Features Spec Builder (Consolidación y calidad)
+**Título**: Release 04 — Refactor Features Spec Builder (Consolidación y calidad)
 **Versión**: 1.0
-**Estado**: Ready
+**Estado**: Completed
 **Fecha**: 2026-04-17
 ---
 
@@ -15,9 +15,9 @@ Release de consolidación y calidad. Se renombran skills para mayor consistencia
 
 ## Features
 
-- **Renombrado `story-finvest-evaluation` → `story-evaluation`**: Nombre más corto y descriptivo, alineado con la rúbrica FINVEST que ya documenta la dimensión F (Formato).
-- **Restricciones de input en story-evaluation**: Se añade gate explícito para imágenes adjuntas — el skill las ignora y solicita el texto de la historia en su lugar.
-- **Mejora de ejemplos few-shot**: `example-refinar.md` actualizado para representar con mayor fidelidad el caso de historia con formato parcial pero INVEST aceptable.
-- **Soporte Atlassian Rovo expandido**: Agente `story-creator-agent.md` actualizado para operar con el conjunto completo de skills (creation, evaluation, split) en el runtime Rovo.
-- **Sincronización multi-runtime**: Skills de `story-creation` y `story-split` sincronizados entre `.claude/skills/`, `.agents/skills/` y `.github/skills/` para garantizar paridad entre runtimes.
-- **Documentación actualizada**: README y CLAUDE.md revisados para reflejar la arquitectura definitiva del módulo de gestión de historias.
+- [x] **FEAT-007 (mejora) — Renombrado `story-finvest-evaluation` → `story-evaluation`**: Nombre más corto y descriptivo, alineado con la rúbrica FINVEST que ya documenta la dimensión F (Formato).
+- [x] **FEAT-007 (mejora) — Restricciones de input en story-evaluation**: Se añade gate explícito para imágenes adjuntas — el skill las ignora y solicita el texto de la historia en su lugar.
+- [x] **FEAT-007 (mejora) — Mejora de ejemplos few-shot**: `example-refinar.md` actualizado para representar con mayor fidelidad el caso de historia con formato parcial pero INVEST aceptable.
+- [x] **FEAT-030: Soporte Atlassian Rovo expandido**: Agente `story-creator-agent.md` actualizado para operar con el conjunto completo de skills (creation, evaluation, split) en el runtime Rovo.
+- [x] **FEAT-006 / FEAT-012 (mejora) — Sincronización multi-runtime**: Skills de `story-creation` y `story-split` sincronizados entre `.claude/skills/`, `.agents/skills/` y `.github/skills/` para garantizar paridad entre runtimes.
+- [x] **Documentación actualizada**: README y CLAUDE.md revisados para reflejar la arquitectura definitiva del módulo de gestión de historias.

@@ -1,9 +1,9 @@
 ---
 alwaysApply: false
 ---
-**Título**: Reverse Engineering (Ingeniería inversa)
+**Título**: Release 03 — Reverse Engineering (Ingeniería inversa)
 **Versión**: 1.0
-**Estado**: Ready
+**Estado**: Completed
 **Fecha**: 2026-04-16
 ---
 
@@ -15,12 +15,13 @@ Añade la capacidad de ingeniería inversa: dado un repositorio existente, el si
 
 ## Features
 
-- **reverse-engineering** (skill): Orquestador del pipeline de ingeniería inversa. Coordina los 4 agentes en paralelo (Fase 1) y luego el sintetizador (Fase 2). Soporta flags `--focus <path>`, `--update` (modo incremental) y `--verbose`.
-- **Agente reverse-engineer-architect**: Analiza el stack tecnológico, dependencias, patrones arquitectónicos y puntos de integración del repositorio. Produce `.tmp/rfc-architecture.md`.
-- **Agente reverse-engineer-product-discovery**: Extrae features y funcionalidades desde la perspectiva del usuario analizando rutas, componentes UI y endpoints. Produce `.tmp/rfc-features.md`.
-- **Agente reverse-engineer-business-analyst**: Identifica reglas de negocio, validaciones, permisos y workflows del código fuente en formato DADO/CUANDO/ENTONCES. Produce `.tmp/rfc-business-rules.md`.
-- **Agente reverse-engineer-ux-flow-mapper**: Reconstruye el mapa de navegación y flujos de usuario a partir de la configuración de ruteo y guardas. Produce `.tmp/rfc-navigation.md`.
-- **Agente reverse-engineer-synthesizer**: Fusiona los cuatro outputs intermedios y genera el `requirement-spec.md` final siguiendo el template canónico. Marca secciones no inferibles con `<!-- PENDING MANUAL REVIEW -->`.
-- **Niveles de confianza**: Los hallazgos se clasifican como `[DIRECT]`, `[INFERRED]` o `[SUGGESTED]` según la certeza del análisis.
-- **Modo incremental (`--update`)**: Permite re-analizar únicamente las secciones marcadas como pendientes en una ejecución previa.
-- **Template actualizado**: `requirement-spec-template.md` mejorado con el campo "Es un" para categorización de software.
+- [x] **FEAT-017 — reverse-engineering** (skill): Orquestador del pipeline de ingeniería inversa. Coordina los 4 agentes en paralelo (Fase 1) y luego el sintetizador (Fase 2). Soporta flags `--focus <path>`, `--update` (modo incremental) y `--verbose`.
+- [x] **FEAT-018 — Agente reverse-engineer-architect**: Analiza el stack tecnológico, dependencias, patrones arquitectónicos y puntos de integración del repositorio. Produce `.tmp/rfc-architecture.md`.
+- [x] **FEAT-019 — Agente reverse-engineer-product-discovery**: Extrae features y funcionalidades desde la perspectiva del usuario analizando rutas, componentes UI y endpoints. Produce `.tmp/rfc-features.md`.
+- [x] **FEAT-020 — Agente reverse-engineer-business-analyst**: Identifica reglas de negocio, validaciones, permisos y workflows del código fuente en formato DADO/CUANDO/ENTONCES. Produce `.tmp/rfc-business-rules.md`.
+- [x] **FEAT-021 — Agente reverse-engineer-ux-flow-mapper**: Reconstruye el mapa de navegación y flujos de usuario a partir de la configuración de ruteo y guardas. Produce `.tmp/rfc-navigation.md`.
+- [x] **FEAT-022 — Agente reverse-engineer-synthesizer**: Fusiona los cuatro outputs intermedios y genera el `requirement-spec.md` final siguiendo el template canónico. Marca secciones no inferibles con `<!-- PENDING MANUAL REVIEW -->`.
+- [x] **Niveles de confianza**: Los hallazgos se clasifican como `[DIRECT]`, `[INFERRED]` o `[SUGGESTED]` según la certeza del análisis.
+- [x] **FEAT-024 — Modo incremental (`--update`)**: Permite re-analizar únicamente las secciones marcadas como pendientes en una ejecución previa.
+- [x] **FEAT-023 — Scope acotado (`--focus`)**: Permite limitar el análisis a una ruta específica del repositorio usando el flag `--focus <path>`.
+- [x] **Template actualizado**: `requirement-spec-template.md` mejorado con el campo "Es un" para categorización de software.

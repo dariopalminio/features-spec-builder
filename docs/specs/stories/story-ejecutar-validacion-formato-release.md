@@ -1,3 +1,12 @@
+---
+alwaysApply: false
+---
+**Título**: Validación de formato de Release
+**Versión**: 1.0
+**Estado**: Completed
+**Fecha**: 2026-04-20
+---
+
 ## 📖 Historia: Validación de formato de Release
 
 **Como** desarrollador o PM que trabaja con releases en el framework SDDF
