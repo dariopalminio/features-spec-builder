@@ -47,6 +47,8 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 - [ ] **FEAT-030: **Soporte Atlassian Rovo**: Agente `story-creator-agent.md` para el runtime Rovo. _(deps: FEAT-006)_
 - [ ] **FEAT-031: Soporte Atlassian Rovo expandido** — Agente `story-creator-agent.md` actualizado para operar con el conjunto completo de skills (creation, evaluation, split) en el runtime Rovo. _(deps: FEAT-030)_
 - [ ] **FEAT-032: Soporte Atlassian Rovo para Validar Release** — Agente `release-validator-agent.md` para el runtime Rovo. _(deps: FEAT-027, FEAT-030)_
+- [ ] **FEAT-033: Soporte Atlassian Rovo para crear Epic Release** — Agente `release-creator-agent.md` para el runtime Rovo. _(deps: FEAT-027, FEAT-030)_
+
 ---
 
 ## Propuesta de Releases
