@@ -1,3 +1,6 @@
+Busca los skills y agents en .agents
+
+
 # Agile Spec-Driven-Development Framework (SDDF)
 
 Este es un proyecto Agile Spec-Driven-Development Framework (SDDF) que utiliza un sistema de agentes y skills para automatizar el proceso de especificación de proyectos software, desde la intención inicial hasta la planificación del backlog, y escritura de historias de usuario. El sistema está diseñado para ser minimalista, utilizando solo archivos Markdown para definir agentes, skills y documentos de salida, con un enfoque en la claridad, la estructura y la colaboración entre agentes.
