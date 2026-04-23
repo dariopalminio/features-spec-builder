@@ -410,11 +410,12 @@ cmd /c mklink /D ".github\agents" ".claude\agents"
 Aunque OpenCode tiene sus propias rutas estandarizadas, su diseño es abierto y flexible. La buena noticia es que es compatible con el ecosistema de Claude, además de ofrecerte varias alternativas para compartir skills y agents de forma centralizada sin tener que duplicarlos.
 
 OpenCode busca en:
+```
 .opencode/skills/<skill-name>/SKILL.md (nativa).
 .claude/skills/<skill-name>/SKILL.md (compatible con Claude)
 ~/.config/opencode/skills/<skill-name>/SKILL.md (nativa).
 ~/.claude/skills/<skill-name>/SKILL.md (compatible con Claude)
-
+```
 
 
 
