@@ -49,6 +49,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 - [ ] **FEAT-032: Soporte Atlassian Rovo para Validar Release** — Agente `release-validator-agent.md` para el runtime Rovo. _(deps: FEAT-027, FEAT-030)_
 - [ ] **FEAT-033: Soporte Atlassian Rovo para crear Epic Release** — Agente `release-creator-agent.md` para el runtime Rovo. _(deps: FEAT-027, FEAT-030)_
 - [ ] **FEAT-034: Rovo Agent: Release Reverse Generator from children** — Agente `release-reverse-generator.md` para el runtime Rovo. _(deps: FEAT-027, FEAT-030)
+- [ ] **FEAT-035: Generar todas las stories desde todos los archivo de release**: Skill `release-generate-all-stories` que itera sobre todos los archivos de release en `docs/specs/releases/` y genera las stories correspondientes para cada uno, siguiendo el mismo proceso que `release-generate-stories`.
 
 ---
 

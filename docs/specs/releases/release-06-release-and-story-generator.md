@@ -3,7 +3,7 @@ alwaysApply: false
 ---
 **Título**: Release 06 — Release & Story Generator
 **Versión**: 1.0
-**Estado**: Ready
+**Estado**: Completed
 **Fecha**: 2026-04-20
 ---
 
@@ -17,5 +17,6 @@ Automatiza la creación de dos artefactos clave después del planning: el docume
 - [x] **FEAT-032: Soporte Atlassian Rovo para Validar Release** — Agente `release-validator-agent.md` para el runtime Rovo. _(deps: FEAT-027, FEAT-030)_
 - [x] **FEAT-033: Soporte Atlassian Rovo para crear Epic Release** — Agente `release-creator-agent.md` para el runtime Rovo. _(deps: FEAT-027, FEAT-030)_
 - [x] **FEAT-034: Rovo Agent: Release Reverse Generator from children** — Agente `release-reverse-generator.md` para el runtime Rovo. _(deps: FEAT-027, FEAT-030)
-- [ ] **FEAT-028 — Generar releases:** Skill `releases-from-project-plan` crea `release-[ID]-[Nombre].md` usando template release-spec-template.md.
-- [ ] **FEAT-029 — Generar stories:** Skill `release-generate-stories` crea `story-[ID]-[Nombre].md` desde el archivo de release y usando template story-gherkin-template.md.
+- [x] **FEAT-028 — Generar releases desde project-plan:** Skill `releases-from-project-plan` crea `release-[ID]-[Nombre].md` usando template release-spec-template.md.
+- [x] **FEAT-029 — Generar stories desde archivo de release:** Skill `release-generate-stories` crea `story-[ID]-[Nombre-kebab].md` desde el archivo de release indicado y usando template story-gherkin-template.md se deben crear las historias en el directorio de historias docs\specs\stories. El usuario puede introducir como input el nombre del archivo de release o la ruta relativa del archivo release (docs\specs\releases\nombre-de-archivo-release.md).
+- [x] **FEAT-035: Generar todas las stories desde todos los archivo de release**: Skill `release-generate-all-stories` que itera sobre todos los archivos de release en `docs/specs/releases/` y genera las stories correspondientes para cada uno, siguiendo el mismo proceso que `release-generate-stories`.
