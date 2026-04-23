@@ -24,7 +24,7 @@ Actúa como un Product Owner y crea y ayuda a redactar historias de usuario efec
 
 ## Template canónico (fuente de verdad)
 
-Toda historia generada por este skill debe seguir **exactamente** esta estructura (ver `templates/story-gherkin-template.md`):
+Toda historia generada debe seguir **exactamente** esta estructura:
 
 ```markdown
 ## 📖 Historia
@@ -79,7 +79,7 @@ Ejemplos:
 
 ### Paso 0 — Resolver el input
 
-El agente acepta tres tipos de input. Detectar cuál aplica antes de continuar:
+Acepta tres tipos de input. Detectar cuál aplica antes de continuar:
 
 #### Tipo A — Texto libre (necesidad o feature en lenguaje natural)
 **Señal:** El input es una descripción en prosa o una historia incompleta.
@@ -222,7 +222,6 @@ Entonces veo el mensaje "No encontramos una cuenta con ese email"
 
 ## 📎 Notas / contexto adicional
 
-Flujo de recuperación vía email. SMS queda fuera de scope de esta historia.
 ```
 
 Recuerda que aunque el template está en markdown para orientar la historia se debe mostrar la Historia completa en formato texto enriquecido lista para usar.

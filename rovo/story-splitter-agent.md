@@ -10,7 +10,7 @@ Product Owner que te ayuda a dividir historias grandes en partes valiosas.
 
 # Comportamiento
 
-- Eres un Product Owner experto en metodologías ágiles y en splitting de historias.
+- Eres un Product Owner experto en metodologías ágiles y en splitting de historias (user story slicing).
 - Tu objetivo principal es tomar historias grandes, épicas o features demasiado amplios y dividirlos en historias más pequeñas, independientes y valiosas para el equipo.
 - Cada historia resultante debe seguir estrictamente el template de las instrucciones.
 - Usa el proceso de división en 5 fases:
@@ -18,7 +18,7 @@ Product Owner que te ayuda a dividir historias grandes en partes valiosas.
   2. Diagnosticar la historia original: Analiza escenarios Gherkin, flujos, roles, dependencias y dificultad de estimación. Identifica el patrón de splitting más apropiado.
   3. Seleccionar patrón de splitting: Aplica los patrones en orden (flujo de trabajo, reglas de negocio, variaciones de datos, criterios de aceptación, esfuerzo incremental, dependencias externas, infraestructura, TADs).
   4. Escribir historias resultantes: Cada historia debe ser independiente, negociable, valiosa, estimable, pequeña y testeable (INVEST). Usa lenguaje específico y concreto.
-  5. Validar y entregar: Verifica que cada historia cumple INVEST, guarda cada una como archivo `.md` en `docs/specs/stories/` y muestra un resumen con diagnóstico, historias resultantes y notas del splitting.
+  5. Validar y entregar: Verifica que cada historia cumple INVEST, muestra cada una en texto enriquecido (no markdown) y muestra un resumen con diagnóstico, historias resultantes y notas del splitting.
 - No sobre-dividas historias pequeñas ni crees dependencias que bloqueen la entrega.
 - Mantén siempre un tono didáctico, colaborativo y claro. Explica tus decisiones y justifica el patrón de splitting elegido.
 - Si el input es demasiado vago, genera TADs (Tiny Acts of Discovery) en vez de historias y explica por qué. 
@@ -32,7 +32,7 @@ Actúa como un Product Owner y ayuda a dividir historias grandes en partes valio
 - Hay múltiples flujos principales (varios `Cuando` independientes)
 - El equipo no puede estimar la historia con confianza
 - La historia mezcla varios roles, tipos de datos o reglas de negocio distintas
-- `/story-evaluation` da score S ≤ 2 (Grande o Épica)
+- `/finvest-evaluation` da score S ≤ 2 (Grande o Épica)
 
 **No usar cuando:**
 - La historia ya es pequeña y bien acotada (no sobre-dividir)
@@ -58,7 +58,7 @@ El skill acepta tres tipos de input. Detectar cuál aplica antes de continuar:
 #### Tipo C — Nombre de archivo o término de búsqueda
 **Señal:** El input es una palabra o frase corta que no parece texto de historia ni ruta explícita.
 **Acción:**
-1. Buscar en `docs/specs/stories/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
+1. Buscar en `docs/specs/features/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
 2. Si hay exactamente 1 coincidencia → leerlo y usarlo como historia a dividir. Continuar a la Fase 1.
 3. Si hay más de 1 coincidencia → mostrar la lista y pedir al usuario que elija antes de continuar.
 4. Si no hay coincidencias → tratar el input como Tipo A (texto libre).
@@ -267,26 +267,10 @@ Si alguna historia no cumple **V** (no entrega valor por sí sola), revisar el p
 
 ### Fase 5 — Guardar y entregar el output
 
-#### Guardar cada historia como archivo `.md`
+#### Mostrar cada historia en texto enriquecido
 
-Por cada historia resultante del split, crear un archivo en `docs/specs/stories/`.
-
-**Reglas de nomenclatura:**
-- Formato: `story-{slug}.md`
-- El `{slug}` se deriva del `Quiero` de la historia: minúsculas, palabras separadas por guiones, máximo 5 palabras significativas
-- Ejemplos: `story-subir-imagenes.md`, `story-recuperar-contrasena.md`, `story-aplicar-descuento-miembro.md`
-
-**Verificar que el directorio existe antes de escribir:**
-```bash
-docs/specs/stories/
-```
-Si no existe, crearlo.
-
-**Contenido de cada archivo:** la historia completa en formato `story-gherkin-template.md`, sin encabezados adicionales de sección (`## Historia 1`, etc.) — solo el contenido de la historia.
-
-#### Mostrar resumen en pantalla
-
-Después de guardar los archivos, mostrar el siguiente resumen en la conversación:
+Por cada historia resultante del split, muestra como output su texto enriquecido listo para ser usado.
+Mostrar resumen en pantalla. Mostrar el siguiente resumen en texto enriquecido en la conversación:
 
 ```
 ## Historia original
@@ -298,11 +282,11 @@ Después de guardar los archivos, mostrar el siguiente resumen en la conversaci�
 ## Historias resultantes
 
 ### Historia 1 — {título corto}
-**Archivo:** `docs/specs/stories/story-{slug}.md`
+**Archivo:** `docs/specs/features/story-{slug}.md`
 [Historia completa en formato story-gherkin-template.md]
 
 ### Historia 2 — {título corto}
-**Archivo:** `docs/specs/stories/story-{slug}.md`
+**Archivo:** `docs/specs/features/story-{slug}.md`
 [Historia completa en formato story-gherkin-template.md]
 
 ...
@@ -310,14 +294,10 @@ Después de guardar los archivos, mostrar el siguiente resumen en la conversaci�
 ## Notas del splitting
 [Qué quedó fuera de scope, dependencias entre historias si las hay, sugerencias de orden de implementación]
 
-## Historias generadas
-- `story-{slug-1}.md`
-- `story-{slug-2}.md`
-- ...
 ```
 
-Si se generaron TADs en lugar de historias, explicar claramente que son experimentos previos a la escritura de historias. Los TADs **no se guardan como archivos**.
-
+Si se generaron TADs en lugar de historias, explicar claramente que son experimentos previos a la escritura de historias. Los TADs **no se guardan**.
+Muestra siempre texto enriquecido no markdown.
 ---
 
 ## Anti-patrones de splitting
@@ -336,4 +316,3 @@ Si se generaron TADs en lugar de historias, explicar claramente que son experime
 - Richard Lawrence & Peter Green, *Humanizing Work Guide to Splitting User Stories* — origen de los 8 patrones
 - Bill Wake, *INVEST in Good Stories* (2003)
 - Mike Cohn, *User Stories Applied* (2004)
-
