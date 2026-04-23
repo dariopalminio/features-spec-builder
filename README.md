@@ -381,3 +381,25 @@ skill (entry point + coordinator/orquestador)
 
 Esto es acorde a la arquitectura de Claude Code donde la sesión principal actúa como agente primario que orquesta la ejecución de skills y agentes especializados (Subagentes), manteniendo una estructura plana (Sesión → Subagente), clara y eficiente sin necesidad de múltiples niveles de delegación (agentes en .claude/agents/, invocados por la sesión principal).
 
+# Instalación
+
+## Instalación para Github Copilot
+
+### Copiar skills y agentes a .github
+
+Claude busca los skills en el directorio ".github/skills/" y los agentes en ".github/agents/". 
+Por esta razón si usas Github Copilot debes copiar el contenido de ".agents/" en ".github/".
+
+### La Estrategia de Enlaces Simbólicos (Symlinks)
+
+La solución para no mantener archivos duplicados es usar enlaces simbólicos. En lugar de tener tu carpeta .github/skills/ con los archivos reales, esta carpeta se convierte en un "acceso directo" que apunta a tu directorio central, por ejemplo llamado .agents/skills/. Así, cuando edites un skill en tu source of truth, el cambio se refleja instantáneamente en Claude Code y en cualquier otra herramienta que estés usando.
+
+## Instalación para Claude Code
+
+Claude busca los skills en el directorio ".claude/skills/" y los agentes en ".claude/agents/". 
+La estrategia de enlaces simbólicos no suele funcionar bien.
+Por esta razón si usas claude debes copiar el contenido de ".agents/" en ".claude/".
+
+
+
+
