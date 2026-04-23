@@ -383,11 +383,11 @@ Esto es acorde a la arquitectura de Claude Code donde la sesión principal actú
 
 # Instalación
 
-## Instalación para Github Copilot
-
 ## Instalación para Claude Code
 
 Claude busca los skills en el directorio ".claude/skills/" y los agentes en ".claude/agents/". 
+
+## Instalación para Github Copilot
 
 ### Copiar skills y agentes a .github
 
