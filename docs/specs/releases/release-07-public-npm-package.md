@@ -1,7 +1,7 @@
 ---
 alwaysApply: false
 ---
-**Título**: Release 06 — Release & Story Generator
+**Título**: Publicación del Framework SDDF como Paquete NPM
 **Versión**: 1.0
 **Estado**: Ready
 **Fecha**: 2026-04-20
