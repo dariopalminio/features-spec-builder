@@ -31,8 +31,6 @@ async function copyDir(srcDir, destDir) {
   let skipped = 0;
 
   for (const entry of entries) {
-    if (!entry.isDirectory()) continue;
-
     const srcEntry = path.join(srcDir, entry.name);
     const destEntry = path.join(destDir, entry.name);
 
