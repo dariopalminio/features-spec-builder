@@ -18,12 +18,29 @@
     "url": "https://github.com/dariopalminio/agile-sddf.git"
   },
   "homepage": "https://github.com/dariopalminio/agile-sddf#readme",
-  "files": [
-    ".claude/",
-    "scripts/",
-    "README.md",
-    "LICENSE"
-  ],
+"files": [
+  ".claude/agents/",
+  ".claude/skills/openspec-generate-baseline",
+  ".claude/skills/openspec-init-config",
+  ".claude/skills/project-begin",
+  ".claude/skills/project-discovery",
+  ".claude/skills/project-flow",
+  ".claude/skills/project-planning",
+  ".claude/skills/project-story-mapping",
+  ".claude/skills/release-format-validation",
+  ".claude/skills/release-generate-all-stories",
+  ".claude/skills/release-generate-stories",
+  ".claude/skills/releases-from-project-plan",
+  ".claude/skills/reverse-engineering",
+  ".claude/skills/skill-creator",
+  ".claude/skills/story-creation",
+  ".claude/skills/story-evaluation",
+  ".claude/skills/story-refine",
+  ".claude/skills/story-split",
+  "scripts/",
+  "README.md",
+  "LICENSE"
+],
   "scripts": {
     "postinstall": "node scripts/postinstall.js"
   },

@@ -109,19 +109,51 @@ Todo aparece como "skipped" porque source === destination, npm suprime el output
 
 **El fix:** npm inyecta INIT_CWD con el directorio donde el usuario corrió npm (la raíz del proyecto).
 
+
+### Causa E — El campo "files" en package.json no incluye .claude/
+
+Ser específico en el campo files (más robusto a largo plazo):
+En lugar de .claude/ como directorio completo, listar exactamente qué skills incluir:
+"files": [
+  ".claude/agents/",
+  ".claude/skills/project-begin",
+  ".claude/skills/project-discovery",
+  ".claude/skills/project-flow",
+  ".claude/skills/project-planning",
+  ".claude/skills/project-story-mapping",
+  ".claude/skills/release-format-validation",
+  ".claude/skills/release-generate-all-stories",
+  ".claude/skills/release-generate-stories",
+  ".claude/skills/releases-from-project-plan",
+  ".claude/skills/reverse-engineering",
+  ".claude/skills/skill-creator",
+  ".claude/skills/story-creation",
+  ".claude/skills/story-evaluation",
+  ".claude/skills/story-refine",
+  ".claude/skills/story-split",
+  "scripts/",
+  "README.md",
+  "LICENSE"
+]
+La Opción B es más segura porque cualquier directorio nuevo que agregues a .claude/ no se incluye automáticamente — tienes que declararlo explícitamente.
+
 ## Postsolución
 
-npm version patch         # 1.5.1 → 1.5.4
-git tag -a v1.5.4 -m "Release  v1.5.4 - Fix postinstall script"
-gh release create v1.5.4 --notes-from-tag
-git push origin v1.5.4
+npm version patch         # 1.5.1 → 1.5.5
+git add . 
+git commit -m "chore: version 1.5.5 - Fix postinstall script to install agents correctly"
+git push origin main
+git tag -a v1.5.5 -m "Release  v1.5.5 - Fix postinstall script"
+git push origin v1.5.5
+gh release create v1.5.5 --notes-from-tag
+git push origin v1.5.5
 npm publish --access public
-// la versión subida es agile-sddf@1.5.4
+// la versión subida es agile-sddf@1.5.5
 
-Lo que pasará cuando publiquemos v1.5.4:
+Lo que pasará cuando publiquemos v1.5.5:
 
 En el proyecto del usuario:
-npm install agile-sddf@1.5.4 --foreground-scripts
+npm install agile-sddf@1.5.5 --foreground-scripts
 Esto:
 
 Detecta versión nueva → reinstala
