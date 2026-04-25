@@ -1,8 +1,18 @@
-
-
-# Skills
+# skill-creator references
 .claude/skills/skill-creator
 .agents/skills/skill-creator
-.notas-privadas.md
 
+# openspec references
+.github/prompts/opsx-apply.prompt.md
+.github/prompts/opsx-archive.prompt.md
+.github/prompts/opsx-explore.prompt.md
+.github/prompts/opsx-propose.prompt.md
+.claude/commands/opsx
+.claude/skills/openspec-apply-change
+.claude/skills/openspec-archive-change
+.claude/skills/openspec-explore
+.claude/skills/openspec-propose
+
+# private notes (temporal not shared with the public)
+.notas-privadas.md
 
