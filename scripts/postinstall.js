@@ -11,7 +11,8 @@ function resolveDestDir() {
   if (process.env.npm_config_global === 'true') {
     return { destDir: path.join(os.homedir(), '.claude'), mode: 'global' };
   }
-  return { destDir: path.join(process.cwd(), '.claude'), mode: 'local' };
+  const projectDir = process.env.INIT_CWD || process.cwd();
+  return { destDir: path.join(projectDir, '.claude'), mode: 'local' };
 }
 
 function validateDestBase(destDir) {
