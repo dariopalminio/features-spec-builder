@@ -139,21 +139,21 @@ La Opción B es más segura porque cualquier directorio nuevo que agregues a .cl
 
 ## Postsolución
 
-npm version patch         # 1.5.1 → 1.5.5
+npm version patch         # 1.5.1 → 1.5.6
 git add . 
-git commit -m "chore: version 1.5.5 - Fix postinstall script to install agents correctly"
+git commit -m "chore: version 1.5.6 - Fix postinstall script to install agents correctly"
 git push origin main
-git tag -a v1.5.5 -m "Release  v1.5.5 - Fix postinstall script"
-git push origin v1.5.5
-gh release create v1.5.5 --notes-from-tag
-git push origin v1.5.5
+git tag -a v1.5.6 -m "Release  v1.5.6 - Fix postinstall script"
+git push origin v1.5.6
+gh release create v1.5.6 --notes-from-tag
+git push origin v1.5.6
 npm publish --access public
-// la versión subida es agile-sddf@1.5.5
+// la versión subida es agile-sddf@1.5.6
 
-Lo que pasará cuando publiquemos v1.5.5:
+Lo que pasará cuando publiquemos v1.5.6:
 
 En el proyecto del usuario:
-npm install agile-sddf@1.5.5 --foreground-scripts
+npm install agile-sddf@1.5.6 --foreground-scripts
 Esto:
 
 Detecta versión nueva → reinstala

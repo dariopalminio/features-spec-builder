@@ -20,11 +20,51 @@ Copia automáticamente todos los skills y agentes a `~/.claude/skills/` y `~/.cl
 npm install agile-sddf
 ```
 
+o la última versión:
+```bash
+npm install agile-sddf@latest --foreground-scripts
+```
 Copia los skills y agentes al `.claude/` del directorio actual del proyecto. Útil para mantener versiones distintas del framework por proyecto o para no afectar la configuración global.
 
 > En ambos casos, los archivos que ya existan en el destino no se sobrescriben.
 >
 > **Nota**: Si usas un entorno que bloquea scripts de instalación (`--ignore-scripts`), ejecuta manualmente: `node node_modules/agile-sddf/scripts/postinstall.js` (local) o `node $(npm root -g)/agile-sddf/scripts/postinstall.js` (global).
+
+# Post Instalación
+
+## Instalación para Claude Code
+
+Claude busca los skills en el directorio ".claude/skills/" y los agentes en ".claude/agents/". 
+
+## Instalación para Github Copilot
+
+### Copiar skills y agentes a .github
+
+Github Copilot busca los skills en el directorio ".github/skills/" y los agentes en ".github/agents/". 
+Por esta razón si usas Github Copilot debes copiar el contenido de ".claude/" en ".github/".
+
+### La Estrategia de Enlaces Simbólicos (Symlinks)
+
+La solución para no mantener archivos duplicados es usar enlaces simbólicos. En lugar de tener tu carpeta .github/skills/ con los archivos reales, esta carpeta se convierte en un "acceso directo" que apunta a tu directorio central, por ejemplo llamado .claude/skills/. Así, cuando edites un skill en tu source of truth, el cambio se refleja instantáneamente en Claude Code y en cualquier otra herramienta que estés usando.
+
+Por ejemplo, en Windows puedes usar el comando `mklink` para crear enlaces simbólicos:
+
+```PowerShell
+cmd /c mklink /D ".github\skills" ".claude\skills"
+cmd /c mklink /D ".github\agents" ".claude\agents"
+```
+
+## Instalación para OpenCode
+
+Aunque OpenCode tiene sus propias rutas estandarizadas, su diseño es abierto y flexible. La buena noticia es que es compatible con el ecosistema de Claude, además de ofrecerte varias alternativas para compartir skills y agents de forma centralizada sin tener que duplicarlos.
+
+OpenCode busca en:
+```
+.opencode/skills/<skill-name>/SKILL.md (nativa).
+.claude/skills/<skill-name>/SKILL.md (compatible con Claude)
+~/.config/opencode/skills/<skill-name>/SKILL.md (nativa).
+~/.claude/skills/<skill-name>/SKILL.md (compatible con Claude)
+```
 
 ## Vision
 
@@ -402,42 +442,4 @@ skill (entry point + coordinator/orquestador)
 ```
 
 Esto es acorde a la arquitectura de Claude Code donde la sesión principal actúa como agente primario que orquesta la ejecución de skills y agentes especializados (Subagentes), manteniendo una estructura plana (Sesión → Subagente), clara y eficiente sin necesidad de múltiples niveles de delegación (agentes en .claude/agents/, invocados por la sesión principal).
-
-# Instalación
-
-## Instalación para Claude Code
-
-Claude busca los skills en el directorio ".claude/skills/" y los agentes en ".claude/agents/". 
-
-## Instalación para Github Copilot
-
-### Copiar skills y agentes a .github
-
-Github Copilot busca los skills en el directorio ".github/skills/" y los agentes en ".github/agents/". 
-Por esta razón si usas Github Copilot debes copiar el contenido de ".claude/" en ".github/".
-
-### La Estrategia de Enlaces Simbólicos (Symlinks)
-
-La solución para no mantener archivos duplicados es usar enlaces simbólicos. En lugar de tener tu carpeta .github/skills/ con los archivos reales, esta carpeta se convierte en un "acceso directo" que apunta a tu directorio central, por ejemplo llamado .claude/skills/. Así, cuando edites un skill en tu source of truth, el cambio se refleja instantáneamente en Claude Code y en cualquier otra herramienta que estés usando.
-
-Por ejemplo, en Windows puedes usar el comando `mklink` para crear enlaces simbólicos:
-
-```PowerShell
-cmd /c mklink /D ".github\skills" ".claude\skills"
-cmd /c mklink /D ".github\agents" ".claude\agents"
-```
-
-## Instalación para OpenCode
-
-Aunque OpenCode tiene sus propias rutas estandarizadas, su diseño es abierto y flexible. La buena noticia es que es compatible con el ecosistema de Claude, además de ofrecerte varias alternativas para compartir skills y agents de forma centralizada sin tener que duplicarlos.
-
-OpenCode busca en:
-```
-.opencode/skills/<skill-name>/SKILL.md (nativa).
-.claude/skills/<skill-name>/SKILL.md (compatible con Claude)
-~/.config/opencode/skills/<skill-name>/SKILL.md (nativa).
-~/.claude/skills/<skill-name>/SKILL.md (compatible con Claude)
-```
-
-
 
