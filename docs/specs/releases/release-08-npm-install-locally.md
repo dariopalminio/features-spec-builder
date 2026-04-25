@@ -3,7 +3,7 @@ alwaysApply: false
 ---
 **Título**: Npm Install locally
 **Versión**: 1.0
-**Estado**: Ready
+**Estado**: Completed
 **Fecha**: 2026-04-20
 ---
 
@@ -13,7 +13,9 @@ alwaysApply: false
 Permitir instalación de agile-sddf localmente desde npm, con npm install agile-sddf en el proyecto, copiando los skills y agentes a `./.claude/` para uso en proyectos específicos sin afectar la instalación global. Esto permitirá a los desarrolladores usar el framework en proyectos específicos sin necesidad de instalarlo globalmente, facilitando la gestión de dependencias y evitando conflictos entre proyectos.
 
 ## Features
-- [ ] **FEAT-041: Npm Install locally** — Permitir instalación local del framework con npm install @sddf/core, copiando los skills y agentes a `./.claude/` para uso en proyectos específicos sin afectar la instalación global. _(deps: FEAT-039, FEAT-040)_
+- [x] **FEAT-041: Npm Install locally** — Permitir instalación local del framework con npm install @sddf/core, copiando los skills y agentes a `./.claude/` para uso en proyectos específicos sin afectar la instalación global. _(deps: FEAT-039, FEAT-040)_
+- [x] **FEAT-041: Exclude openspec files** — Excluir archivos de especificación abierta (openspec) de la instalación local para evitar conflictos y mantener la instalación limpia. _(deps: FEAT-039, FEAT-040)_
+
 
 
 
