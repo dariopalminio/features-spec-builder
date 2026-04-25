@@ -54,6 +54,8 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 - [ ] **FEAT-037: Skill openspec-generate-baseline** Skill `openspec-generate-baseline` para que haciendo ingeniería inversa genere una línea base del proyecto como propuesta y luego lo archive para que quede una lìnea base especificada. _(deps: FEAT-037)_
 - [ ] **FEAT-039: Publicar el framework Agile Spec-Driven-Development (SDDF) como paquete NPM para instalación global** — Empaquetar y publicar todos los skills, agentes y templates del framework en NPM para instalación global con npm install -g @sddf/core. _(deps: —)_
 - [ ] **FEAT-040: Instalar skills via postinstall (script)** — Configurar el script `postinstall` para copiar automáticamente los skills y agentes a `~/.claude/` tras la instalación global. Implica crear un script Node.js (scripts/postinstall.js) que npm ejecuta automáticamente al hacer npm install -g.  _(deps: FEAT-039)_
+- [ ] **FEAT-041: Npm Install locally** — Permitir instalación local del framework con npm install @sddf/core, copiando los skills y agentes a `./.claude/` para uso en proyectos específicos sin afectar la instalación global. _(deps: FEAT-039, FEAT-040)_
+
 ---
 
 ## Propuesta de Releases

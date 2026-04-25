@@ -6,13 +6,25 @@ Sistema multiagente minimalista que automatiza el ciclo completo de especificaci
 
 ## Instalación
 
+### Global — disponible en todos tus proyectos
+
 ```bash
 npm install -g agile-sddf
 ```
 
-El script `postinstall` copia automáticamente todos los skills y agentes a `~/.claude/skills/` y `~/.claude/agents/`. Los archivos que ya existan no se sobrescriben.
+Copia automáticamente todos los skills y agentes a `~/.claude/skills/` y `~/.claude/agents/`. Claude Code los detecta globalmente en cualquier proyecto.
 
-> **Nota**: Si usas un entorno que bloquea scripts de instalación (`npm install --ignore-scripts`), ejecuta manualmente: `node $(npm root -g)/agile-sddf/scripts/postinstall.js`
+### Local — aislado al proyecto actual
+
+```bash
+npm install agile-sddf
+```
+
+Copia los skills y agentes al `.claude/` del directorio actual del proyecto. Útil para mantener versiones distintas del framework por proyecto o para no afectar la configuración global.
+
+> En ambos casos, los archivos que ya existan en el destino no se sobrescriben.
+>
+> **Nota**: Si usas un entorno que bloquea scripts de instalación (`--ignore-scripts`), ejecuta manualmente: `node node_modules/agile-sddf/scripts/postinstall.js` (local) o `node $(npm root -g)/agile-sddf/scripts/postinstall.js` (global).
 
 ## Vision
 

@@ -6,9 +6,22 @@ const fs = require('fs');
 const fse = require('fs-extra');
 
 const SOURCE_DIR = path.join(__dirname, '..', '.claude');
-const DEST_DIR = path.join(os.homedir(), '.claude');
 
-async function copyDir(srcDir, destDir, label) {
+function resolveDestDir() {
+  if (process.env.npm_config_global === 'true') {
+    return { destDir: path.join(os.homedir(), '.claude'), mode: 'global' };
+  }
+  return { destDir: path.join(process.cwd(), '.claude'), mode: 'local' };
+}
+
+function validateDestBase(destDir) {
+  if (fs.existsSync(destDir) && !fs.statSync(destDir).isDirectory()) {
+    console.error(`SDDF error: .claude exists but is not a directory`);
+    process.exit(1);
+  }
+}
+
+async function copyDir(srcDir, destDir) {
   if (!fs.existsSync(srcDir)) return { installed: 0, skipped: 0 };
 
   await fse.ensureDir(destDir);
@@ -37,17 +50,21 @@ async function copyDir(srcDir, destDir, label) {
 }
 
 async function main() {
-  console.log('\nSDDF postinstall: copying skills and agents to ~/.claude/\n');
+  const { destDir, mode } = resolveDestDir();
+
+  console.log(`\nSDDF postinstall: copying skills and agents to ${destDir}\n`);
+
+  validateDestBase(destDir);
 
   const skillsSrc = path.join(SOURCE_DIR, 'skills');
-  const skillsDest = path.join(DEST_DIR, 'skills');
-  const { installed: si, skipped: ss } = await copyDir(skillsSrc, skillsDest, 'skills');
+  const skillsDest = path.join(destDir, 'skills');
+  const { installed: si, skipped: ss } = await copyDir(skillsSrc, skillsDest);
 
   const agentsSrc = path.join(SOURCE_DIR, 'agents');
-  const agentsDest = path.join(DEST_DIR, 'agents');
-  const { installed: ai, skipped: as_ } = await copyDir(agentsSrc, agentsDest, 'agents');
+  const agentsDest = path.join(destDir, 'agents');
+  const { installed: ai, skipped: as_ } = await copyDir(agentsSrc, agentsDest);
 
-  console.log(`\nSDDF installed: ${si} skills, ${ai} agents (${ss + as_} skipped)\n`);
+  console.log(`\nSDDF installed (${mode}): ${si} skills, ${ai} agents (${ss + as_} skipped)\n`);
 }
 
 main().catch((err) => {
