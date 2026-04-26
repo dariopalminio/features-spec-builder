@@ -1,0 +1,23 @@
+{
+  "skill_name": "header-aggregation",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Añade el encabezado YAML estándar a docs/specs/stories/story-FEAT-044-directorio-docs-tipo-wiki.md — ese archivo no tiene frontmatter todavía",
+      "expected_output": "El skill lee el archivo, deriva automáticamente slug/type/title/date/status, genera el bloque YAML frontmatter canónico, lo antepone al contenido del archivo sin modificarlo, y muestra un resumen con los campos aplicados.",
+      "files": ["docs/specs/stories/story-FEAT-044-directorio-docs-tipo-wiki.md"]
+    },
+    {
+      "id": 2,
+      "prompt": "Aplica el esquema de metadatos estándar a docs/specs/stories/story-FEAT-042-readme-builder.md — creo que le faltan algunos campos del nuevo esquema canónico",
+      "expected_output": "El skill detecta que el archivo ya tiene frontmatter YAML, construye un frontmatter propuesto con los campos existentes más los faltantes del esquema canónico, muestra el diff (campos añadidos vs preservados) y solicita confirmación al usuario antes de escribir.",
+      "files": ["docs/specs/stories/story-FEAT-042-readme-builder.md"]
+    },
+    {
+      "id": 3,
+      "prompt": "Necesito estandarizar el frontmatter YAML de todos los archivos en docs/specs/releases/ — algunos ya lo tienen, otros no",
+      "expected_output": "El skill activa el modo batch, lista los archivos del directorio, muestra el resumen anticipado (1 sin frontmatter, 8 con frontmatter/conflicto), pregunta la estrategia para los conflictos y solicita confirmación global antes de proceder.",
+      "files": []
+    }
+  ]
+}
