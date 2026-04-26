@@ -109,6 +109,34 @@ cloud-deploy/
 ```
 Claude reads only the relevant reference file.
 
+#### Templates & Multi-Client Design
+
+If your skill uses templates (document structures the model fills in at runtime), apply these rules to ensure the skill works across all runtimes — Claude Code, GitHub Copilot, OpenCode, Google Gemini, Atlassian Rovo — without modifying SKILL.md:
+
+**Templates are read-only runtime contracts.** A template defines structure (sections, order, prompts via `<!-- -->` comments). The skill reads it at runtime and derives behavior from it — never hardcode section names in the skill body. If the template changes, the skill changes automatically.
+
+**Always use relative paths.** Reference templates as `templates/<file>.md` — a path relative to the skill's own directory. Never use absolute paths or client-specific paths like `.claude/skills/my-skill/templates/`. Absolute paths break portability the moment the skill is installed in a different location.
+
+**Standard fallback chain.** The runtime may install the skill in different directories depending on the client. When the primary relative path fails, resolve in this order:
+
+```
+templates/<file>.md                                        ← primary (relative)
+.agents/skills/<skill-name>/templates/<file>.md
+.claude/skills/<skill-name>/templates/<file>.md
+.opencode/skills/<skill-name>/templates/<file>.md
+.github/skills/<skill-name>/templates/<file>.md
+~/.config/opencode/skills/<skill-name>/templates/<file>.md
+~/.claude/skills/<skill-name>/templates/<file>.md
+docs/specs/templates/<file>.md                             ← shared fallback
+→ Error: inform user and stop
+```
+
+Use this exact chain in every skill that reads a template — it's the established project pattern.
+
+**Multi-client principle.** A skill is multi-client when it works identically in any AI runtime without modifying its SKILL.md. Achieving this requires: (1) relative template paths + fallback chain, (2) no hardcoded client-specific directories, (3) instructions that don't assume a specific tool or UI (e.g., don't assume `AskUserQuestion` is always available — the runtime may not support it).
+
+When building a new skill, ask: *"Would this skill work if copied unchanged into a GitHub Copilot instructions file?"* If the answer is no, find the path or assumption that breaks it and fix it.
+
 #### Principle of Lack of Surprise
 
 This goes without saying, but skills must not contain malware, exploit code, or any content that could compromise system security. A skill's contents should not surprise the user in their intent if described. Don't go along with requests to create misleading skills or skills designed to facilitate unauthorized access, data exfiltration, or other malicious activities. Things like a "roleplay as an XYZ" are OK though.
