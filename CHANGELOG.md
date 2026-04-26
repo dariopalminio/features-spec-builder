@@ -6,6 +6,50 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [Unreleased] — Release 09: Docs & Wiki Builders
+
+### Added
+
+- **Skill `/readme-builder`** (FEAT-042) — genera un `README.md` completo a partir de los artefactos SDDF disponibles (`project-intent.md`, `requirement-spec.md`, `project-plan.md`) usando un template como fuente de verdad estructural; descubrimiento de contenido en 3 tiers (specs formales → archivos de contexto LLM → ingeniería inversa); write guard que solicita confirmación antes de sobreescribir un README existente
+- **Skill `/skill-builder`** (FEAT-048) — ciclo iterativo de creación y mejora de skills con captura de intención, redacción de SKILL.md, generación de casos de prueba, ejecución paralela (con skill vs sin skill), grading contra aserciones y viewer HTML de benchmarking; incluye scripts Python y agentes `analyzer`, `comparator`, `grader`
+
+### Changed
+
+- **Skills multicliente con rutas relativas** (FEAT-047) — los skills `project-begin`, `project-discovery`, `project-planning`, `release-format-validation`, `release-generate-all-stories`, `release-generate-stories`, `releases-from-project-plan`, `reverse-engineering`, `story-creation`, `story-evaluation`, `story-split` actualizados para usar rutas relativas a su directorio base, eliminando dependencia de paths absolutos y haciendo los skills portables entre runtimes
+
+---
+
+## [1.5.6] — 2026-04-25
+
+### Fixed
+
+- `package.json` — corrección de campos de metadata del paquete npm
+
+---
+
+## [1.5.5] — 2026-04-25
+
+### Changed
+
+- Eliminada integración por comandos `opsx:*` en favor de invocación por skills
+- Añadida entrada en `.gitignore` para excluir archivos generados de `openspec/`
+
+---
+
+## [1.5.4] — 2026-04-25 — npm Package & Local Install
+
+### Added
+
+- **Publicación como paquete npm** (FEAT-039) — `package.json` con metadata completa; `npm install -g agile-sddf` instala el framework globalmente con script `postinstall` que copia skills y agentes a `~/.claude/`
+- **Instalación local** (FEAT-041) — `npm install agile-sddf` copia skills y agentes a `./.claude/` del proyecto actual sin afectar la instalación global; `scripts/postinstall.js` detecta automáticamente el tipo de instalación (global vs local)
+- **Templates empaquetados por skill** — cada directorio de skill incluye su propio subdirectorio `templates/` para portabilidad multi-cliente; los templates se copian junto con el skill en la instalación
+
+### Fixed
+
+- `scripts/postinstall.js` — incluido el directorio de agentes en el paso de copia (resuelto en 3 iteraciones de fix)
+
+---
+
 ## [1.4.0] — 2026-04-23 — Release & Story Generator + OpenSpec Utilities
 
 ### Added
