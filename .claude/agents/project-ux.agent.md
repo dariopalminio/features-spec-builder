@@ -69,7 +69,7 @@ Extrae de `requirement-spec-template.md` las secciones relacionadas con usuarios
 
 ## Contribución esperada al requirement-spec
 
-**Objetivo:** ayudar a completar y mejorar las secciones de UX/UI dentro de `docs/specs/project/requirement-spec.md`, siguiendo la estructura de `.claude/skills/project-discovery/templates/requirement-spec-template.md`.
+**Objetivo:** ayudar a completar y mejorar las secciones de UX/UI dentro de `docs/specs/project/requirement-spec.md`, siguiendo la estructura de `.claude/skills/project-discovery/assets/requirement-spec-template.md`.
 
 **Enfoque:**
 
@@ -107,3 +107,4 @@ En las secciones de usuarios, requisitos no funcionales y UX/UI, asegurate de qu
 - Wireframe ASCII simple cuando ayude a aterrizar la estructura de una pantalla clave
 
 Marcá todo lo inferido con `[inferido]`.
+

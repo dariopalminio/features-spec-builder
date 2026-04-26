@@ -323,8 +323,8 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
 
 ### 2.2.6 Mantenibilidad y Extensibilidad
 
-- **NFR-010**: Templates como contrato de interfaz entre skills y agentes
-    - **Descripción**: Los archivos en `*/templates/*.md` SHALL ser el contrato entre skills y agentes. Un cambio en un template debe alterar automáticamente el comportamiento de todos los agentes que lo leen en runtime, sin requerir cambios en el código del agente.
+- **NFR-010**: Assets como contrato de interfaz entre skills y agentes
+    - **Descripción**: Los archivos en `*/assets/*.md` SHALL ser el contrato entre skills y agentes. Un cambio en un template debe alterar automáticamente el comportamiento de todos los agentes que lo leen en runtime, sin requerir cambios en el código del agente.
     - **Prioridad**: Alta
     - **Criterio de aceptación**: Al modificar `requirement-spec-template.md`, los agentes `project-pm` y `project-architect` generan preguntas basadas en las nuevas secciones sin actualizar su propio SKILL.md.
 
@@ -601,7 +601,7 @@ Sin referencias.
 ### Feature Gaps
 
 - No hay skill confirmado para generación de código a partir de especificaciones, aunque la visión lo menciona como objetivo. **Pregunta sugerida**: ¿Existe o está planificado un skill de generación de código para una versión futura?
-- ~~Ruta de template inconsistente en `project-discovery`~~ **RESUELTO**: El template `requirement-spec-template.md` fue centralizado en `docs/specs/templates/` y todas las referencias en `project-discovery/SKILL.md` y `reverse-engineering/SKILL.md` fueron actualizadas.
+- ~~Ruta de template inconsistente en `project-discovery`~~ **RESUELTO**: El template `requirement-spec-template.md` fue migrado a `assets/requirement-spec-template.md` dentro del skill y las referencias en `project-discovery/SKILL.md` y `reverse-engineering/SKILL.md` fueron actualizadas.
 - No hay skill para exportar documentos a formatos externos (PDF, Jira, Linear, Notion, GitHub Issues). **Pregunta sugerida**: ¿Está planificada alguna integración de exportación para futuras versiones?
 - ~~`openspec-sync-specs` no encontrado en el repositorio~~ **ACLARADO**: Es el skill `opsx:archive` del CLI externo OpenSpec, no del framework SDDF directamente. No es un gap interno.
 - No se detectó directorio `tests/` para el framework SDDF (mencionado en CLAUDE.md). **Pregunta sugerida**: ¿Existe un plan de testing para el framework o el `tests/` del CLAUDE.md es aspiracional?

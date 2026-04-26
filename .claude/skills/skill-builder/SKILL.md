@@ -78,10 +78,9 @@ skill-name/
 │   ├── YAML frontmatter (name, description required)
 │   └── Markdown instructions
 └── Bundled Resources (optional)
-    ├── templates/   - Document templates for document structures with placeholders to complete
     ├── scripts/    - Executable code for deterministic/repetitive tasks
     ├── references/ - Docs loaded into context as needed
-    └── assets/     - Files used in output (templates, icons, fonts)
+    └── assets/     - Files used in output (templates, icons, fonts), document templates for document structures with placeholders to complete
 ```
 
 #### Progressive Disclosure
@@ -115,21 +114,9 @@ If your skill uses templates (document structures the model fills in at runtime)
 
 **Templates are read-only runtime contracts.** A template defines structure (sections, order, prompts via `<!-- -->` comments). The skill reads it at runtime and derives behavior from it — never hardcode section names in the skill body. If the template changes, the skill changes automatically.
 
-**Always use relative paths.** Reference templates as `templates/<file>.md` — a path relative to the skill's own directory. Never use absolute paths or client-specific paths like `.claude/skills/my-skill/templates/`. Absolute paths break portability the moment the skill is installed in a different location.
+**Always use relative paths.** Reference templates as `assets/<file-template>.md` — a path relative to the skill's own directory. Never use absolute paths or client-specific paths like `my-skill/assets/`. Absolute paths break portability the moment the skill is installed in a different location.
 
 **Standard fallback chain.** The runtime may install the skill in different directories depending on the client. When the primary relative path fails, resolve in this order:
-
-```
-templates/<file>.md                                        ← primary (relative)
-.agents/skills/<skill-name>/templates/<file>.md
-.claude/skills/<skill-name>/templates/<file>.md
-.opencode/skills/<skill-name>/templates/<file>.md
-.github/skills/<skill-name>/templates/<file>.md
-~/.config/opencode/skills/<skill-name>/templates/<file>.md
-~/.claude/skills/<skill-name>/templates/<file>.md
-docs/specs/templates/<file>.md                             ← shared fallback
-→ Error: inform user and stop
-```
 
 Use this exact chain in every skill that reads a template — it's the established project pattern.
 
@@ -512,3 +499,4 @@ Repeating one more time the core loop here for emphasis:
 Please add steps to your TodoList, if you have such a thing, to make sure you don't forget. If you're in Cowork, please specifically put "Create evals JSON and run `eval-viewer/generate_review.py` so human can review test cases" in your TodoList to make sure it happens.
 
 Good luck!
+

@@ -28,21 +28,14 @@ El archivo de plantilla (template canónico) es la **única fuente de informaci�
 
 El archivo de plantilla (template canónico) es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla (template canónico) `templates/story-gherkin-template.md`.
+Lee el archivo de plantilla (template canónico) `assets/story-gherkin-template.md`.
 
-- Si el archivo **existe**: continua con con el siguiente inciso B. "Formato de referencia".
-- Si el archivo **no existe** busca el archivo `story-gherkin-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres:
-- .agents/skills/story-evaluation/templates
-- .claude/skills/story-evaluation/templates
-- .opencode/skills/story-evaluation/templates
-- .github/skills/story-evaluation/templates
-- ~/.config/opencode/skills/story-evaluation/templates
-- ~/.claude/skills/story-evaluation/templates
-- docs/specs/templates
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template requerido en `templates/story-gherkin-template.md`.
+  > ❌ No se encontró el template requerido en `assets/story-gherkin-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
+
+- Si el archivo **existe**: continua con lo siguiente.
 
 ### B. Formato de referencia
 
@@ -252,7 +245,7 @@ Si la historia no tiene escenarios Gherkin, estimar por complejidad implícita d
 
 ## Instrucciones de Output
 
-1. Usar la estructura del template en `templates/evaluation-output-template.md`.
+1. Usar la estructura del template en `assets/evaluation-output-template.md`.
 2. Calcular F_score con dos decimales de precisión.
 3. Si F_score < 2.5, detenerse en Fase 1 y no calcular INVEST.
 4. Para cada dimensión con score ≤ 3, incluir al menos 1 recomendación concreta y accionable en la sección "Comentarios".
@@ -271,3 +264,4 @@ Los 3 ejemplos muestran historias escritas con el template `story-gherkin-templa
 - `examples/example-rechazar.md` — Dos casos:
   - Caso A: Sin secciones ni Gherkin formal → F_score 1.4 → **RECHAZAR** por formato insuficiente
   - Caso B: Secciones completas pero dimensiones INVEST críticas → **RECHAZAR** por I, E, S = 1
+

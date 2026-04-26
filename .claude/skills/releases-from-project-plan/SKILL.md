@@ -4,7 +4,7 @@ description: "Genera archivos de especificación de release (release-[ID]-[Nombr
 ---
 # Skill: /releases-from-project-plan
 
-Lee `docs/specs/project/project-plan.md` y genera automáticamente un archivo `release-[ID]-[Nombre].md` por cada release planificado en la sección "Propuesta de Releases". Cada archivo generado sigue exactamente la estructura de `templates/release-spec-template.md`.
+Lee `docs/specs/project/project-plan.md` y genera automáticamente un archivo `release-[ID]-[Nombre].md` por cada release planificado en la sección "Propuesta de Releases". Cada archivo generado sigue exactamente la estructura de `assets/release-spec-template.md`.
 
 **Usar cuando:**
 - Se quiere materializar los releases de un `project-plan.md` como archivos de especificación listos para editar
@@ -95,27 +95,20 @@ El archivo de plantilla es la **única fuente de información estructural** para
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla `templates/release-spec-template.md`.
+Lee el archivo de plantilla `assets/release-spec-template.md`.
 
-- Si el archivo **existe**: continua con la el paso 3d. (Escribir el archivo de release).
-- Si el archivo **no existe** busca el archivo `release-spec-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres:
-- .agents/skills/releases-from-project-plan/templates
-- .claude/skills/releases-from-project-plan/templates
-- .opencode/skills/releases-from-project-plan/templates
-- .github/skills/releases-from-project-plan/templates
-- ~/.config/opencode/skills/releases-from-project-plan/templates
-- ~/.claude/skills/releases-from-project-plan/templates
-- docs/specs/templates
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template requerido en `templates/release-spec-template.md`.
+  > ❌ No se encontró el template requerido en `assets/release-spec-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
+
+- Si el archivo **existe**: continua.
 
 ### 3d. Escribir el archivo de release
 
 Crear el archivo `docs/specs/releases/release-[ID]-[nombre-kebab].md` con la siguiente estructura, poblando cada sección con los datos del release:
 
-Completa el archivo de plantilla `templates/release-spec-template.md` infiriendo la información. Para cada sección del template, si el dato correspondiente no existe en el bloque del release, usar el placeholder `[Por completar]` para asegurar que la sección siempre está presente y el archivo tiene estructura completa.
+Completa el archivo de plantilla `assets/release-spec-template.md` infiriendo la información. Para cada sección del template, si el dato correspondiente no existe en el bloque del release, usar el placeholder `[Por completar]` para asegurar que la sección siempre está presente y el archivo tiene estructura completa.
 
 Por ejemplo:
 
@@ -207,3 +200,4 @@ Si algún release fue saltado (usuario eligió no sobreescribir), listarlo como:
 - El skill **no modifica** `project-plan.md`.
 - Si el plan contiene releases con el mismo ID (duplicados), generar ambos archivos añadiendo sufijo `-bis` al segundo (ej. `release-01-nombre-bis.md`) e informar al usuario.
 - Las secciones opcionales del template siempre se incluyen con placeholder `[Por completar]` para facilitar la edición posterior y asegurar que el archivo tiene estructura completa.
+

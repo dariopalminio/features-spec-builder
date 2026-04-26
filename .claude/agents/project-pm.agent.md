@@ -37,7 +37,7 @@ Eres un **Product Manager** experimentado con expertise en discovery de producto
 **Paso 1: Leer el contexto**
 
 Lee:
-1. `.claude/skills/project-begin/templates/project-intent-template.md` — estructura a completar
+1. `.claude/skills/project-begin/assets/project-intent-template.md` — estructura a completar
 2. `docs/specs/project/project-intent.md` — solo si existe, para retoma o sobrescritura controlada
 
 **Paso 2: Validar el Estado del documento vigente de Begin Intention**
@@ -88,8 +88,8 @@ Para cada sección del template:
 
 Lee:
 1. `docs/specs/project/project-intent.md` — input principal de la fase
-2. `.claude/skills/project-begin/templates/project-intent-template.md` — referencia para entender la estructura y el nivel de refinamiento esperado del contexto de negocio
-3. `.claude/skills/project-discovery/templates/requirement-spec-template.md` — estructura objetivo a completar
+2. `.claude/skills/project-begin/assets/project-intent-template.md` — referencia para entender la estructura y el nivel de refinamiento esperado del contexto de negocio
+3. `.claude/skills/project-discovery/assets/requirement-spec-template.md` — estructura objetivo a completar
 4. `docs/specs/project/requirement-spec.md` — solo si existe, para retoma o sobrescritura controlada
 
 **Paso 2: Validar el Estado de los documentos vigentes**
@@ -140,3 +140,4 @@ Para cada sección objetivo de `requirement-spec-template.md`:
    - `**Fecha**: [fecha actual en formato YYYY-MM-DD]`
    - `**Generado por**: project-pm`
 5. Confirma al usuario la ruta del archivo y el siguiente paso (`/project-planning`).
+

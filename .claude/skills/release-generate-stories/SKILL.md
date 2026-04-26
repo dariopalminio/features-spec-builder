@@ -4,7 +4,7 @@ description: "Genera archivos de historia de usuario (story-[ID]-[Nombre-kebab].
 ---
 # Skill: /release-generate-stories
 
-Lee un archivo de release de `docs/specs/releases/` y genera automáticamente un archivo `story-[ID]-[Nombre-kebab].md` por cada feature definida en la sección `## Features` del release. Cada archivo generado sigue exactamente la estructura de `templates/story-gherkin-template.md`.
+Lee un archivo de release de `docs/specs/releases/` y genera automáticamente un archivo `story-[ID]-[Nombre-kebab].md` por cada feature definida en la sección `## Features` del release. Cada archivo generado sigue exactamente la estructura de `assets/story-gherkin-template.md`.
 
 **Usar cuando:**
 - Se quiere derivar historias de usuario listas para sprint planning a partir de un archivo de release
@@ -119,20 +119,13 @@ El archivo de plantilla es la **única fuente de información estructural** para
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla `templates/story-gherkin-template.md`.
+Lee el archivo de plantilla `assets/story-gherkin-template.md`.
 
-- Si el archivo **existe**: continua al paso 3d (Inferir el contenido de la historia).
-- Si el archivo **no existe** busca el archivo `story-gherkin-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres:
-- .agents/skills/release-generate-stories/templates
-- .claude/skills/release-generate-stories/templates
-- .opencode/skills/release-generate-stories/templates
-- .github/skills/release-generate-stories/templates
-- ~/.config/opencode/skills/release-generate-stories/templates
-- ~/.claude/skills/release-generate-stories/templates
-- docs/specs/templates
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
-  > ❌ No se encontró el template requerido en `templates/story-gherkin-template.md`.
+  > ❌ No se encontró el template requerido en `assets/story-gherkin-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
+
+- Si el archivo **existe**: continua.
 
 ### 3d. Inferir el contenido de la historia
 
@@ -241,3 +234,4 @@ Si alguna feature no pudo procesarse por formato inesperado, listarla como:
 - Si dos features tienen el mismo ID (duplicado en el release), añadir sufijo `-bis` al segundo archivo (ej. `story-FEAT-029-nombre-bis.md`) e informar al usuario.
 - Las secciones opcionales siempre se incluyen con placeholder `[Por completar]` para facilitar la edición posterior.
 - El skill no realiza evaluación INVEST ni splitting — si una historia generada parece demasiado grande, sugerirlo en las notas pero no dividirla automáticamente.
+

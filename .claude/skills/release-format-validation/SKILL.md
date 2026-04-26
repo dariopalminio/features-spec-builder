@@ -4,7 +4,7 @@ description: "Valida que un archivo de especificación de release cumple la estr
 ---
 # Skill: /release-format-validation
 
-Valida que un archivo de especificación de release contiene todas las secciones obligatorias del template `templates/release-spec-template.md`. Produce resultado **APROBADO**, **REFINAR** o **RECHAZADO**.
+Valida que un archivo de especificación de release contiene todas las secciones obligatorias del template `assets/release-spec-template.md`. Produce resultado **APROBADO**, **REFINAR** o **RECHAZADO**.
 
 **Usar cuando:**
 - Antes de usar un archivo de release como input para `generate-stories` u otros skills del pipeline SDDF
@@ -51,21 +51,14 @@ El archivo de plantilla es la **única fuente de información estructural** para
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla `templates/release-spec-template.md`.
+Lee el archivo de plantilla `assets/release-spec-template.md`.
 
-- Si el archivo **existe**: continua con la Fase 2.
-- Si el archivo **no existe** busca el archivo `release-spec-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres:
-- .agents/skills/release-format-validation/templates
-- .claude/skills/release-format-validation/templates
-- .opencode/skills/release-format-validation/templates
-- .github/skills/release-format-validation/templates
-- ~/.config/opencode/skills/release-format-validation/templates
-- ~/.claude/skills/release-format-validation/templates
-- docs/specs/templates
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template requerido en `templates/release-spec-template.md`.
+  > ❌ No se encontró el template requerido en `assets/release-spec-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
+
+- Si el archivo **existe**: continua.
 
 ---
 
@@ -132,7 +125,7 @@ Secciones/campos faltantes:
 - <nombre exacto del campo o encabezado faltante 2>
 ...
 
-Revisa el template en templates/release-spec-template.md para completar las secciones indicadas.
+Revisa el template en assets/release-spec-template.md para completar las secciones indicadas.
 ```
 
 ---
@@ -143,3 +136,4 @@ Revisa el template en templates/release-spec-template.md para completar las secc
 - La extracción de secciones obligatorias es **dinámica**: si el template cambia (nuevas secciones con `<!-- sección obligatoria -->`), el skill las detecta automáticamente.
 - Las secciones opcionales (marcadas con `<!-- sección opcional -->` o sin comentario) no afectan el resultado.
 - Generación ni corrección de contenido están fuera del scope de este skill.
+

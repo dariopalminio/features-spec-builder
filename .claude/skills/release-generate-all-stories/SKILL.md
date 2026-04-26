@@ -4,7 +4,7 @@ description: "Genera archivos de historia de usuario (story-[ID]-[Nombre-kebab].
 ---
 # Skill: /release-generate-all-stories
 
-Escanea todos los archivos de release en `docs/specs/releases/` y genera automáticamente un archivo `story-[ID]-[Nombre-kebab].md` por cada feature encontrada en cada release, siguiendo exactamente la estructura de `templates/story-gherkin-template.md`. Es el equivalente batch de `/release-generate-stories`.
+Escanea todos los archivos de release en `docs/specs/releases/` y genera automáticamente un archivo `story-[ID]-[Nombre-kebab].md` por cada feature encontrada en cada release, siguiendo exactamente la estructura de `assets/story-gherkin-template.md`. Es el equivalente batch de `/release-generate-stories`.
 
 **Usar cuando:**
 - Se quiere poblar `docs/specs/stories/` de forma completa a partir de todos los releases del proyecto
@@ -113,20 +113,13 @@ El archivo de plantilla es la **única fuente de información estructural** para
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla `templates/story-gherkin-template.md`.
+Lee el archivo de plantilla `assets/story-gherkin-template.md`.
 
-- Si el archivo **existe**: continua al paso 4 (Inferir el contenido de la historia).
-- Si el archivo **no existe** busca el archivo `story-gherkin-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres:
-- .agents/skills/release-generate-all-stories/templates
-- .claude/skills/release-generate-all-stories/templates
-- .opencode/skills/release-generate-all-stories/templates
-- .github/skills/release-generate-all-stories/templates
-- ~/.config/opencode/skills/release-generate-all-stories/templates
-- ~/.claude/skills/release-generate-all-stories/templates
-- docs/specs/templates
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
-  > ❌ No se encontró el template requerido en `templates/story-gherkin-template.md`.
+  > ❌ No se encontró el template requerido en `assets/story-gherkin-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
+
+- Si el archivo **existe**: continua.
 
 **4. Inferir el contenido de la historia:**
 
@@ -231,3 +224,4 @@ Al finalizar el procesamiento de todos los releases, mostrar el resumen:
 - Si dos features en distintos releases generan el mismo nombre de archivo (mismo ID y mismo slug), el segundo archivo se nombra con sufijo `-bis` (ej. `story-FEAT-027-nombre-bis.md`) e informa al usuario en el resumen.
 - Las secciones opcionales de cada historia siempre se incluyen con placeholder `[Por completar]` para facilitar la edición posterior.
 - El orden de procesamiento es siempre alfabético por nombre de archivo de release, lo que equivale al orden numérico dado el patrón `release-NN-nombre.md`.
+

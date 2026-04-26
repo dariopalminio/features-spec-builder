@@ -23,20 +23,13 @@ The template file is the **sole structural source-of-truth** for the generated R
 
 The template file is **read-only**. Never write to it, modify it, or use it as an output path.
 
-Read the The template file at `templates/readme-template.md`.
+Read the The template file at `assets/readme-template.md`.
 
-- If the file **exists**: continue to step 2.
-- Si el archivo **no existe** busca en las siguientes ubicaciones alternativas, en orden, y lee el primer template que encuentres:
-  - .agents/skills/readme-builder/templates
-  - .claude/skills/readme-builder/templates
-  - .opencode/skills/readme-builder/templates
-  - .github/skills/readme-builder/templates
-  - ~/.config/opencode/skills/readme-builder/templates
-  - ~/.claude/skills/readme-builder/templates
-  - docs/specs/templates
   - If the file **does not exist**: inform the user and stop execution.
-    > ❌ No se encontró el template requerido en `templates/readme-template.md`.
+    > ❌ No se encontró el template requerido en `assets/readme-template.md`.
     > Por favor verifica que el archivo existe antes de continuar.
+
+  - If the file **exists**: continue to step 2.
 
 ---
 
@@ -140,7 +133,7 @@ Write the generated README to:
 
 **Output rules (hard constraints):**
 - Output is always written to the **project root** — never a subdirectory.
-- The template file (`templates/readme-template.md`) is **never written to or modified**.
+- The template file (`assets/readme-template.md`) is **never written to or modified**.
 - No other files are created or modified beyond the README output.
 
 After writing, confirm to the user: which file was written, its full path, and how many sections were generated.
@@ -157,3 +150,4 @@ After writing, confirm to the user: which file was written, its full path, and h
 | Write guard | Always ask before overwriting an existing README.md |
 | Root output only | README.md or README-new.md always in project root |
 | Never write other files | Only the README output file is created/modified |
+

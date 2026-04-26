@@ -46,21 +46,14 @@ El archivo de plantilla es la **única fuente de información estructural** para
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla `templates/project-plan-template.md`.
+Lee el archivo de plantilla `assets/project-plan-template.md`.
 
-- Si el archivo **existe**: continua al paso 4.
-- Si el archivo **no existe** busca el archivo `project-plan-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres: 
-- .agents/skills/project-planning/templates 
-- .claude/skills/project-planning/templates 
-- .opencode/skills/project-planning/templates 
-- .github/skills/project-planning/templates
-- ~/.config/opencode/skills/project-planning/templates 
-- ~/.claude/skills/project-planning/templates
-- docs/specs/templates
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template requerido en `templates/project-plan-template.md`.
+  > ❌ No se encontró el template requerido en `assets/project-plan-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
+
+- Si el archivo **existe**: continua.
 
 ### 4. Story Mapping (fase previa a la planificación)
 
@@ -88,7 +81,7 @@ Lee `docs/specs/project/story-map.md`:
 
 Invoca al agente `project-architect` con la siguiente instrucción:
 
-> Lee los documentos `docs/specs/project/project-intent.md` y `docs/specs/project/requirement-spec.md`. Lee también el template `templates/project-plan-template.md`.
+> Lee los documentos `docs/specs/project/project-intent.md` y `docs/specs/project/requirement-spec.md`. Lee también el template `assets/project-plan-template.md`.
 >
 > Si estás en flujo de retoma (documento existente en `Estado: Doing`), primero lee `docs/specs/project/project-plan.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
@@ -117,3 +110,4 @@ Cuando el `project-architect` termine:
   > Path: `docs\specs\project\project-plan.md`
   > Workflow completo: el documento esta listo para revision.
 3. Si no existe, informa al usuario que algo salió mal y sugiere ejecutar `/project-planning` nuevamente.
+

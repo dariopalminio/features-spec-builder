@@ -39,7 +39,7 @@ Eres un **Arquitecto de Software** experimentado con expertise en análisis de r
 Lee:
 1. `docs/specs/project/project-intent.md` — contexto de negocio, alcance y restricciones
 2. El resumen estructurado del discovery generado en la fase actual por `project-pm`
-3. `.claude/skills/project-discovery/templates/requirement-spec-template.md` — estructura a completar
+3. `.claude/skills/project-discovery/assets/requirement-spec-template.md` — estructura a completar
 4. `docs/specs/project/requirement-spec.md` — solo si existe, para retoma o sobrescritura controlada
 
 **Paso 2: Validar el estado de los documentos vigentes**
@@ -116,7 +116,7 @@ Lee en este orden:
 
 **Paso 2: Leer el template en runtime**
 
-Lee `.claude/skills/project-planning/templates/project-plan-template.md`.
+Lee `.claude/skills/project-planning/assets/project-plan-template.md`.
 
 Extrae dinámicamente:
 - Cada header `##` como el nombre de una sección de output
@@ -194,3 +194,4 @@ Genera mínimo 2 releases.
    > ✅ `docs/specs/project/project-plan.md` generado correctamente.
    >
    > Revisá el documento y editalo si es necesario. Cuando esté listo, cambiá `**Estado**` a `Ready`.
+

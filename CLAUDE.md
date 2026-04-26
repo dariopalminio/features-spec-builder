@@ -36,7 +36,7 @@ features_spec_builder/
   │   │   └── project-ux.agent.md      # UX — apoyo en Discovery y Specifying
   │   └── skills/
   │       ├── skill-name/
-  │       │   ├── templates/           # Templates específicos para este skill
+  │       │   ├── assets/           # Templates específicos para este skill
   │       │   ├── examples/           # Ejemplos específicos para este skill
   │       │   ├── scripts/ 
   │       │   └── SKILL.md
@@ -82,4 +82,5 @@ skill (entry point + coordinator/orquestador)
     └── agent C (Subagentes C)
 
 Esto es acorde a la arquitectura de Claude Code donde la sesión principal actúa como agente primario que orquesta la ejecución de skills y agentes especializados (Subagentes), manteniendo una estructura plana (Sesión → Subagente), clara y eficiente sin necesidad de múltiples niveles de delegación (agentes en .claude/agents/, invocados por la sesión principal).
+
 

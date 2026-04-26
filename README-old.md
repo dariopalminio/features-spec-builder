@@ -219,13 +219,13 @@ Cada comando produce un documento. WIP=1: un proyecto activo a la vez. Cada docu
 └── skills/
     ├── project-begin/
     │   ├── SKILL.md
-    │   └── templates/project-intent-template.md
+    │   └── assets/project-intent-template.md
     ├── project-discovery/
     │   ├── SKILL.md
-    │   └── templates/requirement-spec-template.md
+    │   └── assets/requirement-spec-template.md
     └── project-planning/
         ├── SKILL.md
-        └── templates/project-plan-template.md
+        └── assets/project-plan-template.md
 
 docs/specs/project/              # Documentos generados por el pipeline
 ├── project-intent.md
@@ -302,13 +302,13 @@ Entonces {error}
 .claude/skills/
 ├── story-creation/
 │   ├── SKILL.md
-│   └── templates/story-gherkin-template.md
+│   └── assets/story-gherkin-template.md
 ├── story-split/
 │   ├── SKILL.md
-│   └── templates/story-gherkin-template.md
+│   └── assets/story-gherkin-template.md
 └── story-evaluation/
     ├── SKILL.md
-    ├── templates/
+    ├── assets/
     │   ├── story-gherkin-template.md
     │   └── output-template.md
     └── examples/
@@ -448,4 +448,5 @@ Nota:
     - alwaysApply: true — Claude Code incluye este archivo en el contexto siempre, sin que el usuario lo pida. Útil para instrucciones globales (ej: CLAUDE.md de un skill).
     - alwaysApply: false — el archivo no se carga automáticamente; solo entra en contexto si el usuario lo referencia explícitamente, o si Claude lo lee con una herramienta.
 Es un metadato del runtime para Claude, no del schema SDDF, y borrarlo cambiaría el comportamiento de Claude Code con ese archivo.
+
 

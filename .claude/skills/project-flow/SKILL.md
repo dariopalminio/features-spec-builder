@@ -68,13 +68,13 @@ Lee `docs/specs/project/project-intent.md` (si existe):
 
 ### 1.3 Verificar template
 
-Lee `.claude/skills/project-begin/templates/project-intent-template.md`. Si no existe, informa y detén.
+Lee `project-begin/assets/project-intent-template.md`. Si no existe, informa y detén.
 
 ### 1.4 Delegar al project-pm
 
 Invoca al agente `project-pm` con la siguiente instrucción:
 
-> Lee el template en `.claude/skills/project-begin/templates/project-intent-template.md`. Extrae las secciones del template en runtime.
+> Lee el template en `project-begin/assets/project-intent-template.md`. Extrae las secciones del template en runtime.
 >
 > Si estás en flujo de retoma (documento existente en `Estado: Doing`), primero lee `docs/specs/project/project-intent.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
@@ -125,7 +125,7 @@ Lee `docs/specs/project/requirement-spec.md` (si existe):
 
 ### 2.3 Verificar template
 
-Lee `.claude/skills/project-discovery/templates/requirement-spec-template.md`. Si no existe, informa y detén.
+Lee `project-discovery/assets/requirement-spec-template.md`. Si no existe, informa y detén.
 
 ### 2.4 Sub-fase Discovery — Delegar al project-pm
 
@@ -143,7 +143,7 @@ Invoca al agente `project-pm` con la siguiente instrucción:
 
 Una vez completado el discovery, invoca al agente `project-architect` con la siguiente instrucción:
 
-> Lee `docs/specs/project/project-intent.md` y el resumen del discovery de la fase anterior. Lee también el template `.claude/skills/project-discovery/templates/requirement-spec-template.md`.
+> Lee `docs/specs/project/project-intent.md` y el resumen del discovery de la fase anterior. Lee también el template `project-discovery/assets/requirement-spec-template.md`.
 >
 > Si estás en flujo de retoma (documento existente en `Estado: Doing`), primero lee `docs/specs/project/requirement-spec.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
@@ -191,13 +191,13 @@ Lee `docs/specs/project/project-plan.md` (si existe):
 
 ### 3.3 Verificar template
 
-Lee `.claude/skills/project-planning/templates/project-plan-template.md`. Si no existe, informa y detén.
+Lee `project-planning/assets/project-plan-template.md`. Si no existe, informa y detén.
 
 ### 3.4 Delegar al project-architect
 
 Invoca al agente `project-architect` con la siguiente instrucción:
 
-> Lee los documentos `docs/specs/project/project-intent.md` y `docs/specs/project/requirement-spec.md`. Lee también el template `.claude/skills/project-planning/templates/project-plan-template.md`.
+> Lee los documentos `docs/specs/project/project-intent.md` y `docs/specs/project/requirement-spec.md`. Lee también el template `project-planning/assets/project-plan-template.md`.
 >
 > Si estás en flujo de retoma (documento existente en `Estado: Doing`), primero lee `docs/specs/project/project-plan.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
@@ -237,3 +237,4 @@ Cuando las tres fases estén completas:
 > - ✅ `docs/specs/project/project-plan.md` → Estado: Ready
 >
 > El proyecto está completamente especificado y listo para la fase de desarrollo.
+

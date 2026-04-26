@@ -191,7 +191,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 
 **Ítems de soporte (sin FEAT propio):**
 - Agentes `project-story-mapper` y `story-product-owner`
-- Centralización de templates compartidos en `docs/specs/templates/`
+- Estandarización de assets por skill en `./.claude/skills/*/assets/`
 - Limpieza de directorios legacy `.agents/` y `.github/` desactualizados
 - Auto-especificación del framework SDDF: `docs/specs/project/requirement-spec.md` generado por `/reverse-engineering` con 30 FRs, 13 NFRs, árbol de navegación ASCII y gaps identificados
 

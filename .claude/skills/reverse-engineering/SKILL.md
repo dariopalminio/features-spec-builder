@@ -27,21 +27,14 @@ El archivo de plantilla es la **única fuente de información estructural** para
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla `templates/requirement-spec-template.md`.
+Lee el archivo de plantilla `assets/requirement-spec-template.md`.
 
-- Si el archivo **existe**: continua al paso 3. (Verificar modo --update)
-- Si el archivo **no existe** busca el archivo llamado `requirement-spec-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres:
-- .agents/skills/reverse-engineering/templates
-- .claude/skills/reverse-engineering/templates
-- .opencode/skills/reverse-engineering/templates
-- .github/skills/reverse-engineering/templates
-- ~/.config/opencode/skills/reverse-engineering/templates
-- ~/.claude/skills/reverse-engineering/templates
-- docs/specs/templates
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template en `templates/requirement-spec-template.md`.
+  > ❌ No se encontró el template en `assets/requirement-spec-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
+
+- Si el archivo **existe**: continua.
 
 ### 3. Verificar modo --update
 
@@ -168,3 +161,4 @@ Verifica la existencia de cada archivo `.tmp/rfc-*.md`. Si alguno falta, adviert
    ```
 4. Si `--verbose`: muestra un resumen de cada archivo `.tmp/rfc-*.md` (primeras 20 líneas de cada uno)
 5. Si el archivo no existe: informa que algo falló y sugiere revisar los logs de los agentes y re-ejecutar
+

@@ -42,7 +42,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - **Publicación como paquete npm** (FEAT-039) — `package.json` con metadata completa; `npm install -g agile-sddf` instala el framework globalmente con script `postinstall` que copia skills y agentes a `~/.claude/`
 - **Instalación local** (FEAT-041) — `npm install agile-sddf` copia skills y agentes a `./.claude/` del proyecto actual sin afectar la instalación global; `scripts/postinstall.js` detecta automáticamente el tipo de instalación (global vs local)
-- **Templates empaquetados por skill** — cada directorio de skill incluye su propio subdirectorio `templates/` para portabilidad multi-cliente; los templates se copian junto con el skill en la instalación
+- **Assets empaquetados por skill** — cada directorio de skill incluye su propio subdirectorio `assets/` para portabilidad multi-cliente; los templates y recursos se copian junto con el skill en la instalación
 
 ### Fixed
 
