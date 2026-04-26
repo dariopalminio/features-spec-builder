@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
+- **Assets empaquetados por skill** (FEAT-048) — renombradas todas las carpetas `templates/` dentro de los skills a `assets/` para cumplir el estándar oficial de Agent Skills; actualizadas todas las referencias en `SKILL.md`, agentes y documentación; spec `skill-template-autonomy` actualizado con el nuevo contrato `assets/<file>.md`; eliminados prefijos de cliente hardcodeados en cadenas de fallback de SKILL.md
 - **Skills multicliente con rutas relativas** (FEAT-047) — los skills `project-begin`, `project-discovery`, `project-planning`, `release-format-validation`, `release-generate-all-stories`, `release-generate-stories`, `releases-from-project-plan`, `reverse-engineering`, `story-creation`, `story-evaluation`, `story-split` actualizados para usar rutas relativas a su directorio base, eliminando dependencia de paths absolutos y haciendo los skills portables entre runtimes
 
 ---

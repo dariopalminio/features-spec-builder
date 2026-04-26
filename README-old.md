@@ -428,6 +428,8 @@ Los comandos en Claude se ubican en ".claude/commands/". En Claude evitamos usar
 
 Los skills son las **habilidades personalizadas o herramientas** que construyes para dárselas a tus agentes. Se definen mediante documentos de texto que actúan como instrucciones continuas para dotar al agente de una especialización deseada, indicándole exactamente cómo debe comportarse o ejecutar una acción exclusiva. Gracias a las skills, los agentes pueden realizar tareas de forma autónoma, como redactar una especificación siguiendo una plantilla, conectarse a aplicaciones externas o aplicar técnicas específicas de escritura.
 
+Assets empaquetados por skill: cada skill incluye su propio subdirectorio `assets/` para portabilidad multi-cliente. Los templates y recursos se copian junto con el skill en la instalación, lo que garantiza que cada skill tenga acceso a sus propios assets sin depender de rutas globales o hardcodeadas.
+
 ## Modelo de un solo nivel de delegación
 
 En este modelo, el skill actúa como el punto de entrada y coordinador que invoca agentes especialistas. El skill es responsable de orquestar la ejecución de los agentes, asegurándose de que cada uno realice su tarea específica y luego recopile los resultados para generar la salida final. Este enfoque mantiene la estructura simple y clara, evitando la complejidad de múltiples niveles de delegación.
