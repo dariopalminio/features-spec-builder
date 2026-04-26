@@ -37,19 +37,30 @@ Lee `docs/specs/project/project-intent.md` (si existe) y detecta el valor de `**
 
 ### 3. Verificar que el template existe
 
-Lee `.agent/skills/project-begin/templates/project-intent-template.md`.
+El archivo de plantilla es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derréglelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
+
+El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
+
+Lee el archivo de plantilla `templates/project-intent-template.md`.
 
 - Si el archivo **existe**: continua al paso 4.
-- Si el archivo **no existe**: informa al usuario y detén la ejecución:
-
-  > ❌ No se encontró el template requerido en `.agent/skills/project-begin/templates/project-intent-template.md`.
+- Si el archivo **no existe** busca el archivo `project-intent-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres: 
+- .agents/skills/project-begin/templates 
+- .claude/skills/project-begin/templates 
+- .opencode/skills/project-begin/templates 
+- .github/skills/project-begin/templates
+- ~/.config/opencode/skills/project-begin/templates 
+- ~/.claude/skills/project-begin/templates
+- docs/specs/templates
+- Si el archivo **no existe**: informar al usuario y detener la ejecución:
+  > ❌ No se encontró el template requerido en `templates/project-intent-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 ### 4. Delegar al project-pm
 
 Invoca al agente `project-pm` con la siguiente instrucción:
 
-> Lee el template en `.agent/skills/project-begin/templates/project-intent-template.md`. Extrae las secciones del template en runtime.
+> Lee el template en `templates/project-intent-template.md`. Extrae las secciones del template en runtime.
 >
 > Si estas en flujo de retoma (documento existente en `Estado: Doing`), primero lee `docs/specs/project/project-intent.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continua solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
@@ -74,6 +85,6 @@ Cuando el `project-pm` termine:
 1. Verifica que `docs/specs/project/project-intent.md` existe leyendo el archivo
 2. Si existe, confirma al usuario:
   > ✅ Documento generado correctamente.
-  > Path: `D:\code\project-spec-factory\docs\specs\project\project-intent.md`
+  > Path: `docs\specs\project\project-intent.md`
   > Siguiente comando: `/project-discovery`.
 3. Si no existe, informa al usuario que algo salió mal y sugiere ejecutar `/project-begin` nuevamente.

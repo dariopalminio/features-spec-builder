@@ -20,10 +20,35 @@ Evalúa la calidad de una historia de usuario aplicando la rúbrica **FINVEST** 
 Si el usuario adjunta solo una imagen sin proporcionar texto de historia de usuario, responde indicando que el skill requiere el texto de la historia para poder evaluar.
 
 ---
+### Formato de referencia y fuente de la verdad
 
-## Formato de referencia
+### A. Verificar que el template existe y leerlo
 
-La dimensión **F (Formato)** evalúa qué tan cerca está la historia del template canónico definido en `.claude/skills/story-evaluation/templates/story-gherkin-template.md`:
+El archivo de plantilla (template canónico) es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derréglelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
+
+El archivo de plantilla (template canónico) es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
+
+Lee el archivo de plantilla (template canónico) `templates/story-gherkin-template.md`.
+
+- Si el archivo **existe**: continua con con el siguiente inciso B. "Formato de referencia".
+- Si el archivo **no existe** busca el archivo `story-gherkin-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres:
+- .agents/skills/story-evaluation/templates
+- .claude/skills/story-evaluation/templates
+- .opencode/skills/story-evaluation/templates
+- .github/skills/story-evaluation/templates
+- ~/.config/opencode/skills/story-evaluation/templates
+- ~/.claude/skills/story-evaluation/templates
+- docs/specs/templates
+- Si el archivo **no existe**: informar al usuario y detener la ejecución:
+
+  > ❌ No se encontró el template requerido en `templates/story-gherkin-template.md`.
+  > Por favor verifica que el archivo existe antes de continuar.
+
+### B. Formato de referencia
+
+La dimensión **F (Formato)** evalúa qué tan cerca está la historia del archivo de plantilla (template canónico) definido y leido anteriormente:
+
+Por ejemplo:
 
 ```markdown
 ## 📖 Historia
@@ -58,6 +83,8 @@ Ejemplos:
 
 ## ⚙️ Criterios no funcionales (opcional)
 ## 📎 Notas / contexto adicional (opcional)
+
+Este es solo un ejemplo, recuerda que el archivo de plantilla (template canónico) es la guía a evaluar como formato.
 ```
 
 Una historia que no usa la plantilla story-gherkin-template.md (o este template) puede igual ser evaluada, pero obtendrá scores más bajos en F en función de cuánto se aleja de esta estructura.
@@ -225,7 +252,7 @@ Si la historia no tiene escenarios Gherkin, estimar por complejidad implícita d
 
 ## Instrucciones de Output
 
-1. Usar la estructura del template en `.claude/skills/story-evaluation/templates/evaluation-output-template.md`.
+1. Usar la estructura del template en `templates/evaluation-output-template.md`.
 2. Calcular F_score con dos decimales de precisión.
 3. Si F_score < 2.5, detenerse en Fase 1 y no calcular INVEST.
 4. Para cada dimensión con score ≤ 3, incluir al menos 1 recomendación concreta y accionable en la sección "Comentarios".

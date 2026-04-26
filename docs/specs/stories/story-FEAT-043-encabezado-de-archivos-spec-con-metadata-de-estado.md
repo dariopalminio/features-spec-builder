@@ -40,7 +40,11 @@ Entonces cada archivo recibe su encabezado YAML con los campos estandarizados
 ```gherkin
 Dado que un archivo de spec ya tiene un bloque YAML frontmatter al inicio
 Cuando el skill intenta añadir el encabezado estandarizado
-Entonces el skill detecta el encabezado existente e informa al usuario
+Entonces el skill detecta el encabezado existente 
+  Y redacta el nuevo encabezado propuesto combinando los campos nuevos con los existentes sin perder información
+  Y muestra un resumen de los cambios propuestos al usuario para revisión
+  E informa al usuario
+  Y pregunta si quiere sobreescribir el encabezado existente, combinarlo con el nuevo o mantener el existente sin cambios
   Pero no sobreescribe ni duplica el bloque existente sin confirmación
 ```
 
@@ -52,9 +56,27 @@ Entonces el skill advierte sobre la referencia inválida
   Y genera el encabezado con la referencia marcada como "[pendiente]" en lugar de fallar
 ```
 
-## ⚙️ Criterios no funcionales
+### Requirement: Encabezados y formato de nodos
+Cada nodo es un archivo markdown con frontmatter YAML y un encabezado siguiendo el siguiente template:
+---
+type: [ release | story | project | wiki ]
+date: 2026-04-10
+slug: [ slug único para referencia ]
+title: "Infraestructura de captura de emails: Brevo + n8n + Nginx"
+tags: [ spec, release ]
+status: [ BACKLOG | IN-PROGRESS | COMPLETED ]
+substatus: [ N/A | DOING | READY ]
+parent: [ slug del nodo padre, si aplica ]
+related:
+  - [ slug de nodo relacionado ]
+sources:
+  - jira: PROJ-123
+  - repo: .claude/plans/slug.md
+  - notion: email-strategy
+---
 
-[Por completar]
+### Requirement: Forma de invocación del skill
+El skill puede ser invocado para añadir encabezados a un solo archivo (nombre de archivo o con ruta relativa o absoluta) o a todos los archivos de un directorio (ruta relativa o absoluta).
 
 ## 📎 Notas / contexto adicional
 

@@ -4,7 +4,7 @@ description: "Genera archivos de historia de usuario (story-[ID]-[Nombre-kebab].
 ---
 # Skill: /release-generate-stories
 
-Lee un archivo de release de `docs/specs/releases/` y genera automáticamente un archivo `story-[ID]-[Nombre-kebab].md` por cada feature definida en la sección `## Features` del release. Cada archivo generado sigue exactamente la estructura de `.claude/skills/release-generate-stories/templates/story-gherkin-template.md`.
+Lee un archivo de release de `docs/specs/releases/` y genera automáticamente un archivo `story-[ID]-[Nombre-kebab].md` por cada feature definida en la sección `## Features` del release. Cada archivo generado sigue exactamente la estructura de `templates/story-gherkin-template.md`.
 
 **Usar cuando:**
 - Se quiere derivar historias de usuario listas para sprint planning a partir de un archivo de release
@@ -113,7 +113,28 @@ El archivo docs/specs/stories/story-[ID]-[nombre-kebab].md ya existe.
 
 Esperar confirmación antes de continuar. Si el usuario responde `n` o `no`, saltar esta feature y continuar con la siguiente.
 
-### 3c. Inferir el contenido de la historia
+### 3c. Verificar que el template existe:
+
+El archivo de plantilla es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derréglelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
+
+El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
+
+Lee el archivo de plantilla `templates/story-gherkin-template.md`.
+
+- Si el archivo **existe**: continua al paso 3d (Inferir el contenido de la historia).
+- Si el archivo **no existe** busca el archivo `story-gherkin-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres:
+- .agents/skills/release-generate-stories/templates
+- .claude/skills/release-generate-stories/templates
+- .opencode/skills/release-generate-stories/templates
+- .github/skills/release-generate-stories/templates
+- ~/.config/opencode/skills/release-generate-stories/templates
+- ~/.claude/skills/release-generate-stories/templates
+- docs/specs/templates
+- Si el archivo **no existe**: informar al usuario y detener la ejecución:
+  > ❌ No se encontró el template requerido en `templates/story-gherkin-template.md`.
+  > Por favor verifica que el archivo existe antes de continuar.
+
+### 3d. Inferir el contenido de la historia
 
 Usando el nombre y la descripción de la feature, inferir:
 
@@ -129,7 +150,7 @@ Si la feature tiene descripción detallada, usarla para enriquecer los escenario
 
 Las secciones opcionales (`⚙️ Criterios no funcionales`, `📎 Notas`) se incluyen con placeholder `[Por completar]` si no hay datos suficientes.
 
-### 3d. Escribir el archivo de historia
+### 3e. Escribir el archivo de historia
 
 Crear el archivo `docs/specs/stories/story-[ID]-[nombre-kebab].md` con la siguiente estructura:
 

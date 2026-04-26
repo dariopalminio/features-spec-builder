@@ -43,12 +43,24 @@ Lee `docs/specs/project/requirement-spec.md` (si existe) y detecta el valor de `
 
 ### 3. Verificar que el template existe
 
-Lee `.claude/skills/project-discovery/templates/requirement-spec-template.md`.
+El archivo de plantilla es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derréglelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
+
+El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
+
+Lee el archivo de plantilla `templates/requirement-spec-template.md`.
 
 - Si el archivo **existe**: continua al paso 4.
-- Si el archivo **no existe**: informa al usuario y detén la ejecución:
+- Si el archivo **no existe** busca el archivo llamado `requirement-spec-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres:
+- .agents/skills/project-discovery/templates
+- .claude/skills/project-discovery/templates
+- .opencode/skills/project-discovery/templates
+- .github/skills/project-discovery/templates
+- ~/.config/opencode/skills/project-discovery/templates
+- ~/.claude/skills/project-discovery/templates
+- docs/specs/templates
+- Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template requerido en `.claude/skills/project-discovery/templates/requirement-spec-template.md`.
+  > ❌ No se encontró el template requerido en `templates/requirement-spec-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 ### 4. Fase Discovery - Delegar al project-pm
@@ -67,7 +79,7 @@ Invoca al agente `project-pm` con la siguiente instrucción:
 
 Una vez completado el discovery, invoca al agente `project-architect` con la siguiente instrucción:
 
-> Lee `docs/specs/project/project-intent.md` y el resumen del discovery de la fase anterior. Lee tambien el template `.claude/skills/project-discovery/templates/requirement-spec-template.md`.
+> Lee `docs/specs/project/project-intent.md` y el resumen del discovery de la fase anterior. Lee tambien el template `templates/requirement-spec-template.md`.
 >
 > Si estas en flujo de retoma (documento existente en `Estado: Doing`), primero lee `docs/specs/project/requirement-spec.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continua solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
@@ -90,6 +102,6 @@ Cuando el `project-architect` termine:
 1. Verifica que `docs/specs/project/requirement-spec.md` existe leyendo el archivo
 2. Si existe, confirma al usuario:
   > ✅ Documento generado correctamente.
-  > Path: `D:\code\project-spec-factory\docs\specs\project\requirement-spec.md`
+  > Path: `docs\specs\project\requirement-spec.md`
   > Siguiente comando: `/project-planning`.
 3. Si no existe, informa al usuario que algo salió mal y sugiere ejecutar `/project-discovery` nuevamente.

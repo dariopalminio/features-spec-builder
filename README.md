@@ -1,10 +1,37 @@
 ![agile-sddf](assets/logo/agile-sddf-logo-v1.png)
+# Agile SDDF — Spec-Driven Development Framework
 
-# Agile Spec-Driven-Development Framework (SDDF)
+Sistema multiagente minimalista que automatiza el ciclo completo de especificación de proyectos software usando solo archivos Markdown como agentes, skills y templates.
 
-Sistema multiagente minimalista que automatiza el ciclo completo de especificación de proyectos software — desde la intención inicial hasta el backlog planificado y las historias de usuario — usando solo archivos Markdown como agentes, skills y templates en Claude Code.
+[![npm version](https://img.shields.io/npm/v/agile-sddf.svg)](https://npmjs.com/package/agile-sddf)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## Instalación
+Los developers y equipos que trabajan con IA para desarrollar software carecen de un proceso estructurado y reproducible para transformar ideas en especificaciones de calidad. Agile SDDF resuelve esto con un workflow ágil y secuencial que cubre desde la intención inicial hasta el backlog planificado de historias de usuario, con control de WIP, gates de revisión humana y trazabilidad completa en cada etapa. A diferencia de los prompts ad-hoc o frameworks rígidos, el sistema extrae dinámicamente la estructura de los templates en runtime para generar preguntas y comportamientos contextuales, y opera sin modificar código subyacente en múltiples runtimes de IA (Claude Code, GitHub Copilot, OpenCode, Google Gemini, Atlassian Rovo).
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+
+- **Ingeniería inversa de repositorios**: genera `requirement-spec.md` automáticamente desde código existente mediante análisis paralelo de 4 agentes especializados
+- **Pipeline ProjectSpecFactory**: workflow secuencial Begin Intention → Discovery → Planning con gates de revisión humana entre cada fase
+- **Control WIP=1**: impide proyectos activos simultáneos, ofreciendo exactamente las opciones Sobrescribir o Retomar
+- **User Story Mapping**: sesión colaborativa al estilo Jeff Patton para construir backbone, walking skeleton y release slices
+- **Gestión de épicas de releases**: planificación de releases con `project-plan.md` y generación automática de artefactos de release (feature specs, historias de usuario) con trazabilidad completa
+- **Gestión de historias de usuario**: creación (Como/Quiero/Para + Gherkin), evaluación con rúbrica FINVEST (Likert 1–5), splitting con 8 patrones y refinamiento iterativo
+- **Integración OpenSpec**: exploración, propuesta, implementación y archivado de cambios con trazabilidad completa
+- **Multi-runtime**: los mismos skills operan en Claude Code, GitHub Copilot, Codex/Cursor/OpenCode, Google Gemini Gems y Atlassian Rovo sin modificar el SKILL.md fuente
+- **Meta-framework**: crea, benchmarkea y distribuye nuevas skills con ciclo iterativo (skill-builder)
+- **Trazabilidad completa**: IDs únicos FEAT-NNN y Estado: Doing/Ready en cada documento del pipeline
+
+## Installation
 
 ### Global — disponible en todos tus proyectos
 
@@ -12,434 +39,167 @@ Sistema multiagente minimalista que automatiza el ciclo completo de especificaci
 npm install -g agile-sddf
 ```
 
-Copia automáticamente todos los skills y agentes a `~/.claude/skills/` y `~/.claude/agents/`. Claude Code los detecta globalmente en cualquier proyecto.
+Después de la instalación, el script `postinstall` copia automáticamente los skills y agentes a `~/.claude/` para que estén disponibles en Claude Code de forma global.
 
-### Local — aislado al proyecto actual
+### Local — solo para el proyecto actual
 
 ```bash
 npm install agile-sddf
 ```
 
-o la última versión:
+Los skills y agentes se copian a `./.claude/` del directorio actual.
+
+### Prerequisites
+
+- Node.js >= 18
+- Claude Code (Anthropic) u otro runtime compatible (GitHub Copilot, OpenCode, Google Gemini Gems, Atlassian Rovo)
+
+## Quick Start
+
+Inicia el pipeline completo de especificación en una sola sesión desde Claude Code:
+
 ```bash
-npm install agile-sddf@latest --foreground-scripts
-```
-Copia los skills y agentes al `.claude/` del directorio actual del proyecto. Útil para mantener versiones distintas del framework por proyecto o para no afectar la configuración global.
-
-> En ambos casos, los archivos que ya existan en el destino no se sobrescriben.
->
-> **Nota**: Si usas un entorno que bloquea scripts de instalación (`--ignore-scripts`), ejecuta manualmente: `node node_modules/agile-sddf/scripts/postinstall.js` (local) o `node $(npm root -g)/agile-sddf/scripts/postinstall.js` (global).
-
-# Post Instalación
-
-## Instalación para Claude Code
-
-Claude busca los skills en el directorio ".claude/skills/" y los agentes en ".claude/agents/". 
-
-## Instalación para Github Copilot
-
-### Copiar skills y agentes a .github
-
-Github Copilot busca los skills en el directorio ".github/skills/" y los agentes en ".github/agents/". 
-Por esta razón si usas Github Copilot debes copiar el contenido de ".claude/" en ".github/".
-
-### La Estrategia de Enlaces Simbólicos (Symlinks)
-
-La solución para no mantener archivos duplicados es usar enlaces simbólicos. En lugar de tener tu carpeta .github/skills/ con los archivos reales, esta carpeta se convierte en un "acceso directo" que apunta a tu directorio central, por ejemplo llamado .claude/skills/. Así, cuando edites un skill en tu source of truth, el cambio se refleja instantáneamente en Claude Code y en cualquier otra herramienta que estés usando.
-
-Por ejemplo, en Windows puedes usar el comando `mklink` para crear enlaces simbólicos:
-
-```PowerShell
-cmd /c mklink /D ".github\skills" ".claude\skills"
-cmd /c mklink /D ".github\agents" ".claude\agents"
+# Ejecuta las tres fases del pipeline en una sesión continua
+/project-flow
 ```
 
-## Instalación para OpenCode
+O ejecuta cada fase individualmente:
 
-Aunque OpenCode tiene sus propias rutas estandarizadas, su diseño es abierto y flexible. La buena noticia es que es compatible con el ecosistema de Claude, además de ofrecerte varias alternativas para compartir skills y agents de forma centralizada sin tener que duplicarlos.
+```bash
+# Fase 1 — Captura la intención del proyecto
+/project-begin
 
-OpenCode busca en:
-```
-.opencode/skills/<skill-name>/SKILL.md (nativa).
-.claude/skills/<skill-name>/SKILL.md (compatible con Claude)
-~/.config/opencode/skills/<skill-name>/SKILL.md (nativa).
-~/.claude/skills/<skill-name>/SKILL.md (compatible con Claude)
-```
+# Fase 2 — Discovery de usuarios y especificación de requisitos
+/project-discovery
 
-## Vision
-
-**Para** builders, freelancers, developers y equipos ágiles que usan IA para acelerar el desarrollo de software,
-**quienes** sufren de procesos manuales, prompts inconsistentes y falta de estructura para transformar ideas en especificaciones precisas que la IA pueda ejecutar de forma predecible,
-**nuestro producto** es un sistema que extrae dinámicamente la estructura de los templates en tiempo de ejecución para generar preguntas contextuales, garantizando que el framework evolucione junto con tus prácticas sin modificar lógica hardcodeada. Integra nativamente con OpenSpec y SpecKit, potenciando sus capacidades con agentes y skills personalizables.
-
-## Fundamentos del Framework (Conceptual)
-
-### Agilidad Agentica (Agentic Agile)
-
-Estamos descubriendo formas mejores de desarrollar software potenciados con IA.  Vivimos en un tiempo de "Agilidad Extrema" donde la integración de la IA generativa con Agile, potencia sus principios fundamentales. El objetivo no es eliminar la intervención humana del proceso de desarrollo, sino crear equipos altamente eficaces, potenciados por la IA, que combinen la creatividad y el pensamiento estratégico humanos con la velocidad y el poder analítico de la IA. El futuro inmediato del desarrollo de software pertenece a quienes adoptan esta sinergia.
-
-Los valores de la Agilidad Extrema se adaptan a esta nueva realidad:
-
-* 💎 Valor 1: Individuos e interacciones → Orquestación Humana de Agentes IA
-* 💎 Valor 2: Software funcionando → Arquitectura Coherente y Especificaciones Ejecutables
-* 💎 Valor 3: Colaboración con el cliente → Validación Continua de Valor Híbrida
-* 💎 Valor 4: Respuesta ante el cambio → Adaptación Extrema y Gobernanza de Riesgos
-
-### Niveles de flujos de trabajo
-
-Este framework propone y soporta flujos de trabajo a diferentes niveles de granularidad, desde la visión general del proyecto hasta tareas específicas:
-
-* **L3 - Project:** Aquí vive el flujo de trabajo de proyectos (Project) o iniciativas (Initiative).
-* **L2 - Release:** Aquí vive el flujo de trabajo de entregables (Epic) o Liberaciones (Release) dentro de un proyecto.
-* **L1 - Story:** Aquí vive el flujo de trabajo de historias de usuario (User Story) dentro de un entregable o release.
-
-Estos niveles tienen cierta semejanza con la jerarquía tradicional de proyectos ágiles (Project --> Epic --> Story), con el modelo "Flight Levels" de Klaus Leopold (L3 -estratégico- --> L2 -coordinación- --> L1 -táctico-) y con los tres niveles que se suelen utilizar en herramientas como Jira software (Initiative --> Epic --> Story).
-
-### Elementos de trabajo (Work-items)
-
-Los elementos de trabajo (Work-items) representan las unidades de valor o tareas que se gestionan dentro de cada nivel de flujo de trabajo. Cada tipo de elemento de trabajo tiene un propósito específico y se organiza jerárquicamente para reflejar la estructura del proyecto. En este framework, los tipos de elementos de trabajo se organizan de la siguiente manera:
-
-* **Project:** Independientemente que con qué nombre lo implementes en tu herramienta u organización, el Project representa un micro proyecto o iniciativa específica con un objetivo claro, que se divide en releases o entregables. Es el contenedor de más alto nivel dentro del framework.
-* **Release:** Independientemente que con qué nombre lo implementes en tu herramienta u organización, el Release representa un entregable (Epic) o release específico dentro de un proyecto, que se divide en features o stories. Es el contenedor de nivel medio dentro del framework. El release a nivel de gestión de trabajo es independiente del release real y versión de software en herramientas como github. Un entregable Release puede ser liberado de un tirón (acumulativo) o de manera incremental (en varios releases o merges al main). El Release representa un conjunto de features (stories) liberables a producción.
-* **Story:** Independientemente que con qué nombre lo implementes en tu herramienta u organización, la Story representa una feature o un trozo de feature o una historia de usuario o tarea específica de desarrollo dentro de un release, que se puede dividir en subtareas, specs o tareas técnicas.
-
-**Buenas prácticas:**
-* **Story DoD**: Para garantizar la calidad y la completitud de las historias, se recomienda definir una "Definition of Done" (DoD) específica para las Stories, que incluya criterios de completitud claros y verificables para que una historia se considere completa y potencialmente entregable (releseable). Aquí se recomienda incluir criterios relacionados con la implementación, pruebas unitarias (cobertura), pruebas de criterios de aceptación, pruebas de integración, pruebas de regresión selectiva (pruebas de regresión parcial), documentación (changelog, etc.) y cualquier otro aspecto relevante para asegurar que la historia esté lista para ser incluida en un release.
-* **Release DoD**: Para garantizar la calidad y la completitud de los releases, se recomienda definir una "Definition of Done" (DoD) específica para los Releases, que incluya criterios de completitud y checklist de subida a producción. Aquí se recomienda incluir criterios relacionados con la integración, pruebas de regresión completa o crítica, documentación de release (Release notes, etc.) y cualquier otro aspecto relevante para asegurar que el release esté listo para ser liberado a producción.
-
-### Tipos de Story
-
-Las historias Story pueden ser de diferentes tipos según su propósito o naturaleza. En este framework, se proponen los siguientes tipos de Story:
-
-* **Feat:** Feature funcional como trozo de funcionalidad o característica de software. Esta implementación funcional puede ser nueva o una mejora funcional. Las Feat son las clásicas historias de usuario.
-* **Fix:** Corrección de un error o bug.
-* **Chore:** Tarea técnica no funcional (configuraciones, refactorización, etc.).
-* **Hotfix:** Corrección urgente en producción (flujo especial).
-
-### Jerarquía de elementos de trabajo (Work-items)
-
-El modelo jerárquico de elementos de trabajo (Work-items) se organiza en tres niveles, reflejando la estructura típica de proyectos ágiles:
-
-```
-Project (project)
-    └── Release (releases)
-        └── Story (stories)
+# Fase 3 — Planificación de releases y backlog de features
+/project-planning
 ```
 
-### Documentos de especificaciones
+## Usage
 
-La documentación generada por el framework se organiza en tres carpetas principales, cada una correspondiente a un nivel de flujo de trabajo:
+### Basic Usage
 
-* **L3 - Project:** `docs\specs\project` — para documentos relacionados con la visión general del proyecto, como la intención del proyecto, el plan de proyecto y la especificación de requerimientos a nivel de proyecto.
-* **L2 - Release:** `docs\specs\releases` — para documentos relacionados con entregables específicos o releases dentro del proyecto, como especificaciones de features o epics.
-* **L1 - Story:** `docs\specs\stories` — para documentos relacionados con historias de usuario individuales, como la historia de usuario en formato gherkin, criterios de aceptación, y evaluaciones de calidad de la historia.
+**Crear y refinar una historia de usuario:**
 
-### 2. Flujo de Trabajo en repositorio de código (Git)
+```bash
+# Ciclo completo: creación → evaluación FINVEST → split → mejora
+/story-refine
 
-Si bien el modelo es independiente de la estrategia de branching que utilices, proponemos una convención de ramas básica que refleja la jerarquía de elementos de trabajo para facilitar la trazabilidad y el control de versiones; y que también sirve de forma didáctica para entender los niveles de trabajo.
+# Solo crear una historia
+/story-creation "Como usuario quiero poder registrarme para acceder al sistema"
 
-El flujo se basa en una jerarquía de ramas de tres niveles: `main` → `release/` → (`feat/`/`fix`/`chore`).
+# Evaluar una historia existente
+/story-evaluation docs/specs/stories/story-mi-historia.md
 
-```
-main  o----------------------------------o (tag v1.0.2)
-      |                                  |
-      | git checkout -b                  | PR (de release a main)
-      |                                  |
-      v                                  |
-   release o-----------------------------o
-            |                             |
-            | git checkout -b             | PR (de feat a release)
-            |                             |
-            v                             |
-         feat o---------------------------o
+# Dividir una historia grande
+/story-split docs/specs/stories/story-mi-historia.md
 ```
 
-* **main:** La rama main representa y el nivel de proyecto siendo la acumulación de releases de proyectos. La rama main termina en ambiente producción.
-* **release:** Cada rama release representa un entregable específico dentro del proyecto, que puede ser liberado de un tirón o de manera incremental. La rama release generalmente es probada en ambientes de staging (eso dependerá de tu diseño de CI/CD).
-* **feat:** Cada rama feat representa una historia de usuario o feature específica dentro de un release, que se puede dividir en subtareas o tareas técnicas o specs partes del desarrollo (operativo y táctico). Las feats acumulan los commits del desarrollo. La rama feat generalmente es probada en ambientes de desarrollo y/o testing (también dependerá de tu diseño de CI/CD).
+**Generar artefactos de release:**
 
-**Buenas prácticas:**
-* **Convención de branches:** Esto respeta la "Convención de branches" recomendado [Conventional Branch](https://conventional-branch.github.io/).
-* **Convención de Commits:** Se recomienda usar "Convensión de Commits" [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) para mantener un historial de commits claro y estructurado, lo que facilita la generación de changelogs y la trazabilidad de cambios.
+```bash
+# Genera todos los archivos release desde project-plan.md
+/releases-from-project-plan
 
----
+# Genera las historias de usuario de un release específico
+/release-generate-stories docs/specs/releases/release-01-features-spec-builder.md
 
-## Módulos
-
-| Módulo | Descripción |
-|--------|-------------|
-| [ProjectSpecFactory CLI](#projectspecfactory-cli) | Pipeline de especificación de proyecto: intención → discovery → backlog |
-| [features-spec-builder](#features-spec-builder) | Pipeline de historias de usuario: creación → evaluación → splitting |
-
----
-
-# ProjectSpecFactory CLI
-
-Sistema CLI multiagente que convierte la intención inicial de un proyecto en un backlog planificado por releases, con control de WIP y revisión humana en cada etapa.
-
-## Workflow
-
-```
-/project-begin → /project-discovery → /project-planning
+# Genera las historias de todos los releases
+/release-generate-all-stories
 ```
 
-Cada comando produce un documento. WIP=1: un proyecto activo a la vez. Cada documento tiene subestados `Doing` y `Ready`.
+### Advanced Usage
 
-## Comandos
+**Ingeniería inversa de un repositorio existente:**
 
-| Comando | Documento de salida | Agente principal |
-|---------|---------------------|-----------------|
-| `/project-begin` | `docs/specs/project/project-intent.md` | `project-pm` |
-| `/project-discovery` | `docs/specs/project/requirement-spec.md` | `project-architect` |
-| `/project-planning` | `docs/specs/project/project-plan.md` | `project-architect` |
+```bash
+# Genera requirement-spec.md desde el código fuente
+/reverse-engineering
 
-## Agentes
+# Analiza solo un subdirectorio
+/reverse-engineering --focus src/auth
 
-| Agente | Archivo | Rol |
-|--------|---------|-----|
-| `project-pm` | `.claude/agents/project-pm.agent.md` | Entrevistas de intención y discovery de producto |
-| `project-architect` | `.claude/agents/project-architect.agent.md` | Especificación técnica y planificación |
-| `project-ux` | `.claude/agents/project-ux.agent.md` | Flujos de usuario y usabilidad (soporte en Discovery) |
-
-## Principios
-
-- **Minimalista** — sin dependencias externas, solo archivos Markdown
-- **Trazable** — cada documento incluye metadatos de estado (`Doing` / `Ready`) y agente generador
-- **Idempotente** — re-ejecutar un estado detecta el documento existente y retoma sin duplicar
-- **Extensible** — agregar una sección al template es suficiente para que el agente la incluya
-
-## Estructura
-
-```
-.claude/
-├── agents/
-│   ├── project-pm.agent.md          # PM — Begin Intention, Discovery
-│   ├── project-architect.agent.md   # Arquitecto — Discovery, Planning
-│   └── project-ux.agent.md          # UX — apoyo en Discovery
-└── skills/
-    ├── project-begin/
-    │   ├── SKILL.md
-    │   └── templates/project-intent-template.md
-    ├── project-discovery/
-    │   ├── SKILL.md
-    │   └── templates/requirement-spec-template.md
-    └── project-planning/
-        ├── SKILL.md
-        └── templates/project-plan-template.md
-
-docs/specs/project/              # Documentos generados por el pipeline
-├── project-intent.md
-├── requirement-spec.md
-└── project-plan.md
+# Actualiza solo las secciones pendientes de un spec existente
+/reverse-engineering --update
 ```
 
----
+**Gestión de cambios con OpenSpec:**
 
-# features-spec-builder
+```bash
+# Explorar una idea sin implementar
+/openspec-explore
 
-Sistema agentico minimalista para crear, dividir y evaluar historias de usuario de alta calidad usando skills de Claude Code.
+# Proponer un cambio con todos los artefactos generados
+/openspec-propose "agregar soporte para exportar historias a CSV"
 
-## Workflow
+# Implementar las tareas de un cambio
+/openspec-apply-change
 
-```
-Necesidad / feature
-       │
-       ▼
- /story-creation          ← Genera la historia en formato canónico
-       │
-       ▼
- /story-evaluation      ← Evalúa la calidad (score S ≤ 2 → dividir)
-       │
-       ├── Ready           → Historia lista para sprint planning
-       ├── Refinar         → Aplicar recomendaciones y re-evaluar
-       └── Rechazar
-             │
-             ├── Formato insuficiente → Reescribir con /story-creation
-             └── Historia muy grande  → /story-split → /story-evaluation
+# Archivar un cambio completado
+/openspec-archive-change
 ```
 
-## Comandos
+**Crear una nueva skill:**
 
-| Comando | Descripción |
-|---------|-------------|
-| `/story-creation` | Crea una historia de usuario en formato story-gherkin a partir de una necesidad en lenguaje natural. Aplica Mike Cohn, 3 C's e INVEST. |
-| `/story-split` | Divide una historia grande en historias más pequeñas e independientes usando los 8 patrones de splitting. |
-| `/story-evaluation` | Evalúa la calidad de una historia con la rúbrica FINVEST (Formato + INVEST) en escala Likert 1–5. Produce score por dimensión, score global y decisión Ready / Refinar / Rechazar. |
-
-## Template canónico
-
-Todas las historias siguen el template `story-gherkin-template.md`:
-
-```markdown
-## Historia
-**Como** {rol específico}
-**Quiero** {acción concreta}
-**Para** {beneficio medible}
-
-## Criterios de aceptación
-
-### Escenario principal – {título}
-Dado {contexto}
-Cuando {acción}
-Entonces {resultado}
-
-### Escenario alternativo / error – {título}
-Dado {contexto}
-Cuando {acción inválida}
-Entonces {error}
-  Pero {excepción}
-
-### Requerimiento (opcional)
-{Requerimiento específico (como regla de negocio) relacionado con la historia, si aplica}
-
-## Criterios no funcionales (opcional)
-## Notas / contexto adicional (opcional)
+```bash
+# Ciclo iterativo de creación y benchmarking
+/skill-builder
 ```
 
-## Estructura
+## Configuration
 
-```
-.claude/skills/
-├── story-creation/
-│   ├── SKILL.md
-│   └── templates/story-gherkin-template.md
-├── story-split/
-│   ├── SKILL.md
-│   └── templates/story-gherkin-template.md
-└── story-evaluation/
-    ├── SKILL.md
-    ├── templates/
-    │   ├── story-gherkin-template.md
-    │   └── output-template.md
-    └── examples/
-        ├── example-ready.md
-        ├── example-refinar.md
-        └── example-rechazar.md
-```
+El framework es declarativo y no requiere configuración de variables de entorno. Toda la lógica de flujo se controla mediante el campo `**Estado**` en los documentos Markdown del pipeline.
 
-## Uso en otros clientes
+### Environment Variables
 
-**Claude Code / VS Code / JetBrains** — ejecuta directamente los comandos en el chat del agente:
-```
-/story-creation
-/story-split
-/story-evaluation
-```
+| Variable | Required | Description |
+|----------|----------|-------------|
+| — | — | El sistema no requiere variables de entorno propias |
 
-**Jira (Rovo)** — crea un agente en Studio → Agentes → Crear un Agente y configúralo con los prompts de la carpeta `gem/prompts/`.
+El runtime de IA (Claude Code, GitHub Copilot, etc.) gestiona su propia autenticación de forma independiente al framework.
 
-**Gemini Gem** — crea una Gem con las instrucciones de `gem/prompts/`. Agrega como conocimiento el template canónico (`story-gherkin-template.md`) y la base teórica FINVEST.
+### Estado de documentos
 
-## Base teórica
+El único mecanismo de control de flujo es el campo `**Estado**` en cada documento:
 
-- Mike Cohn — *User Stories Applied* (2004)
-- Bill Wake — *INVEST in Good Stories* (2003)
-- Richard Lawrence & Peter Green — *Humanizing Work Guide to Splitting User Stories*
-- User Experience Mapping — Peter W. Szabo
+| Valor | Significado |
+|-------|-------------|
+| `Doing` | Documento en progreso — el pipeline puede retomarlo |
+| `Ready` | Documento completo — actúa como precondición para la siguiente fase |
 
-# cli-requirement-from-code — Instrucciones para Claude Code
+## Contributing
 
-Este directorio contiene el skill `/requirement-from-code` para Claude Code. Úsalo en cualquier repositorio de código para generar automáticamente una especificación de requerimientos a partir del código fuente.
+1. Fork del repositorio
+2. Crea tu rama de feature (`git checkout -b feature/nueva-skill`)
+3. Haz commit de tus cambios (`git commit -m 'feat: agrega skill X'`)
+4. Push a la rama (`git push origin feature/nueva-skill`)
+5. Abre un Pull Request
 
-## Cómo usar el skill
+### Development Setup
 
-Desde la raíz del repositorio que quieras analizar, ejecuta:
-
-```
-/requirement-from-code
+```bash
+git clone https://github.com/dariopalminio/agile-sddf.git
+cd agile-sddf
+npm install
 ```
 
-### Opciones
+**Con Docker (entorno reproducible):**
 
-| Opción | Descripción |
-|---|---|
-| `--focus <path>` | Limita el análisis a un directorio o módulo específico |
-| `--update` | Re-ejecuta el análisis actualizando una `requirement-spec.md` ya existente |
-| `--verbose` | Muestra el razonamiento de cada agente y estadísticas del análisis |
-
-## Salida generada
-
-El skill crea el archivo `docs/specs/project/requirement-spec.md` con:
-
-- **Stack y arquitectura** detectados automáticamente
-- **Features** agrupadas por dominio con nivel de confianza
-- **Reglas de negocio** en formato `DADO / CUANDO / ENTONCES` con referencia al archivo y línea de código
-- **Mapa de navegación ASCII** de rutas, pantallas y endpoints
-- **Gaps** — secciones no inferibles marcadas con `<!-- PENDING MANUAL REVIEW -->` y preguntas sugeridas
-
-## Template personalizado
-
-Si quieres controlar la estructura del documento de salida, coloca un archivo `requirement-spec-template.md` en la raíz del repositorio a analizar. El skill lo detecta automáticamente y lo usa como base. Sin él, aplica el template interno por defecto.
-
-## Agentes que se ejecutan
-
-El skill lanza un pipeline multi-agente de forma automática. No necesitas invocarlos manualmente:
-
-| Agente | Qué analiza |
-|---|---|
-| `arch-reverse-engineer` | Estructura técnica, capas, frameworks, patrones, dependencias |
-| `product-discovery` | Features desde la perspectiva del usuario: rutas, endpoints, textos de UI |
-| `business-rules-analyst` | Reglas de negocio, validaciones, permisos, workflows |
-| `ux-flow-mapper` | Mapa de navegación: pantallas, rutas, guards, entry points |
-| `requirements-synthesizer` | Fusiona todos los outputs y genera el documento final |
-
-Los primeros cuatro agentes corren en paralelo. El synthesizer corre al final con todos sus outputs.
-
-## Niveles de confianza
-
-Cada inferencia en el documento generado incluye un nivel de confianza:
-
-| Rango | Significado |
-|---|---|
-| 0.9 – 1.0 | Extraído directamente del código |
-| 0.7 – 0.9 | Inferido con patrones claros |
-| 0.5 – 0.7 | Inferido con análisis semántico |
-| < 0.5 | Sugerencia — revisar manualmente |
-
-## Restricciones
-
-- Solo análisis estático: no ejecuta código del repositorio.
-- No detecta features planeadas pero no implementadas.
-- La precisión depende de convenciones de nomenclatura del proyecto analizado.
-- Frameworks con metaprogramación intensiva pueden producir inferencias de baja confianza.
- es un documento vivo y puede ser actualizada con feedback tuyo, o del usuarios. Puedes sugerir mejora arquitectura de solución, nuevos agentes, skills, o cambios en el template. El objetivo es crear una herramienta práctica y efectiva para la ingeniería inversa de requerimientos desde código.
- 
- # Definición y Uso de Agentes, Skills y Comandos
-
-Los **agentes**, las **skills** y los **comandos** son elementos fundamentales para estructurar un el equipo de inteligencia artificial automatizado para Agile Spec-Driven Development Framework (SDDF). Aquí tienes la definición y el uso de cada uno:
-
-## Agentes
-
-Los agentes funcionan como **pequeños empleados virtuales especializados** en tareas concretas dentro de un proyecto, como por ejemplo un agente que hace discovery, otro que redacta especificaciones o uno que diseña arquitectura. Técnicamente, son archivos de texto (Markdown) que contienen instrucciones de roly contexto específico sobre cómo deben actuar. Estos agentes pueden trabajar de forma autónoma, simultánea o en equipo, entregando resultados listos para usar.
-
-## Comandos
-
-Evitamos usar comandos.
-
-### Comandos en Opencode
-
-Los comandos en OpenCode se ubican en ".opencode/commands/": Permite máxima personalización para un desarrollo acelerado. Puedes usar argumentos ($ARGUMENTS), inyectar resultados de comandos Bash (!), y referenciar archivos (@), lo que te permite construir flujos de automatización complejos.
-
-### Comandos en Claude
-
-Los comandos en Claude se ubican en ".claude/commands/". En Claude evitamos usar comandos por se más bien legacy ("precede al sistema de skills actual"). En su lugar, recomendamos usar skills para encapsular la lógica de ejecución, lo que permite una mayor flexibilidad y reutilización. Sin embargo, si decides usar comandos, asegúrate de que estén bien documentados y organizados para facilitar su uso.
-
-## Skills (Habilidades)
-
-Los skills son las **habilidades personalizadas o herramientas** que construyes para dárselas a tus agentes. Se definen mediante documentos de texto que actúan como instrucciones continuas para dotar al agente de una especialización deseada, indicándole exactamente cómo debe comportarse o ejecutar una acción exclusiva. Gracias a las skills, los agentes pueden realizar tareas de forma autónoma, como redactar una especificación siguiendo una plantilla, conectarse a aplicaciones externas o aplicar técnicas específicas de escritura.
-
-## Modelo de un solo nivel de delegación
-
-En este modelo, el skill actúa como el punto de entrada y coordinador que invoca agentes especialistas. El skill es responsable de orquestar la ejecución de los agentes, asegurándose de que cada uno realice su tarea específica y luego recopile los resultados para generar la salida final. Este enfoque mantiene la estructura simple y clara, evitando la complejidad de múltiples niveles de delegación.
-
-Los skills son el punto de entrada y el coordinador que invoca agentes especialistas. Es el patrón establecido en este proyecto.
-
-```
-skill (entry point + coordinator/orquestador)
-    └── agent A (Subagentes A)
-    └── agent B (Subagentes B)
-    └── agent C (Subagentes C)
+```bash
+docker-compose -f docker-compose.dev.yml up
 ```
 
-Esto es acorde a la arquitectura de Claude Code donde la sesión principal actúa como agente primario que orquesta la ejecución de skills y agentes especializados (Subagentes), manteniendo una estructura plana (Sesión → Subagente), clara y eficiente sin necesidad de múltiples niveles de delegación (agentes en .claude/agents/, invocados por la sesión principal).
+El contenedor usa imagen `debian:bookworm-slim` con git, curl y bash.
 
+### Running Tests
+
+El framework no tiene suite de tests automatizados para el pipeline principal. La calidad de los skills se valida con el meta-skill `skill-builder` mediante ejecución paralela (con skill vs sin skill) y un viewer HTML de benchmarking:
+
+```bash
+/skill-builder
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

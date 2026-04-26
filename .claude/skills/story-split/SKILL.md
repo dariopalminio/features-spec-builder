@@ -5,7 +5,7 @@ description: "Divide una historia de usuario grande en historias más pequeñas 
 
 # Skill: /story-split
 
-Toma una historia grande, épica o feature demasiado amplio y lo divide en historias más pequeñas e independientes. Cada historia resultante sigue **estrictamente** el template `.claude/skills/story-split/templates/story-gherkin-template.md`.
+Toma una historia grande, épica o feature demasiado amplio y lo divide en historias más pequeñas e independientes. Cada historia resultante sigue **estrictamente** el template `templates/story-gherkin-template.md`.
 
 **Usar cuando:**
 - Una historia tiene ≥ 4 escenarios Gherkin o ≥ 8 pasos totales
@@ -188,9 +188,35 @@ TAD 3: Construir el motor de recomendación más simple posible
 
 ---
 
-### Fase 3 — Escribir cada historia resultante
+### Fase 3 — Verificar que el template existe y leerlo
 
-Cada historia del split debe seguir **estrictamente** el template `.claude/skills/story-split/templates/story-gherkin-template.md`:
+El archivo de plantilla (template canónico) es la **única fuente de información estructural** para generar el output de stories. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derréglelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
+
+El archivo de plantilla (template canónico) es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
+
+Lee el archivo de plantilla (template canónico) `templates/story-gherkin-template.md`.
+
+- Si el archivo **existe**: continua con la Fase 4.
+- Si el archivo **no existe** busca el archivo `story-gherkin-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres:
+- .agents/skills/story-split/templates
+- .claude/skills/story-split/templates
+- .opencode/skills/story-split/templates
+- .github/skills/story-split/templates
+- ~/.config/opencode/skills/story-split/templates
+- ~/.claude/skills/story-split/templates
+- docs/specs/templates
+- Si el archivo **no existe**: informar al usuario y detener la ejecución:
+
+  > ❌ No se encontró el template requerido en `templates/story-gherkin-template.md`.
+  > Por favor verifica que el archivo existe antes de continuar.
+
+---
+
+### Fase 4 — Escribir cada historia resultante
+
+Cada historia del split debe seguir **estrictamente** el template `templates/story-gherkin-template.md` anteriormente leido, adaptando el contenido a cada historia específica. No agregar ni eliminar secciones del template, solo llenar cada sección con la información correspondiente a la historia resultante.
+
+Por ejemplo:
 
 ```markdown
 ## 📖 Historia
@@ -202,25 +228,23 @@ Cada historia del split debe seguir **estrictamente** el template `.claude/skill
 ## ✅ Criterios de aceptación
 
 ### Escenario principal – {título}
-```gherkin
 Dado {contexto específico}
 Cuando {acción}
 Entonces {resultado verificable}
-```
 
 ### Escenario alternativo / error – {título}
-```gherkin
 Dado {contexto}
 Cuando {acción inválida}
 Entonces {error o comportamiento alternativo}
   Pero {excepción}
-```
 
 ### Requerimiento (opcional)
 {Requerimiento específico (como regla de negocio) relacionado con la historia, si aplica}
 
 ## ⚙️ Criterios no funcionales (opcional)
 ## 📎 Notas / contexto adicional
+
+Este es solo un ejemplo, recuerda que el archivo de plantilla (template canónico) es la guía a evaluar como formato.
 ```
 
 Aplicar las mismas reglas de calidad de `/story-creation`:
@@ -231,7 +255,7 @@ Aplicar las mismas reglas de calidad de `/story-creation`:
 
 ---
 
-### Fase 4 — Validar cada split
+### Fase 5 — Validar cada split
 
 Antes de entregar, verificar que **cada historia** cumple:
 
@@ -248,7 +272,7 @@ Si alguna historia no cumple **V** (no entrega valor por sí sola), revisar el p
 
 ---
 
-### Fase 5 — Guardar y entregar el output
+### Fase 6 — Guardar y entregar el output
 
 #### Guardar cada historia como archivo `.md`
 
@@ -317,7 +341,7 @@ Si se generaron TADs en lugar de historias, explicar claramente que son experime
 
 ## Referencias
 
-- **Template canónico:** `.claude/skills/story-split/templates/story-gherkin-template.md`
+- **Template canónico:** `templates/story-gherkin-template.md`
 - **Creación de historias:** `/story-creation`
 - **Evaluación de calidad:** `/story-evaluation`
 - Richard Lawrence & Peter Green, *Humanizing Work Guide to Splitting User Stories* — origen de los 8 patrones

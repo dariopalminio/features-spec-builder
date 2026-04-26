@@ -1,10 +1,20 @@
 {
   "version": 1,
   "skills": {
+    "readme-blueprint-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "computedHash": "e2c7dabf2e455794260f1516e2ceda6a82dc92a409578cc184fcb0f45bddca54"
+    },
+    "readme-creator": {
+      "source": "mblode/agent-skills",
+      "sourceType": "github",
+      "computedHash": "f0cfa677448b5274fe6ed896324c6aa6b1996644f4aa939490c9972fd423151b"
+    },
     "skill-creator": {
       "source": "anthropics/skills",
       "sourceType": "github",
-      "computedHash": "57f470f512f45bdac598e302bc72fd62bf2b649fc7fad032efe97720149cde4d"
+      "computedHash": "7e3c9cd74e9e2b4828527a857170e86310f2dab5ea8030a9043df2c7e6c88857"
     },
     "user-story-mapping": {
       "source": "melodic-software/claude-code-plugins",

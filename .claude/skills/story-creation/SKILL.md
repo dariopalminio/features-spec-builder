@@ -5,7 +5,7 @@ description: "Crea historias de usuario siguiendo el template story-gherkin (Com
 
 # Skill: /story-creation
 
-Crea una historia de usuario completa a partir de una necesidad o feature descrito en lenguaje natural. El output sigue **estrictamente** el template `.claude/skills/story-creation/templates/story-gherkin-template.md` definido en este skill.
+Crea una historia de usuario completa a partir de una necesidad o feature descrito en lenguaje natural. El output sigue **estrictamente** el template `templates/story-gherkin-template.md` definido en este skill.
 
 **Usar cuando:**
 - Se necesita redactar una historia de usuario lista para sprint planning
@@ -16,7 +16,32 @@ Crea una historia de usuario completa a partir de una necesidad o feature descri
 
 ## Template canónico (fuente de verdad)
 
-Toda historia generada por este skill debe seguir **exactamente** esta estructura (ver `.claude/skills/story-creation/templates/story-gherkin-template.md`):
+### paso A. Verificar que el template existe y leerlo
+
+El archivo de plantilla es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derréglelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
+
+El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
+
+Lee el archivo de plantilla `templates/story-gherkin-template.md`.
+
+- Si el archivo **existe**: continua con el siguiente paso B (Guía de estructura y formato).
+- Si el archivo **no existe** busca el archivo `story-gherkin-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres:
+- .agents/skills/story-creation/templates
+- .claude/skills/story-creation/templates
+- .opencode/skills/story-creation/templates
+- .github/skills/story-creation/templates
+- ~/.config/opencode/skills/story-creation/templates
+- ~/.claude/skills/story-creation/templates
+- docs/specs/templates
+- Si el archivo **no existe**: informar al usuario y detener la ejecución:
+  > ❌ No se encontró el template requerido en `templates/story-gherkin-template.md`.
+  > Por favor verifica que el archivo existe antes de continuar.
+
+### paso B. Guía de estructura y formato
+
+Toda historia generada por este skill debe seguir **exactamente** la estructura de `templates/story-gherkin-template.md` leida en el paso A. No asumas que las secciones siempre estarán en el mismo orden o que tendrán los mismos nombres. Siempre derréglelas dinámicamente de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros en la estructura del template.:
+
+Por ejemplo:
 
 ```markdown
 ## 📖 Historia
@@ -28,24 +53,19 @@ Toda historia generada por este skill debe seguir **exactamente** esta estructur
 ## ✅ Criterios de aceptación
 
 ### Escenario principal – {título descriptivo}
-```gherkin
 Dado {contexto inicial específico}
   Y {otra condición si aplica}
 Cuando {acción del usuario}
 Entonces {resultado esperado concreto}
   Y {otro resultado}
-```
 
 ### Escenario alternativo / error – {título}
-```gherkin
 Dado {contexto}
 Cuando {acción inválida o límite}
 Entonces {mensaje de error o comportamiento alternativo}
   Pero {excepción si aplica}
-```
 
 ### Escenario con datos (Scenario Outline) – opcional
-```gherkin
 Escenario: {título}
   Dado que el usuario tiene el rol "<rol>"
   Cuando intenta acceder a "{recurso}"
@@ -53,7 +73,7 @@ Escenario: {título}
 Ejemplos:
   | rol      | recurso | mensaje           |
   | invitado | /admin  | "Acceso denegado" |
-```
+
 ### Requerimiento (opcional)
 {Requerimiento específico (como regla de negocio) relacionado con la historia, si aplica}
 
@@ -65,6 +85,8 @@ Ejemplos:
 
 ## 📎 Notas / contexto adicional
 {Información relevante para desarrollo o QA. Scope out explícito si aplica.}
+
+Este es solo un ejemplo, recuerda que el archivo de plantilla es la guía a completar.
 ```
 
 ---
@@ -247,7 +269,7 @@ Flujo de recuperación vía email. SMS queda fuera de scope de esta historia.
 
 ## Referencias
 
-- **Template canónico:** `.claude/skills/story-creation/templates/story-gherkin-template.md`
+- **Template canónico:** `templates/story-gherkin-template.md`
 - **Evaluación de calidad:** `/story-evaluation`
 - **División de historias grandes:** `/user-story-splitting`
 - Mike Cohn, *User Stories Applied* (2004)

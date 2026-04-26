@@ -21,14 +21,26 @@ Extrae los flags del input del usuario:
 - `--update`: modo incremental — solo re-analizar secciones marcadas como `<!-- PENDING MANUAL REVIEW -->` en el output existente.
 - `--verbose`: al final, mostrar resumen detallado de cada agente.
 
-### 2. Resolver ruta del template
+### 2. Verificar que el template existe y leerlo
 
-Lee `.claude/skills/reverse-engineering/templates/requirement-spec-template.md`.
+El archivo de plantilla es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derréglelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
 
-- Si el archivo **existe**: guarda la ruta como `TEMPLATE_PATH` — la pasarás a todos los agentes.
-- Si no existe: informa al usuario y detén la ejecución:
+El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-  > ❌ No se encontró el template en `.claude/skills/reverse-engineering/templates/requirement-spec-template.md`.
+Lee el archivo de plantilla `templates/requirement-spec-template.md`.
+
+- Si el archivo **existe**: continua al paso 3. (Verificar modo --update)
+- Si el archivo **no existe** busca el archivo llamado `requirement-spec-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres:
+- .agents/skills/reverse-engineering/templates
+- .claude/skills/reverse-engineering/templates
+- .opencode/skills/reverse-engineering/templates
+- .github/skills/reverse-engineering/templates
+- ~/.config/opencode/skills/reverse-engineering/templates
+- ~/.claude/skills/reverse-engineering/templates
+- docs/specs/templates
+- Si el archivo **no existe**: informar al usuario y detener la ejecución:
+
+  > ❌ No se encontró el template en `templates/requirement-spec-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 ### 3. Verificar modo --update

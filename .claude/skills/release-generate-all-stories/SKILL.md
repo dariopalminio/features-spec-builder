@@ -4,7 +4,7 @@ description: "Genera archivos de historia de usuario (story-[ID]-[Nombre-kebab].
 ---
 # Skill: /release-generate-all-stories
 
-Escanea todos los archivos de release en `docs/specs/releases/` y genera automáticamente un archivo `story-[ID]-[Nombre-kebab].md` por cada feature encontrada en cada release, siguiendo exactamente la estructura de `.claude/skills/release-generate-all-stories/templates/story-gherkin-template.md`. Es el equivalente batch de `/release-generate-stories`.
+Escanea todos los archivos de release en `docs/specs/releases/` y genera automáticamente un archivo `story-[ID]-[Nombre-kebab].md` por cada feature encontrada en cada release, siguiendo exactamente la estructura de `templates/story-gherkin-template.md`. Es el equivalente batch de `/release-generate-stories`.
 
 **Usar cuando:**
 - Se quiere poblar `docs/specs/stories/` de forma completa a partir de todos los releases del proyecto
@@ -107,7 +107,30 @@ Nombre resultante: `story-[ID]-[nombre-kebab].md`
 - **(b) Saltar todos los existentes:** si el archivo ya existe, registrar como saltado y continuar con la siguiente feature
 - **(c) Decidir uno por uno:** si el archivo ya existe, preguntar al usuario antes de continuar
 
-**3. Inferir el contenido de la historia:**
+**3. Verificar que el template existe:**
+
+El archivo de plantilla es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derréglelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
+
+El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
+
+Lee el archivo de plantilla `templates/story-gherkin-template.md`.
+
+- Si el archivo **existe**: continua al paso 4 (Inferir el contenido de la historia).
+- Si el archivo **no existe** busca el archivo `story-gherkin-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres:
+- .agents/skills/release-generate-all-stories/templates
+- .claude/skills/release-generate-all-stories/templates
+- .opencode/skills/release-generate-all-stories/templates
+- .github/skills/release-generate-all-stories/templates
+- ~/.config/opencode/skills/release-generate-all-stories/templates
+- ~/.claude/skills/release-generate-all-stories/templates
+- docs/specs/templates
+- Si el archivo **no existe**: informar al usuario y detener la ejecución:
+  > ❌ No se encontró el template requerido en `templates/story-gherkin-template.md`.
+  > Por favor verifica que el archivo existe antes de continuar.
+
+**4. Inferir el contenido de la historia:**
+
+Usa el archivo de plantilla anteriormente leido para inferir la estructura de la historia, pero extrae el contenido específico de cada sección a partir del nombre y la descripción de la feature. Por ejemplo, el nombre de la feature puede sugerir el rol y la acción principal, mientras que la descripción puede aportar detalles adicionales para los criterios de aceptación.
 
 Usando el nombre y la descripción de la feature, inferir:
 - **Como**: rol específico que se beneficia dentro del sistema SDDF (desarrollador, PM, practitioner — ser específico, no "usuario")
@@ -116,7 +139,7 @@ Usando el nombre y la descripción de la feature, inferir:
 
 Generar al menos un escenario Gherkin principal (happy path) y uno alternativo/error, con pasos `Dado/Cuando/Entonces` específicos y verificables.
 
-**4. Escribir el archivo:**
+**5. Escribir el archivo:**
 
 Crear `docs/specs/stories/story-[ID]-[nombre-kebab].md` con la siguiente estructura:
 

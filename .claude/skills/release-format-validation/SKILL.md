@@ -4,7 +4,7 @@ description: "Valida que un archivo de especificación de release cumple la estr
 ---
 # Skill: /release-format-validation
 
-Valida que un archivo de especificación de release contiene todas las secciones obligatorias del template `.claude/skills/release-format-validation/templates/release-spec-template.md`. Produce resultado **APROBADO**, **REFINAR** o **RECHAZADO**.
+Valida que un archivo de especificación de release contiene todas las secciones obligatorias del template `templates/release-spec-template.md`. Produce resultado **APROBADO**, **REFINAR** o **RECHAZADO**.
 
 **Usar cuando:**
 - Antes de usar un archivo de release como input para `generate-stories` u otros skills del pipeline SDDF
@@ -45,9 +45,31 @@ Terminar la ejecución del skill sin continuar.
 
 ---
 
-## Fase 1 — Extraer secciones obligatorias del template
+## Fase 1 — Verificar que el template existe y leerlo
 
-Leer el archivo `.claude/skills/release-format-validation/templates/release-spec-template.md`.
+El archivo de plantilla es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derréglelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
+
+El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
+
+Lee el archivo de plantilla `templates/release-spec-template.md`.
+
+- Si el archivo **existe**: continua con la Fase 2.
+- Si el archivo **no existe** busca el archivo `release-spec-template.md` en las siguientes ubicaciones alternativas, en orden, y lee la primera plantilla que encuentres:
+- .agents/skills/release-format-validation/templates
+- .claude/skills/release-format-validation/templates
+- .opencode/skills/release-format-validation/templates
+- .github/skills/release-format-validation/templates
+- ~/.config/opencode/skills/release-format-validation/templates
+- ~/.claude/skills/release-format-validation/templates
+- docs/specs/templates
+- Si el archivo **no existe**: informar al usuario y detener la ejecución:
+
+  > ❌ No se encontró el template requerido en `templates/release-spec-template.md`.
+  > Por favor verifica que el archivo existe antes de continuar.
+
+---
+
+## Fase 2 — Extraer secciones obligatorias del template
 
 Extraer dinámicamente los encabezados de las secciones que contengan el comentario `<!-- sección obligatoria` (con o sin espacio antes de `-->`).
 
@@ -62,7 +84,7 @@ Adicionalmente, los campos de frontmatter siempre son obligatorios: **Título**,
 
 ---
 
-## Fase 2 — Validar el archivo de release
+## Fase 3 — Validar el archivo de release
 
 Leer el archivo de release resuelto en Fase 0.
 
@@ -84,7 +106,7 @@ Registrar cuáles están ausentes.
 
 ---
 
-## Fase 3 — Producir resultado
+## Fase 4 — Producir resultado
 
 ### Si no hay secciones ni campos faltantes → APROBADO
 
@@ -110,7 +132,7 @@ Secciones/campos faltantes:
 - <nombre exacto del campo o encabezado faltante 2>
 ...
 
-Revisa el template en .claude/skills/release-format-validation/templates/release-spec-template.md para completar las secciones indicadas.
+Revisa el template en templates/release-spec-template.md para completar las secciones indicadas.
 ```
 
 ---
