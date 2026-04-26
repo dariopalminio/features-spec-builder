@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased] — Release 09: Docs & Wiki Builders
 
 ### Added
-
+- **Skill `/header-aggregation`** (FEAT-040) — agrega un encabezado de tabla de contenido a un documento Markdown existente basado en sus títulos; detecta niveles de encabezado, genera anclas, construye tabla de contenido con formato adecuado y la inserta al inicio del documento; write guard que solicita confirmación antes de sobreescribir el documento original
 - **Skill `/readme-builder`** (FEAT-042) — genera un `README.md` completo a partir de los artefactos SDDF disponibles (`project-intent.md`, `requirement-spec.md`, `project-plan.md`) usando un template como fuente de verdad estructural; descubrimiento de contenido en 3 tiers (specs formales → archivos de contexto LLM → ingeniería inversa); write guard que solicita confirmación antes de sobreescribir un README existente
 - **Skill `/skill-builder`** (FEAT-048) — ciclo iterativo de creación y mejora de skills con captura de intención, redacción de SKILL.md, generación de casos de prueba, ejecución paralela (con skill vs sin skill), grading contra aserciones y viewer HTML de benchmarking; incluye scripts Python y agentes `analyzer`, `comparator`, `grader`
 

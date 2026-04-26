@@ -1,19 +1,14 @@
 ---
 alwaysApply: false
 type: story
-date: 2026-04-26
+date: 2026-04-25
 slug: story-FEAT-043-header-aggregation
 title: "Encabezado de archivos spec con metadata de estado (header-aggregation)"
-status: IN-PROGRESS
-substatus: DOING
+status: COMPLETED
+substatus: READY
 tags: [spec, story]
----
-**Título**: Encabezado de archivos spec con metadata de estado (header-aggregation)
-**Versión**: 1.0
-**Estado**: Doing
-**Fecha**: 2026-04-25
-**FINVEST Score:** —
-**FINVEST Decisión:** —
+FINVEST Score: —
+FINVEST Decisión: —
 ---
 
 # 📖 Historia: Encabezado de archivos spec con metadata de estado (header-aggregation)

@@ -443,3 +443,9 @@ skill (entry point + coordinator/orquestador)
 
 Esto es acorde a la arquitectura de Claude Code donde la sesión principal actúa como agente primario que orquesta la ejecución de skills y agentes especializados (Subagentes), manteniendo una estructura plana (Sesión → Subagente), clara y eficiente sin necesidad de múltiples niveles de delegación (agentes en .claude/agents/, invocados por la sesión principal).
 
+Nota:
+**alwaysApply**: El campo alwaysApply en headers controla si el archivo se inyecta automáticamente en el contexto de cada conversación:
+    - alwaysApply: true — Claude Code incluye este archivo en el contexto siempre, sin que el usuario lo pida. Útil para instrucciones globales (ej: CLAUDE.md de un skill).
+    - alwaysApply: false — el archivo no se carga automáticamente; solo entra en contexto si el usuario lo referencia explícitamente, o si Claude lo lee con una herramienta.
+Es un metadato del runtime para Claude, no del schema SDDF, y borrarlo cambiaría el comportamiento de Claude Code con ese archivo.
+
