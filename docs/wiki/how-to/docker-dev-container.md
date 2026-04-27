@@ -1,3 +1,13 @@
+---
+type: wiki
+slug: docker-dev-container
+title: "Guía Completa: Entorno de Desarrollo React con Docker + VSCode Dev Containers"
+date: 2026-04-26
+status: BACKLOG
+substatus: N/A
+parent: N/A
+---
+
 # 🐳 Guía Completa: Entorno de Desarrollo React con Docker + VSCode Dev Containers
 
 ## 🎯 Objetivo

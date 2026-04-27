@@ -20,6 +20,7 @@
   "homepage": "https://github.com/dariopalminio/agile-sddf#readme",
   "files": [
     ".claude/agents/",
+    ".claude/skills/docs-wiki-builder",
     ".claude/skills/header-aggregation",
     ".claude/skills/openspec-generate-baseline",
     ".claude/skills/openspec-init-config",

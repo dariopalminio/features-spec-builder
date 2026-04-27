@@ -1,3 +1,13 @@
+---
+type: wiki
+slug: extreme-agile
+title: "Agilidad Agentica (Agentic Agile)"
+date: 2026-04-26
+status: BACKLOG
+substatus: N/A
+parent: N/A
+---
+
 # Agilidad Agentica (Agentic Agile)
 
 ## Agilidad Extrema con Ingeniería Agéntica

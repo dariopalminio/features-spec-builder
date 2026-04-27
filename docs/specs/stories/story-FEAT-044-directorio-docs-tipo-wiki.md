@@ -85,6 +85,16 @@ docs/
         └── setup-dev-container.md
 ```
 
+### Requirement: Normalizar encabezados frontmatter
+Añadir el bloque frontmatter como placeholder en la cabecera de cada template (project-intent-template.md, etc.). 
+El skill lo rellena como parte del proceso normal de "completar el template".
+Ventajas: el template define el contrato completo incluyendo metadatos.
+Solo se modifican los templates (menos archivos, cambio más localizado)
+El frontmatter queda visible en el template — fácil de entender y mantener
+No hay que añadir lógica en SKILL.md — el skill ya "rellena el template" por naturaleza
+Si el schema cambia, solo se actualiza el template correspondiente
+La solución es un enfoque mixto — Opción B para los 7 con template + Opción A para los 3 con agentes.
+
 ## ⚙️ Criterios no funcionales
 
 * Trazabilidad: cada nodo debe tener un slug único y metadata clara para su identificación

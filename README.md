@@ -30,6 +30,7 @@ Los developers y equipos que trabajan con IA para desarrollar software carecen d
 - **Multi-runtime**: los mismos skills operan en Claude Code, GitHub Copilot, Codex/Cursor/OpenCode, Google Gemini Gems y Atlassian Rovo sin modificar el SKILL.md fuente
 - **Meta-framework**: crea, benchmarkea y distribuye nuevas skills con ciclo iterativo (skill-builder)
 - **Trazabilidad completa**: IDs únicos FEAT-NNN y Estado: Doing/Ready en cada documento del pipeline
+- **Docs as Wiki**: skill docs-wiki-builder para generar documentación de proyecto en formato wiki navegable. Incluye un skill header-aggregation para generar encabezados frontmatter de archivo '.md'.
 
 ## Installation
 
