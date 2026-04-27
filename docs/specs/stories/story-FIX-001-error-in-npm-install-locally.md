@@ -161,3 +161,5 @@ Ejecuta el postinstall Y muestra el output
 Instala skills Y agents correctamente
 
 Con esto, npm install agile-sddf@latest --foreground-scripts en el proyecto del usuario debería mostrar el output completo con skills y agents instalados correctamente en .claude/ del proyecto.
+
+https://www.npmjs.com/package/agile-sddf
