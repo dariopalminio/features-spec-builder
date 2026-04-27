@@ -1,12 +1,3 @@
----
-alwaysApply: false
----
-**Título**: [Nombre del release]
-**Versión**: 1.0
-**Estado**: [Doing | Ready]
-**Fecha**: [Fecha de generación]
----
-
 # Release/Epic: [Nombre de la Épica/Release] <!-- nombre obligatorio -->
 
 ## Descripción <!-- sección obligatoria-->

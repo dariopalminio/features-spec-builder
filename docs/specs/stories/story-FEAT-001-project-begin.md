@@ -1,5 +1,10 @@
 ---
 alwaysApply: false
+type: story
+slug: story-FEAT-001-project-begin
+title: "project-begin — Captura de intención inicial del proyecto"
+date: 2026-04-22
+status: COMPLETED
 ---
 **Título**: project-begin — Captura de intención inicial del proyecto
 **Versión**: 1.0

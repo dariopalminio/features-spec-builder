@@ -67,7 +67,6 @@ docs/
     │   ├── index.md               # (opcional) resumen de la constitución
     │   ├── constitution.md        # (archivo único) estilo speckit
     │   └── amendments.md          # (opcional) histórico de cambios
-    │
     ├── architecture/              # Decisiones técnicas, diagramas, stack
     │   ├── c4/                    # Diagramas C4 (context, containers, components, code)
     │   ├── sequence/              # Diagramas de secuencia
@@ -78,8 +77,8 @@ docs/
     │   ├── definition-of-ready.md # DoR (opcional)
     │   ├── branching-strategy.md  # (si quieres documentar la estrategia Git)
     │   └── code-review-guidelines.md
-    │
-    ├── extreme-agile/             # (ya existente) artículos sobre agilidad extrema
+    ├── ux/                        # Decisiones y guías de UX/UI
+    ├── guides/             # artículos y guias teóricas (como metodologías ágiles, mejores prácticas, etc.)
     │   └── extreme-agile.md
     │
     └── how-to/                    # Guías prácticas (como docker-dev-container)

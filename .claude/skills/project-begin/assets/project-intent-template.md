@@ -1,13 +1,12 @@
 ---
 alwaysApply: false
----
-# Project Intent: [Nombre del Proyecto]
-
-**Versión**: 1.0
-**Estado**: [Doing | Ready]
-**Fecha**: [Fecha de generación]
-**Generado por**: project-pm
-
+type: project
+slug: project-intent
+title: "<primer # heading del documento>"
+date: <YYYY-MM-DD>
+status: BACKLOG
+substatus: DOING
+parent: N/A
 ---
 
 ## Definición del Problema

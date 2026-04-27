@@ -1,10 +1,13 @@
 ---
 alwaysApply: false
+type: story
+slug: <nombre-del-archivo-sin-extensión>
+title: "<primer # heading del documento>"
+date: <YYYY-MM-DD>
+status: BACKLOG
+substatus: DOING
+parent: N/A
 ---
-**Título**: [Nombre de la Story]
-**Versión**: 1.0
-**Estado**: [Doing | Ready]
-**Fecha**: [Fecha de generación]
 **FINVEST Score:** [FINVEST Score]
 **FINVEST Decisión:** [APROBADA | REFINAR | RECHAZAR]
 ---

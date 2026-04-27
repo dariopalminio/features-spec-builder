@@ -21,9 +21,9 @@ slug: <kebab-case único en el repositorio>  # OBLIGATORIO
 title: "<Título legible del documento>"     # OBLIGATORIO
 tags: []                                    # opcional
 status: <BACKLOG | IN-PROGRESS | COMPLETED> # OBLIGATORIO
-substatus: <N/A | DOING | READY>            # opcional — alineado con Estado: Doing/Ready
-parent: <slug del nodo padre>               # opcional
-related:                                    # opcional
+substatus: <N/A | TODO | DOING | READY>            # OBLIGATORIO
+parent: <N/A | slug del nodo padre>               # OBLIGATORIO
+related:                                    # opcional, si tiene relación con otros nodos
   - <slug de nodo relacionado>
 sources:                                    # opcional
   - <clave>: <valor>
@@ -65,7 +65,7 @@ Para cada archivo a procesar, deriva automáticamente los campos obligatorios:
 | `title` | Primer heading `#` del contenido del archivo. Si no hay heading `#`, usar el nombre del archivo sin extensión formateado (guiones → espacios, capitalizar) |
 | `date` | Fecha en formato `YYYY-MM-DD` (debería preservar la fecha del documento cuando está disponible o fecha today si no existe o es nuevo) |
 | `status` | Buscar `**Estado**: Doing` en el contenido → `IN-PROGRESS`; `**Estado**: Ready` → `COMPLETED`; ausente o desconocido → `BACKLOG` |
-
+| `substatus` | Buscar `**Estado**: Doing` → `DOING`; `**Estado**: Ready` → `READY`; ausente o desconocido → `N/A` |
 Muestra los valores derivados al usuario antes de escribir y permite correcciones.
 
 ---

@@ -1,13 +1,13 @@
 ---
 alwaysApply: false
+type: project
+slug: requirement-spec
+title: "<primer # heading del documento>"
+date: <YYYY-MM-DD>
+status: BACKLOG
+substatus: DOING
+parent: N/A
 ---
-**Nombre del Sistema**: [Nombre del Proyecto]
-**Categoría del Software**: [Librería UI | Aplicación Frontend | Servicio Backend | CLI | Otro]
-**Título del Documento**: Especificación de Requisitos
-**Versión**: [versión]
-**Estado**: [Doing | Ready]
-**Fecha**: [Fecha]
-**Generado por**: [agente]
 
 # 1. Definición del proyecto
 

@@ -1,13 +1,12 @@
 ---
 alwaysApply: false
----
-**Nombre del Sistema**: [Nombre del Proyecto]
-**Título del Documento**: Project Plan
-**Versión**: [versión]
-**Estado**: [Doing | Ready]
-**Fecha**: [Fecha]
-**Generado por**: [agente]
-
+type: project
+slug: project-plan
+title: "<primer # heading del documento>"
+date: <YYYY-MM-DD>
+status: BACKLOG
+substatus: DOING
+parent: N/A
 ---
 
 ## Objetivo

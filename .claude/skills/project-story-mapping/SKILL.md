@@ -63,3 +63,27 @@ project-begin → project-discovery → [user-story-mapping] → project-plannin
 Los documentos producidos por fases anteriores alimentan automáticamente el mapa de historias cuando existen.
 
 **Output:** `docs/specs/project/story-map.md`
+
+---
+
+## Paso 3 — Añadir frontmatter al documento generado
+
+Una vez que el agente `project-story-mapper` haya escrito `docs/specs/project/story-map.md`, antepón el siguiente bloque YAML al inicio del archivo (antes de cualquier otro contenido):
+
+```yaml
+---
+type: project
+slug: story-map
+title: "<primer # heading del documento generado>"
+date: <YYYY-MM-DD>
+status: BACKLOG
+substatus: N/A
+parent: N/A
+---
+```
+
+Reglas de derivación:
+- `title`: extrae el primer `#` heading del documento
+- `date`: fecha actual en formato YYYY-MM-DD
+- `status`: `**Estado**: Doing` → IN-PROGRESS; `**Estado**: Ready` → COMPLETED; ausente → BACKLOG
+- `substatus`: `**Estado**: Doing` → DOING; `**Estado**: Ready` → READY; ausente → N/A
