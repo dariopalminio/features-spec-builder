@@ -8,7 +8,7 @@ substatus: N/A
 parent: N/A
 ---
 
-# 🐳 Guía Completa: Entorno de Desarrollo React con Docker + VSCode Dev Containers
+# 🐳 Guía práctica (how‑to): Entorno de Desarrollo React con Docker + VSCode Dev Containers
 
 ## 🎯 Objetivo
 Tener un entorno de desarrollo completamente aislado usando Docker, donde:
