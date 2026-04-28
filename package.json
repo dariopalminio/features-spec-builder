@@ -35,7 +35,7 @@
     ".claude/skills/release-generate-stories",
     ".claude/skills/releases-from-project-plan",
     ".claude/skills/reverse-engineering",
-    ".claude/skills/skill-builder",
+    ".claude/skills/skill-creator",
     ".claude/skills/story-creation",
     ".claude/skills/story-evaluation",
     ".claude/skills/story-refine",

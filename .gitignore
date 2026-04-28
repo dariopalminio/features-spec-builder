@@ -1,6 +1,6 @@
 # skill-creator references
-.claude/skills/skill-creator
-.agents/skills/skill-creator
+# .claude/skills/skill-creator
+# .agents/skills/skill-creator
 
 # openspec references
 .github/prompts/opsx-apply.prompt.md

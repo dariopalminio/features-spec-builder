@@ -28,7 +28,7 @@ Los developers y equipos que trabajan con IA para desarrollar software carecen d
 - **Gestión de historias de usuario**: creación (Como/Quiero/Para + Gherkin), evaluación con rúbrica FINVEST (Likert 1–5), splitting con 8 patrones y refinamiento iterativo
 - **Integración OpenSpec**: exploración, propuesta, implementación y archivado de cambios con trazabilidad completa
 - **Multi-runtime**: los mismos skills operan en Claude Code, GitHub Copilot, Codex/Cursor/OpenCode, Google Gemini Gems y Atlassian Rovo sin modificar el SKILL.md fuente
-- **Meta-framework**: crea, benchmarkea y distribuye nuevas skills con ciclo iterativo (skill-builder)
+- **Meta-framework**: crea, benchmarkea y distribuye nuevas skills con ciclo iterativo (skill-creator)
 - **Trazabilidad completa**: IDs únicos FEAT-NNN y Estado: Doing/Ready en cada documento del pipeline
 - **Docs as Wiki**: skill docs-wiki-builder para generar documentación de proyecto en formato wiki navegable. Incluye un skill header-aggregation para generar encabezados frontmatter de archivo '.md'. Permite navegación bidireccional entre documentos, generación de índices automáticos y visualización de grafos con "Foam for VSCode".
 
@@ -146,7 +146,7 @@ O ejecuta cada fase individualmente:
 
 ```bash
 # Ciclo iterativo de creación y benchmarking
-/skill-builder
+/skill-creator
 ```
 
 ## Configuration
@@ -196,10 +196,10 @@ El contenedor usa imagen `debian:bookworm-slim` con git, curl y bash.
 
 ### Running Tests
 
-El framework no tiene suite de tests automatizados para el pipeline principal. La calidad de los skills se valida con el meta-skill `skill-builder` mediante ejecución paralela (con skill vs sin skill) y un viewer HTML de benchmarking:
+El framework no tiene suite de tests automatizados para el pipeline principal. La calidad de los skills se valida con el meta-skill `skill-creator` mediante ejecución paralela (con skill vs sin skill) y un viewer HTML de benchmarking:
 
 ```bash
-/skill-builder
+/skill-creator
 ```
 
 ## License

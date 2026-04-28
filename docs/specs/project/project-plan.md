@@ -68,7 +68,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 - [ ] **FEAT-045: Sill de generación de diagramas de arquitacture** — Skill `architecture-diagram-generator` que genera diagramas de arquitectura técnica (C4, secuencia) a partir del análisis del repositorio, la información proporcionada en los documentos de requisitos e interacción con el usuario. _(deps: FEAT-018)_
 - [ ] **FEAT-046: GitHub Actions CI/CD for npm** — **Como** mantenedor del framework SDDF **Quiero** que al crear un release en GitHub se publique automáticamente la nueva versión en npm **Para** distribuir cada versión del framework sin pasos manuales de publicación.
 - [ ] **FEAT-047: Skills con templates Multicliente y rutas relativas** — Asegurar que los skills sean independientes de los clientes llm, haciendo que sean portables y multicliente. _(deps: FEAT-001, FEAT-003, FEAT-004)_
-- [ ] **FEAT-048: Skill builder** — Crear un skill `skill-builder` que pueda crear skills nuevos facilitando la creación de nuevos skills siguiendo las mejores prácticas establecidas y basados en templates. _(deps: FEAT-001, FEAT-003, FEAT-004)_
+- [ ] **FEAT-048: Skill builder** — Crear un skill `skill-creator` que pueda crear skills nuevos facilitando la creación de nuevos skills siguiendo las mejores prácticas establecidas y basados en templates. _(deps: FEAT-001, FEAT-003, FEAT-004)_
 
 ---
 
