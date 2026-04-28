@@ -1,0 +1,69 @@
+---
+type: runbook
+slug: runbook-deployment-to-npm
+title: "Runbook para despliegue en NPM"
+date: 2026-04-26
+status: BACKLOG
+substatus: N/A
+parent: N/A
+---
+
+# 📘 Runbook para despliegue en NPM
+
+Elegir el nuevo número de versión según SemVer:
+
+# Hacer Release en GitHub (crear tag con el número de versión):
+
+Incremento automático de versión:
+
+```bash
+npm version patch   # 1.0.0 -> 1.0.1 (bugfix)
+npm version minor   # 1.0.0 -> 1.1.0 (nueva funcionalidad)
+npm version major   # 1.0.0 -> 2.0.0 (cambio incompatible)
+```
+
+O modificar manualmente version en package.json y luego:
+
+```bash
+git add . 
+git commit -m "chore: version 1.5.6 - Fix postinstall script to install agents correctly"
+git push origin main
+git tag -a v1.5.6 -m "Release  v1.5.6 - Fix postinstall script"
+git push origin v1.5.6
+gh release create v1.5.6 --notes-from-tag
+git push origin v1.5.6
+```
+
+# Publicación en NPM
+
+```bash
+npm login
+npm publish --access public
+```
+
+# Verificación post‑despliegue
+
+https://www.npmjs.com/package/agile-sddf
+
+la versión subida es agile-sddf@1.5.6
+
+Lo que pasará cuando publiquemos v1.5.6:
+En el proyecto del usuario:
+
+```bash
+npm install agile-sddf@1.5.6 --foreground-scripts
+```
+
+Esto:
+Detecta versión nueva → reinstala
+Ejecuta el postinstall Y muestra el output
+Instala skills Y agents correctamente
+Con esto, 
+```bash
+npm install agile-sddf@latest --foreground-scripts
+```
+
+en el proyecto del usuario 
+debería mostrar el output completo con skills y agents instalados correctamente 
+en .claude/ del proyecto.
+
