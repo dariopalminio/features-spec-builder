@@ -8,7 +8,6 @@ substatus: READY
 parent: release-09-docs-and-wiki-builders
 tags: [spec, story]
 ---
-
 <!-- Referencias -->
 [[release-09-docs-and-wiki-builders]]
 
@@ -80,9 +79,6 @@ sources:
   - repo: .claude/plans/slug.md
   - notion: email-strategy
 ---
-
-<!-- Referencias -->
-[[release-09-docs-and-wiki-builders]]
 
 ### Requirement: Forma de invocación del skill
 El skill puede ser invocado para añadir encabezados a un solo archivo (nombre de archivo o con ruta relativa o absoluta) o a todos los archivos de un directorio (ruta relativa o absoluta).
