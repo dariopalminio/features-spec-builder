@@ -45,7 +45,17 @@ npm publish --access public
 
 https://www.npmjs.com/package/agile-sddf
 
-la versión subida es agile-sddf@1.5.6
+Ejecutar:
+
+```bash
+npm view agile-sddf
+```
+
+Si la versión subida es 1.5.6 ejecutar:
+
+```bash
+npm view agile-sddf@1.5.6
+```
 
 Lo que pasará cuando publiquemos v1.5.6:
 En el proyecto del usuario:
