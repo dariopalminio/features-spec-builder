@@ -1,10 +1,14 @@
-**Nombre del Sistema**: Agile SDDF (Spec-Driven Development Framework)
-**Categoría del Software**: AI-CLI Framework / Sistema Multiagente
-**Título del Documento**: Especificación de Requisitos
-**Versión**: 1.0
-**Estado**: Ready
-**Fecha**: 2026-04-19
-**Generado por**: reverse-engineer-synthesizer
+---
+type: project
+slug: requirement-spec
+title: "Especificación de Requisitos"
+date: 2026-04-19
+status: COMPLETED
+substatus: READY
+parent: N/A
+related:
+  - project-intent
+---
 
 # 1. Definición del proyecto
 

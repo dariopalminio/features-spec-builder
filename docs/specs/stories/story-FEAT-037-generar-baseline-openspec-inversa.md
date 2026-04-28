@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-037-generar-baseline-openspec-inversa
+title: "Generar línea base de OpenSpec mediante ingeniería inversa"
+date: 2026-04-23
+status: COMPLETED
+substatus: READY
+parent: release-06-release-and-story-generator
 ---
-alwaysApply: false
----
-**Título**: Generar línea base de OpenSpec mediante ingeniería inversa
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-23
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-06-release-and-story-generator]]
 
 ## 📖 Historia: Generar línea base de OpenSpec mediante ingeniería inversa
 

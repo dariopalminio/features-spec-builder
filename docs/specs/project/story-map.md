@@ -1,11 +1,14 @@
-# Story Map — Agile SDDF (Spec-Driven Development Framework)
-
-**Fecha:** 2026-04-20
-**Versión:** 2.0
-**Estado:** Ready
-**Generado por:** project-story-mapper
-
 ---
+type: wiki
+slug: story-map
+title: "Story Map — Agile SDDF (Spec-Driven Development Framework)"
+date: 2026-04-20
+status: COMPLETED
+substatus: READY
+parent: N/A
+---
+
+# Story Map — Agile SDDF (Spec-Driven Development Framework)
 
 ## Contexto del Proyecto
 

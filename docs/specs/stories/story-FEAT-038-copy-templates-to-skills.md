@@ -1,14 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-038-copy-templates-to-skills
+title: "Copiar los templates a los skills correspondientes"
+date: 2026-04-23
+status: COMPLETED
+substatus: READY
+parent: release-07-public-npm-package
+---
 
----
-alwaysApply: false
----
-**Título**: Copiar los templates a los skills correspondientes
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-23
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+<!-- Referencias -->
+[[release-07-public-npm-package]]
 
 ## 📖 Historia: Copiar los templates a los skills correspondientes
 

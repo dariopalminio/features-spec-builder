@@ -1,11 +1,16 @@
 ---
-alwaysApply: false
+type: release
+slug: release-06-release-and-story-generator
+title: "Release 06 — Release & Story Generator"
+date: 2026-04-20
+status: COMPLETED
+substatus: READY
+parent: project-plan
+related:                              
+  - project-plan
 ---
-**Título**: Release 06 — Release & Story Generator
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-20
----
+<!-- Referencias -->
+[[project-plan]]
 
 # Release 06 — Release & Story Generator & Soporte Atlassian Rovo
 

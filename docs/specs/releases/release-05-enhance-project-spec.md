@@ -1,11 +1,17 @@
 ---
-alwaysApply: false
+type: release
+slug: release-05-enhance-project-spec
+title: "Release 05 — Enhance Project Spec (Expansión project spec)"
+date: 2026-04-18
+status: COMPLETED
+substatus: READY
+parent: project-plan
+related:                              
+  - project-plan
 ---
-**Título**: Release 05 — Enhance Project Spec (Expansión project spec)
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-18
----
+<!-- Referencias -->
+[[project-plan]]
+
 # Release 05 — Enhance Project Spec (Expansión project spec)
 
 ## Descripción

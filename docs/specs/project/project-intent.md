@@ -1,11 +1,14 @@
-# Project Intent: Agile SDDF (Spec-Driven Development Framework)
-
-**Versión**: 1.0
-**Estado**: Ready
-**Fecha**: 2026-04-20
-**Generado por**: project-pm
-
 ---
+type: project
+slug: project-intent
+title: "Project Intent: Agile SDDF (Spec-Driven Development Framework)"
+date: 2026-04-20
+status: COMPLETED
+substatus: READY
+parent: N/A
+---
+
+# Project Intent: Agile SDDF (Spec-Driven Development Framework)
 
 ## Definición del Problema
 

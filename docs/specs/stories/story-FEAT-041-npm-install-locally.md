@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-041-npm-install-locally
+title: "Npm Install locally"
+date: 2026-04-23
+status: COMPLETED
+substatus: READY
+parent: release-08-npm-install-locally
 ---
-alwaysApply: false
----
-**Título**: Npm Install locally
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-23
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-08-npm-install-locally]]
 
 ## 📖 Historia: Npm Install locally
 

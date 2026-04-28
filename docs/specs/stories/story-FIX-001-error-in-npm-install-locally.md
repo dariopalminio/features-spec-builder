@@ -1,14 +1,15 @@
+﻿---
+type: story
+slug: story-FIX-001-error-in-npm-install-locally
+title: "Error en instalación local de npm install agile-sddf en Windows 11"
+date: 2026-04-25
+status: COMPLETED
+substatus: READY
+parent: release-08-npm-install-locally
+---
 
----
-alwaysApply: false
----
-**Título**: Error en instalación local de npm install agile-sddf en Windows 11
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-25
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+<!-- Referencias -->
+[[release-08-npm-install-locally]]
 
 ## Bug: Error en instalación local de npm install agile-sddf en Windows 11
 

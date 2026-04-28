@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-036-openspec-init-config
+title: "Inicializar configuración de OpenSpec automáticamente"
+date: 2026-04-23
+status: COMPLETED
+substatus: READY
+parent: release-06-release-and-story-generator
 ---
-alwaysApply: false
----
-**Título**: Inicializar configuración de OpenSpec automáticamente
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-23
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-06-release-and-story-generator]]
 
 ## 📖 Historia: Inicializar configuración de OpenSpec automáticamente
 

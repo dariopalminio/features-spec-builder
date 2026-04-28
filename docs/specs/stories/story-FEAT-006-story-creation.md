@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-006-story-creation
+title: "story-creation — Crear historias de usuario"
+date: 2026-04-22
+status: COMPLETED
+substatus: READY
+parent: release-01-features-spec-builder
 ---
-alwaysApply: false
----
-**Título**: story-creation — Crear historias de usuario
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-22
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-01-features-spec-builder]]
 
 # Historia de Usuario
 

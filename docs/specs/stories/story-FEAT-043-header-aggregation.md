@@ -1,15 +1,16 @@
----
-alwaysApply: false
+﻿---
 type: story
-date: 2026-04-25
 slug: story-FEAT-043-header-aggregation
 title: "Encabezado de archivos spec con metadata de estado (header-aggregation)"
+date: 2026-04-25
 status: COMPLETED
 substatus: READY
+parent: release-09-docs-and-wiki-builders
 tags: [spec, story]
-FINVEST Score: —
-FINVEST Decisión: —
 ---
+
+<!-- Referencias -->
+[[release-09-docs-and-wiki-builders]]
 
 # 📖 Historia: Encabezado de archivos spec con metadata de estado (header-aggregation)
 
@@ -79,6 +80,9 @@ sources:
   - repo: .claude/plans/slug.md
   - notion: email-strategy
 ---
+
+<!-- Referencias -->
+[[release-09-docs-and-wiki-builders]]
 
 ### Requirement: Forma de invocación del skill
 El skill puede ser invocado para añadir encabezados a un solo archivo (nombre de archivo o con ruta relativa o absoluta) o a todos los archivos de un directorio (ruta relativa o absoluta).

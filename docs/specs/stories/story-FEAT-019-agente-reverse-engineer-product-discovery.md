@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-019-agente-reverse-engineer-product-discovery
+title: "Agente reverse-engineer-product-discovery"
+date: 2026-04-22
+status: COMPLETED
+substatus: READY
+parent: release-03-reverse-engineering
 ---
-alwaysApply: false
----
-**Título**: Agente reverse-engineer-product-discovery
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-22
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-03-reverse-engineering]]
 
 # Historia de Usuario
 

@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-047-skills-multicliente-rutas-relativas
+title: "Skills con templates Multicliente"
+date: 2026-04-26
+status: COMPLETED
+substatus: READY
+parent: release-09-docs-and-wiki-builders
 ---
-alwaysApply: false
----
-**Título**: Skills con templates Multicliente
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-26
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-09-docs-and-wiki-builders]]
 
 ## 📖 Historia: Skills con templates Multicliente
 

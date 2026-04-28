@@ -1,10 +1,14 @@
-**Nombre del Sistema**: Agile SDDF (Spec-Driven Development Framework)
-**Título del Documento**: Project Plan
-**Versión**: 2.0
-**Estado**: Doing
-**Fecha**: 2026-04-20
-**Generado por**: project-architect
-
+---
+type: project
+slug: project-plan
+title: "Project Plan"
+date: 2026-04-20
+status: IN-PROGRESS
+substatus: DOING
+parent: N/A
+related:
+  - requirement-spec
+  - story-map
 ---
 
 ## Objetivo

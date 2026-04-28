@@ -1,3 +1,16 @@
+﻿---
+type: story
+slug: story-FEAT-048-refactor-migrates-templates-to-assets
+title: "Refactoring - Migración de templates a assets en Skills"
+date: 2026-04-27
+status: BACKLOG
+substatus: N/A
+parent: release-09-docs-and-wiki-builders
+---
+
+<!-- Referencias -->
+[[release-09-docs-and-wiki-builders]]
+
 # 📖 Historia de Usuario: Refactoring - Migración de templates a assets en Skills (cumplimiento del estándar Agent Skills)
 
 **Como** mantenedor del framework SDDF que sigue el estándar Agent Skills,

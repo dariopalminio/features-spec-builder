@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-008-control-wip
+title: "Control WIP=1 — Detección de proyecto activo"
+date: 2026-04-22
+status: COMPLETED
+substatus: READY
+parent: release-02-project-spec-builder
 ---
-alwaysApply: false
----
-**Título**: Control WIP=1 — Detección de proyecto activo
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-22
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-02-project-spec-builder]]
 
 # Historia de Usuario
 

@@ -1,11 +1,16 @@
 ---
-alwaysApply: false
+type: release
+slug: release-00-basic-structure
+title: "Release 00 — Estructura Base y Mecanismo de Templates"
+date: 2026-04-09
+status: COMPLETED
+substatus: READY
+parent: project-plan
+related:                              
+  - project-plan
 ---
-**Título**: Release 00 — Estructura Base y Mecanismo de Templates
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-09
----
+<!-- Referencias -->
+[[project-plan]]
 
 ### Release 00 — Estructura Base y Mecanismo de Templates
 

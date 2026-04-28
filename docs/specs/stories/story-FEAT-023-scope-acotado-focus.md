@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-023-scope-acotado-focus
+title: "Scope acotado — Flag --focus para reverse-engineering"
+date: 2026-04-22
+status: COMPLETED
+substatus: READY
+parent: release-03-reverse-engineering
 ---
-alwaysApply: false
----
-**Título**: Scope acotado — Flag --focus para reverse-engineering
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-22
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-03-reverse-engineering]]
 
 # Historia de Usuario
 

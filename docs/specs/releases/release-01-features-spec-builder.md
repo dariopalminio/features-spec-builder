@@ -1,11 +1,16 @@
 ---
-alwaysApply: false
+type: release
+slug: release-01-features-spec-builder
+title: "Release 01 — Features Spec Builder"
+date: 2026-04-09
+status: COMPLETED
+substatus: READY
+parent: project-plan
+related:                              
+  - project-plan
 ---
-**Título**: Release 01 — Features Spec Builder
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-09
----
+<!-- Referencias -->
+[[project-plan]]
 
 # Release 01 — Features Spec Builder
 

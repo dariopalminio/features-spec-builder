@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-005-project-story-mapping
+title: "project-story-mapping — User Story Mapping según Jeff Patton"
+date: 2026-04-22
+status: COMPLETED
+substatus: READY
+parent: release-05-enhance-project-spec
 ---
-alwaysApply: false
----
-**Título**: project-story-mapping — User Story Mapping según Jeff Patton
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-22
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-05-enhance-project-spec]]
 
 # Historia de Usuario
 

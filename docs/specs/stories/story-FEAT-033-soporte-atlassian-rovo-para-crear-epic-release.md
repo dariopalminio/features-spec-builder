@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-033-soporte-atlassian-rovo-para-crear-epic-release
+title: "Soporte Atlassian Rovo para crear Epic Release"
+date: 2026-04-22
+status: COMPLETED
+substatus: READY
+parent: release-06-release-and-story-generator
 ---
-alwaysApply: false
----
-**Título**: Soporte Atlassian Rovo para crear Epic Release
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-22
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-06-release-and-story-generator]]
 
 # Historia de Usuario
 

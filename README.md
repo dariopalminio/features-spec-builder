@@ -30,7 +30,7 @@ Los developers y equipos que trabajan con IA para desarrollar software carecen d
 - **Multi-runtime**: los mismos skills operan en Claude Code, GitHub Copilot, Codex/Cursor/OpenCode, Google Gemini Gems y Atlassian Rovo sin modificar el SKILL.md fuente
 - **Meta-framework**: crea, benchmarkea y distribuye nuevas skills con ciclo iterativo (skill-builder)
 - **Trazabilidad completa**: IDs únicos FEAT-NNN y Estado: Doing/Ready en cada documento del pipeline
-- **Docs as Wiki**: skill docs-wiki-builder para generar documentación de proyecto en formato wiki navegable. Incluye un skill header-aggregation para generar encabezados frontmatter de archivo '.md'.
+- **Docs as Wiki**: skill docs-wiki-builder para generar documentación de proyecto en formato wiki navegable. Incluye un skill header-aggregation para generar encabezados frontmatter de archivo '.md'. Permite navegación bidireccional entre documentos, generación de índices automáticos y visualización de grafos con "Foam for VSCode".
 
 ## Installation
 
@@ -54,6 +54,7 @@ Los skills y agentes se copian a `./.claude/` del directorio actual.
 
 - Node.js >= 18
 - Claude Code (Anthropic) u otro runtime compatible (GitHub Copilot, OpenCode, Google Gemini Gems, Atlassian Rovo)
+- Foam for VSCode (opcional, recomendado para navegación de docs como wiki)
 
 ## Quick Start
 

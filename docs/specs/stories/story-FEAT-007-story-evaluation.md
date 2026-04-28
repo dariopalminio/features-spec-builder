@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-007-story-evaluation
+title: "story-evaluation — Evaluación FINVEST de historias"
+date: 2026-04-22
+status: COMPLETED
+substatus: READY
+parent: release-01-features-spec-builder
 ---
-alwaysApply: false
----
-**Título**: story-evaluation — Evaluación FINVEST de historias
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-22
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-01-features-spec-builder]]
 
 # Historia de Usuario
 

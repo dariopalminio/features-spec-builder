@@ -1,11 +1,16 @@
 ---
-alwaysApply: false
+type: release
+slug: release-02-project-spec-builder
+title: "Release 02 — Project Spec Builder (Pipeline de proyecto)"
+date: 2026-04-16
+status: COMPLETED
+substatus: READY
+parent: project-plan
+related:                              
+  - project-plan
 ---
-**Título**: Release 02 — Project Spec Builder (Pipeline de proyecto)
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-16
----
+<!-- Referencias -->
+[[project-plan]]
 
 # Release 02 — Project Spec Builder (Pipeline de proyecto)
 

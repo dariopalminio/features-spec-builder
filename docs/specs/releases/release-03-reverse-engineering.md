@@ -1,11 +1,16 @@
 ---
-alwaysApply: false
+type: release
+slug: release-03-reverse-engineering
+title: "Release 03 — Reverse Engineering (Ingeniería inversa)"
+date: 2026-04-16
+status: COMPLETED
+substatus: READY
+parent: project-plan
+related:                              
+  - project-plan
 ---
-**Título**: Release 03 — Reverse Engineering (Ingeniería inversa)
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-16
----
+<!-- Referencias -->
+[[project-plan]]
 
 # Release 03 — Reverse Engineering (Ingeniería inversa)
 

@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-035-generar-stories-todos-releases
+title: "Generar stories de todos los releases en batch"
+date: 2026-04-22
+status: COMPLETED
+substatus: READY
+parent: release-06-release-and-story-generator
 ---
-alwaysApply: false
----
-**Título**: Generar stories de todos los releases en batch
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-22
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-06-release-and-story-generator]]
 
 # Historia de Usuario
 

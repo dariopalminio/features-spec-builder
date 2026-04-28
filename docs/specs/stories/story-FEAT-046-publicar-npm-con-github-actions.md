@@ -1,3 +1,16 @@
+﻿---
+type: story
+slug: story-FEAT-046-publicar-npm-con-github-actions
+title: "GitHub Actions CI/CD"
+date: 2026-04-27
+status: BACKLOG
+substatus: N/A
+parent: N/A
+---
+
+<!-- Referencias -->
+[[release-09-docs-and-wiki-builders]]
+
 ## 📖 Historia: GitHub Actions CI/CD
 
 **Como** mantenedor del framework SDDF

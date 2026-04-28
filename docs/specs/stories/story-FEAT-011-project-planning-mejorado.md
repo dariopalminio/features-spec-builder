@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-011-project-planning-mejorado
+title: "project-planning mejorado — Integración con story mapping"
+date: 2026-04-22
+status: COMPLETED
+substatus: READY
+parent: release-05-enhance-project-spec
 ---
-alwaysApply: false
----
-**Título**: project-planning mejorado — Integración con story mapping
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-22
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-05-enhance-project-spec]]
 
 # Historia de Usuario
 

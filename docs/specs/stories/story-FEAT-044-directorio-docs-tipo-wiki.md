@@ -1,3 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-044-directorio-docs-tipo-wiki
+title: "Directorio docs tipo wiki"
+date: 2026-04-27
+status: BACKLOG
+substatus: N/A
+parent: release-09-docs-and-wiki-builders
+---
+
+<!-- Referencias -->
+[[release-09-docs-and-wiki-builders]]
 
 # 📖 Historia: Directorio docs tipo wiki
 

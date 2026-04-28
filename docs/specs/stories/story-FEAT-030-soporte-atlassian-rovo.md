@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-030-soporte-atlassian-rovo
+title: "Soporte Atlassian Rovo — Agente story-creator"
+date: 2026-04-22
+status: COMPLETED
+substatus: READY
+parent: release-01-features-spec-builder
 ---
-alwaysApply: false
----
-**Título**: Soporte Atlassian Rovo — Agente story-creator
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-22
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-01-features-spec-builder]]
 
 # Historia de Usuario
 

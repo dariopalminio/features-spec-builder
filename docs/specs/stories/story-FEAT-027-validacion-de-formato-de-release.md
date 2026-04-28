@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-027-validacion-de-formato-de-release
+title: "Validación de formato de Release"
+date: 2026-04-22
+status: COMPLETED
+substatus: READY
+parent: release-06-release-and-story-generator
 ---
-alwaysApply: false
----
-**Título**: Validación de formato de Release
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-22
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-06-release-and-story-generator]]
 
 # Historia de Usuario
 

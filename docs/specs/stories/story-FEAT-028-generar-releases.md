@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-028-generar-releases
+title: "Generar releases desde project-plan"
+date: 2026-04-22
+status: COMPLETED
+substatus: READY
+parent: release-06-release-and-story-generator
 ---
-alwaysApply: false
----
-**Título**: Generar releases desde project-plan
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-22
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-06-release-and-story-generator]]
 
 # Historia de Usuario
 

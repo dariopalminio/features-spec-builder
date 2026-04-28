@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-042-readme-builder
+title: "README.md builder"
+date: 2026-04-25
+status: COMPLETED
+substatus: READY
+parent: release-09-docs-and-wiki-builders
 ---
-alwaysApply: false
----
-**Título**: README.md builder
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-25
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-09-docs-and-wiki-builders]]
 
 # Historia de Usuario
 

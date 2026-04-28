@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-015-project-flow
+title: "project-flow — Orquestador del pipeline completo ProjectSpecFactory"
+date: 2026-04-22
+status: COMPLETED
+substatus: READY
+parent: release-05-enhance-project-spec
 ---
-alwaysApply: false
----
-**Título**: project-flow — Orquestador del pipeline completo ProjectSpecFactory
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-22
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-05-enhance-project-spec]]
 
 # Historia de Usuario
 

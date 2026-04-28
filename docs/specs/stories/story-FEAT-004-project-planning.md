@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-004-project-planning
+title: "project-planning — Planificación de releases y backlog"
+date: 2026-04-22
+status: COMPLETED
+substatus: READY
+parent: release-02-project-spec-builder
 ---
-alwaysApply: false
----
-**Título**: project-planning — Planificación de releases y backlog
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-22
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-02-project-spec-builder]]
 
 # Historia de Usuario
 

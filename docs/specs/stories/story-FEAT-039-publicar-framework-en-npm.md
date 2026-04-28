@@ -1,13 +1,15 @@
+﻿---
+type: story
+slug: story-FEAT-039-publicar-framework-en-npm
+title: "Publicar framework en npm"
+date: 2026-04-23
+status: COMPLETED
+substatus: READY
+parent: release-07-public-npm-package
 ---
-alwaysApply: false
----
-**Título**: Publicar framework en npm
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-23
-**FINVEST Score:** —
-**FINVEST Decisión:** —
----
+
+<!-- Referencias -->
+[[release-07-public-npm-package]]
 ## 📖 Historia: Publicar framework en npm
 
 **Como** mantenedor del framework SDDF

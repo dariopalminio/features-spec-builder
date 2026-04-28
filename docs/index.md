@@ -2,7 +2,7 @@
 type: wiki
 slug: index
 title: "Índice de documentación"
-date: 2026-04-26
+date: 2026-04-27
 status: IN-PROGRESS
 substatus: DOING
 parent: N/A
@@ -79,6 +79,13 @@ parent: N/A
 - [[story-FEAT-048-refactor-migrates-templates-to-assets]]
 - [[story-FIX-001-error-in-npm-install-locally]]
 
+### Templates
+- [[evaluation-output-template]]
+- [[readme-template]]
+- [[release-spec-template]]
+- [[requirement-spec-template]]
+- [[story-gherkin-template]]
+
 ---
 
 ## 🧠 Wiki de conocimiento (docs/wiki/)
@@ -97,7 +104,12 @@ parent: N/A
 ### UX
 
 ### Guías teóricas
+- [[best-practices-for-agents]]
+- [[best-practices-for-commands]]
+- [[best-practices-for-skills]]
+- [[branching-strategy-sddf-git-flow]]
 - [[extreme-agile]]
+- [[flight-leves-model]]
 
 ### How-to
 - [[docker-dev-container]]
@@ -108,11 +120,11 @@ parent: N/A
 
 | Métrica | Valor |
 |---------|-------|
-| Total de nodos | 57 |
-| Nodos en specs/ | 55 |
-| Nodos en wiki/ | 2 |
+| Total de nodos | 67 |
+| Nodos en specs/ | 60 |
+| Nodos en wiki/ | 7 |
 | Wikilinks rotos (⚠️) | 5 |
-| Última actualización | 2026-04-26 |
+| Última actualización | 2026-04-27 |
 
 ---
 

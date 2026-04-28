@@ -1,13 +1,15 @@
 ---
 alwaysApply: false
 type: release
-slug: <nombre-del-archivo-sin-extensión>
+slug: <nombre-del-archivo-de-release-sin-extensión>
 title: "<primer # heading del documento>"
 date: <YYYY-MM-DD>
 status: BACKLOG
 substatus: DOING
-parent: N/A
+parent: <slug-nombre-del-archivo-de-project-plan-sin-extensión>
 ---
+<!-- Referencias -->
+[[<slug-nombre-del-archivo-de-project-plan-sin-extensión>]]
 
 # Release/Epic: [Nombre de la Épica/Release] <!-- nombre obligatorio -->
 

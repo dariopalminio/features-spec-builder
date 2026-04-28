@@ -1,11 +1,16 @@
 ---
-alwaysApply: false
+type: release
+slug: release-07-public-npm-package
+title: "Release 07 — Publicación del Framework SDDF como Paquete NPM"
+date: 2026-04-20
+status: COMPLETED
+substatus: READY
+parent: project-plan
+related:                              
+  - project-plan
 ---
-**Título**: Publicación del Framework SDDF como Paquete NPM
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-20
----
+<!-- Referencias -->
+[[project-plan]]
 
 # Release 07 — Publicación del Framework SDDF como Paquete NPM
 

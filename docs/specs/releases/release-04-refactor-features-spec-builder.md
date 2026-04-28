@@ -1,11 +1,16 @@
 ---
-alwaysApply: false
+type: release
+slug: release-04-refactor-features-spec-builder
+title: "Release 04 — Refactor Features Spec Builder (Consolidación y calidad)"
+date: 2026-04-17
+status: COMPLETED
+substatus: READY
+parent: project-plan
+related:                              
+  - project-plan
 ---
-**Título**: Release 04 — Refactor Features Spec Builder (Consolidación y calidad)
-**Versión**: 1.0
-**Estado**: Completed
-**Fecha**: 2026-04-17
----
+<!-- Referencias -->
+[[project-plan]]
 
 # Release 04 — Refactor Features Spec Builder (Consolidación y calidad)
 

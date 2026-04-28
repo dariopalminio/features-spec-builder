@@ -1,12 +1,16 @@
-
 ---
-alwaysApply: false
+type: release
+slug: release-09-docs-and-wiki-builders
+title: "Release 09 — Docs and Wiki builders"
+date: 2026-04-25
+status: COMPLETED
+substatus: READY
+parent: project-plan
+related:                              
+  - project-plan
 ---
-**Título**: Docs and Wiki builders
-**Versión**: 1.0
-**Estado**: COMPLETED
-**Fecha**: 2026-04-25
----
+<!-- Referencias -->
+[[project-plan]]
 
 # Release 08 — Docs and Wiki builders
 ## Descripción
