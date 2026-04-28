@@ -6,7 +6,11 @@ date: 2026-04-20
 status: COMPLETED
 substatus: READY
 parent: N/A
+related:
+  - project-plan
 ---
+<!-- Referencias -->
+[[project-plan]]
 
 # Story Map — Agile SDDF (Spec-Driven Development Framework)
 

@@ -10,6 +10,9 @@ related:
   - project-intent
 ---
 
+<!-- Referencias -->
+[[project-intent]]
+
 # 1. Definición del proyecto
 
 ## 1.1. Nombre de Proyecto

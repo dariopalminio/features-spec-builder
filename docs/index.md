@@ -104,12 +104,12 @@ parent: N/A
 ### UX
 
 ### Guías teóricas
+- [[extreme-agile]]
+- [[flight-leves-model]]
 - [[best-practices-for-agents]]
 - [[best-practices-for-commands]]
 - [[best-practices-for-skills]]
 - [[branching-strategy-sddf-git-flow]]
-- [[extreme-agile]]
-- [[flight-leves-model]]
 
 ### How-to
 - [[docker-dev-container]]

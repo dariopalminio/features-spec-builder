@@ -11,6 +11,9 @@ related:
   - story-map
 ---
 
+<!-- Referencias -->
+[[requirement-spec]]
+
 ## Objetivo
 
 Automatizar el ciclo completo de especificación de proyectos software — desde la intención inicial hasta el backlog planificado de historias de usuario — mediante un framework CLI multiagente declarativo basado exclusivamente en archivos Markdown, con control de WIP, trazabilidad completa y compatibilidad con múltiples runtimes de IA.
