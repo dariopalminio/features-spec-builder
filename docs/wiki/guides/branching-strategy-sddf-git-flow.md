@@ -1,3 +1,13 @@
+---
+type: guide
+slug: branching-strategy-sddf-git-flow
+title: "Estrategia de Branching SDDF git flow"
+date: 2026-03-26
+status: BACKLOG
+substatus: N/A
+parent: N/A
+---
+
 # Estrategia de Branching SDDF git flow
 
 ## Flujo de Trabajo en repositorio de código (Git)

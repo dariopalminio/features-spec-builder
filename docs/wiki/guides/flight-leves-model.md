@@ -1,3 +1,13 @@
+---
+type: guide
+slug: flight-leves-model
+title: "Modelo de Niveles de Vuelo (Flight Levels Model)"
+date: 2026-03-26
+status: N/A
+substatus: N/A
+parent: N/A
+---
+
 # Modelo de Niveles de Vuelo (Flight Levels Model)
 
 ## Niveles de flujos de trabajo

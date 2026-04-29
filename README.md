@@ -80,6 +80,32 @@ O ejecuta cada fase individualmente:
 
 ## Usage
 
+### Flujos principales SDDF
+
+SDDF se organiza en 4 niveles principales que cubren todo el ciclo de vida de la especificación, desde la intención inicial (nivel de proyecto o L3), la especificación de entregas releases (L2), la especificaciòn de historias (L1), y con integración opcional de OpenSpec para gestión de cambios (L0). Cada nivel tiene su pipeline y se compone de un conjunto de skills que operan sobre documentos Markdown con control de sub-estado `Doing`/`Ready` para garantizar un flujo estructurado, reproducible y automatizable.
+
+#### 1. L3: Pipeline de especificación de proyecto (iniciativa)
+
+project-begin → project-discovery → project-planning
+
+project-flow orquesta los 3 pasos en una sola sesión con gates de revisión entre etapas.
+
+#### 2. L2: Pipeline de generación de releases e historias
+
+releases-from-project-plan
+
+#### 3. L1: Pipeline de generación y refinamiento de historias
+
+release-generate-stories →
+
+story-creation → story-evaluation → story-split
+
+#### 4. L0: Pipeline granular SDD integración con OpenSpec
+
+openspec-init-config → openspec-generate-baseline → 
+
+( propose → apply → archive )
+
 ### Basic Usage
 
 **Crear y refinar una historia de usuario:**

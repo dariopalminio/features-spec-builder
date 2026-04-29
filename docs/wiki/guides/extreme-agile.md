@@ -1,8 +1,8 @@
 ---
-type: wiki
+type: guide
 slug: extreme-agile
 title: "Agilidad Agentica (Agentic Agile)"
-date: 2026-04-26
+date: 2026-03-26
 status: BACKLOG
 substatus: N/A
 parent: N/A

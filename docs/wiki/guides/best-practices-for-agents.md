@@ -1,3 +1,13 @@
+---
+type: guide
+slug: best-practices-for-agents
+title: "Buenas prácticas para Agentes"
+date: 2026-03-26
+status: N/A
+substatus: N/A
+parent: N/A
+---
+
 # Buenas prácticas para Agentes
 
 Los **agentes**, las **skills** y los **comandos** son elementos fundamentales para estructurar un el equipo de inteligencia artificial automatizado para Agile Spec-Driven Development Framework (SDDF). Aquí tienes la definición y el uso de agentes:
