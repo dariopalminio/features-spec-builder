@@ -112,6 +112,8 @@ Claude reads only the relevant reference file.
 
 If your skill uses templates (document structures the model fills in at runtime), apply these rules to ensure the skill works across all runtimes — Claude Code, GitHub Copilot, OpenCode, Google Gemini, Atlassian Rovo — without modifying SKILL.md:
 
+**Templates are a source of truth**: The skill MUST always dynamically complete the template structure used at runtime, inferring the information, to ensure flexibility in the face of future changes in the template structure.
+
 **Templates are read-only runtime contracts.** A template defines structure (sections, order, prompts via `<!-- -->` comments). The skill reads it at runtime and derives behavior from it — never hardcode section names in the skill body. If the template changes, the skill changes automatically.
 
 **Always use relative paths.** Reference templates as `assets/<file-template>.md` — a path relative to the skill's own directory. Never use absolute paths or client-specific paths like `my-skill/assets/`. Absolute paths break portability the moment the skill is installed in a different location.

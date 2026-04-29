@@ -14,8 +14,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **Skill `/readme-builder`** (FEAT-042) — genera un `README.md` completo a partir de los artefactos SDDF disponibles (`project-intent.md`, `requirement-spec.md`, `project-plan.md`) usando un template como fuente de verdad estructural; descubrimiento de contenido en 3 tiers (specs formales → archivos de contexto LLM → ingeniería inversa); write guard que solicita confirmación antes de sobreescribir un README existente
 - **Skill `/skill-creator`** (FEAT-048) — ciclo iterativo de creación y mejora de skills con captura de intención, redacción de SKILL.md, generación de casos de prueba, ejecución paralela (con skill vs sin skill), grading contra aserciones y viewer HTML de benchmarking; incluye scripts Python y agentes `analyzer`, `comparator`, `grader`
 
+### Added
+
+- **Wiki guides** — `docs/wiki/guides/` incorpora guías de buenas prácticas para agentes, skills y comandos; estrategia de branching SDDF Git Flow; modelo Flight Levels; eliminado `README-old.md` obsoleto
+- **Runbook despliegue a npm** — `docs/runbooks/deployment-to-npm.md` con procedimiento paso a paso para publicar el paquete en npm
+
 ### Changed
 
+- **`substatus` en lugar de `Estado`** — reemplazado el campo `**Estado:**` por `substatus` en todos los skills y agentes del pipeline para unificar el manejo del ciclo de vida de los documentos spec; afecta 17 archivos: skills `project-begin`, `project-discovery`, `project-planning`, `project-flow`, `project-story-mapping`, `release-generate-stories`, `release-generate-all-stories`, `releases-from-project-plan`, `reverse-engineering`, `story-creation`, `story-refine`, `story-split` y agentes `project-pm`, `project-architect`, `story-product-owner`; incluye actualización del template `release-spec-template.md`
 - **Assets empaquetados por skill** (FEAT-048) — renombradas todas las carpetas `templates/` dentro de los skills a `assets/` para cumplir el estándar oficial de Agent Skills; actualizadas todas las referencias en `SKILL.md`, agentes y documentación; spec `skill-template-autonomy` actualizado con el nuevo contrato `assets/<file>.md`; eliminados prefijos de cliente hardcodeados en cadenas de fallback de SKILL.md
 - **Skills multicliente con rutas relativas** (FEAT-047) — los skills `project-begin`, `project-discovery`, `project-planning`, `release-format-validation`, `release-generate-all-stories`, `release-generate-stories`, `releases-from-project-plan`, `reverse-engineering`, `story-creation`, `story-evaluation`, `story-split` actualizados para usar rutas relativas a su directorio base, eliminando dependencia de paths absolutos y haciendo los skills portables entre runtimes
 
