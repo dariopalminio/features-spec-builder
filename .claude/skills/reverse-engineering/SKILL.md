@@ -40,9 +40,9 @@ Lee el archivo de plantilla `assets/requirement-spec-template.md`.
 
 Si `--update` está activo:
 1. Lee `docs/specs/project/requirement-spec.md` si existe
-2. Verifica el campo `**Estado**`:
-   - `Doing`: continúa en modo incremental
-   - `Ready`: informa al usuario que el documento ya está completo y pide confirmación antes de continuar
+2. Verifica el campo `substatus`:
+   - `DOING`: continúa en modo incremental
+   - `READY`: informa al usuario que el documento ya está completo y pide confirmación antes de continuar
    - No existe: ejecuta en modo normal (primera ejecución)
 
 ### 4. Mostrar plan al usuario

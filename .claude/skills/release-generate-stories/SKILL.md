@@ -145,16 +145,20 @@ Las secciones opcionales (`⚙️ Criterios no funcionales`, `📎 Notas`) se in
 
 ### 3e. Escribir el archivo de historia
 
-Crear el archivo `docs/specs/stories/story-[ID]-[nombre-kebab].md` con la siguiente estructura:
+Crear el archivo `docs/specs/stories/story-[ID]-[nombre-kebab].md`  con la estructura del template `assets\story-gherkin-template.md`. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros en la estructura del template.
+
+Si no encuentras el template generar el archivo con la siguiente estructura:
 
 ```markdown
 ---
 alwaysApply: false
----
-**Título**: [Nombre de la feature como título de la historia]
-**Versión**: 1.0
-**Estado**: Doing
-**Fecha**: [Fecha actual en formato YYYY-MM-DD]
+type: spec
+slug: <nombre-del-archivo-sin-extensión>
+title: "<primer # heading del documento o Nombre de la feature>"
+date: <YYYY-MM-DD>
+status: BACKLOG
+substatus: DOING
+parent: N/A
 **FINVEST Score:** —
 **FINVEST Decisión:** —
 ---
@@ -194,6 +198,8 @@ Entonces [mensaje de error o comportamiento alternativo]
 
 Generado automáticamente desde el release: [nombre del archivo de release]
 Feature origen: [ID] — [Nombre de la feature]
+
+Este es solo un ejemplo, recuerda que el archivo de plantilla es la guía a completar.
 ```
 
 ---

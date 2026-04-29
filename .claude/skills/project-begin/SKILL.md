@@ -16,12 +16,12 @@ Generar `docs/specs/project/project-intent.md` conduciendo una entrevista en una
 
 ### 1. Verificar WIP=1
 
-Antes de iniciar, revisa los documentos de `docs/specs/project/` y detecta si existe algun archivo con `**Estado**: Doing`.
+Antes de iniciar, revisa los documentos de `docs/specs/project/` y detecta si existe algun archivo con `substatus: DOING`.
 
-- Si **no** existe ningun documento en `Doing`: continua al paso 2.
-- Si **existe** al menos uno en `Doing`: notifica el conflicto WIP=1 e indica que ya hay un proyecto activo. Muestra cual documento esta en `Doing` y ofrece solo estas opciones:
+- Si **no** existe ningun documento en substatus `DOING`: continua al paso 2.
+- Si **existe** al menos uno en substatus `DOING`: notifica el conflicto WIP=1 e indica que ya hay un proyecto activo. Muestra cual documento esta en substatus `DOING` y ofrece solo estas opciones:
   - `Sobrescribir`: iniciar de cero y continuar con el flujo normal.
-  - `Retomar`: continuar el proyecto activo aplicando flujo de retoma sobre el documento en `Doing`.
+  - `Retomar`: continuar el proyecto activo aplicando flujo de retoma sobre el documento en substatus `DOING`.
 
 Si el usuario elige retomar, activa el flujo de retoma del paso 4 sin reiniciar desde cero.
 
@@ -30,8 +30,8 @@ Si el usuario elige retomar, activa el flujo de retoma del paso 4 sin reiniciar 
 Lee `docs/specs/project/project-intent.md` (si existe) y detecta el valor de `**Estado**:`.
 
 - Si el archivo **no existe**: continua al paso 3 (primera ejecucion).
-- Si existe con `**Estado**: Doing`: activa flujo de retoma y continua al paso 3.
-- Si existe con `**Estado**: Ready`: informa que el documento ya esta completo y pide confirmacion antes de sobrescribir.
+- Si existe con `substatus: DOING`: activa flujo de retoma y continua al paso 3.
+- Si existe con `substatus: READY`: informa que el documento ya esta completo y pide confirmacion antes de sobrescribir.
   - Si el usuario confirma sobrescribir: continua al paso 3.
   - Si el usuario cancela: deten la ejecucion sin modificar el archivo.
 

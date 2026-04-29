@@ -1,7 +1,7 @@
 ---
 alwaysApply: false
-type: project
-slug: project-plan
+type: spec
+slug: <nombre-del-archivo-sin-extensión>
 title: "<primer # heading del documento>"
 date: <YYYY-MM-DD>
 status: BACKLOG

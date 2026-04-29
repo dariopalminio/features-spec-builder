@@ -23,20 +23,20 @@ Lee `docs/specs/project/requirement-spec.md`.
   > ❌ No se encontró `docs/specs/project/requirement-spec.md`.
   > Debes completar primero la fase Discovery ejecutando `/project-discovery`.
 
-- Si el archivo **existe** pero `**Estado**` es `Doing`: informa al usuario y deten la ejecucion.
+- Si el archivo **existe** pero `substatus` es `DOING`: informa al usuario y deten la ejecucion.
 
-  > ❌ `docs/specs/project/requirement-spec.md` aun esta en `Estado: Doing`.
+  > ❌ `docs/specs/project/requirement-spec.md` aun esta en `substatus: DOING`.
   > Debes completar Discovery y dejar el documento en `Estado: Ready` antes de ejecutar `/project-planning`.
 
-- Si el archivo **existe** con `**Estado**: Ready`: continua al paso 2.
+- Si el archivo **existe** con `substatus: READY`: continua al paso 2.
 
 ### 2. Verificar estado del documento de output
 
-Lee `docs/specs/project/project-plan.md` (si existe) y detecta el valor de `**Estado**:`.
+Lee `docs/specs/project/project-plan.md` (si existe) y detecta el valor de `substatus:`.
 
 - Si el archivo **no existe**: continua al paso 3 (primera ejecucion).
-- Si existe con `**Estado**: Doing`: activa flujo de retoma y continua al paso 3.
-- Si existe con `**Estado**: Ready`: informa que el documento ya esta completo y pide confirmacion antes de sobrescribir.
+- Si existe con `substatus: DOING`: activa flujo de retoma y continua al paso 3.
+- Si existe con `substatus: READY`: informa que el documento ya esta completo y pide confirmacion antes de sobrescribir.
   - Si el usuario confirma sobrescribir: continua al paso 3.
   - Si el usuario cancela: deten la ejecucion sin modificar el archivo.
 
@@ -83,7 +83,7 @@ Invoca al agente `project-architect` con la siguiente instrucción:
 
 > Lee los documentos `docs/specs/project/project-intent.md` y `docs/specs/project/requirement-spec.md`. Lee también el template `assets/project-plan-template.md`.
 >
-> Si estás en flujo de retoma (documento existente en `Estado: Doing`), primero lee `docs/specs/project/project-plan.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
+> Si estás en flujo de retoma (documento existente en `substatus: DOING`), primero lee `docs/specs/project/project-plan.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
 > [CONDICIONAL — incluir solo si `docs/specs/project/story-map.md` existe]
 > Lee también `docs/specs/project/story-map.md`. Usa las actividades del backbone como guía para agrupar features relacionadas en el plan. Usa los release slices del story map como referencia estructural para definir qué features van en cada release (respetando las dependencias técnicas y el valor de negocio). No estás obligado a replicar el story map exactamente — es una guía, no una restricción.

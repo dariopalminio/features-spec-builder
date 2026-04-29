@@ -1,3 +1,14 @@
+---
+alwaysApply: false
+type: spec
+slug: <nombre-del-archivo-sin-extensión>
+title: "<primer # heading del documento>"
+date: <YYYY-MM-DD>
+status: BACKLOG
+substatus: DOING
+parent: N/A
+---
+
 # Release/Epic: [Nombre de la Épica/Release] <!-- nombre obligatorio -->
 
 ## Descripción <!-- sección obligatoria-->

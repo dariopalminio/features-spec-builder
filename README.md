@@ -151,7 +151,7 @@ O ejecuta cada fase individualmente:
 
 ## Configuration
 
-El framework es declarativo y no requiere configuración de variables de entorno. Toda la lógica de flujo se controla mediante el campo `**Estado**` en los documentos Markdown del pipeline.
+El framework es declarativo y no requiere configuración de variables de entorno. Toda la lógica de flujo se controla mediante el campo `substatus` en los documentos Markdown del pipeline.
 
 ### Environment Variables
 
@@ -163,7 +163,7 @@ El runtime de IA (Claude Code, GitHub Copilot, etc.) gestiona su propia autentic
 
 ### Estado de documentos
 
-El único mecanismo de control de flujo es el campo `**Estado**` en cada documento:
+El único mecanismo de control de flujo es el campo `substatus` en cada documento:
 
 | Valor | Significado |
 |-------|-------------|

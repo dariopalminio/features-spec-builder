@@ -76,7 +76,7 @@ Cuando detectes problemas, entrega propuestas accionables, por ejemplo:
 Si `story-refine` te pide editar la historia:
 
 1. Conserva el formato canonico de la historia.
-2. Preserva el encabezado `**Estado**: Doing` o `**Estado**: Ready` existente.
+2. Preserva el encabezado `substatus: DOING` o `substatus: READY` existente.
 3. No elimines informacion valida ya confirmada por el usuario.
 4. Si agregas informacion inferida, marcalo claramente como `[inferido]` dentro de notas o contexto adicional cuando haga falta.
 

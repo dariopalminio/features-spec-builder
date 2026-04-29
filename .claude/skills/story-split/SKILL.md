@@ -207,7 +207,7 @@ Lee el archivo de plantilla (template canónico) `assets/story-gherkin-template.
 
 ### Fase 4 — Escribir cada historia resultante
 
-Cada historia del split debe seguir **estrictamente** el template `assets/story-gherkin-template.md` anteriormente leido, adaptando el contenido a cada historia específica. No agregar ni eliminar secciones del template, solo llenar cada sección con la información correspondiente a la historia resultante.
+Cada historia del split debe seguir **estrictamente** el template `assets/story-gherkin-template.md` anteriormente leido, adaptando el contenido a cada historia específica. No agregar ni eliminar secciones del template, solo llenar cada sección con la información correspondiente a la historia resultante. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución, infiriendo la información, para asegurar flexibilidad ante cambios futuros en la estructura del template.
 
 Por ejemplo:
 

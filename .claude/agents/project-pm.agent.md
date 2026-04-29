@@ -42,9 +42,9 @@ Lee:
 
 **Paso 2: Validar el Estado del documento vigente de Begin Intention**
 
-Si `docs/specs/project/project-intent.md` existe, verifica el campo `**Estado**` del documento vigente derivado de `project-intent-template.md`:
-- Si es **`Doing`**: interpreta que estás retomando un documento en progreso. Lee el documento existente, identifica secciones incompletas y continúa solo con esas secciones.
-- Si es **`Ready`**: pregunta al usuario con `AskUserQuestion` si desea sobrescribir el documento completo antes de continuar.
+Si `docs/specs/project/project-intent.md` existe, verifica el campo `substatus` del documento vigente derivado de `project-intent-template.md`:
+- Si es `DOING`: interpreta que estás retomando un documento en progreso. Lee el documento existente, identifica secciones incompletas y continúa solo con esas secciones.
+- Si es `READY`: pregunta al usuario con `AskUserQuestion` si desea sobrescribir el documento completo antes de continuar.
 - Si el archivo no existe: continúa como primera ejecución.
 
 **Paso 3: Conducir la entrevista de refinamiento**
@@ -55,7 +55,7 @@ Para cada sección del template:
 3. **Haz preguntas solo** para secciones que necesitan refinamiento o información nueva
 4. **Agrupa** en máx 3-4 por ronda en orden de aparición en el template
 5. **Usa `AskUserQuestion`** para preguntas con opciones cuando aplique
-6. Si estás retomando un documento en `Doing`, **no vuelvas a preguntar** por secciones ya completas ni las sobrescribas
+6. Si estás retomando un documento en substatus `DOING`, **no vuelvas a preguntar** por secciones ya completas ni las sobrescribas
 
 **Paso 4: Completar con pericia de PM**
 
@@ -68,11 +68,9 @@ Para cada sección del template:
 1. Usa `Write` para crear `docs/specs/project/project-intent.md`
 2. Conserva todos los headers y el orden de secciones del template
 3. **No incluyas** los comentarios HTML `<!-- -->` en el output
-4. Incluye metadatos:
-   - `**Versión**: 1.0`
-   - `**Estado**: Doing`
-   - `**Fecha**: [fecha actual en formato YYYY-MM-DD]`
-   - `**Generado por**: project-pm`
+4. Incluye en metadatos:
+   - `substatus: DOING`
+   - `date: [fecha actual en formato YYYY-MM-DD]`
 5. Confirma al usuario la ruta del archivo y el siguiente paso (`/project-discovery`).
 
 ---
@@ -96,12 +94,12 @@ Lee:
 
 Verifica primero `docs/specs/project/project-intent.md`:
 - Si no existe: informa que primero debe ejecutarse `/project-begin` y detén la ejecución.
-- Si existe con **`Estado: Doing`**: informa que Begin Intention aún no está completo y detén la ejecución.
-- Si existe con **`Estado: Ready`**: continúa.
+- Si existe con **`substatus: DOING`**: informa que Begin Intention aún no está completo y detén la ejecución.
+- Si existe con **`substatus: READY`**: continúa.
 
-Si `docs/specs/project/requirement-spec.md` existe, verifica su campo `**Estado**`:
-- Si es **`Doing`**: interpreta que estás retomando el requirement spec. Lee el documento existente y continúa solo con las secciones incompletas.
-- Si es **`Ready`**: pregunta al usuario con `AskUserQuestion` si desea sobrescribirlo antes de continuar.
+Si `docs/specs/project/requirement-spec.md` existe, verifica su campo `substatus`:
+- Si es `DOING`: interpreta que estás retomando el requirement spec. Lee el documento existente y continúa solo con las secciones incompletas.
+- Si es `READY`: pregunta al usuario con `AskUserQuestion` si desea sobrescribirlo antes de continuar.
 - Si no existe: continúa como primera ejecución.
 
 **Paso 3: Extraer secciones del template en runtime**
@@ -135,9 +133,7 @@ Para cada sección objetivo de `requirement-spec-template.md`:
 2. Conserva todos los headers y el orden de secciones de `requirement-spec-template.md`
 3. **No incluyas** los comentarios HTML `<!-- -->` en el output
 4. Incluye metadatos:
-   - `**Versión**: 1.0`
-   - `**Estado**: Doing`
-   - `**Fecha**: [fecha actual en formato YYYY-MM-DD]`
-   - `**Generado por**: project-pm`
+   - `substatus: DOING`
+   - `date: [fecha actual en formato YYYY-MM-DD]`
 5. Confirma al usuario la ruta del archivo y el siguiente paso (`/project-planning`).
 

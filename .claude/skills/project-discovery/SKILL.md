@@ -24,20 +24,20 @@ Lee `docs/specs/project/project-intent.md`.
   > ❌ No se encontró `docs/specs/project/project-intent.md`.
   > Debes completar primero la fase Begin Intention ejecutando `/project-begin`.
 
-- Si el archivo **existe** pero `**Estado**` es `Doing`: informa al usuario y deten la ejecucion.
+- Si el archivo **existe** pero `substatus` es `DOING`: informa al usuario y deten la ejecucion.
 
   > ❌ `docs/specs/project/project-intent.md` aun esta en `Estado: Doing`.
   > Debes completar Begin Intention y dejar el documento en `Estado: Ready` antes de ejecutar `/project-discovery`.
 
-- Si el archivo **existe** con `**Estado**: Ready`: continua al paso 2.
+- Si el archivo **existe** con `substatus: READY`: continua al paso 2.
 
 ### 2. Verificar estado del documento de output
 
-Lee `docs/specs/project/requirement-spec.md` (si existe) y detecta el valor de `**Estado**:`.
+Lee `docs/specs/project/requirement-spec.md` (si existe) y detecta el valor de `substatus:`.
 
 - Si el archivo **no existe**: continua al paso 3 (primera ejecucion).
-- Si existe con `**Estado**: Doing`: activa flujo de retoma y continua al paso 3.
-- Si existe con `**Estado**: Ready`: informa que el documento ya esta completo y pide confirmacion antes de sobrescribir.
+- Si existe con `substatus: DOING`: activa flujo de retoma y continua al paso 3.
+- Si existe con `substatus: READY`: informa que el documento ya esta completo y pide confirmacion antes de sobrescribir.
   - Si el usuario confirma sobrescribir: continua al paso 3.
   - Si el usuario cancela: deten la ejecucion sin modificar el archivo.
 

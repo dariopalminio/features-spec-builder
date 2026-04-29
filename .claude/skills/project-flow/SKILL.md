@@ -7,7 +7,7 @@ description: >-
 alwaysApply: false
 name: project-flow
 ---
-Eres el **orquestador del pipeline completo** de ProjectSpecFactory. Tu tarea es guiar al usuario a través de las tres fases de especificación en una sola sesión continua, asegurando que cada documento quede en `**Estado**: Ready` antes de pasar a la siguiente fase.
+Eres el **orquestador del pipeline completo** de ProjectSpecFactory. Tu tarea es guiar al usuario a través de las tres fases de especificación en una sola sesión continua, asegurando que cada documento quede en `substatus: READY` antes de pasar a la siguiente fase.
 
 El flujo es: **Fase 1 (Begin Intention)** → **Fase 2 (Discovery)** → **Fase 3 (Planning)**
 
@@ -17,23 +17,23 @@ El flujo es: **Fase 1 (Begin Intention)** → **Fase 2 (Discovery)** → **Fase 
 
 Antes de iniciar, lee los tres documentos de output para determinar desde dónde retomar:
 
-1. `docs/specs/project/project-intent.md` → detecta `**Estado**`
-2. `docs/specs/project/requirement-spec.md` → detecta `**Estado**`
-3. `docs/specs/project/project-plan.md` → detecta `**Estado**`
+1. `docs/specs/project/project-intent.md` → detecta `substatus`
+2. `docs/specs/project/requirement-spec.md` → detecta `substatus`
+3. `docs/specs/project/project-plan.md` → detecta `substatus`
 
 **Lógica de arranque:**
 
-- Si los **tres documentos** existen con `**Estado**: Ready`:
+- Si los **tres documentos** existen con `substatus: READY`:
   > ✅ El pipeline ya está completo. Los tres documentos están en Estado: Ready.
   > ¿Deseas reiniciar el pipeline desde el principio? (Sobrescribirá los documentos existentes)
   Si el usuario confirma: continúa desde la Fase 1.
   Si el usuario cancela: detén la ejecución.
 
-- Si `project-intent.md` tiene `**Estado**: Ready` y `requirement-spec.md` **no existe o es Doing**:
+- Si `project-intent.md` tiene `substatus: READY` y `requirement-spec.md` **no existe o es Doing**:
   > ℹ️ La Fase 1 ya está completa. Continuando desde la Fase 2 (Discovery).
   Salta directamente a la Fase 2.
 
-- Si `project-intent.md` tiene `**Estado**: Ready` y `requirement-spec.md` tiene `**Estado**: Ready` y `project-plan.md` **no existe o es Doing**:
+- Si `project-intent.md` tiene `substatus: READY` y `requirement-spec.md` tiene `substatus: READY` y `project-plan.md` **no existe o es Doing**:
   > ℹ️ Las Fases 1 y 2 ya están completas. Continuando desde la Fase 3 (Planning).
   Salta directamente a la Fase 3.
 
@@ -51,20 +51,20 @@ Informa al usuario el estado detectado y las fases que se ejecutarán antes de c
 
 ### 1.1 Verificar WIP=1
 
-Revisa `docs/specs/project/` y detecta si existe algún archivo con `**Estado**: Doing`.
+Revisa `docs/specs/project/` y detecta si existe algún archivo con `substatus: DOING`.
 
-- Si **no** existe ninguno en `Doing`: continúa al paso 1.2.
-- Si **existe** al menos uno en `Doing`: notifica el conflicto WIP=1 y ofrece:
+- Si **no** existe ninguno en substatus `DOING`: continúa al paso 1.2.
+- Si **existe** al menos uno en substatus `DOING`: notifica el conflicto WIP=1 y ofrece:
   - `Sobrescribir`: iniciar de cero.
-  - `Retomar`: continuar el documento en `Doing`.
+  - `Retomar`: continuar el documento en substatus `DOING`.
 
 ### 1.2 Verificar estado del documento de output
 
 Lee `docs/specs/project/project-intent.md` (si existe):
 
 - No existe → primera ejecución, continúa.
-- `**Estado**: Doing` → flujo de retoma, continúa.
-- `**Estado**: Ready` → informa que ya está completo y pide confirmación para sobrescribir.
+- `substatus: DOING` → flujo de retoma, continúa.
+- `substatus: READY` → informa que ya está completo y pide confirmación para sobrescribir.
 
 ### 1.3 Verificar template
 
@@ -84,7 +84,7 @@ Invoca al agente `project-pm` con la siguiente instrucción:
 >
 > **Fase 2 — Refinamiento:** A partir de las respuestas de la Fase 1, profundiza sección por sección del template (máx 3-4 preguntas por ronda). Pre-rellena con la información ya capturada y solicita solo lo que falta. Infiere el contenido faltante marcándolo con `[inferido]`.
 >
-> Escribe el resultado completo en `docs/specs/project/project-intent.md` con `**Estado**: Doing`.
+> Escribe el resultado completo en `docs/specs/project/project-intent.md` con `substatus: DOING`.
 
 ### 1.5 Gate de revisión — Fase 1
 
@@ -100,7 +100,7 @@ Cuando el `project-pm` termine:
    > - `No, necesito ajustes` → continúa la entrevista para completar secciones faltantes
 
 4. Si el usuario confirma:
-   - Edita `docs/specs/project/project-intent.md` reemplazando `**Estado**: Doing` por `**Estado**: Ready`.
+   - Edita `docs/specs/project/project-intent.md` reemplazando `substatus: DOING` por `substatus: READY`.
    - Confirma:
      > ✅ project-intent.md → Estado: Ready
      > Continuando con la Fase 2 (Discovery)...
@@ -113,15 +113,15 @@ Cuando el `project-pm` termine:
 
 ### 2.1 Verificar precondición
 
-Lee `docs/specs/project/project-intent.md`. Debe existir con `**Estado**: Ready` (garantizado por el gate anterior).
+Lee `docs/specs/project/project-intent.md`. Debe existir con `substatus: READY` (garantizado por el gate anterior).
 
 ### 2.2 Verificar estado del documento de output
 
 Lee `docs/specs/project/requirement-spec.md` (si existe):
 
 - No existe → primera ejecución, continúa.
-- `**Estado**: Doing` → flujo de retoma, continúa.
-- `**Estado**: Ready` → pide confirmación para sobrescribir.
+- `substatus: DOING` → flujo de retoma, continúa.
+- `substatus: READY` → pide confirmación para sobrescribir.
 
 ### 2.3 Verificar template
 
@@ -150,7 +150,7 @@ Una vez completado el discovery, invoca al agente `project-architect` con la sig
 > Extrae las secciones del template en runtime y conduce la entrevista de especificación de requisitos con el usuario por secciones (máx 3-4 preguntas por ronda).
 > Pre-rellena con la información ya disponible del discovery y el project-intent. Infiere contenido faltante marcándolo con `[inferido]`.
 > Para secciones de experiencia de usuario y usabilidad, puedes apoyarte en el agente `project-ux`.
-> Escribe el documento final en `docs/specs/project/requirement-spec.md` con `**Estado**: Doing`.
+> Escribe el documento final en `docs/specs/project/requirement-spec.md` con `substatus: DOING`.
 
 ### 2.6 Gate de revisión — Fase 2
 
@@ -166,7 +166,7 @@ Cuando el `project-architect` termine:
    > - `No, necesito ajustes` → continúa la entrevista para completar secciones faltantes
 
 4. Si el usuario confirma:
-   - Edita `docs/specs/project/requirement-spec.md` reemplazando `**Estado**: Doing` por `**Estado**: Ready`.
+   - Edita `docs/specs/project/requirement-spec.md` reemplazando `substatus: DOING` por `substatus: READY`.
    - Confirma:
      > ✅ requirement-spec.md → Estado: Ready
      > Continuando con la Fase 3 (Planning)...
@@ -179,15 +179,15 @@ Cuando el `project-architect` termine:
 
 ### 3.1 Verificar precondición
 
-Lee `docs/specs/project/requirement-spec.md`. Debe existir con `**Estado**: Ready` (garantizado por el gate anterior).
+Lee `docs/specs/project/requirement-spec.md`. Debe existir con `substatus: READY` (garantizado por el gate anterior).
 
 ### 3.2 Verificar estado del documento de output
 
 Lee `docs/specs/project/project-plan.md` (si existe):
 
 - No existe → primera ejecución, continúa.
-- `**Estado**: Doing` → flujo de retoma, continúa.
-- `**Estado**: Ready` → pide confirmación para sobrescribir.
+- `substatus: DOING` → flujo de retoma, continúa.
+- `substatus: READY` → pide confirmación para sobrescribir.
 
 ### 3.3 Verificar template
 
@@ -201,7 +201,7 @@ Invoca al agente `project-architect` con la siguiente instrucción:
 >
 > Si estás en flujo de retoma (documento existente en `Estado: Doing`), primero lee `docs/specs/project/project-plan.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
-> Extrae features atómicas con IDs FEAT-NNN, priorizalas, agrúpalas en releases con MVP en Release 1, y escribe el resultado en `docs/specs/project/project-plan.md` con `**Estado**: Doing`.
+> Extrae features atómicas con IDs FEAT-NNN, priorizalas, agrúpalas en releases con MVP en Release 1, y escribe el resultado en `docs/specs/project/project-plan.md` con `substatus: DOING`.
 
 ### 3.5 Gate de revisión — Fase 3
 
@@ -217,7 +217,7 @@ Cuando el `project-architect` termine:
    > - `No, necesito ajustes` → continúa la planificación para ajustar features o releases
 
 4. Si el usuario confirma:
-   - Edita `docs/specs/project/project-plan.md` reemplazando `**Estado**: Doing` por `**Estado**: Ready`.
+   - Edita `docs/specs/project/project-plan.md` reemplazando `substatus: DOING` por `substatus: READY`.
    - Confirma:
      > ✅ project-plan.md → Estado: Ready
 

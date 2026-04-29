@@ -37,7 +37,7 @@ Existing reference implementations to follow: `ps-specifying` (skill + specifyin
 **Alternative considered**: Replace `ps-approve` in-place — rejected to avoid unintended side effects.
 
 ### Decision 4: State validation mirrors specifying-agent pattern
-**Choice**: The skill reads `requirement-spec.md` and checks `**Estado**`; if `Doing`, asks the user to confirm before proceeding.
+**Choice**: The skill reads `requirement-spec.md` and checks `substatus`; if `Doing`, asks the user to confirm before proceeding.
 **Why**: Consistent with how `ps-specifying` validates `discovery.md` state. The pattern is already proven in the pipeline.
 
 ## Risks / Trade-offs

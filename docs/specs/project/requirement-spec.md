@@ -292,7 +292,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
     - **Prioridad**: Alta
     - **Criterio de aceptación**: Todos los outputs del pipeline son archivos `.md` en `docs/specs/project/` y `docs/specs/stories/`. No existe ningún archivo de configuración de base de datos en el repositorio.
 
-- **NFR-004**: Control de estado mediante campo `**Estado**` en documentos
+- **NFR-004**: Control de estado mediante campo `substatus` en documentos
     - **Descripción**: El sistema SHALL usar el campo `**Estado**: Doing | Ready` en los documentos Markdown como mecanismo de control de flujo y lock distribuido. Este campo es el único mecanismo de estado persistente reconocido por todos los skills y agentes.
     - **Prioridad**: Alta
     - **Criterio de aceptación**: Ningún skill avanza al siguiente paso si el documento de entrada no tiene `Estado: Ready`.
@@ -305,14 +305,14 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
     - **Criterio de aceptación**: Los archivos `.tmp/rfc-*.md` contienen etiquetas de confianza en cada ítem. Los agentes incluyen `[inferido]` en el documento generado para contenido no confirmado por el usuario.
 
 - **NFR-006**: Metadatos de trazabilidad en todos los documentos generados
-    - **Descripción**: El sistema SHALL incluir en cada documento generado los metadatos: `**Versión**`, `**Estado**`, `**Fecha**` y `**Generado por**`.
+    - **Descripción**: El sistema SHALL incluir en cada documento generado los metadatos: `**Versión**`, `substatus`, `**Fecha**` y `**Generado por**`.
     - **Prioridad**: Alta
     - **Criterio de aceptación**: Todos los documentos en `docs/specs/project/` incluyen estos 4 campos en el encabezado. [DIRECT — BR-055]
 
 ### 2.2.4 Seguridad y Control de Acceso
 
 - **NFR-007**: Control de acceso basado en precondiciones de documento
-    - **Descripción**: El sistema SHALL implementar el control de avance de pipeline exclusivamente mediante verificación del campo `**Estado**` del documento de entrada requerido. No se implementa autenticación de usuarios ni roles de sistema.
+    - **Descripción**: El sistema SHALL implementar el control de avance de pipeline exclusivamente mediante verificación del campo `substatus` del documento de entrada requerido. No se implementa autenticación de usuarios ni roles de sistema.
     - **Prioridad**: Alta
     - **Criterio de aceptación**: El skill `project-discovery` no ejecuta si `project-intent.md` no existe o tiene `Estado: Doing`. El skill `project-planning` no ejecuta si `requirement-spec.md` no está en `Estado: Ready`. [DIRECT — BR-013, BR-014, BR-015, BR-016]
 

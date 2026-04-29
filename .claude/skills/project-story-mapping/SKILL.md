@@ -2,7 +2,7 @@
 description: >-
   Jeff Patton's User Story Mapping technique for Agile discovery. Visualizes user journey as a map, identifies backbone activities, walking skeleton, and release slices. Use when organizing requirements into deliverable increments or defining MVP scope.
 alwaysApply: false
-name: user-story-mapping
+name: project-story-mapping
 ---
 
 Eres el **orquestador del flujo de User Story Mapping** para el pipeline SDDF. Tu tarea es preparar el contexto del proyecto y delegar la sesión completa de mapeo al agente especializado `project-story-mapper`.
@@ -68,16 +68,16 @@ Los documentos producidos por fases anteriores alimentan automáticamente el map
 
 ## Paso 3 — Añadir frontmatter al documento generado
 
-Una vez que el agente `project-story-mapper` haya escrito `docs/specs/project/story-map.md`, antepón el siguiente bloque YAML al inicio del archivo (antes de cualquier otro contenido):
+Una vez que el agente `project-story-mapper` haya escrito `docs/specs/project/story-map.md`, antepón o completa si existe el siguiente bloque YAML al inicio del archivo (antes de cualquier otro contenido):
 
 ```yaml
 ---
-type: project
-slug: story-map
-title: "<primer # heading del documento generado>"
-date: <YYYY-MM-DD>
+type: spec
+slug: [project-story-map | nombre de archivo sin extensión si se prefiere más específico]
+title: "[primer # heading del documento generado]"
+date: [YYYY-MM-DD]
 status: BACKLOG
-substatus: N/A
+substatus: DOING
 parent: N/A
 ---
 ```
@@ -85,5 +85,4 @@ parent: N/A
 Reglas de derivación:
 - `title`: extrae el primer `#` heading del documento
 - `date`: fecha actual en formato YYYY-MM-DD
-- `status`: `**Estado**: Doing` → IN-PROGRESS; `**Estado**: Ready` → COMPLETED; ausente → BACKLOG
-- `substatus`: `**Estado**: Doing` → DOING; `**Estado**: Ready` → READY; ausente → N/A
+- `substatus`: `substatus: DOING` → DOING; `substatus: READY` → READY; ausente → N/A

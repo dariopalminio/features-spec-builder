@@ -134,16 +134,20 @@ Generar al menos un escenario Gherkin principal (happy path) y uno alternativo/e
 
 **5. Escribir el archivo:**
 
-Crear `docs/specs/stories/story-[ID]-[nombre-kebab].md` con la siguiente estructura:
+Crear `docs/specs/stories/story-[ID]-[nombre-kebab].md` con la estructura del template `assets\story-gherkin-template.md` infiriendo la información. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros en la estructura del template.
+
+Si no encuentras el template generar el archivo con la siguiente estructura:
 
 ```markdown
 ---
 alwaysApply: false
----
-**Título**: [Nombre de la feature]
-**Versión**: 1.0
-**Estado**: Doing
-**Fecha**: [Fecha actual YYYY-MM-DD]
+type: spec
+slug: <nombre-del-archivo-sin-extensión>
+title: "<primer # heading del documento o Nombre de la feature>"
+date: <YYYY-MM-DD>
+status: BACKLOG
+substatus: DOING
+parent: N/A
 **FINVEST Score:** —
 **FINVEST Decisión:** —
 ---
@@ -183,6 +187,8 @@ Entonces [mensaje de error o comportamiento alternativo]
 
 Generado automáticamente desde el release: [nombre del archivo de release]
 Feature origen: [ID] — [Nombre de la feature]
+
+Este es solo un ejemplo, recuerda que el archivo de plantilla es la guía a completar.
 ```
 
 ---

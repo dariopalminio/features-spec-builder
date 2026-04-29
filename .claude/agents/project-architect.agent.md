@@ -46,12 +46,12 @@ Lee:
 
 Verifica primero `docs/specs/project/project-intent.md`:
 - Si no existe: informa que primero debe ejecutarse `/project-begin` y detén la ejecución.
-- Si existe con `**Estado**: Doing`: informa que Begin Intention aún no está completo y detén la ejecución.
-- Si existe con `**Estado**: Ready`: continúa.
+- Si existe con `substatus: DOING`: informa que Begin Intention aún no está completo y detén la ejecución.
+- Si existe con `substatus: READY`: continúa.
 
-Si `docs/specs/project/requirement-spec.md` existe, verifica su campo `**Estado**`:
-- Si es **`Doing`**: activa flujo de retoma leyendo el documento existente y completando solo secciones incompletas.
-- Si es **`Ready`**: pregunta al usuario con `AskUserQuestion` si desea sobrescribir el documento completo antes de continuar.
+Si `docs/specs/project/requirement-spec.md` existe, verifica su campo `substatus`:
+- Si es **`DOING`**: activa flujo de retoma leyendo el documento existente y completando solo secciones incompletas.
+- Si es **`READY`**: pregunta al usuario con `AskUserQuestion` si desea sobrescribir el documento completo antes de continuar.
 - Si no existe: continúa como primera ejecución.
 
 **Paso 3: Extraer secciones del template en runtime**
@@ -70,7 +70,7 @@ Para cada sección del template:
 3. **Haz preguntas solo** para secciones que necesitan información nueva o mayor detalle
 4. **Agrupa** en máx 3-4 por ronda en orden de aparición en el template
 5. **Usa `AskUserQuestion`** con opciones cuando aplique, o preguntas abiertas para respuestas libres
-6. Si estás retomando un documento en `Doing`, no vuelvas a preguntar por secciones completas ni las sobrescribas
+6. Si estás retomando un documento en substatus `DOING`, no vuelvas a preguntar por secciones completas ni las sobrescribas
 
 Para secciones de UX/UI, accesibilidad, navegación o wireframes, puedes apoyarte en `project-ux`.
 
@@ -87,13 +87,13 @@ Cuando el usuario no proporciona suficiente detalle:
 1. Usa `Write` para crear `docs/specs/project/requirement-spec.md`
 2. Conserva todos los headers y el orden de secciones del template
 3. **No incluyas** los comentarios HTML `<!-- -->` en el output
-4. Incluye los metadatos del template al inicio completados:
-   - `**Nombre del Sistema**`: nombre del proyecto
-   - `**Categoría del Software**`: categoría correspondiente
-   - `**Versión**: 1.0`
-   - `**Estado**: Doing`
-   - `**Fecha**: [fecha actual en formato YYYY-MM-DD]`
-   - `**Generado por**: architect`
+4. Incluye los metadatos frontmatter del template al inicio completados:
+   - `type: spec`
+   - `slug: [slug del nombre de archivo | requirement-spec]`
+   - `title: Requirement Specification of [nombre del proyecto]`
+   - `substatus: DOING`
+   - `date: [fecha actual en formato YYYY-MM-DD]`
+   - `parent: N/A`
 5. Propone al usuario que revise el resultado. El siguiente paso es `/project-planning`.
 
 ---
@@ -126,9 +126,9 @@ Extrae dinámicamente:
 
 **Paso 3: Validar el estado del output si existe**
 
-Si `docs/specs/project/project-plan.md` existe, verifica el campo `**Estado**`:
-- Si es **`Doing`**: lee el documento existente, identifica secciones incompletas y continúa solo con ellas.
-- Si es **`Ready`**: pregunta al usuario con `AskUserQuestion` si desea sobrescribirlo antes de continuar.
+Si `docs/specs/project/project-plan.md` existe, verifica el campo `substatus`:
+- Si es **`DOING`**: lee el documento existente, identifica secciones incompletas y continúa solo con ellas.
+- Si es **`READY`**: pregunta al usuario con `AskUserQuestion` si desea sobrescribirlo antes de continuar.
 - Si no existe: continúa como primera ejecución.
 
 **Paso 4: Extraer features atómicas**
@@ -183,15 +183,17 @@ Genera mínimo 2 releases.
 2. Conserva todos los headers `##` del template en el mismo orden
 3. **No incluyas** los comentarios HTML `<!-- -->` en el output
 4. Todas las features usan el prefijo `- [ ]` (checkbox vacío)
-5. Incluye metadatos al inicio:
-   - `**Nombre del Sistema**`: nombre del proyecto
-   - `**Título del Documento**: Project Plan`
-   - `**Versión**: 1.0`
-   - `**Estado**: Doing`
-   - `**Fecha**: [fecha actual en formato YYYY-MM-DD]`
-   - `**Generado por**: architect`
+5. Incluye metadatos al inicio del documento:
+   - `type: plan`
+   - `slug: [slug del nombre de archivo | project-plan]`
+   - `title: Project Plan of [nombre del proyecto]`
+   - `substatus: DOING`
+   - `date: [fecha actual en formato YYYY-MM-DD]`
+   - `parent: N/A`
+   - `related:
+      - [slug de nodo relacionado requirement-spec que genera el plan]`
 6. Informa al usuario:
    > ✅ `docs/specs/project/project-plan.md` generado correctamente.
    >
-   > Revisá el documento y editalo si es necesario. Cuando esté listo, cambiá `**Estado**` a `Ready`.
+   > Revisá el documento y editalo si es necesario. Cuando esté listo, cambiá `substatus` a `Ready`.
 

@@ -37,7 +37,7 @@ Dentro de esa sección, extraer cada bloque delimitado por un encabezado `### Re
 
 - **ID**: el número de dos dígitos que sigue a `### Release ` (ej. `00`, `01`, `06`)
 - **Nombre**: el texto después de ` — ` en la misma línea (ej. `Estructura Base y Mecanismo de Templates`)
-- **Estado**: el valor del campo `**Estado:**` si existe en el bloque (ej. `Ready`, `Doing`); si no existe, usar `Doing`
+- substatus: el valor del campo `substatus:` si existe en el bloque (ej. `READY`, `DOING`); si no existe, usar `DOING`
 - **Fecha**: el valor del campo `**Fecha:**` si existe; si no existe, usar la fecha actual en formato YYYY-MM-DD
 - **Objetivo**: el párrafo que sigue a `**Objetivo:**`
 - **Features**: las líneas con formato `- [ ] FEAT-NNN - Nombre` o `- [x] FEAT-NNN - Nombre` dentro del bloque
@@ -108,16 +108,17 @@ Lee el archivo de plantilla `assets/release-spec-template.md`.
 
 Crear el archivo `docs/specs/releases/release-[ID]-[nombre-kebab].md` con la siguiente estructura, poblando cada sección con los datos del release:
 
-Completa el archivo de plantilla `assets/release-spec-template.md` infiriendo la información. Para cada sección del template, si el dato correspondiente no existe en el bloque del release, usar el placeholder `[Por completar]` para asegurar que la sección siempre está presente y el archivo tiene estructura completa.
+Completa el archivo de plantilla `assets/release-spec-template.md` infiriendo la información. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros en la estructura del template. Para cada sección del template, si el dato correspondiente no existe en el bloque del release, usar el placeholder `[Por completar]` para asegurar que la sección siempre está presente y el archivo tiene estructura completa.
 
 Por ejemplo:
 
 ```markdown
 ---
-**Título**: [Nombre completo del release]
-**Versión**: 1.0
-**Estado**: [Estado extraído o "Doing"]
-**Fecha**: [Fecha extraída o fecha actual]
+title: <"Nombre completo del release">
+date: <Fecha extraída o fecha actual con formato YYYY-MM-DD>
+status: IN-PROGRESS
+substatus: <substatus extraido o DOING>
+parent: <nombre del archivo de requirement-spec del proyecto del cual se genera el releaseo N/A>
 ---
 
 # Release/Epic: [Nombre completo del release]

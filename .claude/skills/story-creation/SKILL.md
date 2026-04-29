@@ -32,7 +32,7 @@ Lee el archivo de plantilla `assets/story-gherkin-template.md`.
 
 ### paso B. Guía de estructura y formato
 
-Toda historia generada por este skill debe seguir **exactamente** la estructura de `assets/story-gherkin-template.md` leida en el paso A. No asumas que las secciones siempre estarán en el mismo orden o que tendrán los mismos nombres. Siempre derréglelas dinámicamente de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros en la estructura del template.:
+Toda historia generada por este skill debe seguir **exactamente** la estructura de `assets/story-gherkin-template.md` leida en el paso A. No asumas que las secciones siempre estarán en el mismo orden o que tendrán los mismos nombres. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución, infiriendo la información, para asegurar flexibilidad ante cambios futuros en la estructura del template.:
 
 Por ejemplo:
 
