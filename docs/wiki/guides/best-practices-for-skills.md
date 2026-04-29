@@ -6,6 +6,9 @@ date: 2026-03-26
 status: N/A
 substatus: N/A
 parent: N/A
+related:                                    # opcional, si tiene relación con otros nodos
+  - best-practices-for-agents
+  - best-practices-for-commands
 ---
 
 # Buenas prácticas para LLM Clients: Skills

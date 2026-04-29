@@ -6,6 +6,8 @@ date: 2026-04-26
 status: N/A
 substatus: N/A
 parent: N/A
+related:                                    # opcional, si tiene relación con otros nodos
+  - flight-leves-model
 ---
 
 # Flujos principales SDDF

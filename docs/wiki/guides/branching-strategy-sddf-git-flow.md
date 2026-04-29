@@ -6,6 +6,8 @@ date: 2026-03-26
 status: BACKLOG
 substatus: N/A
 parent: N/A
+related:                                    # opcional, si tiene relación con otros nodos
+  - flight-leves-model
 ---
 
 # Estrategia de Branching SDDF git flow
