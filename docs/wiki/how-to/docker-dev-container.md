@@ -1,5 +1,5 @@
 ---
-type: wiki
+type: how-to
 slug: docker-dev-container
 title: "Guía Completa: Entorno de Desarrollo React con Docker + VSCode Dev Containers"
 date: 2026-04-26
