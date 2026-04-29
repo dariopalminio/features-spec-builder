@@ -1,6 +1,6 @@
 ---
 type: guide
-slug: sddf-workflows
+slug: sddf-main-workflows
 title: "Flujos principales SDDF"
 date: 2026-04-26
 status: N/A
