@@ -7,11 +7,13 @@ title: "Lectura de SDDF_ROOT como ruta base de artefactos en skills SDDF"
 date: 2026-05-01
 status: BACKLOG
 substatus: DOING
-parent: null
+parent: EPIC-10-mejora-estructura-artefactos-nuevos-skills
 ---
 **FINVEST Score:** [pendiente]
 **FINVEST Decisión:** [pendiente]
 ---
+<!-- Referencias -->
+[[EPIC-10-mejora-estructura-artefactos-nuevos-skills]]
 
 # 📖 Historia: Lectura de SDDF_ROOT como ruta base de artefactos en skills SDDF
 

@@ -30,6 +30,7 @@
     ".claude/skills/project-planning",
     ".claude/skills/project-story-mapping",
     ".claude/skills/readme-builder",
+    ".claude/skills/release-creation",
     ".claude/skills/release-format-validation",
     ".claude/skills/release-generate-all-stories",
     ".claude/skills/release-generate-stories",

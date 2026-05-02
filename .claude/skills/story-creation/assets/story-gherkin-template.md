@@ -6,7 +6,7 @@ slug: <nombre-del-directorio-de-historia>
 title: "<primer # heading del documento>"
 status: BACKLOG
 substatus: DOING
-parent: <EPIC-NN>
+parent: <nombre-del-directorio-de-release o EPIC-NN>
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>
 ---
