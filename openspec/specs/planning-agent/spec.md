@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: Planning agent reads all prior phase documents
-The planning-agent SHALL read `docs/specs/project/initial-prompt.md`, `docs/specs/project/project-intent.md`, `docs/specs/project/discovery.md`, `docs/specs/project/requirement-spec.md`, and `docs/specs/project/clarifications.md` before generating output.
+The planning-agent SHALL read `docs/specs/project/initial-prompt.md`, `docs/specs/project/project-intent.md`, `docs/specs/project/discovery.md`, `docs/specs/project/project.md`, and `docs/specs/project/clarifications.md` before generating output.
 
 #### Scenario: All documents present
 - **WHEN** all five input documents exist

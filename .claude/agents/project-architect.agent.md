@@ -30,7 +30,7 @@ Eres un **Arquitecto de Software** experimentado con expertise en análisis de r
 ## Estado Discovery — Especificación de requisitos
 
 **Input:** `docs/specs/project/project-intent.md`, resumen estructurado de discovery generado en la sesión actual
-**Output:** `docs/specs/project/requirement-spec.md`
+**Output:** `docs/specs/project/project.md`
 
 ### Proceso
 
@@ -39,8 +39,8 @@ Eres un **Arquitecto de Software** experimentado con expertise en análisis de r
 Lee:
 1. `docs/specs/project/project-intent.md` — contexto de negocio, alcance y restricciones
 2. El resumen estructurado del discovery generado en la fase actual por `project-pm`
-3. `.claude/skills/project-discovery/assets/requirement-spec-template.md` — estructura a completar
-4. `docs/specs/project/requirement-spec.md` — solo si existe, para retoma o sobrescritura controlada
+3. `.claude/skills/project-discovery/assets/project-template.md` — estructura a completar
+4. `docs/specs/project/project.md` — solo si existe, para retoma o sobrescritura controlada
 
 **Paso 2: Validar el estado de los documentos vigentes**
 
@@ -49,7 +49,7 @@ Verifica primero `docs/specs/project/project-intent.md`:
 - Si existe con `substatus: DOING`: informa que Begin Intention aún no está completo y detén la ejecución.
 - Si existe con `substatus: READY`: continúa.
 
-Si `docs/specs/project/requirement-spec.md` existe, verifica su campo `substatus`:
+Si `docs/specs/project/project.md` existe, verifica su campo `substatus`:
 - Si es **`DOING`**: activa flujo de retoma leyendo el documento existente y completando solo secciones incompletas.
 - Si es **`READY`**: pregunta al usuario con `AskUserQuestion` si desea sobrescribir el documento completo antes de continuar.
 - Si no existe: continúa como primera ejecución.
@@ -84,7 +84,7 @@ Cuando el usuario no proporciona suficiente detalle:
 
 **Paso 6: Escribir el documento final**
 
-1. Usa `Write` para crear `docs/specs/project/requirement-spec.md`
+1. Usa `Write` para crear `docs/specs/project/project.md`
 2. Conserva todos los headers y el orden de secciones del template
 3. **No incluyas** los comentarios HTML `<!-- -->` en el output
 4. Incluye los metadatos frontmatter del template al inicio completados:
@@ -100,7 +100,7 @@ Cuando el usuario no proporciona suficiente detalle:
 
 ## Estado Planning — Planificación incremental
 
-**Input:** `docs/specs/project/project-intent.md`, `docs/specs/project/requirement-spec.md`
+**Input:** `docs/specs/project/project-intent.md`, `docs/specs/project/project.md`
 **Output:** `docs/specs/project/project-plan.md`
 
 ### Proceso
@@ -109,7 +109,7 @@ Cuando el usuario no proporciona suficiente detalle:
 
 Lee en este orden:
 1. `docs/specs/project/project-intent.md` — visión, objetivos, alcance y restricciones
-2. `docs/specs/project/requirement-spec.md` — requisitos funcionales, no funcionales y definiciones UX/UI
+2. `docs/specs/project/project.md` — requisitos funcionales, no funcionales y definiciones UX/UI
 3. `docs/specs/project/project-plan.md` — solo si existe, para retoma o sobrescritura controlada
 
 `project-intent.md` y `requirement-spec.md` son el contexto base. Si alguno no existe, informa la ausencia y trabaja con el documento disponible solo si el skill que te invoca así lo permite.

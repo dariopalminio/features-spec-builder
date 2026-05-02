@@ -1,14 +1,14 @@
 ---
 type: project
 id: PROJ-01
-slug: requirement-spec
+slug: project-requirement-spec
 title: "Especificación de Requisitos"
 date: 2026-04-19
 status: COMPLETED
 substatus: READY
 parent: null
 related:
-  - project-intent
+  - PROJ-01-agile-sddf-project-intent
 ---
 
 <!-- Referencias -->
@@ -89,7 +89,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
     - **Fuente**: FEAT-001, `.claude/skills/project-begin/SKILL.md`
 
 - **FR-002**: Discovery del proyecto con descubrimiento de usuarios y especificación de requisitos
-    - **Descripción**: El sistema SHALL colaborar con el usuario en dos sub-fases: (1) Discovery de perfiles de usuario y sus dolores, y (2) Entrevista de especificación sección por sección del template de requisitos. El output es `docs/specs/project/requirement-spec.md`.
+    - **Descripción**: El sistema SHALL colaborar con el usuario en dos sub-fases: (1) Discovery de perfiles de usuario y sus dolores, y (2) Entrevista de especificación sección por sección del template de requisitos. El output es `docs/specs/project/project.md`.
     - **Prioridad**: Alta
     - **Usuario**: US-001, US-002, US-003
     - **Fuente**: FEAT-002, `.claude/skills/project-discovery/SKILL.md`
@@ -185,7 +185,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
 ## 2.1.4 Ingeniería Inversa de Repositorios
 
 - **FR-017**: Generación automática de requisitos desde código existente
-    - **Descripción**: El sistema SHALL analizar un repositorio existente mediante 4 agentes especializados en paralelo y un agente sintetizador, generando automáticamente `docs/specs/project/requirement-spec.md`. Las secciones sin datos suficientes se marcan como `<!-- PENDING MANUAL REVIEW -->`.
+    - **Descripción**: El sistema SHALL analizar un repositorio existente mediante 4 agentes especializados en paralelo y un agente sintetizador, generando automáticamente `docs/specs/project/project.md`. Las secciones sin datos suficientes se marcan como `<!-- PENDING MANUAL REVIEW -->`.
     - **Prioridad**: Alta
     - **Usuario**: US-001, US-002, US-004
     - **Fuente**: FEAT-017, BR-034, BR-052
@@ -334,7 +334,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
 - **NFR-010**: Assets como contrato de interfaz entre skills y agentes
     - **Descripción**: Los archivos en `*/assets/*.md` SHALL ser el contrato entre skills y agentes. Un cambio en un template debe alterar automáticamente el comportamiento de todos los agentes que lo leen en runtime, sin requerir cambios en el código del agente.
     - **Prioridad**: Alta
-    - **Criterio de aceptación**: Al modificar `requirement-spec-template.md`, los agentes `project-pm` y `project-architect` generan preguntas basadas en las nuevas secciones sin actualizar su propio SKILL.md.
+    - **Criterio de aceptación**: Al modificar `project-template.md`, los agentes `project-pm` y `project-architect` generan preguntas basadas en las nuevas secciones sin actualizar su propio SKILL.md.
 
 - **NFR-011**: Versionado de dependencias externas de skills
     - **Descripción**: El sistema SHALL gestionar las dependencias de skills externos mediante `skills-lock.json`, incluyendo hash de verificación de integridad para cada skill externo instalado.
@@ -402,7 +402,7 @@ AGILE SDDF — Sistema de Invocación de Skills
 │   │   ├── Precondición: project-intent.md con Estado: Ready 
 │   │   ├── Sub-fase Discovery: agente project-pm  (+ apoyo opcional project-ux)
 │   │   ├── Sub-fase Specifying: agente project-architect  (+ apoyo opcional project-ux)
-│   │   ├── Output: docs/specs/project/requirement-spec.md
+│   │   ├── Output: docs/specs/project/project.md
 │   │   └── [Bifurcación] Estado del output:
 │   │       ├── No existe → Crear
 │   │       ├── Estado: Doing → Retomar
@@ -510,7 +510,7 @@ AGILE SDDF — Sistema de Invocación de Skills
 │       │   ├── reverse-engineer-business-analyst  → .tmp/rfc-business-rules.md
 │       │   └── reverse-engineer-ux-flow-mapper    → .tmp/rfc-navigation.md
 │       ├── Fase 2 — Síntesis: 
-│       │   └── reverse-engineer-synthesizer → docs/specs/project/requirement-spec.md
+│       │   └── reverse-engineer-synthesizer → docs/specs/project/project.md
 │       └── Fase 3 — Confirmación: contar secciones PENDING MANUAL REVIEW
 │
 └── PIPELINE G: Skill Creator 
@@ -609,7 +609,7 @@ Sin referencias.
 ### Feature Gaps
 
 - No hay skill confirmado para generación de código a partir de especificaciones, aunque la visión lo menciona como objetivo. **Pregunta sugerida**: ¿Existe o está planificado un skill de generación de código para una versión futura?
-- ~~Ruta de template inconsistente en `project-discovery`~~ **RESUELTO**: El template `requirement-spec-template.md` fue migrado a `assets/requirement-spec-template.md` dentro del skill y las referencias en `project-discovery/SKILL.md` y `reverse-engineering/SKILL.md` fueron actualizadas.
+- ~~Ruta de template inconsistente en `project-discovery`~~ **RESUELTO**: El template `project-template.md` fue migrado a `assets/project-template.md` dentro del skill y las referencias en `project-discovery/SKILL.md` y `reverse-engineering/SKILL.md` fueron actualizadas.
 - No hay skill para exportar documentos a formatos externos (PDF, Jira, Linear, Notion, GitHub Issues). **Pregunta sugerida**: ¿Está planificada alguna integración de exportación para futuras versiones?
 - ~~`openspec-sync-specs` no encontrado en el repositorio~~ **ACLARADO**: Es el skill `opsx:archive` del CLI externo OpenSpec, no del framework SDDF directamente. No es un gap interno.
 - No se detectó directorio `tests/` para el framework SDDF (mencionado en CLAUDE.md). **Pregunta sugerida**: ¿Existe un plan de testing para el framework o el `tests/` del CLAUDE.md es aspiracional?

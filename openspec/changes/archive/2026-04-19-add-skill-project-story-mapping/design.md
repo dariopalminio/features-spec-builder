@@ -29,7 +29,7 @@ The skill delegates entirely to `project-story-mapper.agent.md` rather than embe
 
 ### Decision 2: Read project context documents if they exist
 
-The agent is instructed to read `docs/specs/project/project-intent.md` and `docs/specs/project/requirement-spec.md` at session start if they exist, to ground the story map in the project's actual requirements.
+The agent is instructed to read `docs/specs/project/project-intent.md` and `docs/specs/project/project.md` at session start if they exist, to ground the story map in the project's actual requirements.
 
 **Rationale:** Avoids asking the user to repeat context already captured in prior pipeline stages.
 

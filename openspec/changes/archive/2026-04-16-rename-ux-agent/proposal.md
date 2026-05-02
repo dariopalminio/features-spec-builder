@@ -10,7 +10,7 @@ The agent file `.claude/agents/ux-designer.agent.md` uses the name `ux-designer`
 - Update `.claude/agents/project-architect.agent.md` — agent name reference `ux-designer` → `project-ux`
 - Update `.claude/agents/project-pm.agent.md` — agent name reference `ux-designer` → `project-ux` (in body reference)
 - Update openspec specs (`role-based-agents`, `project-discovery-skill`) — `ux-designer-agent` → `project-ux`
-- Update documentation files: `README.md`, `CLAUDE.md`, `docs/specs/project-spec-factory/requirement-spec.md`
+- Update documentation files: `README.md`, `CLAUDE.md`, `docs/specs/project-spec-factory/project.md`
 
 ## Capabilities
 
@@ -31,5 +31,5 @@ The agent file `.claude/agents/ux-designer.agent.md` uses the name `ux-designer`
 - `.claude/agents/project-pm.agent.md` — agent name reference updated (if present in body)
 - `openspec/specs/role-based-agents/spec.md` — delta spec
 - `openspec/specs/project-discovery-skill/spec.md` — delta spec
-- `docs/specs/project-spec-factory/requirement-spec.md` — agent list
+- `docs/specs/project-spec-factory/project.md` — agent list
 - `README.md`, `CLAUDE.md` — structure diagrams

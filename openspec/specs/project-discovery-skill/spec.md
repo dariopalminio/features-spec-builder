@@ -8,7 +8,7 @@ El sistema SHALL incluir un skill en `.claude/skills/project-discovery/SKILL.md`
 - **THEN** el sistema MUST cargar y ejecutar `.claude/skills/project-discovery/SKILL.md`
 
 ### Requirement: project-discovery reads existing document state
-El skill SHALL leer el campo `**Estado**:` de `docs/specs/project/requirement-spec.md` si existe, aplicando la logica de `skill-state-detection`.
+El skill SHALL leer el campo `**Estado**:` de `docs/specs/project/project.md` si existe, aplicando la logica de `skill-state-detection`.
 
 #### Scenario: Document in Doing state
 - **WHEN** `requirement-spec.md` existe con `Estado: Doing`
@@ -30,11 +30,11 @@ El skill `/project-discovery` SHALL verificar que `docs/specs/project/project-in
 - **THEN** el sistema MUST informar al usuario que debe ejecutar `/project-begin` primero y detener la ejecucion
 
 ### Requirement: project-discovery produces requirement-spec.md
-El skill `/project-discovery` SHALL producir `docs/specs/project/requirement-spec.md` como unico documento de salida, en una sola sesion que combina discovery de usuarios y especificacion de requisitos.
+El skill `/project-discovery` SHALL producir `docs/specs/project/project.md` como unico documento de salida, en una sola sesion que combina discovery de usuarios y especificacion de requisitos.
 
 #### Scenario: Single session produces final document
 - **WHEN** el usuario completa la sesion guiada por `/project-discovery`
-- **THEN** el sistema MUST crear `docs/specs/project/requirement-spec.md` usando el template `project-discovery/templates/requirement-spec-template.md`
+- **THEN** el sistema MUST crear `docs/specs/project/project.md` usando el template `project-discovery/templates/project-template.md`
 
 #### Scenario: No intermediate files created
 - **WHEN** `/project-discovery` completa su ejecucion
@@ -48,11 +48,11 @@ El skill `/project-discovery` SHALL delegar la especificacion al `project-archit
 - **THEN** el sistema MUST invocar `project-architect` para generar `requirement-spec.md`
 
 ### Requirement: project-discovery template exists
-El directorio `.claude/skills/project-discovery/templates/` SHALL contener `requirement-spec-template.md` como referencia de estructura para el documento de salida.
+El directorio `.claude/skills/project-discovery/templates/` SHALL contener `project-template.md` como referencia de estructura para el documento de salida.
 
 #### Scenario: Template is accessible to agent
 - **WHEN** el `project-architect` necesita la estructura del documento
-- **THEN** MUST poder leer `.claude/skills/project-discovery/templates/requirement-spec-template.md`
+- **THEN** MUST poder leer `.claude/skills/project-discovery/templates/project-template.md`
 
 ### Requirement: project-discovery confirms output with transition feedback
 Al finalizar, el skill SHALL aplicar el patron de `transition-feedback`.
@@ -87,9 +87,9 @@ El skill `project-discovery` SHALL localizar el proyecto activo buscando en `{SP
 - **THEN** el skill MUST mostrar "No se encontró un proyecto activo en {SPECS_BASE}/specs/projects/" y detener la ejecución
 
 ### Requirement: project-discovery escribe requirement-spec.md en el directorio del proyecto
-El artefacto `requirement-spec.md` generado por el skill SHALL guardarse en `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/requirement-spec.md`, no en `{SPECS_BASE}/specs/project/` (ruta anterior).
+El artefacto `requirement-spec.md` generado por el skill SHALL guardarse en `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/project.md`, no en `{SPECS_BASE}/specs/project/` (ruta anterior).
 
 #### Scenario: Escritura de requirement-spec.md en la nueva ruta
 - **WHEN** el skill completa el proceso de discovery
-- **THEN** MUST escribir el archivo en `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/requirement-spec.md`
-- **THEN** MUST NOT escribir en `{SPECS_BASE}/specs/project/requirement-spec.md`
+- **THEN** MUST escribir el archivo en `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/project.md`
+- **THEN** MUST NOT escribir en `{SPECS_BASE}/specs/project/project.md`

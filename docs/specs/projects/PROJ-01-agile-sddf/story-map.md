@@ -10,7 +10,7 @@ related:
   - project-plan
 ---
 <!-- Referencias -->
-[[PROJ-01-agile-sddf]]
+[[project-requirement-spec]]
 
 # Story Map — Agile SDDF (Spec-Driven Development Framework)
 

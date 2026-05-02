@@ -12,7 +12,7 @@ El skill SHALL leer el campo `**Estado**:` de `docs/specs/project/project-plan.m
 - **THEN** el skill MUST informar al usuario y solicitar confirmacion antes de sobrescribir
 
 ### Requirement: project-planning validates requirement-spec.md is Ready
-El skill SHALL verificar que `docs/specs/project/requirement-spec.md` existe y tiene `Estado: Ready` antes de delegar al agente.
+El skill SHALL verificar que `docs/specs/project/project.md` existe y tiene `Estado: Ready` antes de delegar al agente.
 
 #### Scenario: Input present and Ready
 - **WHEN** `requirement-spec.md` existe con `Estado: Ready`
@@ -88,8 +88,8 @@ El skill `project-planning` SHALL localizar el proyecto activo buscando en `{SPE
 
 #### Scenario: Lectura de requirement-spec.md desde directorio del proyecto
 - **WHEN** el skill inicia la fase de planning
-- **THEN** MUST leer `requirement-spec.md` desde `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/requirement-spec.md`
-- **THEN** MUST NOT leer desde `{SPECS_BASE}/specs/project/requirement-spec.md`
+- **THEN** MUST leer `requirement-spec.md` desde `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/project.md`
+- **THEN** MUST NOT leer desde `{SPECS_BASE}/specs/project/project.md`
 
 #### Scenario: Escritura de project-plan.md en el directorio del proyecto
 - **WHEN** el skill completa la generación del plan

@@ -1,7 +1,7 @@
 ---
 alwaysApply: false
 type: project
-slug: requirement-spec
+slug: project-requirement-spec-template
 title: "<primer # heading del documento>"
 date: <YYYY-MM-DD>
 status: BACKLOG

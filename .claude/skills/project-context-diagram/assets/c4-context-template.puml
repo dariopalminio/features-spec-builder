@@ -1,0 +1,33 @@
+@startuml C4Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+' ─────────────────────────────────────────────
+' C4 Context Diagram — Nivel 1 (System Context)
+' ─────────────────────────────────────────────
+' Instrucciones de uso:
+'   - Sustituye cada placeholder con los datos reales del sistema.
+'   - Añade o elimina Person / System_Ext según el contexto.
+'   - Cada Rel() describe una relación: Rel(origen, destino, "etiqueta", "protocolo")
+'   - Para relaciones bidireccionales usa BiRel().
+'
+' Referencia: https://github.com/plantuml-stdlib/C4-PlantUML
+' ─────────────────────────────────────────────
+
+title [Nombre del sistema] — Diagrama de Contexto (C4 Nivel 1)
+
+' ── Actores (personas / roles) ───────────────
+Person(actor1, "[Nombre del actor]", "[Descripción del rol o persona]")
+' Person(actor2, "[Nombre del segundo actor]", "[Descripción]")
+
+' ── Sistema principal ────────────────────────
+System(sistema, "[Nombre del sistema]", "[Descripción breve del sistema]")
+
+' ── Sistemas externos ────────────────────────
+System_Ext(sistema_ext1, "[Sistema externo 1]", "[Descripción del sistema externo]")
+' System_Ext(sistema_ext2, "[Sistema externo 2]", "[Descripción]")
+
+' ── Relaciones ───────────────────────────────
+Rel(actor1, sistema, "[Acción o interacción]", "[Protocolo, ej: HTTPS/REST]")
+Rel(sistema, sistema_ext1, "[Acción o interacción]", "[Protocolo, ej: API REST]")
+
+@enduml

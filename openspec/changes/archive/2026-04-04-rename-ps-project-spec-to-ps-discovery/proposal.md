@@ -12,7 +12,7 @@ El nombre `ps-project-spec` no refleja claramente lo que hace el skill: combinar
 
 **Non-goals:**
 - No cambiar el contenido ni la lógica del SKILL.md (solo el nombre y las rutas)
-- No cambiar el template `requirement-spec-template.md` (se mueve con el directorio)
+- No cambiar el template `project-template.md` (se mueve con el directorio)
 - No cambiar los agentes ni los documentos de salida
 
 ## Capabilities

@@ -4,24 +4,24 @@ El pipeline de ProjectSpecFactory carece del estado **Specifying**, el cuarto pa
 
 ## What Changes
 
-- **Nuevo template** `requirement-spec-template.md` en `.claude/skills/ps-specifying/templates/` que define la estructura del documento de especificación de requisitos (funcionales, no-funcionales, usuarios, contexto).
-- **Nuevo agente** `specifying-agent.md` (`.claude/agents/`) especializado en entrevistar al usuario sección por sección del template y producir `docs/specs/project/requirement-spec.md`.
+- **Nuevo template** `project-template.md` en `.claude/skills/ps-specifying/templates/` que define la estructura del documento de especificación de requisitos (funcionales, no-funcionales, usuarios, contexto).
+- **Nuevo agente** `specifying-agent.md` (`.claude/agents/`) especializado en entrevistar al usuario sección por sección del template y producir `docs/specs/project/project.md`.
 - **Nuevo skill** `ps-specifying` (`.claude/skills/ps-specifying/SKILL.md`) que orquesta el estado Specifying: valida el `discovery.md`, delega al `specifying-agent` y confirma el output.
 
 ## Capabilities
 
 ### New Capabilities
 
-- `ps-specifying-skill`: Skill orquestador del estado Specifying que valida precondiciones, delega al agente y confirma el output en `docs/specs/project/requirement-spec.md`.
+- `ps-specifying-skill`: Skill orquestador del estado Specifying que valida precondiciones, delega al agente y confirma el output en `docs/specs/project/project.md`.
 - `specifying-agent`: Agente PM especializado que lee `discovery.md`, extrae headers y comentarios del template en runtime, entrevista al usuario por secciones y produce `requirement-spec.md`.
-- `requirement-spec-template`: Template Markdown con estructura de secciones (descripción general, contexto, usuarios, requisitos funcionales, no funcionales, referencias) que guía la captura de intención del proyecto.
+- `project-template`: Template Markdown con estructura de secciones (descripción general, contexto, usuarios, requisitos funcionales, no funcionales, referencias) que guía la captura de intención del proyecto.
 
 ### Modified Capabilities
 
 ## Impact
 
 - Nuevo archivo: `.claude/agents/specifying-agent.md`
-- Nuevo directorio: `.claude/skills/ps-specifying/` con `SKILL.md` y `templates/requirement-spec-template.md`
+- Nuevo directorio: `.claude/skills/ps-specifying/` con `SKILL.md` y `templates/project-template.md`
 - El template existente en `docs/templates/requirements-spec-template.md` sirve como referencia de estructura pero NO se modifica
-- El output del agente se escribe en `docs/specs/project/requirement-spec.md`
+- El output del agente se escribe en `docs/specs/project/project.md`
 - No se modifican skills ni agentes existentes

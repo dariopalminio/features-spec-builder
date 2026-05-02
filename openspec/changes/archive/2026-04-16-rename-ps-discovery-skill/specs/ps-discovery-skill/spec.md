@@ -38,22 +38,22 @@ El sistema SHALL incluir un skill en `.claude/skills/project-discovery/SKILL.md`
 - **THEN** el sistema MUST cargar y ejecutar `.claude/skills/project-discovery/SKILL.md`
 
 ### Requirement: project-discovery produces requirement-spec.md
-El skill `/project-discovery` SHALL producir `docs/specs/project/requirement-spec.md` como unico documento de salida, en una sola sesion que combina discovery de usuarios y especificacion de requisitos.
+El skill `/project-discovery` SHALL producir `docs/specs/project/project.md` como unico documento de salida, en una sola sesion que combina discovery de usuarios y especificacion de requisitos.
 
 #### Scenario: Single session produces final document
 - **WHEN** el usuario completa la sesion guiada por `/project-discovery`
-- **THEN** el sistema MUST crear `docs/specs/project/requirement-spec.md` usando el template `project-discovery/templates/requirement-spec-template.md`
+- **THEN** el sistema MUST crear `docs/specs/project/project.md` usando el template `project-discovery/templates/project-template.md`
 
 #### Scenario: No intermediate files created
 - **WHEN** `/project-discovery` completa su ejecucion
 - **THEN** el sistema MUST NOT crear archivos intermedios como `discovery.md` o `clarifications.md`
 
 ### Requirement: project-discovery template exists
-El directorio `.claude/skills/project-discovery/templates/` SHALL contener `requirement-spec-template.md` como referencia de estructura para el documento de salida.
+El directorio `.claude/skills/project-discovery/templates/` SHALL contener `project-template.md` como referencia de estructura para el documento de salida.
 
 #### Scenario: Template is accessible to agent
 - **WHEN** el `architect-agent` necesita la estructura del documento
-- **THEN** MUST poder leer `.claude/skills/project-discovery/templates/requirement-spec-template.md`
+- **THEN** MUST poder leer `.claude/skills/project-discovery/templates/project-template.md`
 
 ### Requirement: project-discovery confirms output with transition feedback
 Al finalizar, el skill SHALL aplicar el patron de `transition-feedback`.

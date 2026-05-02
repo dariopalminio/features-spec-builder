@@ -26,7 +26,7 @@ El skill `ps-planning` usa el prefijo `ps-` que es inconsistente con la convenci
 - `openspec/specs/ps-planning-skill/spec.md` (directorio renombrado)
 - `openspec/specs/role-based-agents/spec.md`
 - `openspec/specs/transition-feedback/spec.md`
-- `docs/specs/project-spec-factory/requirement-spec.md`
+- `docs/specs/project-spec-factory/project.md`
 - `docs/specs/project-spec-factory/project-plan.md`
 - `README.md`
 - `gem/README.md`

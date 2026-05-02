@@ -28,7 +28,7 @@ Archivos activos afectados:
 - `openspec/specs/project-planning-skill/spec.md`
 - `openspec/specs/project-discovery-skill/spec.md`
 - `openspec/specs/ps-project-spec-skill/spec.md`
-- `docs/specs/project-spec-factory/requirement-spec.md`
+- `docs/specs/project-spec-factory/project.md`
 - `docs/specs/project-spec-factory/project-plan.md`
 - `README.md`
 - `gem/prompts/prompt-ps-planning`

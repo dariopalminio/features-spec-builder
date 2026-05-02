@@ -8,7 +8,7 @@ El sistema SHALL proveer un skill en `.claude/skills/ps-discovery/SKILL.md` que 
 - **THEN** Claude Code carga `.claude/skills/ps-discovery/SKILL.md` y lo ejecuta como skill
 
 ### Requirement: ps-discovery reads existing document state
-El skill SHALL leer el campo `**Estado**:` de `docs/specs/project/requirement-spec.md` si existe, aplicando la lógica de `skill-state-detection`.
+El skill SHALL leer el campo `**Estado**:` de `docs/specs/project/project.md` si existe, aplicando la lógica de `skill-state-detection`.
 
 #### Scenario: Document in Doing state
 - **WHEN** `requirement-spec.md` existe con `Estado: Doing`

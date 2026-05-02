@@ -10,7 +10,7 @@ The system SHALL provide a `clarifications-template.md` at `.claude/skills/ps-ap
 - **THEN** it derives section names from `##` headers and question guidance from `<!-- -->` comments without using any hardcoded section names
 
 ### Requirement: ps-approval skill validates requirement-spec state
-The system SHALL provide a `ps-approval` skill at `.claude/skills/ps-approval/SKILL.md`. The skill SHALL read `docs/specs/project/requirement-spec.md` and verify the `**Estado**` field before proceeding.
+The system SHALL provide a `ps-approval` skill at `.claude/skills/ps-approval/SKILL.md`. The skill SHALL read `docs/specs/project/project.md` and verify the `**Estado**` field before proceeding.
 
 #### Scenario: requirement-spec.md does not exist
 - **WHEN** the user runs `/ps-approval`

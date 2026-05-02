@@ -83,7 +83,7 @@ parent: null
 - [[evaluation-output-template]]
 - [[readme-template]]
 - [[release-spec-template]]
-- [[requirement-spec-template]]
+- [[project-template]]
 - [[story-gherkin-template]]
 
 ---

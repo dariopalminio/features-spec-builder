@@ -3,14 +3,14 @@ description: >-
   Reverse-engineers a requirement specification from an existing codebase.
   Triggers when the user runs /reverse-engineering (with optional --focus <path>,
   --update, or --verbose flags). Analyzes the current repository's source code and
-  generates $SPECS_BASE/specs/projects/<PROJ-ID>-<nombre>/requirement-spec.md using a requirements template.
+  generates $SPECS_BASE/specs/projects/<PROJ-ID>-<nombre>/project.md using a requirements template.
   Use this skill whenever the user wants to document an existing codebase, extract
   requirements from code, reverse-engineer a spec, or generate a requirement-spec
   from a project they didn't write.
 alwaysApply: false
 name: reverse-engineering
 ---
-Eres el orquestador del comando `/reverse-engineering`. Tu responsabilidad es coordinar 4 agentes de análisis en paralelo y luego un agente sintetizador para generar automáticamente `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md` a partir del código fuente del repositorio actual.
+Eres el orquestador del comando `/reverse-engineering`. Tu responsabilidad es coordinar 4 agentes de análisis en paralelo y luego un agente sintetizador para generar automáticamente `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` a partir del código fuente del repositorio actual.
 
 ## Configuración — Determinar ruta base (`SPECS_BASE`)
 
@@ -57,11 +57,11 @@ El archivo de plantilla es la **única fuente de información estructural** para
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla `assets/requirement-spec-template.md`.
+Lee el archivo de plantilla `assets/project-template.md`.
 
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template en `assets/requirement-spec-template.md`.
+  > ❌ No se encontró el template en `assets/project-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 - Si el archivo **existe**: continua.
@@ -69,7 +69,7 @@ Lee el archivo de plantilla `assets/requirement-spec-template.md`.
 ### 3. Verificar modo --update
 
 Si `--update` está activo:
-1. Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md` si existe
+1. Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` si existe
 2. Verifica el campo `substatus`:
    - `DOING`: continúa en modo incremental
    - `READY`: informa al usuario que el documento ya está completo y pide confirmación antes de continuar
@@ -91,7 +91,7 @@ Fase 1: Análisis paralelo (4 agentes)
   → reverse-engineer-ux-flow-mapper          → .tmp/rfc-navigation.md
 
 Fase 2: Síntesis
-  → reverse-engineer-synthesizer → $SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md
+  → reverse-engineer-synthesizer → $SPECS_BASE/specs/projects/$PROJ_DIR/project.md
 ```
 
 ---
@@ -168,7 +168,7 @@ Verifica la existencia de cada archivo `.tmp/rfc-*.md`. Si alguno falta, adviert
 >   - `.tmp/rfc-features.md` (existe: [sí/no])
 >   - `.tmp/rfc-business-rules.md` (existe: [sí/no])
 >   - `.tmp/rfc-navigation.md` (existe: [sí/no])
-> - Output path: `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md`
+> - Output path: `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`
 > - Update mode: [true/false] — si true, también lee el documento existente y preserva secciones ya completas.
 >
 > Genera el documento aunque algunas secciones queden como `<!-- PENDING MANUAL REVIEW -->`.
@@ -177,12 +177,12 @@ Verifica la existencia de cada archivo `.tmp/rfc-*.md`. Si alguno falta, adviert
 
 ## Fase 3 — Confirmación
 
-1. Verifica que `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md` existe leyendo el archivo
+1. Verifica que `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` existe leyendo el archivo
 2. Cuenta las ocurrencias de `<!-- PENDING MANUAL REVIEW -->` en el output
 3. Reporta al usuario:
    ```
    ✅ Especificación generada correctamente.
-   Path: $SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md
+   Path: $SPECS_BASE/specs/projects/$PROJ_DIR/project.md
    Secciones completadas: [N]
    Secciones pendientes de revisión: [M] (<!-- PENDING MANUAL REVIEW -->)
    

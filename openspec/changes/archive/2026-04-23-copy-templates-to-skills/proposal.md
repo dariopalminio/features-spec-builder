@@ -6,7 +6,7 @@ Los templates en `docs/specs/templates/` mezclan artefactos de entrada (plantill
 
 - Copiar `story-gherkin-template.md` al directorio `templates/` de los skills: `story-creation`, `story-evaluation`, `story-split`, `release-generate-all-stories`
 - Copiar `evaluation-output-template.md` al directorio `templates/` del skill `story-evaluation`
-- Copiar `requirement-spec-template.md` al directorio `templates/` del skill `project-discovery`
+- Copiar `project-template.md` al directorio `templates/` del skill `project-discovery`
 - Copiar `release-spec-template.md` al directorio `templates/` de los skills: `releases-from-project-plan`, `release-generate-stories`, `release-format-validation`, `release-generate-all-stories`
 - Actualizar todas las referencias a `docs/specs/templates/` en los archivos `SKILL.md` de cada skill afectado
 - Actualizar las referencias en los agentes de `.claude/agents/` que usen rutas de `docs/specs/templates/`

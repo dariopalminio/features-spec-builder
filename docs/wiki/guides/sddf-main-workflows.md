@@ -40,7 +40,7 @@ project-begin → project-discovery → project-planning
 | Skill | Input | Output |
 |---|---|---|
 | `project-begin` | Intención del usuario (conversación) | `$SPECS_BASE/specs/project/project-intent.md` |
-| `project-discovery` | `project-intent.md` | `$SPECS_BASE/specs/project/requirement-spec.md` |
+| `project-discovery` | `project-intent.md` | `$SPECS_BASE/specs/project/project.md` |
 | `project-planning` | `requirement-spec.md` | `$SPECS_BASE/specs/project/project-plan.md` |
 
 > `project-flow` orquesta los 3 pasos en una sola sesión con gates de revisión entre etapas.

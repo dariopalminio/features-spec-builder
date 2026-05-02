@@ -7,8 +7,8 @@
 ## 2. Crear skill ps-project-spec
 
 - [x] 2.1 Crear directorio `.claude/skills/ps-project-spec/templates/`
-- [x] 2.2 Copiar `.claude/skills/ps-specifying/templates/requirement-spec-template.md` → `.claude/skills/ps-project-spec/templates/requirement-spec-template.md`
-- [x] 2.3 Crear `.claude/skills/ps-project-spec/SKILL.md` — orquestador que verifica que existe `project-intent.md`, invoca `product-manager-agent` para discovery y `architect-agent` para especificación, produciendo `docs/specs/project/requirement-spec.md`
+- [x] 2.2 Copiar `.claude/skills/ps-specifying/templates/project-template.md` → `.claude/skills/ps-project-spec/templates/project-template.md`
+- [x] 2.3 Crear `.claude/skills/ps-project-spec/SKILL.md` — orquestador que verifica que existe `project-intent.md`, invoca `product-manager-agent` para discovery y `architect-agent` para especificación, produciendo `docs/specs/project/project.md`
 
 ## 3. Eliminar skills obsoletos
 

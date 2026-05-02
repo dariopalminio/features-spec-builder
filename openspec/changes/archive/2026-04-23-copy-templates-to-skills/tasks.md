@@ -20,8 +20,8 @@
 ## 4. Copiar templates al skill project-discovery
 
 - [x] 4.1 Crear directorio `.claude/skills/project-discovery/templates/`
-- [x] 4.2 Copiar `docs/specs/templates/requirement-spec-template.md` a `.claude/skills/project-discovery/templates/requirement-spec-template.md`
-- [x] 4.3 Actualizar referencias en `.claude/skills/project-discovery/SKILL.md`: reemplazar `docs/specs/templates/requirement-spec-template.md` por `.claude/skills/project-discovery/templates/requirement-spec-template.md`
+- [x] 4.2 Copiar `docs/specs/templates/project-template.md` a `.claude/skills/project-discovery/templates/project-template.md`
+- [x] 4.3 Actualizar referencias en `.claude/skills/project-discovery/SKILL.md`: reemplazar `docs/specs/templates/project-template.md` por `.claude/skills/project-discovery/templates/project-template.md`
 
 ## 5. Copiar templates al skill releases-from-project-plan
 
@@ -50,8 +50,8 @@
 ## 9. Copiar templates al skill reverse-engineering
 
 - [x] 9.1 Crear directorio `.claude/skills/reverse-engineering/templates/`
-- [x] 9.2 Copiar `docs/specs/templates/requirement-spec-template.md` a `.claude/skills/reverse-engineering/templates/requirement-spec-template.md`
-- [x] 9.3 Actualizar referencias en `.claude/skills/reverse-engineering/SKILL.md`: reemplazar `docs/specs/templates/requirement-spec-template.md` por `.claude/skills/reverse-engineering/templates/requirement-spec-template.md`
+- [x] 9.2 Copiar `docs/specs/templates/project-template.md` a `.claude/skills/reverse-engineering/templates/project-template.md`
+- [x] 9.3 Actualizar referencias en `.claude/skills/reverse-engineering/SKILL.md`: reemplazar `docs/specs/templates/project-template.md` por `.claude/skills/reverse-engineering/templates/project-template.md`
 
 ## 10. Verificación final
 

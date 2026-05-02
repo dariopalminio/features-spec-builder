@@ -28,7 +28,7 @@
 
 - [x] 6.1 Replace all occurrences of `ps-planning` in `README.md` with `project-planning`
 - [x] 6.2 Replace all occurrences of `ps-planning` in `gem/README.md` with `project-planning`
-- [x] 6.3 Replace all occurrences of `ps-planning` in `docs/specs/project-spec-factory/requirement-spec.md` with `project-planning`
+- [x] 6.3 Replace all occurrences of `ps-planning` in `docs/specs/project-spec-factory/project.md` with `project-planning`
 - [x] 6.4 Replace all occurrences of `ps-planning` in `docs/specs/project-spec-factory/project-plan.md` with `project-planning`
 
 ## 7. Verify

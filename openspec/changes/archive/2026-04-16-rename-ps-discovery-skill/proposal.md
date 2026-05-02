@@ -30,7 +30,7 @@ El skill `ps-discovery` usa el prefijo `ps-` que es inconsistente con la convenc
 - `openspec/specs/role-based-agents/spec.md`
 - `openspec/specs/ps-project-spec-skill/spec.md`
 - `openspec/specs/discovery-template/spec.md`
-- `docs/specs/project-spec-factory/requirement-spec.md`
+- `docs/specs/project-spec-factory/project.md`
 - `docs/specs/project-spec-factory/project-plan.md`
 - `README.md`
 - `gem/README.md`

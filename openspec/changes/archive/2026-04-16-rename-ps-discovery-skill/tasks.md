@@ -32,7 +32,7 @@
 
 - [x] 6.1 Replace all occurrences of `ps-discovery` in `README.md` with `project-discovery`
 - [x] 6.2 Replace all occurrences of `ps-discovery` in `gem/README.md` with `project-discovery`
-- [x] 6.3 Replace all occurrences of `ps-discovery` in `docs/specs/project-spec-factory/requirement-spec.md` with `project-discovery`
+- [x] 6.3 Replace all occurrences of `ps-discovery` in `docs/specs/project-spec-factory/project.md` with `project-discovery`
 - [x] 6.4 Replace all occurrences of `ps-discovery` in `docs/specs/project-spec-factory/project-plan.md` with `project-discovery`
 
 ## 7. Update gem prompts

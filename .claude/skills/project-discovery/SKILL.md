@@ -3,7 +3,7 @@ description: >-
   Segundo paso del pipeline de ProjectSpecFactory. Verifica que
   project-intent.md existe en el directorio del proyecto activo, conduce discovery de usuarios y especificación de
   requisitos mediante project-pm y project-architect, produciendo
-  docs/specs/projects/<PROJ-ID>-<nombre>/requirement-spec.md en una sola sesión.
+  docs/specs/projects/<PROJ-ID>-<nombre>/project.md en una sola sesión.
 alwaysApply: false
 name: project-discovery
 ---
@@ -11,7 +11,7 @@ Eres el orchestrator del estado **Discovery** del pipeline de ProjectSpecFactory
 
 ## Tu tarea
 
-Generar `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md` a partir de `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md`, conduciendo una sesión que fusiona el discovery de usuarios y la especificación de requisitos.
+Generar `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` a partir de `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md`, conduciendo una sesión que fusiona el discovery de usuarios y la especificación de requisitos.
 
 ## Pasos
 
@@ -56,7 +56,7 @@ Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md`.
 
 ### 2. Verificar estado del documento de output
 
-Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md` (si existe) y detecta el valor de `substatus:`.
+Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` (si existe) y detecta el valor de `substatus:`.
 
 - Si el archivo **no existe**: continua al paso 3 (primera ejecucion).
 - Si existe con `substatus: DOING`: activa flujo de retoma y continua al paso 3.
@@ -70,11 +70,11 @@ El archivo de plantilla es la **única fuente de información estructural** para
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla `assets/requirement-spec-template.md`.
+Lee el archivo de plantilla `assets/project-template.md`.
 
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template requerido en `assets/requirement-spec-template.md`.
+  > ❌ No se encontró el template requerido en `assets/project-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 - Si el archivo **existe**: continua.
@@ -95,14 +95,14 @@ Invoca al agente `project-pm` con la siguiente instrucción:
 
 Una vez completado el discovery, invoca al agente `project-architect` con la siguiente instrucción:
 
-> Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md` y el resumen del discovery de la fase anterior. Lee tambien el template `assets/requirement-spec-template.md`.
+> Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md` y el resumen del discovery de la fase anterior. Lee tambien el template `assets/project-template.md`.
 >
-> Si estas en flujo de retoma (documento existente en `Estado: Doing`), primero lee `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continua solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
+> Si estas en flujo de retoma (documento existente en `Estado: Doing`), primero lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continua solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
 > Extrae las secciones del template en runtime y conduce la entrevista de especificación de requisitos con el usuario por secciones (máx 3-4 preguntas por ronda).
 > Pre-rellena con la información ya disponible del discovery y el project-intent. Infiere contenido faltante marcándolo con `[inferido]`.
 > Para secciones de experiencia de usuario y usabilidad, puedes apoyarte en el agente `project-ux`.
-> Escribe el documento final en `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md`.
+> Escribe el documento final en `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`.
 
 El `project-architect` se encargará de:
 - Pre-rellenar secciones con información del discovery y project-intent
@@ -115,9 +115,9 @@ El `project-architect` se encargará de:
 
 Cuando el `project-architect` termine:
 
-1. Verifica que `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md` existe leyendo el archivo
+1. Verifica que `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` existe leyendo el archivo
 2. Si existe, confirma al usuario:
   > ✅ Documento generado correctamente.
-  > Path: `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md`
+  > Path: `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`
   > Siguiente comando: `/project-planning`.
 3. Si no existe, informa al usuario que algo salió mal y sugiere ejecutar `/project-discovery` nuevamente.

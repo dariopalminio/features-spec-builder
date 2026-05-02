@@ -15,11 +15,11 @@ El skill `/ps-project-spec` SHALL verificar que `docs/specs/project/project-inte
 - **THEN** el sistema MUST informar al usuario que debe ejecutar `/ps-begin-intention` primero y detener la ejecución
 
 ### Requirement: ps-project-spec produces requirement-spec.md
-El skill `/ps-project-spec` SHALL producir `docs/specs/project/requirement-spec.md` como único documento de salida, en una sola sesión que combina discovery de usuarios y especificación de requisitos.
+El skill `/ps-project-spec` SHALL producir `docs/specs/project/project.md` como único documento de salida, en una sola sesión que combina discovery de usuarios y especificación de requisitos.
 
 #### Scenario: Single session produces final document
 - **WHEN** el usuario completa la sesión guiada por `/ps-project-spec`
-- **THEN** el sistema MUST crear `docs/specs/project/requirement-spec.md` usando el template `ps-project-spec/templates/requirement-spec-template.md`
+- **THEN** el sistema MUST crear `docs/specs/project/project.md` usando el template `ps-project-spec/templates/project-template.md`
 
 #### Scenario: No intermediate files created
 - **WHEN** `/ps-project-spec` completa su ejecución
@@ -33,8 +33,8 @@ El skill `/ps-project-spec` SHALL delegar la especificación al `architect-agent
 - **THEN** el sistema MUST invocar `architect-agent` para generar `requirement-spec.md`
 
 ### Requirement: ps-project-spec template exists
-El directorio `.claude/skills/ps-project-spec/templates/` SHALL contener `requirement-spec-template.md` como referencia de estructura para el documento de salida.
+El directorio `.claude/skills/ps-project-spec/templates/` SHALL contener `project-template.md` como referencia de estructura para el documento de salida.
 
 #### Scenario: Template is accessible to agent
 - **WHEN** el `architect-agent` necesita la estructura del documento
-- **THEN** MUST poder leer `.claude/skills/ps-project-spec/templates/requirement-spec-template.md`
+- **THEN** MUST poder leer `.claude/skills/ps-project-spec/templates/project-template.md`

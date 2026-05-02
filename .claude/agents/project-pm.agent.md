@@ -78,7 +78,7 @@ Para cada sección del template:
 ## Estado Discovery — Discovery de usuarios y refinamiento para requirement-spec
 
 **Input:** `docs/specs/project/project-intent.md`
-**Output:** `docs/specs/project/requirement-spec.md`
+**Output:** `docs/specs/project/project.md`
 
 ### Proceso
 
@@ -87,8 +87,8 @@ Para cada sección del template:
 Lee:
 1. `docs/specs/project/project-intent.md` — input principal de la fase
 2. `.claude/skills/project-begin/assets/project-intent-template.md` — referencia para entender la estructura y el nivel de refinamiento esperado del contexto de negocio
-3. `.claude/skills/project-discovery/assets/requirement-spec-template.md` — estructura objetivo a completar
-4. `docs/specs/project/requirement-spec.md` — solo si existe, para retoma o sobrescritura controlada
+3. `.claude/skills/project-discovery/assets/project-template.md` — estructura objetivo a completar
+4. `docs/specs/project/project.md` — solo si existe, para retoma o sobrescritura controlada
 
 **Paso 2: Validar el Estado de los documentos vigentes**
 
@@ -97,7 +97,7 @@ Verifica primero `docs/specs/project/project-intent.md`:
 - Si existe con **`substatus: DOING`**: informa que Begin Intention aún no está completo y detén la ejecución.
 - Si existe con **`substatus: READY`**: continúa.
 
-Si `docs/specs/project/requirement-spec.md` existe, verifica su campo `substatus`:
+Si `docs/specs/project/project.md` existe, verifica su campo `substatus`:
 - Si es `DOING`: interpreta que estás retomando el requirement spec. Lee el documento existente y continúa solo con las secciones incompletas.
 - Si es `READY`: pregunta al usuario con `AskUserQuestion` si desea sobrescribirlo antes de continuar.
 - Si no existe: continúa como primera ejecución.
@@ -106,14 +106,14 @@ Si `docs/specs/project/requirement-spec.md` existe, verifica su campo `substatus
 
 A partir del contexto leído, extrae dinámicamente:
 - Del `project-intent-template.md`, las secciones que describen visión, alcance, usuarios, restricciones y criterios de éxito para usarlas como base de refinamiento
-- Del `requirement-spec-template.md`, las secciones objetivo que deben completarse en el documento final
+- Del `project-template.md`, las secciones objetivo que deben completarse en el documento final
 - Los comentarios `<!-- -->` inmediatamente siguientes como guía para formular preguntas y completar las secciones
 
 **No uses preguntas hardcodeadas.** Si el template cambia, tu comportamiento se adapta automáticamente.
 
 **Paso 4: Conducir la entrevista de discovery**
 
-Para cada sección objetivo de `requirement-spec-template.md`:
+Para cada sección objetivo de `project-template.md`:
 1. **Pre-rellena** con información ya disponible en `project-intent.md` y con lo que puedas derivar de `project-intent-template.md`
 2. **Deriva la pregunta del comentario** `<!-- -->` — reformúlalo como pregunta directa al usuario
 3. **Haz preguntas solo** para secciones que necesitan información nueva, validación o mayor detalle
@@ -129,8 +129,8 @@ Para cada sección objetivo de `requirement-spec-template.md`:
 
 **Paso 6: Escribir el documento final**
 
-1. Usa `Write` para crear `docs/specs/project/requirement-spec.md`
-2. Conserva todos los headers y el orden de secciones de `requirement-spec-template.md`
+1. Usa `Write` para crear `docs/specs/project/project.md`
+2. Conserva todos los headers y el orden de secciones de `project-template.md`
 3. **No incluyas** los comentarios HTML `<!-- -->` en el output
 4. Incluye metadatos:
    - `substatus: DOING`

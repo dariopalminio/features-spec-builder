@@ -1,7 +1,7 @@
 ## 1. Lógica de detección de estado (skill-state-detection)
 
 - [x] 1.1 Agregar sección "Verificar estado del documento de output" en `.claude/skills/ps-begin-intention/SKILL.md`: leer `docs/specs/project/project-intent.md`, detectar campo `**Estado**:` y bifurcar según valor (`Doing` → retoma, `Ready` → pedir confirmación, inexistente → continuar)
-- [x] 1.2 Agregar sección "Verificar estado del documento de output" en `.claude/skills/ps-discovery/SKILL.md`: leer `docs/specs/project/requirement-spec.md`, aplicar misma lógica de bifurcación
+- [x] 1.2 Agregar sección "Verificar estado del documento de output" en `.claude/skills/ps-discovery/SKILL.md`: leer `docs/specs/project/project.md`, aplicar misma lógica de bifurcación
 - [x] 1.3 Agregar sección "Verificar estado del documento de output" en `.claude/skills/ps-planning/SKILL.md`: leer `docs/specs/project/project-plan.md`, aplicar misma lógica de bifurcación
 
 ## 2. Retoma de proyecto (project-retake)

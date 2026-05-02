@@ -5,7 +5,7 @@ El skill SHALL escribir los artefactos generados (`requirement-spec.md` y artefa
 
 #### Scenario: Artefactos escritos en directorio de proyecto
 - **WHEN** el skill completa el análisis del código fuente
-- **THEN** MUST escribir `requirement-spec.md` en `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/requirement-spec.md`
+- **THEN** MUST escribir `requirement-spec.md` en `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/project.md`
 - **THEN** MUST NOT escribir en `{SPECS_BASE}/specs/project/`
 
 #### Scenario: Directorio de proyecto inexistente

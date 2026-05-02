@@ -4,7 +4,7 @@
 TBD - created by archiving change readme-builder-skill. Update Purpose after archive.
 ## Requirements
 ### Requirement: Generate README from formal spec artifacts
-The skill SHALL generate a README.md in the project root when at least one of the following artifacts exists: `docs/specs/project/project-intent.md`, `docs/specs/project/requirement-spec.md`, or `docs/specs/project/project-plan.md`. Content for each README section SHALL be derived from the available artifacts using the readme-template.md as the structural source-of-truth.
+The skill SHALL generate a README.md in the project root when at least one of the following artifacts exists: `docs/specs/project/project-intent.md`, `docs/specs/project/project.md`, or `docs/specs/project/project-plan.md`. Content for each README section SHALL be derived from the available artifacts using the readme-template.md as the structural source-of-truth.
 
 #### Scenario: All three spec artifacts present
 - **WHEN** the user invokes the `readme-builder` skill and all three spec artifacts exist

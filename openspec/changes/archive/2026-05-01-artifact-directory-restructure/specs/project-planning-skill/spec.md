@@ -5,8 +5,8 @@ El skill `project-planning` SHALL localizar el proyecto activo buscando en `{SPE
 
 #### Scenario: Lectura de requirement-spec.md desde directorio del proyecto
 - **WHEN** el skill inicia la fase de planning
-- **THEN** MUST leer `requirement-spec.md` desde `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/requirement-spec.md`
-- **THEN** MUST NOT leer desde `{SPECS_BASE}/specs/project/requirement-spec.md`
+- **THEN** MUST leer `requirement-spec.md` desde `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/project.md`
+- **THEN** MUST NOT leer desde `{SPECS_BASE}/specs/project/project.md`
 
 #### Scenario: Escritura de project-plan.md en el directorio del proyecto
 - **WHEN** el skill completa la generación del plan

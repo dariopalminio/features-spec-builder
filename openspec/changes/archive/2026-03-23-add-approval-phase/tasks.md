@@ -1,7 +1,7 @@
 ## 1. Template
 
 - [x] 1.1 Create `.claude/skills/ps-approval/templates/clarifications-template.md` with `##` section headers and `<!-- -->` guidance comments covering: Resumen de Hallazgos, Hallazgos por Perfil (PM / Arquitecto / UX), Preguntas y Respuestas (grouped by theme), and Estado de Clarificaciones (Resueltas / Pendientes)
-- [x] 1.2 Verify the template follows the same structural conventions as `requirement-spec-template.md` (metadata block at top, `**Estado**` field, `**Generado por**` field)
+- [x] 1.2 Verify the template follows the same structural conventions as `project-template.md` (metadata block at top, `**Estado**` field, `**Generado por**` field)
 
 ## 2. Approval Agent
 
@@ -17,7 +17,7 @@
 ## 3. ps-approval Skill
 
 - [x] 3.1 Create `.claude/skills/ps-approval/SKILL.md` with YAML frontmatter (`name: ps-approval`, `description: ...`)
-- [x] 3.2 Add Paso 1: Verificar que `docs/specs/project/requirement-spec.md` existe — si no, informar al usuario y detener
+- [x] 3.2 Add Paso 1: Verificar que `docs/specs/project/project.md` existe — si no, informar al usuario y detener
 - [x] 3.3 Add Paso 2: Verificar que el template existe en `.claude/skills/ps-approval/templates/clarifications-template.md` — si no, informar y detener
 - [x] 3.4 Add Paso 3: Delegar al `approval-agent` con instrucción explícita que incluya las rutas de todos los archivos de entrada y salida
 - [x] 3.5 Add Paso 4: Confirmar que `docs/specs/project/clarifications.md` existe después de la ejecución del agente — si existe, mostrar mensaje de éxito y mencionar `/ps-plan`; si no, sugerir re-ejecutar `/ps-approval`

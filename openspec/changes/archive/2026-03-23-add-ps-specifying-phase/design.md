@@ -4,7 +4,7 @@ ProjectSpecFactory es un pipeline de agentes Claude Code que transforma la inten
 
 El estado actual del pipeline es:
 - Input disponible: `docs/specs/project/discovery.md` (generado por Discovery)
-- Output requerido: `docs/specs/project/requirement-spec.md`
+- Output requerido: `docs/specs/project/project.md`
 - Template de referencia: `docs/templates/requirements-spec-template.md` (existente, NO se modifica)
 
 ## Goals / Non-Goals
@@ -35,7 +35,7 @@ El estado actual del pipeline es:
 
 ### Decisión 2: Template copiado junto al skill
 
-**Elección**: Crear `requirement-spec-template.md` en `.claude/skills/ps-specifying/templates/` copiando la estructura de `docs/templates/requirements-spec-template.md`.
+**Elección**: Crear `project-template.md` en `.claude/skills/ps-specifying/templates/` copiando la estructura de `docs/templates/requirements-spec-template.md`.
 
 **Rationale**: Principio del repo — "el template vive junto al skill que lo usa". El template en `docs/templates/` es legacy/referencia y no se toca. El agente referencia su template con ruta relativa desde el skill.
 

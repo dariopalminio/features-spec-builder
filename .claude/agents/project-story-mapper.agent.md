@@ -31,7 +31,7 @@ Eres un Product Manager **especialista en User Story Mapping** siguiendo la téc
 Al iniciar, busca y lee los siguientes archivos si existen:
 
 1. `docs/specs/project/project-intent.md`
-2. `docs/specs/project/requirement-spec.md`
+2. `docs/specs/project/project.md`
 
 Si ambos existen: extrae personas/usuarios identificados, funcionalidades clave y objetivos del proyecto. Usa ese contexto para informar el mapeo sin pedirle al usuario que repita lo ya capturado.
 

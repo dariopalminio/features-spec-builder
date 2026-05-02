@@ -11,7 +11,7 @@ Templates existentes relevantes:
 - `ps-funnel/templates/initial-prompt-template.md` — ya no se necesita (el output intermedio desaparece)
 - `ps-draft/templates/project-intent-template.md` → mueve a `ps-begin-intention/templates/`
 - `ps-discovery/templates/discovery-template.md` — ya no se necesita (output intermedio desaparece)
-- `ps-specifying/templates/requirement-spec-template.md` → mueve a `ps-project-spec/templates/`
+- `ps-specifying/templates/project-template.md` → mueve a `ps-project-spec/templates/`
 - `ps-planning/templates/project-plan-template.md` → se mantiene en su lugar
 
 ## Goals / Non-Goals
@@ -49,14 +49,14 @@ El agente usa el template `project-intent-template.md` como única referencia de
 
 **Decisión:** `ps-project-spec/SKILL.md` invoca primero al `product-manager-agent` para el discovery de usuarios y contexto, luego al `architect-agent` para la especificación de requisitos. El output final es `requirement-spec.md`.
 
-El agente usa `requirement-spec-template.md` como estructura de output. El `ux-designer-agent` puede ser invocado como apoyo en la sección de flujos de usuario.
+El agente usa `project-template.md` como estructura de output. El `ux-designer-agent` puede ser invocado como apoyo en la sección de flujos de usuario.
 
 ### D4: Templates a preservar y reubicar
 
 | Template original | Nueva ubicación |
 |---|---|
 | `ps-draft/templates/project-intent-template.md` | `ps-begin-intention/templates/project-intent-template.md` |
-| `ps-specifying/templates/requirement-spec-template.md` | `ps-project-spec/templates/requirement-spec-template.md` |
+| `ps-specifying/templates/project-template.md` | `ps-project-spec/templates/project-template.md` |
 | `ps-planning/templates/project-plan-template.md` | Sin cambios |
 
 Templates eliminados (documentos intermedios que desaparecen):

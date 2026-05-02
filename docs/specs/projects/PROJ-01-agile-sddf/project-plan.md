@@ -8,12 +8,12 @@ status: IN-PROGRESS
 substatus: DOING
 parent: null
 related:
-  - requirement-spec
+  - project-requirement-spec
   - story-map
 ---
 
 <!-- Referencias -->
-[[PROJ-01-agile-sddf]]
+[[project-requirement-spec]]
 
 ## Objetivo
 
@@ -129,7 +129,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 
 **Ítems de soporte (sin FEAT propio):**
 - Agentes `project-pm`, `project-architect`, `project-ux`
-- Templates canónicos: `project-intent-template.md`, `requirement-spec-template.md`, `project-plan-template.md`
+- Templates canónicos: `project-intent-template.md`, `project-template.md`, `project-plan-template.md`
 - Soporte Google Gemini Gems: prompts en `gem/prompts/`
 - Documentos de ejemplo del pipeline aplicado al propio proyecto SDDF
 
@@ -157,7 +157,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 - Agente `reverse-engineer-synthesizer` (fusión de outputs en `requirement-spec.md`)
 - Niveles de confianza DIRECT / INFERRED / SUGGESTED en hallazgos
 - Archivos intermedios `.tmp/rfc-*.md`
-- `requirement-spec-template.md` actualizado con campo "Es un"
+- `project-template.md` actualizado con campo "Es un"
 
 **Criterios de éxito:**
 - [ ] El skill `reverse-engineering` genera un `requirement-spec.md` completo a partir de un repositorio existente con al menos el 80% de secciones completadas automáticamente; las secciones sin datos suficientes se marcan como `<!-- PENDING MANUAL REVIEW -->`.
@@ -201,7 +201,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 - Agentes `project-story-mapper` y `story-product-owner`
 - Estandarización de assets por skill en `./.claude/skills/*/assets/`
 - Limpieza de directorios legacy `.agents/` y `.github/` desactualizados
-- Auto-especificación del framework SDDF: `docs/specs/project/requirement-spec.md` generado por `/reverse-engineering` con 30 FRs, 13 NFRs, árbol de navegación ASCII y gaps identificados
+- Auto-especificación del framework SDDF: `docs/specs/project/project.md` generado por `/reverse-engineering` con 30 FRs, 13 NFRs, árbol de navegación ASCII y gaps identificados
 
 **Criterios de éxito:**
 - [ ] El skill `project-flow` ejecuta las tres fases del pipeline en una sesión continua detectando automáticamente el estado actual y aplicando los gates de revisión sin intervención manual.

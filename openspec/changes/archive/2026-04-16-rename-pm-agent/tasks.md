@@ -34,7 +34,7 @@
 - [x] 7.2 In `CLAUDE.md`: update `product-manager.agent.md` → `project-pm.agent.md` in structure diagram
 - [x] 7.3 In `docs/specs/project-spec-factory/project-intent.md`: update `**Generado por**: product-manager-agent` → `project-pm`
 - [x] 7.4 In `docs/specs/project-spec-factory/project-plan.md`: update `product-manager-agent` → `project-pm` (FEAT-003 description)
-- [x] 7.5 In `docs/specs/project-spec-factory/requirement-spec.md`: update `product-manager-agent` → `project-pm` in agent list
+- [x] 7.5 In `docs/specs/project-spec-factory/project.md`: update `product-manager-agent` → `project-pm` in agent list
 - [x] 7.6 In `gem/prompts/prompt-ps-begin-intention`: update `**Generado por**: product-manager-agent` → `project-pm`
 
 ## 8. Verify

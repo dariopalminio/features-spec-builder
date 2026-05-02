@@ -12,7 +12,7 @@ Los artefactos de especificación del framework SDDF (proyectos, releases e hist
 
 **Estructura anterior:**
 ```
-docs/specs/project/requirement-spec.md
+docs/specs/project/project.md
 docs/specs/project/project-intent.md
 docs/specs/releases/release-01-features-spec-builder.md
 docs/specs/stories/story-FEAT-001-project-begin.md

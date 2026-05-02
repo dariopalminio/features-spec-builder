@@ -17,5 +17,5 @@
 **Migration**: Ver requisito equivalente en `ps-discovery-skill`.
 
 ### Requirement: ps-project-spec template exists
-**Reason**: Template movido a `.claude/skills/ps-discovery/templates/requirement-spec-template.md`.
+**Reason**: Template movido a `.claude/skills/ps-discovery/templates/project-template.md`.
 **Migration**: Ver requisito equivalente en `ps-discovery-skill`.

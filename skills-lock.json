@@ -25,6 +25,11 @@
       "source": "local",
       "sourceType": "local",
       "file": ".claude/skills/release-creation/SKILL.md"
+    },
+    "project-context-diagram": {
+      "source": "local",
+      "sourceType": "local",
+      "file": ".claude/skills/project-context-diagram/SKILL.md"
     }
   }
 }

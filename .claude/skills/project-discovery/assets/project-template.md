@@ -1,7 +1,7 @@
 ---
 alwaysApply: false
 type: project
-slug: < nombre-del-directorio-del-proyecto-requirement-spec | requirement-spec si es el primer documento >
+slug: < nombre-del-directorio-del-proyecto-project >
 title: "<primer # heading del documento>"
 date: <YYYY-MM-DD>
 status: BACKLOG

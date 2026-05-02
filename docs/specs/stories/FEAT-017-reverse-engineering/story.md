@@ -2,7 +2,7 @@
 type: story
 id: FEAT-017
 slug: FEAT-017-reverse-engineering
-title: "reverse-engineering — Skill orquestador de ingeniería inversa"
+title: "reverse-engineering ï¿½ Skill orquestador de ingenierï¿½a inversa"
 date: 2026-04-22
 status: COMPLETED
 substatus: READY
@@ -14,29 +14,29 @@ parent: EPIC-03-reverse-engineering
 
 # Historia de Usuario
 
-## ?? Historia: reverse-engineering — Skill orquestador de ingeniería inversa
+## ?? Historia: reverse-engineering ï¿½ Skill orquestador de ingenierï¿½a inversa
 
-**Como** developer o architect que trabaja con un repositorio existente sin documentación de requisitos
-**Quiero** ejecutar el skill `reverse-engineering` sobre ese repositorio para que cuatro agentes analicen en paralelo el código fuente
-**Para** obtener `docs/specs/project/requirement-spec.md` generado automáticamente desde el código, sin tener que documentar los requisitos desde cero
+**Como** developer o architect que trabaja con un repositorio existente sin documentaciï¿½n de requisitos
+**Quiero** ejecutar el skill `reverse-engineering` sobre ese repositorio para que cuatro agentes analicen en paralelo el cï¿½digo fuente
+**Para** obtener `docs/specs/project/project.md` generado automï¿½ticamente desde el cï¿½digo, sin tener que documentar los requisitos desde cero
 
-## ? Criterios de aceptación
+## ? Criterios de aceptaciï¿½n
 
-### Escenario principal – Generación exitosa de requirement-spec.md desde código
+### Escenario principal ï¿½ Generaciï¿½n exitosa de requirement-spec.md desde cï¿½digo
 ```gherkin
-Dado que el desarrollador está en la raíz de un repositorio con código fuente
+Dado que el desarrollador estï¿½ en la raï¿½z de un repositorio con cï¿½digo fuente
 Cuando ejecuta el skill "reverse-engineering"
 Entonces el skill lanza 4 agentes en paralelo (architect, product-discovery, business-analyst, ux-flow-mapper)
-  Y al finalizar el sintetizador fusiona los outputs en "docs/specs/project/requirement-spec.md"
-  Y el documento incluye stack, features, reglas de negocio y mapa de navegación inferidos del código
+  Y al finalizar el sintetizador fusiona los outputs en "docs/specs/project/project.md"
+  Y el documento incluye stack, features, reglas de negocio y mapa de navegaciï¿½n inferidos del cï¿½digo
 ```
 
-### Escenario alternativo / error – Repositorio sin código fuente reconocible
+### Escenario alternativo / error ï¿½ Repositorio sin cï¿½digo fuente reconocible
 ```gherkin
-Dado que el directorio solo contiene archivos de configuración sin lógica de negocio
+Dado que el directorio solo contiene archivos de configuraciï¿½n sin lï¿½gica de negocio
 Cuando el skill analiza el repositorio
 Entonces los agentes generan outputs con secciones marcadas como "<!-- PENDING MANUAL REVIEW -->"
-  Y el sintetizador informa qué secciones no pudieron inferirse del código disponible
+  Y el sintetizador informa quï¿½ secciones no pudieron inferirse del cï¿½digo disponible
 ```
 
 ## ?? Criterios no funcionales
@@ -45,5 +45,5 @@ Entonces los agentes generan outputs con secciones marcadas como "<!-- PENDING M
 
 ## ?? Notas / contexto adicional
 
-Generado automáticamente desde el release: release-03-reverse-engineering.md
-Feature origen: FEAT-017 — reverse-engineering (skill orquestador)
+Generado automï¿½ticamente desde el release: release-03-reverse-engineering.md
+Feature origen: FEAT-017 ï¿½ reverse-engineering (skill orquestador)

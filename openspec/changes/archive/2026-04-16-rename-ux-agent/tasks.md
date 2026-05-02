@@ -29,7 +29,7 @@
 
 - [x] 7.1 In `README.md`: update `ux-designer.agent.md` → `project-ux.agent.md` in structure diagram
 - [x] 7.2 In `CLAUDE.md`: update `ux-designer.agent.md` → `project-ux.agent.md` in structure diagram (line 33 only — skip line 50 generic example)
-- [x] 7.3 In `docs/specs/project-spec-factory/requirement-spec.md`: update `ux-designer-agent` → `project-ux` in agent list
+- [x] 7.3 In `docs/specs/project-spec-factory/project.md`: update `ux-designer-agent` → `project-ux` in agent list
 
 ## 8. Verify
 

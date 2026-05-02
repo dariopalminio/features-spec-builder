@@ -165,13 +165,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Added
 - **ProjectSpecFactory CLI pipeline** — three-skill workflow for project specification:
   - `/ps-begin-intention` — captures project intent and produces `docs/specs/project/project-intent.md`
-  - `/ps-discovery` — conducts user discovery and produces `docs/specs/project/requirement-spec.md`
+  - `/ps-discovery` — conducts user discovery and produces `docs/specs/project/project.md`
   - `/ps-planning` — generates prioritized release backlog and produces `docs/specs/project/project-plan.md`
 - **Role-based agents** — three specialized agents replacing task-based agents:
   - `architect.agent.md` — technical architect for Specifying and Planning phases
   - `product-manager.agent.md` — PM for Begin Intention and Discovery phases
   - `ux-designer.agent.md` — UX Designer supporting Discovery phase
-- **Skill templates** — `project-intent-template.md`, `requirement-spec-template.md`, `project-plan-template.md`
+- **Skill templates** — `project-intent-template.md`, `project-template.md`, `project-plan-template.md`
 - **Gem prompts** — standalone prompt files for `ps-begin-intention`, `ps-discovery`, `ps-planning`
 - **OpenSpec workflow** — `opsx:propose`, `opsx:apply`, `opsx:archive`, `opsx:explore` skills and commands
 - **OpenSpec specs** — baseline specifications for all pipeline capabilities

@@ -20,10 +20,10 @@ El sistema SHALL proveer un agente `specifying-agent` en `.claude/agents/specify
 - **THEN** el agente informa que debe completarse el discovery primero y detiene la ejecución
 
 ### Requirement: Agente extrae secciones del template en runtime
-El sistema SHALL proveer que el `specifying-agent` extraiga dinámicamente los headers `##` y comentarios `<!-- -->` del template `requirement-spec-template.md` para derivar las preguntas de la entrevista.
+El sistema SHALL proveer que el `specifying-agent` extraiga dinámicamente los headers `##` y comentarios `<!-- -->` del template `project-template.md` para derivar las preguntas de la entrevista.
 
 #### Scenario: Extracción exitosa de secciones
-- **WHEN** el agente lee el template `requirement-spec-template.md`
+- **WHEN** el agente lee el template `project-template.md`
 - **THEN** extrae cada header `##` como nombre de sección y el comentario `<!-- -->` inmediato como guía para formular preguntas, sin hardcodear ninguna pregunta
 
 #### Scenario: Template cambia de estructura
@@ -42,11 +42,11 @@ El sistema SHALL proveer que el `specifying-agent` conduzca la entrevista de esp
 - **THEN** agrupa máximo 3-4 preguntas por ronda y espera las respuestas antes de continuar
 
 ### Requirement: Agente produce requirement-spec.md
-El sistema SHALL proveer que el `specifying-agent` escriba el documento final `docs/specs/project/requirement-spec.md` usando el template como estructura base.
+El sistema SHALL proveer que el `specifying-agent` escriba el documento final `docs/specs/project/project.md` usando el template como estructura base.
 
 #### Scenario: Documento generado con metadatos
 - **WHEN** el agente finaliza la entrevista
-- **THEN** usa `Write` para crear `docs/specs/project/requirement-spec.md` con metadatos: Versión 1.0, Estado Doing, Fecha actual, Generado por specifying-agent
+- **THEN** usa `Write` para crear `docs/specs/project/project.md` con metadatos: Versión 1.0, Estado Doing, Fecha actual, Generado por specifying-agent
 
 #### Scenario: Comentarios HTML excluidos del output
 - **WHEN** el agente escribe el documento final

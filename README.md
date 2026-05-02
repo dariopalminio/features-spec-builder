@@ -8,6 +8,8 @@ Sistema multiagente minimalista que automatiza el ciclo completo de especificaci
 
 Los developers y equipos que trabajan con IA para desarrollar software carecen de un proceso estructurado y reproducible para transformar ideas en especificaciones de calidad. Agile SDDF resuelve esto con un workflow ágil y secuencial que cubre desde la intención inicial hasta el backlog planificado de historias de usuario, con control de WIP, gates de revisión humana y trazabilidad completa en cada etapa. A diferencia de los prompts ad-hoc o frameworks rígidos, el sistema extrae dinámicamente la estructura de los templates en runtime para generar preguntas y comportamientos contextuales, y opera sin modificar código subyacente en múltiples runtimes de IA (Claude Code, GitHub Copilot, OpenCode, Google Gemini, Atlassian Rovo).
 
+![agile-sddf](assets\diagrams\context-diagram.png)
+
 ## Table of Contents
 
 - [Features](#features)

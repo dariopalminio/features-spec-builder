@@ -52,7 +52,7 @@ La ruta completa del proyecto activo es: `$SPECS_BASE/specs/projects/$PROJ_DIR/`
 Antes de invocar al agente, lee los siguientes archivos si existen:
 
 1. `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md`
-2. `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md`
+2. `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`
 
 Si existen, extrae y resume:
 - Nombre del proyecto

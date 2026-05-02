@@ -27,7 +27,7 @@ Incorpora el pipeline completo de especificación de proyectos (ProjectSpecFacto
 - [x] **Agente project-pm**: Especializado en discovery de usuarios, identificación de perfiles y dolores, e integraciones externas.
 - [x] **Agente project-architect**: Especializado en entrevista de especificación de requisitos sección por sección y planificación de releases con criterio de priorización.
 - [x] **Agente project-ux**: Especializado en flujos de usuario y usabilidad, invocado como apoyo durante discovery y specifying.
-- [x] **Templates canónicos**: `project-intent-template.md`, `requirement-spec-template.md` y `project-plan-template.md`.
+- [x] **Templates canónicos**: `project-intent-template.md`, `project-template.md` y `project-plan-template.md`.
 - [x] **Soporte Google Gemini Gems**: Prompts adaptados en `gem/prompts/` para el runtime Gemini.
 - [x] **FEAT-008 — Control WIP=1**: Mecanismo de detección de `Estado: Doing` para impedir múltiples proyectos activos simultáneos.
 - [x] **FEAT-010 — Gates de Revisión Humana**: Presentación de resumen del documento generado y solicitud de confirmación del usuario antes de avanzar a la siguiente fase; el documento avanza a `Estado: Ready` solo tras confirmación.

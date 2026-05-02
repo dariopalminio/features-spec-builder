@@ -19,7 +19,7 @@ El cambio es puramente de renaming — no hay modificaciones de comportamiento, 
 
 **Non-Goals:**
 - No modificar el comportamiento del SKILL.md (lógica de orquestación, pasos, agentes invocados)
-- No modificar el template `requirement-spec-template.md`
+- No modificar el template `project-template.md`
 - No cambiar los documentos de salida (`requirement-spec.md`)
 - No cambiar los agentes role-based
 

@@ -49,7 +49,7 @@ El skill SHALL ejecutar la lógica de la fase Discovery delegando a `project-pm`
 
 #### Scenario: Phase 2 produces requirement-spec.md
 - **WHEN** `project-architect` completa la especificación
-- **THEN** el sistema MUST crear o actualizar `docs/specs/project/requirement-spec.md`
+- **THEN** el sistema MUST crear o actualizar `docs/specs/project/project.md`
 
 ### Requirement: project-flow executes Phase 3 (Planning)
 El skill SHALL ejecutar la lógica de la fase Planning delegando al agente `project-architect`, replicando el comportamiento de `/project-planning`.

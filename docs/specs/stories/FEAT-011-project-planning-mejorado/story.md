@@ -2,7 +2,7 @@
 type: story
 id: FEAT-011
 slug: FEAT-011-project-planning-mejorado
-title: "project-planning mejorado — Integración con story mapping"
+title: "project-planning mejorado ï¿½ Integraciï¿½n con story mapping"
 date: 2026-04-22
 status: COMPLETED
 substatus: READY
@@ -14,29 +14,29 @@ parent: EPIC-05-enhance-project-spec
 
 # Historia de Usuario
 
-## ?? Historia: project-planning mejorado — Integración con story mapping
+## ?? Historia: project-planning mejorado ï¿½ Integraciï¿½n con story mapping
 
-**Como** developer que ha completado el story mapping y quiere planificar el backlog con más contexto
-**Quiero** que el skill `project-planning` detecte automáticamente `story-map.md` si existe y lo use como guía para agrupar features y estructurar releases
-**Para** obtener un `project-plan.md` que respete el backbone y los release slices definidos en el story map, garantizando alineación entre el mapa y el plan
+**Como** developer que ha completado el story mapping y quiere planificar el backlog con mï¿½s contexto
+**Quiero** que el skill `project-planning` detecte automï¿½ticamente `story-map.md` si existe y lo use como guï¿½a para agrupar features y estructurar releases
+**Para** obtener un `project-plan.md` que respete el backbone y los release slices definidos en el story map, garantizando alineaciï¿½n entre el mapa y el plan
 
-## ? Criterios de aceptación
+## ? Criterios de aceptaciï¿½n
 
-### Escenario principal – Planning guiado por story map existente
+### Escenario principal ï¿½ Planning guiado por story map existente
 ```gherkin
-Dado que existen "docs/specs/project/requirement-spec.md" y "docs/specs/project/story-map.md" con Estado: Ready
+Dado que existen "docs/specs/project/project.md" y "docs/specs/project/story-map.md" con Estado: Ready
 Cuando el desarrollador ejecuta el skill "project-planning"
-Entonces el agente carga ambos documentos y usa el backbone del story map como guía de agrupación
+Entonces el agente carga ambos documentos y usa el backbone del story map como guï¿½a de agrupaciï¿½n
   Y organiza las features en releases alineados con los release slices del story map
   Y el "project-plan.md" generado refleja la estructura de releases sugerida por el story map
 ```
 
-### Escenario alternativo – Planning sin story map (comportamiento original)
+### Escenario alternativo ï¿½ Planning sin story map (comportamiento original)
 ```gherkin
-Dado que existe "docs/specs/project/requirement-spec.md" pero NO existe "story-map.md"
+Dado que existe "docs/specs/project/project.md" pero NO existe "story-map.md"
 Cuando el desarrollador ejecuta el skill "project-planning"
-Entonces el skill opera en modo original sin guía de story map
-  Y el agente agrupa las features usando criterios propios de priorización
+Entonces el skill opera en modo original sin guï¿½a de story map
+  Y el agente agrupa las features usando criterios propios de priorizaciï¿½n
 ```
 
 ## ?? Criterios no funcionales
@@ -45,5 +45,5 @@ Entonces el skill opera en modo original sin guía de story map
 
 ## ?? Notas / contexto adicional
 
-Generado automáticamente desde el release: release-05-enhance-project-spec.md
-Feature origen: FEAT-011 — project-planning mejorado
+Generado automï¿½ticamente desde el release: release-05-enhance-project-spec.md
+Feature origen: FEAT-011 ï¿½ project-planning mejorado

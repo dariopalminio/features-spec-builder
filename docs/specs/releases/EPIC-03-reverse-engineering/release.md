@@ -30,4 +30,4 @@ Añade la capacidad de ingeniería inversa: dado un repositorio existente, el si
 - [x] **Niveles de confianza**: Los hallazgos se clasifican como `[DIRECT]`, `[INFERRED]` o `[SUGGESTED]` según la certeza del análisis.
 - [x] **FEAT-024 — Modo incremental (`--update`)**: Permite re-analizar únicamente las secciones marcadas como pendientes en una ejecución previa.
 - [x] **FEAT-023 — Scope acotado (`--focus`)**: Permite limitar el análisis a una ruta específica del repositorio usando el flag `--focus <path>`.
-- [x] **Template actualizado**: `requirement-spec-template.md` mejorado con el campo "Es un" para categorización de software.
+- [x] **Template actualizado**: `project-template.md` mejorado con el campo "Es un" para categorización de software.

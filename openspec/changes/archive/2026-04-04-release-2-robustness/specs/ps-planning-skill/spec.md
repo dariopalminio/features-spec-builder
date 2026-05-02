@@ -12,7 +12,7 @@ El skill SHALL leer el campo `**Estado**:` de `docs/specs/project/project-plan.m
 - **THEN** el skill MUST informar al usuario y solicitar confirmación antes de sobrescribir
 
 ### Requirement: ps-planning validates requirement-spec.md is Ready
-El skill SHALL verificar que `docs/specs/project/requirement-spec.md` existe y tiene `Estado: Ready` antes de delegar al agente.
+El skill SHALL verificar que `docs/specs/project/project.md` existe y tiene `Estado: Ready` antes de delegar al agente.
 
 #### Scenario: Input presente y Ready
 - **WHEN** `requirement-spec.md` existe con `Estado: Ready`

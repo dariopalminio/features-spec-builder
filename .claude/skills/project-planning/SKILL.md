@@ -10,7 +10,7 @@ Eres el orchestrator del estado **Planning** del pipeline de ProjectSpecFactory.
 
 ## Tu tarea
 
-Generar `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md` a partir de `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md` y los documentos anteriores del pipeline, delegando el análisis y la generación al `project-architect`.
+Generar `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md` a partir de `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` y los documentos anteriores del pipeline, delegando el análisis y la generación al `project-architect`.
 
 ## Pasos
 
@@ -39,16 +39,16 @@ La ruta completa del proyecto activo es: `$SPECS_BASE/specs/projects/$PROJ_DIR/`
 
 ### 1. Verificar precondicion de entrada (requirement-spec.md)
 
-Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md`.
+Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`.
 
 - Si el archivo **no existe**: informa al usuario y deten la ejecucion:
 
-  > ❌ No se encontró `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md`.
+  > ❌ No se encontró `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`.
   > Debes completar primero la fase Discovery ejecutando `/project-discovery`.
 
 - Si el archivo **existe** pero `substatus` es `DOING`: informa al usuario y deten la ejecucion.
 
-  > ❌ `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md` aun esta en `substatus: DOING`.
+  > ❌ `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` aun esta en `substatus: DOING`.
   > Debes completar Discovery y dejar el documento en `Estado: Ready` antes de ejecutar `/project-planning`.
 
 - Si el archivo **existe** con `substatus: READY`: continua al paso 2.
@@ -104,7 +104,7 @@ Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/story-map.md`:
 
 Invoca al agente `project-architect` con la siguiente instrucción:
 
-> Lee los documentos `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md` y `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md`. Lee también el template `assets/project-plan-template.md`.
+> Lee los documentos `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md` y `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`. Lee también el template `assets/project-plan-template.md`.
 >
 > Si estás en flujo de retoma (documento existente en `substatus: DOING`), primero lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >

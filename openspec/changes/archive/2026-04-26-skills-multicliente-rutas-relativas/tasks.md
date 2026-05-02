@@ -3,13 +3,13 @@
 Reemplazar `.claude/skills/<skill>/templates/<template>` → `templates/<template>` en cada SKILL.md listado.
 
 - [x] 1.1 `project-begin/SKILL.md` — 3 referencias a `project-intent-template.md` (líneas 40, 45, 52)
-- [x] 1.2 `project-discovery/SKILL.md` — 3 referencias a `requirement-spec-template.md` (líneas 46, 51, 70)
+- [x] 1.2 `project-discovery/SKILL.md` — 3 referencias a `project-template.md` (líneas 46, 51, 70)
 - [x] 1.3 `project-planning/SKILL.md` — 3 referencias a `project-plan-template.md` (líneas 45, 50, 79)
 - [x] 1.4 `release-format-validation/SKILL.md` — 3 referencias a `release-spec-template.md` (líneas 7 descripción, 50, 113)
 - [x] 1.5 `release-generate-stories/SKILL.md` — 1 referencia a `story-gherkin-template.md` (línea 7 descripción)
 - [x] 1.6 `release-generate-all-stories/SKILL.md` — 1 referencia a `story-gherkin-template.md` (línea 7 descripción)
 - [x] 1.7 `releases-from-project-plan/SKILL.md` — 1 referencia a `release-spec-template.md` (línea 7 descripción)
-- [x] 1.8 `reverse-engineering/SKILL.md` — 2 referencias a `requirement-spec-template.md` (líneas 26, 31)
+- [x] 1.8 `reverse-engineering/SKILL.md` — 2 referencias a `project-template.md` (líneas 26, 31)
 - [x] 1.9 `story-creation/SKILL.md` — 3 referencias a `story-gherkin-template.md` (líneas 8 descripción, 19, 250)
 - [x] 1.10 `story-split/SKILL.md` — 3 referencias a `story-gherkin-template.md` (líneas 8 descripción, 193, 320)
 - [x] 1.11 `story-evaluation/SKILL.md` — 2 referencias: `story-gherkin-template.md` (línea 26) y `evaluation-output-template.md` (línea 228)
