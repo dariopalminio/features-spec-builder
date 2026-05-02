@@ -12,16 +12,11 @@ name: reverse-engineering
 ---
 Eres el orquestador del comando `/reverse-engineering`. Tu responsabilidad es coordinar 4 agentes de análisis en paralelo y luego un agente sintetizador para generar automáticamente `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` a partir del código fuente del repositorio actual.
 
-## Configuración — Determinar ruta base (`SPECS_BASE`)
+## Paso 0 — Verificar entorno (`skill-preflight`)
 
-Antes de cualquier operación con archivos de salida, determinar el directorio raíz de especificaciones:
+Invocar `skill-preflight` antes de cualquier operación con archivos. El preflight verifica `SDDF_ROOT`, resuelve `SPECS_BASE` (fallback: `docs`) y confirma los subdirectorios de specs estándar. Si retorna `✗ Entorno inválido`, detener la ejecución.
 
-1. Leer la variable de entorno `SDDF_ROOT`.
-2. Si `SDDF_ROOT` está definida y la ruta existe: usar ese valor como `SPECS_BASE`.
-3. Si `SDDF_ROOT` no está definida: usar `SPECS_BASE=docs`.
-4. Si `SDDF_ROOT` está definida pero la ruta no existe: mostrar `⚠️ La ruta definida en SDDF_ROOT no existe. Se usará el valor por defecto: docs` y usar `SPECS_BASE=docs`.
-
-Usar `$SPECS_BASE` en lugar de `docs` para todas las rutas de artefactos de salida en las fases siguientes.
+Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los pasos siguientes.
 
 ---
 

@@ -1,4 +1,4 @@
-## ADDED Requirements
+## MODIFIED Requirements
 
 ### Requirement: Leer SDDF_ROOT para la ruta raíz de especificaciones
 Los skills del framework SDDF SHALL leer la variable de entorno `SDDF_ROOT` a través del skill `skill-preflight` al inicio de su ejecución para determinar el directorio raíz de especificaciones, usando `docs` como valor por defecto cuando la variable no esté definida. Los skills individuales NO deben replicar esta lógica de validación; en su lugar DEBEN invocar `skill-preflight` en su Paso 0.
@@ -17,25 +17,3 @@ Los skills del framework SDDF SHALL leer la variable de entorno `SDDF_ROOT` a tr
 - **WHEN** el usuario ejecuta un skill con `SDDF_ROOT` apuntando a una ruta que no existe en el sistema de archivos
 - **THEN** `skill-preflight` emite `[ERROR] SDDF_ROOT apunta a ruta inexistente` y detiene la ejecución
 - **THEN** el skill invocador no continúa hasta que el usuario corrija el entorno
-
-### Requirement: Construcción de rutas derivadas desde SPECS_BASE
-Una vez resuelto `SPECS_BASE`, los skills SHALL construir todas las sub-rutas (proyectos, releases, historias, templates, índices) concatenando `SPECS_BASE` con el path relativo correspondiente, sin usar rutas absolutas hardcodeadas.
-
-#### Scenario: Rutas de proyectos bajo SPECS_BASE
-- **WHEN** un skill necesita acceder al directorio de proyectos
-- **THEN** usa la ruta `$SPECS_BASE/specs/projects/` en lugar de `docs/specs/projects/`
-
-#### Scenario: Rutas de historias bajo SPECS_BASE
-- **WHEN** un skill necesita acceder al directorio de historias de usuario
-- **THEN** usa la ruta `$SPECS_BASE/specs/stories/` en lugar de `docs/specs/stories/`
-
-#### Scenario: Rutas de releases bajo SPECS_BASE
-- **WHEN** un skill necesita acceder al directorio de releases
-- **THEN** usa la ruta `$SPECS_BASE/specs/releases/` en lugar de `docs/specs/releases/`
-
-### Requirement: Documentación de SDDF_ROOT en README
-El archivo `README.md` del proyecto SHALL incluir una sección dedicada a la variable de entorno `SDDF_ROOT` que explique su propósito, los valores válidos y cómo definirla.
-
-#### Scenario: README contiene sección SDDF_ROOT
-- **WHEN** un usuario consulta el README del proyecto
-- **THEN** encuentra una sección que describe `SDDF_ROOT`, su valor por defecto (`docs`) y un ejemplo de uso (e.g., `export SDDF_ROOT=".sdd"`)

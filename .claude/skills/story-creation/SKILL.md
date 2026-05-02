@@ -84,16 +84,11 @@ Este es solo un ejemplo, recuerda que el archivo de plantilla es la guía a comp
 
 ---
 
-## Configuración — Determinar ruta base (`SPECS_BASE`)
+## Paso 0 — Verificar entorno (`skill-preflight`)
 
-Antes de cualquier operación con archivos, determinar el directorio raíz de especificaciones:
+Invocar `skill-preflight` antes de cualquier operación con archivos. El preflight verifica `SDDF_ROOT`, resuelve `SPECS_BASE` (fallback: `docs`) y confirma los subdirectorios de specs estándar. Si retorna `✗ Entorno inválido`, detener la ejecución.
 
-1. Leer la variable de entorno `SDDF_ROOT`.
-2. Si `SDDF_ROOT` está definida y la ruta existe: usar ese valor como `SPECS_BASE`.
-3. Si `SDDF_ROOT` no está definida: usar `SPECS_BASE=docs`.
-4. Si `SDDF_ROOT` está definida pero la ruta no existe: mostrar `⚠️ La ruta definida en SDDF_ROOT no existe. Se usará el valor por defecto: docs` y usar `SPECS_BASE=docs`.
-
-Usar `$SPECS_BASE` para todas las rutas de artefactos en los pasos siguientes.
+Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los pasos siguientes.
 
 ---
 
@@ -187,29 +182,41 @@ Si alguna dimensión falla, ajustar la historia antes de entregar. Si `S` es dem
 
 ### Paso 5 — Guardar y entregar el output
 
-#### Guardar la historia como archivo `.md`
+#### Derivar el siguiente ID (FEAT-NNN)
 
-Crear el archivo en `$SPECS_BASE/specs/stories/` con la historia completa en formato `story-gherkin-template.md`.
+Antes de escribir el archivo, determinar el próximo número de feature:
 
-**Reglas de nomenclatura:**
-- Formato: `story-{slug}.md`
-- El `{slug}` se deriva del `Quiero` de la historia: minúsculas, palabras separadas por guiones, máximo 5 palabras significativas
-- Ejemplos: `story-recuperar-contrasena-email.md`, `story-filtrar-pedidos-por-estado.md`
+1. Listar todos los subdirectorios de `$SPECS_BASE/specs/stories/` cuyo nombre comience con `FEAT-` o `FIX-`.
+2. Extraer los números de todos los prefijos `FEAT-NNN` encontrados.
+3. Tomar el número más alto y sumarle 1. Si no hay ninguno, comenzar en `FEAT-001`.
+4. Formatear con ceros a la izquierda hasta 3 dígitos: `FEAT-001`, `FEAT-053`, etc.
 
-**Verificar que el directorio existe antes de escribir:**
-```
-$SPECS_BASE/specs/stories/
-```
-Si no existe, crearlo.
+#### Reglas de nomenclatura
 
-**Contenido del archivo:** la historia completa en formato `story-gherkin-template.md`, sin encabezados de sección adicionales — solo el contenido de la historia.
+- **Directorio:** `FEAT-{NNN}-{slug}/`
+- **Archivo:** `story.md` dentro de ese directorio
+- El `{slug}` se deriva del `Quiero` de la historia: minúsculas, palabras separadas por guiones, máximo 5 palabras significativas, sin acentos ni caracteres especiales
+- Ruta final: `$SPECS_BASE/specs/stories/FEAT-{NNN}-{slug}/story.md`
+- Ejemplos:
+  - `docs/specs/stories/FEAT-054-recuperar-contrasena-email/story.md`
+  - `docs/specs/stories/FEAT-055-filtrar-pedidos-por-estado/story.md`
+
+#### Verificar conflicto de directorio
+
+Si el directorio `FEAT-{NNN}-{slug}/` ya existe, incrementar NNN hasta encontrar uno disponible.
+
+#### Actualizar frontmatter
+
+En el archivo `story.md`, completar los campos del frontmatter con los valores resueltos:
+- `id: FEAT-{NNN}`
+- `slug: FEAT-{NNN}-{slug}`
 
 #### Mostrar resumen en pantalla
 
 Después de guardar el archivo, mostrar en la conversación:
 
 ```
-**Archivo generado:** `$SPECS_BASE/specs/stories/story-{slug}.md`
+**Archivo generado:** `$SPECS_BASE/specs/stories/FEAT-{NNN}-{slug}/story.md`
 
 [Historia completa en formato story-gherkin-template.md]
 

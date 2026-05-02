@@ -1,0 +1,95 @@
+---
+name: skill-preflight
+description: "Protocolo centralizado de verificación de entorno previo a la ejecución de cualquier skill SDDF. Verifica SDDF_ROOT, subdirectorios de specs estándar, templates requeridos y config.yaml. Produce un informe OK/WARNING/ERROR con mensajes accionables."
+---
+
+# Skill: skill-preflight
+
+Protocolo de inicialización que centraliza todas las verificaciones de entorno del framework SDDF. Cada skill SDDF llama a este skill en su Paso 0 en lugar de replicar la lógica de validación.
+
+**Usar cuando:**
+- Al inicio de cualquier skill SDDF (invocado internamente como Paso 0)
+- Cuando se quiere diagnosticar el estado del entorno antes de ejecutar un workflow
+
+**No es necesario invocar directamente** — los skills SDDF lo llaman automáticamente.
+
+---
+
+## Protocolo de verificación
+
+Ejecutar las siguientes verificaciones en orden. Acumular todos los resultados y emitir el informe completo al final.
+
+### Verificación 1 — SDDF_ROOT y resolución de `SPECS_BASE`
+
+1. Leer la variable de entorno `SDDF_ROOT`.
+2. **Si `SDDF_ROOT` está definida y la ruta existe:**
+   - Emitir: `[OK]  SDDF_ROOT = <ruta>`
+   - Establecer `SPECS_BASE = <ruta>`
+3. **Si `SDDF_ROOT` no está definida:**
+   - Emitir: `[WARNING] SDDF_ROOT no definida → Se usará "docs" como valor por defecto`
+   - Establecer `SPECS_BASE = docs`
+4. **Si `SDDF_ROOT` está definida pero la ruta no existe:**
+   - Emitir: `[ERROR]  SDDF_ROOT apunta a ruta inexistente: <ruta> → Crear el directorio o corregir la variable`
+   - Registrar error bloqueante.
+
+Exponer `SPECS_BASE` al skill invocador para que lo use en todas sus rutas.
+
+### Verificación 2 — Subdirectorios de specs estándar
+
+Para cada uno de los siguientes directorios bajo `SPECS_BASE`:
+- `specs/project/`
+- `specs/releases/`
+- `specs/stories/`
+
+Verificar si existe:
+- **Existe:** emitir `[OK]  <ruta> existe`
+- **No existe:** emitir `[WARNING] <ruta> no encontrado → Crear el directorio si el skill lo requiere`
+
+Los directorios faltantes son advertencias, no errores bloqueantes (algunos workflows pueden no necesitar todos los directorios).
+
+### Verificación 3 — Templates requeridos por el skill invocador (opcional)
+
+Si el skill invocador declara una lista de templates requeridos (archivos en su directorio `assets/`):
+
+Para cada template declarado:
+- **Existe:** emitir `[OK]  Template presente: <ruta>`
+- **No existe:** emitir `[ERROR]  Template faltante: <ruta> → Verificar que el archivo existe en assets/`
+  - Registrar error bloqueante.
+
+Si no se declaran templates requeridos, omitir esta verificación.
+
+### Verificación 4 — Inicialización de config.yaml
+
+Verificar si `openspec/config.yaml` existe y tiene contenido:
+- **Existe con contenido:** emitir `[OK]  openspec/config.yaml inicializado`
+- **No existe o está vacío:** emitir `[WARNING] openspec/config.yaml no inicializado → Ejecutar /openspec-init-config`
+
+Esta es una advertencia, no un error bloqueante.
+
+---
+
+## Informe de estado final
+
+Después de todas las verificaciones, emitir el informe consolidado:
+
+```
+── Preflight SDDF ──────────────────────────────
+[OK]      SDDF_ROOT = docs
+[OK]      specs/project/ existe
+[WARNING] specs/releases/ no encontrado → Crear el directorio si el skill lo requiere
+[OK]      specs/stories/ existe
+[OK]      openspec/config.yaml inicializado
+────────────────────────────────────────────────
+```
+
+**Si no hay errores bloqueantes:**
+```
+✓ Entorno OK — listo para continuar
+```
+Ceder el control al skill invocador para que prosiga su ejecución.
+
+**Si hay uno o más errores bloqueantes:**
+```
+✗ Entorno inválido — corregir los errores [ERROR] antes de continuar
+```
+Detener la ejecución. No continuar con el skill invocador hasta que el usuario corrija el entorno.

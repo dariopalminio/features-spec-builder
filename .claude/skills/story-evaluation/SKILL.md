@@ -21,7 +21,7 @@ Si el usuario adjunta solo una imagen sin proporcionar texto de historia de usua
 
 ---
 
-> **Nota SDDF_ROOT:** Este skill evalúa historias proporcionadas como input y no escribe artefactos en `docs/specs/`. La variable de entorno `SDDF_ROOT` no aplica a su flujo de ejecución.
+> **Nota preflight:** Este skill evalúa historias proporcionadas como input y no escribe artefactos en `docs/specs/`. No es necesario invocar `skill-preflight` — `SDDF_ROOT` y `SPECS_BASE` no aplican a su flujo de ejecución.
 
 ---
 ### Formato de referencia y fuente de la verdad
