@@ -16,6 +16,20 @@ related:
 
 Este documento define cómo se configura el directorio raíz de especificaciones en el framework SDDF (Spec-Driven Development Framework). El objetivo es permitir que diferentes proyectos o usuarios usen ubicaciones distintas sin modificar los skills o scripts internos.
 
+### Flujo de onboarding recomendado
+
+Al configurar SDDF en un proyecto nuevo, ejecutar los siguientes skills en orden:
+
+```
+/sddf-init           → Crea directorios base y archivos de configuración
+/openspec-init-config → Carga el contexto del proyecto en openspec/config.yaml
+/skill-preflight     → Verifica que el entorno está correcto (se ejecuta automáticamente antes de cada skill)
+```
+
+El skill `sddf-init` es idempotente: puede ejecutarse múltiples veces sin efectos destructivos.
+
+---
+
 ---
 
 ### 1. Variable de entorno `SDDF_ROOT`
@@ -70,7 +84,7 @@ Definirla a nivel de usuario (persistente, recomendada):
 Puedes crear un archivo `.env` en la raíz del proyecto y cargarlo antes de ejecutar scripts. Ejemplo:
 
 ```
-SDDF_ROOT=.sdd
+SDDF_ROOT=docs
 ```
 #### En Claude Code
 

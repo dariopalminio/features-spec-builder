@@ -5,7 +5,10 @@ description: "Protocolo centralizado de verificación de entorno previo a la eje
 
 # Skill: skill-preflight
 
-Protocolo de inicialización que centraliza todas las verificaciones de entorno del framework SDDF. Cada skill SDDF llama a este skill en su Paso 0 en lugar de replicar la lógica de validación.
+Protocolo de verificación que centraliza todas las comprobaciones de entorno del framework SDDF. Cada skill SDDF llama a este skill en su Paso 0 en lugar de replicar la lógica de validación.
+
+> **Flujo de onboarding recomendado:** `sddf-init → skill-preflight → [cualquier skill SDDF]`
+> Usa `sddf-init` primero para crear la estructura base (directorios, config.yaml). Luego `skill-preflight` verifica que el entorno está correcto antes de cada ejecución.
 
 **Usar cuando:**
 - Al inicio de cualquier skill SDDF (invocado internamente como Paso 0)
@@ -62,7 +65,7 @@ Si no se declaran templates requeridos, omitir esta verificación.
 
 Verificar si `openspec/config.yaml` existe y tiene contenido:
 - **Existe con contenido:** emitir `[OK]  openspec/config.yaml inicializado`
-- **No existe o está vacío:** emitir `[WARNING] openspec/config.yaml no inicializado → Ejecutar /openspec-init-config`
+- **No existe o está vacío:** emitir `[WARNING] openspec/config.yaml no inicializado → Ejecutar /sddf-init seguido de /openspec-init-config`
 
 Esta es una advertencia, no un error bloqueante.
 

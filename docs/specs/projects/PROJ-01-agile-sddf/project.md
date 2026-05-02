@@ -1,7 +1,7 @@
 ---
 type: project
 id: PROJ-01
-slug: project-requirement-spec
+slug: PROJ-01-agile-sddf
 title: "Especificación de Requisitos"
 date: 2026-04-19
 status: COMPLETED

@@ -5,9 +5,13 @@ slug: EPIC-10-mejora-estructura-artefactos-nuevos-skills
 title: "Mejora en estructura de artefactos y nuevos skills"
 date: 2026-05-01
 status: BACKLOG
-substatus: DOING
+substatus: READY
 parent: null
+related:                              
+  - PROJ-01-agile-sddf
 ---
+<!-- Referencias -->
+[[PROJ-01-agile-sddf]]
 
 # Release/Epic: Mejora en estructura de artefactos y nuevos skills
 
@@ -15,8 +19,9 @@ parent: null
 Se mejora la estructura de artefactos de especificaciones permitiendo seguir un estándar y se agregan skills necesarios para releases y diagramado de contexto.
 
 ## Features <!-- sección obligatoria-->
-- [ ] FEAT-049 - **Agregar configuración de directorio raíz de specs:** Soporte para variable SDDF_ROOT como ruta base configurable haciendo que los skills lean la variable de entorno y usen `$SPECS_BASE` en lugar de hardcodear `docs` para todas las rutas de artefactos.
-- [ ] FEAT-050 - **Mejorar la estructura de artefactos de especificaciones:** Mejora estructural que permite seguir un estándar, haciendo que cada workitem (proyecto, release, historia) se almacene en su propio subdirectorio identificado bajo `projects/`, `releases/` o `stories/`, agrupando todos los artefactos de un mismo workitem en un único lugar y facilitando la navegación cuando hay múltiples proyectos simultáneos (estilo como lo hace openspec y speckit).
-- [ ] FEAT-051 - **Crear nuevo skill de creación de release:** Skill interactivo para crear releases guiados por el usuario.
-- [ ] FEAT-052 - **Crear nuevo skill de diagramado de contexto:** Skill para generar diagramas de contexto del proyecto tio c4 a partir de preguntas al usuario sobre los sistemas involucrados y sus relaciones o a partir del documento de especificaciones de proyecto.
-
+- [x] FEAT-049 - **Agregar configuración de directorio raíz de specs:** Soporte para variable SDDF_ROOT como ruta base configurable haciendo que los skills lean la variable de entorno y usen `$SPECS_BASE` en lugar de hardcodear `docs` para todas las rutas de artefactos.
+- [x] FEAT-050 - **Mejorar la estructura de artefactos de especificaciones:** Mejora estructural que permite seguir un estándar, haciendo que cada workitem (proyecto, release, historia) se almacene en su propio subdirectorio identificado bajo `projects/`, `releases/` o `stories/`, agrupando todos los artefactos de un mismo workitem en un único lugar y facilitando la navegación cuando hay múltiples proyectos simultáneos (estilo como lo hace openspec y speckit).
+- [x] FEAT-054 - **Inicializar entorno SDDF:** Skill para inicializar el entorno SDDF, configurando variables de entorno y preparando directorios necesarios para la ejecución de otros skills.
+- [x] FEAT-053 - **Centralizar la validación de entorno SDDF con skill-preflight:** Skill para validar el entorno SDDF antes de ejecutar cualquier operación, asegurando que todas las dependencias y configuraciones estén correctas.
+- [x] FEAT-051 - **Crear nuevo skill de creación de release:** Skill interactivo para crear releases guiados por el usuario.
+- [x] FEAT-052 - **Crear nuevo skill de diagramado de contexto:** Skill para generar diagramas de contexto del proyecto tio c4 a partir de preguntas al usuario sobre los sistemas involucrados y sus relaciones o a partir del documento de especificaciones de proyecto.

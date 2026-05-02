@@ -50,7 +50,7 @@ El skill `skill-preflight` SHALL verificar que `openspec/config.yaml` existe y n
 
 #### Scenario: config.yaml ausente o vacío
 - **WHEN** `openspec/config.yaml` no existe o está vacío
-- **THEN** el preflight emite `[WARNING] openspec/config.yaml no inicializado → Ejecutar /openspec-init-config`
+- **THEN** el preflight emite `[WARNING] openspec/config.yaml no inicializado → Ejecutar /sddf-init seguido de /openspec-init-config`
 - **THEN** el preflight continúa (es advertencia, no error bloqueante)
 
 ### Requirement: Producir informe de estado de entorno
@@ -63,3 +63,11 @@ El skill `skill-preflight` SHALL producir un informe de estado con el resultado 
 #### Scenario: Entorno con errores bloqueantes
 - **WHEN** al menos una verificación produce `[ERROR]`
 - **THEN** el preflight emite `✗ Entorno inválido — corregir los errores antes de continuar` y detiene la ejecución del skill invocador
+
+### Requirement: Documentar sddf-init como predecesor en el flujo de onboarding
+El skill `skill-preflight` SHALL documentar que `sddf-init` es su predecesor en el flujo de onboarding: primero se inicializa el entorno con `sddf-init` (operación de escritura), luego se valida con `skill-preflight` antes de cada skill (operación de solo lectura).
+
+#### Scenario: Flujo de onboarding documentado
+- **WHEN** un desarrollador configura SDDF en un proyecto nuevo
+- **THEN** la documentación de `skill-preflight` indica claramente que debe ejecutarse `sddf-init` antes del primer uso de cualquier skill SDDF
+- **THEN** el flujo recomendado es `sddf-init → skill-preflight → [cualquier skill SDDF]`

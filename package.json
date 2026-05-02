@@ -37,6 +37,8 @@
     ".claude/skills/release-generate-stories",
     ".claude/skills/releases-from-project-plan",
     ".claude/skills/reverse-engineering",
+    ".claude/skills/sddf-init",
+    ".claude/skills/skill-preflight",
     ".claude/skills/skill-creator",
     ".claude/skills/story-creation",
     ".claude/skills/story-evaluation",

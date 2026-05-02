@@ -6,9 +6,10 @@ date: 2026-03-26
 status: null
 substatus: null
 parent: null
-related:                                    # opcional, si tiene relación con otros nodos
+related:
   - best-practices-for-agents
   - best-practices-for-commands
+  - harness-engineering
 ---
 <!-- Referencias -->
 [[best-practices-for-agents]]
@@ -43,6 +44,39 @@ skill (entry point + coordinator/orquestador)
 ```
 
 Esto es acorde a la arquitectura de Claude Code donde la sesión principal actúa como agente primario que orquesta la ejecución de skills y agentes especializados (Subagentes), manteniendo una estructura plana (Sesión → Subagente), clara y eficiente sin necesidad de múltiples niveles de delegación (agentes en .claude/agents/, invocados por la sesión principal).
+
+## Patrón de comunicación inter-agente: `.tmp/<skill>/`
+
+Cuando un skill orquesta múltiples subagentes en paralelo, cada subagente debe escribir sus resultados de forma **independiente** en un directorio temporal aislado, evitando el "teléfono descompuesto" (ver `[[harness-engineering]]`).
+
+### Convención
+
+```
+.tmp/
+└── <skill-name>/
+    ├── <agent-a-output>.md
+    ├── <agent-b-output>.md
+    └── <agent-c-output>.md
+```
+
+### Reglas
+
+1. **Cada skill tiene su propio subdirectorio** `.tmp/<skill-name>/` — nunca se comparte el directorio `.tmp/` raíz entre skills.
+2. **Los subagentes escriben directamente** en `.tmp/<skill-name>/` sin recibir el contexto completo del skill orquestador.
+3. **El skill sintetizador** (agente final) lee solo los archivos de `.tmp/<skill-name>/` que necesita, no el contexto de la sesión.
+4. **El directorio `.tmp/` no se versiona** — debe estar en `.gitignore`.
+
+### Ejemplo: skill `reverse-engineering`
+
+```
+.tmp/
+└── rfc-architecture.md       # escrito por reverse-engineer-architect
+└── rfc-features.md           # escrito por reverse-engineer-product-discovery
+└── rfc-business-rules.md     # escrito por reverse-engineer-business-analyst
+└── rfc-navigation.md         # escrito por reverse-engineer-ux-flow-mapper
+```
+
+El agente `reverse-engineer-synthesizer` lee solo esos cuatro archivos para generar el artefacto final, sin acceder al contexto de la sesión principal.
 
 Nota:
 **alwaysApply**: El campo alwaysApply en headers controla si el archivo se inyecta automáticamente en el contexto de cada conversación:
