@@ -14,6 +14,23 @@ related:                                    # opcional, si tiene relación con o
 
 ---
 
+## Configuración — Variable `SDDF_ROOT`
+
+Todos los skills resuelven la ruta raíz de especificaciones a partir de la variable de entorno `SDDF_ROOT`.
+
+| Escenario | Ruta usada |
+|---|---|
+| `SDDF_ROOT` no definida | `docs/` (valor por defecto — retrocompatible) |
+| `SDDF_ROOT=".sdd"` y la ruta existe | `.sdd/` |
+| `SDDF_ROOT` definida pero ruta inexistente | `docs/` + advertencia `⚠️ La ruta definida en SDDF_ROOT no existe` |
+
+```bash
+# Opcional: personalizar la ubicación de los artefactos
+export SDDF_ROOT=".sdd"
+```
+
+---
+
 ## 1. Pipeline de especificación de proyecto
 
 ```
@@ -22,11 +39,12 @@ project-begin → project-discovery → project-planning
 
 | Skill | Input | Output |
 |---|---|---|
-| `project-begin` | Intención del usuario (conversación) | `docs/specs/project/project-intent.md` |
-| `project-discovery` | `project-intent.md` | `docs/specs/project/requirement-spec.md` |
-| `project-planning` | `requirement-spec.md` | `docs/specs/project/project-plan.md` |
+| `project-begin` | Intención del usuario (conversación) | `$SPECS_BASE/specs/project/project-intent.md` |
+| `project-discovery` | `project-intent.md` | `$SPECS_BASE/specs/project/requirement-spec.md` |
+| `project-planning` | `requirement-spec.md` | `$SPECS_BASE/specs/project/project-plan.md` |
 
 > `project-flow` orquesta los 3 pasos en una sola sesión con gates de revisión entre etapas.
+> `$SPECS_BASE` es `docs` por defecto, o el valor de `SDDF_ROOT` si está configurada.
 
 ---
 
@@ -38,8 +56,8 @@ releases-from-project-plan → release-generate-stories
 
 | Skill | Input | Output |
 |---|---|---|
-| `releases-from-project-plan` | `project-plan.md` | `docs/specs/releases/release-[ID]-[Nombre].md` (uno por release) |
-| `release-generate-stories` | Un archivo `release-*.md` | `docs/specs/stories/story-[ID]-[Nombre].md` (una por feature) |
+| `releases-from-project-plan` | `project-plan.md` | `$SPECS_BASE/specs/releases/release-[ID]-[Nombre].md` (uno por release) |
+| `release-generate-stories` | Un archivo `release-*.md` | `$SPECS_BASE/specs/stories/story-[ID]-[Nombre].md` (una por feature) |
 
 > `release-generate-all-stories` procesa todos los releases en batch.
 

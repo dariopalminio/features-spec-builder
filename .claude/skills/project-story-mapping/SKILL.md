@@ -22,12 +22,37 @@ Eres el **orquestador del flujo de User Story Mapping** para el pipeline SDDF. T
 
 ---
 
+## Paso 0 — Determinar ruta base (`SPECS_BASE`)
+
+Antes de cualquier operación con archivos, determinar el directorio raíz de especificaciones:
+
+1. Leer la variable de entorno `SDDF_ROOT`.
+2. Si `SDDF_ROOT` está definida y la ruta existe: usar ese valor como `SPECS_BASE`.
+3. Si `SDDF_ROOT` no está definida: usar `SPECS_BASE=docs`.
+4. Si `SDDF_ROOT` está definida pero la ruta no existe: mostrar `⚠️ La ruta definida en SDDF_ROOT no existe. Se usará el valor por defecto: docs` y usar `SPECS_BASE=docs`.
+
+Usar `$SPECS_BASE` en lugar de `docs` para todas las rutas de artefactos en los pasos siguientes.
+
+---
+
+## Paso 0b — Resolver directorio del proyecto activo (`PROJ_DIR`)
+
+1. Listar todos los subdirectorios de `$SPECS_BASE/specs/projects/`.
+2. Para cada subdirectorio, leer `project-intent.md` y verificar si `substatus` es `READY`.
+3. Si se encuentra exactamente uno con `substatus: READY` → usar ese directorio como `$PROJ_DIR`.
+4. Si se encuentran varios → mostrar la lista y pedir al usuario que elija antes de continuar.
+5. Si no se encuentra ninguno → proceder sin contexto de proyecto (el agente recopilará la información interactivamente).
+
+La ruta completa del proyecto activo es: `$SPECS_BASE/specs/projects/$PROJ_DIR/`
+
+---
+
 ## Paso 1 — Leer documentos del proyecto
 
 Antes de invocar al agente, lee los siguientes archivos si existen:
 
-1. `docs/specs/project/project-intent.md`
-2. `docs/specs/project/requirement-spec.md`
+1. `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md`
+2. `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md`
 
 Si existen, extrae y resume:
 - Nombre del proyecto
@@ -46,7 +71,7 @@ Delega la sesión completa al agente `project-story-mapper` con el siguiente bri
 > Inicia una sesión de User Story Mapping para el proyecto [nombre del proyecto si se conoce].
 > [Si hay documentos disponibles]: He leído los documentos del proyecto. El contexto es: [resumen].
 > [Si no hay documentos]: No hay documentos de proyecto disponibles aún; recopila el contexto interactivamente.
-> Produce el documento completo en `docs/specs/project/story-map.md`.
+> Produce el documento completo en `$SPECS_BASE/specs/projects/$PROJ_DIR/story-map.md`.
 
 El agente conduce toda la sesión de forma interactiva con el usuario y escribe el documento de salida.
 
@@ -62,18 +87,18 @@ project-begin → project-discovery → [user-story-mapping] → project-plannin
 
 Los documentos producidos por fases anteriores alimentan automáticamente el mapa de historias cuando existen.
 
-**Output:** `docs/specs/project/story-map.md`
+**Output:** `$SPECS_BASE/specs/projects/$PROJ_DIR/story-map.md`
 
 ---
 
 ## Paso 3 — Añadir frontmatter al documento generado
 
-Una vez que el agente `project-story-mapper` haya escrito `docs/specs/project/story-map.md`, antepón o completa si existe el siguiente bloque YAML al inicio del archivo (antes de cualquier otro contenido):
+Una vez que el agente `project-story-mapper` haya escrito `$SPECS_BASE/specs/projects/$PROJ_DIR/story-map.md`, antepón o completa si existe el siguiente bloque YAML al inicio del archivo (antes de cualquier otro contenido):
 
 ```yaml
 ---
 type: spec
-slug: [project-story-map | nombre de archivo sin extensión si se prefiere más específico]
+slug: < nombre-del-directorio-del-proyecto-story-map | story-map si es el primer documento >
 title: "[primer # heading del documento generado]"
 date: [YYYY-MM-DD]
 status: BACKLOG

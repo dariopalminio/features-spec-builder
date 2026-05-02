@@ -2,7 +2,7 @@
 description: >-
   Tercer paso del pipeline de ProjectSpecFactory. Verifica que
   requirement-spec.md existe, conduce la generación del plan mediante el agente
-  project-architect y genera docs/specs/project/project-plan.md.
+  project-architect y genera docs/specs/projects/<PROJ-ID>-<nombre>/project-plan.md.
 alwaysApply: false
 name: project-planning
 ---
@@ -10,29 +10,52 @@ Eres el orchestrator del estado **Planning** del pipeline de ProjectSpecFactory.
 
 ## Tu tarea
 
-Generar `docs/specs/project/project-plan.md` a partir de `docs/specs/project/requirement-spec.md` y los documentos anteriores del pipeline, delegando el análisis y la generación al `project-architect`.
+Generar `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md` a partir de `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md` y los documentos anteriores del pipeline, delegando el análisis y la generación al `project-architect`.
 
 ## Pasos
 
+### 0. Determinar ruta base (`SPECS_BASE`)
+
+Antes de cualquier operación con archivos, determinar el directorio raíz de especificaciones:
+
+1. Leer la variable de entorno `SDDF_ROOT`.
+2. Si `SDDF_ROOT` está definida y la ruta existe: usar ese valor como `SPECS_BASE`.
+3. Si `SDDF_ROOT` no está definida: usar `SPECS_BASE=docs`.
+4. Si `SDDF_ROOT` está definida pero la ruta no existe: mostrar `⚠️ La ruta definida en SDDF_ROOT no existe. Se usará el valor por defecto: docs` y usar `SPECS_BASE=docs`.
+
+Usar `$SPECS_BASE` en lugar de `docs` para todas las rutas de artefactos en los pasos siguientes.
+
+### 0b. Resolver directorio del proyecto activo (`PROJ_DIR`)
+
+1. Listar todos los subdirectorios de `$SPECS_BASE/specs/projects/`.
+2. Para cada subdirectorio, leer `project-intent.md` y verificar si `substatus` es `READY`.
+3. Si se encuentra exactamente uno con `substatus: READY` → usar ese directorio como `$PROJ_DIR`.
+4. Si se encuentran varios → mostrar la lista y pedir al usuario que elija antes de continuar.
+5. Si no se encuentra ninguno → mostrar error y detener:
+   > ❌ No se encontró ningún proyecto activo en `$SPECS_BASE/specs/projects/`.
+   > Ejecuta `/project-begin` primero.
+
+La ruta completa del proyecto activo es: `$SPECS_BASE/specs/projects/$PROJ_DIR/`
+
 ### 1. Verificar precondicion de entrada (requirement-spec.md)
 
-Lee `docs/specs/project/requirement-spec.md`.
+Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md`.
 
 - Si el archivo **no existe**: informa al usuario y deten la ejecucion:
 
-  > ❌ No se encontró `docs/specs/project/requirement-spec.md`.
+  > ❌ No se encontró `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md`.
   > Debes completar primero la fase Discovery ejecutando `/project-discovery`.
 
 - Si el archivo **existe** pero `substatus` es `DOING`: informa al usuario y deten la ejecucion.
 
-  > ❌ `docs/specs/project/requirement-spec.md` aun esta en `substatus: DOING`.
+  > ❌ `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md` aun esta en `substatus: DOING`.
   > Debes completar Discovery y dejar el documento en `Estado: Ready` antes de ejecutar `/project-planning`.
 
 - Si el archivo **existe** con `substatus: READY`: continua al paso 2.
 
 ### 2. Verificar estado del documento de output
 
-Lee `docs/specs/project/project-plan.md` (si existe) y detecta el valor de `substatus:`.
+Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md` (si existe) y detecta el valor de `substatus:`.
 
 - Si el archivo **no existe**: continua al paso 3 (primera ejecucion).
 - Si existe con `substatus: DOING`: activa flujo de retoma y continua al paso 3.
@@ -57,12 +80,12 @@ Lee el archivo de plantilla `assets/project-plan-template.md`.
 
 ### 4. Story Mapping (fase previa a la planificación)
 
-Lee `docs/specs/project/story-map.md`:
+Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/story-map.md`:
 
 **Si el archivo existe:**
 
 - Informa al usuario:
-  > ✅ Se encontró `docs/specs/project/story-map.md`. Se usará como guía estructural para el plan de proyecto.
+  > ✅ Se encontró `$SPECS_BASE/specs/projects/$PROJ_DIR/story-map.md`. Se usará como guía estructural para el plan de proyecto.
 - Continúa al paso 5 con el story map disponible como contexto adicional.
 
 **Si el archivo NO existe:**
@@ -81,15 +104,15 @@ Lee `docs/specs/project/story-map.md`:
 
 Invoca al agente `project-architect` con la siguiente instrucción:
 
-> Lee los documentos `docs/specs/project/project-intent.md` y `docs/specs/project/requirement-spec.md`. Lee también el template `assets/project-plan-template.md`.
+> Lee los documentos `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md` y `$SPECS_BASE/specs/projects/$PROJ_DIR/requirement-spec.md`. Lee también el template `assets/project-plan-template.md`.
 >
-> Si estás en flujo de retoma (documento existente en `substatus: DOING`), primero lee `docs/specs/project/project-plan.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
+> Si estás en flujo de retoma (documento existente en `substatus: DOING`), primero lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
-> [CONDICIONAL — incluir solo si `docs/specs/project/story-map.md` existe]
-> Lee también `docs/specs/project/story-map.md`. Usa las actividades del backbone como guía para agrupar features relacionadas en el plan. Usa los release slices del story map como referencia estructural para definir qué features van en cada release (respetando las dependencias técnicas y el valor de negocio). No estás obligado a replicar el story map exactamente — es una guía, no una restricción.
+> [CONDICIONAL — incluir solo si `$SPECS_BASE/specs/projects/$PROJ_DIR/story-map.md` existe]
+> Lee también `$SPECS_BASE/specs/projects/$PROJ_DIR/story-map.md`. Usa las actividades del backbone como guía para agrupar features relacionadas en el plan. Usa los release slices del story map como referencia estructural para definir qué features van en cada release (respetando las dependencias técnicas y el valor de negocio). No estás obligado a replicar el story map exactamente — es una guía, no una restricción.
 > [FIN CONDICIONAL]
 >
-> Extrae features atómicas con IDs FEAT-NNN, priorízalas, agrúpalas en releases con MVP en Release 1, y escribe el resultado en `docs/specs/project/project-plan.md`.
+> Extrae features atómicas con IDs FEAT-NNN, priorízalas, agrúpalas en releases con MVP en Release 1, y escribe el resultado en `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md`.
 
 El `project-architect` se encargará de:
 - Leer los documentos de entrada de fases anteriores
@@ -104,10 +127,9 @@ El `project-architect` se encargará de:
 
 Cuando el `project-architect` termine:
 
-1. Verifica que `docs/specs/project/project-plan.md` existe leyendo el archivo
+1. Verifica que `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md` existe leyendo el archivo
 2. Si existe, confirma al usuario:
   > ✅ Documento generado correctamente.
-  > Path: `docs\specs\project\project-plan.md`
+  > Path: `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md`
   > Workflow completo: el documento esta listo para revision.
 3. Si no existe, informa al usuario que algo salió mal y sugiere ejecutar `/project-planning` nuevamente.
-

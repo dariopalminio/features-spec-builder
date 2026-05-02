@@ -60,3 +60,36 @@ Al finalizar, el skill SHALL aplicar el patron de `transition-feedback`.
 #### Scenario: Successful completion
 - **WHEN** `requirement-spec.md` es creado exitosamente
 - **THEN** el skill MUST confirmar al usuario con el path del documento y sugerir ejecutar `/project-planning`
+
+### Requirement: Resolución dinámica de ruta raíz en project-discovery
+El skill `project-discovery` SHALL resolver la ruta base de artefactos mediante `SDDF_ROOT` antes de leer `project-intent.md` y escribir `requirement-spec.md`.
+
+#### Scenario: Skill lee y escribe artefactos bajo SDDF_ROOT
+- **WHEN** el usuario ejecuta `/project-discovery` con `SDDF_ROOT` definida
+- **THEN** el skill lee `project-intent.md` desde `$SPECS_BASE/specs/projects/`
+- **THEN** el skill escribe `requirement-spec.md` bajo `$SPECS_BASE/specs/projects/`
+
+#### Scenario: Skill usa docs por defecto sin SDDF_ROOT
+- **WHEN** el usuario ejecuta `/project-discovery` sin `SDDF_ROOT` definida
+- **THEN** el skill opera sobre `docs/specs/projects/` (comportamiento previo)
+
+## ADDED Requirements
+
+### Requirement: project-discovery resuelve el directorio del proyecto activo
+El skill `project-discovery` SHALL localizar el proyecto activo buscando en `{SPECS_BASE}/specs/projects/` el directorio cuyo `project.md` tenga `status: IN_PROGRESS`. Toda lectura y escritura de artefactos del proyecto SHALL usar esa ruta como base.
+
+#### Scenario: Proyecto activo encontrado
+- **WHEN** existe exactamente un directorio en `{SPECS_BASE}/specs/projects/` con `project.md` en `status: IN_PROGRESS`
+- **THEN** el skill MUST usar ese directorio como base para leer `project-intent.md` y escribir `requirement-spec.md`
+
+#### Scenario: Proyecto activo no encontrado
+- **WHEN** no existe ningún directorio en `{SPECS_BASE}/specs/projects/` con `status: IN_PROGRESS`
+- **THEN** el skill MUST mostrar "No se encontró un proyecto activo en {SPECS_BASE}/specs/projects/" y detener la ejecución
+
+### Requirement: project-discovery escribe requirement-spec.md en el directorio del proyecto
+El artefacto `requirement-spec.md` generado por el skill SHALL guardarse en `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/requirement-spec.md`, no en `{SPECS_BASE}/specs/project/` (ruta anterior).
+
+#### Scenario: Escritura de requirement-spec.md en la nueva ruta
+- **WHEN** el skill completa el proceso de discovery
+- **THEN** MUST escribir el archivo en `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/requirement-spec.md`
+- **THEN** MUST NOT escribir en `{SPECS_BASE}/specs/project/requirement-spec.md`

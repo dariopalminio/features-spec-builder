@@ -20,6 +20,10 @@ Evalúa la calidad de una historia de usuario aplicando la rúbrica **FINVEST** 
 Si el usuario adjunta solo una imagen sin proporcionar texto de historia de usuario, responde indicando que el skill requiere el texto de la historia para poder evaluar.
 
 ---
+
+> **Nota SDDF_ROOT:** Este skill evalúa historias proporcionadas como input y no escribe artefactos en `docs/specs/`. La variable de entorno `SDDF_ROOT` no aplica a su flujo de ejecución.
+
+---
 ### Formato de referencia y fuente de la verdad
 
 ### A. Verificar que el template existe y leerlo

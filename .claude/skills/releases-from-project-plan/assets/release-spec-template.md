@@ -1,15 +1,22 @@
 ---
 alwaysApply: false
 type: release
-slug: <nombre-del-archivo-de-release-sin-extensión>
+id: <EPIC-NN>
+slug: <nombre-del-directorio-de-release>
 title: "<primer # heading del documento>"
-date: <YYYY-MM-DD>
 status: BACKLOG
 substatus: DOING
-parent: <slug-nombre-del-archivo-de-project-plan-sin-extensión>
+parent: <PROJ-NN>
+created: <YYYY-MM-DD>
+updated: <YYYY-MM-DD>
 ---
 <!-- Referencias -->
-[[<slug-nombre-del-archivo-de-project-plan-sin-extensión>]]
+[[<nombre-del-directorio-del-proyecto-project-plan | slug del project-plan.md origen>]] <!-- referencia al project plan del proyecto padre -->
+
+nombre-del-directorio-de-release
+
+.prueba\specs\projects\PROJ-01-harness-engineering\project-plan.md
+
 
 # Release/Epic: [Nombre de la Épica/Release] <!-- nombre obligatorio -->
 

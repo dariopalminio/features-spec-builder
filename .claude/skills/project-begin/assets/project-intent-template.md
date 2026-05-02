@@ -1,12 +1,14 @@
 ---
 alwaysApply: false
 type: project
-slug: project-intent
+id: <PROJ-NN>
+slug: < nombre-del-directorio-del-proyecto | project-intent si es el primer documento >
 title: "<primer # heading del documento>"
-date: <YYYY-MM-DD>
 status: BACKLOG
 substatus: DOING
-parent: N/A
+parent: null
+created: <YYYY-MM-DD>
+updated: <YYYY-MM-DD>
 ---
 
 ## Definición del Problema

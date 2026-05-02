@@ -106,6 +106,28 @@ openspec-init-config → openspec-generate-baseline →
 
 ( propose → apply → archive )
 
+### Estructura de artefactos
+
+Los artefactos de especificación se organizan en directorios por workitem bajo `{SDDF_ROOT}/specs/`:
+
+```
+docs/specs/
+├── projects/
+│   └── PROJ-01-nombre-proyecto/    # un directorio por proyecto
+│       ├── project-intent.md
+│       ├── requirement-spec.md
+│       ├── project-plan.md
+│       └── story-map.md
+├── releases/
+│   └── EPIC-01-nombre-release/     # un directorio por release
+│       └── release.md
+└── stories/
+    └── FEAT-001-nombre-historia/   # un directorio por historia
+        └── story.md
+```
+
+Cada archivo principal usa un nombre canónico (`project-intent.md`, `release.md`, `story.md`) e incluye frontmatter con `type`, `id`, `title`, `status`, `parent`, `created` y `updated`. Las relaciones jerárquicas se expresan mediante el campo `parent` (ej. una release tiene `parent: PROJ-01`).
+
 ### Basic Usage
 
 **Crear y refinar una historia de usuario:**
@@ -118,20 +140,20 @@ openspec-init-config → openspec-generate-baseline →
 /story-creation "Como usuario quiero poder registrarme para acceder al sistema"
 
 # Evaluar una historia existente
-/story-evaluation docs/specs/stories/story-mi-historia.md
+/story-evaluation docs/specs/stories/FEAT-001-nombre/story.md
 
 # Dividir una historia grande
-/story-split docs/specs/stories/story-mi-historia.md
+/story-split docs/specs/stories/FEAT-001-nombre/story.md
 ```
 
 **Generar artefactos de release:**
 
 ```bash
-# Genera todos los archivos release desde project-plan.md
+# Genera todos los directorios de release desde project-plan.md
 /releases-from-project-plan
 
 # Genera las historias de usuario de un release específico
-/release-generate-stories docs/specs/releases/release-01-features-spec-builder.md
+/release-generate-stories EPIC-01-features-spec-builder
 
 # Genera las historias de todos los releases
 /release-generate-all-stories
@@ -177,15 +199,37 @@ openspec-init-config → openspec-generate-baseline →
 
 ## Configuration
 
-El framework es declarativo y no requiere configuración de variables de entorno. Toda la lógica de flujo se controla mediante el campo `substatus` en los documentos Markdown del pipeline.
+El framework es declarativo y su flujo se controla mediante el campo `substatus` en los documentos Markdown del pipeline.
 
 ### Environment Variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| — | — | El sistema no requiere variables de entorno propias |
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `SDDF_ROOT` | No | `docs` | Directorio raíz donde los skills leen y escriben artefactos (`specs/projects/`, `specs/releases/`, `specs/stories/`) |
 
 El runtime de IA (Claude Code, GitHub Copilot, etc.) gestiona su propia autenticación de forma independiente al framework.
+
+### SDDF_ROOT
+
+`SDDF_ROOT` define el directorio raíz donde todos los skills del framework buscan y crean artefactos. Permite alojar la carpeta de especificaciones en cualquier ubicación del repositorio sin modificar los skills.
+
+```bash
+# Usar un directorio personalizado
+export SDDF_ROOT=".sdd"
+
+# Usar el valor por defecto (docs/) — equivale a no definirla
+export SDDF_ROOT="docs"
+```
+
+**Comportamiento:**
+- Si `SDDF_ROOT` está definida y la ruta existe → los skills usan esa ruta como raíz.
+- Si `SDDF_ROOT` no está definida → los skills usan `docs` (retrocompatible con versiones anteriores).
+- Si `SDDF_ROOT` apunta a una ruta inexistente → los skills emiten una advertencia y vuelven a `docs`:
+  ```
+  ⚠️ La ruta definida en SDDF_ROOT no existe. Se usará el valor por defecto: docs
+  ```
+
+> **Nota sobre rutas con espacios:** si el valor de `SDDF_ROOT` contiene espacios, enciérralo entre comillas al exportarlo: `export SDDF_ROOT="mi carpeta/specs"`.
 
 ### Estado de documentos
 

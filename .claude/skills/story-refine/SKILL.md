@@ -14,10 +14,23 @@ Tu responsabilidad adicional es gestionar el estado de cada historia (`DOING` / 
 
 ---
 
+## Configuración — Determinar ruta base (`SPECS_BASE`)
+
+Antes de cualquier operación con archivos, determinar el directorio raíz de especificaciones:
+
+1. Leer la variable de entorno `SDDF_ROOT`.
+2. Si `SDDF_ROOT` está definida y la ruta existe: usar ese valor como `SPECS_BASE`.
+3. Si `SDDF_ROOT` no está definida: usar `SPECS_BASE=docs`.
+4. Si `SDDF_ROOT` está definida pero la ruta no existe: mostrar `⚠️ La ruta definida en SDDF_ROOT no existe. Se usará el valor por defecto: docs` y usar `SPECS_BASE=docs`.
+
+Usar `$SPECS_BASE` en lugar de `docs` para todas las rutas de artefactos en los pasos siguientes.
+
+---
+
 ## Reglas no negociables
 
 1. No modifiques los skills existentes `story-creation`, `story-evaluation` ni `story-split`.
-2. Usa `docs/specs/stories/` como unico directorio de salida para historias.
+2. Usa `$SPECS_BASE/specs/stories/` como unico directorio de salida para historias.
 3. Toda historia activa debe tener encabezado `substatus: DOING`.
 4. Una historia pasa automaticamente a `substatus: READY` cuando `story-evaluation` devuelve `Decision: APROBADA`.
 5. Si la decision es `REFINAR` o `RECHAZAR`, nunca entres en un bucle infinito: siempre pide al usuario una decision explicita antes de iterar otra vez.
@@ -31,7 +44,7 @@ Mantiene y actualiza durante toda la sesion una tabla de trabajo como esta:
 
 | ID | Archivo | Origen | Estado | Decision FINVEST | Siguiente accion |
 |----|---------|--------|--------|------------------|------------------|
-| ST-001 | `docs/specs/stories/story-...md` | original | Doing | REFINAR | mejorar redaccion |
+| ST-001 | `$SPECS_BASE/specs/stories/story-...md` | original | Doing | REFINAR | mejorar redaccion |
 
 Reglas del registro:
 
@@ -55,7 +68,7 @@ Cada vez que cambie el backlog, muestra un resumen breve con:
 
 Antes de empezar:
 
-1. Revisa `docs/specs/stories/`.
+1. Revisa `$SPECS_BASE/specs/stories/`.
 2. Identifica archivos `story-*.md` con `substatus: DOING` y con `substatus: READY`.
 3. Construye el registro inicial de historias.
 
@@ -77,7 +90,7 @@ Si el usuario crea una historia nueva, esa historia entra al backlog como `origi
 
 1. Si el input del usuario es incompleto, invoca al agente `story-product-owner` para aclarar usuario, necesidad, valor, contexto y restricciones.
 2. Invoca el skill `story-creation` con el contexto refinado.
-3. Cuando `story-creation` genere el archivo en `docs/specs/stories/`, edita el archivo para insertar `substatus: DOING` al inicio, antes de `## 📖 Historia`.
+3. Cuando `story-creation` genere el archivo en `$SPECS_BASE/specs/stories/`, edita el archivo para insertar `substatus: DOING` al inicio, antes de `## 📖 Historia`.
 4. Registra la historia en la tabla de backlog con `Decision FINVEST = Pendiente`.
 
 ### Caso B - Historia existente en `DOING`
@@ -188,7 +201,7 @@ Cuando no queden historias pendientes para iterar o el usuario decida detenerse,
    - historias con substatus `READY`
    - historias con substatus `DOING`
    - historias derivadas creadas
-2. Ruta de todos los archivos afectados en `docs/specs/stories/`.
+2. Ruta de todos los archivos afectados en `$SPECS_BASE/specs/stories/`.
 3. Proximo paso recomendado para cada historia en substatus `DOING`.
 
 Formato sugerido:
@@ -206,4 +219,4 @@ Formato sugerido:
 - Conserva la esencia y el formato de los skills originales.
 - Nunca pierde trazabilidad de historias derivadas.
 - Hace preguntas adicionales solo cuando agregan claridad real.
-- Mantiene el directorio `docs/specs/stories/` como fuente de verdad.
+- Mantiene el directorio `$SPECS_BASE/specs/stories/` como fuente de verdad.

@@ -1,7 +1,7 @@
 ---
 alwaysApply: false
 type: story
-slug: <nombre-del-archivo-sin-extensión>
+slug: <nombre-del-directorio-de-historia>
 title: "<primer # heading del documento>"
 date: <YYYY-MM-DD>
 status: BACKLOG

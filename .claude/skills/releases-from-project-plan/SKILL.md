@@ -1,10 +1,10 @@
 ---
 name: releases-from-project-plan
-description: "Genera archivos de especificación de release (release-[ID]-[Nombre].md) a partir de los releases planificados en docs/specs/project/project-plan.md, usando el template release-spec-template.md."
+description: "Genera especificaciones de release (directorio EPIC-NN-nombre/release.md) a partir de los releases planificados en docs/specs/projects/<PROJ-ID>-<nombre>/project-plan.md, usando el template release-spec-template.md."
 ---
 # Skill: /releases-from-project-plan
 
-Lee `docs/specs/project/project-plan.md` y genera automáticamente un archivo `release-[ID]-[Nombre].md` por cada release planificado en la sección "Propuesta de Releases". Cada archivo generado sigue exactamente la estructura de `assets/release-spec-template.md`.
+Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md` y genera automáticamente un directorio `EPIC-[ID]-[nombre-kebab]/` con un archivo `release.md` por cada release planificado en la sección "Propuesta de Releases". Cada archivo generado sigue exactamente la estructura de `assets/release-spec-template.md`.
 
 **Usar cuando:**
 - Se quiere materializar los releases de un `project-plan.md` como archivos de especificación listos para editar
@@ -13,14 +13,41 @@ Lee `docs/specs/project/project-plan.md` y genera automáticamente un archivo `r
 
 ---
 
+## Configuración — Determinar ruta base (`SPECS_BASE`)
+
+Antes de cualquier operación con archivos, determinar el directorio raíz de especificaciones:
+
+1. Leer la variable de entorno `SDDF_ROOT`.
+2. Si `SDDF_ROOT` está definida y la ruta existe: usar ese valor como `SPECS_BASE`.
+3. Si `SDDF_ROOT` no está definida: usar `SPECS_BASE=docs`.
+4. Si `SDDF_ROOT` está definida pero la ruta no existe: mostrar `⚠️ La ruta definida en SDDF_ROOT no existe. Se usará el valor por defecto: docs` y usar `SPECS_BASE=docs`.
+
+Usar `$SPECS_BASE` en lugar de `docs` para todas las rutas de artefactos en las fases siguientes.
+
+---
+
+## Configuración 0b — Resolver directorio del proyecto activo (`PROJ_DIR`)
+
+1. Listar todos los subdirectorios de `$SPECS_BASE/specs/projects/`.
+2. Para cada subdirectorio, leer `project-intent.md` y verificar si `substatus` es `READY`.
+3. Si se encuentra exactamente uno con `substatus: READY` → usar ese directorio como `$PROJ_DIR`.
+4. Si se encuentran varios → mostrar la lista y pedir al usuario que elija antes de continuar.
+5. Si no se encuentra ninguno → mostrar error y detener:
+   > ❌ No se encontró ningún proyecto activo en `$SPECS_BASE/specs/projects/`.
+   > Ejecuta `/project-begin` primero.
+
+La ruta completa del proyecto activo es: `$SPECS_BASE/specs/projects/$PROJ_DIR/`
+
+---
+
 ## Fase 0 — Verificar input
 
-Verificar que el archivo `docs/specs/project/project-plan.md` existe.
+Verificar que el archivo `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md` existe.
 
 **Si no existe**, mostrar el siguiente mensaje y terminar sin generar ningún archivo:
 
 ```
-No se encontró docs/specs/project/project-plan.md
+No se encontró $SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md
 
 Asegúrate de haber ejecutado el skill /project-planning antes de usar este skill.
 ```
@@ -29,7 +56,7 @@ Asegúrate de haber ejecutado el skill /project-planning antes de usar este skil
 
 ## Fase 1 — Extraer releases del plan
 
-Leer `docs/specs/project/project-plan.md`.
+Leer `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md`.
 
 Localizar la sección `## Propuesta de Releases`. Solo analizar el contenido dentro de esa sección (ignorar todo lo que esté antes o pertenezca a otras secciones `##`).
 
@@ -55,7 +82,7 @@ Verifica que el archivo contiene una sección "## Propuesta de Releases" con blo
 
 ## Fase 2 — Preparar directorio de destino
 
-Verificar si el directorio `docs/specs/releases/` existe.
+Verificar si el directorio `$SPECS_BASE/specs/releases/` existe.
 
 Si no existe, crearlo antes de continuar.
 
@@ -65,7 +92,7 @@ Si no existe, crearlo antes de continuar.
 
 Para cada release extraído en Fase 1, ejecutar los siguientes pasos:
 
-### 3a. Construir el nombre de archivo
+### 3a. Construir el nombre del directorio
 
 Convertir el nombre del release a kebab-case siguiendo estas reglas:
 1. Convertir a minúsculas
@@ -74,17 +101,19 @@ Convertir el nombre del release a kebab-case siguiendo estas reglas:
 4. Eliminar guiones consecutivos (reemplazar `--` por `-`)
 5. Eliminar guiones al inicio o al final
 
-Nombre de archivo resultante: `release-[ID]-[nombre-kebab].md`
+Nombre de directorio resultante: `EPIC-[ID]-[nombre-kebab]`
 
-**Ejemplo:** `### Release 00 — Estructura Base y Mecanismo de Templates` → `release-00-estructura-base-y-mecanismo-de-templates.md`
+Ruta del archivo de salida: `$SPECS_BASE/specs/releases/EPIC-[ID]-[nombre-kebab]/release.md`
+
+**Ejemplo:** `### Release 00 — Estructura Base y Mecanismo de Templates` → directorio `EPIC-00-estructura-base-y-mecanismo-de-templates/` con archivo `release.md`
 
 ### 3b. Verificar existencia previa
 
-Si ya existe un archivo con ese nombre en `docs/specs/releases/`, informar al usuario:
+Si ya existe el **directorio** `$SPECS_BASE/specs/releases/EPIC-[ID]-[nombre-kebab]/`, informar al usuario:
 
 ```
-El archivo docs/specs/releases/release-[ID]-[nombre-kebab].md ya existe.
-¿Deseas sobreescribirlo? (s/n)
+El directorio $SPECS_BASE/specs/releases/EPIC-[ID]-[nombre-kebab]/ ya existe.
+¿Deseas sobreescribir release.md? (s/n)
 ```
 
 Esperar confirmación antes de continuar. Si el usuario responde `n` o `no`, saltar este release y continuar con el siguiente.
@@ -106,7 +135,7 @@ Lee el archivo de plantilla `assets/release-spec-template.md`.
 
 ### 3d. Escribir el archivo de release
 
-Crear el archivo `docs/specs/releases/release-[ID]-[nombre-kebab].md` con la siguiente estructura, poblando cada sección con los datos del release:
+Crear el directorio `$SPECS_BASE/specs/releases/EPIC-[ID]-[nombre-kebab]/` si no existe, luego crear el archivo `release.md` dentro de ese directorio, poblando cada sección con los datos del release:
 
 Completa el archivo de plantilla `assets/release-spec-template.md` infiriendo la información. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros en la estructura del template. Para cada sección del template, si el dato correspondiente no existe en el bloque del release, usar el placeholder `[Por completar]` para asegurar que la sección siempre está presente y el archivo tiene estructura completa.
 
@@ -179,10 +208,10 @@ Al terminar de generar todos los archivos, mostrar un resumen en pantalla:
 ```
 ## Releases generados
 
-Se generaron [N] archivos de release en docs/specs/releases/:
+Se generaron [N] directorios de release en $SPECS_BASE/specs/releases/:
 
-- docs/specs/releases/release-00-nombre.md
-- docs/specs/releases/release-01-nombre.md
+- $SPECS_BASE/specs/releases/EPIC-00-nombre/release.md
+- $SPECS_BASE/specs/releases/EPIC-01-nombre/release.md
 ...
 
 **Siguiente paso:** Ejecuta `/release-format-validation` para verificar que cada archivo cumple la estructura obligatoria del template.
@@ -190,7 +219,7 @@ Se generaron [N] archivos de release en docs/specs/releases/:
 
 Si algún release fue saltado (usuario eligió no sobreescribir), listarlo como:
 ```
-- docs/specs/releases/release-XX-nombre.md — saltado (ya existía)
+- $SPECS_BASE/specs/releases/EPIC-XX-nombre/ — saltado (ya existía)
 ```
 
 ---
@@ -201,4 +230,3 @@ Si algún release fue saltado (usuario eligió no sobreescribir), listarlo como:
 - El skill **no modifica** `project-plan.md`.
 - Si el plan contiene releases con el mismo ID (duplicados), generar ambos archivos añadiendo sufijo `-bis` al segundo (ej. `release-01-nombre-bis.md`) e informar al usuario.
 - Las secciones opcionales del template siempre se incluyen con placeholder `[Por completar]` para facilitar la edición posterior y asegurar que el archivo tiene estructura completa.
-

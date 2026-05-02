@@ -1,36 +1,49 @@
 ---
 name: release-generate-all-stories
-description: "Genera archivos de historia de usuario (story-[ID]-[Nombre-kebab].md) para todos los releases existentes en docs/specs/releases/, aplicando el mismo flujo de extracción y generación del skill release-generate-stories. Procesa todos los archivos de release en orden alfabético en una sola invocación."
+description: "Genera historias de usuario (directorio FEAT-NNN-nombre/story.md) para todos los releases existentes en docs/specs/releases/, aplicando el mismo flujo de extracción y generación del skill release-generate-stories. Procesa todos los directorios de release en orden alfabético en una sola invocación."
 ---
 # Skill: /release-generate-all-stories
 
-Escanea todos los archivos de release en `docs/specs/releases/` y genera automáticamente un archivo `story-[ID]-[Nombre-kebab].md` por cada feature encontrada en cada release, siguiendo exactamente la estructura de `assets/story-gherkin-template.md`. Es el equivalente batch de `/release-generate-stories`.
+Escanea todos los **directorios** de release en `$SPECS_BASE/specs/releases/`, lee `release.md` de cada uno, y genera automáticamente un directorio `FEAT-[ID]-[Nombre-kebab]/` con un archivo `story.md` por cada feature encontrada, siguiendo exactamente la estructura de `assets/story-gherkin-template.md`. Es el equivalente batch de `/release-generate-stories`.
 
 **Usar cuando:**
-- Se quiere poblar `docs/specs/stories/` de forma completa a partir de todos los releases del proyecto
+- Se quiere poblar `$SPECS_BASE/specs/stories/` de forma completa a partir de todos los releases del proyecto
 - Al iniciar un sprint planning y se necesitan todas las historias de todos los releases en un solo paso
 - Como alternativa a invocar `/release-generate-stories` individualmente por cada archivo de release
 
 ---
 
-## Fase 0 — Descubrir archivos de release
+## Configuración — Determinar ruta base (`SPECS_BASE`)
 
-Listar todos los archivos con extensión `.md` en `docs/specs/releases/`, ordenados alfabéticamente por nombre de archivo.
+Antes de cualquier operación con archivos, determinar el directorio raíz de especificaciones:
 
-**Si el directorio `docs/specs/releases/` no existe o no contiene ningún archivo `.md`**, mostrar el siguiente mensaje y terminar sin generar ningún archivo:
+1. Leer la variable de entorno `SDDF_ROOT`.
+2. Si `SDDF_ROOT` está definida y la ruta existe: usar ese valor como `SPECS_BASE`.
+3. Si `SDDF_ROOT` no está definida: usar `SPECS_BASE=docs`.
+4. Si `SDDF_ROOT` está definida pero la ruta no existe: mostrar `⚠️ La ruta definida en SDDF_ROOT no existe. Se usará el valor por defecto: docs` y usar `SPECS_BASE=docs`.
+
+Usar `$SPECS_BASE` en lugar de `docs` para todas las rutas de artefactos en las fases siguientes.
+
+---
+
+## Fase 0 — Descubrir directorios de release
+
+Listar todos los **subdirectorios** en `$SPECS_BASE/specs/releases/` que contengan un archivo `release.md`, ordenados alfabéticamente por nombre de directorio.
+
+**Si el directorio `$SPECS_BASE/specs/releases/` no existe o no contiene ningún subdirectorio con `release.md`**, mostrar el siguiente mensaje y terminar sin generar ningún archivo:
 
 ```
-No se encontraron archivos de release en docs/specs/releases/
+No se encontraron directorios de release en $SPECS_BASE/specs/releases/
 
 Asegúrate de haber ejecutado el skill /releases-from-project-plan antes de usar este skill,
-o verifica que el directorio contiene archivos de release con extensión .md.
+o verifica que el directorio contiene subdirectorios EPIC-NN-nombre/ con archivo release.md.
 ```
 
 Mostrar al usuario la lista de releases descubiertos antes de continuar:
 ```
-Se encontraron [N] archivos de release en docs/specs/releases/:
-- release-00-nombre.md
-- release-01-nombre.md
+Se encontraron [N] directorios de release en $SPECS_BASE/specs/releases/:
+- EPIC-00-nombre/
+- EPIC-01-nombre/
 ...
 Procesando en orden alfabético.
 ```
@@ -39,18 +52,18 @@ Procesando en orden alfabético.
 
 ## Fase 1 — Detección anticipada de conflictos
 
-Antes de procesar ningún release, verificar qué historias ya existen en `docs/specs/stories/` que serían generadas en este batch.
+Antes de procesar ningún release, verificar qué historias ya existen en `$SPECS_BASE/specs/stories/` que serían generadas en este batch.
 
-Para ello, leer la sección `## Features` de cada release descubierto en Fase 0 y calcular los nombres de archivo que se generarían (`story-[ID]-[nombre-kebab].md`). Verificar cuáles de esos nombres ya existen en `docs/specs/stories/`.
+Para ello, leer la sección `## Features` de cada `release.md` descubierto en Fase 0 y calcular los nombres de directorio que se generarían (`FEAT-[NNN]-[nombre-kebab]/`). Verificar cuáles de esos directorios ya existen en `$SPECS_BASE/specs/stories/`.
 
 **Si no hay ningún conflicto**, continuar directamente a Fase 2 sin mostrar pantalla de confirmación.
 
-**Si hay al menos un conflicto**, mostrar la lista de archivos en conflicto y presentar la siguiente pregunta antes de comenzar el procesamiento:
+**Si hay al menos un conflicto**, mostrar la lista de directorios en conflicto y presentar la siguiente pregunta antes de comenzar el procesamiento:
 
 ```
-Se detectaron [N] archivos de historia que ya existen y serían sobreescritos:
-- docs/specs/stories/story-FEAT-NNN-nombre.md (release-XX)
-- docs/specs/stories/story-FEAT-NNN-nombre.md (release-YY)
+Se detectaron [N] directorios de historia que ya existen y serían sobreescritos:
+- $SPECS_BASE/specs/stories/FEAT-NNN-nombre/ (EPIC-XX)
+- $SPECS_BASE/specs/stories/FEAT-NNN-nombre/ (EPIC-YY)
 ...
 
 ¿Cómo deseas manejar los conflictos?
@@ -65,7 +78,7 @@ Esperar la respuesta del usuario antes de continuar a Fase 2. Registrar la decis
 
 ## Fase 2 — Preparar directorio de destino
 
-Verificar si el directorio `docs/specs/stories/` existe.
+Verificar si el directorio `$SPECS_BASE/specs/stories/` existe.
 
 Si no existe, crearlo antes de continuar.
 
@@ -92,7 +105,7 @@ Capturar para cada feature: **ID** (ej. `FEAT-027`), **Nombre** (texto después 
 
 Para cada feature extraída del release:
 
-**1. Construir el nombre de archivo:**
+**1. Construir el nombre del directorio:**
 
 Convertir el nombre de la feature a kebab-case:
 1. Convertir a minúsculas
@@ -100,7 +113,9 @@ Convertir el nombre de la feature a kebab-case:
 3. Reemplazar espacios y caracteres no alfanuméricos por guion `-`
 4. Eliminar guiones consecutivos y al inicio/final
 
-Nombre resultante: `story-[ID]-[nombre-kebab].md`
+Nombre de directorio resultante: `FEAT-[NNN]-[nombre-kebab]`
+
+Ruta del archivo de salida: `$SPECS_BASE/specs/stories/FEAT-[NNN]-[nombre-kebab]/story.md`
 
 **2. Gestionar idempotencia según la decisión de Fase 1:**
 - **(a) Sobreescribir todos:** sobreescribir sin preguntar
@@ -134,20 +149,22 @@ Generar al menos un escenario Gherkin principal (happy path) y uno alternativo/e
 
 **5. Escribir el archivo:**
 
-Crear `docs/specs/stories/story-[ID]-[nombre-kebab].md` con la estructura del template `assets\story-gherkin-template.md` infiriendo la información. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros en la estructura del template.
+Crear el directorio `$SPECS_BASE/specs/stories/FEAT-[NNN]-[nombre-kebab]/` si no existe, luego crear `story.md` dentro de ese directorio con la estructura del template `assets/story-gherkin-template.md` infiriendo la información. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros en la estructura del template.
 
 Si no encuentras el template generar el archivo con la siguiente estructura:
 
 ```markdown
 ---
 alwaysApply: false
-type: spec
-slug: <nombre-del-archivo-sin-extensión>
+type: story
+id: <FEAT-NNN>
+slug: <nombre-del-directorio-de-historia>
 title: "<primer # heading del documento o Nombre de la feature>"
-date: <YYYY-MM-DD>
 status: BACKLOG
 substatus: DOING
-parent: N/A
+parent: <EPIC-NN>
+created: <YYYY-MM-DD>
+updated: <YYYY-MM-DD>
 **FINVEST Score:** —
 **FINVEST Decisión:** —
 ---
@@ -205,17 +222,17 @@ Al finalizar el procesamiento de todos los releases, mostrar el resumen:
 **Historias saltadas:** [N saltadas por conflicto]
 **Releases sin features:** [N releases que no tenían features]
 
-### Archivos creados
-- docs/specs/stories/story-FEAT-NNN-nombre.md  (release-XX)
-- docs/specs/stories/story-FEAT-NNN-nombre.md  (release-YY)
+### Directorios creados
+- $SPECS_BASE/specs/stories/FEAT-NNN-nombre/story.md  (EPIC-XX)
+- $SPECS_BASE/specs/stories/FEAT-NNN-nombre/story.md  (EPIC-YY)
 ...
 
-### Archivos saltados (ya existían)
-- docs/specs/stories/story-FEAT-NNN-nombre.md  (release-XX)
+### Directorios saltados (ya existían)
+- $SPECS_BASE/specs/stories/FEAT-NNN-nombre/  (EPIC-XX)
 ...
 
 ### Releases sin features (no procesados)
-- docs/specs/releases/release-NN-nombre.md
+- $SPECS_BASE/specs/releases/EPIC-NN-nombre/
 
 **Siguiente paso:** Ejecuta `/story-evaluation` para verificar la calidad de las historias generadas, o `/story-refine` para refinarlas de forma interactiva.
 ```
@@ -227,7 +244,6 @@ Al finalizar el procesamiento de todos los releases, mostrar el resumen:
 - El skill **no valida** la calidad FINVEST de las historias — esa responsabilidad es de `/story-evaluation`.
 - El skill **no modifica** los archivos de release.
 - El skill procesa **todas** las features de cada release (pendientes `[ ]` y completadas `[x]`).
-- Si dos features en distintos releases generan el mismo nombre de archivo (mismo ID y mismo slug), el segundo archivo se nombra con sufijo `-bis` (ej. `story-FEAT-027-nombre-bis.md`) e informa al usuario en el resumen.
+- Si dos features en distintos releases generan el mismo nombre de directorio (mismo ID y mismo slug), el segundo directorio se nombra con sufijo `-bis` (ej. `FEAT-027-nombre-bis/`) e informa al usuario en el resumen.
 - Las secciones opcionales de cada historia siempre se incluyen con placeholder `[Por completar]` para facilitar la edición posterior.
-- El orden de procesamiento es siempre alfabético por nombre de archivo de release, lo que equivale al orden numérico dado el patrón `release-NN-nombre.md`.
-
+- El orden de procesamiento es siempre alfabético por nombre de directorio de release, lo que equivale al orden numérico dado el patrón `EPIC-NN-nombre/`.

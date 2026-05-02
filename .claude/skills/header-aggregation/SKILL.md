@@ -16,16 +16,18 @@ Este esquema es la fuente de verdad del skill. Nunca lo hardcodees en otro lugar
 ```yaml
 ---
 type: <project | release | story | wiki>   # OBLIGATORIO
-date: <YYYY-MM-DD>                          # OBLIGATORIO
-slug: <kebab-case único en el repositorio>  # OBLIGATORIO
-title: "<Título legible del documento>"     # OBLIGATORIO
-tags: []                                    # opcional
+id: <PROJ-NN | EPIC-NN | FEAT-NNN>         # OBLIGATORIO (según type)
+slug: <nombre-del-directorio>              # OBLIGATORIO
+title: "<Título legible del documento>"    # OBLIGATORIO
 status: <BACKLOG | IN-PROGRESS | COMPLETED> # OBLIGATORIO
-substatus: <N/A | TODO | DOING | READY>            # OBLIGATORIO
-parent: <N/A | slug del nodo padre>               # OBLIGATORIO
-related:                                    # opcional, si tiene relación con otros nodos
-  - <slug de nodo relacionado>
-sources:                                    # opcional
+substatus: <N/A | TODO | DOING | READY>    # OBLIGATORIO
+parent: <null | PROJ-NN | EPIC-NN>         # OBLIGATORIO
+created: <YYYY-MM-DD>                      # OBLIGATORIO
+updated: <YYYY-MM-DD>                      # OBLIGATORIO
+tags: []                                   # opcional
+related:                                   # opcional
+  - <id de nodo relacionado>
+sources:                                   # opcional
   - <clave>: <valor>
 ---
 ```
@@ -34,17 +36,33 @@ Omite los campos opcionales del bloque generado si no tienen valor relevante.
 
 ---
 
+## Paso 0 — Determinar ruta base (`SPECS_BASE`)
+
+Antes de cualquier operación con archivos, determinar el directorio raíz de especificaciones:
+
+1. Leer la variable de entorno `SDDF_ROOT`.
+2. Si `SDDF_ROOT` está definida y la ruta existe: usar ese valor como `SPECS_BASE`.
+3. Si `SDDF_ROOT` no está definida: usar `SPECS_BASE=docs`.
+4. Si `SDDF_ROOT` está definida pero la ruta no existe: mostrar `⚠️ La ruta definida en SDDF_ROOT no existe. Se usará el valor por defecto: docs` y usar `SPECS_BASE=docs`.
+
+Usar `$SPECS_BASE` en lugar de `docs` para todas las rutas de artefactos en los pasos siguientes.
+
+---
+
 ## Paso 1: Resolver el input
 
 El skill acepta tres formas de input:
 
-**A) Nombre corto de archivo** (ej. `story-FEAT-043-header-aggregation`):
-- Busca el archivo en este orden: `docs/specs/stories/`, `docs/specs/releases/`, `docs/specs/project/`
+**A) Nombre corto de directorio o archivo** (ej. `FEAT-043-header-aggregation` o `project-intent`):
+- Busca el archivo canónico en este orden:
+  - `$SPECS_BASE/specs/stories/*/story.md` (busca directorio que coincida con el término)
+  - `$SPECS_BASE/specs/releases/*/release.md` (busca directorio que coincida)
+  - `$SPECS_BASE/specs/projects/*/` (busca en todos los archivos del directorio del proyecto)
 - Si hay exactamente un resultado → úsalo directamente
 - Si hay múltiples resultados → muestra la lista y pide selección al usuario
 - Si no hay resultado → trata el input como texto libre e informa al usuario
 
-**B) Ruta relativa o absoluta** (ej. `docs/specs/stories/story-FEAT-043.md` o directorio `docs/specs/stories/`):
+**B) Ruta relativa o absoluta** (ej. `$SPECS_BASE/specs/stories/FEAT-043-nombre/story.md` o directorio `$SPECS_BASE/specs/stories/`):
 - Usa la ruta directamente sin búsqueda adicional
 - Si es un directorio → activa el modo batch (ver Paso 4)
 
@@ -60,12 +78,16 @@ Para cada archivo a procesar, deriva automáticamente los campos obligatorios:
 
 | Campo | Regla de derivación |
 |-------|---------------------|
-| `slug` | Nombre del archivo sin extensión, en kebab-case (ej. `story-FEAT-043-header-aggregation`) |
-| `type` | Prefijo del nombre de archivo: `story-*` → `story`, `release-*` → `release`, `project-*` → `project`, cualquier otro → `wiki` |
-| `title` | Primer heading `#` del contenido del archivo. Si no hay heading `#`, usar el nombre del archivo sin extensión formateado (guiones → espacios, capitalizar) |
-| `date` | Fecha en formato `YYYY-MM-DD` (debería preservar la fecha del documento cuando está disponible o fecha today si no existe o es nuevo) |
+| `id` | Extraer del frontmatter existente si tiene. Si no: prefijo del nombre de directorio → `FEAT-NNN` para stories, `EPIC-NN` para releases, `PROJ-NN` para projects |
+| `slug` | Nombre del **directorio** contenedor en kebab-case (ej. `FEAT-043-header-aggregation`, `EPIC-01-nombre`, `PROJ-01-nombre`) |
+| `type` | Prefijo del nombre de directorio: `FEAT-*` → `story`, `EPIC-*` → `release`, `PROJ-*` → `project`, archivos fuera de estas convenciones → `wiki` |
+| `title` | Primer heading `#` del contenido del archivo. Si no hay heading `#`, usar el nombre del directorio formateado (guiones → espacios, capitalizar) |
 | `status` | Buscar `**Estado**: Doing` en el contenido → `IN-PROGRESS`; `**Estado**: Ready` → `COMPLETED`; ausente o desconocido → `BACKLOG` |
 | `substatus` | Buscar `**Estado**: Doing` → `DOING`; `**Estado**: Ready` → `READY`; ausente o desconocido → `N/A` |
+| `parent` | Para stories: extraer EPIC-NN del frontmatter existente o de la sección del documento. Para releases: extraer PROJ-NN. Para projects: `null` |
+| `created` | Preservar del frontmatter existente (`created` o `date`). Si no existe → fecha actual `YYYY-MM-DD` |
+| `updated` | Fecha actual `YYYY-MM-DD` siempre que se haga un merge/update |
+
 Muestra los valores derivados al usuario antes de escribir y permite correcciones.
 
 ---
@@ -106,23 +128,43 @@ Lee el archivo. El archivo tiene frontmatter YAML si comienza exactamente con `-
 
 ## Paso 4: Modo batch (directorio)
 
-Cuando el input es un directorio:
+Cuando el input es un directorio, el skill adapta el escaneo según el tipo de directorio recibido:
 
-1. Lista todos los archivos `.md` directamente en ese directorio (no recursivo)
-2. Clasifica cada archivo:
+### 4.1 Resolución del conjunto de archivos a procesar
+
+**Si el directorio es `$SPECS_BASE/specs/` o cualquier directorio padre equivalente:**
+- Escanea los tres subdirectorios de artefactos en profundidad:
+  - `$SPECS_BASE/specs/projects/*/project-intent.md` (y cualquier otro `.md` dentro de cada `PROJ-*-*/`)
+  - `$SPECS_BASE/specs/releases/*/release.md`
+  - `$SPECS_BASE/specs/stories/*/story.md`
+
+**Si el directorio es uno de los tres tipos de artefacto** (ej. `$SPECS_BASE/specs/stories/`):
+- Lista todos los **subdirectorios** directamente dentro (no recursivo en el segundo nivel)
+- Busca el archivo canónico en cada subdirectorio:
+  - Para `stories/`: busca `story.md`
+  - Para `releases/`: busca `release.md`
+  - Para `projects/`: busca `project-intent.md`
+- Ignora subdirectorios que no contengan el archivo canónico esperado
+
+**Si el directorio es un subdirectorio de artefacto** (ej. `$SPECS_BASE/specs/stories/FEAT-043-header-aggregation/`):
+- Lista todos los archivos `.md` directamente dentro de ese directorio
+
+### 4.2 Clasificación y confirmación
+
+1. Clasifica cada archivo resuelto en 4.1:
    - **Sin frontmatter**: será modificado
    - **Con frontmatter existente**: conflicto potencial
-3. Muestra el resumen anticipado antes de proceder:
+2. Muestra el resumen anticipado antes de proceder:
    ```
    Archivos a modificar (sin frontmatter): 12
    Archivos con conflicto (frontmatter existente): 3
    ```
-4. Para los archivos con conflicto, pregunta la estrategia:
+3. Para los archivos con conflicto, pregunta la estrategia:
    - **Proponer merge en todos** — aplica la lógica del Paso 3.3 en todos
    - **Saltar todos los conflictos** — procesa solo los archivos sin frontmatter
    - **Decidir uno por uno** — aplica el flujo interactivo del Paso 3.3 para cada conflicto
-5. Solicita confirmación global antes de proceder: "¿Confirmas el procesamiento de N archivos?"
-6. Procesa los archivos en secuencia y muestra el progreso con un resumen final
+4. Solicita confirmación global antes de proceder: "¿Confirmas el procesamiento de N archivos?"
+5. Procesa los archivos en secuencia y muestra el progreso con un resumen final
 
 ---
 
@@ -148,11 +190,13 @@ Al terminar (archivo individual o batch), muestra siempre:
 
 ```
 ✓ Frontmatter aplicado: <ruta-del-archivo>
-  type:   story
-  slug:   story-FEAT-043-header-aggregation
-  title:  "Encabezado de archivos spec con metadata de estado"
-  date:   2026-04-26
-  status: IN-PROGRESS
+  type:    story
+  id:      FEAT-043
+  slug:    FEAT-043-header-aggregation
+  title:   "Encabezado de archivos spec con metadata de estado"
+  status:  IN-PROGRESS
+  created: 2026-04-26
+  updated: 2026-05-01
 
 ⚠ Referencias marcadas como [pendiente]: 0
 ```

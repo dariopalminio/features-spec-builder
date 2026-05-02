@@ -84,6 +84,19 @@ Este es solo un ejemplo, recuerda que el archivo de plantilla es la guía a comp
 
 ---
 
+## Configuración — Determinar ruta base (`SPECS_BASE`)
+
+Antes de cualquier operación con archivos, determinar el directorio raíz de especificaciones:
+
+1. Leer la variable de entorno `SDDF_ROOT`.
+2. Si `SDDF_ROOT` está definida y la ruta existe: usar ese valor como `SPECS_BASE`.
+3. Si `SDDF_ROOT` no está definida: usar `SPECS_BASE=docs`.
+4. Si `SDDF_ROOT` está definida pero la ruta no existe: mostrar `⚠️ La ruta definida en SDDF_ROOT no existe. Se usará el valor por defecto: docs` y usar `SPECS_BASE=docs`.
+
+Usar `$SPECS_BASE` para todas las rutas de artefactos en los pasos siguientes.
+
+---
+
 ## Proceso de creación
 
 ### Paso 0 — Resolver el input
@@ -101,7 +114,7 @@ El skill acepta tres tipos de input. Detectar cuál aplica antes de continuar:
 #### Tipo C — Nombre de archivo o término de búsqueda
 **Señal:** El input es una palabra o frase corta que no parece texto de historia ni ruta explícita.
 **Acción:**
-1. Buscar en `docs/specs/stories/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
+1. Buscar en `$SPECS_BASE/specs/stories/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
 2. Si hay exactamente 1 coincidencia → leerlo y usarlo como base. Continuar al Paso 1.
 3. Si hay más de 1 coincidencia → mostrar la lista y pedir al usuario que elija antes de continuar.
 4. Si no hay coincidencias → tratar el input como Tipo A (texto libre).
@@ -176,7 +189,7 @@ Si alguna dimensión falla, ajustar la historia antes de entregar. Si `S` es dem
 
 #### Guardar la historia como archivo `.md`
 
-Crear el archivo en `docs/specs/stories/` con la historia completa en formato `story-gherkin-template.md`.
+Crear el archivo en `$SPECS_BASE/specs/stories/` con la historia completa en formato `story-gherkin-template.md`.
 
 **Reglas de nomenclatura:**
 - Formato: `story-{slug}.md`
@@ -185,7 +198,7 @@ Crear el archivo en `docs/specs/stories/` con la historia completa en formato `s
 
 **Verificar que el directorio existe antes de escribir:**
 ```
-docs/specs/stories/
+$SPECS_BASE/specs/stories/
 ```
 Si no existe, crearlo.
 
@@ -196,7 +209,7 @@ Si no existe, crearlo.
 Después de guardar el archivo, mostrar en la conversación:
 
 ```
-**Archivo generado:** `docs/specs/stories/story-{slug}.md`
+**Archivo generado:** `$SPECS_BASE/specs/stories/story-{slug}.md`
 
 [Historia completa en formato story-gherkin-template.md]
 

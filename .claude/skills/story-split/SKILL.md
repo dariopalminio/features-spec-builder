@@ -21,6 +21,19 @@ Toma una historia grande, épica o feature demasiado amplio y lo divide en histo
 
 ---
 
+## Configuración — Determinar ruta base (`SPECS_BASE`)
+
+Antes de cualquier operación con archivos, determinar el directorio raíz de especificaciones:
+
+1. Leer la variable de entorno `SDDF_ROOT`.
+2. Si `SDDF_ROOT` está definida y la ruta existe: usar ese valor como `SPECS_BASE`.
+3. Si `SDDF_ROOT` no está definida: usar `SPECS_BASE=docs`.
+4. Si `SDDF_ROOT` está definida pero la ruta no existe: mostrar `⚠️ La ruta definida en SDDF_ROOT no existe. Se usará el valor por defecto: docs` y usar `SPECS_BASE=docs`.
+
+Usar `$SPECS_BASE` en lugar de `docs` para todas las rutas de artefactos en las fases siguientes.
+
+---
+
 ## Proceso de división
 
 ### Fase 0 — Resolver el input
@@ -38,7 +51,7 @@ El skill acepta tres tipos de input. Detectar cuál aplica antes de continuar:
 #### Tipo C — Nombre de archivo o término de búsqueda
 **Señal:** El input es una palabra o frase corta que no parece texto de historia ni ruta explícita.
 **Acción:**
-1. Buscar en `docs/specs/stories/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
+1. Buscar en `$SPECS_BASE/specs/stories/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
 2. Si hay exactamente 1 coincidencia → leerlo y usarlo como historia a dividir. Continuar a la Fase 1.
 3. Si hay más de 1 coincidencia → mostrar la lista y pedir al usuario que elija antes de continuar.
 4. Si no hay coincidencias → tratar el input como Tipo A (texto libre).
@@ -269,7 +282,7 @@ Si alguna historia no cumple **V** (no entrega valor por sí sola), revisar el p
 
 #### Guardar cada historia como archivo `.md`
 
-Por cada historia resultante del split, crear un archivo en `docs/specs/stories/`.
+Por cada historia resultante del split, crear un archivo en `$SPECS_BASE/specs/stories/`.
 
 **Reglas de nomenclatura:**
 - Formato: `story-{slug}.md`
@@ -278,7 +291,7 @@ Por cada historia resultante del split, crear un archivo en `docs/specs/stories/
 
 **Verificar que el directorio existe antes de escribir:**
 ```bash
-docs/specs/stories/
+$SPECS_BASE/specs/stories/
 ```
 Si no existe, crearlo.
 
@@ -298,11 +311,11 @@ Después de guardar los archivos, mostrar el siguiente resumen en la conversaci�
 ## Historias resultantes
 
 ### Historia 1 — {título corto}
-**Archivo:** `docs/specs/stories/story-{slug}.md`
+**Archivo:** `$SPECS_BASE/specs/stories/story-{slug}.md`
 [Historia completa en formato story-gherkin-template.md]
 
 ### Historia 2 — {título corto}
-**Archivo:** `docs/specs/stories/story-{slug}.md`
+**Archivo:** `$SPECS_BASE/specs/stories/story-{slug}.md`
 [Historia completa en formato story-gherkin-template.md]
 
 ...
@@ -311,8 +324,8 @@ Después de guardar los archivos, mostrar el siguiente resumen en la conversaci�
 [Qué quedó fuera de scope, dependencias entre historias si las hay, sugerencias de orden de implementación]
 
 ## Archivos generados
-- `docs/specs/stories/story-{slug-1}.md`
-- `docs/specs/stories/story-{slug-2}.md`
+- `$SPECS_BASE/specs/stories/story-{slug-1}.md`
+- `$SPECS_BASE/specs/stories/story-{slug-2}.md`
 - ...
 ```
 

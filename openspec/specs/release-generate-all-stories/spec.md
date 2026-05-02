@@ -59,3 +59,31 @@ Al terminar el procesamiento de todos los releases, el skill SHALL mostrar un re
 - **THEN** el resumen muestra: "6 releases procesados | 20 historias generadas | 3 historias saltadas | 1 release sin features"
 - **THEN** el skill lista los archivos creados con sus rutas
 - **THEN** el skill sugiere ejecutar `/story-evaluation` para verificar la calidad de las historias generadas
+
+## ADDED Requirements
+
+### Requirement: Resolución dinámica de ruta raíz en release-generate-all-stories
+El skill `release-generate-all-stories` SHALL resolver la ruta base de artefactos mediante `SDDF_ROOT` antes de iterar sobre todos los releases y generar historias.
+
+#### Scenario: Skill genera historias para todos los releases bajo SDDF_ROOT
+- **WHEN** el usuario ejecuta `/release-generate-all-stories` con `SDDF_ROOT` definida
+- **THEN** el skill itera sobre releases en `$SPECS_BASE/specs/releases/`
+- **THEN** el skill escribe todas las historias generadas bajo `$SPECS_BASE/specs/stories/`
+
+#### Scenario: Skill usa docs por defecto sin SDDF_ROOT
+- **WHEN** el usuario ejecuta `/release-generate-all-stories` sin `SDDF_ROOT` definida
+- **THEN** el skill opera sobre `docs/specs/` (comportamiento previo)
+
+## ADDED Requirements
+
+### Requirement: release-generate-all-stories genera directorios de historia por feature en todos los releases
+El skill SHALL iterar sobre todos los directorios en `{SPECS_BASE}/specs/releases/`, leer el `release.md` de cada uno y generar un directorio `<FEAT-ID>-<nombre-kebab>/story.md` por cada feature encontrada, siguiendo el mismo patrón de nomenclatura que `release-generate-stories`.
+
+#### Scenario: Múltiples releases con features
+- **WHEN** existen tres directorios de release en `{SPECS_BASE}/specs/releases/` con features definidas
+- **THEN** el skill genera los directorios de historia correspondientes en `{SPECS_BASE}/specs/stories/`
+- **THEN** cada `story.md` incluye frontmatter con `type: story`, `id` y `parent` del release correspondiente
+
+#### Scenario: Release sin sección de features
+- **WHEN** un directorio de release no contiene un `release.md` válido o no tiene features definidas
+- **THEN** el skill omite ese release, registra una advertencia y continúa con los demás
