@@ -10,6 +10,9 @@ related:                                    # opcional, si tiene relación con o
   - best-practices-for-agents
   - best-practices-for-skills
 ---
+<!-- Referencias -->
+[[best-practices-for-agents]]
+[[best-practices-for-skills]]
 
 # Buenas prácticas para LLM Clients: Comandos
 

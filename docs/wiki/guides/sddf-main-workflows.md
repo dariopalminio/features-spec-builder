@@ -9,6 +9,8 @@ parent: null
 related:                                    # opcional, si tiene relación con otros nodos
   - flight-leves-model
 ---
+<!-- Referencias -->
+[[flight-leves-model]]
 
 # Flujos principales SDDF
 

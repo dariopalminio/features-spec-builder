@@ -6,6 +6,8 @@ date: 2026-03-26
 status: BACKLOG
 substatus: null
 parent: null
+related:                                    # opcional, si tiene relación con otros nodos
+  - best-practices-for-agents
 ---
 
 # Agilidad Agentica (Agentic Agile)

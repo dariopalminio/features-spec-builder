@@ -10,6 +10,9 @@ related:                                    # opcional, si tiene relación con o
   - best-practices-for-skills
   - best-practices-for-commands
 ---
+<!-- Referencias -->
+[[best-practices-for-commands]]
+[[best-practices-for-skills]]
 
 # Buenas prácticas para Agentes
 

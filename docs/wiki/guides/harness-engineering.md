@@ -1,3 +1,21 @@
+---
+type: guide
+slug: harness-engineering
+title: "Harness Engineering"
+date: 2026-03-26
+status: null
+substatus: null
+parent: null
+related:
+  - best-practices-for-agents
+  - best-practices-for-commands
+  - best-practices-for-skills
+---
+<!-- Referencias -->
+[[best-practices-for-agents]]
+[[best-practices-for-commands]]
+[[best-practices-for-skills]]
+
 # Harness Engineering
 
 Harness Engineering es un enfoque de diseño y desarrollo de sistemas de IA que se centra en crear un entorno controlado y estructurado para que la IA opere de manera eficiente y efectiva. Este enfoque se basa en varios principios clave:

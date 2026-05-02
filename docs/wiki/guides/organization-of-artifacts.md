@@ -9,6 +9,8 @@ parent: null
 related:
   - root-folder-practices
 ---
+<!-- Referencias -->
+[[root-folder-practices]]
 
 ## 📁 Reglas de la estrategia de organización de artefactos (SDDF)
 

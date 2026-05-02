@@ -1,6 +1,6 @@
 ---
 type: guide
-slug: root-folder-practices
+slug: organization-of-artifacts
 title: "Prácticas de gestión del directorio raíz de SDDF"
 date: 2026-05-01
 status: null
@@ -9,6 +9,8 @@ parent: null
 related:
   - organization-of-artifacts
 ---
+<!-- Referencias -->
+[[organization-of-artifacts]]
 
 ## 📁 Prácticas de gestión del directorio raíz de SDDF
 

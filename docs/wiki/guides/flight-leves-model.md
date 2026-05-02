@@ -9,6 +9,8 @@ parent: null
 related:                                    # opcional, si tiene relación con otros nodos
   - extreme-agile
 ---
+<!-- Referencias -->
+[[extreme-agile]]
 
 # Modelo de Niveles de Vuelo (Flight Levels Model)
 
