@@ -4,7 +4,7 @@ type: story
 slug: <nombre-del-directorio-de-historia>
 title: "<primer # heading del documento>"
 date: <YYYY-MM-DD>
-status: BACKLOG
+status: REFINING
 substatus: DOING
 parent: <nombre-del-directorio-de-release>
 ---

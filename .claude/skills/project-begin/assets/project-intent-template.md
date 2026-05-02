@@ -4,7 +4,7 @@ type: project
 id: <PROJ-NN>
 slug: < nombre-del-directorio-del-proyecto | project-intent si es el primer documento >
 title: "<primer # heading del documento>"
-status: BACKLOG
+status: BEGINNING
 substatus: DOING
 parent: null
 created: <YYYY-MM-DD>

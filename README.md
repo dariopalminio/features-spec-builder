@@ -14,6 +14,7 @@ Los developers y equipos que trabajan con IA para desarrollar software carecen d
 
 - [Features](#features)
 - [Installation](#installation)
+- [Initialization](#initialization)
 - [Quick Start](#quick-start)
 - [Usage](#usage)
 - [Configuration](#configuration)
@@ -57,6 +58,29 @@ Los skills y agentes se copian a `./.claude/` del directorio actual.
 - Node.js >= 18
 - Claude Code (Anthropic) u otro runtime compatible (GitHub Copilot, OpenCode, Google Gemini Gems, Atlassian Rovo)
 - Foam for VSCode (opcional, recomendado para navegación de docs como wiki)
+
+## Initialization
+
+Después de instalar el paquete, inicializa la estructura de directorios SDDF en tu proyecto con:
+
+```bash
+/sddf-init
+```
+
+Este skill crea los directorios base de artefactos bajo `<SPECS_BASE>/specs/` (por defecto `docs/`), genera `openspec/config.yaml` y el archivo `.env.template` con la variable `SDDF_ROOT`. Solo es necesario ejecutarlo una vez por proyecto.
+
+```
+── sddf-init ────────────────────────────────────
+[CREADO]     docs/specs/projects/
+[CREADO]     docs/specs/releases/
+[CREADO]     docs/specs/stories/
+[CREADO]     openspec/config.yaml
+[CREADO]     .env.template
+─────────────────────────────────────────────────
+✓ Entorno SDDF inicializado correctamente en docs/
+```
+
+Si `SDDF_ROOT` está definida como variable de entorno y la ruta no existe, el skill lo reporta como error antes de crear cualquier archivo. Consulta la sección [Configuration](#configuration) para más detalles sobre `SDDF_ROOT`.
 
 ## Quick Start
 

@@ -4,7 +4,7 @@ type: story
 id: <FEAT-NNN>
 slug: <nombre-del-directorio-de-historia>
 title: "<primer # heading del documento>"
-status: BACKLOG
+status: REFINING
 substatus: DOING
 parent: <nombre-del-directorio-de-release>
 created: <YYYY-MM-DD>

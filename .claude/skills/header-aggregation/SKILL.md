@@ -19,8 +19,8 @@ type: <project | release | story | wiki>   # OBLIGATORIO
 id: <PROJ-NN | EPIC-NN | FEAT-NNN>         # OBLIGATORIO (según type)
 slug: <nombre-del-directorio>              # OBLIGATORIO
 title: "<Título legible del documento>"    # OBLIGATORIO
-status: <BACKLOG | IN-PROGRESS | COMPLETED> # OBLIGATORIO
-substatus: <N/A | TODO | DOING | READY>    # OBLIGATORIO
+status: <REFINING | READY-FOR-DEVELOP | DEFINITION | PLANNED | BEGINNING | DISCOVERY | PLANNING | IN-DEVELOPMENT | MEASURING-VALUE | FINISHED | CANCELED | DEVELOP | INTEGRATION | RELEASE | RELEASED | DEVELOPING | TESTING | ACCEPTANCE | DELIVERED> # OBLIGATORIO
+substatus: <null | TODO | DOING | READY>    # OBLIGATORIO
 parent: <null | PROJ-NN | EPIC-NN>         # OBLIGATORIO
 created: <YYYY-MM-DD>                      # OBLIGATORIO
 updated: <YYYY-MM-DD>                      # OBLIGATORIO

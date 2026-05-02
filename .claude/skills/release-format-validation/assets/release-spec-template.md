@@ -4,7 +4,7 @@ type: spec
 slug: <nombre-del-archivo-sin-extensión>
 title: "<primer # heading del documento>"
 date: <YYYY-MM-DD>
-status: BACKLOG
+status: DEFINITION
 substatus: DOING
 parent: null
 ---

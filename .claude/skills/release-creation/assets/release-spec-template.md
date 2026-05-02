@@ -4,7 +4,7 @@ type: spec
 slug: <nombre-del-directorio-de-release>
 title: "<primer # heading del documento>"
 date: <YYYY-MM-DD>
-status: BACKLOG
+status: DEFINITION
 substatus: DOING
 parent: null
 ---
