@@ -56,8 +56,10 @@ Los skills y agentes se copian a `./.claude/` del directorio actual.
 ### Prerequisites
 
 - Node.js >= 18
-- Claude Code (Anthropic) u otro runtime compatible (GitHub Copilot, OpenCode, Google Gemini Gems, Atlassian Rovo)
-- Foam for VSCode (opcional, recomendado para navegación de docs como wiki)
+- Runtime compatible: Claude Code (Anthropic), GitHub Copilot, OpenCode.
+- Foam for VSCode: opcional, recomendado para navegación de docs como wiki.
+- PlantUML extension para VSCode: opcional, recomendado para visualizar diagramas c4 generados.
+- Herramientas externas alternativas: Jira con Rovo, Google Gemini Gems.
 
 ## Initialization
 
