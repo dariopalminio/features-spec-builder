@@ -3,9 +3,9 @@ type: guide
 slug: flight-leves-model
 title: "Modelo de Niveles de Vuelo (Flight Levels Model)"
 date: 2026-03-26
-status: N/A
-substatus: N/A
-parent: N/A
+status: null
+substatus: null
+parent: null
 related:                                    # opcional, si tiene relación con otros nodos
   - extreme-agile
 ---

@@ -3,9 +3,9 @@ type: guide
 slug: sddf-main-workflows
 title: "Flujos principales SDDF"
 date: 2026-04-26
-status: N/A
-substatus: N/A
-parent: N/A
+status: null
+substatus: null
+parent: null
 related:                                    # opcional, si tiene relación con otros nodos
   - flight-leves-model
 ---

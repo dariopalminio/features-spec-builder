@@ -5,7 +5,7 @@ title: "Índice de documentación"
 date: <YYYY-MM-DD>
 status: IN-PROGRESS
 substatus: DOING
-parent: N/A
+parent: null
 ---
 
 # 📚 Índice de documentación

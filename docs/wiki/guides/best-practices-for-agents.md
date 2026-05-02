@@ -3,9 +3,9 @@ type: guide
 slug: best-practices-for-agents
 title: "Buenas prácticas para Agentes"
 date: 2026-03-26
-status: N/A
-substatus: N/A
-parent: N/A
+status: null
+substatus: null
+parent: null
 related:                                    # opcional, si tiene relación con otros nodos
   - best-practices-for-skills
   - best-practices-for-commands

@@ -3,9 +3,9 @@ type: guide
 slug: organization-of-artifacts
 title: "Reglas de la estrategia de organización de artefactos (SDDF)"
 date: 2026-05-01
-status: N/A
-substatus: N/A
-parent: N/A
+status: null
+substatus: null
+parent: null
 related:
   - root-folder-practices
 ---

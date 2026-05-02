@@ -3,9 +3,9 @@ type: guide
 slug: artifact-directory-migration
 title: "Guía de migración — nueva estructura de directorios de artefactos SDDF"
 date: 2026-05-01
-status: N/A
-substatus: N/A
-parent: N/A
+status: null
+substatus: null
+parent: null
 related:
   - organization-of-artifacts
 ---

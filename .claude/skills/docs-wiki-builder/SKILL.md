@@ -132,7 +132,7 @@ Construye `docs/index.md` listando todos los archivos `.md` encontrados en `docs
    date: <fecha-actual YYYY-MM-DD>
    status: IN-PROGRESS
    substatus: DOING
-   parent: N/A
+   parent: null
    ---
    ```
 

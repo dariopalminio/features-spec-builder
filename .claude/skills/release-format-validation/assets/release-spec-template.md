@@ -6,7 +6,7 @@ title: "<primer # heading del documento>"
 date: <YYYY-MM-DD>
 status: BACKLOG
 substatus: DOING
-parent: N/A
+parent: null
 ---
 
 # Release/Epic: [Nombre de la Épica/Release] <!-- nombre obligatorio -->

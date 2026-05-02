@@ -6,7 +6,7 @@ title: "<primer # heading del documento>"
 date: <YYYY-MM-DD>
 status: BACKLOG
 substatus: DOING
-parent: N/A
+parent: null
 ---
 
 # 1. Definición del proyecto

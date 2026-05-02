@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- **Variable de entorno `SDDF_ROOT`** (FEAT-049) — todos los skills del pipeline (`project-begin`, `project-discovery`, `project-planning`, `releases-from-project-plan`, `release-generate-stories`, `release-generate-all-stories`, `reverse-engineering`) leen `SDDF_ROOT` para determinar la ruta base de artefactos (`SPECS_BASE`); si no está definida usa `docs` como fallback; si está definida pero la ruta no existe muestra advertencia y usa `docs`
+
+### Changed
+
+- **Restructura de `docs/specs/`** — migrado a la convención workitem-per-directory especificada en `docs/wiki/guides/organization-of-artifacts.md`: cada proyecto, release e historia ocupa su propio directorio con un archivo canónico (`project.md`, `release.md`, `story.md`); directorio `project/` (singular, flat) → `projects/PROJ-01-agile-sddf/`; 10 archivos flat de releases → `EPIC-NN-nombre/release.md`; 42 archivos flat de stories → `FEAT-NNN-nombre/story.md`; wikilinks y referencias `parent:` actualizados a los nuevos slugs
+
+---
+
 ## [Unreleased] — Release 09: Docs & Wiki Builders
 
 ### Added

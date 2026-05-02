@@ -3,9 +3,9 @@ type: guide
 slug: root-folder-practices
 title: "Prácticas de gestión del directorio raíz de SDDF"
 date: 2026-05-01
-status: N/A
-substatus: N/A
-parent: N/A
+status: null
+substatus: null
+parent: null
 related:
   - organization-of-artifacts
 ---

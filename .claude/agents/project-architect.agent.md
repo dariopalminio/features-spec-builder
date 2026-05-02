@@ -93,7 +93,7 @@ Cuando el usuario no proporciona suficiente detalle:
    - `title: Requirement Specification of [nombre del proyecto]`
    - `substatus: DOING`
    - `date: [fecha actual en formato YYYY-MM-DD]`
-   - `parent: N/A`
+   - `parent: null`
 5. Propone al usuario que revise el resultado. El siguiente paso es `/project-planning`.
 
 ---
@@ -189,7 +189,7 @@ Genera mínimo 2 releases.
    - `title: Project Plan of [nombre del proyecto]`
    - `substatus: DOING`
    - `date: [fecha actual en formato YYYY-MM-DD]`
-   - `parent: N/A`
+   - `parent: null`
    - `related:
       - [slug de nodo relacionado requirement-spec que genera el plan]`
 6. Informa al usuario:

@@ -3,9 +3,9 @@ type: guide
 slug: best-practices-for-skills
 title: "Buenas prácticas para LLM Clients: Skills"
 date: 2026-03-26
-status: N/A
-substatus: N/A
-parent: N/A
+status: null
+substatus: null
+parent: null
 related:                                    # opcional, si tiene relación con otros nodos
   - best-practices-for-agents
   - best-practices-for-commands

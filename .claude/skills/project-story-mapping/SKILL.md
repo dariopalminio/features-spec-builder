@@ -103,7 +103,7 @@ title: "[primer # heading del documento generado]"
 date: [YYYY-MM-DD]
 status: BACKLOG
 substatus: DOING
-parent: N/A
+parent: null
 ---
 ```
 

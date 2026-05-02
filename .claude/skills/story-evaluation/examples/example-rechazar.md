@@ -44,7 +44,7 @@ Dos sub-casos: (A) rechazado por formato insuficiente (sin template), (B) rechaz
 **S – Small:** — (no evaluado)
 **T – Testeable:** — (no evaluado)
 
-**FINVEST Score:** N/A
+**FINVEST Score:** null
 **FINVEST Decisión:** 🔴 **Rechazar — Formato insuficiente**
 
 #### Comentarios y Recomendaciones

@@ -4,8 +4,8 @@ slug: runbook-deployment-to-npm
 title: "Runbook para despliegue en NPM"
 date: 2026-04-26
 status: BACKLOG
-substatus: N/A
-parent: N/A
+substatus: null
+parent: null
 ---
 
 # 📘 Runbook para despliegue en NPM

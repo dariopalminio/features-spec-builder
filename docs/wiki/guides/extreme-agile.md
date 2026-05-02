@@ -4,8 +4,8 @@ slug: extreme-agile
 title: "Agilidad Agentica (Agentic Agile)"
 date: 2026-03-26
 status: BACKLOG
-substatus: N/A
-parent: N/A
+substatus: null
+parent: null
 ---
 
 # Agilidad Agentica (Agentic Agile)

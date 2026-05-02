@@ -4,8 +4,8 @@ slug: branching-strategy-sddf-git-flow
 title: "Estrategia de Branching SDDF git flow"
 date: 2026-03-26
 status: BACKLOG
-substatus: N/A
-parent: N/A
+substatus: null
+parent: null
 related:                                    # opcional, si tiene relación con otros nodos
   - flight-leves-model
 ---

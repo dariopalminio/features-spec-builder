@@ -36,7 +36,7 @@ slug: <kebab-case único en el repositorio>
 title: "Título legible del documento"
 tags: [spec, release]               # opcional
 status: BACKLOG | IN-PROGRESS | COMPLETED
-substatus: N/A | DOING | READY       # opcional — alineado con Estado: Doing/Ready del pipeline
+substatus: null | DOING | READY       # opcional — alineado con Estado: Doing/Ready del pipeline
 parent: <slug del nodo padre>        # opcional
 related:                             # opcional
   - <slug de nodo relacionado>
