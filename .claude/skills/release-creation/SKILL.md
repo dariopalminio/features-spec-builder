@@ -1,6 +1,6 @@
 ---
 name: release-creation
-description: "Crea un archivo de release completado mediante interacción con el usuario. Lee el template release-spec-template.md dinámicamente en tiempo de ejecución y formula preguntas por sección para completar cada campo. Produce docs/specs/releases/<slug>/release.md listo para pasar release-format-validation. Usar cuando se quiera crear un release desde cero sin necesitar un project-plan.md previo."
+description: "Crea un archivo de release completado mediante interacción con el usuario. Lee el template release-spec-template.md dinámicamente en tiempo de ejecución y formula preguntas por sección para completar cada campo. Produce `<SPECS_BASE>/specs/releases/<slug>/release.md` listo para pasar release-format-validation. Usar cuando se quiera crear un release desde cero sin necesitar un project-plan.md previo."
 ---
 
 # Skill: /release-creation

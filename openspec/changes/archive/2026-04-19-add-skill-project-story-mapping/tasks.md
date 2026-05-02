@@ -2,10 +2,10 @@
 
 - [x] 1.1 Create `.claude/agents/project-story-mapper.agent.md` with frontmatter (name, description, allowed-tools)
 - [x] 1.2 Define agent role: Jeff Patton User Story Mapping specialist integrated with SDDF project pipeline
-- [x] 1.3 Add instructions to read `docs/specs/project/project-intent.md` and `docs/specs/project/project.md` if they exist
+- [x] 1.3 Add instructions to read `docs/specs/projects/project-intent.md` and `docs/specs/projects/project.md` if they exist
 - [x] 1.4 Add interactive questioning logic for when project documents are absent
 - [x] 1.5 Define the mapping process steps: personas → backbone → walking skeleton → user tasks → release slices
-- [x] 1.6 Add output instructions: write `docs/specs/project/story-map.md` with ASCII map + structured sections
+- [x] 1.6 Add output instructions: write `docs/specs/projects/story-map.md` with ASCII map + structured sections
 
 ## 2. Create the project-story-mapping skill
 

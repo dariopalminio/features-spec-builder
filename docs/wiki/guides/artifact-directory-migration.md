@@ -18,10 +18,10 @@ Esta guía explica cómo migrar artefactos existentes (proyectos, releases, hist
 
 | Artefacto | Ruta anterior | Ruta nueva |
 |-----------|--------------|------------|
-| project-intent.md | `docs/specs/project/project-intent.md` | `docs/specs/projects/PROJ-01-nombre/project-intent.md` |
-| requirement-spec.md | `docs/specs/project/project.md` | `docs/specs/projects/PROJ-01-nombre/project.md` |
-| project-plan.md | `docs/specs/project/project-plan.md` | `docs/specs/projects/PROJ-01-nombre/project-plan.md` |
-| story-map.md | `docs/specs/project/story-map.md` | `docs/specs/projects/PROJ-01-nombre/story-map.md` |
+| project-intent.md | `docs/specs/projects/project-intent.md` | `docs/specs/projects/PROJ-01-nombre/project-intent.md` |
+| requirement-spec.md | `docs/specs/projects/project.md` | `docs/specs/projects/PROJ-01-nombre/project.md` |
+| project-plan.md | `docs/specs/projects/project-plan.md` | `docs/specs/projects/PROJ-01-nombre/project-plan.md` |
+| story-map.md | `docs/specs/projects/story-map.md` | `docs/specs/projects/PROJ-01-nombre/story-map.md` |
 | release-01-nombre.md | `docs/specs/releases/release-01-nombre.md` | `docs/specs/releases/EPIC-01-nombre/release.md` |
 | story-FEAT-001-nombre.md | `docs/specs/stories/story-FEAT-001-nombre.md` | `docs/specs/stories/FEAT-001-nombre/story.md` |
 
@@ -36,10 +36,10 @@ Esta guía explica cómo migrar artefactos existentes (proyectos, releases, hist
 mkdir -p docs/specs/projects/PROJ-01-nombre-proyecto
 
 # Mover los artefactos del proyecto
-mv docs/specs/project/project-intent.md  docs/specs/projects/PROJ-01-nombre-proyecto/project-intent.md
-mv docs/specs/project/project.md docs/specs/projects/PROJ-01-nombre-proyecto/project.md
-mv docs/specs/project/project-plan.md    docs/specs/projects/PROJ-01-nombre-proyecto/project-plan.md
-mv docs/specs/project/story-map.md       docs/specs/projects/PROJ-01-nombre-proyecto/story-map.md 2>/dev/null || true
+mv docs/specs/projects/project-intent.md  docs/specs/projects/PROJ-01-nombre-proyecto/project-intent.md
+mv docs/specs/projects/project.md docs/specs/projects/PROJ-01-nombre-proyecto/project.md
+mv docs/specs/projects/project-plan.md    docs/specs/projects/PROJ-01-nombre-proyecto/project-plan.md
+mv docs/specs/projects/story-map.md       docs/specs/projects/PROJ-01-nombre-proyecto/story-map.md 2>/dev/null || true
 
 # Eliminar el directorio antiguo si está vacío
 rmdir docs/specs/project 2>/dev/null || true

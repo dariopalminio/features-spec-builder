@@ -10,16 +10,16 @@
 - [x] 2.3 Write agent Step 2: read template at `.claude/skills/ps-plan/templates/project-plan-template.md` and extract section structure dynamically from `##` headers and `<!-- -->` comments
 - [x] 2.4 Write agent Step 3: extract atomic features (FEAT-NNN IDs), one-sentence descriptions, and dependency relationships from input documents
 - [x] 2.5 Write agent Step 4: prioritize features (business value → dependency order → technical risk) and group into releases with MVP in Release 1
-- [x] 2.6 Write agent Step 5: write `docs/specs/project/project-plan.md` using template structure, including metadata (`Estado: Doing`, date, `Generado por: planning-agent`), full backlog with `- [ ]` checkboxes, release proposals with success criteria, and summary metrics table
+- [x] 2.6 Write agent Step 5: write `docs/specs/projects/project-plan.md` using template structure, including metadata (`Estado: Doing`, date, `Generado por: planning-agent`), full backlog with `- [ ]` checkboxes, release proposals with success criteria, and summary metrics table
 - [x] 2.7 Write agent closing message: inform user document is ready, suggest review, prompt to run `/ps-finish` when ready
 
 ## 3. ps-plan Skill (replace stub)
 
 - [x] 3.1 Replace `.claude/skills/ps-plan/SKILL.md` stub with full orchestrator skill: update frontmatter description to reflect Planning phase role
-- [x] 3.2 Add Step 1 to skill: verify `docs/specs/project/clarifications.md` exists — halt with error and `/ps-approval` instruction if missing
+- [x] 3.2 Add Step 1 to skill: verify `docs/specs/projects/clarifications.md` exists — halt with error and `/ps-approval` instruction if missing
 - [x] 3.3 Add Step 2 to skill: verify `.claude/skills/ps-plan/templates/project-plan-template.md` exists — halt with error if missing
-- [x] 3.4 Add Step 3 to skill: invoke `planning-agent` with instruction to read all input documents, read template, and write `docs/specs/project/project-plan.md`
-- [x] 3.5 Add Step 4 to skill: verify `docs/specs/project/project-plan.md` exists after agent completes — show success message and next-step prompt, or error with re-run suggestion
+- [x] 3.4 Add Step 3 to skill: invoke `planning-agent` with instruction to read all input documents, read template, and write `docs/specs/projects/project-plan.md`
+- [x] 3.5 Add Step 4 to skill: verify `docs/specs/projects/project-plan.md` exists after agent completes — show success message and next-step prompt, or error with re-run suggestion
 
 ## 4. Validation (human review)
 

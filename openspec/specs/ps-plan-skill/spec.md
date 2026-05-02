@@ -9,4 +9,4 @@ The `/ps-plan` skill SHALL implement the full Planning phase orchestration: vali
 
 #### Scenario: Output path updated
 - **WHEN** the skill produces output
-- **THEN** the output is written to `docs/specs/project/project-plan.md` (not `docs/specs/plan.md` as previously implied by the stub)
+- **THEN** the output is written to `docs/specs/projects/project-plan.md` (not `docs/specs/plan.md` as previously implied by the stub)

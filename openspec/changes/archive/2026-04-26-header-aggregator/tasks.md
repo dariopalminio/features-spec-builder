@@ -32,7 +32,7 @@
 ## 6. Resolución de input multi-modo
 
 - [x] 6.1 Documentar en SKILL.md los tres modos de input: nombre corto (búsqueda automática), ruta relativa/absoluta, sin input (modo interactivo)
-- [x] 6.2 Documentar el comportamiento de búsqueda por nombre corto: buscar en `docs/specs/stories/`, `docs/specs/releases/` y `docs/specs/project/`; solicitar selección si hay múltiples coincidencias
+- [x] 6.2 Documentar el comportamiento de búsqueda por nombre corto: buscar en `docs/specs/stories/`, `docs/specs/releases/` y `docs/specs/projects/`; solicitar selección si hay múltiples coincidencias
 
 ## 7. Verificación
 

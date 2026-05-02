@@ -8,7 +8,7 @@ Existing reference implementations to follow: `ps-specifying` (skill + specifyin
 
 **Goals:**
 - Create `clarifications-template.md` at `.claude/skills/ps-approval/templates/` following the same co-location pattern as other skills
-- Create `approval-agent.md` that performs multi-lens (PM, Architect, UX) analysis and interviews the user to produce `docs/specs/project/clarifications.md`
+- Create `approval-agent.md` that performs multi-lens (PM, Architect, UX) analysis and interviews the user to produce `docs/specs/projects/clarifications.md`
 - Create `ps-approval` skill that validates `requirement-spec.md` state, delegates to `approval-agent`, and confirms output
 - The agent reads all 4 prior documents (`initial-prompt.md`, `project-intent.md`, `discovery.md`, `requirement-spec.md`)
 - Follow the existing pattern: skill orchestrates, agent interviews, template drives structure

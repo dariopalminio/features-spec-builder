@@ -7,7 +7,7 @@
 ## 2. Implementar lógica de verificación en SKILL.md
 
 - [x] 2.1 Implementar Paso 0: resolver SDDF_ROOT (OK / WARNING con fallback a `docs` / ERROR con detención)
-- [x] 2.2 Implementar Paso 1: verificar subdirectorios estándar (`docs/specs/project/`, `docs/specs/releases/`, `docs/specs/stories/`)
+- [x] 2.2 Implementar Paso 1: verificar subdirectorios estándar (`docs/specs/projects/`, `docs/specs/releases/`, `docs/specs/stories/`)
 - [x] 2.3 Implementar Paso 2: verificar templates declarados por el skill invocador (si se proporcionan)
 - [x] 2.4 Implementar Paso 3: verificar `openspec/config.yaml` (WARNING si ausente, no bloqueante)
 - [x] 2.5 Implementar Paso 4: emitir informe de estado con formato `[OK] / [WARNING] / [ERROR]` y resultado final `✓ Entorno OK` o `✗ Entorno inválido`

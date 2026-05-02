@@ -1,6 +1,6 @@
 ---
 name: releases-from-project-plan
-description: "Genera especificaciones de release (directorio EPIC-NN-nombre/release.md) a partir de los releases planificados en docs/specs/projects/<PROJ-ID>-<nombre>/project-plan.md, usando el template release-spec-template.md."
+description: "Genera especificaciones de release (directorio `EPIC-NN-nombre/release.md`) a partir de los releases planificados en `<SPECS_BASE>/specs/projects/<PROJ-ID>-<nombre>/project-plan.md`, usando el template `release-spec-template.md`."
 ---
 # Skill: /releases-from-project-plan
 

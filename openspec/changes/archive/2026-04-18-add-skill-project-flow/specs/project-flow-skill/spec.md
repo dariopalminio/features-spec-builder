@@ -11,7 +11,7 @@ El sistema SHALL incluir un skill en `.claude/skills/project-flow/SKILL.md` con 
 Al iniciar, el skill SHALL leer el estado de los tres documentos de output (`project-intent.md`, `requirement-spec.md`, `project-plan.md`) y determinar desde qué fase debe comenzar.
 
 #### Scenario: Pipeline virgin (no documents exist)
-- **WHEN** ninguno de los tres documentos existe en `docs/specs/project/`
+- **WHEN** ninguno de los tres documentos existe en `docs/specs/projects/`
 - **THEN** el skill MUST iniciar desde la Fase 1 (project-begin)
 
 #### Scenario: Pipeline partially complete
@@ -27,7 +27,7 @@ El skill SHALL ejecutar la lógica de la fase Begin Intention delegando al agent
 
 #### Scenario: Phase 1 produces project-intent.md
 - **WHEN** el agente `project-pm` completa la entrevista de intención
-- **THEN** el sistema MUST crear o actualizar `docs/specs/project/project-intent.md`
+- **THEN** el sistema MUST crear o actualizar `docs/specs/projects/project-intent.md`
 
 ### Requirement: project-flow enforces review gate after each phase
 Después de completar cada fase, el skill SHALL presentar al usuario el documento generado y solicitar confirmación explícita antes de marcar el documento como `Ready` y avanzar a la siguiente fase.
@@ -49,7 +49,7 @@ El skill SHALL ejecutar la lógica de la fase Discovery delegando a `project-pm`
 
 #### Scenario: Phase 2 produces requirement-spec.md
 - **WHEN** `project-architect` completa la especificación
-- **THEN** el sistema MUST crear o actualizar `docs/specs/project/project.md`
+- **THEN** el sistema MUST crear o actualizar `docs/specs/projects/project.md`
 
 ### Requirement: project-flow executes Phase 3 (Planning)
 El skill SHALL ejecutar la lógica de la fase Planning delegando al agente `project-architect`, replicando el comportamiento de `/project-planning`.
@@ -60,7 +60,7 @@ El skill SHALL ejecutar la lógica de la fase Planning delegando al agente `proj
 
 #### Scenario: Phase 3 produces project-plan.md
 - **WHEN** `project-architect` completa el plan
-- **THEN** el sistema MUST crear o actualizar `docs/specs/project/project-plan.md`
+- **THEN** el sistema MUST crear o actualizar `docs/specs/projects/project-plan.md`
 
 ### Requirement: project-flow completes with all documents in Ready state
 Al finalizar exitosamente el pipeline completo, el skill SHALL confirmar al usuario que los tres documentos están en `Estado: Ready`.

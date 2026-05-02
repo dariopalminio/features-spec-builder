@@ -2,13 +2,13 @@
 
 - [x] 1.1 Revisar `docs/specs/templates/release-spec-template.md` para mapear todas las secciones obligatorias y opcionales que el skill debe poblar
 - [x] 1.2 Revisar `.claude/skills/release-format-validation/SKILL.md` para reutilizar el patrón de fases (resolver input → leer template → procesar → escribir output)
-- [x] 1.3 Revisar `docs/specs/project/project-plan.md` para confirmar la estructura exacta de los bloques `### Release NN — Nombre` que el skill debe parsear
+- [x] 1.3 Revisar `docs/specs/projects/project-plan.md` para confirmar la estructura exacta de los bloques `### Release NN — Nombre` que el skill debe parsear
 
 ## 2. Creación del skill
 
 - [x] 2.1 Crear el directorio `.claude/skills/releases-from-project-plan/`
 - [x] 2.2 Crear `.claude/skills/releases-from-project-plan/SKILL.md` con el frontmatter (`name`, `description`) y la estructura de fases del skill
-- [x] 2.3 Implementar **Fase 0 — Verificar input**: verificar que `docs/specs/project/project-plan.md` existe; si no, mostrar "No se encontró docs/specs/project/project-plan.md" y terminar
+- [x] 2.3 Implementar **Fase 0 — Verificar input**: verificar que `docs/specs/projects/project-plan.md` existe; si no, mostrar "No se encontró docs/specs/projects/project-plan.md" y terminar
 - [x] 2.4 Implementar **Fase 1 — Extraer releases**: leer `project-plan.md`, localizar la sección `## Propuesta de Releases` y extraer todos los bloques `### Release NN — Nombre` con sus datos (objetivo, features, criterios de éxito); si no hay bloques, mostrar "No se encontraron releases planificados en project-plan.md" y terminar
 - [x] 2.5 Implementar **Fase 2 — Preparar directorio de destino**: verificar si `docs/specs/releases/` existe; si no, crearlo
 - [x] 2.6 Implementar **Fase 3 — Generar archivos de release**: para cada release extraído, construir el nombre de archivo `release-[ID]-[nombre-kebab].md` (kebab-case, minúsculas, sin caracteres especiales), verificar si ya existe el archivo y pedir confirmación antes de sobreescribir, y escribir el archivo con el template canónico poblado con los datos del release (secciones opcionales con placeholder `[Por completar]` cuando no hay datos)

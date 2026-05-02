@@ -5,7 +5,7 @@ El sistema SHALL crear la estructura canónica de directorios wiki en `docs/` cu
 
 #### Scenario: Directorio docs/ no existe o está vacío
 - **WHEN** el usuario invoca el skill y `docs/` no existe o está vacío
-- **THEN** el sistema crea los directorios `docs/specs/project/`, `docs/specs/releases/`, `docs/specs/stories/`, `docs/wiki/constitution/`, `docs/wiki/architecture/`, `docs/wiki/process/`, `docs/wiki/ux/`, `docs/wiki/guides/`, `docs/wiki/how-to/`
+- **THEN** el sistema crea los directorios `docs/specs/projects/`, `docs/specs/releases/`, `docs/specs/stories/`, `docs/wiki/constitution/`, `docs/wiki/architecture/`, `docs/wiki/process/`, `docs/wiki/ux/`, `docs/wiki/guides/`, `docs/wiki/how-to/`
 - **THEN** el sistema genera `docs/index.md` con la estructura canónica del índice
 
 #### Scenario: Directorio docs/ existe con contenido no-wiki

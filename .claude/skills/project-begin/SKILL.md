@@ -2,7 +2,7 @@
 description: >-
   Primer paso del pipeline de ProjectSpecFactory. Entrevista al usuario mediante
   el agente project-pm para capturar la intención del proyecto y refinarla,
-  produciendo docs/specs/projects/<PROJ-ID>-<nombre>/project-intent.md en una sola sesión.
+  produciendo `<SPECS_BASE>/specs/projects/<PROJ-ID>-<nombre>/project-intent.md` en una sola sesión.
 alwaysApply: false
 name: project-begin
 ---

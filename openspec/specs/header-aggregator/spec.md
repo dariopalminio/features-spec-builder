@@ -85,7 +85,7 @@ El sistema SHALL aceptar tres formas de input para identificar el objetivo:
 
 #### Scenario: Input como nombre de archivo corto
 - **WHEN** el usuario proporciona solo el nombre de archivo (ej. `story-FEAT-043-header-aggregation.md`) sin ruta
-- **THEN** el sistema busca automáticamente el archivo en `docs/specs/stories/`, `docs/specs/releases/` y `docs/specs/project/`
+- **THEN** el sistema busca automáticamente el archivo en `docs/specs/stories/`, `docs/specs/releases/` y `docs/specs/projects/`
 - **THEN** si encuentra exactamente un resultado, lo procesa directamente
 - **THEN** si encuentra múltiples resultados, muestra la lista y solicita selección al usuario
 
@@ -105,7 +105,7 @@ El skill SHALL buscar archivos Markdown en los patrones `{SPECS_BASE}/specs/proj
 #### Scenario: Escaneo de archivos en estructura nueva
 - **WHEN** el skill ejecuta la agregación de frontmatter
 - **THEN** MUST encontrar archivos bajo `{SPECS_BASE}/specs/projects/<ID>/`, `{SPECS_BASE}/specs/releases/<ID>/` y `{SPECS_BASE}/specs/stories/<ID>/`
-- **THEN** MUST NOT limitar el escaneo únicamente a `{SPECS_BASE}/specs/project/` (ruta anterior singular)
+- **THEN** MUST NOT limitar el escaneo únicamente a `{SPECS_BASE}/specs/projects/` (ruta anterior singular)
 
 #### Scenario: Actualización de frontmatter en archivos principales
 - **WHEN** el skill actualiza el frontmatter de un `story.md`

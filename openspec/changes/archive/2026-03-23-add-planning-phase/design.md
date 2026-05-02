@@ -12,7 +12,7 @@ All prior phases follow the same pattern: an orchestrator skill validates prereq
 - Add `planning-agent.md` that extracts atomic features from all prior documents, prioritizes them, groups them into releases, and writes `project-plan.md`
 - Replace the stub `ps-plan/SKILL.md` with a full orchestrator skill
 - Add `project-plan-template.md` defining the minimal output structure
-- Output path: `docs/specs/project/project-plan.md`
+- Output path: `docs/specs/projects/project-plan.md`
 
 **Non-Goals:**
 - No task-level breakdown (features only, not subtasks)

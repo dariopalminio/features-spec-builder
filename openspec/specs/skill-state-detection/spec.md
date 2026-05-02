@@ -1,10 +1,10 @@
 ## ADDED Requirements
 
 ### Requirement: Skill reads Estado field at startup
-Al inicio de su ejecucion, cada skill del pipeline SHALL leer el campo `**Estado**:` del documento de output de su fase en `docs/specs/project/` antes de delegar al agente.
+Al inicio de su ejecucion, cada skill del pipeline SHALL leer el campo `**Estado**:` del documento de output de su fase en `docs/specs/projects/` antes de delegar al agente.
 
 #### Scenario: Document does not exist
-- **WHEN** el documento de output de la fase no existe en `docs/specs/project/`
+- **WHEN** el documento de output de la fase no existe en `docs/specs/projects/`
 - **THEN** el skill MUST continuar con el flujo normal de ejecucion (primera ejecucion)
 
 #### Scenario: Document exists with Estado Doing

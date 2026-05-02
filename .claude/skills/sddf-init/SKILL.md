@@ -1,6 +1,6 @@
 ---
 name: sddf-init
-description: "Inicializa el entorno SDDF en un proyecto nuevo: crea la estructura de directorios base (specs/project/, specs/releases/, specs/stories/), genera openspec/config.yaml mínimo y .env.template documentando SDDF_ROOT. Idempotente — no sobrescribe archivos ni directorios existentes."
+description: "Inicializa el entorno SDDF en un proyecto nuevo: crea la estructura de directorios base (`<SPECS_BASE>/specs/projects/`, `<SPECS_BASE>/specs/releases/`, `<SPECS_BASE>/specs/stories/`), genera `openspec/config.yaml` mínimo y `.env.template` documentando `SDDF_ROOT`. Idempotente — no sobrescribe archivos ni directorios existentes."
 ---
 
 # Skill: sddf-init
@@ -42,7 +42,7 @@ sddf-init → skill-preflight → [cualquier skill SDDF]
 ### Paso 2 — Crear directorios de specs
 
 Para cada uno de los siguientes directorios bajo `SPECS_BASE`:
-- `specs/project/`
+- `specs/projects/`
 - `specs/releases/`
 - `specs/stories/`
 
@@ -89,7 +89,7 @@ Emitir el informe consolidado con todos los artefactos verificados:
 
 ```
 ── sddf-init ────────────────────────────────────
-[CREADO]     docs/specs/project/
+[CREADO]     docs/specs/projects/
 [CREADO]     docs/specs/releases/
 [YA EXISTÍA] docs/specs/stories/
 [CREADO]     openspec/config.yaml

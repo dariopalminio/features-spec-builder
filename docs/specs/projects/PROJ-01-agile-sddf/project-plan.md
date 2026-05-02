@@ -201,7 +201,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 - Agentes `project-story-mapper` y `story-product-owner`
 - Estandarización de assets por skill en `./.claude/skills/*/assets/`
 - Limpieza de directorios legacy `.agents/` y `.github/` desactualizados
-- Auto-especificación del framework SDDF: `docs/specs/project/project.md` generado por `/reverse-engineering` con 30 FRs, 13 NFRs, árbol de navegación ASCII y gaps identificados
+- Auto-especificación del framework SDDF: `docs/specs/projects/project.md` generado por `/reverse-engineering` con 30 FRs, 13 NFRs, árbol de navegación ASCII y gaps identificados
 
 **Criterios de éxito:**
 - [ ] El skill `project-flow` ejecuta las tres fases del pipeline en una sesión continua detectando automáticamente el estado actual y aplicando los gates de revisión sin intervención manual.

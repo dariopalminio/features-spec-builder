@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: project-planning reads existing document state
-El skill SHALL leer el campo `**Estado**:` de `docs/specs/project/project-plan.md` si existe, aplicando la logica de `skill-state-detection`.
+El skill SHALL leer el campo `**Estado**:` de `docs/specs/projects/project-plan.md` si existe, aplicando la logica de `skill-state-detection`.
 
 #### Scenario: Document in Doing state
 - **WHEN** `project-plan.md` existe con `Estado: Doing`
@@ -12,7 +12,7 @@ El skill SHALL leer el campo `**Estado**:` de `docs/specs/project/project-plan.m
 - **THEN** el skill MUST informar al usuario y solicitar confirmacion antes de sobrescribir
 
 ### Requirement: project-planning validates requirement-spec.md is Ready
-El skill SHALL verificar que `docs/specs/project/project.md` existe y tiene `Estado: Ready` antes de delegar al agente.
+El skill SHALL verificar que `docs/specs/projects/project.md` existe y tiene `Estado: Ready` antes de delegar al agente.
 
 #### Scenario: Input present and Ready
 - **WHEN** `requirement-spec.md` existe con `Estado: Ready`
@@ -34,7 +34,7 @@ The skill SHALL verify that `.claude/skills/project-planning/templates/project-p
 - **THEN** the skill displays an error message and halts execution
 
 ### Requirement: project-planning offers story mapping phase before planning
-The skill SHALL check whether `docs/specs/project/story-map.md` exists after validating prerequisites, and offer to run the `project-story-mapping` skill to generate it if absent.
+The skill SHALL check whether `docs/specs/projects/story-map.md` exists after validating prerequisites, and offer to run the `project-story-mapping` skill to generate it if absent.
 
 #### Scenario: Story map does not exist — user accepts
 - **WHEN** `story-map.md` does not exist and the user chooses to run story mapping
@@ -49,7 +49,7 @@ The skill SHALL check whether `docs/specs/project/story-map.md` exists after val
 - **THEN** the skill reads it and informs the user it will be used to enrich the plan, then continues to the architect delegation step without asking
 
 ### Requirement: project-planning delegates to project-architect
-The skill SHALL invoke the `project-architect` with an instruction to read the requirement spec, read the template, and produce `docs/specs/project/project-plan.md`. When `docs/specs/project/story-map.md` exists, the architect MUST also read it and use its backbone activities and release slices as structural guidance for feature grouping and release definition in the plan.
+The skill SHALL invoke the `project-architect` with an instruction to read the requirement spec, read the template, and produce `docs/specs/projects/project-plan.md`. When `docs/specs/projects/story-map.md` exists, the architect MUST also read it and use its backbone activities and release slices as structural guidance for feature grouping and release definition in the plan.
 
 #### Scenario: Delegation to agent without story map
 - **WHEN** prerequisites are validated and `story-map.md` does not exist
@@ -89,9 +89,9 @@ El skill `project-planning` SHALL localizar el proyecto activo buscando en `{SPE
 #### Scenario: Lectura de requirement-spec.md desde directorio del proyecto
 - **WHEN** el skill inicia la fase de planning
 - **THEN** MUST leer `requirement-spec.md` desde `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/project.md`
-- **THEN** MUST NOT leer desde `{SPECS_BASE}/specs/project/project.md`
+- **THEN** MUST NOT leer desde `{SPECS_BASE}/specs/projects/project.md`
 
 #### Scenario: Escritura de project-plan.md en el directorio del proyecto
 - **WHEN** el skill completa la generación del plan
 - **THEN** MUST escribir `project-plan.md` en `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/project-plan.md`
-- **THEN** MUST NOT escribir en `{SPECS_BASE}/specs/project/project-plan.md`
+- **THEN** MUST NOT escribir en `{SPECS_BASE}/specs/projects/project-plan.md`

@@ -1,5 +1,5 @@
 ### Requirement: El skill extrae todos los releases de project-plan.md
-El skill SHALL leer `docs/specs/project/project-plan.md` y extraer cada bloque de release definido bajo la sección `## Propuesta de Releases`. Por cada bloque `### Release NN — Nombre` encontrado, el skill MUST generar un archivo de especificación de release independiente.
+El skill SHALL leer `docs/specs/projects/project-plan.md` y extraer cada bloque de release definido bajo la sección `## Propuesta de Releases`. Por cada bloque `### Release NN — Nombre` encontrado, el skill MUST generar un archivo de especificación de release independiente.
 
 #### Scenario: Plan con múltiples releases
 - **WHEN** `project-plan.md` contiene dos o más bloques `### Release NN — Nombre` bajo `## Propuesta de Releases`
@@ -45,8 +45,8 @@ Los archivos generados SHALL guardarse en el directorio `docs/specs/releases/`. 
 El skill SHALL detectar condiciones de error antes de intentar generar archivos y MUST mostrar un mensaje descriptivo sin generar archivos parciales.
 
 #### Scenario: project-plan.md no existe
-- **WHEN** el archivo `docs/specs/project/project-plan.md` no existe
-- **THEN** el skill muestra el mensaje "No se encontró docs/specs/project/project-plan.md"
+- **WHEN** el archivo `docs/specs/projects/project-plan.md` no existe
+- **THEN** el skill muestra el mensaje "No se encontró docs/specs/projects/project-plan.md"
 - **THEN** el skill no genera ningún archivo de release
 
 #### Scenario: El plan no contiene la sección de releases

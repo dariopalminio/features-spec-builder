@@ -5,7 +5,7 @@ Cuando el skill detecta `Estado: Doing`, el agente delegado SHALL recibir instru
 
 #### Scenario: Agent loads existing document
 - **WHEN** el skill activa el flujo de retoma
-- **THEN** el agente MUST leer el documento existente en `docs/specs/project/` antes de formular cualquier pregunta al usuario
+- **THEN** el agente MUST leer el documento existente en `docs/specs/projects/` antes de formular cualquier pregunta al usuario
 
 #### Scenario: Agent identifies incomplete sections
 - **WHEN** el agente lee el documento existente en estado `Doing`

@@ -1,6 +1,6 @@
 ## Why
 
-Los artefactos de especificación del framework SDDF (proyectos, releases e historias) se almacenan actualmente como archivos planos en carpetas compartidas (`docs/specs/project/`, `docs/specs/releases/`, `docs/specs/stories/`), lo que impide agrupar todos los artefactos de un mismo workitem en un único lugar, dificulta la navegación y no escala a múltiples proyectos simultáneos. La nueva estructura organiza cada workitem en su propio directorio con un identificador único, siguiendo la convención definida en `docs/wiki/guides/organization-of-artifacts.md`.
+Los artefactos de especificación del framework SDDF (proyectos, releases e historias) se almacenan actualmente como archivos planos en carpetas compartidas (`docs/specs/projects/`, `docs/specs/releases/`, `docs/specs/stories/`), lo que impide agrupar todos los artefactos de un mismo workitem en un único lugar, dificulta la navegación y no escala a múltiples proyectos simultáneos. La nueva estructura organiza cada workitem en su propio directorio con un identificador único, siguiendo la convención definida en `docs/wiki/guides/organization-of-artifacts.md`.
 
 ## What Changes
 
@@ -12,8 +12,8 @@ Los artefactos de especificación del framework SDDF (proyectos, releases e hist
 
 **Estructura anterior:**
 ```
-docs/specs/project/project.md
-docs/specs/project/project-intent.md
+docs/specs/projects/project.md
+docs/specs/projects/project-intent.md
 docs/specs/releases/release-01-features-spec-builder.md
 docs/specs/stories/story-FEAT-001-project-begin.md
 ```

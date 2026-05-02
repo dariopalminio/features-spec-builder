@@ -7,7 +7,7 @@ La solución es una skill dedicada, `sddf-init`, que crea el entorno base en un 
 ## Goals / Non-Goals
 
 **Goals:**
-- Crear `docs/specs/project/`, `docs/specs/releases/`, `docs/specs/stories/` (o la ruta equivalente bajo `SDDF_ROOT`).
+- Crear `docs/specs/projects/`, `docs/specs/releases/`, `docs/specs/stories/` (o la ruta equivalente bajo `SDDF_ROOT`).
 - Generar `openspec/config.yaml` mínimo (solo si no existe) con la estructura base (`schema: spec-driven` + comentarios del template).
 - Generar `.env.template` documentando `SDDF_ROOT` (solo si no existe).
 - Garantizar idempotencia: nunca sobrescribir ni eliminar contenido existente.

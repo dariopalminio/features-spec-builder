@@ -12,7 +12,7 @@ The system SHALL provide a `clarifications-template.md` at `.claude/skills/ps-ap
 - **THEN** it derives section names from `##` headers and question guidance from `<!-- -->` comments without using any hardcoded section names
 
 ### Requirement: ps-approval skill validates requirement-spec state
-The system SHALL provide a `ps-approval` skill at `.claude/skills/ps-approval/SKILL.md`. The skill SHALL read `docs/specs/project/project.md` and verify the `**Estado**` field before proceeding.
+The system SHALL provide a `ps-approval` skill at `.claude/skills/ps-approval/SKILL.md`. The skill SHALL read `docs/specs/projects/project.md` and verify the `**Estado**` field before proceeding.
 
 #### Scenario: requirement-spec.md does not exist
 - **WHEN** the user runs `/ps-approval`
@@ -31,7 +31,7 @@ The system SHALL provide a `ps-approval` skill at `.claude/skills/ps-approval/SK
 - **THEN** the skill informs the user to complete the Specifying phase first and stops execution
 
 ### Requirement: approval-agent reads all prior phase documents
-The `approval-agent` SHALL read `initial-prompt.md`, `project-intent.md`, `discovery.md`, and `requirement-spec.md` from `docs/specs/project/` before beginning analysis.
+The `approval-agent` SHALL read `initial-prompt.md`, `project-intent.md`, `discovery.md`, and `requirement-spec.md` from `docs/specs/projects/` before beginning analysis.
 
 #### Scenario: All four input documents are available
 - **WHEN** all four prior-phase documents exist
@@ -68,11 +68,11 @@ The `approval-agent` SHALL present findings to the user as grouped questions (ma
 - **THEN** the agent generates a follow-up question before closing the interview for that topic
 
 ### Requirement: approval-agent produces clarifications.md
-The `approval-agent` SHALL write `docs/specs/project/clarifications.md` using the template structure. The document SHALL include all findings, each question with its answer, a classification of resolved vs. pending items, and generation metadata.
+The `approval-agent` SHALL write `docs/specs/projects/clarifications.md` using the template structure. The document SHALL include all findings, each question with its answer, a classification of resolved vs. pending items, and generation metadata.
 
 #### Scenario: clarifications.md is written after interview completes
 - **WHEN** the user has answered all questions (or explicitly indicated no more input)
-- **THEN** the agent writes `docs/specs/project/clarifications.md` with `**Estado**: Doing` and `**Generado por**: approval-agent`
+- **THEN** the agent writes `docs/specs/projects/clarifications.md` with `**Estado**: Doing` and `**Generado por**: approval-agent`
 
 #### Scenario: Output uses template structure
 - **WHEN** the agent writes the output file
@@ -83,7 +83,7 @@ The `approval-agent` SHALL write `docs/specs/project/clarifications.md` using th
 - **THEN** the file at `.claude/skills/ps-approval/templates/clarifications-template.md` is unchanged
 
 ### Requirement: ps-approval skill confirms output and prompts next step
-After `approval-agent` completes, the `ps-approval` skill SHALL verify that `docs/specs/project/clarifications.md` exists and inform the user of the next step.
+After `approval-agent` completes, the `ps-approval` skill SHALL verify that `docs/specs/projects/clarifications.md` exists and inform the user of the next step.
 
 #### Scenario: clarifications.md exists after agent run
 - **WHEN** `approval-agent` finishes and `clarifications.md` exists

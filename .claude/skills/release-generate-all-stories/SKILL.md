@@ -1,6 +1,6 @@
 ---
 name: release-generate-all-stories
-description: "Genera historias de usuario (directorio FEAT-NNN-nombre/story.md) para todos los releases existentes en docs/specs/releases/, aplicando el mismo flujo de extracción y generación del skill release-generate-stories. Procesa todos los directorios de release en orden alfabético en una sola invocación."
+description: "Genera historias de usuario (directorio FEAT-NNN-nombre/story.md) para todos los releases existentes en `<SPECS_BASE>/specs/releases/`, aplicando el mismo flujo de extracción y generación del skill release-generate-stories. Procesa todos los directorios de release en orden alfabético en una sola invocación."
 ---
 # Skill: /release-generate-all-stories
 

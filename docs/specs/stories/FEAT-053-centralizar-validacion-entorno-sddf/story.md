@@ -68,7 +68,7 @@ Entonces skill-preflight emite "[ERROR]  Template faltante: assets/mi-template.m
 ```
 
 ### Requirement: Un solo punto de mantenimiento para las convenciones de entorno
-Cualquier cambio en las convenciones de rutas del framework SDDF (ej. renombrar `specs/project/` a `specs/projects/`) SHALL requerir modificar únicamente `skill-preflight/SKILL.md` para que todos los skills queden alineados, sin necesidad de editar los demás SKILL.md.
+Cualquier cambio en las convenciones de rutas del framework SDDF (ej. renombrar `specs/projects/` a `specs/projects/`) SHALL requerir modificar únicamente `skill-preflight/SKILL.md` para que todos los skills queden alineados, sin necesidad de editar los demás SKILL.md.
 
 ## ⚙️ Criterios no funcionales
 

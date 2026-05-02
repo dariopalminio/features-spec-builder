@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: project-planning offers story mapping phase before planning
-The skill SHALL check whether `docs/specs/project/story-map.md` exists after validating prerequisites, and offer to run the `project-story-mapping` skill to generate it if absent.
+The skill SHALL check whether `docs/specs/projects/story-map.md` exists after validating prerequisites, and offer to run the `project-story-mapping` skill to generate it if absent.
 
 #### Scenario: Story map does not exist — user accepts
 - **WHEN** `story-map.md` does not exist and the user chooses to run story mapping
@@ -18,7 +18,7 @@ The skill SHALL check whether `docs/specs/project/story-map.md` exists after val
 ## MODIFIED Requirements
 
 ### Requirement: project-planning delegates to project-architect
-The skill SHALL invoke the `project-architect` with an instruction to read the requirement spec, read the template, and produce `docs/specs/project/project-plan.md`. When `docs/specs/project/story-map.md` exists, the architect MUST also read it and use its backbone activities and release slices as structural guidance for feature grouping and release definition in the plan.
+The skill SHALL invoke the `project-architect` with an instruction to read the requirement spec, read the template, and produce `docs/specs/projects/project-plan.md`. When `docs/specs/projects/story-map.md` exists, the architect MUST also read it and use its backbone activities and release slices as structural guidance for feature grouping and release definition in the plan.
 
 #### Scenario: Delegation to agent without story map
 - **WHEN** prerequisites are validated and `story-map.md` does not exist

@@ -1,6 +1,6 @@
 ## Context
 
-Los archivos de spec del proyecto SDDF (`docs/specs/project/`, `docs/specs/releases/`, `docs/specs/stories/`) actualmente carecen de un esquema de metadatos uniforme. Algunos tienen frontmatter YAML parcial, otros tienen un bloque de metadatos en texto plano (`**Estado**: Doing`), y otros ninguno. Esta heterogeneidad impide implementar el patrón LLM Wiki (leer `index.md` → abrir solo los nodos necesarios) porque no hay un campo `slug` ni `type` consistentes que un índice pueda referenciar.
+Los archivos de spec del proyecto SDDF (`docs/specs/projects/`, `docs/specs/releases/`, `docs/specs/stories/`) actualmente carecen de un esquema de metadatos uniforme. Algunos tienen frontmatter YAML parcial, otros tienen un bloque de metadatos en texto plano (`**Estado**: Doing`), y otros ninguno. Esta heterogeneidad impide implementar el patrón LLM Wiki (leer `index.md` → abrir solo los nodos necesarios) porque no hay un campo `slug` ni `type` consistentes que un índice pueda referenciar.
 
 El skill `header-aggregation` actúa como utilitario de mantenimiento: dado un archivo o directorio, aplica un frontmatter YAML estandarizado, detecta conflictos con metadatos preexistentes y solicita confirmación antes de modificar.
 

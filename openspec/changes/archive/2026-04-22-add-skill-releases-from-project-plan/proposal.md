@@ -5,7 +5,7 @@ El framework SDDF genera `project-plan.md` con releases planificados, pero no ex
 ## What Changes
 
 - Nuevo skill `releases-from-project-plan` en `.claude/skills/releases-from-project-plan/SKILL.md`
-- El skill lee la sección "## Propuesta de Releases" de `docs/specs/project/project-plan.md` y genera un archivo `release-[ID]-[Nombre].md` por cada release encontrado
+- El skill lee la sección "## Propuesta de Releases" de `docs/specs/projects/project-plan.md` y genera un archivo `release-[ID]-[Nombre].md` por cada release encontrado
 - Cada archivo generado sigue exactamente la estructura de `docs/specs/templates/release-spec-template.md`, populando las secciones obligatorias (frontmatter, Descripción, Features, Flujos Críticos) con los datos del plan
 - Las secciones opcionales del template se incluyen con placeholder cuando no hay datos disponibles
 - Los archivos se guardan en `docs/specs/releases/` (creando el directorio si no existe)
@@ -25,5 +25,5 @@ El framework SDDF genera `project-plan.md` con releases planificados, pero no ex
 
 - **Nuevo archivo:** `.claude/skills/releases-from-project-plan/SKILL.md`
 - **Directorio de salida:** `docs/specs/releases/` (creado por el skill en runtime)
-- **Dependencias de lectura:** `docs/specs/project/project-plan.md`, `docs/specs/templates/release-spec-template.md`
+- **Dependencias de lectura:** `docs/specs/projects/project-plan.md`, `docs/specs/templates/release-spec-template.md`
 - **Sin dependencias de código ejecutable:** el skill opera exclusivamente con instrucciones Markdown y el LLM

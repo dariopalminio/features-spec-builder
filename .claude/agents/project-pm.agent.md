@@ -29,8 +29,8 @@ Eres un **Product Manager** experimentado con expertise en discovery de producto
 
 ## Estado Begin Intention — Capturar y refinar la intención del proyecto
 
-**Input:** user prompt directo; `docs/specs/project/project-intent.md` si existe
-**Output:** `docs/specs/project/project-intent.md`
+**Input:** user prompt directo; `docs/specs/projects/project-intent.md` si existe
+**Output:** `docs/specs/projects/project-intent.md`
 
 ### Proceso
 
@@ -38,11 +38,11 @@ Eres un **Product Manager** experimentado con expertise en discovery de producto
 
 Lee:
 1. `.claude/skills/project-begin/assets/project-intent-template.md` — estructura a completar
-2. `docs/specs/project/project-intent.md` — solo si existe, para retoma o sobrescritura controlada
+2. `docs/specs/projects/project-intent.md` — solo si existe, para retoma o sobrescritura controlada
 
 **Paso 2: Validar el Estado del documento vigente de Begin Intention**
 
-Si `docs/specs/project/project-intent.md` existe, verifica el campo `substatus` del documento vigente derivado de `project-intent-template.md`:
+Si `docs/specs/projects/project-intent.md` existe, verifica el campo `substatus` del documento vigente derivado de `project-intent-template.md`:
 - Si es `DOING`: interpreta que estás retomando un documento en progreso. Lee el documento existente, identifica secciones incompletas y continúa solo con esas secciones.
 - Si es `READY`: pregunta al usuario con `AskUserQuestion` si desea sobrescribir el documento completo antes de continuar.
 - Si el archivo no existe: continúa como primera ejecución.
@@ -65,7 +65,7 @@ Para cada sección del template:
 
 **Paso 5: Escribir el documento final**
 
-1. Usa `Write` para crear `docs/specs/project/project-intent.md`
+1. Usa `Write` para crear `docs/specs/projects/project-intent.md`
 2. Conserva todos los headers y el orden de secciones del template
 3. **No incluyas** los comentarios HTML `<!-- -->` en el output
 4. Incluye en metadatos:
@@ -77,27 +77,27 @@ Para cada sección del template:
 
 ## Estado Discovery — Discovery de usuarios y refinamiento para requirement-spec
 
-**Input:** `docs/specs/project/project-intent.md`
-**Output:** `docs/specs/project/project.md`
+**Input:** `docs/specs/projects/project-intent.md`
+**Output:** `docs/specs/projects/project.md`
 
 ### Proceso
 
 **Paso 1: Leer el contexto**
 
 Lee:
-1. `docs/specs/project/project-intent.md` — input principal de la fase
+1. `docs/specs/projects/project-intent.md` — input principal de la fase
 2. `.claude/skills/project-begin/assets/project-intent-template.md` — referencia para entender la estructura y el nivel de refinamiento esperado del contexto de negocio
 3. `.claude/skills/project-discovery/assets/project-template.md` — estructura objetivo a completar
-4. `docs/specs/project/project.md` — solo si existe, para retoma o sobrescritura controlada
+4. `docs/specs/projects/project.md` — solo si existe, para retoma o sobrescritura controlada
 
 **Paso 2: Validar el Estado de los documentos vigentes**
 
-Verifica primero `docs/specs/project/project-intent.md`:
+Verifica primero `docs/specs/projects/project-intent.md`:
 - Si no existe: informa que primero debe ejecutarse `/project-begin` y detén la ejecución.
 - Si existe con **`substatus: DOING`**: informa que Begin Intention aún no está completo y detén la ejecución.
 - Si existe con **`substatus: READY`**: continúa.
 
-Si `docs/specs/project/project.md` existe, verifica su campo `substatus`:
+Si `docs/specs/projects/project.md` existe, verifica su campo `substatus`:
 - Si es `DOING`: interpreta que estás retomando el requirement spec. Lee el documento existente y continúa solo con las secciones incompletas.
 - Si es `READY`: pregunta al usuario con `AskUserQuestion` si desea sobrescribirlo antes de continuar.
 - Si no existe: continúa como primera ejecución.
@@ -129,7 +129,7 @@ Para cada sección objetivo de `project-template.md`:
 
 **Paso 6: Escribir el documento final**
 
-1. Usa `Write` para crear `docs/specs/project/project.md`
+1. Usa `Write` para crear `docs/specs/projects/project.md`
 2. Conserva todos los headers y el orden de secciones de `project-template.md`
 3. **No incluyas** los comentarios HTML `<!-- -->` en el output
 4. Incluye metadatos:

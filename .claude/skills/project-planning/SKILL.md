@@ -2,7 +2,7 @@
 description: >-
   Tercer paso del pipeline de ProjectSpecFactory. Verifica que
   requirement-spec.md existe, conduce la generación del plan mediante el agente
-  project-architect y genera docs/specs/projects/<PROJ-ID>-<nombre>/project-plan.md.
+  project-architect y genera `<SPECS_BASE>/specs/projects/<PROJ-ID>-<nombre>/project-plan.md`.
 alwaysApply: false
 name: project-planning
 ---

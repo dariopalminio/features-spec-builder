@@ -74,7 +74,7 @@ resuelve el directorio del proyecto activoEl skill `project-discovery` SHALL loc
 lee y escribe en el directorio del proyecto activoEl skill `project-planning` SHALL localizar el proyecto activo buscando en `{SPECS_BASE}/specs/projects/` el directorio con `project.md` en `status: IN_PROGRESS`, y usar esa ruta como base para leer `requirement-spec.md` y escribir `project-plan.md`.
 
 ### Requirement: project-story-mapping 
-escribe story-map.md en el directorio del proyecto activoEl skill SHALL localizar el proyecto activo en `{SPECS_BASE}/specs/projects/` y escribir `story-map.md` dentro de ese directorio, no en `{SPECS_BASE}/specs/project/`.
+escribe story-map.md en el directorio del proyecto activoEl skill SHALL localizar el proyecto activo en `{SPECS_BASE}/specs/projects/` y escribir `story-map.md` dentro de ese directorio, no en `{SPECS_BASE}/specs/projects/`.
 
 ### Requirement: release-generate-all-stories 
 genera directorios de historia por feature en todos los releasesEl skill SHALL iterar sobre todos los directorios en `{SPECS_BASE}/specs/releases/`, leer el `release.md` de cada uno y generar un directorio `<FEAT-ID>-<nombre-kebab>/story.md` por cada feature encontrada, siguiendo el mismo patrón de nomenclatura que `release-generate-stories`.
@@ -86,7 +86,7 @@ El skill SHALL aceptar el ID de release (ej. `EPIC-01`), el nombre del directori
 El skill SHALL leer `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/project-plan.md` del proyecto activo y extraer cada bloque de release definido bajo la sección `## Propuesta de Releases`. Por cada bloque `### Release NN — Nombre` encontrado, el skill MUST generar un directorio de release independiente con su archivo `release.md`.
 
 ### Requirement: reverse-engineering 
-escribe artefactos en el directorio del proyecto activoEl skill SHALL escribir los artefactos generados (`requirement-spec.md` y artefactos intermedios) en `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/` en lugar de `{SPECS_BASE}/specs/project/`. Si no existe un proyecto activo, el skill SHALL crear el directorio con el ID y nombre derivados del repositorio analizado.
+escribe artefactos en el directorio del proyecto activoEl skill SHALL escribir los artefactos generados (`requirement-spec.md` y artefactos intermedios) en `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/` en lugar de `{SPECS_BASE}/specs/projects/`. Si no existe un proyecto activo, el skill SHALL crear el directorio con el ID y nombre derivados del repositorio analizado.
 
 
 ## ⚙️ Criterios no funcionales

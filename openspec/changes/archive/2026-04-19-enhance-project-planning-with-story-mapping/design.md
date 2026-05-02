@@ -7,7 +7,7 @@ The `project-planning` skill (`SKILL.md`) currently follows a 5-step flow:
 4. Delegate to `project-architect` (reads `project-intent.md` + `requirement-spec.md`)
 5. Confirm output
 
-The `project-story-mapping` skill and `project-story-mapper` agent were added in the previous change. They produce `docs/specs/project/story-map.md` with backbone, walking skeleton, and release slices — exactly the structure a planner needs to organize features into releases.
+The `project-story-mapping` skill and `project-story-mapper` agent were added in the previous change. They produce `docs/specs/projects/story-map.md` with backbone, walking skeleton, and release slices — exactly the structure a planner needs to organize features into releases.
 
 ## Goals / Non-Goals
 

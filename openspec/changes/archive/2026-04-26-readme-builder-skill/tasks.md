@@ -15,7 +15,7 @@
 
 ## 3. Artifact Discovery Logic (in SKILL.md)
 
-- [x] 3.1 Define Step 1 — check for formal spec artifacts: `docs/specs/project/project-intent.md`, `requirement-spec.md`, `project-plan.md`
+- [x] 3.1 Define Step 1 — check for formal spec artifacts: `docs/specs/projects/project-intent.md`, `requirement-spec.md`, `project-plan.md`
 - [x] 3.2 Define Step 2 — if no formal artifacts, check for LLM-context files: `AGENTS.md`, `CLAUDE.md`, `.specify/memory/constitution.md`
 - [x] 3.3 Define Step 3 — if neither found, describe reverse-engineering approach: read package.json, main/index files, top-level directories
 

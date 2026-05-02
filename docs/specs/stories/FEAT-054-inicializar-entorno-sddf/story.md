@@ -30,7 +30,7 @@ updated: 2026-05-02
 Dado que estoy en un repositorio git sin estructura SDDF previa
   Y no tengo definida la variable de entorno SDDF_ROOT
 Cuando ejecuto el skill sddf-init
-Entonces se crean los directorios "docs/specs/project/", "docs/specs/releases/" y "docs/specs/stories/"
+Entonces se crean los directorios "docs/specs/projects/", "docs/specs/releases/" y "docs/specs/stories/"
   Y se genera el archivo "openspec/config.yaml" con valores por defecto desde el template
   Y se genera el archivo ".env.template" documentando la variable SDDF_ROOT
   Y se muestra el mensaje "✓ Entorno SDDF inicializado correctamente en docs/"
@@ -41,14 +41,14 @@ Entonces se crean los directorios "docs/specs/project/", "docs/specs/releases/" 
 Dado que tengo definida la variable de entorno SDDF_ROOT="custom/specs"
   Y el directorio "custom/specs" existe
 Cuando ejecuto el skill sddf-init
-Entonces se crean los directorios bajo "custom/specs/project/", "custom/specs/releases/" y "custom/specs/stories/"
+Entonces se crean los directorios bajo "custom/specs/projects/", "custom/specs/releases/" y "custom/specs/stories/"
   Y se muestra el mensaje "✓ Entorno SDDF inicializado correctamente en custom/specs/"
 ```
 
 ### Escenario alternativo – Entorno ya inicializado (idempotencia)
 ```gherkin
 Dado que el entorno SDDF ya fue inicializado previamente
-  Y los directorios "docs/specs/project/", "docs/specs/releases/" y "docs/specs/stories/" ya existen
+  Y los directorios "docs/specs/projects/", "docs/specs/releases/" y "docs/specs/stories/" ya existen
 Cuando ejecuto el skill sddf-init nuevamente
 Entonces los directorios existentes no son modificados ni eliminados
   Y se muestra el mensaje "✓ Entorno ya inicializado — sin cambios necesarios"

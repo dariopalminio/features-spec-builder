@@ -2,13 +2,13 @@
 
 - [x] 1.1 Crear directorio `.claude/skills/ps-begin-intention/templates/`
 - [x] 1.2 Copiar `.claude/skills/ps-draft/templates/project-intent-template.md` → `.claude/skills/ps-begin-intention/templates/project-intent-template.md`
-- [x] 1.3 Crear `.claude/skills/ps-begin-intention/SKILL.md` — orquestador que invoca `product-manager-agent` para capturar intención + refinar, produciendo `docs/specs/project/project-intent.md` en una sola sesión
+- [x] 1.3 Crear `.claude/skills/ps-begin-intention/SKILL.md` — orquestador que invoca `product-manager-agent` para capturar intención + refinar, produciendo `docs/specs/projects/project-intent.md` en una sola sesión
 
 ## 2. Crear skill ps-project-spec
 
 - [x] 2.1 Crear directorio `.claude/skills/ps-project-spec/templates/`
 - [x] 2.2 Copiar `.claude/skills/ps-specifying/templates/project-template.md` → `.claude/skills/ps-project-spec/templates/project-template.md`
-- [x] 2.3 Crear `.claude/skills/ps-project-spec/SKILL.md` — orquestador que verifica que existe `project-intent.md`, invoca `product-manager-agent` para discovery y `architect-agent` para especificación, produciendo `docs/specs/project/project.md`
+- [x] 2.3 Crear `.claude/skills/ps-project-spec/SKILL.md` — orquestador que verifica que existe `project-intent.md`, invoca `product-manager-agent` para discovery y `architect-agent` para especificación, produciendo `docs/specs/projects/project.md`
 
 ## 3. Eliminar skills obsoletos
 

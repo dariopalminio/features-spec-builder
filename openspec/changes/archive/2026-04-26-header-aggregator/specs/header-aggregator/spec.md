@@ -87,7 +87,7 @@ El sistema SHALL aceptar tres formas de input para identificar el objetivo:
 
 #### Scenario: Input como nombre de archivo corto
 - **WHEN** el usuario proporciona solo el nombre de archivo (ej. `story-FEAT-043-header-aggregation.md`) sin ruta
-- **THEN** el sistema busca automáticamente el archivo en `docs/specs/stories/`, `docs/specs/releases/` y `docs/specs/project/`
+- **THEN** el sistema busca automáticamente el archivo en `docs/specs/stories/`, `docs/specs/releases/` y `docs/specs/projects/`
 - **THEN** si encuentra exactamente un resultado, lo procesa directamente
 - **THEN** si encuentra múltiples resultados, muestra la lista y solicita selección al usuario
 

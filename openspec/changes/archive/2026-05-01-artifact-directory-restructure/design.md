@@ -3,7 +3,7 @@
 El framework SDDF almacena actualmente los artefactos de especificación como archivos planos en tres carpetas compartidas:
 
 ```
-docs/specs/project/     → project-intent.md, requirement-spec.md, project-plan.md, story-map.md
+docs/specs/projects/     → project-intent.md, requirement-spec.md, project-plan.md, story-map.md
 docs/specs/releases/    → release-01-nombre.md, release-02-nombre.md ...
 docs/specs/stories/     → story-FEAT-001-nombre.md, story-FEAT-002-nombre.md ...
 ```
@@ -65,7 +65,7 @@ Esta estructura no escala a múltiples proyectos simultáneos, no permite agrupa
 
 | Riesgo | Mitigación |
 |--------|-----------|
-| **Breaking change total** — artefactos existentes en `docs/specs/project/` dejan de ser encontrados por los skills. | Documentar claramente que es un cambio disruptivo. Proporcionar guía de migración manual. Contemplar un skill de migración en un cambio futuro. |
+| **Breaking change total** — artefactos existentes en `docs/specs/projects/` dejan de ser encontrados por los skills. | Documentar claramente que es un cambio disruptivo. Proporcionar guía de migración manual. Contemplar un skill de migración en un cambio futuro. |
 | **Skills no actualizados** — un skill consumidor que no actualice sus rutas fallará silenciosamente o leerá desde la ruta antigua. | El change incluye delta specs para todos los skills afectados, garantizando cobertura. |
 | **Asignación de ID en project-begin** — si el usuario no proporciona un ID explícito, el skill debe inferirlo del título, lo que puede generar IDs inconsistentes. | El skill propone el ID derivado del título (kebab-case) y solicita confirmación antes de crear el directorio. |
 | **Compatibilidad con SDDF_ROOT** — la nueva estructura de directorios debe funcionar tanto con `docs` (por defecto) como con rutas personalizadas via `SDDF_ROOT`. | Las rutas se construyen siempre como `$SPECS_BASE/specs/projects/...`, no como rutas absolutas. |

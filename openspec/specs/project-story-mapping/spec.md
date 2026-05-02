@@ -14,14 +14,14 @@ The system SHALL provide an agent at `.claude/agents/project-story-mapper.agent.
 
 #### Scenario: Agent produces a story map document
 - **WHEN** the agent completes the mapping session
-- **THEN** it writes `docs/specs/project/story-map.md` containing backbone activities, walking skeleton, user tasks, and release slices
+- **THEN** it writes `docs/specs/projects/story-map.md` containing backbone activities, walking skeleton, user tasks, and release slices
 
 #### Scenario: Agent generates an ASCII map
 - **WHEN** the story map document is created
 - **THEN** the document includes an ASCII table showing the backbone, walking skeleton, and at least one release slice
 
 ### Requirement: Story map document structure
-The output document `docs/specs/project/story-map.md` SHALL follow a defined structure.
+The output document `docs/specs/projects/story-map.md` SHALL follow a defined structure.
 
 #### Scenario: Document contains required sections
 - **WHEN** the story map document is generated
@@ -34,12 +34,12 @@ The output document `docs/specs/project/story-map.md` SHALL follow a defined str
 ## ADDED Requirements
 
 ### Requirement: project-story-mapping escribe story-map.md en el directorio del proyecto activo
-El skill SHALL localizar el proyecto activo en `{SPECS_BASE}/specs/projects/` y escribir `story-map.md` dentro de ese directorio, no en `{SPECS_BASE}/specs/project/`.
+El skill SHALL localizar el proyecto activo en `{SPECS_BASE}/specs/projects/` y escribir `story-map.md` dentro de ese directorio, no en `{SPECS_BASE}/specs/projects/`.
 
 #### Scenario: Escritura de story-map.md en la nueva ruta
 - **WHEN** el skill completa la sesión de story mapping
 - **THEN** MUST escribir el archivo en `{SPECS_BASE}/specs/projects/<PROJ-ID>-<nombre>/story-map.md`
-- **THEN** MUST NOT escribir en `{SPECS_BASE}/specs/project/story-map.md`
+- **THEN** MUST NOT escribir en `{SPECS_BASE}/specs/projects/story-map.md`
 
 #### Scenario: Lectura de artefactos de proyecto para contexto
 - **WHEN** el skill necesita leer `project-intent.md` o `requirement-spec.md` para el mapeo

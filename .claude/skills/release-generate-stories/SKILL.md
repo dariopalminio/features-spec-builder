@@ -1,6 +1,6 @@
 ---
 name: release-generate-stories
-description: "Genera historias de usuario (directorio FEAT-NNN-nombre/story.md) a partir de las features definidas en el release.md de un directorio de release, usando el template story-gherkin-template.md. El usuario puede indicar el nombre del directorio de release."
+description: "Genera historias de usuario (directorio `<SPECS_BASE>/specs/stories/FEAT-NNN-nombre/story.md`) a partir de las features definidas en el release.md de un directorio de release, usando el template story-gherkin-template.md. El usuario puede indicar el nombre del directorio de release."
 ---
 # Skill: /release-generate-stories
 

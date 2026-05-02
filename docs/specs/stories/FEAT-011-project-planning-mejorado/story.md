@@ -24,7 +24,7 @@ parent: EPIC-05-enhance-project-spec
 
 ### Escenario principal � Planning guiado por story map existente
 ```gherkin
-Dado que existen "docs/specs/project/project.md" y "docs/specs/project/story-map.md" con Estado: Ready
+Dado que existen "docs/specs/projects/project.md" y "docs/specs/projects/story-map.md" con Estado: Ready
 Cuando el desarrollador ejecuta el skill "project-planning"
 Entonces el agente carga ambos documentos y usa el backbone del story map como gu�a de agrupaci�n
   Y organiza las features en releases alineados con los release slices del story map
@@ -33,7 +33,7 @@ Entonces el agente carga ambos documentos y usa el backbone del story map como g
 
 ### Escenario alternativo � Planning sin story map (comportamiento original)
 ```gherkin
-Dado que existe "docs/specs/project/project.md" pero NO existe "story-map.md"
+Dado que existe "docs/specs/projects/project.md" pero NO existe "story-map.md"
 Cuando el desarrollador ejecuta el skill "project-planning"
 Entonces el skill opera en modo original sin gu�a de story map
   Y el agente agrupa las features usando criterios propios de priorizaci�n

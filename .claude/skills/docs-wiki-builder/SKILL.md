@@ -47,7 +47,7 @@ Si `docs/` no existe o está vacío:
 
 1. Crea los siguientes directorios:
    ```
-   docs/specs/project/
+   docs/specs/projects/
    docs/specs/releases/
    docs/specs/stories/
    docs/wiki/constitution/
@@ -70,7 +70,7 @@ Si `docs/` existe con archivos pero sin estructura wiki:
 1. Analiza cada archivo `.md` encontrado e infiere su ubicación en la nueva estructura:
    - Archivos con prefijo `story-*` → `docs/specs/stories/`
    - Archivos con prefijo `release-*` → `docs/specs/releases/`
-   - Archivos con prefijo `project-*` → `docs/specs/project/`
+   - Archivos con prefijo `project-*` → `docs/specs/projects/`
    - Documentación técnica / artículos → `docs/wiki/guides/` o `docs/wiki/how-to/`
    - Archivos que ya están en la ubicación correcta → sin movimiento
 
@@ -83,7 +83,7 @@ Si `docs/` existe con archivos pero sin estructura wiki:
    - docs/extreme-agile/extreme-agile.md → docs/wiki/guides/extreme-agile.md
 
    Sin cambios (ya en ubicación correcta):
-   - docs/specs/project/project-intent.md
+   - docs/specs/projects/project-intent.md
    - docs/specs/releases/...
    - docs/specs/stories/...
 
@@ -109,7 +109,7 @@ Lee el template `assets/wiki-index-template.md`.
 Construye `docs/index.md` listando todos los archivos `.md` encontrados en `docs/`:
 
 1. **Organiza por sección** según el subdirectorio:
-   - Archivos en `docs/specs/project/` → sección "L3 — Proyecto"
+   - Archivos en `docs/specs/projects/` → sección "L3 — Proyecto"
    - Archivos en `docs/specs/releases/` → sección "L2 — Releases"
    - Archivos en `docs/specs/stories/` → sección "L1 — Historias de usuario"
    - Archivos en `docs/wiki/constitution/` → sección "Constitución"
@@ -119,7 +119,7 @@ Construye `docs/index.md` listando todos los archivos `.md` encontrados en `docs
    - Archivos en `docs/wiki/guides/` → sección "Guías teóricas"
    - Archivos en `docs/wiki/how-to/` → sección "How-to"
 
-2. **Genera wikilinks** para cada archivo usando la sintaxis `[[slug]]` donde `slug` = nombre del archivo sin extensión (kebab-case). Ejemplo: `docs/specs/project/project-intent.md` → `[[project-intent]]`.
+2. **Genera wikilinks** para cada archivo usando la sintaxis `[[slug]]` donde `slug` = nombre del archivo sin extensión (kebab-case). Ejemplo: `docs/specs/projects/project-intent.md` → `[[project-intent]]`.
 
 3. **Valida wikilinks** (ver Paso 5) y marca los rotos antes de escribir el índice.
 

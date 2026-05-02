@@ -1,6 +1,6 @@
 ## Context
 
-El framework SDDF ya genera `docs/specs/project/project-plan.md` mediante el skill `project-planning`, que incluye la sección "## Propuesta de Releases" con bloques `### Release NN — Nombre` conteniendo objetivo, features asignadas y criterios de éxito. El template `docs/specs/templates/release-spec-template.md` define el formato canónico de un archivo de release.
+El framework SDDF ya genera `docs/specs/projects/project-plan.md` mediante el skill `project-planning`, que incluye la sección "## Propuesta de Releases" con bloques `### Release NN — Nombre` conteniendo objetivo, features asignadas y criterios de éxito. El template `docs/specs/templates/release-spec-template.md` define el formato canónico de un archivo de release.
 
 El gap actual: no existe ningún mecanismo para transformar esos releases planificados en archivos de especificación listos para usar. El desarrollador debe crear cada archivo manualmente.
 
@@ -9,7 +9,7 @@ El nuevo skill `releases-from-project-plan` cierra ese gap. Siguiendo el patrón
 ## Goals / Non-Goals
 
 **Goals:**
-- Leer `docs/specs/project/project-plan.md` y extraer todos los bloques de release
+- Leer `docs/specs/projects/project-plan.md` y extraer todos los bloques de release
 - Generar un archivo `release-[ID]-[Nombre-kebab].md` por release, en `docs/specs/releases/`
 - Poblar cada archivo con los datos disponibles del plan siguiendo `release-spec-template.md`
 - Informar con mensajes claros cuando el archivo de plan no existe o no tiene releases

@@ -1,6 +1,6 @@
 ## Context
 
-SDDF already produces structured Markdown artifacts at known paths (docs/specs/project/, docs/specs/releases/, docs/specs/stories/). Users reach the end of a spec cycle with a well-documented project but no README.md. Writing one manually is repetitive and prone to drifting from the specs. A `readme-builder` skill fits naturally into the existing skill-as-orchestrator pattern: one SKILL.md entry point, no external dependencies, pure Markdown I/O.
+SDDF already produces structured Markdown artifacts at known paths (docs/specs/projects/, docs/specs/releases/, docs/specs/stories/). Users reach the end of a spec cycle with a well-documented project but no README.md. Writing one manually is repetitive and prone to drifting from the specs. A `readme-builder` skill fits naturally into the existing skill-as-orchestrator pattern: one SKILL.md entry point, no external dependencies, pure Markdown I/O.
 
 Existing inspiration: `readme-creator` (skills.sh) and `readme-blueprint-generator` (awesome-copilot). Both confirm a template-driven approach outperforms ad-hoc generation.
 
@@ -32,7 +32,7 @@ The skill reads `.claude/skills/readme-builder/templates/readme-template.md` at 
 ### Decision 2: Three-tier artifact discovery
 
 Discovery order (stop at first tier that yields content):
-1. **Formal spec artifacts**: `docs/specs/project/project-intent.md`, `requirement-spec.md`, `project-plan.md`.
+1. **Formal spec artifacts**: `docs/specs/projects/project-intent.md`, `requirement-spec.md`, `project-plan.md`.
 2. **LLM-context files**: `AGENTS.md`, `CLAUDE.md`, `.specify/memory/constitution.md`.
 3. **Reverse-engineering fallback**: scan source tree, read key files, extract information.
 

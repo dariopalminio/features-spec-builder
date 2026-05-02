@@ -3,8 +3,8 @@
 ProjectSpecFactory es un pipeline de agentes Claude Code que transforma la intención de un proyecto en documentación estructurada. El cuarto estado del workflow (Specifying) carece de implementación. Los estados anteriores (Funnel, Draft, Discovery) ya están implementados con el patrón: skill orquestador → agente especializado → documento de output. Este estado debe seguir exactamente el mismo patrón.
 
 El estado actual del pipeline es:
-- Input disponible: `docs/specs/project/discovery.md` (generado por Discovery)
-- Output requerido: `docs/specs/project/project.md`
+- Input disponible: `docs/specs/projects/discovery.md` (generado por Discovery)
+- Output requerido: `docs/specs/projects/project.md`
 - Template de referencia: `docs/templates/requirements-spec-template.md` (existente, NO se modifica)
 
 ## Goals / Non-Goals

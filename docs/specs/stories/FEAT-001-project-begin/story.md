@@ -2,7 +2,7 @@
 type: story
 id: FEAT-001
 slug: FEAT-001-project-begin
-title: "project-begin — Captura de intención inicial del proyecto"
+title: "project-begin ï¿½ Captura de intenciï¿½n inicial del proyecto"
 date: 2026-04-22
 status: COMPLETED
 substatus: READY
@@ -14,28 +14,28 @@ parent: EPIC-02-project-spec-builder
 
 # Historia de Usuario
 
-## ?? Historia: project-begin — Captura de intención inicial del proyecto
+## ?? Historia: project-begin ï¿½ Captura de intenciï¿½n inicial del proyecto
 
 **Como** developer o emprendedor que quiere especificar un nuevo proyecto de software con el framework SDDF
 **Quiero** ejecutar el skill `project-begin` para responder una entrevista interactiva sobre mi proyecto
-**Para** obtener `docs/specs/project/project-intent.md` con el problema, visión, beneficios, criterios de éxito, restricciones y non-goals documentados, como punto de partida para el pipeline de especificación
+**Para** obtener `docs/specs/projects/project-intent.md` con el problema, visiï¿½n, beneficios, criterios de ï¿½xito, restricciones y non-goals documentados, como punto de partida para el pipeline de especificaciï¿½n
 
-## ? Criterios de aceptación
+## ? Criterios de aceptaciï¿½n
 
-### Escenario principal – Generación exitosa de project-intent.md
+### Escenario principal ï¿½ Generaciï¿½n exitosa de project-intent.md
 ```gherkin
-Dado que no existe "docs/specs/project/project-intent.md" y no hay ningún proyecto en estado Doing
+Dado que no existe "docs/specs/projects/project-intent.md" y no hay ningï¿½n proyecto en estado Doing
 Cuando el desarrollador ejecuta el skill "project-begin"
 Entonces el agente project-pm conduce una entrevista interactiva con preguntas contextuales
-  Y al finalizar genera "docs/specs/project/project-intent.md" con Estado: Ready
-  Y el documento incluye las secciones: problema, visión, beneficios, criterios de éxito, restricciones y non-goals
+  Y al finalizar genera "docs/specs/projects/project-intent.md" con Estado: Ready
+  Y el documento incluye las secciones: problema, visiï¿½n, beneficios, criterios de ï¿½xito, restricciones y non-goals
 ```
 
-### Escenario alternativo / error – Proyecto ya en estado Doing (WIP=1)
+### Escenario alternativo / error ï¿½ Proyecto ya en estado Doing (WIP=1)
 ```gherkin
-Dado que ya existe un archivo con Estado: Doing en "docs/specs/project/"
+Dado que ya existe un archivo con Estado: Doing en "docs/specs/projects/"
 Cuando el desarrollador ejecuta el skill "project-begin"
-Entonces el skill muestra el mensaje de conflicto WIP y no inicia una nueva sesión
+Entonces el skill muestra el mensaje de conflicto WIP y no inicia una nueva sesiï¿½n
   Pero sugiere completar el proyecto activo antes de iniciar uno nuevo
 ```
 
@@ -45,5 +45,5 @@ Entonces el skill muestra el mensaje de conflicto WIP y no inicia una nueva sesi
 
 ## ?? Notas / contexto adicional
 
-Generado automáticamente desde el release: release-02-project-spec-builder.md
-Feature origen: FEAT-001 — project-begin-intention (luego renombrado a project-begin)
+Generado automï¿½ticamente desde el release: release-02-project-spec-builder.md
+Feature origen: FEAT-001 ï¿½ project-begin-intention (luego renombrado a project-begin)

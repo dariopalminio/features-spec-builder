@@ -8,11 +8,11 @@ El sistema SHALL incluir un skill en `.claude/skills/ps-begin-intention/SKILL.md
 - **THEN** el sistema MUST cargar y ejecutar `.claude/skills/ps-begin-intention/SKILL.md`
 
 ### Requirement: ps-begin-intention produces project-intent.md
-El skill `/ps-begin-intention` SHALL producir `docs/specs/project/project-intent.md` como único documento de salida, en una sola sesión interactiva que combina la captura de intención inicial y su refinamiento.
+El skill `/ps-begin-intention` SHALL producir `docs/specs/projects/project-intent.md` como único documento de salida, en una sola sesión interactiva que combina la captura de intención inicial y su refinamiento.
 
 #### Scenario: Single session produces final document
 - **WHEN** el usuario completa la entrevista guiada por `/ps-begin-intention`
-- **THEN** el sistema MUST crear `docs/specs/project/project-intent.md` usando el template `ps-begin-intention/templates/project-intent-template.md`
+- **THEN** el sistema MUST crear `docs/specs/projects/project-intent.md` usando el template `ps-begin-intention/templates/project-intent-template.md`
 
 #### Scenario: No intermediate files created
 - **WHEN** `/ps-begin-intention` completa su ejecución

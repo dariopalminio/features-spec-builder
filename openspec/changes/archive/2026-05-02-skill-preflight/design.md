@@ -43,7 +43,7 @@ El skill `skill-preflight` actuará como módulo de inicialización invocable de
 **Decisión:** El preflight produce un bloque de texto con estado por verificación:
 ```
 [OK]      SDDF_ROOT = /ruta/al/proyecto
-[OK]      docs/specs/project/ existe
+[OK]      docs/specs/projects/ existe
 [ERROR]   docs/specs/releases/ no encontrado → Crear el directorio antes de continuar
 [WARNING] openspec/config.yaml no inicializado → Ejecutar /openspec-init-config
 ```

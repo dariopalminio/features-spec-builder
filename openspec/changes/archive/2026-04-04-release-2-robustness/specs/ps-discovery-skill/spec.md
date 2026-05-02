@@ -8,7 +8,7 @@ El sistema SHALL proveer un skill en `.claude/skills/ps-discovery/SKILL.md` que 
 - **THEN** Claude Code carga `.claude/skills/ps-discovery/SKILL.md` y lo ejecuta como skill
 
 ### Requirement: ps-discovery reads existing document state
-El skill SHALL leer el campo `**Estado**:` de `docs/specs/project/project.md` si existe, aplicando la lógica de `skill-state-detection`.
+El skill SHALL leer el campo `**Estado**:` de `docs/specs/projects/project.md` si existe, aplicando la lógica de `skill-state-detection`.
 
 #### Scenario: Document in Doing state
 - **WHEN** `requirement-spec.md` existe con `Estado: Doing`
@@ -19,7 +19,7 @@ El skill SHALL leer el campo `**Estado**:` de `docs/specs/project/project.md` si
 - **THEN** el skill MUST informar al usuario y solicitar confirmación antes de sobrescribir
 
 ### Requirement: Verificación de precondición — input existe
-Antes de delegar al agente, el skill SHALL verificar que `docs/specs/project/project-intent.md` existe y tiene `Estado: Ready`.
+Antes de delegar al agente, el skill SHALL verificar que `docs/specs/projects/project-intent.md` existe y tiene `Estado: Ready`.
 
 #### Scenario: Input presente y Ready
 - **WHEN** `project-intent.md` existe con `Estado: Ready`

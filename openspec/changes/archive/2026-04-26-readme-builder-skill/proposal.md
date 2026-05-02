@@ -22,6 +22,6 @@ Developers using SDDF invest effort producing spec artifacts (project-intent.md,
 ## Impact
 
 - New directory `.claude/skills/readme-builder/` with `SKILL.md` and `templates/readme-template.md`.
-- Reads (never writes): `docs/specs/project/project-intent.md`, `requirement-spec.md`, `project-plan.md`, `AGENTS.md`, `CLAUDE.md`, `.specify/memory/constitution.md`. Never write a file other than the README file to be generated.
+- Reads (never writes): `docs/specs/projects/project-intent.md`, `requirement-spec.md`, `project-plan.md`, `AGENTS.md`, `CLAUDE.md`, `.specify/memory/constitution.md`. Never write a file other than the README file to be generated.
 - Writes: `README.md` in project root (with user confirmation if file exists).
 - No dependency on external packages; pure Markdown + Claude Code skill model.

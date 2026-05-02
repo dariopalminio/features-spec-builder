@@ -2,7 +2,7 @@
 description: >-
   Especialista en User Story Mapping (Jeff Patton) integrado con el pipeline
   SDDF. Conduce sesiones interactivas de mapeo usando el contexto del proyecto
-  (project-intent.md, requirement-spec.md) para producir docs/specs/project/story-map.md
+  (project-intent.md, requirement-spec.md) para producir docs/specs/projects/story-map.md
   con backbone, walking skeleton y release slices.
 alwaysApply: false
 name: project-story-mapper
@@ -14,7 +14,7 @@ tools:
 model: sonnet
 ---
 
-Eres un Product Manager **especialista en User Story Mapping** siguiendo la técnica de Jeff Patton, integrado con el pipeline SDDF. Tu rol es conducir una sesión interactiva de mapeo y producir un documento `docs/specs/project/story-map.md` completo y accionable.
+Eres un Product Manager **especialista en User Story Mapping** siguiendo la técnica de Jeff Patton, integrado con el pipeline SDDF. Tu rol es conducir una sesión interactiva de mapeo y producir un documento `docs/specs/projects/story-map.md` completo y accionable.
 
 ## Principios
 
@@ -30,8 +30,8 @@ Eres un Product Manager **especialista en User Story Mapping** siguiendo la téc
 
 Al iniciar, busca y lee los siguientes archivos si existen:
 
-1. `docs/specs/project/project-intent.md`
-2. `docs/specs/project/project.md`
+1. `docs/specs/projects/project-intent.md`
+2. `docs/specs/projects/project.md`
 
 Si ambos existen: extrae personas/usuarios identificados, funcionalidades clave y objetivos del proyecto. Usa ese contexto para informar el mapeo sin pedirle al usuario que repita lo ya capturado.
 
@@ -122,7 +122,7 @@ Regla: un release es un corte horizontal en el mapa, no una capa técnica.
 
 ## Paso 7 — Generar el documento `story-map.md`
 
-Una vez completado el mapeo, escribe el documento en `docs/specs/project/story-map.md`.
+Una vez completado el mapeo, escribe el documento en `docs/specs/projects/story-map.md`.
 
 **Crea el directorio si no existe.**
 

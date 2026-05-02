@@ -1,7 +1,7 @@
 ## 1. Insert story mapping gate into project-planning skill
 
 - [x] 1.1 Open `.claude/skills/project-planning/SKILL.md` and add a new **Paso 0 — Story Mapping** section after the template verification step (step 3) and before the architect delegation (step 4)
-- [x] 1.2 In Paso 0: check if `docs/specs/project/story-map.md` exists; if it does, read it and display a confirmation that it will be used as planning input
+- [x] 1.2 In Paso 0: check if `docs/specs/projects/story-map.md` exists; if it does, read it and display a confirmation that it will be used as planning input
 - [x] 1.3 In Paso 0: if `story-map.md` does NOT exist, ask the user whether to run story mapping now or skip; if user accepts, invoke the `project-story-mapping` skill
 - [x] 1.4 Ensure step numbering in the rest of the skill is updated (old step 4 → step 5, old step 5 → step 6)
 

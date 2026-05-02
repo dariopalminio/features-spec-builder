@@ -19,11 +19,11 @@ El sistema SHALL organizar cada workitem (proyecto, release, historia) en un sub
 - **THEN** el archivo principal SHALL llamarse `story.md`
 
 ### Requirement: La carpeta raíz de proyectos es projects/ (plural)
-El sistema SHALL usar `{SPECS_BASE}/specs/projects/` (plural) como carpeta contenedora de todos los proyectos, reemplazando la carpeta anterior `{SPECS_BASE}/specs/project/` (singular).
+El sistema SHALL usar `{SPECS_BASE}/specs/projects/` (plural) como carpeta contenedora de todos los proyectos, reemplazando la carpeta anterior `{SPECS_BASE}/specs/projects/` (singular).
 
 #### Scenario: Carpeta de proyectos en plural
 - **WHEN** un skill escribe o lee artefactos de proyecto
-- **THEN** SHALL usar la ruta `{SPECS_BASE}/specs/projects/` y MUST NOT usar `{SPECS_BASE}/specs/project/`
+- **THEN** SHALL usar la ruta `{SPECS_BASE}/specs/projects/` y MUST NOT usar `{SPECS_BASE}/specs/projects/`
 
 ### Requirement: El ID del workitem determina el nombre de su directorio
 El nombre del directorio de un workitem SHALL seguir el patrón `<PREFIX>-<NN>-<nombre-kebab>`, donde `<PREFIX>` es `PROJ`, `EPIC` o `FEAT` según el tipo, `<NN>` es un número secuencial de dos o más dígitos y `<nombre-kebab>` es el nombre del workitem en kebab-case.

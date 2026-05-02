@@ -3,7 +3,7 @@ description: >-
   Reverse-engineers a requirement specification from an existing codebase.
   Triggers when the user runs /reverse-engineering (with optional --focus <path>,
   --update, or --verbose flags). Analyzes the current repository's source code and
-  generates $SPECS_BASE/specs/projects/<PROJ-ID>-<nombre>/project.md using a requirements template.
+  generates `<SPECS_BASE>/specs/projects/<PROJ-ID>-<nombre>/project.md` using a requirements template.
   Use this skill whenever the user wants to document an existing codebase, extract
   requirements from code, reverse-engineer a spec, or generate a requirement-spec
   from a project they didn't write.

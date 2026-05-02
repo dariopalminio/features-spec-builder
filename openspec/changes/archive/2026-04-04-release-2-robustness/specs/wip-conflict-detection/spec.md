@@ -1,14 +1,14 @@
 ## ADDED Requirements
 
 ### Requirement: ps-begin-intention detects active WIP project
-Al ejecutar `/ps-begin-intention`, el skill SHALL verificar si existe algún documento en `docs/specs/project/` con `**Estado**: Doing` antes de iniciar la entrevista.
+Al ejecutar `/ps-begin-intention`, el skill SHALL verificar si existe algún documento en `docs/specs/projects/` con `**Estado**: Doing` antes de iniciar la entrevista.
 
 #### Scenario: No active project detected
-- **WHEN** ningún documento en `docs/specs/project/` tiene `Estado: Doing`
+- **WHEN** ningún documento en `docs/specs/projects/` tiene `Estado: Doing`
 - **THEN** el skill MUST continuar con el flujo normal sin interrupciones
 
 #### Scenario: Active project detected
-- **WHEN** al menos un documento en `docs/specs/project/` tiene `Estado: Doing`
+- **WHEN** al menos un documento en `docs/specs/projects/` tiene `Estado: Doing`
 - **THEN** el skill MUST notificar al usuario que existe un proyecto activo e indicar qué documento está en `Doing`
 
 #### Scenario: User chooses to overwrite

@@ -4,7 +4,7 @@ description: >
   Genera un diagrama de contexto C4 Nivel 1 (System Context) en PlantUML para el proyecto activo.
   Soporta dos modos: `--interactive` (preguntas guiadas sobre actores, sistemas externos y relaciones)
   y `--from-files` (inferencia automática desde documentos de specs y código fuente).
-  Escribe el resultado en `$SPECS_BASE/specs/projects/<PROJ-slug>/context-diagram.puml`.
+  Escribe el resultado en `<SPECS_BASE>/specs/projects/<PROJ-slug>/context-diagram.puml`.
 triggers:
   - /project-context-diagram
   - /context-diagram

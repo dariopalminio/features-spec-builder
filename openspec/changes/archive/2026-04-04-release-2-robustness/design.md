@@ -2,7 +2,7 @@
 
 Los tres skills del pipeline (`ps-begin-intention`, `ps-discovery`, `ps-planning`) son orchestrators en Markdown que instruyen al agente cómo actuar. Actualmente cada SKILL.md asume que siempre se ejecuta sobre un proyecto nuevo: lee el template, delega a los agentes, y escribe el output. No existe ninguna lógica de estado previo.
 
-El estado del proyecto vive íntegramente en el filesystem: los documentos en `docs/specs/project/` incluyen el campo `**Estado**: Doing | Ready` en su frontmatter. Este campo es la única fuente de verdad sobre el progreso de una fase.
+El estado del proyecto vive íntegramente en el filesystem: los documentos en `docs/specs/projects/` incluyen el campo `**Estado**: Doing | Ready` en su frontmatter. Este campo es la única fuente de verdad sobre el progreso de una fase.
 
 El cambio consiste en agregar una **fase de precondiciones** al inicio de cada SKILL.md que lea ese campo y bifurque el comportamiento antes de delegar al agente.
 
@@ -38,7 +38,7 @@ El cambio consiste en agregar una **fase de precondiciones** al inicio de cada S
 
 ### Decisión 3: Para WIP=1, verificar todos los documentos de output, no solo el de la fase actual
 
-**Decisión:** Al ejecutar `/ps-begin-intention`, el skill verifica si existe cualquier documento en `docs/specs/project/` con `Estado: Doing`. Si encuentra uno, avisa y ofrece las opciones. Esto cubre el caso de un proyecto interrumpido en cualquier fase.
+**Decisión:** Al ejecutar `/ps-begin-intention`, el skill verifica si existe cualquier documento en `docs/specs/projects/` con `Estado: Doing`. Si encuentra uno, avisa y ofrece las opciones. Esto cubre el caso de un proyecto interrumpido en cualquier fase.
 
 ### Decisión 4: En caso de retoma (`Estado: Doing`), el agente lee el documento existente y continúa
 

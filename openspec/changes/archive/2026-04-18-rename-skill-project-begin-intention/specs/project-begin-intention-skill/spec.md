@@ -15,11 +15,11 @@ El directorio `.claude/skills/project-begin/templates/` SHALL contener `project-
 - **THEN** MUST poder leer `.claude/skills/project-begin/templates/project-intent-template.md`
 
 ### Requirement: project-begin-intention produces project-intent.md
-El skill `/project-begin` SHALL producir `docs/specs/project/project-intent.md` como unico documento de salida, en una sola sesion interactiva que combina la captura de intencion inicial y su refinamiento.
+El skill `/project-begin` SHALL producir `docs/specs/projects/project-intent.md` como unico documento de salida, en una sola sesion interactiva que combina la captura de intencion inicial y su refinamiento.
 
 #### Scenario: Single session produces final document
 - **WHEN** el usuario completa la entrevista guiada por `/project-begin`
-- **THEN** el sistema MUST crear `docs/specs/project/project-intent.md` usando el template `project-begin/templates/project-intent-template.md`
+- **THEN** el sistema MUST crear `docs/specs/projects/project-intent.md` usando el template `project-begin/templates/project-intent-template.md`
 
 #### Scenario: No intermediate files created
 - **WHEN** `/project-begin` completa su ejecucion

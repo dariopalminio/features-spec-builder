@@ -12,7 +12,7 @@ context: |
   - .claude/skills/ — fuente única de verdad para skills reutilizables
   - openspec/changes/ — cambios activos y archivados (spec-driven workflow)
   - openspec/specs/ — capabilities con sus spec.md por dominio
-  - docs/specs/project/ — documentos L3: project-intent.md, requirement-spec.md, project-plan.md
+  - docs/specs/projects/ — documentos L3: project-intent.md, requirement-spec.md, project-plan.md
   - docs/specs/releases/ — documentos L2: release-[ID]-[nombre].md
   - docs/specs/stories/ — documentos L1: story-[ID]-[nombre-kebab].md
 

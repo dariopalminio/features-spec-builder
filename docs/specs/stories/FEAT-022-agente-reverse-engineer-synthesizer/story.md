@@ -18,7 +18,7 @@ parent: EPIC-03-reverse-engineering
 
 **Como** developer que ha ejecutado el skill `reverse-engineering` y tiene los cuatro outputs de an�lisis en `.tmp/`
 **Quiero** que el agente `reverse-engineer-synthesizer` fusione los cuatro archivos intermedios en un �nico documento de requisitos
-**Para** obtener `docs/specs/project/project.md` completo y estructurado siguiendo el template can�nico del framework SDDF
+**Para** obtener `docs/specs/projects/project.md` completo y estructurado siguiendo el template can�nico del framework SDDF
 
 ## ? Criterios de aceptaci�n
 
@@ -26,7 +26,7 @@ parent: EPIC-03-reverse-engineering
 ```gherkin
 Dado que existen ".tmp/rfc-architecture.md", ".tmp/rfc-features.md", ".tmp/rfc-business-rules.md" y ".tmp/rfc-navigation.md"
 Cuando el agente "reverse-engineer-synthesizer" procesa los cuatro archivos
-Entonces genera "docs/specs/project/project.md" siguiendo la estructura del template can�nico
+Entonces genera "docs/specs/projects/project.md" siguiendo la estructura del template can�nico
   Y las secciones no inferibles quedan marcadas con "<!-- PENDING MANUAL REVIEW -->"
   Y los hallazgos se clasifican con nivel de confianza [DIRECT], [INFERRED] o [SUGGESTED]
 ```

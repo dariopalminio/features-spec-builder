@@ -24,7 +24,7 @@ parent: EPIC-03-reverse-engineering
 
 ### Escenario principal � Re-an�lisis incremental de secciones pendientes
 ```gherkin
-Dado que existe "docs/specs/project/project.md" con tres secciones marcadas "<!-- PENDING MANUAL REVIEW -->"
+Dado que existe "docs/specs/projects/project.md" con tres secciones marcadas "<!-- PENDING MANUAL REVIEW -->"
 Cuando el desarrollador ejecuta "/reverse-engineering --update"
 Entonces el skill identifica las secciones marcadas y lanza el an�lisis solo sobre esas partes
   Y actualiza �nicamente las secciones pendientes en el documento existente
@@ -33,7 +33,7 @@ Entonces el skill identifica las secciones marcadas y lanza el an�lisis solo s
 
 ### Escenario alternativo / error � No hay secciones pendientes
 ```gherkin
-Dado que "docs/specs/project/project.md" no contiene ninguna secci�n "<!-- PENDING MANUAL REVIEW -->"
+Dado que "docs/specs/projects/project.md" no contiene ninguna secci�n "<!-- PENDING MANUAL REVIEW -->"
 Cuando el desarrollador ejecuta "/reverse-engineering --update"
 Entonces el skill informa "No se encontraron secciones pendientes. El documento ya est� completo."
   Pero no modifica el documento ni lanza an�lisis adicionales

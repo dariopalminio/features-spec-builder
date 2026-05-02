@@ -5,16 +5,16 @@ El skill `sddf-init` SHALL crear los directorios base del framework SDDF bajo la
 
 #### Scenario: Inicialización exitosa en proyecto nuevo
 - **WHEN** el usuario ejecuta `sddf-init` en un repositorio sin estructura SDDF previa y sin `SDDF_ROOT` definida
-- **THEN** se crean los directorios `docs/specs/project/`, `docs/specs/releases/` y `docs/specs/stories/`
+- **THEN** se crean los directorios `docs/specs/projects/`, `docs/specs/releases/` y `docs/specs/stories/`
 - **THEN** se muestra `✓ Entorno SDDF inicializado correctamente en docs/`
 
 #### Scenario: Inicialización con SDDF_ROOT personalizado
 - **WHEN** el usuario ejecuta `sddf-init` con `SDDF_ROOT="custom/specs"` y ese directorio existe
-- **THEN** se crean los directorios `custom/specs/project/`, `custom/specs/releases/` y `custom/specs/stories/`
+- **THEN** se crean los directorios `custom/specs/projects/`, `custom/specs/releases/` y `custom/specs/stories/`
 - **THEN** se muestra `✓ Entorno SDDF inicializado correctamente en custom/specs/`
 
 #### Scenario: Entorno ya inicializado (idempotencia)
-- **WHEN** el usuario ejecuta `sddf-init` y los directorios `docs/specs/project/`, `docs/specs/releases/` y `docs/specs/stories/` ya existen
+- **WHEN** el usuario ejecuta `sddf-init` y los directorios `docs/specs/projects/`, `docs/specs/releases/` y `docs/specs/stories/` ya existen
 - **THEN** los directorios existentes no son modificados ni eliminados
 - **THEN** se muestra `✓ Entorno ya inicializado — sin cambios necesarios`
 

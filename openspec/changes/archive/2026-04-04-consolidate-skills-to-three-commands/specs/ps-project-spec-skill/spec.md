@@ -8,18 +8,18 @@ El sistema SHALL incluir un skill en `.claude/skills/ps-project-spec/SKILL.md` c
 - **THEN** el sistema MUST cargar y ejecutar `.claude/skills/ps-project-spec/SKILL.md`
 
 ### Requirement: ps-project-spec requires project-intent.md as input
-El skill `/ps-project-spec` SHALL verificar que `docs/specs/project/project-intent.md` existe antes de proceder.
+El skill `/ps-project-spec` SHALL verificar que `docs/specs/projects/project-intent.md` existe antes de proceder.
 
 #### Scenario: Missing prerequisite blocks execution
 - **WHEN** el usuario ejecuta `/ps-project-spec` sin que exista `project-intent.md`
 - **THEN** el sistema MUST informar al usuario que debe ejecutar `/ps-begin-intention` primero y detener la ejecución
 
 ### Requirement: ps-project-spec produces requirement-spec.md
-El skill `/ps-project-spec` SHALL producir `docs/specs/project/project.md` como único documento de salida, en una sola sesión que combina discovery de usuarios y especificación de requisitos.
+El skill `/ps-project-spec` SHALL producir `docs/specs/projects/project.md` como único documento de salida, en una sola sesión que combina discovery de usuarios y especificación de requisitos.
 
 #### Scenario: Single session produces final document
 - **WHEN** el usuario completa la sesión guiada por `/ps-project-spec`
-- **THEN** el sistema MUST crear `docs/specs/project/project.md` usando el template `ps-project-spec/templates/project-template.md`
+- **THEN** el sistema MUST crear `docs/specs/projects/project.md` usando el template `ps-project-spec/templates/project-template.md`
 
 #### Scenario: No intermediate files created
 - **WHEN** `/ps-project-spec` completa su ejecución

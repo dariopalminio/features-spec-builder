@@ -3,7 +3,7 @@ description: >-
   Segundo paso del pipeline de ProjectSpecFactory. Verifica que
   project-intent.md existe en el directorio del proyecto activo, conduce discovery de usuarios y especificación de
   requisitos mediante project-pm y project-architect, produciendo
-  docs/specs/projects/<PROJ-ID>-<nombre>/project.md en una sola sesión.
+  `<SPECS_BASE>/specs/projects/<PROJ-ID>-<nombre>/project.md` en una sola sesión.
 alwaysApply: false
 name: project-discovery
 ---

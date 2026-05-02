@@ -23,6 +23,6 @@ Los archivos de spec del proyecto (project-intent, requirement-spec, project-pla
 ## Impact
 
 - Nuevo directorio `.claude/skills/header-aggregation/` con `SKILL.md` y template de frontmatter
-- Los archivos en `docs/specs/project/`, `docs/specs/releases/` y `docs/specs/stories/` serán enriquecidos con YAML frontmatter al invocar el skill
+- Los archivos en `docs/specs/projects/`, `docs/specs/releases/` y `docs/specs/stories/` serán enriquecidos con YAML frontmatter al invocar el skill
 - Compatible con FEAT-044 (directorio docs tipo wiki): el frontmatter generado es el requisito previo para que `index.md` pueda referenciar nodos por slug
 - Sin cambios en el pipeline existente de skills — el skill es independiente y no afecta el flujo de ejecución actual
