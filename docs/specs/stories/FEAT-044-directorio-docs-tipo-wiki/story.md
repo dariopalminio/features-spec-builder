@@ -4,8 +4,8 @@ id: FEAT-044
 slug: FEAT-044-directorio-docs-tipo-wiki
 title: "Directorio docs tipo wiki"
 date: 2026-04-27
-status: BACKLOG
-substatus: null
+status: COMPLETED
+substatus: READY
 parent: EPIC-09-docs-and-wiki-builders
 ---
 

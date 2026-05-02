@@ -4,8 +4,8 @@ id: FEAT-046
 slug: FEAT-046-publicar-npm-con-github-actions
 title: "GitHub Actions CI/CD"
 date: 2026-04-27
-status: BACKLOG
-substatus: null
+status: COMPLETED
+substatus: READY
 parent: null
 ---
 

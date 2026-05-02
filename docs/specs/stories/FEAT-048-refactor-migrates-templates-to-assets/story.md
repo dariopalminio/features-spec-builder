@@ -4,8 +4,8 @@ id: FEAT-048
 slug: FEAT-048-refactor-migrates-templates-to-assets
 title: "Refactoring - Migraci�n de templates a assets en Skills"
 date: 2026-04-27
-status: BACKLOG
-substatus: null
+status: COMPLETED
+substatus: READY
 parent: EPIC-09-docs-and-wiki-builders
 ---
 

@@ -6,10 +6,10 @@ title: "<primer # heading del documento>"
 date: <YYYY-MM-DD>
 status: BACKLOG
 substatus: DOING
-parent: <slug-nombre-del-release>
+parent: <nombre-del-directorio-de-release>
 ---
 <!-- Referencias -->
-[[<slug-nombre-del-release>]]
+[[<nombre-del-directorio-de-release>]]
 
 # 📖 Historia: [Título de la historia o nombre de historia]
 

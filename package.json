@@ -25,6 +25,7 @@
     ".claude/skills/openspec-generate-baseline",
     ".claude/skills/openspec-init-config",
     ".claude/skills/project-begin",
+    ".claude/skills/project-context-diagram",
     ".claude/skills/project-discovery",
     ".claude/skills/project-flow",
     ".claude/skills/project-planning",

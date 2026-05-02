@@ -5,8 +5,8 @@ id: FEAT-049
 slug: FEAT-049-reading-of-sddf-root
 title: "Lectura de SDDF_ROOT como ruta base de artefactos en skills SDDF"
 date: 2026-05-01
-status: BACKLOG
-substatus: DOING
+status: COMPLETED
+substatus: READY
 parent: EPIC-10-mejora-estructura-artefactos-nuevos-skills
 ---
 **FINVEST Score:** [pendiente]

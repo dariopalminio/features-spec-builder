@@ -6,13 +6,16 @@ slug: <nombre-del-directorio-de-historia>
 title: "<primer # heading del documento>"
 status: BACKLOG
 substatus: DOING
-parent: <nombre-del-directorio-de-release o EPIC-NN>
+parent: <nombre-del-directorio-de-release>
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>
 ---
 **FINVEST Score:** [FINVEST Score]
 **FINVEST Decisión:** [APROBADA | REFINAR | RECHAZAR]
 ---
+<!-- Referencias -->
+[[nombre-del-directorio-de-release]]
+
 
 # 📖 Historia: [Título de la historia o nombre de historia]
 

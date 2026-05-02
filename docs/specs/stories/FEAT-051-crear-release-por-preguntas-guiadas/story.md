@@ -4,8 +4,8 @@ type: story
 id: FEAT-051
 slug: FEAT-051-crear-release-por-preguntas-guiadas
 title: "Crear un release.md válido respondiendo preguntas guiadas por el template"
-status: BACKLOG
-substatus: DOING
+status: COMPLETED
+substatus: READY
 parent: EPIC-10-mejora-estructura-artefactos-nuevos-skills
 created: 2026-05-01
 updated: 2026-05-01

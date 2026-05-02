@@ -6,11 +6,13 @@ title: "<primer # heading del documento>"
 date: <YYYY-MM-DD>
 status: BACKLOG
 substatus: DOING
-parent: null
+parent: <nombre-del-directorio-de-release>
 ---
 **FINVEST Score:** [FINVEST Score]
 **FINVEST Decisión:** [APROBADA | REFINAR | RECHAZAR]
 ---
+<!-- Referencias -->
+[[nombre-del-directorio-de-release]]
 
 # 📖 Historia: [Título de la historia o nombre de historia]
 
