@@ -10,6 +10,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- **Skill `/sddf-init`** (FEAT-054) — inicializa el entorno SDDF en un proyecto nuevo: crea los directorios `specs/project/`, `specs/releases/` y `specs/stories/` bajo `SDDF_ROOT` (o `docs/` por defecto), genera `openspec/config.yaml` mínimo desde template y `.env.template` documentando `SDDF_ROOT`; idempotente (no sobrescribe archivos ni directorios existentes); aborta con `[ERROR]` si `SDDF_ROOT` está definida pero la ruta no existe; distingue `[CREADO]` vs `[YA EXISTÍA]` en el informe final; es el primer paso del flujo de onboarding `sddf-init → skill-preflight → [skill]`
+- **Skill `/skill-preflight`** — protocolo centralizado de verificación de entorno previo a la ejecución de cualquier skill SDDF; verifica `SDDF_ROOT` y resolución de `SPECS_BASE`, subdirectorios de specs estándar, templates requeridos por el skill invocador y estado de `openspec/config.yaml`; produce informe `[OK] / [WARNING] / [ERROR]` con resultado final `✓ Entorno OK` o `✗ Entorno inválido`; todos los skills del pipeline (L1 Story, L2 Release, L3 Project, utilidades) migrados para invocar `skill-preflight` en su Paso 0 en lugar de replicar lógica de validación de entorno
+
 - **Variable de entorno `SDDF_ROOT`** (FEAT-049) — todos los skills del pipeline (`project-begin`, `project-discovery`, `project-planning`, `releases-from-project-plan`, `release-generate-stories`, `release-generate-all-stories`, `reverse-engineering`) leen `SDDF_ROOT` para determinar la ruta base de artefactos (`SPECS_BASE`); si no está definida usa `docs` como fallback; si está definida pero la ruta no existe muestra advertencia y usa `docs`
 
 ### Changed
