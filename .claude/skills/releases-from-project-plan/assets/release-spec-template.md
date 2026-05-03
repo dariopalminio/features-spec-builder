@@ -9,6 +9,8 @@ substatus: DOING
 parent: <PROJ-NN>
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>
+related:                              
+  - <nombre-del-directorio-del-proyecto-project-plan | slug del project-plan.md origen>
 ---
 <!-- Referencias -->
 [[<nombre-del-directorio-del-proyecto-project-plan | slug del project-plan.md origen>]] <!-- referencia al project plan del proyecto padre -->

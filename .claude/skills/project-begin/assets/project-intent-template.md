@@ -2,7 +2,7 @@
 alwaysApply: false
 type: project
 id: <PROJ-NN>
-slug: < nombre-del-directorio-del-proyecto | project-intent si es el primer documento >
+slug: < nombre-del-directorio-del-proyecto-project-intent | project-intent si es el primer documento >
 title: "<primer # heading del documento>"
 status: BEGINNING
 substatus: DOING

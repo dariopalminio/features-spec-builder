@@ -6,11 +6,15 @@ title: "<primer # heading del documento>"
 date: <YYYY-MM-DD>
 status: REFINING
 substatus: DOING
-parent: null
+parent: <nombre-del-directorio-de-release o slug del release relacionado (si existe)>
+related:                              
+  - <nombre-del-directorio-de-release o slug del release relacionado (si existe)>
 ---
 **FINVEST Score:** [FINVEST Score]
 **FINVEST Decisión:** [APROBADA | REFINAR | RECHAZAR]
 ---
+<!-- Referencias -->
+[[nombre-del-directorio-de-release o slug del release relacionado (si existe)]] <!-- referencia al project plan del proyecto padre -->
 
 # 📖 Historia: [Título de la historia o nombre de historia]
 

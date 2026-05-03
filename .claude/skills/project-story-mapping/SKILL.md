@@ -99,8 +99,11 @@ date: [YYYY-MM-DD]
 status: BACKLOG
 substatus: DOING
 parent: null
+related:                              
+  - <nombre-del-directorio-del-proyecto-project o slug de project-plan relacionado (si existe)>
 ---
-```
+<!-- Referencias -->
+[[nombre-del-directorio-del-proyecto-project o slug de project-plan relacionado (si existe)]]
 
 Reglas de derivación:
 - `title`: extrae el primer `#` heading del documento

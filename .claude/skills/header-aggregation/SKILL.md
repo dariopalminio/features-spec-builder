@@ -73,15 +73,19 @@ Para cada archivo a procesar, deriva automáticamente los campos obligatorios:
 
 | Campo | Regla de derivación |
 |-------|---------------------|
+| `alwaysApply` | false |
 | `id` | Extraer del frontmatter existente si tiene. Si no: prefijo del nombre de directorio → `FEAT-NNN` para stories, `EPIC-NN` para releases, `PROJ-NN` para projects |
 | `slug` | Nombre del **directorio** contenedor en kebab-case (ej. `FEAT-043-header-aggregation`, `EPIC-01-nombre`, `PROJ-01-nombre`) |
 | `type` | Prefijo del nombre de directorio: `FEAT-*` → `story`, `EPIC-*` → `release`, `PROJ-*` → `project`, archivos fuera de estas convenciones → `wiki` |
 | `title` | Primer heading `#` del contenido del archivo. Si no hay heading `#`, usar el nombre del directorio formateado (guiones → espacios, capitalizar) |
 | `status` | Buscar `**Estado**: Doing` en el contenido → `IN-PROGRESS`; `**Estado**: Ready` → `COMPLETED`; ausente o desconocido → `BACKLOG` |
-| `substatus` | Buscar `**Estado**: Doing` → `DOING`; `**Estado**: Ready` → `READY`; ausente o desconocido → `N/A` |
-| `parent` | Para stories: extraer EPIC-NN del frontmatter existente o de la sección del documento. Para releases: extraer PROJ-NN. Para projects: `null` |
+| `substatus` | no es un archivo spec → null; si es un archivo de spec → derivar según contenido; ausente o desconocido → null |
+| `parent` | Para stories: extraer nombre del directorio del release (la Epic o release) padre del frontmatter existente o de la sección del documento o el slug del archivo release padre (ej. `EPIC-01-nombre`). Para releases: extraer nombre del directorio del proyecto padre o slug del archivo padre project.md (ej. `PROJ-01-nombre`). Para projects u otros archivos: `null` |
 | `created` | Preservar del frontmatter existente (`created` o `date`). Si no existe → fecha actual `YYYY-MM-DD` |
 | `updated` | Fecha actual `YYYY-MM-DD` siempre que se haga un merge/update |
+| `related` | Lista de slug de elementos relacionados (ej. `EPIC-01-nombre`) incluida el parent |
+
+Se agrega una referencias inmediatamente despues del frontmatter con el formato `[[slug-del-release-o-proyecto]]` con el listado de `related` para facilitar la navegación y trazabilidad.
 
 Muestra los valores derivados al usuario antes de escribir y permite correcciones.
 

@@ -7,7 +7,11 @@ date: <YYYY-MM-DD>
 status: PLANNING
 substatus: DOING
 parent: null
+related:                              
+  - <nombre-del-directorio-del-proyecto-project o slug de project-plan relacionado (si existe)>
 ---
+<!-- Referencias -->
+[[nombre-del-directorio-del-proyecto-project o slug de project-plan relacionado (si existe)]]
 
 ## Objetivo
 

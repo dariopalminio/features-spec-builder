@@ -7,7 +7,11 @@ date: <YYYY-MM-DD>
 status: DEFINITION
 substatus: DOING
 parent: null
+related:                              
+  - <slug de project relacionado (si existe)>
 ---
+<!-- Referencias -->
+[[slug de project relacionado (si existe)]]
 
 # Release/Epic: [Nombre de la Épica/Release] <!-- nombre obligatorio -->
 

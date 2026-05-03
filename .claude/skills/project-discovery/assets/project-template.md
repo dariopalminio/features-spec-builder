@@ -7,7 +7,11 @@ date: <YYYY-MM-DD>
 status: DISCOVERY
 substatus: DOING
 parent: null
+related:                              
+  - slug del project-intent relacionado (si existe)
 ---
+<!-- Referencias -->
+[[slug del project-intent relacionado (si existe)]]
 
 # 1. Definición del proyecto
 

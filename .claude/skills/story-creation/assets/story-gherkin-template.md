@@ -9,12 +9,14 @@ substatus: DOING
 parent: <nombre-del-directorio-de-release>
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>
+related:                              
+  - <nombre-del-directorio-de-release o slug del release relacionado (si existe)>
 ---
 **FINVEST Score:** [FINVEST Score]
 **FINVEST Decisión:** [APROBADA | REFINAR | RECHAZAR]
 ---
 <!-- Referencias -->
-[[nombre-del-directorio-de-release]]
+[[nombre-del-directorio-de-release o slug del release relacionado (si existe)]] <!-- referencia al project plan del proyecto padre -->
 
 
 # 📖 Historia: [Título de la historia o nombre de historia]
