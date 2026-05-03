@@ -1,12 +1,16 @@
 ---
 alwaysApply: false
 type: story
-slug: <nombre-del-archivo-sin-extensión>
+id: <FEAT-NNN>
+slug: <nombre-del-directorio-de-historia>
 title: "<primer # heading del documento>"
-date: <YYYY-MM-DD>
 status: BACKLOG
 substatus: DOING
-parent: null
+parent: <nombre-del-directorio-de-release>
+created: <YYYY-MM-DD>
+updated: <YYYY-MM-DD>
+related:
+  - <nombre-del-directorio-de-release o slug del release relacionado (si existe)>
 ---
 **FINVEST Score:** [FINVEST Score]
 **FINVEST Decisión:** [APROBADA | REFINAR | RECHAZAR]

@@ -1,12 +1,14 @@
 ---
 alwaysApply: false
 type: project
+id: <PROJ-NN>
 slug: < nombre-del-directorio-del-proyecto-project >
 title: "<primer # heading del documento>"
-date: <YYYY-MM-DD>
 status: DISCOVERY
 substatus: DOING
 parent: null
+created: <YYYY-MM-DD>
+updated: <YYYY-MM-DD>
 related:                              
   - slug del project-intent relacionado (si existe)
 ---

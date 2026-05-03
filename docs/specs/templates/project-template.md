@@ -1,12 +1,16 @@
 ---
 alwaysApply: false
 type: project
-slug: project-requirement-spec-template
+id: <PROJ-NN>
+slug: <nombre-del-directorio-del-proyecto>
 title: "<primer # heading del documento>"
-date: <YYYY-MM-DD>
 status: BACKLOG
 substatus: DOING
 parent: null
+created: <YYYY-MM-DD>
+updated: <YYYY-MM-DD>
+related:
+  - <slug del project-intent relacionado (si existe)>
 ---
 
 # 1. Definición del proyecto

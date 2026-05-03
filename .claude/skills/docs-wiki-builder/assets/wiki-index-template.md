@@ -1,11 +1,13 @@
 ---
+alwaysApply: false
 type: wiki
 slug: index
 title: "Índice de documentación"
-date: <YYYY-MM-DD>
 status: IN-PROGRESS
 substatus: DOING
 parent: null
+created: <YYYY-MM-DD>
+updated: <YYYY-MM-DD>
 ---
 
 # 📚 Índice de documentación

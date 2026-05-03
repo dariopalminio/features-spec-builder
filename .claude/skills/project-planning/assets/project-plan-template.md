@@ -1,12 +1,14 @@
 ---
 alwaysApply: false
-type: spec
+type: project
+id: <PROJ-NN>
 slug: < nombre-del-directorio-del-proyecto-project-plan >
 title: "<primer # heading del documento>"
-date: <YYYY-MM-DD>
 status: PLANNING
 substatus: DOING
 parent: null
+created: <YYYY-MM-DD>
+updated: <YYYY-MM-DD>
 related:                              
   - <nombre-del-directorio-del-proyecto-project o slug de project-plan relacionado (si existe)>
 ---

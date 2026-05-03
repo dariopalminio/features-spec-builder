@@ -1,12 +1,14 @@
 ---
 alwaysApply: false
-type: spec
+type: release
+id: <EPIC-NN>
 slug: <nombre-del-directorio-de-release>
 title: "<primer # heading del documento>"
-date: <YYYY-MM-DD>
 status: DEFINITION
 substatus: DOING
 parent: null
+created: <YYYY-MM-DD>
+updated: <YYYY-MM-DD>
 related:                              
   - <slug de project relacionado (si existe)>
 ---

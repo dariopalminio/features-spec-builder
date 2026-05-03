@@ -15,11 +15,6 @@ related:
 <!-- Referencias -->
 [[<nombre-del-directorio-del-proyecto-project-plan | slug del project-plan.md origen>]] <!-- referencia al project plan del proyecto padre -->
 
-nombre-del-directorio-de-release
-
-.prueba\specs\projects\PROJ-01-harness-engineering\project-plan.md
-
-
 # Release/Epic: [Nombre de la Épica/Release] <!-- nombre obligatorio -->
 
 ## Descripción <!-- sección obligatoria-->

@@ -15,11 +15,12 @@ Este esquema es la fuente de verdad del skill. Nunca lo hardcodees en otro lugar
 
 ```yaml
 ---
+alwaysApply: false                         # OBLIGATORIO — siempre false en archivos spec
 type: <project | release | story | wiki>   # OBLIGATORIO
 id: <PROJ-NN | EPIC-NN | FEAT-NNN>         # OBLIGATORIO (según type)
 slug: <nombre-del-directorio>              # OBLIGATORIO
 title: "<Título legible del documento>"    # OBLIGATORIO
-status: <REFINING | READY-FOR-DEVELOP | DEFINITION | PLANNED | BEGINNING | DISCOVERY | PLANNING | IN-DEVELOPMENT | MEASURING-VALUE | FINISHED | CANCELED | DEVELOP | INTEGRATION | RELEASE | RELEASED | DEVELOPING | TESTING | ACCEPTANCE | DELIVERED> # OBLIGATORIO
+status: <BACKLOG | BEGINNING | DISCOVERY | PLANNING | DEFINITION | REFINING | PLANNED | READY-FOR-DEVELOP | IN-PROGRESS | IN-DEVELOPMENT | DEVELOPING | TESTING | ACCEPTANCE | INTEGRATION | RELEASE | RELEASED | MEASURING-VALUE | COMPLETED | FINISHED | CANCELED | DELIVERED> # OBLIGATORIO
 substatus: <null | TODO | DOING | READY>    # OBLIGATORIO
 parent: <null | PROJ-NN | EPIC-NN>         # OBLIGATORIO
 created: <YYYY-MM-DD>                      # OBLIGATORIO

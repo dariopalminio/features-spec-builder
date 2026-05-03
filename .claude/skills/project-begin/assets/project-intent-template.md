@@ -9,6 +9,8 @@ substatus: DOING
 parent: null
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>
+related:
+  - <slug del project.md o requirement-spec relacionado (si existe)>
 ---
 
 ## Definición del Problema
