@@ -4,7 +4,7 @@ id: EPIC-01
 slug: EPIC-01-features-spec-builder
 title: "Release 01 — Features Spec Builder"
 date: 2026-04-09
-status: COMPLETED
+status: RELEASED
 substatus: READY
 parent: PROJ-01-agile-sddf
 related:                              

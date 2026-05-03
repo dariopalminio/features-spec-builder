@@ -4,7 +4,7 @@ type: release
 id: EPIC-10
 slug: EPIC-10-mejora-estructura-artefactos-nuevos-skills
 title: "Mejora en estructura de artefactos y nuevos skills"
-status: BACKLOG
+status: RELEASED
 substatus: READY
 parent: PROJ-01-agile-sddf
 created: 2026-05-01

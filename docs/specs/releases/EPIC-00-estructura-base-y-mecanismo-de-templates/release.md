@@ -4,7 +4,7 @@ id: EPIC-00
 slug: EPIC-00-estructura-base-y-mecanismo-de-templates
 title: "Release 00 — Estructura Base y Mecanismo de Templates"
 date: 2026-04-09
-status: COMPLETED
+status: RELEASED
 substatus: READY
 parent: PROJ-01-agile-sddf
 related:                              

@@ -4,7 +4,7 @@ id: EPIC-08
 slug: EPIC-08-npm-install-locally
 title: "Release 08 — Npm Install locally"
 date: 2026-04-20
-status: COMPLETED
+status: RELEASED
 substatus: READY
 parent: PROJ-01-agile-sddf
 related:                              

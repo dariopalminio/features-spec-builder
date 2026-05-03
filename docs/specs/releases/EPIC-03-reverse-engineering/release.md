@@ -4,7 +4,7 @@ id: EPIC-03
 slug: EPIC-03-reverse-engineering
 title: "Release 03 — Reverse Engineering (Ingeniería inversa)"
 date: 2026-04-16
-status: COMPLETED
+status: RELEASED
 substatus: READY
 parent: PROJ-01-agile-sddf
 related:                              

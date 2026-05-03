@@ -4,7 +4,7 @@ id: EPIC-07
 slug: EPIC-07-publicacion-framework-npm
 title: "Release 07 — Publicación del Framework SDDF como Paquete NPM"
 date: 2026-04-20
-status: COMPLETED
+status: RELEASED
 substatus: READY
 parent: PROJ-01-agile-sddf
 related:                              
