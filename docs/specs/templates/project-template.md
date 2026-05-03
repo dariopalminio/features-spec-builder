@@ -4,7 +4,7 @@ type: project
 id: <PROJ-NN>
 slug: <nombre-del-directorio-del-proyecto>
 title: "<primer # heading del documento>"
-status: BACKLOG
+status: <ESTADO_INICIAL>
 substatus: DOING
 parent: null
 created: <YYYY-MM-DD>

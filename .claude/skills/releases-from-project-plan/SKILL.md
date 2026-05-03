@@ -4,7 +4,7 @@ description: "Genera especificaciones de release (directorio `EPIC-NN-nombre/rel
 ---
 # Skill: /releases-from-project-plan
 
-Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md` y genera automáticamente un directorio `EPIC-[ID]-[nombre-kebab]/` con un archivo `release.md` por cada release planificado en la sección "Propuesta de Releases". Cada archivo generado sigue exactamente la estructura de `assets/release-spec-template.md`.
+Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md` y genera automáticamente un directorio `EPIC-[ID]-[nombre-kebab]/` con un archivo `release.md` por cada release planificado en la sección "Propuesta de Releases". Cada archivo generado sigue exactamente la estructura de `$SPECS_BASE/specs/templates/release-spec-template.md`.
 
 **Usar cuando:**
 - Se quiere materializar los releases de un `project-plan.md` como archivos de especificación listos para editar
@@ -119,11 +119,11 @@ El archivo de plantilla es la **única fuente de información estructural** para
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla `assets/release-spec-template.md`.
+Lee el archivo de plantilla `$SPECS_BASE/specs/templates/release-spec-template.md`.
 
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template requerido en `assets/release-spec-template.md`.
+  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/release-spec-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 - Si el archivo **existe**: continua.
@@ -132,7 +132,10 @@ Lee el archivo de plantilla `assets/release-spec-template.md`.
 
 Crear el directorio `$SPECS_BASE/specs/releases/EPIC-[ID]-[nombre-kebab]/` si no existe, luego crear el archivo `release.md` dentro de ese directorio, poblando cada sección con los datos del release:
 
-Completa el archivo de plantilla `assets/release-spec-template.md` infiriendo la información. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros en la estructura del template. Para cada sección del template, si el dato correspondiente no existe en el bloque del release, usar el placeholder `[Por completar]` para asegurar que la sección siempre está presente y el archivo tiene estructura completa.
+Completa el archivo de plantilla `$SPECS_BASE/specs/templates/release-spec-template.md` infiriendo la información. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros en la estructura del template. Para cada sección del template, si el dato correspondiente no existe en el bloque del release, usar el placeholder `[Por completar]` para asegurar que la sección siempre está presente y el archivo tiene estructura completa.
+
+Al completar el frontmatter del archivo generado, usar:
+- `status: DEFINITION` — estado inicial de todo release generado desde un project-plan (en etapa de definición, pendiente de validación)
 
 Por ejemplo:
 
@@ -140,7 +143,7 @@ Por ejemplo:
 ---
 title: <"Nombre completo del release">
 date: <Fecha extraída o fecha actual con formato YYYY-MM-DD>
-status: IN-PROGRESS
+status: DEFINITION
 substatus: <substatus extraido o DOING>
 parent: <nombre del archivo de requirement-spec del proyecto del cual se genera el releaseo N/A>
 ---

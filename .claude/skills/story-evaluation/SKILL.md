@@ -32,11 +32,11 @@ El archivo de plantilla (template canónico) es la **única fuente de informaci�
 
 El archivo de plantilla (template canónico) es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla (template canónico) `assets/story-gherkin-template.md`.
+Lee el archivo de plantilla (template canónico) `$SPECS_BASE/specs/templates/story-gherkin-template.md`.
 
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template requerido en `assets/story-gherkin-template.md`.
+  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/story-gherkin-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 - Si el archivo **existe**: continua con lo siguiente.

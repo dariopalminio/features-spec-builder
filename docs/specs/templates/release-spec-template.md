@@ -4,7 +4,7 @@ type: release
 id: <EPIC-NN>
 slug: <nombre-del-directorio-de-release>
 title: "<primer # heading del documento>"
-status: BACKLOG
+status: <ESTADO_INICIAL>
 substatus: DOING
 parent: null
 created: <YYYY-MM-DD>

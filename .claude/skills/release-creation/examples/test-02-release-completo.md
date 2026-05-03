@@ -24,7 +24,7 @@
 - El directorio no existe → continuar
 
 ### Fase 1 — Leer template
-- Se lee `assets/release-spec-template.md`
+- Se lee `$SPECS_BASE/specs/templates/release-spec-template.md`
 - Secciones obligatorias: `Descripción`, `Features`, `Flujos Críticos / Smoke Tests`
 - Secciones opcionales: `Requerimiento`, `Impacto en Procesos Claves`, `Dependencias Críticas`, `Riesgos`, `Criterios de éxito`, `Notas adicionales`
 

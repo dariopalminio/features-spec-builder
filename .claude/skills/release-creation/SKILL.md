@@ -5,7 +5,7 @@ description: "Crea un archivo de release completado mediante interacción con el
 
 # Skill: /release-creation
 
-Conduce al usuario a través de la creación de un archivo de release completo mediante preguntas interactivas. Extrae la estructura del template `assets/release-spec-template.md` en tiempo de ejecución — si el template cambia, el flujo de preguntas se actualiza automáticamente.
+Conduce al usuario a través de la creación de un archivo de release completo mediante preguntas interactivas. Extrae la estructura del template `$SPECS_BASE/specs/templates/release-spec-template.md` en tiempo de ejecución — si el template cambia, el flujo de preguntas se actualiza automáticamente.
 
 **Usar cuando:**
 - Se quiere crear un release sin tener `project-plan.md` previo
@@ -61,10 +61,10 @@ Si elige "2", volver al inicio de la Fase 0 para pedir un nombre diferente.
 
 El archivo de plantilla es la **única fuente de información estructural**. Nunca hardcodear nombres de secciones.
 
-Leer `assets/release-spec-template.md`.
+Leer `$SPECS_BASE/specs/templates/release-spec-template.md`.
 
 - Si el archivo **no existe**: detener la ejecución con:
-  > ❌ No se encontró el template requerido en `assets/release-spec-template.md`.
+  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/release-spec-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 - Si el archivo **existe**: extraer dinámicamente:
@@ -84,7 +84,7 @@ Preguntar los campos del frontmatter con valores sugeridos. Para cada campo, mos
 |---|---|---|
 | `title` | "¿Cuál es el título del release?" | El nombre ingresado en Fase 0 |
 | `date` | "¿Fecha del release? (YYYY-MM-DD)" | Fecha de hoy |
-| `status` | "¿Estado inicial? (BACKLOG / DOING / DONE)" | `BACKLOG` |
+| `status` | "¿Estado inicial?" | `DEFINITION` — estado inicial de un release recién creado (en etapa de definición) |
 | `substatus` | "¿Subestado? (DOING / REVIEW / READY)" | `DOING` |
 | `slug` | — | Derivado automáticamente del nombre (mostrar al usuario, permitir corrección) |
 
@@ -221,7 +221,7 @@ Si el usuario responde "sí": volver a Fase 3 o Fase 4 según corresponda para l
 
 ## Referencias
 
-- **Template canónico:** `assets/release-spec-template.md`
+- **Template canónico:** `$SPECS_BASE/specs/templates/release-spec-template.md`
 - **Validación de releases:** `/release-format-validation`
 - **Generación de stories:** `/release-generate-stories`
 - **Generación desde plan:** `/releases-from-project-plan`

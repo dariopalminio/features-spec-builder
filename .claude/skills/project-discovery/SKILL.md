@@ -65,11 +65,11 @@ El archivo de plantilla es la **única fuente de información estructural** para
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla `assets/project-template.md`.
+Lee el archivo de plantilla `$SPECS_BASE/specs/templates/project-template.md`.
 
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template requerido en `assets/project-template.md`.
+  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/project-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 - Si el archivo **existe**: continua.
@@ -90,13 +90,14 @@ Invoca al agente `project-pm` con la siguiente instrucción:
 
 Una vez completado el discovery, invoca al agente `project-architect` con la siguiente instrucción:
 
-> Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md` y el resumen del discovery de la fase anterior. Lee tambien el template `assets/project-template.md`.
+> Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md` y el resumen del discovery de la fase anterior. Lee tambien el template `$SPECS_BASE/specs/templates/project-template.md`.
 >
 > Si estas en flujo de retoma (documento existente en `Estado: Doing`), primero lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continua solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
 > Extrae las secciones del template en runtime y conduce la entrevista de especificación de requisitos con el usuario por secciones (máx 3-4 preguntas por ronda).
 > Pre-rellena con la información ya disponible del discovery y el project-intent. Infiere contenido faltante marcándolo con `[inferido]`.
 > Para secciones de experiencia de usuario y usabilidad, puedes apoyarte en el agente `project-ux`.
+> Al completar el frontmatter del documento generado, usar `status: DISCOVERY` — estado inicial de todo proyecto en etapa de descubrimiento de requisitos.
 > Escribe el documento final en `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`.
 
 El `project-architect` se encargará de:

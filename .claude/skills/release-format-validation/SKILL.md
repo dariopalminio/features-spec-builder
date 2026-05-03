@@ -4,7 +4,7 @@ description: "Valida que un archivo de especificación de release cumple la estr
 ---
 # Skill: /release-format-validation
 
-Valida que un archivo de especificación de release contiene todas las secciones obligatorias del template `assets/release-spec-template.md`. Produce resultado **APROBADO**, **REFINAR** o **RECHAZADO**.
+Valida que un archivo de especificación de release contiene todas las secciones obligatorias del template `$SPECS_BASE/specs/templates/release-spec-template.md`. Produce resultado **APROBADO**, **REFINAR** o **RECHAZADO**.
 
 **Usar cuando:**
 - Antes de usar un archivo de release como input para `generate-stories` u otros skills del pipeline SDDF
@@ -51,11 +51,11 @@ El archivo de plantilla es la **única fuente de información estructural** para
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla `assets/release-spec-template.md`.
+Lee el archivo de plantilla `$SPECS_BASE/specs/templates/release-spec-template.md`.
 
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template requerido en `assets/release-spec-template.md`.
+  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/release-spec-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 - Si el archivo **existe**: continua.
@@ -125,7 +125,7 @@ Secciones/campos faltantes:
 - <nombre exacto del campo o encabezado faltante 2>
 ...
 
-Revisa el template en assets/release-spec-template.md para completar las secciones indicadas.
+Revisa el template en $SPECS_BASE/specs/templates/release-spec-template.md para completar las secciones indicadas.
 ```
 
 ---

@@ -125,7 +125,7 @@ Lee `docs/specs/projects/project.md` (si existe):
 
 ### 2.3 Verificar template
 
-Lee `project-discovery/assets/project-template.md`. Si no existe, informa y detén.
+Lee `$SPECS_BASE/specs/templates/project-template.md`. Si no existe, informa y detén.
 
 ### 2.4 Sub-fase Discovery — Delegar al project-pm
 
@@ -143,7 +143,7 @@ Invoca al agente `project-pm` con la siguiente instrucción:
 
 Una vez completado el discovery, invoca al agente `project-architect` con la siguiente instrucción:
 
-> Lee `docs/specs/projects/project-intent.md` y el resumen del discovery de la fase anterior. Lee también el template `project-discovery/assets/project-template.md`.
+> Lee `docs/specs/projects/project-intent.md` y el resumen del discovery de la fase anterior. Lee también el template `$SPECS_BASE/specs/templates/project-template.md`.
 >
 > Si estás en flujo de retoma (documento existente en `Estado: Doing`), primero lee `docs/specs/projects/project.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >

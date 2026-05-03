@@ -84,6 +84,8 @@ Este skill crea los directorios base de artefactos bajo `<SPECS_BASE>/specs/` (p
 
 Si `SDDF_ROOT` está definida como variable de entorno y la ruta no existe, el skill lo reporta como error antes de crear cualquier archivo. Consulta la sección [Configuration](#configuration) para más detalles sobre `SDDF_ROOT`.
 
+> **skill-preflight:** todos los skills SDDF invocan automáticamente `/skill-preflight` como Paso 0 antes de cualquier operación. Verifica `SDDF_ROOT`, los subdirectorios de specs y produce un informe OK/WARNING/ERROR. No es necesario invocarlo manualmente; se puede ejecutar directamente para diagnosticar el entorno antes de un workflow.
+
 ## Quick Start
 
 Inicia el pipeline completo de especificación en una sola sesión desde Claude Code:
@@ -114,9 +116,9 @@ SDDF se organiza en 4 niveles principales que cubren todo el ciclo de vida de la
 
 #### 1. L3: Pipeline de especificación de proyecto (iniciativa)
 
-project-begin → project-discovery → project-planning
+project-begin → project-discovery → project-planning → project-story-mapping
 
-project-flow orquesta los 3 pasos en una sola sesión con gates de revisión entre etapas.
+project-flow orquesta los 3 primeros pasos en una sola sesión con gates de revisión entre etapas. project-story-mapping se ejecuta de forma opcional como sesión de mapeo colaborativo post-planning.
 
 #### 2. L2: Pipeline de generación de releases e historias
 
@@ -177,6 +179,9 @@ Cada archivo principal usa un nombre canónico (`project-intent.md`, `release.md
 **Generar artefactos de release:**
 
 ```bash
+# Genera el plan de releases
+/release-creation
+
 # Genera todos los directorios de release desde project-plan.md
 /releases-from-project-plan
 
@@ -185,6 +190,25 @@ Cada archivo principal usa un nombre canónico (`project-intent.md`, `release.md
 
 # Genera las historias de todos los releases
 /release-generate-all-stories
+
+# Valida que un release cumple la estructura obligatoria antes de generar historias
+/release-format-validation EPIC-01-features-spec-builder
+```
+
+**Documentación y visualización de proyecto:**
+
+```bash
+# Sesión interactiva de User Story Mapping (Jeff Patton) para construir backbone y release slices
+/project-story-mapping
+
+# Genera diagrama de contexto C4 Nivel 1 en PlantUML con preguntas guiadas
+/project-context-diagram --interactive
+
+# Genera diagrama de contexto C4 Nivel 1 infiriendo desde documentos de specs existentes
+/project-context-diagram --from-files
+
+# Genera README.md completo a partir de los artefactos de specs del proyecto
+/readme-builder
 ```
 
 ### Advanced Usage
@@ -205,6 +229,12 @@ Cada archivo principal usa un nombre canónico (`project-intent.md`, `release.md
 **Gestión de cambios con OpenSpec:**
 
 ```bash
+# Inicializar el contexto del proyecto en openspec/config.yaml
+/openspec-init-config
+
+# Generar baseline de especificaciones OpenSpec desde código fuente existente
+/openspec-generate-baseline
+
 # Explorar una idea sin implementar
 /openspec-explore
 
@@ -216,6 +246,16 @@ Cada archivo principal usa un nombre canónico (`project-intent.md`, `release.md
 
 # Archivar un cambio completado
 /openspec-archive-change
+```
+
+**Docs wiki y frontmatter:**
+
+```bash
+# Reorganizar docs/ como wiki navegable con índice central (LLM Wiki pattern)
+/docs-wiki-builder
+
+# Añadir o actualizar frontmatter YAML canónico en archivos spec Markdown
+/header-aggregation docs/specs/stories/FEAT-001-nombre/story.md
 ```
 
 **Crear una nueva skill:**

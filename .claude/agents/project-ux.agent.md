@@ -69,7 +69,7 @@ Extrae de `project-template.md` las secciones relacionadas con usuarios, experie
 
 ## Contribución esperada al requirement-spec
 
-**Objetivo:** ayudar a completar y mejorar las secciones de UX/UI dentro de `docs/specs/projects/project.md`, siguiendo la estructura de `.claude/skills/project-discovery/assets/project-template.md`.
+**Objetivo:** ayudar a completar y mejorar las secciones de UX/UI dentro de `docs/specs/projects/project.md`, siguiendo la estructura de `docs/specs/templates/project-template.md`.
 
 **Enfoque:**
 

@@ -52,11 +52,11 @@ El archivo de plantilla es la **única fuente de información estructural** para
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla `assets/project-template.md`.
+Lee el archivo de plantilla `$SPECS_BASE/specs/templates/project-template.md`.
 
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template en `assets/project-template.md`.
+  > ❌ No se encontró el template en `$SPECS_BASE/specs/templates/project-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 - Si el archivo **existe**: continua.
@@ -166,6 +166,7 @@ Verifica la existencia de cada archivo `.tmp/rfc-*.md`. Si alguno falta, adviert
 > - Output path: `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`
 > - Update mode: [true/false] — si true, también lee el documento existente y preserva secciones ya completas.
 >
+> Al completar el frontmatter del documento generado, usar `status: DISCOVERY` — estado inicial de todo proyecto generado por ingeniería inversa (descubrimiento de requisitos desde código).
 > Genera el documento aunque algunas secciones queden como `<!-- PENDING MANUAL REVIEW -->`.
 
 ---
