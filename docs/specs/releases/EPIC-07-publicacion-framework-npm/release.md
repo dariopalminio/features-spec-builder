@@ -19,7 +19,7 @@ related:
 Permite la distribución del framework Agile Spec-Driven-Development (SDDF) como un paquete NPM público, facilitando la instalación global de todos los skills, agentes y templates del framework.
 
 ## Features
-- [x] **FEAT-038: Copiar los templates a los skills correspondientes** — Reorganizar los templates de `docs/specs/templates/` a los directorios `templates/` de los skills que los utilizan. _(deps: —)_
+- [x] **FEAT-038: Copiar los templates a los skills correspondientes** — Reorganizar los templates de `$SPECS_BASE/specs/templates/` a los directorios `templates/` de los skills que los utilizan. _(deps: —)_
 - [x] **FEAT-039: Publicar framework en npm** — (package structure + npm publish manual) Empaquetar y publicar todos los skills, agentes y templates del framework en NPM para instalación global con npm install -g @sddf/core. _(deps: FEAT-038)_
 - [x] **FEAT-040: Instalar skills via postinstall (script)** — Configurar el script `postinstall` para copiar automáticamente los skills y agentes a `~/.claude/` tras la instalación global. Implica crear un script Node.js (scripts/postinstall.js) que npm ejecuta automáticamente al hacer npm install -g.  _(deps: FEAT-039)_
 

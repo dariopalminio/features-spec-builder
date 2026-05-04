@@ -13,6 +13,15 @@ Valida que un archivo de especificación de release contiene todas las secciones
 
 ---
 
+## Paso 0 — Verificar entorno (`skill-preflight`)
+
+Invocar `skill-preflight` antes de cualquier operación con archivos. El preflight verifica `SDDF_ROOT`, resuelve `SPECS_BASE` (fallback: `docs`) y confirma los subdirectorios de specs estándar. Si retorna `✗ Entorno inválido`, detener la ejecución.
+
+Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los pasos siguientes.
+
+Continua con las fases siguientes.
+---
+
 ## Fase 0 — Resolver el input
 
 El skill acepta tres formas de input. Detectar cuál aplica antes de continuar:
@@ -24,7 +33,7 @@ El skill acepta tres formas de input. Detectar cuál aplica antes de continuar:
 ### Tipo B — Nombre con o sin extensión `.md`
 **Señal:** El input es una palabra o frase corta que no contiene separadores de ruta.
 **Acción:**
-1. Buscar en `docs/specs/releases/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas/minúsculas), incluyendo los que tengan o no extensión `.md`
+1. Buscar en `$SPECS_BASE/specs/releases/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas/minúsculas), incluyendo los que tengan o no extensión `.md`
 2. Si hay exactamente 1 coincidencia → usar ese archivo. Continuar a Fase 1.
 3. Si hay más de 1 coincidencia → mostrar la lista y pedir al usuario que elija antes de continuar.
 4. Si no hay coincidencias → ir a **manejo de archivo no encontrado**.
@@ -81,7 +90,7 @@ Adicionalmente, los campos de frontmatter siempre son obligatorios: **Título**,
 
 Leer el archivo de release resuelto en Fase 0.
 
-### 2a. Validar frontmatter
+### 3a. Validar frontmatter
 
 Verificar que el bloque frontmatter (entre los dos `---`) contiene los cuatro campos:
 - `**Título**:`
@@ -91,9 +100,9 @@ Verificar que el bloque frontmatter (entre los dos `---`) contiene los cuatro ca
 
 Registrar cuáles están ausentes.
 
-### 2b. Validar secciones obligatorias
+### 3b. Validar secciones obligatorias
 
-Para cada sección obligatoria extraída en Fase 1, verificar que el archivo de release contiene un encabezado `##` cuyo texto (ignorando espacios y comentarios HTML) coincida con el nombre de la sección.
+Para cada sección obligatoria extraída en Fase 2, verificar que el archivo de release contiene un encabezado `##` cuyo texto (ignorando espacios y comentarios HTML) coincida con el nombre de la sección.
 
 Registrar cuáles están ausentes.
 

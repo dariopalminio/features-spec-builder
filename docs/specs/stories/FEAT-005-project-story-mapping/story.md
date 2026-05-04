@@ -18,7 +18,7 @@ parent: EPIC-05-enhance-project-spec
 
 **Como** developer o PM que ha completado la especificaci�n de requisitos y quiere visualizar el alcance del proyecto
 **Quiero** ejecutar el skill `project-story-mapping` para construir un story map con backbone, walking skeleton y release slices
-**Para** obtener `docs/specs/projects/story-map.md` con la visualizaci�n del journey del usuario organizada en actividades, flujo m�nimo y releases incrementales
+**Para** obtener `$SPECS_BASE/specs/projects/story-map.md` con la visualizaci�n del journey del usuario organizada en actividades, flujo m�nimo y releases incrementales
 
 ## ? Criterios de aceptaci�n
 

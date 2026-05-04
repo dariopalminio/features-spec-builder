@@ -8,7 +8,7 @@ El skill `docs-wiki-builder` implementa este patrón generando y manteniendo la 
 
 **Goals:**
 - Generar `docs/index.md` como mapa navegable de toda la documentación
-- Crear la estructura canónica de directorios (`docs/specs/`, `docs/wiki/`)
+- Crear la estructura canónica de directorios (`$SPECS_BASE/specs/`, `docs/wiki/`)
 - Validar wikilinks internos y marcar nodos pendientes (`⚠️`)
 - Detectar estructura preexistente y proponer reorganización con confirmación
 - Integrar el frontmatter YAML (type, slug, title, date, status) en cada nodo

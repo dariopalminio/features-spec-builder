@@ -33,7 +33,7 @@ Templates existentes relevantes:
 
 **Decisión:** Los nuevos skills no generan `initial-prompt.md` ni `discovery.md` como archivos persistentes intermedios. La información se captura en memoria durante la sesión y el agente produce directamente el documento de salida final.
 
-**Rationale:** Reducir la cantidad de archivos en `docs/specs/projects/` simplifica el workspace. Los documentos intermedios eran útiles en el pipeline de 7 pasos pero son overhead en el pipeline de 3 pasos.
+**Rationale:** Reducir la cantidad de archivos en `$SPECS_BASE/specs/projects/` simplifica el workspace. Los documentos intermedios eran útiles en el pipeline de 7 pasos pero son overhead en el pipeline de 3 pasos.
 
 **Alternativa descartada:** Mantener los intermedios como "borradores" internos — agrega complejidad sin valor visible al usuario.
 

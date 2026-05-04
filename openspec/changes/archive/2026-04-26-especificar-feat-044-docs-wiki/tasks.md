@@ -12,7 +12,7 @@
 
 ## 3. Generación de la estructura de directorios
 
-- [x] 3.1 Documentar en SKILL.md la lista completa de directorios a crear: `docs/specs/projects/`, `docs/specs/releases/`, `docs/specs/stories/`, `docs/wiki/constitution/`, `docs/wiki/architecture/`, `docs/wiki/process/`, `docs/wiki/ux/`, `docs/wiki/guides/`, `docs/wiki/how-to/`
+- [x] 3.1 Documentar en SKILL.md la lista completa de directorios a crear: `$SPECS_BASE/specs/projects/`, `$SPECS_BASE/specs/releases/`, `$SPECS_BASE/specs/stories/`, `docs/wiki/constitution/`, `docs/wiki/architecture/`, `docs/wiki/process/`, `docs/wiki/ux/`, `docs/wiki/guides/`, `docs/wiki/how-to/`
 - [x] 3.2 Documentar la regla de no-eliminación: el skill nunca elimina archivos sin confirmación explícita del usuario
 
 ## 4. Generación del índice docs/index.md

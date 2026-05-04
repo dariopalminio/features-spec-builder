@@ -112,7 +112,7 @@ O ejecuta cada fase individualmente:
 
 ### Flujos principales SDDF
 
-SDDF se organiza en 4 niveles principales que cubren todo el ciclo de vida de la especificación, desde la intención inicial (nivel de proyecto o L3), la especificación de entregas releases (L2), la especificaciòn de historias (L1), y con integración opcional de OpenSpec para gestión de cambios (L0). Cada nivel tiene su pipeline y se compone de un conjunto de skills que operan sobre documentos Markdown con control de sub-estado `Doing`/`Ready` para garantizar un flujo estructurado, reproducible y automatizable.
+SDDF se organiza en 4 niveles principales que cubren todo el ciclo de vida de la especificación, desde la intención inicial (nivel de proyecto o L3), la especificación de entregas releases (L2), la especificaciòn de historias (L1), y con integración opcional de OpenSpec para gestión de cambios (L0). Cada nivel tiene su pipeline y se compone de un conjunto de skills que operan sobre documentos Markdown con control de sub-estado `IN‑PROGRESS`/`DONE` para garantizar un flujo estructurado, reproducible y automatizable.
 
 #### 1. L3: Pipeline de especificación de proyecto (iniciativa)
 
@@ -305,8 +305,8 @@ El único mecanismo de control de flujo es el campo `substatus` en cada document
 
 | Valor | Significado |
 |-------|-------------|
-| `Doing` | Documento en progreso — el pipeline puede retomarlo |
-| `Ready` | Documento completo — actúa como precondición para la siguiente fase |
+| `IN‑PROGRESS` | Documento en progreso — el pipeline puede retomarlo |
+| `DONE` | Documento completo — actúa como precondición para la siguiente fase |
 
 ## Contributing
 

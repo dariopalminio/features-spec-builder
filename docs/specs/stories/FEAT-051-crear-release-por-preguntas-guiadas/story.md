@@ -29,7 +29,7 @@ updated: 2026-05-01
 Dado que ejecuto el skill `/release-creation` en un proyecto sin `project-plan.md`
   Y el archivo `assets/release-spec-template.md` existe en el skill
 Cuando respondo las preguntas para cada sección obligatoria (Descripción, Features, Smoke Tests)
-Entonces el skill crea el archivo en `docs/specs/releases/EPIC-NN-<slug>/release.md`
+Entonces el skill crea el archivo en `$SPECS_BASE/specs/releases/EPIC-NN-<slug>/release.md`
   Y el skill invoca automáticamente `release-format-validation` sobre el archivo creado
   Y el resultado de la validación es APROBADO
 ```

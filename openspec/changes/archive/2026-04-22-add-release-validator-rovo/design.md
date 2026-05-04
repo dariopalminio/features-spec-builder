@@ -26,7 +26,7 @@ A diferencia del skill de Claude Code, el agente Rovo no puede leer archivos del
 
 **Decisión:** El template de release se incrusta íntegramente dentro de la sección `## Instrucciones` del agente Rovo bajo el encabezado `## Template canónico (fuente de verdad)`.
 
-**Alternativa considerada:** Referenciar el template externo en `docs/specs/templates/release-spec-template.md`. Descartada porque el agente Rovo no tiene acceso al sistema de archivos; cualquier referencia externa sería inaccesible en runtime.
+**Alternativa considerada:** Referenciar el template externo en `$SPECS_BASE/specs/templates/release-spec-template.md`. Descartada porque el agente Rovo no tiene acceso al sistema de archivos; cualquier referencia externa sería inaccesible en runtime.
 
 **Rationale:** Al incrustar el template, el agente es completamente autónomo dentro del contexto de Jira. El costo es que los cambios al template deben propagarse manualmente al agente Rovo, pero dado que el template es estable, este es un trade-off aceptable.
 

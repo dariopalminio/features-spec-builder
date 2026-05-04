@@ -9,4 +9,4 @@ El skill `project-begin` SHALL resolver la ruta base de artefactos mediante `SDD
 
 #### Scenario: Skill usa docs por defecto sin SDDF_ROOT
 - **WHEN** el usuario ejecuta `/project-begin` sin `SDDF_ROOT` definida
-- **THEN** el archivo `project-intent.md` se crea bajo `docs/specs/projects/` (comportamiento previo)
+- **THEN** el archivo `project-intent.md` se crea bajo `$SPECS_BASE/specs/projects/` (comportamiento previo)

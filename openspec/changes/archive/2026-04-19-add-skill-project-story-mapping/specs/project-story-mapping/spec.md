@@ -16,14 +16,14 @@ The system SHALL provide an agent at `.claude/agents/project-story-mapper.agent.
 
 #### Scenario: Agent produces a story map document
 - **WHEN** the agent completes the mapping session
-- **THEN** it writes `docs/specs/projects/story-map.md` containing backbone activities, walking skeleton, user tasks, and release slices
+- **THEN** it writes `$SPECS_BASE/specs/projects/story-map.md` containing backbone activities, walking skeleton, user tasks, and release slices
 
 #### Scenario: Agent generates an ASCII map
 - **WHEN** the story map document is created
 - **THEN** the document includes an ASCII table showing the backbone, walking skeleton, and at least one release slice
 
 ### Requirement: Story map document structure
-The output document `docs/specs/projects/story-map.md` SHALL follow a defined structure.
+The output document `$SPECS_BASE/specs/projects/story-map.md` SHALL follow a defined structure.
 
 #### Scenario: Document contains required sections
 - **WHEN** the story map document is generated

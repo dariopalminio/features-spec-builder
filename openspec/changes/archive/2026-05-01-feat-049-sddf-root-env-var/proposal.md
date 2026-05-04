@@ -4,11 +4,11 @@ Los skills del framework SDDF tienen hardcodeada la ruta `docs` como directorio 
 
 ## What Changes
 
-- Todos los skills que acceden a rutas bajo `docs/specs/` pasan a leer `SDDF_ROOT` con `docs` como fallback.
+- Todos los skills que acceden a rutas bajo `$SPECS_BASE/specs/` pasan a leer `SDDF_ROOT` con `docs` como fallback.
 - Se introduce una convención estándar de lectura de variable: `SPECS_BASE="${SDDF_ROOT:-docs}"` al inicio de cada skill afectado.
 - Si `SDDF_ROOT` apunta a una ruta inexistente, el skill emite una advertencia y cae al valor por defecto `docs`.
 - El `README.md` se actualiza con una sección dedicada a `SDDF_ROOT` (propósito, valores válidos, cómo definirla).
-- Skills afectados: `project-begin`, `project-discovery`, `project-planning`, `story-creation`, `story-split`, `story-evaluation`, `release-generate-all-stories`, `release-generate-stories`, `releases-from-project-plan`, `project-story-mapping`, `reverse-engineering`, `header-aggregation`, y cualquier otro skill que referencie `docs/specs/`.
+- Skills afectados: `project-begin`, `project-discovery`, `project-planning`, `story-creation`, `story-split`, `story-evaluation`, `release-generate-all-stories`, `release-generate-stories`, `releases-from-project-plan`, `project-story-mapping`, `reverse-engineering`, `header-aggregation`, y cualquier otro skill que referencie `$SPECS_BASE/specs/`.
 
 ## Capabilities
 

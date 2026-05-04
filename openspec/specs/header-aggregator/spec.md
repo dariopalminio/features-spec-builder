@@ -61,7 +61,7 @@ Los campos `type`, `date`, `slug`, `title` y `status` son obligatorios. El resto
 - **THEN** `type` = `story`
 - **THEN** `title` se deriva del primer heading `#` del archivo o del nombre de archivo si no hay heading
 - **THEN** `date` = fecha actual del sistema en formato `YYYY-MM-DD`
-- **THEN** `status` = `IN-PROGRESS` si el documento contiene `**Estado**: Doing`, `COMPLETED` si contiene `**Estado**: Ready`, `BACKLOG` en otro caso
+- **THEN** `status` = `IN-PROGRESS` si el documento contiene `**substatus**: IN‑PROGRESS`, `COMPLETED` si contiene `**substatus**: DONE`, `BACKLOG` en otro caso
 
 ---
 
@@ -85,7 +85,7 @@ El sistema SHALL aceptar tres formas de input para identificar el objetivo:
 
 #### Scenario: Input como nombre de archivo corto
 - **WHEN** el usuario proporciona solo el nombre de archivo (ej. `story-FEAT-043-header-aggregation.md`) sin ruta
-- **THEN** el sistema busca automáticamente el archivo en `docs/specs/stories/`, `docs/specs/releases/` y `docs/specs/projects/`
+- **THEN** el sistema busca automáticamente el archivo en `$SPECS_BASE/specs/stories/`, `$SPECS_BASE/specs/releases/` y `$SPECS_BASE/specs/projects/`
 - **THEN** si encuentra exactamente un resultado, lo procesa directamente
 - **THEN** si encuentra múltiples resultados, muestra la lista y solicita selección al usuario
 

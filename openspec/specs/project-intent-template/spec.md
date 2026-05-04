@@ -23,7 +23,7 @@ El template SHALL incluir como mínimo las siguientes secciones: Problem Stateme
 ---
 
 ### Requirement: Template es de solo lectura durante la ejecución
-El template SHALL no ser modificado durante la ejecución del skill. El output siempre se escribe en `docs/specs/project-intent.md`.
+El template SHALL no ser modificado durante la ejecución del skill. El output siempre se escribe en `$SPECS_BASE/specs/project-intent.md`.
 
 #### Scenario: Template intacto después de ejecución
 - **WHEN** el skill `/ps-draft` se ejecuta y completa

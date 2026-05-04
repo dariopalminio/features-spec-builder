@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: project-planning reads existing document state
-El skill SHALL leer el campo `**Estado**:` de `docs/specs/projects/project-plan.md` si existe, aplicando la logica de `skill-state-detection`.
+El skill SHALL leer el campo `**Estado**:` de `$SPECS_BASE/specs/projects/project-plan.md` si existe, aplicando la logica de `skill-state-detection`.
 
 #### Scenario: Document in Doing state
 - **WHEN** `project-plan.md` existe con `Estado: Doing`
@@ -12,7 +12,7 @@ El skill SHALL leer el campo `**Estado**:` de `docs/specs/projects/project-plan.
 - **THEN** el skill MUST informar al usuario y solicitar confirmacion antes de sobrescribir
 
 ### Requirement: project-planning validates requirement-spec.md is Ready
-El skill SHALL verificar que `docs/specs/projects/project.md` existe y tiene `Estado: Ready` antes de delegar al agente.
+El skill SHALL verificar que `$SPECS_BASE/specs/projects/project.md` existe y tiene `Estado: Ready` antes de delegar al agente.
 
 #### Scenario: Input present and Ready
 - **WHEN** `requirement-spec.md` existe con `Estado: Ready`
@@ -34,7 +34,7 @@ The skill SHALL verify that `.claude/skills/project-planning/templates/project-p
 - **THEN** the skill displays an error message and halts execution
 
 ### Requirement: project-planning offers story mapping phase before planning
-The skill SHALL check whether `docs/specs/projects/story-map.md` exists after validating prerequisites, and offer to run the `project-story-mapping` skill to generate it if absent.
+The skill SHALL check whether `$SPECS_BASE/specs/projects/story-map.md` exists after validating prerequisites, and offer to run the `project-story-mapping` skill to generate it if absent.
 
 #### Scenario: Story map does not exist — user accepts
 - **WHEN** `story-map.md` does not exist and the user chooses to run story mapping
@@ -49,7 +49,7 @@ The skill SHALL check whether `docs/specs/projects/story-map.md` exists after va
 - **THEN** the skill reads it and informs the user it will be used to enrich the plan, then continues to the architect delegation step without asking
 
 ### Requirement: project-planning delegates to project-architect
-The skill SHALL invoke the `project-architect` with an instruction to read the requirement spec, read the template, and produce `docs/specs/projects/project-plan.md`. When `docs/specs/projects/story-map.md` exists, the architect MUST also read it and use its backbone activities and release slices as structural guidance for feature grouping and release definition in the plan.
+The skill SHALL invoke the `project-architect` with an instruction to read the requirement spec, read the template, and produce `$SPECS_BASE/specs/projects/project-plan.md`. When `$SPECS_BASE/specs/projects/story-map.md` exists, the architect MUST also read it and use its backbone activities and release slices as structural guidance for feature grouping and release definition in the plan.
 
 #### Scenario: Delegation to agent without story map
 - **WHEN** prerequisites are validated and `story-map.md` does not exist
@@ -79,7 +79,7 @@ El skill `project-planning` SHALL resolver la ruta base de artefactos mediante `
 
 #### Scenario: Skill usa docs por defecto sin SDDF_ROOT
 - **WHEN** el usuario ejecuta `/project-planning` sin `SDDF_ROOT` definida
-- **THEN** el skill opera sobre `docs/specs/projects/` (comportamiento previo)
+- **THEN** el skill opera sobre `$SPECS_BASE/specs/projects/` (comportamiento previo)
 
 ## ADDED Requirements
 

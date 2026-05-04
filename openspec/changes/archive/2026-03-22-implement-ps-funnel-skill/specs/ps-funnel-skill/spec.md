@@ -32,15 +32,15 @@ El skill SHALL invocar al agente `pm-agent` (definido en `.claude/agents/pm-agen
 ---
 
 ### Requirement: Skill produce initial-prompt.md como output
-El skill SHALL resultar en la creación o sobrescritura de `docs/specs/initial-prompt.md` con el contenido completado por el agente PM.
+El skill SHALL resultar en la creación o sobrescritura de `$SPECS_BASE/specs/initial-prompt.md` con el contenido completado por el agente PM.
 
 #### Scenario: Output generado correctamente
 - **WHEN** el agente PM completa la entrevista
-- **THEN** el archivo `docs/specs/initial-prompt.md` existe y contiene todas las secciones del template completadas
+- **THEN** el archivo `$SPECS_BASE/specs/initial-prompt.md` existe y contiene todas las secciones del template completadas
 
 #### Scenario: Idempotencia
 - **WHEN** el usuario ejecuta `/ps-funnel` más de una vez
-- **THEN** el archivo `docs/specs/initial-prompt.md` es sobrescrito con el nuevo contenido sin duplicaciones
+- **THEN** el archivo `$SPECS_BASE/specs/initial-prompt.md` es sobrescrito con el nuevo contenido sin duplicaciones
 
 #### Scenario: Template referenciado en skill
 - **WHEN** se ejecuta `/ps-funnel`

@@ -25,7 +25,7 @@ El template SHALL incluir al menos las siguientes secciones: Visión del Product
 El `discovery-agent` SHALL solo leer el template; nunca escribir sobre él.
 
 #### Scenario: Ejecución del agente no altera el template
-- **WHEN** el agente completa la entrevista y escribe el output en `docs/specs/discovery.md`
+- **WHEN** el agente completa la entrevista y escribe el output en `$SPECS_BASE/specs/discovery.md`
 - **THEN** el contenido de `.claude/skills/ps-discovery/templates/discovery-template.md` permanece idéntico al estado previo a la ejecución
 
 ### Requirement: Template de referencia en docs/templates no se modifica

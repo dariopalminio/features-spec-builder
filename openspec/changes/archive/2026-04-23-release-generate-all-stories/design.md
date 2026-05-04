@@ -1,13 +1,13 @@
 ## Context
 
-`release-generate-stories` (FEAT-029) ya cubre la generación de stories desde un único archivo de release. Este skill extiende ese flujo con un patrón de orquestación batch: descubre todos los archivos en `docs/specs/releases/`, los procesa en secuencia y consolida el resultado. La arquitectura del SDDF es SKILL.md — sin código ejecutable, solo instrucciones para el agente Claude Code.
+`release-generate-stories` (FEAT-029) ya cubre la generación de stories desde un único archivo de release. Este skill extiende ese flujo con un patrón de orquestación batch: descubre todos los archivos en `$SPECS_BASE/specs/releases/`, los procesa en secuencia y consolida el resultado. La arquitectura del SDDF es SKILL.md — sin código ejecutable, solo instrucciones para el agente Claude Code.
 
 El problema de idempotencia es más complejo en batch que en single-file: si 30 historias ya existen y el usuario ejecuta el skill de nuevo, preguntar por cada una sería inutilizable. Se necesita una estrategia de confirmación global.
 
 ## Goals / Non-Goals
 
 **Goals:**
-- Implementar `.claude/skills/release-generate-all-stories/SKILL.md` que escanea `docs/specs/releases/`, procesa cada archivo en orden alfabético y genera stories usando el mismo flujo de extracción y generación de `release-generate-stories`
+- Implementar `.claude/skills/release-generate-all-stories/SKILL.md` que escanea `$SPECS_BASE/specs/releases/`, procesa cada archivo en orden alfabético y genera stories usando el mismo flujo de extracción y generación de `release-generate-stories`
 - Idempotencia en modo batch: detección anticipada de conflictos con confirmación global única antes de comenzar el procesamiento
 - Resumen final con contadores: releases procesados / historias generadas / historias saltadas / releases sin features
 
@@ -15,7 +15,7 @@ El problema de idempotencia es más complejo en batch que en single-file: si 30 
 - Reimplementar la lógica de extracción de features o generación de historias (eso ya está en `release-generate-stories`)
 - Filtrar releases por estado, fecha o ID
 - Evaluación FINVEST de las historias generadas
-- Soporte para directorios de release distintos a `docs/specs/releases/`
+- Soporte para directorios de release distintos a `$SPECS_BASE/specs/releases/`
 
 ## Decisions
 
@@ -51,7 +51,7 @@ El problema de idempotencia es más complejo en batch que en single-file: si 30 
 
 ### Decisión 4: Sin filtrado de releases completados vs pendientes
 
-**Elegido:** Procesar todos los archivos `.md` en `docs/specs/releases/` sin filtrar por estado.
+**Elegido:** Procesar todos los archivos `.md` en `$SPECS_BASE/specs/releases/` sin filtrar por estado.
 
 **Alternativa descartada:** Procesar solo releases con `Estado: Ready` o solo features pendientes `[ ]`.
 

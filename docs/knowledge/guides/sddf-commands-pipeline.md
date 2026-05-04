@@ -1,6 +1,6 @@
 ---
 type: guide
-slug: sddf-main-workflows
+slug: sddf-commands-pipeline
 title: "Flujos principales SDDF"
 date: 2026-04-26
 status: null

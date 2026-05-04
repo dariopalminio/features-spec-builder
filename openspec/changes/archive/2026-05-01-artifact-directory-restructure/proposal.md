@@ -1,6 +1,6 @@
 ## Why
 
-Los artefactos de especificación del framework SDDF (proyectos, releases e historias) se almacenan actualmente como archivos planos en carpetas compartidas (`docs/specs/projects/`, `docs/specs/releases/`, `docs/specs/stories/`), lo que impide agrupar todos los artefactos de un mismo workitem en un único lugar, dificulta la navegación y no escala a múltiples proyectos simultáneos. La nueva estructura organiza cada workitem en su propio directorio con un identificador único, siguiendo la convención definida en `docs/wiki/guides/organization-of-artifacts.md`.
+Los artefactos de especificación del framework SDDF (proyectos, releases e historias) se almacenan actualmente como archivos planos en carpetas compartidas (`$SPECS_BASE/specs/projects/`, `$SPECS_BASE/specs/releases/`, `$SPECS_BASE/specs/stories/`), lo que impide agrupar todos los artefactos de un mismo workitem en un único lugar, dificulta la navegación y no escala a múltiples proyectos simultáneos. La nueva estructura organiza cada workitem en su propio directorio con un identificador único, siguiendo la convención definida en `docs/wiki/guides/organization-of-artifacts.md`.
 
 ## What Changes
 
@@ -36,12 +36,12 @@ docs/specs/stories/FEAT-001-nombre-story/story.md
 
 ### Modified Capabilities
 
-- `project-begin-intention-skill`: Rutas de escritura de `project-intent.md` pasan a `docs/specs/projects/<PROJ-ID>/project-intent.md`.
+- `project-begin-intention-skill`: Rutas de escritura de `project-intent.md` pasan a `$SPECS_BASE/specs/projects/<PROJ-ID>/project-intent.md`.
 - `project-discovery-skill`: Rutas de lectura/escritura de `requirement-spec.md` pasan al directorio del proyecto activo.
-- `project-planning-skill`: Rutas de `project-plan.md` pasan a `docs/specs/projects/<PROJ-ID>/project-plan.md`.
-- `project-story-mapping`: Ruta de `story-map.md` pasa a `docs/specs/projects/<PROJ-ID>/story-map.md`.
-- `releases-from-project-plan`: Salida pasa de `docs/specs/releases/release-<ID>-<nombre>.md` a `docs/specs/releases/<EPIC-ID>-<nombre>/release.md`.
-- `release-generate-stories`: Salida pasa de `docs/specs/stories/story-<ID>-<nombre>.md` a `docs/specs/stories/<FEAT-ID>-<nombre>/story.md`.
+- `project-planning-skill`: Rutas de `project-plan.md` pasan a `$SPECS_BASE/specs/projects/<PROJ-ID>/project-plan.md`.
+- `project-story-mapping`: Ruta de `story-map.md` pasa a `$SPECS_BASE/specs/projects/<PROJ-ID>/story-map.md`.
+- `releases-from-project-plan`: Salida pasa de `$SPECS_BASE/specs/releases/release-<ID>-<nombre>.md` a `$SPECS_BASE/specs/releases/<EPIC-ID>-<nombre>/release.md`.
+- `release-generate-stories`: Salida pasa de `$SPECS_BASE/specs/stories/story-<ID>-<nombre>.md` a `$SPECS_BASE/specs/stories/<FEAT-ID>-<nombre>/story.md`.
 - `release-generate-all-stories`: Ídem — salida de historias al nuevo directorio por historia.
 - `reverse-engineering`: Rutas de salida de artefactos generados se adaptan a la nueva estructura.
 - `header-aggregator`: El scanner de frontmatter actualiza sus patrones de búsqueda para cubrir los nuevos paths `projects/*/`, `releases/*/`, `stories/*/`.

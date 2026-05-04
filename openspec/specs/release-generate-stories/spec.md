@@ -1,5 +1,5 @@
 ### Requirement: El skill resuelve el input del archivo de release
-El skill SHALL aceptar el archivo de release como nombre corto (con o sin extensión `.md`), o como ruta relativa completa, siguiendo el comportamiento definido en `release-input-resolution`. Si el nombre coincide con más de un archivo en `docs/specs/releases/`, el skill SHALL solicitar al usuario que especifique cuál usar antes de continuar.
+El skill SHALL aceptar el archivo de release como nombre corto (con o sin extensión `.md`), o como ruta relativa completa, siguiendo el comportamiento definido en `release-input-resolution`. Si el nombre coincide con más de un archivo en `$SPECS_BASE/specs/releases/`, el skill SHALL solicitar al usuario que especifique cuál usar antes de continuar.
 
 #### Scenario: Input como nombre corto con extensión
 - **WHEN** el usuario proporciona "release-06-release-and-story-generator.md"
@@ -26,7 +26,7 @@ El skill SHALL leer la sección `## Features` del archivo de release y extraer c
 - **THEN** el skill no genera ningún archivo de historia
 
 ### Requirement: El skill genera un archivo de historia por feature
-El skill SHALL generar exactamente un archivo `story-[ID]-[nombre-kebab].md` por cada feature extraída del release. Cada archivo generado SHALL seguir exactamente la estructura de `docs/specs/templates/story-gherkin-template.md` con las secciones mínimas obligatorias: frontmatter, `## 📖 Historia` (Como/Quiero/Para), y `## ✅ Criterios de aceptación` con al menos un escenario Gherkin principal y uno alternativo/error.
+El skill SHALL generar exactamente un archivo `story-[ID]-[nombre-kebab].md` por cada feature extraída del release. Cada archivo generado SHALL seguir exactamente la estructura de `$SPECS_BASE/specs/templates/story-gherkin-template.md` con las secciones mínimas obligatorias: frontmatter, `## 📖 Historia` (Como/Quiero/Para), y `## ✅ Criterios de aceptación` con al menos un escenario Gherkin principal y uno alternativo/error.
 
 #### Scenario: Generación exitosa de historia desde feature
 - **WHEN** el release contiene "FEAT-029 — Generar stories"
@@ -48,7 +48,7 @@ Los archivos generados SHALL seguir el patrón `story-[ID]-[nombre-kebab].md` do
 - **THEN** el archivo se nombra "story-FEAT-029-generar-stories-desde-release.md"
 
 ### Requirement: El skill guarda los archivos en docs/specs/stories/
-Los archivos generados SHALL guardarse en el directorio `docs/specs/stories/`. Si el directorio no existe, el skill MUST crearlo antes de escribir los archivos.
+Los archivos generados SHALL guardarse en el directorio `$SPECS_BASE/specs/stories/`. Si el directorio no existe, el skill MUST crearlo antes de escribir los archivos.
 
 #### Scenario: Directorio de destino no existe
 - **WHEN** el directorio "docs/specs/stories/" no existe al momento de ejecutar el skill
@@ -56,7 +56,7 @@ Los archivos generados SHALL guardarse en el directorio `docs/specs/stories/`. S
 - **THEN** los archivos generados se guardan en él correctamente
 
 ### Requirement: El skill solicita confirmación antes de sobreescribir una historia existente
-Si ya existe un archivo con el mismo nombre en `docs/specs/stories/`, el skill SHALL informar al usuario y solicitar confirmación explícita antes de sobreescribir. Si el usuario rechaza, el skill SHALL omitir ese archivo y continuar con las demás features.
+Si ya existe un archivo con el mismo nombre en `$SPECS_BASE/specs/stories/`, el skill SHALL informar al usuario y solicitar confirmación explícita antes de sobreescribir. Si el usuario rechaza, el skill SHALL omitir ese archivo y continuar con las demás features.
 
 #### Scenario: Historia existente — usuario confirma sobreescritura
 - **WHEN** ya existe "docs/specs/stories/story-FEAT-029-generar-stories.md"
@@ -90,7 +90,7 @@ El skill `release-generate-stories` SHALL resolver la ruta base de artefactos me
 
 #### Scenario: Skill usa docs por defecto sin SDDF_ROOT
 - **WHEN** el usuario ejecuta `/release-generate-stories` sin `SDDF_ROOT` definida
-- **THEN** el skill opera sobre `docs/specs/releases/` y `docs/specs/stories/` (comportamiento previo)
+- **THEN** el skill opera sobre `$SPECS_BASE/specs/releases/` y `$SPECS_BASE/specs/stories/` (comportamiento previo)
 
 ## MODIFIED Requirements
 

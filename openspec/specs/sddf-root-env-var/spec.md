@@ -23,15 +23,15 @@ Una vez resuelto `SPECS_BASE`, los skills SHALL construir todas las sub-rutas (p
 
 #### Scenario: Rutas de proyectos bajo SPECS_BASE
 - **WHEN** un skill necesita acceder al directorio de proyectos
-- **THEN** usa la ruta `$SPECS_BASE/specs/projects/` en lugar de `docs/specs/projects/`
+- **THEN** usa la ruta `$SPECS_BASE/specs/projects/` en lugar de `$SPECS_BASE/specs/projects/`
 
 #### Scenario: Rutas de historias bajo SPECS_BASE
 - **WHEN** un skill necesita acceder al directorio de historias de usuario
-- **THEN** usa la ruta `$SPECS_BASE/specs/stories/` en lugar de `docs/specs/stories/`
+- **THEN** usa la ruta `$SPECS_BASE/specs/stories/` en lugar de `$SPECS_BASE/specs/stories/`
 
 #### Scenario: Rutas de releases bajo SPECS_BASE
 - **WHEN** un skill necesita acceder al directorio de releases
-- **THEN** usa la ruta `$SPECS_BASE/specs/releases/` en lugar de `docs/specs/releases/`
+- **THEN** usa la ruta `$SPECS_BASE/specs/releases/` en lugar de `$SPECS_BASE/specs/releases/`
 
 ### Requirement: Documentación de SDDF_ROOT en README
 El archivo `README.md` del proyecto SHALL incluir una sección dedicada a la variable de entorno `SDDF_ROOT` que explique su propósito, los valores válidos y cómo definirla.

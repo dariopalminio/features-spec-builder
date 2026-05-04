@@ -11,7 +11,7 @@ El sistema SHALL incluir un skill en `.claude/skills/project-begin/SKILL.md` con
 Al inicio, el skill SHALL verificar si existe un proyecto activo con `Estado: Doing` antes de comenzar la entrevista, aplicando la logica de `wip-conflict-detection`.
 
 #### Scenario: No WIP conflict
-- **WHEN** no existe ningun documento en `docs/specs/projects/` con `Estado: Doing`
+- **WHEN** no existe ningun documento en `$SPECS_BASE/specs/projects/` con `Estado: Doing`
 - **THEN** el skill MUST continuar directamente a verificar precondiciones del template
 
 #### Scenario: WIP conflict detected
@@ -19,7 +19,7 @@ Al inicio, el skill SHALL verificar si existe un proyecto activo con `Estado: Do
 - **THEN** el skill MUST notificar y ofrecer las opciones definidas en `wip-conflict-detection`
 
 ### Requirement: project-begin reads existing document state
-El skill SHALL leer el campo `**Estado**:` de `docs/specs/projects/project-intent.md` si existe, aplicando la logica de `skill-state-detection`.
+El skill SHALL leer el campo `**Estado**:` de `$SPECS_BASE/specs/projects/project-intent.md` si existe, aplicando la logica de `skill-state-detection`.
 
 #### Scenario: Document in Doing state
 - **WHEN** `project-intent.md` existe con `Estado: Doing`
@@ -30,11 +30,11 @@ El skill SHALL leer el campo `**Estado**:` de `docs/specs/projects/project-inten
 - **THEN** el skill MUST informar al usuario y solicitar confirmacion antes de sobrescribir
 
 ### Requirement: project-begin produces project-intent.md
-El skill `/project-begin` SHALL producir `docs/specs/projects/project-intent.md` como unico documento de salida, en una sola sesion interactiva que combina la captura de intencion inicial y su refinamiento.
+El skill `/project-begin` SHALL producir `$SPECS_BASE/specs/projects/project-intent.md` como unico documento de salida, en una sola sesion interactiva que combina la captura de intencion inicial y su refinamiento.
 
 #### Scenario: Single session produces final document
 - **WHEN** el usuario completa la entrevista guiada por `/project-begin`
-- **THEN** el sistema MUST crear `docs/specs/projects/project-intent.md` usando el template `project-begin/templates/project-intent-template.md`
+- **THEN** el sistema MUST crear `$SPECS_BASE/specs/projects/project-intent.md` usando el template `project-begin/templates/project-intent-template.md`
 
 #### Scenario: No intermediate files created
 - **WHEN** `/project-begin` completa su ejecucion
@@ -70,7 +70,7 @@ El skill `project-begin` SHALL resolver la ruta base de artefactos mediante `SDD
 
 #### Scenario: Skill usa docs por defecto sin SDDF_ROOT
 - **WHEN** el usuario ejecuta `/project-begin` sin `SDDF_ROOT` definida
-- **THEN** el archivo `project-intent.md` se crea bajo `docs/specs/projects/` (comportamiento previo)
+- **THEN** el archivo `project-intent.md` se crea bajo `$SPECS_BASE/specs/projects/` (comportamiento previo)
 
 ## MODIFIED Requirements
 

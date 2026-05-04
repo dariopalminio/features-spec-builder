@@ -26,7 +26,7 @@ Todos los artefactos se guardan bajo un directorio raíz configurable. Por defec
 docs/specs/
 ```
 
-Puedes cambiarlo, pero esta documentación asume `docs/specs/`. A partir de aquí, se representa como `{SPECS_ROOT}`.
+Puedes cambiarlo, pero esta documentación asume `$SPECS_BASE/specs/`. A partir de aquí, se representa como `{SPECS_ROOT}`.
 
 ---
 

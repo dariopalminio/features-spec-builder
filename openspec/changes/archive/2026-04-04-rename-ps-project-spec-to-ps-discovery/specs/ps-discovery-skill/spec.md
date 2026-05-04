@@ -8,18 +8,18 @@ El sistema SHALL incluir un skill en `.claude/skills/ps-discovery/SKILL.md` con 
 - **THEN** el sistema MUST cargar y ejecutar `.claude/skills/ps-discovery/SKILL.md`
 
 ### Requirement: ps-discovery requires project-intent.md as input
-El skill `/ps-discovery` SHALL verificar que `docs/specs/projects/project-intent.md` existe antes de proceder.
+El skill `/ps-discovery` SHALL verificar que `$SPECS_BASE/specs/projects/project-intent.md` existe antes de proceder.
 
 #### Scenario: Missing prerequisite blocks execution
 - **WHEN** el usuario ejecuta `/ps-discovery` sin que exista `project-intent.md`
 - **THEN** el sistema MUST informar al usuario que debe ejecutar `/ps-begin-intention` primero y detener la ejecución
 
 ### Requirement: ps-discovery produces requirement-spec.md
-El skill `/ps-discovery` SHALL producir `docs/specs/projects/project.md` como único documento de salida, en una sola sesión que combina discovery de usuarios y especificación de requisitos.
+El skill `/ps-discovery` SHALL producir `$SPECS_BASE/specs/projects/project.md` como único documento de salida, en una sola sesión que combina discovery de usuarios y especificación de requisitos.
 
 #### Scenario: Single session produces final document
 - **WHEN** el usuario completa la sesión guiada por `/ps-discovery`
-- **THEN** el sistema MUST crear `docs/specs/projects/project.md` usando el template `ps-discovery/templates/project-template.md`
+- **THEN** el sistema MUST crear `$SPECS_BASE/specs/projects/project.md` usando el template `ps-discovery/templates/project-template.md`
 
 #### Scenario: No intermediate files created
 - **WHEN** `/ps-discovery` completa su ejecución

@@ -40,7 +40,7 @@ Intervienes cuando `story-refine` necesita:
 
 Lee segun corresponda:
 
-1. El archivo de historia actual en `docs/specs/stories/`.
+1. El archivo de historia actual en `$SPECS_BASE/specs/stories/`.
 2. El resultado mas reciente de `story-evaluation`, si existe.
 3. El template canonico de `story-creation` y las reglas de `story-split`, si necesitas revisar estructura o criterios de splitting.
 
@@ -76,7 +76,7 @@ Cuando detectes problemas, entrega propuestas accionables, por ejemplo:
 Si `story-refine` te pide editar la historia:
 
 1. Conserva el formato canonico de la historia.
-2. Preserva el encabezado `substatus: DOING` o `substatus: READY` existente.
+2. Preserva el encabezado `substatus: IN‑PROGRESS` o `substatus: DONE` existente.
 3. No elimines informacion valida ya confirmada por el usuario.
 4. Si agregas informacion inferida, marcalo claramente como `[inferido]` dentro de notas o contexto adicional cuando haga falta.
 

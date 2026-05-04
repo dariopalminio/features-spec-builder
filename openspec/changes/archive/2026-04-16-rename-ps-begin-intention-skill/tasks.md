@@ -26,8 +26,8 @@
 
 - [x] 6.1 Replace all occurrences of `ps-begin-intention` in `README.md` with `project-begin-intention`
 - [x] 6.2 Replace all occurrences of `ps-begin-intention` in `gem/README.md` with `project-begin-intention`
-- [x] 6.3 Replace all occurrences of `ps-begin-intention` in `docs/specs/project-spec-factory/project.md` with `project-begin-intention`
-- [x] 6.4 Replace all occurrences of `ps-begin-intention` in `docs/specs/project-spec-factory/project-plan.md` with `project-begin-intention`
+- [x] 6.3 Replace all occurrences of `ps-begin-intention` in `$SPECS_BASE/specs/project-spec-factory/project.md` with `project-begin-intention`
+- [x] 6.4 Replace all occurrences of `ps-begin-intention` in `$SPECS_BASE/specs/project-spec-factory/project-plan.md` with `project-begin-intention`
 
 ## 7. Update openspec change cross-references
 

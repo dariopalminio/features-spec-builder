@@ -9,4 +9,4 @@ El skill `reverse-engineering` SHALL resolver la ruta base de artefactos mediant
 
 #### Scenario: Skill usa docs por defecto sin SDDF_ROOT
 - **WHEN** el usuario ejecuta `/reverse-engineering` sin `SDDF_ROOT` definida
-- **THEN** el skill escribe bajo `docs/specs/projects/` (comportamiento previo)
+- **THEN** el skill escribe bajo `$SPECS_BASE/specs/projects/` (comportamiento previo)

@@ -38,11 +38,11 @@ El sistema SHALL incluir un skill en `.claude/skills/project-discovery/SKILL.md`
 - **THEN** el sistema MUST cargar y ejecutar `.claude/skills/project-discovery/SKILL.md`
 
 ### Requirement: project-discovery produces requirement-spec.md
-El skill `/project-discovery` SHALL producir `docs/specs/projects/project.md` como unico documento de salida, en una sola sesion que combina discovery de usuarios y especificacion de requisitos.
+El skill `/project-discovery` SHALL producir `$SPECS_BASE/specs/projects/project.md` como unico documento de salida, en una sola sesion que combina discovery de usuarios y especificacion de requisitos.
 
 #### Scenario: Single session produces final document
 - **WHEN** el usuario completa la sesion guiada por `/project-discovery`
-- **THEN** el sistema MUST crear `docs/specs/projects/project.md` usando el template `project-discovery/templates/project-template.md`
+- **THEN** el sistema MUST crear `$SPECS_BASE/specs/projects/project.md` usando el template `project-discovery/templates/project-template.md`
 
 #### Scenario: No intermediate files created
 - **WHEN** `/project-discovery` completa su ejecucion

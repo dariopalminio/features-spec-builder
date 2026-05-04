@@ -35,5 +35,5 @@
 ## 7. Verificación
 
 - [x] 7.1 Ejecutar un skill representativo (e.g., `story-creation`) con `SDDF_ROOT` definida y verificar que los artefactos se crean en la ruta configurada
-- [x] 7.2 Ejecutar el mismo skill sin `SDDF_ROOT` y verificar que opera sobre `docs/specs/stories/` (retrocompatibilidad)
+- [x] 7.2 Ejecutar el mismo skill sin `SDDF_ROOT` y verificar que opera sobre `$SPECS_BASE/specs/stories/` (retrocompatibilidad)
 - [x] 7.3 Ejecutar el skill con `SDDF_ROOT` apuntando a ruta inexistente y verificar que aparece la advertencia y el fallback a `docs` funciona

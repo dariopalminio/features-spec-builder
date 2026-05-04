@@ -1,6 +1,6 @@
 ## Context
 
-El repositorio ya dispone de tres skills especializados para trabajar historias de usuario de forma separada: `story-creation`, `story-evaluation` y `story-split`. El nuevo `story-refine` debe actuar como orquestador interactivo sin modificar esos skills, manteniendo la experiencia conversacional y agregando control explicito del estado de cada historia (`Doing`/`Ready`) durante ciclos iterativos.
+El repositorio ya dispone de tres skills especializados para trabajar historias de usuario de forma separada: `story-creation`, `story-evaluation` y `story-split`. El nuevo `story-refine` debe actuar como orquestador interactivo sin modificar esos skills, manteniendo la experiencia conversacional y agregando control explicito del estado de cada historia (`IN‑PROGRESS`/`DONE`) durante ciclos iterativos.
 
 El principal reto tecnico es gestionar un backlog dinamico de historias en refinamiento: una historia inicial puede dividirse en varias historias hijas y todas deben continuar el ciclo de evaluacion/refinamiento hasta quedar en estado final.
 
@@ -8,7 +8,7 @@ El principal reto tecnico es gestionar un backlog dinamico de historias en refin
 
 **Goals:**
 - Definir un orquestador `story-refine` que ejecute secuencialmente `story-creation` -> `story-evaluation` -> `story-split`.
-- Introducir una maquina de estados simple por historia: `Doing` mientras se refina, `Ready` cuando se aprueba o cuando el usuario decide cerrar manualmente.
+- Introducir una maquina de estados simple por historia: `IN‑PROGRESS` mientras se refina, `DONE` cuando se aprueba o cuando el usuario decide cerrar manualmente.
 - Mantener trazabilidad de historias derivadas (conteo, identificadores, relacion padre/hija) para no perder ninguna en el proceso.
 - Incorporar un agente `story-product-owner` como soporte para indagacion, analisis del problema, propuestas de mejora y enriquecimiento de redaccion.
 - Prevenir ciclos infinitos con un gate de decision del usuario en cada iteracion no aprobada.
@@ -26,12 +26,12 @@ El principal reto tecnico es gestionar un backlog dinamico de historias en refin
 - Alternative considered: procesar historias en paralelo. Se descarta por mayor complejidad conversacional y menor trazabilidad.
 
 2. Estado explicitamente embebido en cada historia
-- Decision: cada archivo de historia debe contener `**Estado**: Doing` durante refinamiento y pasar a `**Estado**: Ready` al cierre.
+- Decision: cada archivo de historia debe contener `**substatus**: IN‑PROGRESS` durante refinamiento y pasar a `**substatus**: DONE` al cierre.
 - Rationale: permite retoma manual y visibilidad inmediata sin dependencias externas.
 - Alternative considered: registrar estado en un index central solamente. Se descarta porque desincroniza facil con el contenido real de cada historia.
 
 3. Criterio de cierre basado en FINVEST + decision humana
-- Decision: cierre automatico a `Ready` cuando decision FINVEST sea `APROBADA`; para `REFINAR`/`RECHAZAR` se solicita continuar iterando o detener.
+- Decision: cierre automatico a `DONE` cuando decision FINVEST sea `APROBADA`; para `REFINAR`/`RECHAZAR` se solicita continuar iterando o detener.
 - Rationale: combina criterio de calidad objetivo con control humano sobre costo/tiempo.
 - Alternative considered: forzar iteracion hasta aprobacion. Se descarta por riesgo de bucles infinitos y fatiga del usuario.
 
@@ -47,7 +47,7 @@ El principal reto tecnico es gestionar un backlog dinamico de historias en refin
 ## Risks / Trade-offs
 
 - [Riesgo] El numero de historias puede crecer rapidamente tras varios splits -> Mitigation: imponer registro obligatorio de historias activas y mostrar resumen de backlog en cada ciclo.
-- [Riesgo] Cierre manual de historias en `Doing` puede dejar calidad heterogenea -> Mitigation: gate explicito con confirmacion y recomendacion de retomar luego.
+- [Riesgo] Cierre manual de historias en `IN‑PROGRESS` puede dejar calidad heterogenea -> Mitigation: gate explicito con confirmacion y recomendacion de retomar luego.
 - [Riesgo] Dependencia de salidas consistentes del evaluador FINVEST -> Mitigation: definir parseo robusto de decision (`APROBADA`/`REFINAR`/`RECHAZAR`) y fallback con pregunta al usuario si hay ambiguedad.
 - [Trade-off] Mayor interactividad mejora calidad pero aumenta tiempo de sesion.
 
@@ -64,6 +64,6 @@ Rollback:
 
 ## Open Questions
 
-- Definir convencion exacta de nombrado para historias derivadas (ej. sufijos `-A`, `-B` o IDs incrementales). --> Propuesta: usar `docs/specs/stories/story-{slug}.md` donde `{slug}` es un identificador unico generado a partir del titulo de la historia.
-- Confirmar si el cierre manual en `Doing` debe requerir motivo textual obligatorio para facilitar retoma.
-- Confirmar si `story-refine` debe escribir un indice resumido de historias activas en `docs/specs/stories/`.
+- Definir convencion exacta de nombrado para historias derivadas (ej. sufijos `-A`, `-B` o IDs incrementales). --> Propuesta: usar `$SPECS_BASE/specs/stories/story-{slug}.md` donde `{slug}` es un identificador unico generado a partir del titulo de la historia.
+- Confirmar si el cierre manual en `IN‑PROGRESS` debe requerir motivo textual obligatorio para facilitar retoma.
+- Confirmar si `story-refine` debe escribir un indice resumido de historias activas en `$SPECS_BASE/specs/stories/`.

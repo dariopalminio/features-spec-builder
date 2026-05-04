@@ -31,4 +31,4 @@ Incorpora el pipeline completo de especificación de proyectos (ProjectSpecFacto
 - [x] **Soporte Google Gemini Gems**: Prompts adaptados en `gem/prompts/` para el runtime Gemini.
 - [x] **FEAT-008 — Control WIP=1**: Mecanismo de detección de `Estado: Doing` para impedir múltiples proyectos activos simultáneos.
 - [x] **FEAT-010 — Gates de Revisión Humana**: Presentación de resumen del documento generado y solicitud de confirmación del usuario antes de avanzar a la siguiente fase; el documento avanza a `Estado: Ready` solo tras confirmación.
-- [x] **Documentos de ejemplo**: Ejecución completa del pipeline sobre el propio proyecto SDDF (`docs/specs/project-spec-factory/`).
+- [x] **Documentos de ejemplo**: Ejecución completa del pipeline sobre el propio proyecto SDDF (`$SPECS_BASE/specs/project-spec-factory/`).

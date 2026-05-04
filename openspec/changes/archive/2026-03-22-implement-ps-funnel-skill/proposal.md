@@ -8,7 +8,7 @@ El pipeline de ProjectSpecFactory comienza con el estado **Funnel**, pero actual
 - Nuevo template `initial-prompt-template.md` que define la estructura del documento de entrada
 - Nuevo agente PM (`.claude/agents/pm-agent.md`) especializado en entrevistar al usuario para capturar la intención del proyecto
 - El agente hace preguntas al usuario sección por sección del template y completa el documento con las respuestas + su propia pericia
-- El resultado final es `docs/specs/initial-prompt.md` listo para el siguiente estado (Draft)
+- El resultado final es `$SPECS_BASE/specs/initial-prompt.md` listo para el siguiente estado (Draft)
 
 ## Non-goals
 
@@ -33,6 +33,6 @@ El pipeline de ProjectSpecFactory comienza con el estado **Funnel**, pero actual
 - Nuevo archivo: `.claude/skills/ps-funnel/SKILL.md`
 - Nuevo archivo: `.claude/agents/pm-agent.md`
 - Nuevo archivo: `.claude/skills/ps-funnel/templates/initial-prompt-template.md`
-- Nuevo archivo generado (output): `docs/specs/initial-prompt.md`
+- Nuevo archivo generado (output): `$SPECS_BASE/specs/initial-prompt.md`
 - Sin cambios a código existente; solo adición de archivos Markdown
 

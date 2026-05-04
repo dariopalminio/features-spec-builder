@@ -32,8 +32,8 @@ El agente PM SHALL usar su conocimiento de gestión de productos para inferir y 
 ---
 
 ### Requirement: Agente escribe el documento final
-El agente PM SHALL escribir `docs/specs/initial-prompt.md` usando el template como estructura y las respuestas del usuario como contenido, al finalizar la entrevista.
+El agente PM SHALL escribir `$SPECS_BASE/specs/initial-prompt.md` usando el template como estructura y las respuestas del usuario como contenido, al finalizar la entrevista.
 
 #### Scenario: Escritura del documento
 - **WHEN** el agente PM ha recopilado respuestas para todas las secciones
-- **THEN** usa la herramienta `Write` para crear `docs/specs/initial-prompt.md` con todas las secciones completadas y metadatos de generación (fecha, agente)
+- **THEN** usa la herramienta `Write` para crear `$SPECS_BASE/specs/initial-prompt.md` con todas las secciones completadas y metadatos de generación (fecha, agente)

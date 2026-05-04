@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: Planning agent reads all prior phase documents
-The planning-agent SHALL read `docs/specs/projects/initial-prompt.md`, `docs/specs/projects/project-intent.md`, `docs/specs/projects/discovery.md`, `docs/specs/projects/project.md`, and `docs/specs/projects/clarifications.md` before generating output.
+The planning-agent SHALL read `$SPECS_BASE/specs/projects/initial-prompt.md`, `$SPECS_BASE/specs/projects/project-intent.md`, `$SPECS_BASE/specs/projects/discovery.md`, `$SPECS_BASE/specs/projects/project.md`, and `$SPECS_BASE/specs/projects/clarifications.md` before generating output.
 
 #### Scenario: All documents present
 - **WHEN** all five input documents exist
@@ -59,11 +59,11 @@ The agent SHALL read `.claude/skills/ps-plan/templates/project-plan-template.md`
 - **THEN** the agent produces `project-plan.md` with sections matching the template headers, without copying HTML comments into the output
 
 ### Requirement: Planning agent writes project-plan.md with metadata
-The agent SHALL write `docs/specs/projects/project-plan.md` including: project name, document version, Estado: Doing, generation date (YYYY-MM-DD), and Generado por: planning-agent.
+The agent SHALL write `$SPECS_BASE/specs/projects/project-plan.md` including: project name, document version, Estado: Doing, generation date (YYYY-MM-DD), and Generado por: planning-agent.
 
 #### Scenario: Output written
 - **WHEN** the agent completes analysis
-- **THEN** `docs/specs/projects/project-plan.md` is created with correct metadata and full backlog content
+- **THEN** `$SPECS_BASE/specs/projects/project-plan.md` is created with correct metadata and full backlog content
 
 ### Requirement: Planning agent uses check-list format for features
 Every feature in the backlog and in release tables SHALL begin with `- [ ]` (empty checkbox) to enable manual progress tracking.

@@ -1,6 +1,6 @@
 ## Context
 
-El framework SDDF ya genera `docs/specs/projects/project-plan.md` mediante el skill `project-planning`, que incluye la sección "## Propuesta de Releases" con bloques `### Release NN — Nombre` conteniendo objetivo, features asignadas y criterios de éxito. El template `docs/specs/templates/release-spec-template.md` define el formato canónico de un archivo de release.
+El framework SDDF ya genera `$SPECS_BASE/specs/projects/project-plan.md` mediante el skill `project-planning`, que incluye la sección "## Propuesta de Releases" con bloques `### Release NN — Nombre` conteniendo objetivo, features asignadas y criterios de éxito. El template `$SPECS_BASE/specs/templates/release-spec-template.md` define el formato canónico de un archivo de release.
 
 El gap actual: no existe ningún mecanismo para transformar esos releases planificados en archivos de especificación listos para usar. El desarrollador debe crear cada archivo manualmente.
 
@@ -9,11 +9,11 @@ El nuevo skill `releases-from-project-plan` cierra ese gap. Siguiendo el patrón
 ## Goals / Non-Goals
 
 **Goals:**
-- Leer `docs/specs/projects/project-plan.md` y extraer todos los bloques de release
-- Generar un archivo `release-[ID]-[Nombre-kebab].md` por release, en `docs/specs/releases/`
+- Leer `$SPECS_BASE/specs/projects/project-plan.md` y extraer todos los bloques de release
+- Generar un archivo `release-[ID]-[Nombre-kebab].md` por release, en `$SPECS_BASE/specs/releases/`
 - Poblar cada archivo con los datos disponibles del plan siguiendo `release-spec-template.md`
 - Informar con mensajes claros cuando el archivo de plan no existe o no tiene releases
-- Crear el directorio `docs/specs/releases/` si no existe
+- Crear el directorio `$SPECS_BASE/specs/releases/` si no existe
 
 **Non-Goals:**
 - Validar el formato del archivo generado (responsabilidad de FEAT-027 / `release-format-validation`)
@@ -57,4 +57,4 @@ El nuevo skill `releases-from-project-plan` cierra ese gap. Siguiendo el patrón
 
 - **Releases con nombres largos o caracteres especiales** → El slug kebab-case puede quedar truncado o con caracteres inválidos. Mitigación: el skill limpia el nombre (lowercase, reemplaza espacios y caracteres no alfanuméricos por guiones, elimina guiones dobles).
 
-- **Sobreescritura de archivos existentes** → Si ya existe `docs/specs/releases/release-01-nombre.md`, el skill debe avisar antes de sobreescribir. Mitigación: incluir fase de verificación de existencia en las instrucciones del skill.
+- **Sobreescritura de archivos existentes** → Si ya existe `$SPECS_BASE/specs/releases/release-01-nombre.md`, el skill debe avisar antes de sobreescribir. Mitigación: incluir fase de verificación de existencia en las instrucciones del skill.

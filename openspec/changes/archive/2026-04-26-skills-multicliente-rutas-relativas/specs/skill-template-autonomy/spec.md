@@ -12,5 +12,5 @@ Todos los archivos `SKILL.md` SHALL referenciar templates usando rutas relativas
 - **THEN** no hay coincidencias — ninguna referencia a template usa rutas absolutas con prefijo de cliente
 
 #### Scenario: Ningún agente referencia el directorio compartido antiguo
-- **WHEN** se hace búsqueda de `docs/specs/templates/` en `.claude/agents/`
+- **WHEN** se hace búsqueda de `$SPECS_BASE/specs/templates/` en `.claude/agents/`
 - **THEN** no hay resultados en archivos activos

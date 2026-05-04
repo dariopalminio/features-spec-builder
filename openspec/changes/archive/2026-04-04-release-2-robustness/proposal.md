@@ -6,7 +6,7 @@ El MVP de ProjectSpecFactory (Release 1) permite recorrer el workflow completo e
 
 - Los tres orchestrators de skills (`ps-begin-intention`, `ps-discovery`, `ps-planning`) detectan automáticamente el `Estado:` del documento de su fase antes de actuar.
 - Se define un comportamiento explícito para tres escenarios: documento inexistente (ejecutar normalmente), `Estado: Doing` (retomar), `Estado: Ready` (avisar antes de sobrescribir).
-- Se agrega detección de conflicto WIP=1: al ejecutar `/ps-begin-intention` con proyectos en `Doing`, el sistema ofrece sobrescribir o retomar.
+- Se agrega detección de conflicto WIP=1: al ejecutar `/ps-begin-intention` con proyectos en `IN‑PROGRESS`, el sistema ofrece sobrescribir o retomar.
 - Se formaliza el patrón de feedback al cierre de cada fase: path del documento generado + siguiente comando recomendado.
 
 ## Capabilities

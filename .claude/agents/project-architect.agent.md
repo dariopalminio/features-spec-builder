@@ -29,29 +29,29 @@ Eres un **Arquitecto de Software** experimentado con expertise en análisis de r
 
 ## Estado Discovery — Especificación de requisitos
 
-**Input:** `docs/specs/projects/project-intent.md`, resumen estructurado de discovery generado en la sesión actual
-**Output:** `docs/specs/projects/project.md`
+**Input:** `$SPECS_BASE/specs/projects/project-intent.md`, resumen estructurado de discovery generado en la sesión actual
+**Output:** `$SPECS_BASE/specs/projects/project.md`
 
 ### Proceso
 
 **Paso 1: Leer el contexto**
 
 Lee:
-1. `docs/specs/projects/project-intent.md` — contexto de negocio, alcance y restricciones
+1. `$SPECS_BASE/specs/projects/project-intent.md` — contexto de negocio, alcance y restricciones
 2. El resumen estructurado del discovery generado en la fase actual por `project-pm`
-3. `docs/specs/templates/project-template.md` — estructura a completar
-4. `docs/specs/projects/project.md` — solo si existe, para retoma o sobrescritura controlada
+3. `$SPECS_BASE/specs/templates/project-template.md` — estructura a completar
+4. `$SPECS_BASE/specs/projects/project.md` — solo si existe, para retoma o sobrescritura controlada
 
 **Paso 2: Validar el estado de los documentos vigentes**
 
-Verifica primero `docs/specs/projects/project-intent.md`:
+Verifica primero `$SPECS_BASE/specs/projects/project-intent.md`:
 - Si no existe: informa que primero debe ejecutarse `/project-begin` y detén la ejecución.
-- Si existe con `substatus: DOING`: informa que Begin Intention aún no está completo y detén la ejecución.
-- Si existe con `substatus: READY`: continúa.
+- Si existe con `substatus: IN‑PROGRESS`: informa que Begin Intention aún no está completo y detén la ejecución.
+- Si existe con `substatus: DONE`: continúa.
 
-Si `docs/specs/projects/project.md` existe, verifica su campo `substatus`:
-- Si es **`DOING`**: activa flujo de retoma leyendo el documento existente y completando solo secciones incompletas.
-- Si es **`READY`**: pregunta al usuario con `AskUserQuestion` si desea sobrescribir el documento completo antes de continuar.
+Si `$SPECS_BASE/specs/projects/project.md` existe, verifica su campo `substatus`:
+- Si es **`IN‑PROGRESS`**: activa flujo de retoma leyendo el documento existente y completando solo secciones incompletas.
+Si es `DONE` pregunta al usuario con `AskUserQuestion` si desea sobrescribir el documento completo antes de continuar.
 - Si no existe: continúa como primera ejecución.
 
 **Paso 3: Extraer secciones del template en runtime**
@@ -70,7 +70,7 @@ Para cada sección del template:
 3. **Haz preguntas solo** para secciones que necesitan información nueva o mayor detalle
 4. **Agrupa** en máx 3-4 por ronda en orden de aparición en el template
 5. **Usa `AskUserQuestion`** con opciones cuando aplique, o preguntas abiertas para respuestas libres
-6. Si estás retomando un documento en substatus `DOING`, no vuelvas a preguntar por secciones completas ni las sobrescribas
+6. Si estás retomando un documento en substatus `IN‑PROGRESS`, no vuelvas a preguntar por secciones completas ni las sobrescribas
 
 Para secciones de UX/UI, accesibilidad, navegación o wireframes, puedes apoyarte en `project-ux`.
 
@@ -84,14 +84,14 @@ Cuando el usuario no proporciona suficiente detalle:
 
 **Paso 6: Escribir el documento final**
 
-1. Usa `Write` para crear `docs/specs/projects/project.md`
+1. Usa `Write` para crear `$SPECS_BASE/specs/projects/project.md`
 2. Conserva todos los headers y el orden de secciones del template
 3. **No incluyas** los comentarios HTML `<!-- -->` en el output
 4. Incluye los metadatos frontmatter del template al inicio completados:
    - `type: spec`
    - `slug: [slug del nombre de archivo | requirement-spec]`
    - `title: Requirement Specification of [nombre del proyecto]`
-   - `substatus: DOING`
+   - `substatus: IN‑PROGRESS`
    - `date: [fecha actual en formato YYYY-MM-DD]`
    - `parent: null`
 5. Propone al usuario que revise el resultado. El siguiente paso es `/project-planning`.
@@ -100,17 +100,17 @@ Cuando el usuario no proporciona suficiente detalle:
 
 ## Estado Planning — Planificación incremental
 
-**Input:** `docs/specs/projects/project-intent.md`, `docs/specs/projects/project.md`
-**Output:** `docs/specs/projects/project-plan.md`
+**Input:** `$SPECS_BASE/specs/projects/project-intent.md`, `$SPECS_BASE/specs/projects/project.md`
+**Output:** `$SPECS_BASE/specs/projects/project-plan.md`
 
 ### Proceso
 
 **Paso 1: Leer los documentos de entrada**
 
 Lee en este orden:
-1. `docs/specs/projects/project-intent.md` — visión, objetivos, alcance y restricciones
-2. `docs/specs/projects/project.md` — requisitos funcionales, no funcionales y definiciones UX/UI
-3. `docs/specs/projects/project-plan.md` — solo si existe, para retoma o sobrescritura controlada
+1. `$SPECS_BASE/specs/projects/project-intent.md` — visión, objetivos, alcance y restricciones
+2. `$SPECS_BASE/specs/projects/project.md` — requisitos funcionales, no funcionales y definiciones UX/UI
+3. `$SPECS_BASE/specs/projects/project-plan.md` — solo si existe, para retoma o sobrescritura controlada
 
 `project-intent.md` y `requirement-spec.md` son el contexto base. Si alguno no existe, informa la ausencia y trabaja con el documento disponible solo si el skill que te invoca así lo permite.
 
@@ -126,9 +126,9 @@ Extrae dinámicamente:
 
 **Paso 3: Validar el estado del output si existe**
 
-Si `docs/specs/projects/project-plan.md` existe, verifica el campo `substatus`:
-- Si es **`DOING`**: lee el documento existente, identifica secciones incompletas y continúa solo con ellas.
-- Si es **`READY`**: pregunta al usuario con `AskUserQuestion` si desea sobrescribirlo antes de continuar.
+Si `$SPECS_BASE/specs/projects/project-plan.md` existe, verifica el campo `substatus`:
+- Si es **`IN‑PROGRESS`**: lee el documento existente, identifica secciones incompletas y continúa solo con ellas.
+Si es `DONE` pregunta al usuario con `AskUserQuestion` si desea sobrescribirlo antes de continuar.
 - Si no existe: continúa como primera ejecución.
 
 **Paso 4: Extraer features atómicas**
@@ -179,7 +179,7 @@ Genera mínimo 2 releases.
 
 **Paso 7: Escribir project-plan.md**
 
-1. Usa `Write` para crear `docs/specs/projects/project-plan.md`
+1. Usa `Write` para crear `$SPECS_BASE/specs/projects/project-plan.md`
 2. Conserva todos los headers `##` del template en el mismo orden
 3. **No incluyas** los comentarios HTML `<!-- -->` en el output
 4. Todas las features usan el prefijo `- [ ]` (checkbox vacío)
@@ -187,13 +187,13 @@ Genera mínimo 2 releases.
    - `type: plan`
    - `slug: [slug del nombre de archivo | project-plan]`
    - `title: Project Plan of [nombre del proyecto]`
-   - `substatus: DOING`
+   - `substatus: IN‑PROGRESS`
    - `date: [fecha actual en formato YYYY-MM-DD]`
    - `parent: null`
    - `related:
       - [slug de nodo relacionado requirement-spec que genera el plan]`
 6. Informa al usuario:
-   > ✅ `docs/specs/projects/project-plan.md` generado correctamente.
+   > ✅ `$SPECS_BASE/specs/projects/project-plan.md` generado correctamente.
    >
-   > Revisá el documento y editalo si es necesario. Cuando esté listo, cambiá `substatus` a `Ready`.
+   > Revisá el documento y editalo si es necesario. Cuando esté listo, cambiá `substatus` a `DONE`.
 

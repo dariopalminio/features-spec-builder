@@ -2,7 +2,7 @@
 
 Los tres skills del pipeline (`ps-begin-intention`, `ps-discovery`, `ps-planning`) son orchestrators en Markdown que instruyen al agente cómo actuar. Actualmente cada SKILL.md asume que siempre se ejecuta sobre un proyecto nuevo: lee el template, delega a los agentes, y escribe el output. No existe ninguna lógica de estado previo.
 
-El estado del proyecto vive íntegramente en el filesystem: los documentos en `docs/specs/projects/` incluyen el campo `**Estado**: Doing | Ready` en su frontmatter. Este campo es la única fuente de verdad sobre el progreso de una fase.
+El estado del proyecto vive íntegramente en el filesystem: los documentos en `$SPECS_BASE/specs/projects/` incluyen el campo `**Estado**: Doing | Ready` en su frontmatter. Este campo es la única fuente de verdad sobre el progreso de una fase.
 
 El cambio consiste en agregar una **fase de precondiciones** al inicio de cada SKILL.md que lea ese campo y bifurque el comportamiento antes de delegar al agente.
 
@@ -11,8 +11,8 @@ El cambio consiste en agregar una **fase de precondiciones** al inicio de cada S
 **Goals:**
 - Detectar automáticamente el estado del documento de cada fase al inicio del skill
 - Definir comportamiento explícito para los tres escenarios: inexistente, Doing, Ready
-- Implementar retoma de sesión cuando el documento está en `Doing`
-- Implementar idempotencia cuando el documento está en `Ready`
+- Implementar retoma de sesión cuando el documento está en `IN‑PROGRESS`
+- Implementar idempotencia cuando el documento está en `DONE`
 - Implementar detección de conflicto WIP=1 en `ps-begin-intention`
 - Formalizar el patrón de cierre de fase con feedback al usuario
 
@@ -38,13 +38,13 @@ El cambio consiste en agregar una **fase de precondiciones** al inicio de cada S
 
 ### Decisión 3: Para WIP=1, verificar todos los documentos de output, no solo el de la fase actual
 
-**Decisión:** Al ejecutar `/ps-begin-intention`, el skill verifica si existe cualquier documento en `docs/specs/projects/` con `Estado: Doing`. Si encuentra uno, avisa y ofrece las opciones. Esto cubre el caso de un proyecto interrumpido en cualquier fase.
+**Decisión:** Al ejecutar `/ps-begin-intention`, el skill verifica si existe cualquier documento en `$SPECS_BASE/specs/projects/` con `Estado: Doing`. Si encuentra uno, avisa y ofrece las opciones. Esto cubre el caso de un proyecto interrumpido en cualquier fase.
 
 ### Decisión 4: En caso de retoma (`Estado: Doing`), el agente lee el documento existente y continúa
 
 **Alternativa considerada:** Reiniciar la entrevista desde cero con el documento como contexto.
 
-**Decisión:** El agente recibe instrucción de leer el documento en `Doing`, identificar las secciones con placeholders sin completar (`[...]`) y continuar solo con esas secciones. Las secciones ya completas no se repiten. Esto minimiza la fricción de retoma.
+**Decisión:** El agente recibe instrucción de leer el documento en `IN‑PROGRESS`, identificar las secciones con placeholders sin completar (`[...]`) y continuar solo con esas secciones. Las secciones ya completas no se repiten. Esto minimiza la fricción de retoma.
 
 ### Decisión 5: Patrón de cierre de fase formalizado como sección en SKILL.md
 
@@ -55,11 +55,11 @@ El cambio consiste en agregar una **fase de precondiciones** al inicio de cada S
 **[Riesgo] El agente puede no identificar correctamente las secciones incompletas al retomar**
 → Mitigación: La instrucción de retoma especifica explícitamente que debe buscar campos con formato `[...]` o `[Nombre del Proyecto]` como indicadores de secciones sin completar.
 
-**[Riesgo] Si el usuario editó manualmente el documento en `Doing`, el agente puede sobrescribir cambios**
+**[Riesgo] Si el usuario editó manualmente el documento en `IN‑PROGRESS`, el agente puede sobrescribir cambios**
 → Mitigación: La instrucción de retoma indica que el agente debe pre-rellenar desde el documento existente y solo preguntar lo que falta. Los campos ya completados se preservan.
 
 **[Riesgo] El campo `Estado:` puede tener variaciones de formato (mayúsculas, espacios)**
-→ Mitigación: Los templates generan siempre `**Estado**: Doing` o `**Estado**: Ready`. El orchestrator busca ambas formas con instrucción explícita al agente de leer el campo exacto.
+→ Mitigación: Los templates generan siempre `**substatus**: IN‑PROGRESS` o `**substatus**: DONE`. El orchestrator busca ambas formas con instrucción explícita al agente de leer el campo exacto.
 
 **[Trade-off] La lógica de estado en lenguaje natural (Markdown) es menos robusta que código**
 → Aceptado: Es coherente con el principio de "solo Markdown". La lógica es simple (tres ramas) y el lenguaje natural de los SKILL.md es suficientemente preciso para guiar al LLM.

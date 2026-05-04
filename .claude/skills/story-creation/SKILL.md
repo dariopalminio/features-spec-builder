@@ -198,8 +198,8 @@ Antes de escribir el archivo, determinar el próximo número de feature:
 - El `{slug}` se deriva del `Quiero` de la historia: minúsculas, palabras separadas por guiones, máximo 5 palabras significativas, sin acentos ni caracteres especiales
 - Ruta final: `$SPECS_BASE/specs/stories/FEAT-{NNN}-{slug}/story.md`
 - Ejemplos:
-  - `docs/specs/stories/FEAT-054-recuperar-contrasena-email/story.md`
-  - `docs/specs/stories/FEAT-055-filtrar-pedidos-por-estado/story.md`
+  - `$SPECS_BASE/specs/stories/FEAT-054-recuperar-contrasena-email/story.md`
+  - `$SPECS_BASE/specs/stories/FEAT-055-filtrar-pedidos-por-estado/story.md`
 
 #### Verificar conflicto de directorio
 

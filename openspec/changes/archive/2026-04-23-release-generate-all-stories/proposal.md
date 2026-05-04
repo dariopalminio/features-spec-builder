@@ -4,7 +4,7 @@ El skill `release-generate-stories` (FEAT-029) genera historias de usuario desde
 
 ## What Changes
 
-- **Nuevo skill** `release-generate-all-stories` en `.claude/skills/release-generate-all-stories/SKILL.md` que escanea `docs/specs/releases/`, procesa cada archivo de release en orden alfabético, y genera un archivo `story-[ID]-[nombre-kebab].md` por cada feature usando el mismo flujo que `release-generate-stories`.
+- **Nuevo skill** `release-generate-all-stories` en `.claude/skills/release-generate-all-stories/SKILL.md` que escanea `$SPECS_BASE/specs/releases/`, procesa cada archivo de release en orden alfabético, y genera un archivo `story-[ID]-[nombre-kebab].md` por cada feature usando el mismo flujo que `release-generate-stories`.
 - El skill implementa **idempotencia guiada en modo batch**: si detecta que ya existen archivos de historia que serían sobreescritos, solicita una confirmación global al inicio (sobreescribir todos / saltar todos los existentes / decidir uno por uno) para evitar interrupciones repetitivas durante el procesamiento.
 - Al finalizar, muestra un resumen con contadores: releases procesados / historias generadas / historias saltadas / releases sin features.
 
@@ -12,7 +12,7 @@ El skill `release-generate-stories` (FEAT-029) genera historias de usuario desde
 
 ### New Capabilities
 
-- `release-generate-all-stories`: Skill orquestador que itera sobre todos los archivos `.md` de `docs/specs/releases/` y genera stories para cada uno, delegando en el mismo flujo de extracción y generación de `release-generate-stories`.
+- `release-generate-all-stories`: Skill orquestador que itera sobre todos los archivos `.md` de `$SPECS_BASE/specs/releases/` y genera stories para cada uno, delegando en el mismo flujo de extracción y generación de `release-generate-stories`.
 
 ### Modified Capabilities
 
@@ -21,5 +21,5 @@ _(ninguna — no se modifican requisitos de specs existentes)_
 ## Impact
 
 - **Archivos nuevos**: `.claude/skills/release-generate-all-stories/SKILL.md`
-- **Dependencias funcionales**: reutiliza el flujo de generación de `release-generate-stories` (FEAT-029); necesita `docs/specs/releases/` con archivos de release y `docs/specs/templates/story-gherkin-template.md`
+- **Dependencias funcionales**: reutiliza el flujo de generación de `release-generate-stories` (FEAT-029); necesita `$SPECS_BASE/specs/releases/` con archivos de release y `$SPECS_BASE/specs/templates/story-gherkin-template.md`
 - **Sin breaking changes**: no modifica el skill `release-generate-stories` ni ningún otro artefacto existente

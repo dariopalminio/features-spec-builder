@@ -9,7 +9,7 @@ El skill se construye siguiendo la metodología del skill `skill-creator`: dise�
 **Goals:**
 - Skill `release-creation` que extrae dinámicamente las secciones del template `assets/release-spec-template.md` en tiempo de ejecución
 - Flujo interactivo de preguntas por sección (obligatorias primero, opcionales con opción de saltar)
-- Genera `docs/specs/releases/<slug>/release.md` con frontmatter completo
+- Genera `$SPECS_BASE/specs/releases/<slug>/release.md` con frontmatter completo
 - El archivo producido debe pasar `release-format-validation` sin refinamiento adicional
 - Usa `skill-creator` como metodología de construcción del skill
 
@@ -35,7 +35,7 @@ El skill tendrá su propia copia de `assets/release-spec-template.md`. Esto elim
 Para secciones opcionales del template, el skill pregunta "¿Quieres completar la sección X? (sí / no / saltar todo)". Si el usuario responde no/skip, la sección se omite del archivo final. Esto produce releases mínimos válidos cuando el usuario quiere rapidez.
 
 ### D4 — Slug del directorio derivado del nombre del release
-El skill pide el nombre del release como primera pregunta. Derivan automáticamente el slug kebab-case para crear `docs/specs/releases/<EPIC-NN-slug>/release.md`. Si el directorio ya existe, el skill pregunta si sobreescribir o usar un nombre diferente.
+El skill pide el nombre del release como primera pregunta. Derivan automáticamente el slug kebab-case para crear `$SPECS_BASE/specs/releases/<EPIC-NN-slug>/release.md`. Si el directorio ya existe, el skill pregunta si sobreescribir o usar un nombre diferente.
 
 ### D5 — Construcción con `skill-creator`
 El SKILL.md se redacta usando la metodología `skill-creator`: captura de intent, redacción del draft, definición de casos de prueba y criterios de evaluación. No se ejecutan benchmarks automatizados (skill de tipo workflow interactivo), pero sí se documentan los casos de prueba para validación manual.

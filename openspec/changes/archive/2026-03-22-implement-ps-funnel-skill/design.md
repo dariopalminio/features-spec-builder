@@ -10,7 +10,7 @@ El usuario necesita una forma guiada de capturar la intención de su proyecto. S
 - Implementar el skill `/ps-funnel` como punto de entrada al pipeline
 - Crear el agente PM que conduce la entrevista y completa el documento
 - Definir el template `initial-prompt-template.md` con las secciones necesarias
-- Producir `docs/specs/initial-prompt.md` listo para el siguiente estado
+- Producir `$SPECS_BASE/specs/initial-prompt.md` listo para el siguiente estado
 
 **Non-Goals:**
 - No procesar ni validar el `initial-prompt.md` generado
@@ -49,7 +49,7 @@ El usuario necesita una forma guiada de capturar la intención de su proyecto. S
 
 ### D4: Output escrito directamente por el agente PM
 
-**Decisión**: El agente PM escribe `docs/specs/initial-prompt.md` usando la herramienta `Write` de Claude Code, usando el template como estructura base y llenando las secciones con las respuestas del usuario + inferencias del agente.
+**Decisión**: El agente PM escribe `$SPECS_BASE/specs/initial-prompt.md` usando la herramienta `Write` de Claude Code, usando el template como estructura base y llenando las secciones con las respuestas del usuario + inferencias del agente.
 
 **Rationale**: Evita capas intermedias. El agente tiene contexto completo de la conversación y puede producir un documento cohesivo en una sola pasada.
 

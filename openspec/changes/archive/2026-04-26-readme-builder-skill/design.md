@@ -32,7 +32,7 @@ The skill reads `.claude/skills/readme-builder/templates/readme-template.md` at 
 ### Decision 2: Three-tier artifact discovery
 
 Discovery order (stop at first tier that yields content):
-1. **Formal spec artifacts**: `docs/specs/projects/project-intent.md`, `requirement-spec.md`, `project-plan.md`.
+1. **Formal spec artifacts**: `$SPECS_BASE/specs/projects/project-intent.md`, `requirement-spec.md`, `project-plan.md`.
 2. **LLM-context files**: `AGENTS.md`, `CLAUDE.md`, `.specify/memory/constitution.md`.
 3. **Reverse-engineering fallback**: scan source tree, read key files, extract information.
 

@@ -12,7 +12,7 @@ The Planning phase (`/ps-plan`) exists only as a stub skill with no agent or tem
 
 ### New Capabilities
 
-- `planning-agent`: Specialized agent that transforms specification documents into a prioritized feature backlog and release proposal, outputting `docs/specs/projects/project-plan.md`
+- `planning-agent`: Specialized agent that transforms specification documents into a prioritized feature backlog and release proposal, outputting `$SPECS_BASE/specs/projects/project-plan.md`
 - `ps-planning-skill`: Orchestrator skill for the Planning phase — validates `clarifications.md` exists, delegates to `planning-agent`, confirms output
 - `project-plan-template`: Minimal Markdown template defining the output structure for `project-plan.md`
 
@@ -24,6 +24,6 @@ The Planning phase (`/ps-plan`) exists only as a stub skill with no agent or tem
 
 - Completes the pipeline: Funnel → Draft → Discovery → Specifying → Approval → **Planning** → Finished
 - No external dependencies — pure Markdown files
-- Input: `docs/specs/projects/clarifications.md` (and all prior phase docs)
-- Output: `docs/specs/projects/project-plan.md`
+- Input: `$SPECS_BASE/specs/projects/clarifications.md` (and all prior phase docs)
+- Output: `$SPECS_BASE/specs/projects/project-plan.md`
 - Non-goals: No Jira/Linear integration, no task-level breakdown (only feature-level), no effort estimates in story points

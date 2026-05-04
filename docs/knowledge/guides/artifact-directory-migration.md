@@ -18,12 +18,12 @@ Esta guía explica cómo migrar artefactos existentes (proyectos, releases, hist
 
 | Artefacto | Ruta anterior | Ruta nueva |
 |-----------|--------------|------------|
-| project-intent.md | `docs/specs/projects/project-intent.md` | `docs/specs/projects/PROJ-01-nombre/project-intent.md` |
-| requirement-spec.md | `docs/specs/projects/project.md` | `docs/specs/projects/PROJ-01-nombre/project.md` |
-| project-plan.md | `docs/specs/projects/project-plan.md` | `docs/specs/projects/PROJ-01-nombre/project-plan.md` |
-| story-map.md | `docs/specs/projects/story-map.md` | `docs/specs/projects/PROJ-01-nombre/story-map.md` |
-| release-01-nombre.md | `docs/specs/releases/release-01-nombre.md` | `docs/specs/releases/EPIC-01-nombre/release.md` |
-| story-FEAT-001-nombre.md | `docs/specs/stories/story-FEAT-001-nombre.md` | `docs/specs/stories/FEAT-001-nombre/story.md` |
+| project-intent.md | `$SPECS_BASE/specs/projects/project-intent.md` | `$SPECS_BASE/specs/projects/PROJ-01-nombre/project-intent.md` |
+| requirement-spec.md | `$SPECS_BASE/specs/projects/project.md` | `$SPECS_BASE/specs/projects/PROJ-01-nombre/project.md` |
+| project-plan.md | `$SPECS_BASE/specs/projects/project-plan.md` | `$SPECS_BASE/specs/projects/PROJ-01-nombre/project-plan.md` |
+| story-map.md | `$SPECS_BASE/specs/projects/story-map.md` | `$SPECS_BASE/specs/projects/PROJ-01-nombre/story-map.md` |
+| release-01-nombre.md | `$SPECS_BASE/specs/releases/release-01-nombre.md` | `$SPECS_BASE/specs/releases/EPIC-01-nombre/release.md` |
+| story-FEAT-001-nombre.md | `$SPECS_BASE/specs/stories/story-FEAT-001-nombre.md` | `$SPECS_BASE/specs/stories/FEAT-001-nombre/story.md` |
 
 ---
 
@@ -47,7 +47,7 @@ rmdir docs/specs/project 2>/dev/null || true
 
 #### 2. Migrar releases
 
-Por cada archivo `release-NN-nombre.md` en `docs/specs/releases/`:
+Por cada archivo `release-NN-nombre.md` en `$SPECS_BASE/specs/releases/`:
 
 ```bash
 # Ejemplo para release-01-features-spec-builder.md
@@ -58,7 +58,7 @@ mv docs/specs/releases/release-01-features-spec-builder.md \
 
 #### 3. Migrar historias
 
-Por cada archivo `story-FEAT-NNN-nombre.md` en `docs/specs/stories/`:
+Por cada archivo `story-FEAT-NNN-nombre.md` en `$SPECS_BASE/specs/stories/`:
 
 ```bash
 # Ejemplo para story-FEAT-001-project-begin.md
@@ -91,5 +91,5 @@ updated: 2026-05-01
 
 - El campo `parent` en releases apunta al ID del proyecto (`PROJ-01`), no al nombre del directorio.
 - El campo `parent` en historias apunta al ID del release (`EPIC-01`) o al proyecto si aún no está asignada a un release.
-- Los IDs deben ser únicos globalmente en todo `docs/specs/`.
-- Si usas `SDDF_ROOT` con un valor personalizado, reemplaza `docs/specs/` con `$SDDF_ROOT/specs/` en todos los comandos anteriores.
+- Los IDs deben ser únicos globalmente en todo `$SPECS_BASE/specs/`.
+- Si usas `SDDF_ROOT` con un valor personalizado, reemplaza `$SPECS_BASE/specs/` con `$SDDF_ROOT/specs/` en todos los comandos anteriores.

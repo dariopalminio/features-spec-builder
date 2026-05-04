@@ -21,4 +21,4 @@ related:
 Centralizar templates de spec en directorio compartido.
 
 ## Features
-- [ ] FEAT-055 - **Centralizar templates de spec en directorio compartido:** Migración de los templates `story-gherkin-template.md`, `release-spec-template.md` y `project-template.md` desde las carpetas `assets/` de cada skill individual hacia `docs/specs/templates/` como única fuente de verdad, eliminando divergencias de frontmatter y definiendo status inicial por workflow en cada skill generador.
+- [ ] FEAT-055 - **Centralizar templates de spec en directorio compartido:** Migración de los templates `story-gherkin-template.md`, `release-spec-template.md` y `project-template.md` desde las carpetas `assets/` de cada skill individual hacia `$SPECS_BASE/specs/templates/` como única fuente de verdad, eliminando divergencias de frontmatter y definiendo status inicial por workflow en cada skill generador.

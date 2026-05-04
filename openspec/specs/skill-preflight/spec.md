@@ -21,7 +21,7 @@ El skill `skill-preflight` SHALL verificar que la variable de entorno `SDDF_ROOT
 El skill `skill-preflight` SHALL verificar que existen los subdirectorios de specs estándar del SDDF bajo `SPECS_BASE`.
 
 #### Scenario: Todos los subdirectorios existen
-- **WHEN** `docs/specs/projects/`, `docs/specs/releases/` y `docs/specs/stories/` existen bajo `SPECS_BASE`
+- **WHEN** `$SPECS_BASE/specs/projects/`, `$SPECS_BASE/specs/releases/` y `$SPECS_BASE/specs/stories/` existen bajo `SPECS_BASE`
 - **THEN** el preflight emite `[OK]` para cada directorio y continúa
 
 #### Scenario: Algún subdirectorio falta

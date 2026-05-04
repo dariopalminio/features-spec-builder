@@ -8,7 +8,7 @@
 
 - [x] 2.1 Documentar en SKILL.md la regla de derivación de `slug` desde nombre de archivo (sin extensión, kebab-case)
 - [x] 2.2 Documentar la regla de inferencia de `type` desde prefijo de archivo (`story-*` → `story`, `release-*` → `release`, `project-*` → `project`, resto → `wiki`)
-- [x] 2.3 Documentar la regla de mapeo de `status` desde el campo `**Estado**` existente (`Doing` → `IN-PROGRESS`, `Ready` → `COMPLETED`, ausente → `BACKLOG`)
+- [x] 2.3 Documentar la regla de mapeo de `status` desde el campo `**Estado**` existente (`IN‑PROGRESS` → `IN-PROGRESS`, `DONE` → `COMPLETED`, ausente → `BACKLOG`)
 - [x] 2.4 Documentar la derivación de `title` desde el primer heading `#` del archivo o desde el nombre de archivo si no hay heading
 
 ## 3. Flujo de aplicación a archivo individual
@@ -32,11 +32,11 @@
 ## 6. Resolución de input multi-modo
 
 - [x] 6.1 Documentar en SKILL.md los tres modos de input: nombre corto (búsqueda automática), ruta relativa/absoluta, sin input (modo interactivo)
-- [x] 6.2 Documentar el comportamiento de búsqueda por nombre corto: buscar en `docs/specs/stories/`, `docs/specs/releases/` y `docs/specs/projects/`; solicitar selección si hay múltiples coincidencias
+- [x] 6.2 Documentar el comportamiento de búsqueda por nombre corto: buscar en `$SPECS_BASE/specs/stories/`, `$SPECS_BASE/specs/releases/` y `$SPECS_BASE/specs/projects/`; solicitar selección si hay múltiples coincidencias
 
 ## 7. Verificación
 
-- [x] 7.1 Invocar el skill sobre `docs/specs/stories/story-FEAT-043-header-aggregation.md` y verificar que el frontmatter es añadido correctamente con los campos derivados
+- [x] 7.1 Invocar el skill sobre `$SPECS_BASE/specs/stories/story-FEAT-043-header-aggregation.md` y verificar que el frontmatter es añadido correctamente con los campos derivados
 - [x] 7.2 Invocar el skill nuevamente sobre el mismo archivo y verificar que detecta el frontmatter existente y ofrece las opciones de merge/mantener/cancelar
-- [x] 7.3 Invocar el skill sobre el directorio `docs/specs/stories/` y verificar el resumen anticipado y la confirmación global
+- [x] 7.3 Invocar el skill sobre el directorio `$SPECS_BASE/specs/stories/` y verificar el resumen anticipado y la confirmación global
 - [x] 7.4 Verificar que referencias a slugs inexistentes son marcadas como `[pendiente]` en el frontmatter generado

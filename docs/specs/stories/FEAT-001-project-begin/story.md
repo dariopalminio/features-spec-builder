@@ -18,7 +18,7 @@ parent: EPIC-02-project-spec-builder
 
 **Como** developer o emprendedor que quiere especificar un nuevo proyecto de software con el framework SDDF
 **Quiero** ejecutar el skill `project-begin` para responder una entrevista interactiva sobre mi proyecto
-**Para** obtener `docs/specs/projects/project-intent.md` con el problema, visi�n, beneficios, criterios de �xito, restricciones y non-goals documentados, como punto de partida para el pipeline de especificaci�n
+**Para** obtener `$SPECS_BASE/specs/projects/project-intent.md` con el problema, visi�n, beneficios, criterios de �xito, restricciones y non-goals documentados, como punto de partida para el pipeline de especificaci�n
 
 ## ? Criterios de aceptaci�n
 

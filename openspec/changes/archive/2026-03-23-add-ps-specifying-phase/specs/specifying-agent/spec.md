@@ -1,19 +1,19 @@
 ## ADDED Requirements
 
 ### Requirement: Agente specifying-agent valida el estado de discovery.md
-El sistema SHALL proveer un agente `specifying-agent` en `.claude/agents/specifying-agent.md` que, al iniciarse, lee `docs/specs/projects/discovery.md` y verifica el campo `**Estado**`.
+El sistema SHALL proveer un agente `specifying-agent` en `.claude/agents/specifying-agent.md` que, al iniciarse, lee `$SPECS_BASE/specs/projects/discovery.md` y verifica el campo `**Estado**`.
 
 #### Scenario: discovery.md tiene Estado Ready
-- **WHEN** el `specifying-agent` lee `discovery.md` y el campo `**Estado**` es `Ready`
+- **WHEN** el `specifying-agent` lee `discovery.md` y el campo `**Estado**` es `DONE`
 - **THEN** el agente continúa directamente a la entrevista sin interrumpir al usuario
 
 #### Scenario: discovery.md tiene Estado Doing
-- **WHEN** el `specifying-agent` lee `discovery.md` y el campo `**Estado**` es `Doing`
+- **WHEN** el `specifying-agent` lee `discovery.md` y el campo `**Estado**` es `IN‑PROGRESS`
 - **THEN** el agente pregunta al usuario con `AskUserQuestion` si confirma que el discovery está listo
 
 #### Scenario: Usuario confirma avanzar con Estado Doing
-- **WHEN** el usuario confirma avanzar a pesar del Estado `Doing`
-- **THEN** el agente usa `Edit` para cambiar el campo `**Estado**` en `discovery.md` de `Doing` a `Ready` y continúa
+- **WHEN** el usuario confirma avanzar a pesar del Estado `IN‑PROGRESS`
+- **THEN** el agente usa `Edit` para cambiar el campo `**Estado**` en `discovery.md` de `IN‑PROGRESS` a `DONE` y continúa
 
 #### Scenario: Usuario rechaza avanzar con Estado Doing
 - **WHEN** el usuario rechaza avanzar
@@ -42,11 +42,11 @@ El sistema SHALL proveer que el `specifying-agent` conduzca la entrevista de esp
 - **THEN** agrupa máximo 3-4 preguntas por ronda y espera las respuestas antes de continuar
 
 ### Requirement: Agente produce requirement-spec.md
-El sistema SHALL proveer que el `specifying-agent` escriba el documento final `docs/specs/projects/project.md` usando el template como estructura base.
+El sistema SHALL proveer que el `specifying-agent` escriba el documento final `$SPECS_BASE/specs/projects/project.md` usando el template como estructura base.
 
 #### Scenario: Documento generado con metadatos
 - **WHEN** el agente finaliza la entrevista
-- **THEN** usa `Write` para crear `docs/specs/projects/project.md` con metadatos: Versión 1.0, Estado Doing, Fecha actual, Generado por specifying-agent
+- **THEN** usa `Write` para crear `$SPECS_BASE/specs/projects/project.md` con metadatos: Versión 1.0, Estado Doing, Fecha actual, Generado por specifying-agent
 
 #### Scenario: Comentarios HTML excluidos del output
 - **WHEN** el agente escribe el documento final

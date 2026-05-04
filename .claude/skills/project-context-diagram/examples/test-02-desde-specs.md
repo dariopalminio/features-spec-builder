@@ -9,9 +9,9 @@
 **Skill:**
 > ⚙️ SPECS_BASE = `docs` (SDDF_ROOT no está definida)  
 > ✅ Template `assets/c4-context-template.puml` encontrado.  
-> Modo: `--from-files` (documento indicado: `docs/specs/projects/PROJ-01-agile-sddf/project.md`)
+> Modo: `--from-files` (documento indicado: `$SPECS_BASE/specs/projects/PROJ-01-agile-sddf/project.md`)
 
-**Skill:** Leyendo `docs/specs/projects/PROJ-01-agile-sddf/project.md`...
+**Skill:** Leyendo `$SPECS_BASE/specs/projects/PROJ-01-agile-sddf/project.md`...
 
 ---
 
@@ -63,7 +63,7 @@ Rel(sddf, claude_api, "Delega ejecución de agentes y generación de contenido",
 
 **Skill:**
 > ✅ Diagrama de contexto C4 generado:  
-> `docs/specs/projects/PROJ-01-agile-sddf/context-diagram.puml`
+> `$SPECS_BASE/specs/projects/PROJ-01-agile-sddf/context-diagram.puml`
 >
 > Para renderizarlo localmente, instala la extensión PlantUML en VS Code (ext: jebbs.plantuml) o visita https://www.plantuml.com/plantuml
 >

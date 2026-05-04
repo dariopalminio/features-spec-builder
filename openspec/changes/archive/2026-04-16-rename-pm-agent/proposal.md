@@ -28,4 +28,4 @@ The agent file `.claude/agents/product-manager.agent.md` uses a generic name (`p
 - `.claude/skills/project-discovery/SKILL.md` — agent invocation updated
 - `.claude/agents/ux-designer.agent.md` — agent name reference updated
 - `openspec/specs/role-based-agents/spec.md` — delta spec for requirement rename
-- Documentation files: `README.md`, `CLAUDE.md`, `docs/specs/project-spec-factory/`
+- Documentation files: `README.md`, `CLAUDE.md`, `$SPECS_BASE/specs/project-spec-factory/`

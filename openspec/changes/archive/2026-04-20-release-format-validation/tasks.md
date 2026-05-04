@@ -8,7 +8,7 @@
 - [x] 2.2 Implementar Fase 0: resolución de input (nombre corto, nombre con extensión, ruta relativa)
 - [x] 2.3 Implementar detección de múltiples coincidencias y prompt al usuario para elegir
 - [x] 2.4 Implementar manejo de archivo no encontrado con resultado RECHAZADO
-- [x] 2.5 Implementar lectura de `docs/specs/templates/release-spec-template.md` y extracción dinámica de secciones con `<!-- sección obligatoria -->`
+- [x] 2.5 Implementar lectura de `$SPECS_BASE/specs/templates/release-spec-template.md` y extracción dinámica de secciones con `<!-- sección obligatoria -->`
 - [x] 2.6 Implementar validación de frontmatter (Título, Versión, Estado, Fecha)
 - [x] 2.7 Implementar validación de secciones obligatorias por encabezado `##`
 - [x] 2.8 Implementar output APROBADO con mensaje de confirmación

@@ -36,7 +36,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 - [ ] **FEAT-011: Integración Story Map en Planning** — El sistema detecta si existe `story-map.md` durante la fase de Planning y lo usa como guía estructural para agrupar features en releases respetando el backbone. _(deps: FEAT-004, FEAT-005)_
 - [ ] **FEAT-012: División de Historias con 8 Patrones de Splitting** — El sistema divide historias grandes en historias más pequeñas e independientes aplicando uno de los 8 patrones de splitting (pasos de flujo, variaciones de reglas, datos, complejidad, esfuerzo, dependencias externas, DevOps, TADs). _(deps: FEAT-006)_
 - [ ] **FEAT-013: Ciclo Iterativo de Refinamiento de Historias** — El sistema orquesta el ciclo completo creación → evaluación → split → mejora con gate anti-bucle que solicita confirmación antes de reiterar y ofrece tres salidas explícitas. _(deps: FEAT-006, FEAT-007, FEAT-012)_
-- [ ] **FEAT-014: Búsqueda de Historias por Término** — El sistema permite invocar skills de historia con un término corto, busca automáticamente en `docs/specs/stories/` el archivo correspondiente y solicita selección si hay múltiples coincidencias. _(deps: FEAT-006)_
+- [ ] **FEAT-014: Búsqueda de Historias por Término** — El sistema permite invocar skills de historia con un término corto, busca automáticamente en `$SPECS_BASE/specs/stories/` el archivo correspondiente y solicita selección si hay múltiples coincidencias. _(deps: FEAT-006)_
 - [ ] **FEAT-015: Pipeline Completo en una Sola Sesión** — El skill `project-flow` ejecuta las tres fases (Begin Intention → Discovery → Planning) en una sesión continua con detección automática del estado actual del pipeline y gates entre etapas. _(deps: FEAT-001, FEAT-003, FEAT-004, FEAT-009, FEAT-010)_
 - [ ] **FEAT-016: Backlog de Historias con Trazabilidad** — El sistema mantiene un registro de backlog de sesión con ID, archivo, origen (original o derivado de split), estado y decisión FINVEST, con trazabilidad mediante IDs únicos ST-00X. _(deps: FEAT-007, FEAT-012)_
 - [ ] **FEAT-017: Ingeniería Inversa de Repositorios** — El sistema analiza un repositorio existente mediante 4 agentes especializados en paralelo y un agente sintetizador para generar automáticamente `requirement-spec.md`, marcando secciones sin datos como `<!-- PENDING MANUAL REVIEW -->`. _(deps: FEAT-002)_
@@ -57,7 +57,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 - [ ] **FEAT-032: Soporte Atlassian Rovo para Validar Release** — Agente `release-validator-agent.md` para el runtime Rovo. _(deps: FEAT-027, FEAT-030)_
 - [ ] **FEAT-033: Soporte Atlassian Rovo para crear Epic Release** — Agente `release-creator-agent.md` para el runtime Rovo. _(deps: FEAT-027, FEAT-030)_
 - [ ] **FEAT-034: Rovo Agent: Release Reverse Generator from children** — Agente `release-reverse-generator.md` para el runtime Rovo. _(deps: FEAT-027, FEAT-030)
-- [ ] **FEAT-035: Generar todas las stories desde todos los archivo de release**: Skill `release-generate-all-stories` que itera sobre todos los archivos de release en `docs/specs/releases/` y genera las stories correspondientes para cada uno, siguiendo el mismo proceso que `release-generate-stories`.
+- [ ] **FEAT-035: Generar todas las stories desde todos los archivo de release**: Skill `release-generate-all-stories` que itera sobre todos los archivos de release en `$SPECS_BASE/specs/releases/` y genera las stories correspondientes para cada uno, siguiendo el mismo proceso que `release-generate-stories`.
 - [ ] **FEAT-036: Skill openspec-load-context** Skill openspec-load-context para cargar el contexto del proyecto para openspec en el archivo openspec\config.yaml. _(deps: FEAT-001, FEAT-003, FEAT-004)_
 - [ ] **FEAT-037: Skill openspec-generate-baseline** Skill `openspec-generate-baseline` para que haciendo ingeniería inversa genere una línea base del proyecto como propuesta y luego lo archive para que quede una lìnea base especificada. _(deps: FEAT-037)_
 - [ ] **FEAT-039: Publicar el framework Agile Spec-Driven-Development (SDDF) como paquete NPM para instalación global** — Empaquetar y publicar todos los skills, agentes y templates del framework en NPM para instalación global con npm install -g @sddf/core. _(deps: —)_
@@ -83,7 +83,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 - [ ] FEAT-002 - Extracción Dinámica de Templates
 
 **Ítems de soporte (sin FEAT propio):**
-- Estructura inicial de directorios `.claude/skills/`, `.claude/agents/`, `docs/specs/`
+- Estructura inicial de directorios `.claude/skills/`, `.claude/agents/`, `$SPECS_BASE/specs/`
 - Convenciones CLAUDE.md y AGENTS.md del framework
 - Configuración de entorno Docker con imagen `debian:bookworm-slim`
 - Soporte multi-runtime inicial: Claude Code (`.claude/`), GitHub Copilot (`.github/`), Codex/Cursor (`.agents/`)
@@ -201,7 +201,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 - Agentes `project-story-mapper` y `story-product-owner`
 - Estandarización de assets por skill en `./.claude/skills/*/assets/`
 - Limpieza de directorios legacy `.agents/` y `.github/` desactualizados
-- Auto-especificación del framework SDDF: `docs/specs/projects/project.md` generado por `/reverse-engineering` con 30 FRs, 13 NFRs, árbol de navegación ASCII y gaps identificados
+- Auto-especificación del framework SDDF: `$SPECS_BASE/specs/projects/project.md` generado por `/reverse-engineering` con 30 FRs, 13 NFRs, árbol de navegación ASCII y gaps identificados
 
 **Criterios de éxito:**
 - [ ] El skill `project-flow` ejecuta las tres fases del pipeline en una sesión continua detectando automáticamente el estado actual y aplicando los gates de revisión sin intervención manual.

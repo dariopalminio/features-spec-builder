@@ -24,4 +24,4 @@ The skill `ps-begin-intention` uses a `ps-` prefix that is inconsistent with the
 - `.claude/agents/architect.agent.md` (reference updated)
 - `.claude/skills/ps-discovery/SKILL.md` (reference updated)
 - `openspec/specs/ps-begin-intention-skill/spec.md` (reference updated)
-- `README.md`, `gem/README.md`, `docs/specs/` files (documentation references updated)
+- `README.md`, `gem/README.md`, `$SPECS_BASE/specs/` files (documentation references updated)

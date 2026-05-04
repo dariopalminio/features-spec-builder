@@ -85,7 +85,7 @@ Preguntar los campos del frontmatter con valores sugeridos. Para cada campo, mos
 | `title` | "¿Cuál es el título del release?" | El nombre ingresado en Fase 0 |
 | `date` | "¿Fecha del release? (YYYY-MM-DD)" | Fecha de hoy |
 | `status` | "¿Estado inicial?" | `DEFINITION` — estado inicial de un release recién creado (en etapa de definición) |
-| `substatus` | "¿Subestado? (DOING / REVIEW / READY)" | `DOING` |
+| `substatus` | "¿Subestado? (DOING / REVIEW / READY)" | `IN‑PROGRESS` |
 | `slug` | — | Derivado automáticamente del nombre (mostrar al usuario, permitir corrección) |
 
 Confirmar el slug con el usuario antes de continuar. El slug determinará el nombre del directorio y del archivo.

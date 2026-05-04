@@ -10,4 +10,4 @@ El skill `release-generate-all-stories` SHALL resolver la ruta base de artefacto
 
 #### Scenario: Skill usa docs por defecto sin SDDF_ROOT
 - **WHEN** el usuario ejecuta `/release-generate-all-stories` sin `SDDF_ROOT` definida
-- **THEN** el skill opera sobre `docs/specs/` (comportamiento previo)
+- **THEN** el skill opera sobre `$SPECS_BASE/specs/` (comportamiento previo)

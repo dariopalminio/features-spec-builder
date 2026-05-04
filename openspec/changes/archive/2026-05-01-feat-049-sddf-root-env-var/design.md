@@ -1,6 +1,6 @@
 ## Context
 
-Actualmente, todos los skills del framework SDDF resuelven rutas de artefactos usando la cadena literal `docs` (e.g., `docs/specs/projects/`, `docs/specs/stories/`). Esta ruta está embebida directamente en el cuerpo de cada `SKILL.md`, lo que significa que cualquier usuario que necesite almacenar artefactos en una ubicación distinta debe editar manualmente cada skill.
+Actualmente, todos los skills del framework SDDF resuelven rutas de artefactos usando la cadena literal `docs` (e.g., `$SPECS_BASE/specs/projects/`, `$SPECS_BASE/specs/stories/`). Esta ruta está embebida directamente en el cuerpo de cada `SKILL.md`, lo que significa que cualquier usuario que necesite almacenar artefactos en una ubicación distinta debe editar manualmente cada skill.
 
 El framework ya usa variables de entorno para otras configuraciones. Extender este patrón a la ruta raíz de specs es consistente con la filosofía del framework y no requiere ninguna infraestructura nueva.
 

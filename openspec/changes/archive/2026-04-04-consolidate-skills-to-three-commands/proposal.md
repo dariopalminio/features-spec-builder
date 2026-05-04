@@ -5,9 +5,9 @@ El pipeline actual expone 7 comandos al usuario (ps-funnel, ps-draft, ps-discove
 ## What Changes
 
 - **BREAKING** Eliminar skills: `ps-funnel`, `ps-draft`, `ps-discovery`, `ps-specifying`, `ps-approval`, `ps-finish`
-- Crear skill `/ps-begin-intention` — fusiona Funnel + Draft: entrevista al usuario y genera `docs/specs/projects/project-intent.md`
-- Crear skill `/ps-project-spec` — fusiona Discovery + Specifying: conduce discovery de usuarios y especificación de requisitos, genera `docs/specs/projects/project.md`
-- Mantener skill `/ps-planning` — sin cambios de interfaz, genera `docs/specs/projects/project-plan.md`
+- Crear skill `/ps-begin-intention` — fusiona Funnel + Draft: entrevista al usuario y genera `$SPECS_BASE/specs/projects/project-intent.md`
+- Crear skill `/ps-project-spec` — fusiona Discovery + Specifying: conduce discovery de usuarios y especificación de requisitos, genera `$SPECS_BASE/specs/projects/project.md`
+- Mantener skill `/ps-planning` — sin cambios de interfaz, genera `$SPECS_BASE/specs/projects/project-plan.md`
 - Actualizar `CLAUDE.md` con los 3 comandos finales y el nuevo workflow simplificado
 
 **Non-goals:**

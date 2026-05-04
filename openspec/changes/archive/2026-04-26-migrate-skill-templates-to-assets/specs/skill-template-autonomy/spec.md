@@ -1,7 +1,7 @@
 ## MODIFIED Requirements
 
 ### Requirement: Cada skill contiene sus propios templates
-Cada skill en `.claude/skills/` que requiera un template para operar SHALL tener ese template en su propio directorio `.claude/skills/<skill>/assets/`. No SHALL depender de templates en `docs/specs/templates/` para funcionar.
+Cada skill en `.claude/skills/` que requiera un template para operar SHALL tener ese template en su propio directorio `.claude/skills/<skill>/assets/`. No SHALL depender de templates en `$SPECS_BASE/specs/templates/` para funcionar.
 
 #### Scenario: Skill usa template local
 - **WHEN** un skill necesita un template para generar su output
@@ -9,7 +9,7 @@ Cada skill en `.claude/skills/` que requiera un template para operar SHALL tener
 
 #### Scenario: Skill no referencia directorio compartido
 - **WHEN** se lee el archivo `SKILL.md` de cualquier skill activo
-- **THEN** no contiene referencias a rutas bajo `docs/specs/templates/`
+- **THEN** no contiene referencias a rutas bajo `$SPECS_BASE/specs/templates/`
 
 ### Requirement: Templates duplicados por skill cuando son compartidos
 Cuando un mismo template es necesario en múltiples skills, cada skill SHALL tener su propia copia local del template en su directorio `assets/`.
@@ -30,5 +30,5 @@ Todos los archivos `SKILL.md` SHALL referenciar templates usando rutas relativas
 - **THEN** no hay coincidencias — ninguna referencia a template usa rutas absolutas con prefijo de cliente
 
 #### Scenario: Ningún agente referencia el directorio compartido antiguo
-- **WHEN** se hace búsqueda de `docs/specs/templates/` en `.claude/agents/`
+- **WHEN** se hace búsqueda de `$SPECS_BASE/specs/templates/` en `.claude/agents/`
 - **THEN** no hay resultados en archivos activos

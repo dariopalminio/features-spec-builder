@@ -6,7 +6,7 @@ La validación de entorno (SDDF_ROOT, directorios de specs, templates y config.y
 
 - **Nueva capability** `skill-preflight`: skill orquestador que ejecuta todas las verificaciones de entorno en un único punto de entrada.
 - Verifica que `SDDF_ROOT` esté definida y apunte a un directorio válido.
-- Confirma que los subdirectorios de specs estándar existen (`docs/specs/projects/`, `docs/specs/releases/`, `docs/specs/stories/`).
+- Confirma que los subdirectorios de specs estándar existen (`$SPECS_BASE/specs/projects/`, `$SPECS_BASE/specs/releases/`, `$SPECS_BASE/specs/stories/`).
 - Verifica que los archivos de templates requeridos por el skill invocador estén presentes en `.claude/skills/<skill-name>/assets/`.
 - Confirma que `openspec/config.yaml` (o el archivo de configuración del proyecto) está inicializado.
 - Cada skill reemplaza su Paso 0 ad-hoc por una única llamada al preflight: `Paso 0: Ejecutar skill-preflight`.

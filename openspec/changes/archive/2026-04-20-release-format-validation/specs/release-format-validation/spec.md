@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: Validar estructura obligatoria de un archivo de release
-El skill release-format-validation SHALL leer el archivo de release especificado por el usuario y verificar que contiene todas las secciones marcadas como `<!-- sección obligatoria -->` en `docs/specs/templates/release-spec-template.md`, más el frontmatter completo (Título, Versión, Estado, Fecha). El resultado SHALL ser APROBADO si todas las secciones están presentes, o REFINAR si alguna falta.
+El skill release-format-validation SHALL leer el archivo de release especificado por el usuario y verificar que contiene todas las secciones marcadas como `<!-- sección obligatoria -->` en `$SPECS_BASE/specs/templates/release-spec-template.md`, más el frontmatter completo (Título, Versión, Estado, Fecha). El resultado SHALL ser APROBADO si todas las secciones están presentes, o REFINAR si alguna falta.
 
 #### Scenario: Release con todas las secciones obligatorias presentes
 - **WHEN** el usuario ejecuta el skill con un archivo que contiene todas las secciones obligatorias y el frontmatter completo
@@ -16,7 +16,7 @@ El skill release-format-validation SHALL leer el archivo de release especificado
 - **THEN** el skill produce el resultado "REFINAR" e indica los campos de frontmatter ausentes
 
 ### Requirement: Resolver input por nombre corto o ruta relativa
-El skill SHALL aceptar como input el nombre del archivo con o sin extensión `.md`, o la ruta relativa completa desde la raíz del proyecto. El skill SHALL buscar coincidencias en `docs/specs/releases/`.
+El skill SHALL aceptar como input el nombre del archivo con o sin extensión `.md`, o la ruta relativa completa desde la raíz del proyecto. El skill SHALL buscar coincidencias en `$SPECS_BASE/specs/releases/`.
 
 #### Scenario: Input como nombre corto sin extensión
 - **WHEN** el usuario proporciona el nombre "release-06-release-and-story-generator"
@@ -27,15 +27,15 @@ El skill SHALL aceptar como input el nombre del archivo con o sin extensión `.m
 - **THEN** el skill usa esa ruta directamente sin búsqueda adicional
 
 #### Scenario: Archivo no encontrado
-- **WHEN** el input proporcionado no corresponde a ningún archivo existente en `docs/specs/releases/`
+- **WHEN** el input proporcionado no corresponde a ningún archivo existente en `$SPECS_BASE/specs/releases/`
 - **THEN** el skill muestra el error "Archivo no encontrado: <ruta>" y termina con resultado RECHAZADO sin continuar la validación
 
 #### Scenario: Múltiples coincidencias para un nombre corto
-- **WHEN** el nombre corto proporcionado coincide con más de un archivo en `docs/specs/releases/`
+- **WHEN** el nombre corto proporcionado coincide con más de un archivo en `$SPECS_BASE/specs/releases/`
 - **THEN** el skill muestra la lista de archivos coincidentes y solicita al usuario que elija antes de continuar
 
 ### Requirement: Extraer secciones obligatorias del template en tiempo de ejecución
-El skill SHALL leer `docs/specs/templates/release-spec-template.md` y extraer dinámicamente los encabezados de secciones marcadas con el comentario `<!-- sección obligatoria -->` para construir la lista de secciones a validar.
+El skill SHALL leer `$SPECS_BASE/specs/templates/release-spec-template.md` y extraer dinámicamente los encabezados de secciones marcadas con el comentario `<!-- sección obligatoria -->` para construir la lista de secciones a validar.
 
 #### Scenario: Template actualizado con nueva sección obligatoria
 - **WHEN** se agrega una nueva sección con `<!-- sección obligatoria -->` al template

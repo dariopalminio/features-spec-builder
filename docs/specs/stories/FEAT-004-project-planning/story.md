@@ -18,7 +18,7 @@ parent: EPIC-02-project-spec-builder
 
 **Como** developer que tiene `requirement-spec.md` aprobado y necesita organizar el trabajo en releases
 **Quiero** ejecutar el skill `project-planning` para que el agente architect extraiga features, las priorice y las agrupe en releases incrementales
-**Para** obtener `docs/specs/projects/project-plan.md` con el backlog organizado en releases FEAT-NNN, listo para comenzar el desarrollo sprint a sprint
+**Para** obtener `$SPECS_BASE/specs/projects/project-plan.md` con el backlog organizado en releases FEAT-NNN, listo para comenzar el desarrollo sprint a sprint
 
 ## ? Criterios de aceptaci�n
 

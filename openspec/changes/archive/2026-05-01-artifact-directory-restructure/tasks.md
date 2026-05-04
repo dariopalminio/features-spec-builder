@@ -66,8 +66,8 @@
 
 ## 12. Validación
 
-- [x] 12.1 Ejecutar `/project-begin` y verificar que crea `docs/specs/projects/PROJ-01-nombre/project-intent.md`
-- [x] 12.2 Ejecutar `/releases-from-project-plan` y verificar que crea `docs/specs/releases/EPIC-01-nombre/release.md`
-- [x] 12.3 Ejecutar `/release-generate-stories` y verificar que crea `docs/specs/stories/FEAT-001-nombre/story.md`
+- [x] 12.1 Ejecutar `/project-begin` y verificar que crea `$SPECS_BASE/specs/projects/PROJ-01-nombre/project-intent.md`
+- [x] 12.2 Ejecutar `/releases-from-project-plan` y verificar que crea `$SPECS_BASE/specs/releases/EPIC-01-nombre/release.md`
+- [x] 12.3 Ejecutar `/release-generate-stories` y verificar que crea `$SPECS_BASE/specs/stories/FEAT-001-nombre/story.md`
 - [x] 12.4 Verificar que todos los skills leen correctamente los artefactos de la nueva estructura
 - [x] 12.5 Verificar que `SDDF_ROOT` sigue funcionando con la nueva estructura de directorios

@@ -1,6 +1,6 @@
 ## Context
 
-El pipeline SDDF requiere que los releases sigan el template canónico definido en `docs/specs/templates/release-spec-template.md`. Actualmente los PMs crean Epics manualmente, lo que produce releases con estructura inconsistente antes de que el validador (`release-validator-agent.md`, FEAT-032) los rechace por secciones faltantes.
+El pipeline SDDF requiere que los releases sigan el template canónico definido en `$SPECS_BASE/specs/templates/release-spec-template.md`. Actualmente los PMs crean Epics manualmente, lo que produce releases con estructura inconsistente antes de que el validador (`release-validator-agent.md`, FEAT-032) los rechace por secciones faltantes.
 
 El agente creador (`release-creator-agent.md`) completa el flujo de Rovo para releases: creación guiada → validación de formato. Sigue la misma convención de agentes Rovo que `story-creator-agent.md`: archivo Markdown con secciones Nombre / Descripción / Comportamiento / Instrucciones, desplegado en el runtime Rovo de Atlassian Jira.
 

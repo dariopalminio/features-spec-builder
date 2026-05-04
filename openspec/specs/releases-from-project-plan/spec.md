@@ -1,5 +1,5 @@
 ### Requirement: El skill extrae todos los releases de project-plan.md
-El skill SHALL leer `docs/specs/projects/project-plan.md` y extraer cada bloque de release definido bajo la sección `## Propuesta de Releases`. Por cada bloque `### Release NN — Nombre` encontrado, el skill MUST generar un archivo de especificación de release independiente.
+El skill SHALL leer `$SPECS_BASE/specs/projects/project-plan.md` y extraer cada bloque de release definido bajo la sección `## Propuesta de Releases`. Por cada bloque `### Release NN — Nombre` encontrado, el skill MUST generar un archivo de especificación de release independiente.
 
 #### Scenario: Plan con múltiples releases
 - **WHEN** `project-plan.md` contiene dos o más bloques `### Release NN — Nombre` bajo `## Propuesta de Releases`
@@ -10,7 +10,7 @@ El skill SHALL leer `docs/specs/projects/project-plan.md` y extraer cada bloque 
 - **THEN** el skill genera exactamente un archivo de release
 
 ### Requirement: El skill genera archivos que siguen el template canónico
-Cada archivo generado SHALL seguir exactamente la estructura de `docs/specs/templates/release-spec-template.md`. Las secciones obligatorias (frontmatter con Título/Versión/Estado/Fecha, `## Descripción`, `## Features`, `## Flujos Críticos / Smoke Tests`) MUST estar presentes y pobladas con los datos disponibles en el plan.
+Cada archivo generado SHALL seguir exactamente la estructura de `$SPECS_BASE/specs/templates/release-spec-template.md`. Las secciones obligatorias (frontmatter con Título/Versión/Estado/Fecha, `## Descripción`, `## Features`, `## Flujos Críticos / Smoke Tests`) MUST estar presentes y pobladas con los datos disponibles en el plan.
 
 #### Scenario: Secciones obligatorias pobladas desde el plan
 - **WHEN** el plan contiene objetivo, features y criterios de éxito para un release
@@ -29,15 +29,15 @@ Los archivos generados SHALL seguir el patrón `release-[ID]-[nombre-kebab].md` 
 - **THEN** el archivo se nombra con el equivalente kebab-case (ej. `release-00-estructura-base-y-mecanismo-de-templates.md`)
 
 ### Requirement: El skill guarda los archivos en docs/specs/releases/
-Los archivos generados SHALL guardarse en el directorio `docs/specs/releases/`. Si el directorio no existe, el skill MUST crearlo antes de escribir los archivos.
+Los archivos generados SHALL guardarse en el directorio `$SPECS_BASE/specs/releases/`. Si el directorio no existe, el skill MUST crearlo antes de escribir los archivos.
 
 #### Scenario: Directorio de destino no existe
-- **WHEN** el directorio `docs/specs/releases/` no existe al momento de ejecutar el skill
+- **WHEN** el directorio `$SPECS_BASE/specs/releases/` no existe al momento de ejecutar el skill
 - **THEN** el skill crea el directorio
 - **THEN** los archivos generados se guardan en él correctamente
 
 #### Scenario: Archivo de destino ya existe
-- **WHEN** ya existe un archivo con el mismo nombre en `docs/specs/releases/`
+- **WHEN** ya existe un archivo con el mismo nombre en `$SPECS_BASE/specs/releases/`
 - **THEN** el skill informa al usuario que el archivo ya existe antes de sobreescribirlo
 - **THEN** el skill solicita confirmación antes de proceder con la sobreescritura
 
@@ -45,7 +45,7 @@ Los archivos generados SHALL guardarse en el directorio `docs/specs/releases/`. 
 El skill SHALL detectar condiciones de error antes de intentar generar archivos y MUST mostrar un mensaje descriptivo sin generar archivos parciales.
 
 #### Scenario: project-plan.md no existe
-- **WHEN** el archivo `docs/specs/projects/project-plan.md` no existe
+- **WHEN** el archivo `$SPECS_BASE/specs/projects/project-plan.md` no existe
 - **THEN** el skill muestra el mensaje "No se encontró docs/specs/projects/project-plan.md"
 - **THEN** el skill no genera ningún archivo de release
 
@@ -66,7 +66,7 @@ El skill `releases-from-project-plan` SHALL resolver la ruta base de artefactos 
 
 #### Scenario: Skill usa docs por defecto sin SDDF_ROOT
 - **WHEN** el usuario ejecuta `/releases-from-project-plan` sin `SDDF_ROOT` definida
-- **THEN** el skill opera sobre `docs/specs/` (comportamiento previo)
+- **THEN** el skill opera sobre `$SPECS_BASE/specs/` (comportamiento previo)
 
 ## MODIFIED Requirements
 

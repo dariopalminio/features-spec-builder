@@ -18,7 +18,7 @@ parent: EPIC-02-project-spec-builder
 
 **Como** developer que tiene `project-intent.md` aprobado y necesita detallar los requisitos del sistema
 **Quiero** ejecutar el skill `project-discovery` para completar la entrevista de especificaci�n con el agente architect
-**Para** obtener `docs/specs/projects/project.md` con usuarios, flujos, requisitos funcionales y no funcionales documentados, listo para la fase de planning
+**Para** obtener `$SPECS_BASE/specs/projects/project.md` con usuarios, flujos, requisitos funcionales y no funcionales documentados, listo para la fase de planning
 
 ## ? Criterios de aceptaci�n
 

@@ -18,7 +18,7 @@ parent: EPIC-03-reverse-engineering
 
 **Como** developer que ha ejecutado el skill `reverse-engineering` y tiene los cuatro outputs de an�lisis en `.tmp/`
 **Quiero** que el agente `reverse-engineer-synthesizer` fusione los cuatro archivos intermedios en un �nico documento de requisitos
-**Para** obtener `docs/specs/projects/project.md` completo y estructurado siguiendo el template can�nico del framework SDDF
+**Para** obtener `$SPECS_BASE/specs/projects/project.md` completo y estructurado siguiendo el template can�nico del framework SDDF
 
 ## ? Criterios de aceptaci�n
 

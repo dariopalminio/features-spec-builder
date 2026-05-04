@@ -11,7 +11,7 @@ El skill `release-format-validation` ya implementa resolución de input en su Fa
 
 **Non-Goals:**
 - Extraer la resolución como un skill o herramienta independiente (no hay demanda aún)
-- Soportar búsqueda en directorios distintos a `docs/specs/releases/`
+- Soportar búsqueda en directorios distintos a `$SPECS_BASE/specs/releases/`
 - Fuzzy matching o corrección de nombres similares
 
 ## Decisions

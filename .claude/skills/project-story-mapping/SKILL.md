@@ -33,8 +33,8 @@ Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los 
 ## Paso 0b — Resolver directorio del proyecto activo (`PROJ_DIR`)
 
 1. Listar todos los subdirectorios de `$SPECS_BASE/specs/projects/`.
-2. Para cada subdirectorio, leer `project-intent.md` y verificar si `substatus` es `READY`.
-3. Si se encuentra exactamente uno con `substatus: READY` → usar ese directorio como `$PROJ_DIR`.
+2. Para cada subdirectorio, leer `project-intent.md` y verificar si `substatus` es `DONE`.
+3. Si se encuentra exactamente uno con `substatus: DONE` → usar ese directorio como `$PROJ_DIR`.
 4. Si se encuentran varios → mostrar la lista y pedir al usuario que elija antes de continuar.
 5. Si no se encuentra ninguno → proceder sin contexto de proyecto (el agente recopilará la información interactivamente).
 
@@ -108,4 +108,4 @@ related:
 Reglas de derivación:
 - `title`: extrae el primer `#` heading del documento
 - `date`: fecha actual en formato YYYY-MM-DD
-- `substatus`: `substatus: DOING` → DOING; `substatus: READY` → READY; ausente → N/A
+- `substatus`: `substatus: IN‑PROGRESS` → DOING; `substatus: DONE` → READY; ausente → N/A

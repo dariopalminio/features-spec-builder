@@ -5,8 +5,8 @@ El pipeline SDDF genera stories desde archivos de release, pero no hay forma de 
 ## What Changes
 
 - **Nuevo skill** `release-format-validation` en `.claude/skills/release-format-validation/`
-- El skill recibe como input el nombre o ruta relativa de un archivo de release en `docs/specs/releases/`
-- El skill lee el archivo y verifica la presencia de todas las secciones marcadas como `<!-- sección obligatoria -->` en `docs/specs/templates/release-spec-template.md`, más el frontmatter (Título, Versión, Estado, Fecha)
+- El skill recibe como input el nombre o ruta relativa de un archivo de release en `$SPECS_BASE/specs/releases/`
+- El skill lee el archivo y verifica la presencia de todas las secciones marcadas como `<!-- sección obligatoria -->` en `$SPECS_BASE/specs/templates/release-spec-template.md`, más el frontmatter (Título, Versión, Estado, Fecha)
 - Devuelve **APROBADO** si todas las secciones obligatorias están presentes, o **REFINAR** con la lista de secciones faltantes si alguna falta
 - Si el archivo no existe, reporta error y termina con resultado **RECHAZADO**
 
@@ -21,6 +21,6 @@ El pipeline SDDF genera stories desde archivos de release, pero no hay forma de 
 ## Impact
 
 - Nuevo directorio `.claude/skills/release-format-validation/` con `SKILL.md`
-- Lectura del archivo tempate desde `docs/specs/templates/release-spec-template.md` para extraer secciones obligatorias en tiempo de ejecución
+- Lectura del archivo tempate desde `$SPECS_BASE/specs/templates/release-spec-template.md` para extraer secciones obligatorias en tiempo de ejecución
 - Sin cambios en skills existentes ni en el template `release-spec-template.md`
 - Prerrequisito natural para el skill `generate-stories` (Release 06)

@@ -28,8 +28,8 @@
 ## 6. Update documentation
 
 - [x] 6.1 In `README.md`: replace agent name references to `architect-agent` or `architect` agent → `project-architect` (skip generic role mentions)
-- [x] 6.2 In `docs/specs/project-spec-factory/project.md`: replace agent name references → `project-architect`
-- [x] 6.3 In `docs/specs/project-spec-factory/project-plan.md`: replace agent name references → `project-architect`
+- [x] 6.2 In `$SPECS_BASE/specs/project-spec-factory/project.md`: replace agent name references → `project-architect`
+- [x] 6.3 In `$SPECS_BASE/specs/project-spec-factory/project-plan.md`: replace agent name references → `project-architect`
 - [x] 6.4 In `gem/prompts/prompt-ps-planning`: replace agent name references → `project-architect`
 
 ## 7. Verify

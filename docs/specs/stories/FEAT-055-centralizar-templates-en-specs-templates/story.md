@@ -23,7 +23,7 @@ related:
 # 📖 Historia: Centralizar templates de spec en directorio compartido
 
 **Como** maintainer del framework SDDF que evoluciona skills y templates con el tiempo  
-**Quiero** centralizar los templates de spec (`story-gherkin-template.md`, `release-spec-template.md`, `project-template.md`) en `docs/specs/templates/` como única fuente de verdad  
+**Quiero** centralizar los templates de spec (`story-gherkin-template.md`, `release-spec-template.md`, `project-template.md`) en `$SPECS_BASE/specs/templates/` como única fuente de verdad  
 **Para** eliminar la divergencia de frontmatter entre las copias distribuidas en cada skill y garantizar que cualquier cambio en la estructura de un template se propague automáticamente a todos los skills generadores
 
 ## ✅ Criterios de aceptación
@@ -62,10 +62,10 @@ Cada skill generador declara explícitamente en su SKILL.md el `status` inicial 
 
 * Mantenibilidad: modificar una sección del template central debe reflejarse en todos los skills sin editar ningún SKILL.md individual
 * Verificabilidad: la ausencia de referencias a `assets/<template>.md` es comprobable con un único `grep` recursivo sobre `.claude/`
-* Compatibilidad: los archivos spec ya generados en `docs/specs/` no se modifican; la migración solo afecta templates y SKILL.md
+* Compatibilidad: los archivos spec ya generados en `$SPECS_BASE/specs/` no se modifican; la migración solo afecta templates y SKILL.md
 
 ## 📎 Notas / contexto adicional
 
 Esta historia resuelve la inconsistencia IC-8 (duplicación de templates sin control de versión) detectada en el análisis de frontmatter del release EPIC-10. Las inconsistencias IC-1 (date vs created/updated), IC-2 (type: spec), IC-3 (id ausente) e IC-4 (status inicial heterogéneo) quedaron también corregidas como efecto de esta migración.
 
-Scope out: la sincronización de los templates de `docs/specs/templates/` con los de `docs/specs/templates/speckit/` y `docs/specs/templates/openspec/` queda fuera de esta historia.
+Scope out: la sincronización de los templates de `$SPECS_BASE/specs/templates/` con los de `$SPECS_BASE/specs/templates/speckit/` y `$SPECS_BASE/specs/templates/openspec/` queda fuera de esta historia.

@@ -2,7 +2,7 @@
 
 ProjectSpecFactory tiene implementados los estados Funnel y Draft. El estado Discovery es el siguiente en el workflow (`Funnel → Draft → **Discovery** → Specifying → ...`) pero carece de implementación. El sistema ya define `/ps-discover` como comando en CLAUDE.md pero sin skill, agente ni template de soporte.
 
-El estado Draft produce `docs/specs/project-intent.md` como input de Discovery. El estado Discovery debe producir `docs/specs/discovery.md` que capture: visión del producto, usuarios clave, user journey map, preguntas de discovery e hipótesis de validación.
+El estado Draft produce `$SPECS_BASE/specs/project-intent.md` como input de Discovery. El estado Discovery debe producir `$SPECS_BASE/specs/discovery.md` que capture: visión del producto, usuarios clave, user journey map, preguntas de discovery e hipótesis de validación.
 
 El patrón establecido por Draft (skill orchestrator + agente especializado + template junto al skill) es el modelo a replicar.
 
@@ -14,7 +14,7 @@ El patrón establecido por Draft (skill orchestrator + agente especializado + te
 - Proveer template `discovery-template.md` colocado junto al skill (autónomo)
 - El agente extrae secciones y guías del template en runtime (no hardcodea preguntas)
 - El agente lee `project-intent.md` de la fase anterior y construye sobre ese contexto
-- El output final es `docs/specs/discovery.md` con metadatos de generación
+- El output final es `$SPECS_BASE/specs/discovery.md` con metadatos de generación
 
 **Non-Goals:**
 - No modificar el template de referencia en `docs/templates/discovery.md`

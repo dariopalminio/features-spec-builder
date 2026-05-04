@@ -12,15 +12,15 @@ El estado **Draft** del pipeline carece de implementación autónoma: el skill `
 
 - Nuevo skill `/ps-draft` reescrito en `.claude/skills/ps-draft/SKILL.md` con orquestación completa: validación de estado, delegación al agente, confirmación de output
 - Nuevo template autónomo `.claude/skills/ps-draft/templates/project-intent-template.md` (adaptado de `docs/templates/project-intent-template.md`)
-- Nuevo agente `draft-agent` (`.claude/agents/draft-agent.md`) especializado en la fase Draft: lee `initial-prompt.md`, valida su estado, conduce entrevista por secciones del template y produce `docs/specs/project-intent.md`
-- El agente verifica que `initial-prompt.md` tenga `**Estado**: Ready`; si está `Doing`, pregunta al usuario si confirma avanzar y actualiza el campo antes de continuar
+- Nuevo agente `draft-agent` (`.claude/agents/draft-agent.md`) especializado en la fase Draft: lee `initial-prompt.md`, valida su estado, conduce entrevista por secciones del template y produce `$SPECS_BASE/specs/project-intent.md`
+- El agente verifica que `initial-prompt.md` tenga `**substatus**: DONE`; si está `IN‑PROGRESS`, pregunta al usuario si confirma avanzar y actualiza el campo antes de continuar
 
 ## Capabilities
 
 ### New Capabilities
 
 - `ps-draft-skill`: Skill SKILL.md que orquesta el estado Draft: verifica existencia del template y de `initial-prompt.md`, invoca al `draft-agent`, confirma la generación de `project-intent.md`
-- `draft-agent`: Agente PM especializado en Draft; valida el estado de `initial-prompt.md`, hace preguntas al usuario por secciones del template `project-intent-template.md`, infiere contenido faltante y escribe `docs/specs/project-intent.md`
+- `draft-agent`: Agente PM especializado en Draft; valida el estado de `initial-prompt.md`, hace preguntas al usuario por secciones del template `project-intent-template.md`, infiere contenido faltante y escribe `$SPECS_BASE/specs/project-intent.md`
 - `project-intent-template`: Template `.claude/skills/ps-draft/templates/project-intent-template.md` con secciones guiadas por comentarios HTML para la fase Draft
 
 ### Modified Capabilities
@@ -32,5 +32,5 @@ El estado **Draft** del pipeline carece de implementación autónoma: el skill `
 - `.claude/skills/ps-draft/SKILL.md` — reescrito completamente
 - Nuevo: `.claude/agents/draft-agent.md`
 - Nuevo: `.claude/skills/ps-draft/templates/project-intent-template.md`
-- Nuevo archivo generado (output): `docs/specs/project-intent.md`
-- Lee como input: `docs/specs/initial-prompt.md` (producido por Funnel)
+- Nuevo archivo generado (output): `$SPECS_BASE/specs/project-intent.md`
+- Lee como input: `$SPECS_BASE/specs/initial-prompt.md` (producido por Funnel)

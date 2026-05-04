@@ -24,8 +24,8 @@ Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los 
 ## Configuración 0b — Resolver directorio del proyecto activo (`PROJ_DIR`)
 
 1. Listar todos los subdirectorios de `$SPECS_BASE/specs/projects/`.
-2. Para cada subdirectorio, leer `project-intent.md` y verificar si `substatus` es `READY`.
-3. Si se encuentra exactamente uno con `substatus: READY` → usar ese directorio como `$PROJ_DIR`.
+2. Para cada subdirectorio, leer `project-intent.md` y verificar si `substatus` es `DONE`.
+3. Si se encuentra exactamente uno con `substatus: DONE` → usar ese directorio como `$PROJ_DIR`.
 4. Si se encuentran varios → mostrar la lista y pedir al usuario que elija antes de continuar.
 5. Si no se encuentra ninguno → mostrar error y detener:
    > ❌ No se encontró ningún proyecto activo en `$SPECS_BASE/specs/projects/`.
@@ -59,7 +59,7 @@ Dentro de esa sección, extraer cada bloque delimitado por un encabezado `### Re
 
 - **ID**: el número de dos dígitos que sigue a `### Release ` (ej. `00`, `01`, `06`)
 - **Nombre**: el texto después de ` — ` en la misma línea (ej. `Estructura Base y Mecanismo de Templates`)
-- substatus: el valor del campo `substatus:` si existe en el bloque (ej. `READY`, `DOING`); si no existe, usar `DOING`
+- substatus: el valor del campo `substatus:` si existe en el bloque (ej. `DONE`, `IN‑PROGRESS`); si no existe, usar `IN‑PROGRESS`
 - **Fecha**: el valor del campo `**Fecha:**` si existe; si no existe, usar la fecha actual en formato YYYY-MM-DD
 - **Objetivo**: el párrafo que sigue a `**Objetivo:**`
 - **Features**: las líneas con formato `- [ ] FEAT-NNN - Nombre` o `- [x] FEAT-NNN - Nombre` dentro del bloque

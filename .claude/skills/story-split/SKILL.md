@@ -295,8 +295,8 @@ Por cada historia resultante del split, crear en `$SPECS_BASE/specs/stories/`:
 - El `{slug}` se deriva del `Quiero` de la historia: minúsculas, palabras separadas por guiones, máximo 5 palabras significativas, sin acentos ni caracteres especiales
 - Ruta final: `$SPECS_BASE/specs/stories/FEAT-{NNN}-{slug}/story.md`
 - Ejemplos:
-  - `docs/specs/stories/FEAT-054-subir-imagenes-perfil/story.md`
-  - `docs/specs/stories/FEAT-055-recuperar-contrasena/story.md`
+  - `$SPECS_BASE/specs/stories/FEAT-054-subir-imagenes-perfil/story.md`
+  - `$SPECS_BASE/specs/stories/FEAT-055-recuperar-contrasena/story.md`
 
 **Actualizar frontmatter** de cada `story.md` con `id: FEAT-{NNN}`, `slug: FEAT-{NNN}-{slug}` y `status: REFINING` — estado inicial de toda historia resultante de un split (pendiente de re-evaluación).
 

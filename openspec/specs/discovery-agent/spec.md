@@ -8,11 +8,11 @@ El sistema SHALL proveer un archivo `.claude/agents/discovery-agent.md` con fron
 - **THEN** el agente tiene acceso a `Read`, `Write`, `Edit` y `AskUserQuestion`
 
 ### Requirement: Lectura del contexto previo
-El agente SHALL leer `docs/specs/project-intent.md` y el template `discovery-template.md` al inicio de su ejecución.
+El agente SHALL leer `$SPECS_BASE/specs/project-intent.md` y el template `discovery-template.md` al inicio de su ejecución.
 
 #### Scenario: Lectura exitosa del input anterior
 - **WHEN** el agente inicia su ejecución
-- **THEN** lee `docs/specs/project-intent.md` para obtener contexto del proyecto antes de formular preguntas
+- **THEN** lee `$SPECS_BASE/specs/project-intent.md` para obtener contexto del proyecto antes de formular preguntas
 
 ### Requirement: Extracción de secciones del template en runtime
 El agente SHALL extraer los headers `##` y los comentarios `<!-- -->` del template para derivar las preguntas de entrevista dinámicamente, sin preguntas hardcodeadas.
@@ -44,19 +44,19 @@ Cuando el usuario no provee suficiente detalle para una sección, el agente SHAL
 - **THEN** el agente infiere el contenido razonable y añade `[inferido]` al final de cada ítem inferido
 
 ### Requirement: Escritura de docs/specs/discovery.md
-Al finalizar la entrevista, el agente SHALL escribir `docs/specs/discovery.md` usando el template como estructura base.
+Al finalizar la entrevista, el agente SHALL escribir `$SPECS_BASE/specs/discovery.md` usando el template como estructura base.
 
 #### Scenario: Documento generado con metadatos
 - **WHEN** el agente completa la entrevista y escribe el output
-- **THEN** `docs/specs/discovery.md` contiene metadatos al inicio: `**Versión**`, `**Estado**: Doing`, `**Fecha**` (YYYY-MM-DD), `**Generado por**: discovery-agent`
+- **THEN** `$SPECS_BASE/specs/discovery.md` contiene metadatos al inicio: `**Versión**`, `**substatus**: IN‑PROGRESS`, `**Fecha**` (YYYY-MM-DD), `**Generado por**: discovery-agent`
 
 #### Scenario: Comentarios HTML excluidos del output
 - **WHEN** el agente escribe el documento final
-- **THEN** los comentarios `<!-- -->` del template no aparecen en `docs/specs/discovery.md`
+- **THEN** los comentarios `<!-- -->` del template no aparecen en `$SPECS_BASE/specs/discovery.md`
 
 ### Requirement: Propuesta de revisión al finalizar
 Al completar la escritura, el agente SHALL proponer al usuario que revise el output y mencionar la siguiente fase.
 
 #### Scenario: Mensaje de cierre del agente
-- **WHEN** el agente termina de escribir `docs/specs/discovery.md`
+- **WHEN** el agente termina de escribir `$SPECS_BASE/specs/discovery.md`
 - **THEN** informa la ruta del archivo generado, invita al usuario a revisar y editar si es necesario, y menciona que el siguiente paso es `/ps-specify`

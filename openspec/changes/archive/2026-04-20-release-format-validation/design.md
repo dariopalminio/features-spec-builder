@@ -1,6 +1,6 @@
 ## Context
 
-El framework SDDF utiliza archivos de release (`docs/specs/releases/release-*.md`) como input para el skill `generate-stories`. Actualmente no existe ningún gate de calidad que verifique la estructura de estos archivos antes de usarlos. El template canónico `docs/specs/templates/release-spec-template.md` ya existe y usa comentarios HTML (`<!-- sección obligatoria -->`) para marcar qué secciones son obligatorias.
+El framework SDDF utiliza archivos de release (`$SPECS_BASE/specs/releases/release-*.md`) como input para el skill `generate-stories`. Actualmente no existe ningún gate de calidad que verifique la estructura de estos archivos antes de usarlos. El template canónico `$SPECS_BASE/specs/templates/release-spec-template.md` ya existe y usa comentarios HTML (`<!-- sección obligatoria -->`) para marcar qué secciones son obligatorias.
 
 El sistema de skills del proyecto sigue un patrón establecido: un archivo `SKILL.md` define el comportamiento del skill mediante instrucciones en Markdown, sin código subyacente. El skill es ejecutado por el agente primario (sesión Claude) siguiendo las instrucciones del archivo.
 
@@ -22,7 +22,7 @@ El sistema de skills del proyecto sigue un patrón establecido: un archivo `SKIL
 
 ### Decisión 1: Extraer secciones obligatorias del template en tiempo de ejecución
 
-**Elegido:** El skill lee `docs/specs/templates/release-spec-template.md` y extrae las secciones marcadas con `<!-- sección obligatoria -->` cada vez que se ejecuta.
+**Elegido:** El skill lee `$SPECS_BASE/specs/templates/release-spec-template.md` y extrae las secciones marcadas con `<!-- sección obligatoria -->` cada vez que se ejecuta.
 
 **Alternativa descartada:** Lista hardcodeada de secciones en `SKILL.md`.
 

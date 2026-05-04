@@ -20,7 +20,7 @@
 - Slug derivado: `sistema-de-pagos`
 - Identificador sugerido: `EPIC-02` (asumiendo que EPIC-01 ya existe)
 - Usuario acepta
-- Ruta de salida: `docs/specs/releases/EPIC-02-sistema-de-pagos/release.md`
+- Ruta de salida: `$SPECS_BASE/specs/releases/EPIC-02-sistema-de-pagos/release.md`
 - El directorio no existe → continuar
 
 ### Fase 1 — Leer template

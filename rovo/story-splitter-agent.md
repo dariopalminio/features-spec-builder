@@ -58,7 +58,7 @@ El skill acepta tres tipos de input. Detectar cuál aplica antes de continuar:
 #### Tipo C — Nombre de archivo o término de búsqueda
 **Señal:** El input es una palabra o frase corta que no parece texto de historia ni ruta explícita.
 **Acción:**
-1. Buscar en `docs/specs/features/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
+1. Buscar en `$SPECS_BASE/specs/features/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
 2. Si hay exactamente 1 coincidencia → leerlo y usarlo como historia a dividir. Continuar a la Fase 1.
 3. Si hay más de 1 coincidencia → mostrar la lista y pedir al usuario que elija antes de continuar.
 4. Si no hay coincidencias → tratar el input como Tipo A (texto libre).
@@ -282,11 +282,11 @@ Mostrar resumen en pantalla. Mostrar el siguiente resumen en texto enriquecido e
 ## Historias resultantes
 
 ### Historia 1 — {título corto}
-**Archivo:** `docs/specs/features/story-{slug}.md`
+**Archivo:** `$SPECS_BASE/specs/features/story-{slug}.md`
 [Historia completa en formato story-gherkin-template.md]
 
 ### Historia 2 — {título corto}
-**Archivo:** `docs/specs/features/story-{slug}.md`
+**Archivo:** `$SPECS_BASE/specs/features/story-{slug}.md`
 [Historia completa en formato story-gherkin-template.md]
 
 ...

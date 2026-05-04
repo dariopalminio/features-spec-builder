@@ -83,19 +83,19 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
 ## 2.1 Pipeline de Especificación de Proyectos (ProjectSpecFactory)
 
 - **FR-001**: Captura de intención inicial del proyecto
-    - **Descripción**: El sistema SHALL conducir una entrevista interactiva guiada para capturar el nombre del proyecto, el problema que resuelve, la visión, los beneficios clave, los criterios de éxito, las restricciones y los non-goals. El resultado se escribe en `docs/specs/projects/project-intent.md` con `Estado: Doing`.
+    - **Descripción**: El sistema SHALL conducir una entrevista interactiva guiada para capturar el nombre del proyecto, el problema que resuelve, la visión, los beneficios clave, los criterios de éxito, las restricciones y los non-goals. El resultado se escribe en `$SPECS_BASE/specs/projects/project-intent.md` con `Estado: Doing`.
     - **Prioridad**: Alta
     - **Usuario**: US-001, US-002
     - **Fuente**: FEAT-001, `.claude/skills/project-begin/SKILL.md`
 
 - **FR-002**: Discovery del proyecto con descubrimiento de usuarios y especificación de requisitos
-    - **Descripción**: El sistema SHALL colaborar con el usuario en dos sub-fases: (1) Discovery de perfiles de usuario y sus dolores, y (2) Entrevista de especificación sección por sección del template de requisitos. El output es `docs/specs/projects/project.md`.
+    - **Descripción**: El sistema SHALL colaborar con el usuario en dos sub-fases: (1) Discovery de perfiles de usuario y sus dolores, y (2) Entrevista de especificación sección por sección del template de requisitos. El output es `$SPECS_BASE/specs/projects/project.md`.
     - **Prioridad**: Alta
     - **Usuario**: US-001, US-002, US-003
     - **Fuente**: FEAT-002, `.claude/skills/project-discovery/SKILL.md`
 
 - **FR-003**: Planificación de proyecto con releases y backlog de features
-    - **Descripción**: El sistema SHALL extraer features atómicas con IDs FEAT-NNN desde el `requirement-spec.md`, priorizarlas según criterios (valor de negocio → dependencias → riesgo técnico → esfuerzo) y agruparlas en releases incrementales con MVP en Release 1 (mínimo 3-5 features, desplegable, con 2+ criterios de éxito medibles). El output es `docs/specs/projects/project-plan.md`.
+    - **Descripción**: El sistema SHALL extraer features atómicas con IDs FEAT-NNN desde el `requirement-spec.md`, priorizarlas según criterios (valor de negocio → dependencias → riesgo técnico → esfuerzo) y agruparlas en releases incrementales con MVP en Release 1 (mínimo 3-5 features, desplegable, con 2+ criterios de éxito medibles). El output es `$SPECS_BASE/specs/projects/project-plan.md`.
     - **Prioridad**: Alta
     - **Usuario**: US-002, US-004
     - **Fuente**: FEAT-003, BR-043, BR-044, BR-045, `.claude/skills/project-planning/SKILL.md`
@@ -107,7 +107,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
     - **Fuente**: FEAT-004, BR-023, `.claude/skills/project-flow/SKILL.md`
 
 - **FR-005**: Retoma de proyecto interrumpido
-    - **Descripción**: El sistema SHALL detectar automáticamente el campo `Estado` de los documentos existentes en `docs/specs/projects/` y reanudar el trabajo desde la fase o sección incompleta sin requerir configuración manual. El agente NO debe re-preguntar secciones ya completadas.
+    - **Descripción**: El sistema SHALL detectar automáticamente el campo `Estado` de los documentos existentes en `$SPECS_BASE/specs/projects/` y reanudar el trabajo desde la fase o sección incompleta sin requerir configuración manual. El agente NO debe re-preguntar secciones ya completadas.
     - **Prioridad**: Alta
     - **Usuario**: US-001, US-002
     - **Fuente**: FEAT-005, BR-039, BR-040
@@ -133,7 +133,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
 ## 2.1.2 User Story Mapping
 
 - **FR-009**: Sesión interactiva de User Story Mapping
-    - **Descripción**: El sistema SHALL conducir una sesión colaborativa para identificar personas, construir el backbone de actividades, definir el walking skeleton y trazar release slices. El output es `docs/specs/projects/story-map.md` con mapa ASCII estilo Jeff Patton.
+    - **Descripción**: El sistema SHALL conducir una sesión colaborativa para identificar personas, construir el backbone de actividades, definir el walking skeleton y trazar release slices. El output es `$SPECS_BASE/specs/projects/story-map.md` con mapa ASCII estilo Jeff Patton.
     - **Prioridad**: Media
     - **Usuario**: US-002, US-003
     - **Fuente**: FEAT-009
@@ -147,7 +147,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
 ## 2.1.3 Gestión de Historias de Usuario
 
 - **FR-011**: Creación de historias de usuario
-    - **Descripción**: El sistema SHALL generar historias completas en formato Como/Quiero/Para con criterios de aceptación Gherkin (Dado/Cuando/Entonces), incluyendo mínimo 1 escenario principal y 1 escenario alternativo o de error. El output se guarda como `story-{slug}.md` en `docs/specs/stories/`.
+    - **Descripción**: El sistema SHALL generar historias completas en formato Como/Quiero/Para con criterios de aceptación Gherkin (Dado/Cuando/Entonces), incluyendo mínimo 1 escenario principal y 1 escenario alternativo o de error. El output se guarda como `story-{slug}.md` en `$SPECS_BASE/specs/stories/`.
     - **Prioridad**: Alta
     - **Usuario**: US-003
     - **Fuente**: FEAT-011, BR-007, BR-008, BR-009, BR-010
@@ -171,7 +171,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
     - **Fuente**: FEAT-014, BR-028, BR-029, BR-030, BR-031, BR-036
 
 - **FR-015**: Búsqueda de historias por término o nombre de archivo
-    - **Descripción**: El sistema SHALL permitir invocar los skills de story-creation o story-split con un término corto, buscar automáticamente en `docs/specs/stories/` el archivo correspondiente, y solicitar selección al usuario si hay múltiples coincidencias.
+    - **Descripción**: El sistema SHALL permitir invocar los skills de story-creation o story-split con un término corto, buscar automáticamente en `$SPECS_BASE/specs/stories/` el archivo correspondiente, y solicitar selección al usuario si hay múltiples coincidencias.
     - **Prioridad**: Media
     - **Usuario**: US-003
     - **Fuente**: FEAT-015, BR-053
@@ -185,7 +185,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
 ## 2.1.4 Ingeniería Inversa de Repositorios
 
 - **FR-017**: Generación automática de requisitos desde código existente
-    - **Descripción**: El sistema SHALL analizar un repositorio existente mediante 4 agentes especializados en paralelo y un agente sintetizador, generando automáticamente `docs/specs/projects/project.md`. Las secciones sin datos suficientes se marcan como `<!-- PENDING MANUAL REVIEW -->`.
+    - **Descripción**: El sistema SHALL analizar un repositorio existente mediante 4 agentes especializados en paralelo y un agente sintetizador, generando automáticamente `$SPECS_BASE/specs/projects/project.md`. Las secciones sin datos suficientes se marcan como `<!-- PENDING MANUAL REVIEW -->`.
     - **Prioridad**: Alta
     - **Usuario**: US-001, US-002, US-004
     - **Fuente**: FEAT-017, BR-034, BR-052
@@ -291,7 +291,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
 - **NFR-003**: Sistema de archivos como única capa de persistencia
     - **Descripción**: El sistema SHALL usar exclusivamente el sistema de archivos local para persistencia. No debe requerir base de datos, servicio de almacenamiento externo ni servidor propio.
     - **Prioridad**: Alta
-    - **Criterio de aceptación**: Todos los outputs del pipeline son archivos `.md` en `docs/specs/projects/` y `docs/specs/stories/`. No existe ningún archivo de configuración de base de datos en el repositorio.
+    - **Criterio de aceptación**: Todos los outputs del pipeline son archivos `.md` en `$SPECS_BASE/specs/projects/` y `$SPECS_BASE/specs/stories/`. No existe ningún archivo de configuración de base de datos en el repositorio.
 
 - **NFR-004**: Control de estado mediante campo `substatus` en documentos
     - **Descripción**: El sistema SHALL usar el campo `**Estado**: Doing | Ready` en los documentos Markdown como mecanismo de control de flujo y lock distribuido. Este campo es el único mecanismo de estado persistente reconocido por todos los skills y agentes.
@@ -308,7 +308,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
 - **NFR-006**: Metadatos de trazabilidad en todos los documentos generados
     - **Descripción**: El sistema SHALL incluir en cada documento generado los metadatos: `**Versión**`, `substatus`, `**Fecha**` y `**Generado por**`.
     - **Prioridad**: Alta
-    - **Criterio de aceptación**: Todos los documentos en `docs/specs/projects/` incluyen estos 4 campos en el encabezado. [DIRECT — BR-055]
+    - **Criterio de aceptación**: Todos los documentos en `$SPECS_BASE/specs/projects/` incluyen estos 4 campos en el encabezado. [DIRECT — BR-055]
 
 ### 2.2.4 Seguridad y Control de Acceso
 
@@ -626,7 +626,7 @@ Sin referencias.
 ### UX & Navigation Gaps
 
 - La generación dinámica de preguntas por los agentes no puede mapearse estáticamente — el árbol de navegación es una aproximación. **Pregunta sugerida**: ¿Se requiere documentación adicional de los flujos de entrevista?
-- Coexistencia de dos paths de output: `docs/specs/projects/` (canónico en skills actuales) y `docs/project-spec-factory/` (donde están los documentos reales del proyecto). **Aclaración**: `docs/project-spec-factory/` es el path legacy — los skills están actualizados para usar `docs/specs/projects/`. Los documentos reales en `docs/project-spec-factory/` son documentos de una ejecución anterior y no han sido migrados. Se recomienda migrarlos o dejarlos como referencia histórica.
+- Coexistencia de dos paths de output: `$SPECS_BASE/specs/projects/` (canónico en skills actuales) y `docs/project-spec-factory/` (donde están los documentos reales del proyecto). **Aclaración**: `docs/project-spec-factory/` es el path legacy — los skills están actualizados para usar `$SPECS_BASE/specs/projects/`. Los documentos reales en `docs/project-spec-factory/` son documentos de una ejecución anterior y no han sido migrados. Se recomienda migrarlos o dejarlos como referencia histórica.
 - Relación entre `project-flow` y los skills individuales no está completamente documentada. **Pregunta sugerida**: ¿El skill `project-flow` reemplaza o complementa a los skills individuales `project-begin`, `project-discovery` y `project-planning`? Ambos existen en el repositorio.
 - El directorio `.agents/skills/` parece estar vacío o sin contenido activo observable. **Pregunta sugerida**: ¿Es un residuo o está en uso activo por algún runtime?
 

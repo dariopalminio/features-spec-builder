@@ -20,8 +20,8 @@ related:
 - [x] FEAT-002 - Extracción Dinámica de Templates
 
 **Ítems de soporte (sin FEAT propio):**
-- Crear proyecto en VSCode con estructura inicial de directorios: `.claude/skills/`, `.claude/agents/`, `docs/specs/`.
-- Estructura inicial de directorios `.claude/skills/`, `.claude/agents/`, `docs/specs/`
+- Crear proyecto en VSCode con estructura inicial de directorios: `.claude/skills/`, `.claude/agents/`, `$SPECS_BASE/specs/`.
+- Estructura inicial de directorios `.claude/skills/`, `.claude/agents/`, `$SPECS_BASE/specs/`
 - Convenciones CLAUDE.md y AGENTS.md del framework
 - Configuración de entorno Docker con imagen `debian:bookworm-slim`
 - Soporte multi-runtime inicial: Claude Code (`.claude/`), GitHub Copilot (`.github/`), Codex/Cursor (`.agents/`)

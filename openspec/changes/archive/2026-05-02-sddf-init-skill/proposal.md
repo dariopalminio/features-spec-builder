@@ -1,11 +1,11 @@
 ## Why
 
-Los skills SDDF asumen que la estructura de directorios base (`docs/specs/projects/`, `docs/specs/releases/`, `docs/specs/stories/`) y `openspec/config.yaml` ya existen, pero no hay ningún mecanismo que los cree. Esto obliga al desarrollador a crearlos manualmente al onboardear un proyecto nuevo, generando errores silenciosos en `skill-preflight` y en cualquier skill SDDF que los requiera.
+Los skills SDDF asumen que la estructura de directorios base (`$SPECS_BASE/specs/projects/`, `$SPECS_BASE/specs/releases/`, `$SPECS_BASE/specs/stories/`) y `openspec/config.yaml` ya existen, pero no hay ningún mecanismo que los cree. Esto obliga al desarrollador a crearlos manualmente al onboardear un proyecto nuevo, generando errores silenciosos en `skill-preflight` y en cualquier skill SDDF que los requiera.
 
 ## What Changes
 
 - **Nueva skill `sddf-init`**: crea la estructura de directorios SDDF y archivos de configuración base en un proyecto nuevo.
-- Genera `docs/specs/projects/`, `docs/specs/releases/`, `docs/specs/stories/` (o bajo `SDDF_ROOT` personalizado).
+- Genera `$SPECS_BASE/specs/projects/`, `$SPECS_BASE/specs/releases/`, `$SPECS_BASE/specs/stories/` (o bajo `SDDF_ROOT` personalizado).
 - Genera `openspec/config.yaml` desde el template existente (solo si no existe).
 - Genera `.env.template` documentando la variable `SDDF_ROOT`.
 - Garantiza idempotencia: no sobrescribe directorios ni archivos con contenido existente.

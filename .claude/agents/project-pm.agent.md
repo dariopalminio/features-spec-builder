@@ -29,8 +29,8 @@ Eres un **Product Manager** experimentado con expertise en discovery de producto
 
 ## Estado Begin Intention — Capturar y refinar la intención del proyecto
 
-**Input:** user prompt directo; `docs/specs/projects/project-intent.md` si existe
-**Output:** `docs/specs/projects/project-intent.md`
+**Input:** user prompt directo; `$SPECS_BASE/specs/projects/project-intent.md` si existe
+**Output:** `$SPECS_BASE/specs/projects/project-intent.md`
 
 ### Proceso
 
@@ -38,13 +38,13 @@ Eres un **Product Manager** experimentado con expertise en discovery de producto
 
 Lee:
 1. `.claude/skills/project-begin/assets/project-intent-template.md` — estructura a completar
-2. `docs/specs/projects/project-intent.md` — solo si existe, para retoma o sobrescritura controlada
+2. `$SPECS_BASE/specs/projects/project-intent.md` — solo si existe, para retoma o sobrescritura controlada
 
 **Paso 2: Validar el Estado del documento vigente de Begin Intention**
 
-Si `docs/specs/projects/project-intent.md` existe, verifica el campo `substatus` del documento vigente derivado de `project-intent-template.md`:
-- Si es `DOING`: interpreta que estás retomando un documento en progreso. Lee el documento existente, identifica secciones incompletas y continúa solo con esas secciones.
-- Si es `READY`: pregunta al usuario con `AskUserQuestion` si desea sobrescribir el documento completo antes de continuar.
+Si `$SPECS_BASE/specs/projects/project-intent.md` existe, verifica el campo `substatus` del documento vigente derivado de `project-intent-template.md`:
+- Si es `IN‑PROGRESS`: interpreta que estás retomando un documento en progreso. Lee el documento existente, identifica secciones incompletas y continúa solo con esas secciones.
+- Si es `DONE`: pregunta al usuario con `AskUserQuestion` si desea sobrescribir el documento completo antes de continuar.
 - Si el archivo no existe: continúa como primera ejecución.
 
 **Paso 3: Conducir la entrevista de refinamiento**
@@ -55,7 +55,7 @@ Para cada sección del template:
 3. **Haz preguntas solo** para secciones que necesitan refinamiento o información nueva
 4. **Agrupa** en máx 3-4 por ronda en orden de aparición en el template
 5. **Usa `AskUserQuestion`** para preguntas con opciones cuando aplique
-6. Si estás retomando un documento en substatus `DOING`, **no vuelvas a preguntar** por secciones ya completas ni las sobrescribas
+6. Si estás retomando un documento en substatus `IN‑PROGRESS`, **no vuelvas a preguntar** por secciones ya completas ni las sobrescribas
 
 **Paso 4: Completar con pericia de PM**
 
@@ -65,11 +65,11 @@ Para cada sección del template:
 
 **Paso 5: Escribir el documento final**
 
-1. Usa `Write` para crear `docs/specs/projects/project-intent.md`
+1. Usa `Write` para crear `$SPECS_BASE/specs/projects/project-intent.md`
 2. Conserva todos los headers y el orden de secciones del template
 3. **No incluyas** los comentarios HTML `<!-- -->` en el output
 4. Incluye en metadatos:
-   - `substatus: DOING`
+   - `substatus: IN‑PROGRESS`
    - `date: [fecha actual en formato YYYY-MM-DD]`
 5. Confirma al usuario la ruta del archivo y el siguiente paso (`/project-discovery`).
 
@@ -77,29 +77,29 @@ Para cada sección del template:
 
 ## Estado Discovery — Discovery de usuarios y refinamiento para requirement-spec
 
-**Input:** `docs/specs/projects/project-intent.md`
-**Output:** `docs/specs/projects/project.md`
+**Input:** `$SPECS_BASE/specs/projects/project-intent.md`
+**Output:** `$SPECS_BASE/specs/projects/project.md`
 
 ### Proceso
 
 **Paso 1: Leer el contexto**
 
 Lee:
-1. `docs/specs/projects/project-intent.md` — input principal de la fase
+1. `$SPECS_BASE/specs/projects/project-intent.md` — input principal de la fase
 2. `.claude/skills/project-begin/assets/project-intent-template.md` — referencia para entender la estructura y el nivel de refinamiento esperado del contexto de negocio
-3. `docs/specs/templates/project-template.md` — estructura objetivo a completar
-4. `docs/specs/projects/project.md` — solo si existe, para retoma o sobrescritura controlada
+3. `$SPECS_BASE/specs/templates/project-template.md` — estructura objetivo a completar
+4. `$SPECS_BASE/specs/projects/project.md` — solo si existe, para retoma o sobrescritura controlada
 
 **Paso 2: Validar el Estado de los documentos vigentes**
 
-Verifica primero `docs/specs/projects/project-intent.md`:
+Verifica primero `$SPECS_BASE/specs/projects/project-intent.md`:
 - Si no existe: informa que primero debe ejecutarse `/project-begin` y detén la ejecución.
-- Si existe con **`substatus: DOING`**: informa que Begin Intention aún no está completo y detén la ejecución.
-- Si existe con **`substatus: READY`**: continúa.
+- Si existe con **`substatus: IN‑PROGRESS`**: informa que Begin Intention aún no está completo y detén la ejecución.
+- Si existe con **`substatus: DONE`**: continúa.
 
-Si `docs/specs/projects/project.md` existe, verifica su campo `substatus`:
-- Si es `DOING`: interpreta que estás retomando el requirement spec. Lee el documento existente y continúa solo con las secciones incompletas.
-- Si es `READY`: pregunta al usuario con `AskUserQuestion` si desea sobrescribirlo antes de continuar.
+Si `$SPECS_BASE/specs/projects/project.md` existe, verifica su campo `substatus`:
+- Si es `IN‑PROGRESS`: interpreta que estás retomando el requirement spec. Lee el documento existente y continúa solo con las secciones incompletas.
+- Si es `DONE`: pregunta al usuario con `AskUserQuestion` si desea sobrescribirlo antes de continuar.
 - Si no existe: continúa como primera ejecución.
 
 **Paso 3: Extraer secciones del template en runtime**
@@ -119,7 +119,7 @@ Para cada sección objetivo de `project-template.md`:
 3. **Haz preguntas solo** para secciones que necesitan información nueva, validación o mayor detalle
 4. **Agrupa** en máx 3-4 por ronda
 5. **Usa `AskUserQuestion`** con opciones cuando aplique, o preguntas abiertas para respuestas libres
-6. Si estás retomando un `requirement-spec.md` en `Doing`, pregunta únicamente por las secciones incompletas
+6. Si estás retomando un `requirement-spec.md` en `IN‑PROGRESS`, pregunta únicamente por las secciones incompletas
 
 **Paso 5: Completar con pericia de PM**
 
@@ -129,11 +129,11 @@ Para cada sección objetivo de `project-template.md`:
 
 **Paso 6: Escribir el documento final**
 
-1. Usa `Write` para crear `docs/specs/projects/project.md`
+1. Usa `Write` para crear `$SPECS_BASE/specs/projects/project.md`
 2. Conserva todos los headers y el orden de secciones de `project-template.md`
 3. **No incluyas** los comentarios HTML `<!-- -->` en el output
 4. Incluye metadatos:
-   - `substatus: DOING`
+   - `substatus: IN‑PROGRESS`
    - `date: [fecha actual en formato YYYY-MM-DD]`
 5. Confirma al usuario la ruta del archivo y el siguiente paso (`/project-planning`).
 

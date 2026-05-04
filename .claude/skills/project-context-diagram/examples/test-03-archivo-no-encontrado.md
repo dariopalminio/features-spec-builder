@@ -9,12 +9,12 @@
 **Skill:**
 > ⚙️ SPECS_BASE = `docs` (SDDF_ROOT no está definida)  
 > ✅ Template `assets/c4-context-template.puml` encontrado.  
-> Verificando ruta indicada: `docs/specs/projects/PROJ-99-inexistente/project.md`...
+> Verificando ruta indicada: `$SPECS_BASE/specs/projects/PROJ-99-inexistente/project.md`...
 
 **Skill:**
-> ❌ No se encontró el archivo de especificaciones indicado: `docs/specs/projects/PROJ-99-inexistente/project.md`
+> ❌ No se encontró el archivo de especificaciones indicado: `$SPECS_BASE/specs/projects/PROJ-99-inexistente/project.md`
 >
-> Proyectos disponibles en `docs/specs/projects/`:
+> Proyectos disponibles en `$SPECS_BASE/specs/projects/`:
 > - `PROJ-01-agile-sddf`
 >
 > ¿Cómo deseas continuar?
@@ -43,7 +43,7 @@ _(... flujo interactivo continúa hasta completar actores, sistemas externos y r
 
 **Skill:**
 > ✅ Diagrama de contexto C4 generado:  
-> `docs/specs/projects/PROJ-01-agile-sddf/context-diagram.puml`
+> `$SPECS_BASE/specs/projects/PROJ-01-agile-sddf/context-diagram.puml`
 >
 > Para renderizarlo localmente, instala la extensión PlantUML en VS Code (ext: jebbs.plantuml) o visita https://www.plantuml.com/plantuml
 

@@ -2,7 +2,7 @@
 
 - [x] 1.1 Revisar el archivo `rovo/story-evaluator-agent.md` para confirmar la estructura de secciones vigente (Nombre, Descripción, Comportamiento, Instrucciones)
 - [x] 1.2 Revisar el skill `.claude/skills/release-format-validation/SKILL.md` para mapear las fases al equivalente Rovo
-- [x] 1.3 Revisar `docs/specs/templates/release-spec-template.md` para extraer el template canónico completo que se incrustará
+- [x] 1.3 Revisar `$SPECS_BASE/specs/templates/release-spec-template.md` para extraer el template canónico completo que se incrustará
 
 ## 2. Creación del agente Rovo
 

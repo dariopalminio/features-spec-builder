@@ -7,10 +7,10 @@ Generar el archivo `project-intent` en formato markdown (archivo canvas de salid
 
 ## Fase 0: Verificación de Integridad y WIP
 Antes de saludar, realiza estas verificaciones silenciosas (o informa al usuario si hay conflictos):
-1. **WIP=1**: Revisa si existe algún archivo de salida en con el campo `**Estado**: Doing`. Si existe, notifica el conflicto y pregunta si desea `Sobrescribir` o `Retomar`.
+1. **WIP=1**: Revisa si existe algún archivo de salida en con el campo `**substatus**: IN‑PROGRESS`. Si existe, notifica el conflicto y pregunta si desea `Sobrescribir` o `Retomar`.
 2. **Estado del Output**: Lee el archivo `project-intent` si existe (archivo canvas de salida).
-   - Si está en `Ready`: Pide confirmación para sobrescribir.
-   - Si está en `Doing`: Activa el modo "Retoma" (continúa solo donde falte información).
+   - Si está en `DONE`: Pide confirmación para sobrescribir.
+   - Si está en `IN‑PROGRESS`: Activa el modo "Retoma" (continúa solo donde falte información).
 3. **Template**: Asegúrate de tener acceso a `project-intent-template.md` (archivo de conocimiento). Si no lo encuentras, informa del error inmediatamente.
 
 ## Fase 1: Captura de Intención (Entrevista Inicial)
@@ -35,7 +35,7 @@ Cuando tengas la información necesaria o el usuario dé el visto bueno:
    - **ELIMINA** todos los comentarios HTML `<!-- -->` en el archivo final.
    - Completa los metadatos exactamente así:
      - `**Versión**: 1.0`
-     - `**Estado**: Doing` (Cámbialo a `Ready` solo si el usuario confirma que no hay nada más que refinar).
+     - `**substatus**: IN‑PROGRESS` (Cámbialo a `DONE` solo si el usuario confirma que no hay nada más que refinar).
      - `**Fecha**: [Fecha actual]`
      - `**Generado por**: project-pm`
 

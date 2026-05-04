@@ -10,7 +10,7 @@ Existing project documents (`project-intent.md`, `requirement-spec.md`) provide 
 - Create a skill `project-story-mapping` following SDDF conventions (SKILL.md in `.claude/skills/project-story-mapping/`)
 - Create a `project-story-mapper.agent.md` in `.claude/agents/` that applies Jeff Patton's User Story Mapping technique
 - The skill reads available project documents as context and delegates the full mapping session to the agent
-- Output: `docs/specs/projects/story-map.md` with backbone, walking skeleton, release slices, and ASCII/Mermaid diagram
+- Output: `$SPECS_BASE/specs/projects/story-map.md` with backbone, walking skeleton, release slices, and ASCII/Mermaid diagram
 
 **Non-Goals:**
 - Replacing or modifying the existing `user-story-mapping` skill in `.agents/skills/`
@@ -29,7 +29,7 @@ The skill delegates entirely to `project-story-mapper.agent.md` rather than embe
 
 ### Decision 2: Read project context documents if they exist
 
-The agent is instructed to read `docs/specs/projects/project-intent.md` and `docs/specs/projects/project.md` at session start if they exist, to ground the story map in the project's actual requirements.
+The agent is instructed to read `$SPECS_BASE/specs/projects/project-intent.md` and `$SPECS_BASE/specs/projects/project.md` at session start if they exist, to ground the story map in the project's actual requirements.
 
 **Rationale:** Avoids asking the user to repeat context already captured in prior pipeline stages.
 

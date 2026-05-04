@@ -9,4 +9,4 @@ El skill `project-planning` SHALL resolver la ruta base de artefactos mediante `
 
 #### Scenario: Skill usa docs por defecto sin SDDF_ROOT
 - **WHEN** el usuario ejecuta `/project-planning` sin `SDDF_ROOT` definida
-- **THEN** el skill opera sobre `docs/specs/projects/` (comportamiento previo)
+- **THEN** el skill opera sobre `$SPECS_BASE/specs/projects/` (comportamiento previo)

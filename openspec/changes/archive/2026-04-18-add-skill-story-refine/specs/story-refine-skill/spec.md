@@ -27,15 +27,15 @@ Cada historia en refinamiento SHALL mantener el encabezado `**Estado**: Doing | 
 
 #### Scenario: Story remains Doing during active refinement
 - **WHEN** una historia aun no cumple criterios de cierre
-- **THEN** su archivo markdown MUST mantenerse con `**Estado**: Doing`
+- **THEN** su archivo markdown MUST mantenerse con `**substatus**: IN‑PROGRESS`
 
 #### Scenario: Story becomes Ready when FINVEST is approved
 - **WHEN** `story-evaluation` retorna decision `APROBADA`
-- **THEN** el orquestador MUST actualizar el archivo de la historia a `**Estado**: Ready`
+- **THEN** el orquestador MUST actualizar el archivo de la historia a `**substatus**: DONE`
 
 #### Scenario: User decides to pause refinement
 - **WHEN** la decision FINVEST es `REFINAR` o `RECHAZAR` y el usuario elige pausar
-- **THEN** el orquestador MUST permitir finalizar la sesion dejando la historia en `**Estado**: Doing`
+- **THEN** el orquestador MUST permitir finalizar la sesion dejando la historia en `**substatus**: IN‑PROGRESS`
 
 ### Requirement: story-refine tracks and processes derived stories
 El orquestador SHALL mantener registro de cuantas historias existen en el flujo, cuales son derivadas por split y cuales siguen pendientes de refinamiento.
@@ -50,7 +50,7 @@ El orquestador SHALL mantener registro de cuantas historias existen en el flujo,
 
 #### Scenario: Flow summary is available to user
 - **WHEN** cambia el backlog de historias por una division o cierre
-- **THEN** el orquestador MUST informar al usuario el total de historias y su estado (`Doing`/`Ready`)
+- **THEN** el orquestador MUST informar al usuario el total de historias y su estado (`IN‑PROGRESS`/`DONE`)
 
 ### Requirement: non-approved stories require explicit iteration decision
 Para evitar bucles infinitos, el orquestador SHALL pedir decision explicita del usuario en cada ciclo no aprobado (`REFINAR` o `RECHAZAR`) para continuar iterando o terminar.

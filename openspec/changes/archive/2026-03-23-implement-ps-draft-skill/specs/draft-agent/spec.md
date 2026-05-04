@@ -10,18 +10,18 @@ El sistema SHALL proveer un agente Draft en `.claude/agents/draft-agent.md` con 
 ---
 
 ### Requirement: Agente valida el Estado del initial-prompt
-El agente SHALL leer `docs/specs/initial-prompt.md` y verificar que el campo `**Estado**` tiene el valor `Ready`. Si el valor es `Doing`, debe preguntar al usuario si confirma avanzar.
+El agente SHALL leer `$SPECS_BASE/specs/initial-prompt.md` y verificar que el campo `**Estado**` tiene el valor `DONE`. Si el valor es `IN‑PROGRESS`, debe preguntar al usuario si confirma avanzar.
 
 #### Scenario: Estado es Ready
-- **WHEN** el agente lee `initial-prompt.md` y el campo `**Estado**` contiene `Ready`
+- **WHEN** el agente lee `initial-prompt.md` y el campo `**Estado**` contiene `DONE`
 - **THEN** el agente continúa con la entrevista de refinamiento sin interrupciones
 
 #### Scenario: Estado es Doing — usuario confirma
-- **WHEN** el agente lee `initial-prompt.md` y el campo `**Estado**` contiene `Doing`
-- **THEN** el agente pregunta al usuario si considera que el Funnel está completo y si desea avanzar; si el usuario confirma, el agente actualiza el campo `**Estado**` a `Ready` en el archivo usando `Edit` y continúa
+- **WHEN** el agente lee `initial-prompt.md` y el campo `**Estado**` contiene `IN‑PROGRESS`
+- **THEN** el agente pregunta al usuario si considera que el Funnel está completo y si desea avanzar; si el usuario confirma, el agente actualiza el campo `**Estado**` a `DONE` en el archivo usando `Edit` y continúa
 
 #### Scenario: Estado es Doing — usuario rechaza
-- **WHEN** el agente lee `initial-prompt.md`, el campo `**Estado**` es `Doing`, y el usuario indica que aún no está listo
+- **WHEN** el agente lee `initial-prompt.md`, el campo `**Estado**` es `IN‑PROGRESS`, y el usuario indica que aún no está listo
 - **THEN** el agente informa al usuario que debe completar el Funnel primero (`/ps-funnel`) y detiene su ejecución
 
 ---
@@ -49,8 +49,8 @@ El agente SHALL usar su conocimiento de gestión de productos para inferir y com
 ---
 
 ### Requirement: Agente escribe docs/specs/project-intent.md
-El agente SHALL escribir el documento `docs/specs/project-intent.md` al finalizar la entrevista, usando el template como estructura y el contenido recopilado como contenido.
+El agente SHALL escribir el documento `$SPECS_BASE/specs/project-intent.md` al finalizar la entrevista, usando el template como estructura y el contenido recopilado como contenido.
 
 #### Scenario: Escritura del documento final
 - **WHEN** el agente ha completado todas las secciones del template
-- **THEN** usa `Write` para crear `docs/specs/project-intent.md` con todas las secciones completadas y metadatos (fecha, agente, estado=`Doing`)
+- **THEN** usa `Write` para crear `$SPECS_BASE/specs/project-intent.md` con todas las secciones completadas y metadatos (fecha, agente, estado=`IN‑PROGRESS`)

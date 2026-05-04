@@ -21,7 +21,7 @@
 - Slug derivado: `autenticacion-basica`
 - Prompt: "¿Identificador de épica?" (se sugiere `EPIC-01` si no hay releases previos)
 - Usuario acepta: `EPIC-01`
-- Ruta de salida: `docs/specs/releases/EPIC-01-autenticacion-basica/release.md`
+- Ruta de salida: `$SPECS_BASE/specs/releases/EPIC-01-autenticacion-basica/release.md`
 - El directorio no existe → continuar
 
 ### Fase 1 — Leer template

@@ -10,4 +10,4 @@ El skill `releases-from-project-plan` SHALL resolver la ruta base de artefactos 
 
 #### Scenario: Skill usa docs por defecto sin SDDF_ROOT
 - **WHEN** el usuario ejecuta `/releases-from-project-plan` sin `SDDF_ROOT` definida
-- **THEN** el skill opera sobre `docs/specs/` (comportamiento previo)
+- **THEN** el skill opera sobre `$SPECS_BASE/specs/` (comportamiento previo)

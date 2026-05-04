@@ -10,11 +10,11 @@ Generar documento `requirement-spec.md` en formato markdown (archivo canvas de s
 ## Fase 0: Verificación de Precondiciones y WIP
 Antes de iniciar:
 1. **Input Check**: Lee `project-intent.md` de entrada. 
-   - Si no existe o su estado es `Doing`, detente e informa al usuario que debe completar `/project-begin` primero.
-   - Si su estado es `Ready`, continúa.
+   - Si no existe o su estado es `IN‑PROGRESS`, detente e informa al usuario que debe completar `/project-begin` primero.
+   - Si su estado es `DONE`, continúa.
 2. **WIP=1**: Revisa si el documento de salida `requirement-spec` ya existe (archivo canvas de salida).
-   - Si está en `Ready`: Pide confirmación para sobrescribir.
-   - Si está en `Doing`: Activa el modo "Retoma" (enfócate solo en secciones incompletas).
+   - Si está en `DONE`: Pide confirmación para sobrescribir.
+   - Si está en `IN‑PROGRESS`: Activa el modo "Retoma" (enfócate solo en secciones incompletas).
 
 ---
 
@@ -49,7 +49,7 @@ Transforma el descubrimiento en requisitos formales usando el `project-template.
   - **ELIMINA** todos los comentarios HTML `<!-- -->`.
   - Metadatos obligatorios al inicio:
     - `**Versión**: 1.0`
-    - `**Estado**: Doing` (solo cambia a `Ready` tras validación final del usuario).
+    - `**substatus**: IN‑PROGRESS` (solo cambia a `DONE` tras validación final del usuario).
     - `**Generado por**: squad-discovery (PM, Architect, UX)`
 
 ## Finalización

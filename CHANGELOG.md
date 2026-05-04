@@ -17,7 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Changed
 
-- **Restructura de `docs/specs/`** — migrado a la convención workitem-per-directory especificada en `docs/wiki/guides/organization-of-artifacts.md`: cada proyecto, release e historia ocupa su propio directorio con un archivo canónico (`project.md`, `release.md`, `story.md`); directorio `project/` (singular, flat) → `projects/PROJ-01-agile-sddf/`; 10 archivos flat de releases → `EPIC-NN-nombre/release.md`; 42 archivos flat de stories → `FEAT-NNN-nombre/story.md`; wikilinks y referencias `parent:` actualizados a los nuevos slugs
+- **Restructura de `$SPECS_BASE/specs/`** — migrado a la convención workitem-per-directory especificada en `docs/wiki/guides/organization-of-artifacts.md`: cada proyecto, release e historia ocupa su propio directorio con un archivo canónico (`project.md`, `release.md`, `story.md`); directorio `project/` (singular, flat) → `projects/PROJ-01-agile-sddf/`; 10 archivos flat de releases → `EPIC-NN-nombre/release.md`; 42 archivos flat de stories → `FEAT-NNN-nombre/story.md`; wikilinks y referencias `parent:` actualizados a los nuevos slugs
 
 ---
 
@@ -77,8 +77,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
-- **Skill `/release-generate-stories`** (FEAT-029) — genera archivos `story-[ID]-[nombre-kebab].md` en `docs/specs/stories/` a partir de las features de un archivo de release; acepta nombre corto, nombre con extensión o ruta relativa como input; solicita confirmación antes de sobreescribir historias existentes
-- **Skill `/release-generate-all-stories`** (FEAT-035) — procesa en modo batch todos los archivos `.md` de `docs/specs/releases/` en orden alfabético; detecta conflictos anticipadamente con confirmación global única (sobreescribir todo / saltar todos / decidir uno por uno); muestra resumen consolidado con contadores al finalizar
+- **Skill `/release-generate-stories`** (FEAT-029) — genera archivos `story-[ID]-[nombre-kebab].md` en `$SPECS_BASE/specs/stories/` a partir de las features de un archivo de release; acepta nombre corto, nombre con extensión o ruta relativa como input; solicita confirmación antes de sobreescribir historias existentes
+- **Skill `/release-generate-all-stories`** (FEAT-035) — procesa en modo batch todos los archivos `.md` de `$SPECS_BASE/specs/releases/` en orden alfabético; detecta conflictos anticipadamente con confirmación global única (sobreescribir todo / saltar todos / decidir uno por uno); muestra resumen consolidado con contadores al finalizar
 - **Skill `/openspec-init-config`** (FEAT-036) — carga el contexto del proyecto en `openspec/config.yaml` leyendo exhaustivamente `README.md`, `CLAUDE.md` y `AGENTS.md`; actualiza únicamente el campo `context:` preservando `schema:` y `rules:`; ejecutado sobre el propio proyecto SDDF para inicializar el contexto de OpenSpec
 - **Skill `/openspec-generate-baseline`** (FEAT-037) — genera una línea base de especificaciones OpenSpec mediante ingeniería inversa del código fuente (`src/`, `README.md`, `AGENTS.md`); invoca `/opsx:propose baseline` con instrucción de reverse engineering y archiva el change directamente sin fase de apply; detecta conflictos si ya existe un change `baseline` (opción de sobreescribir o usar sufijo de fecha)
 
@@ -116,8 +116,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - Skill `/project-flow` as a single entry-point orchestrator for the full ProjectSpecFactory pipeline (`project-begin` → `project-discovery` → `project-planning`) in one interactive session
-- Review gates between phases to enforce explicit confirmation and transition each output document from `**Estado**: Doing` to `**Estado**: Ready`
-- Startup state detection logic in `project-flow` to resume from the appropriate phase based on existing outputs in `docs/specs/projects/`
+- Review gates between phases to enforce explicit confirmation and transition each output document from `**substatus**: IN‑PROGRESS` to `**substatus**: DONE`
+- Startup state detection logic in `project-flow` to resume from the appropriate phase based on existing outputs in `$SPECS_BASE/specs/projects/`
 - Main OpenSpec capability spec for `project-flow-skill` at `openspec/specs/project-flow-skill/spec.md`
 
 ---
@@ -167,9 +167,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 - **ProjectSpecFactory CLI pipeline** — three-skill workflow for project specification:
-  - `/ps-begin-intention` — captures project intent and produces `docs/specs/projects/project-intent.md`
-  - `/ps-discovery` — conducts user discovery and produces `docs/specs/projects/project.md`
-  - `/ps-planning` — generates prioritized release backlog and produces `docs/specs/projects/project-plan.md`
+  - `/ps-begin-intention` — captures project intent and produces `$SPECS_BASE/specs/projects/project-intent.md`
+  - `/ps-discovery` — conducts user discovery and produces `$SPECS_BASE/specs/projects/project.md`
+  - `/ps-planning` — generates prioritized release backlog and produces `$SPECS_BASE/specs/projects/project-plan.md`
 - **Role-based agents** — three specialized agents replacing task-based agents:
   - `architect.agent.md` — technical architect for Specifying and Planning phases
   - `product-manager.agent.md` — PM for Begin Intention and Discovery phases

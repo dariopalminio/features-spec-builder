@@ -1,14 +1,14 @@
 ## ADDED Requirements
 
 ### Requirement: Skill ps-draft verifica existencia de initial-prompt.md
-El skill SHALL verificar que `docs/specs/initial-prompt.md` existe antes de invocar al agente. Si no existe, detiene la ejecución con un mensaje de error claro.
+El skill SHALL verificar que `$SPECS_BASE/specs/initial-prompt.md` existe antes de invocar al agente. Si no existe, detiene la ejecución con un mensaje de error claro.
 
 #### Scenario: Input presente
-- **WHEN** se ejecuta `/ps-draft` y `docs/specs/initial-prompt.md` existe
+- **WHEN** se ejecuta `/ps-draft` y `$SPECS_BASE/specs/initial-prompt.md` existe
 - **THEN** el skill continúa al siguiente paso
 
 #### Scenario: Input ausente
-- **WHEN** se ejecuta `/ps-draft` y `docs/specs/initial-prompt.md` no existe
+- **WHEN** se ejecuta `/ps-draft` y `$SPECS_BASE/specs/initial-prompt.md` no existe
 - **THEN** el skill informa al usuario que debe completar primero el estado Funnel ejecutando `/ps-funnel` y detiene la ejecución
 
 ---
@@ -36,12 +36,12 @@ El skill SHALL invocar al agente `draft-agent` pasándole como contexto la ruta 
 ---
 
 ### Requirement: Skill confirma la generación del output
-El skill SHALL verificar que `docs/specs/project-intent.md` existe al finalizar y confirmar al usuario.
+El skill SHALL verificar que `$SPECS_BASE/specs/project-intent.md` existe al finalizar y confirmar al usuario.
 
 #### Scenario: Output generado
 - **WHEN** el draft-agent completa su trabajo
-- **THEN** el skill verifica la existencia de `docs/specs/project-intent.md` y confirma al usuario que puede continuar con `/ps-discover`
+- **THEN** el skill verifica la existencia de `$SPECS_BASE/specs/project-intent.md` y confirma al usuario que puede continuar con `/ps-discover`
 
 #### Scenario: Output no generado
-- **WHEN** el draft-agent finaliza pero `docs/specs/project-intent.md` no existe
+- **WHEN** el draft-agent finaliza pero `$SPECS_BASE/specs/project-intent.md` no existe
 - **THEN** el skill informa al usuario que algo salió mal y sugiere ejecutar `/ps-draft` nuevamente

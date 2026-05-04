@@ -10,10 +10,10 @@ Generar el archivo documento `project-plan.md` en formato markdown (archivo canv
 ## Fase 0: Verificación de Precondiciones y WIP
 Antes de iniciar:
 1. **Input Check**: Lee `requirement-spec.md` de entrada. 
-   - Si no existe o su estado es `Doing`, informa al usuario que debe completar `/project-discovery` y asegurar que el documento esté en `Ready`.
+   - Si no existe o su estado es `IN‑PROGRESS`, informa al usuario que debe completar `/project-discovery` y asegurar que el documento esté en `DONE`.
 2. **WIP=1**: Revisa si `project-plan.md` ya existe (archivo canvas de salida).
-   - Si está en `Ready`: Pide confirmación para sobrescribir.
-   - Si está en `Doing`: Activa el modo "Retoma" (enfócate solo en secciones incompletas o placeholders).
+   - Si está en `DONE`: Pide confirmación para sobrescribir.
+   - Si está en `IN‑PROGRESS`: Activa el modo "Retoma" (enfócate solo en secciones incompletas o placeholders).
 
 ---
 
@@ -46,7 +46,7 @@ Escribe el plan final en un documento `project-plan` en formato markdown (archiv
    - **ELIMINA** todos los comentarios HTML `<!-- -->`.
 2. **Metadatos obligatorios**:
    - `**Versión**: 1.0`
-   - `**Estado**: Doing` (Cámbialo a `Ready` solo tras validación final del usuario).
+   - `**substatus**: IN‑PROGRESS` (Cámbialo a `DONE` solo tras validación final del usuario).
    - `**Fecha**: [Fecha actual]`
    - `**Generado por**: project-architect`
 3. **Resumen**: Completa la tabla de métricas (Total Features, Features en MVP, etc.).

@@ -28,21 +28,21 @@ updated: 2026-05-01
 ```gherkin
 Dado que ejecuto el skill `/release-creation` para crear el release "Sistema de pagos"
 Cuando el skill escribe el archivo de release
-Entonces el archivo se crea en `docs/specs/releases/EPIC-01-sistema-de-pagos/release.md`
-  Y no existe ningún archivo `docs/specs/releases/release-01-sistema-de-pagos.md`
+Entonces el archivo se crea en `$SPECS_BASE/specs/releases/EPIC-01-sistema-de-pagos/release.md`
+  Y no existe ningún archivo `$SPECS_BASE/specs/releases/release-01-sistema-de-pagos.md`
 ```
 
 ### Escenario principal – Artefacto de historia creado en su propio directorio
 ```gherkin
 Dado que ejecuto el skill `/release-generate-stories` sobre un release existente
 Cuando el skill escribe una historia de usuario
-Entonces el archivo se crea en `docs/specs/stories/FEAT-001-nombre-historia/story.md`
-  Y no existe ningún archivo `docs/specs/stories/story-FEAT-001-nombre-historia.md`
+Entonces el archivo se crea en `$SPECS_BASE/specs/stories/FEAT-001-nombre-historia/story.md`
+  Y no existe ningún archivo `$SPECS_BASE/specs/stories/story-FEAT-001-nombre-historia.md`
 ```
 
 ### Escenario alternativo / error – Directorio destino ya existe
 ```gherkin
-Dado que el directorio `docs/specs/releases/EPIC-01-sistema-de-pagos/` ya existe
+Dado que el directorio `$SPECS_BASE/specs/releases/EPIC-01-sistema-de-pagos/` ya existe
 Cuando el skill intenta crear el release con el mismo identificador
 Entonces el skill alerta al usuario del conflicto antes de sobreescribir
   Pero no sobreescribe el archivo sin confirmación explícita

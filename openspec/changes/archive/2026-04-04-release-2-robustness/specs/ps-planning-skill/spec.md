@@ -1,7 +1,7 @@
 ## MODIFIED Requirements
 
 ### Requirement: ps-planning reads existing document state
-El skill SHALL leer el campo `**Estado**:` de `docs/specs/projects/project-plan.md` si existe, aplicando la lógica de `skill-state-detection`.
+El skill SHALL leer el campo `**Estado**:` de `$SPECS_BASE/specs/projects/project-plan.md` si existe, aplicando la lógica de `skill-state-detection`.
 
 #### Scenario: Document in Doing state
 - **WHEN** `project-plan.md` existe con `Estado: Doing`
@@ -12,7 +12,7 @@ El skill SHALL leer el campo `**Estado**:` de `docs/specs/projects/project-plan.
 - **THEN** el skill MUST informar al usuario y solicitar confirmación antes de sobrescribir
 
 ### Requirement: ps-planning validates requirement-spec.md is Ready
-El skill SHALL verificar que `docs/specs/projects/project.md` existe y tiene `Estado: Ready` antes de delegar al agente.
+El skill SHALL verificar que `$SPECS_BASE/specs/projects/project.md` existe y tiene `Estado: Ready` antes de delegar al agente.
 
 #### Scenario: Input presente y Ready
 - **WHEN** `requirement-spec.md` existe con `Estado: Ready`

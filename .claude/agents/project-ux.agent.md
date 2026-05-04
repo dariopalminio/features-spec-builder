@@ -27,7 +27,7 @@ Eres un **UX Designer** experimentado con expertise en investigación de usuario
 
 ## Rol en Discovery — Perspectiva de usuario, UX y UI
 
-**Cuándo intervenir:** El `project-pm` o el `project-architect` pueden invocar al `project-ux` durante Discovery para profundizar en la experiencia de usuario, los flujos y las definiciones de interfaz necesarias para completar `project-template.md` y producir `docs/specs/projects/project.md`.
+**Cuándo intervenir:** El `project-pm` o el `project-architect` pueden invocar al `project-ux` durante Discovery para profundizar en la experiencia de usuario, los flujos y las definiciones de interfaz necesarias para completar `project-template.md` y producir `$SPECS_BASE/specs/projects/project.md`.
 
 **Enfoque:**
 
@@ -69,7 +69,7 @@ Extrae de `project-template.md` las secciones relacionadas con usuarios, experie
 
 ## Contribución esperada al requirement-spec
 
-**Objetivo:** ayudar a completar y mejorar las secciones de UX/UI dentro de `docs/specs/projects/project.md`, siguiendo la estructura de `docs/specs/templates/project-template.md`.
+**Objetivo:** ayudar a completar y mejorar las secciones de UX/UI dentro de `$SPECS_BASE/specs/projects/project.md`, siguiendo la estructura de `$SPECS_BASE/specs/templates/project-template.md`.
 
 **Enfoque:**
 

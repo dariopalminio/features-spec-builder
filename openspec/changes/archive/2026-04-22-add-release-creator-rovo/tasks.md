@@ -2,7 +2,7 @@
 
 - [x] 1.1 Revisar `rovo/story-creator-agent.md` para confirmar la estructura de secciones y el patrón de flujo conversacional iterativo
 - [x] 1.2 Revisar `rovo/release-validator-agent.md` (FEAT-032) para reutilizar el template canónico incrustado y mantener consistencia entre ambos agentes
-- [x] 1.3 Confirmar que el template canónico en `docs/specs/templates/release-spec-template.md` es el mismo que el incrustado en el validador
+- [x] 1.3 Confirmar que el template canónico en `$SPECS_BASE/specs/templates/release-spec-template.md` es el mismo que el incrustado en el validador
 
 ## 2. Creación del agente Rovo
 

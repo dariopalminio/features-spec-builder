@@ -23,7 +23,7 @@ Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los 
 ## Configuración 0b — Resolver o crear directorio del proyecto (`PROJ_DIR`)
 
 1. Listar todos los subdirectorios de `$SPECS_BASE/specs/projects/`.
-2. Para cada subdirectorio, leer `project-intent.md` y verificar si `substatus` es `READY` o `DOING`.
+2. Para cada subdirectorio, leer `project-intent.md` y verificar si `substatus` es `DONE` o `IN‑PROGRESS`.
 3. Si se encuentra exactamente uno → usar ese directorio como `$PROJ_DIR`.
 4. Si se encuentran varios → mostrar la lista y pedir al usuario que elija.
 5. Si no se encuentra ninguno → **derivar el ID desde el nombre del repositorio**:
@@ -66,8 +66,8 @@ Lee el archivo de plantilla `$SPECS_BASE/specs/templates/project-template.md`.
 Si `--update` está activo:
 1. Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` si existe
 2. Verifica el campo `substatus`:
-   - `DOING`: continúa en modo incremental
-   - `READY`: informa al usuario que el documento ya está completo y pide confirmación antes de continuar
+   - `IN‑PROGRESS`: continúa en modo incremental
+   - `DONE`: informa al usuario que el documento ya está completo y pide confirmación antes de continuar
    - No existe: ejecuta en modo normal (primera ejecución)
 
 ### 4. Mostrar plan al usuario

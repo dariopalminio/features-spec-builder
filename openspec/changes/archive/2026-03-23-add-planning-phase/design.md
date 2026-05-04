@@ -12,7 +12,7 @@ All prior phases follow the same pattern: an orchestrator skill validates prereq
 - Add `planning-agent.md` that extracts atomic features from all prior documents, prioritizes them, groups them into releases, and writes `project-plan.md`
 - Replace the stub `ps-plan/SKILL.md` with a full orchestrator skill
 - Add `project-plan-template.md` defining the minimal output structure
-- Output path: `docs/specs/projects/project-plan.md`
+- Output path: `$SPECS_BASE/specs/projects/project-plan.md`
 
 **Non-Goals:**
 - No task-level breakdown (features only, not subtasks)
@@ -47,8 +47,8 @@ The planning-agent reads `.claude/skills/ps-plan/templates/project-plan-template
 
 ### 5. Estado field lifecycle
 
-- `project-plan.md` is written with `**Estado**: Doing`
-- The agent does not self-promote to `Ready` — the user reviews and updates
+- `project-plan.md` is written with `**substatus**: IN‑PROGRESS`
+- The agent does not self-promote to `DONE` — the user reviews and updates
 - This matches the human-in-the-loop principle of the pipeline
 
 ## Risks / Trade-offs

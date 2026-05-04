@@ -44,7 +44,7 @@ SDDF_ROOT
 
 Los artefactos de especificación se guardan dentro de la subcarpeta `specs/` de esta raíz.
 
-- Si `SDDF_ROOT=docs`, la ruta completa es `docs/specs/`.
+- Si `SDDF_ROOT=docs`, la ruta completa es `$SPECS_BASE/specs/`.
 - Si `SDDF_ROOT=.sdd`, la ruta completa es `.sdd/specs/`.
 - Si `SDDF_ROOT=./custom`, la ruta completa es `./custom/specs/`.
 

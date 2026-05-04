@@ -18,7 +18,7 @@ parent: EPIC-03-reverse-engineering
 
 **Como** developer o architect que trabaja con un repositorio existente sin documentaci�n de requisitos
 **Quiero** ejecutar el skill `reverse-engineering` sobre ese repositorio para que cuatro agentes analicen en paralelo el c�digo fuente
-**Para** obtener `docs/specs/projects/project.md` generado autom�ticamente desde el c�digo, sin tener que documentar los requisitos desde cero
+**Para** obtener `$SPECS_BASE/specs/projects/project.md` generado autom�ticamente desde el c�digo, sin tener que documentar los requisitos desde cero
 
 ## ? Criterios de aceptaci�n
 

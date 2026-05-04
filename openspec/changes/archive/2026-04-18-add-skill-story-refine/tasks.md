@@ -13,10 +13,10 @@
 
 ## 3. Implementar reglas de estado y refinamiento iterativo
 
-- [x] 3.1 Asegurar que cada historia se cree/actualice con `**Estado**: Doing` mientras no haya cierre
-- [x] 3.2 Implementar cierre automatico a `**Estado**: Ready` cuando FINVEST decision sea `APROBADA`
+- [x] 3.1 Asegurar que cada historia se cree/actualice con `**substatus**: IN‑PROGRESS` mientras no haya cierre
+- [x] 3.2 Implementar cierre automatico a `**substatus**: DONE` cuando FINVEST decision sea `APROBADA`
 - [x] 3.3 Implementar gate para decisiones `REFINAR`/`RECHAZAR`: preguntar si continuar iterando o pausar
-- [x] 3.4 Si el usuario pausa, permitir finalizar dejando la historia en `Doing` para retoma posterior
+- [x] 3.4 Si el usuario pausa, permitir finalizar dejando la historia en `IN‑PROGRESS` para retoma posterior
 - [x] 3.5 Integrar al agente `story-product-owner` para hacer preguntas adicionales, analizar historia y proponer mejoras antes de cada reevaluacion
 
 ## 4. Replicar en mirrors y alinear convenciones
@@ -27,7 +27,7 @@
 
 ## 5. Verificacion de flujo completo
 
-- [x] 5.1 Probar caso base sin split: una historia llega a `APROBADA` y queda en `Ready`
+- [x] 5.1 Probar caso base sin split: una historia llega a `APROBADA` y queda en `DONE`
 - [x] 5.2 Probar caso con split: registrar historias derivadas y completar ciclo para todas
-- [x] 5.3 Probar caso no aprobado (`REFINAR`/`RECHAZAR`) con decision de pausar y confirmar que queda en `Doing`
+- [x] 5.3 Probar caso no aprobado (`REFINAR`/`RECHAZAR`) con decision de pausar y confirmar que queda en `IN‑PROGRESS`
 - [x] 5.4 Verificar que `story-creation`, `story-evaluation` y `story-split` no tuvieron cambios

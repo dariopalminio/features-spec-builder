@@ -24,7 +24,7 @@ El template SHALL incluir como mínimo las siguientes secciones H2: Nombre del P
 ---
 
 ### Requirement: Template es reutilizable e idempotente
-El template SHALL ser un archivo de solo lectura que no se modifica durante la ejecución del skill. El output siempre se escribe en `docs/specs/initial-prompt.md`, nunca sobre el template.
+El template SHALL ser un archivo de solo lectura que no se modifica durante la ejecución del skill. El output siempre se escribe en `$SPECS_BASE/specs/initial-prompt.md`, nunca sobre el template.
 
 #### Scenario: Template intacto después de ejecución
 - **WHEN** el skill `/ps-funnel` se ejecuta y completa

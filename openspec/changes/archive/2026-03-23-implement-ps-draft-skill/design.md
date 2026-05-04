@@ -1,6 +1,6 @@
 ## Context
 
-El skill `/ps-draft` existe como stub pero no tiene implementación real. El estado Draft es el segundo paso del pipeline: toma `docs/specs/initial-prompt.md` (output del Funnel) y produce `docs/specs/project-intent.md` con una intención de proyecto más refinada, usando un template estructurado y una entrevista guiada. El agente que realiza este trabajo es un **Draft Agent** (PM especializado en refinar intención), separado del `pm-agent` de Funnel.
+El skill `/ps-draft` existe como stub pero no tiene implementación real. El estado Draft es el segundo paso del pipeline: toma `$SPECS_BASE/specs/initial-prompt.md` (output del Funnel) y produce `$SPECS_BASE/specs/project-intent.md` con una intención de proyecto más refinada, usando un template estructurado y una entrevista guiada. El agente que realiza este trabajo es un **Draft Agent** (PM especializado en refinar intención), separado del `pm-agent` de Funnel.
 
 ## Goals / Non-Goals
 
@@ -26,7 +26,7 @@ El skill `/ps-draft` existe como stub pero no tiene implementación real. El est
 
 ### D2: Validación de `**Estado**` en `initial-prompt.md` dentro del agente
 
-**Decisión**: El `draft-agent` es responsable de leer `initial-prompt.md`, verificar el campo `**Estado**`, y si está `Doing`, preguntar al usuario si confirma avanzar. Si confirma, el agente actualiza el campo a `Ready` usando la herramienta `Edit` antes de continuar.
+**Decisión**: El `draft-agent` es responsable de leer `initial-prompt.md`, verificar el campo `**Estado**`, y si está `IN‑PROGRESS`, preguntar al usuario si confirma avanzar. Si confirma, el agente actualiza el campo a `DONE` usando la herramienta `Edit` antes de continuar.
 
 **Rationale**: El agente tiene acceso a `AskUserQuestion` y a las herramientas de edición. Centralizar esta lógica en el agente (y no en el skill orchestrator) permite que la conversación con el usuario sea fluida y contextual.
 

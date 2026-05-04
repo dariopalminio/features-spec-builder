@@ -42,7 +42,7 @@ El sistema es puramente Markdown: los skills son archivos `SKILL.md` con instruc
 
 ### Decisión 3: Reutilizar el patrón release-input-resolution en lugar de definir lógica propia
 
-**Elegido:** Las instrucciones del SKILL.md referencian explícitamente el comportamiento definido en `release-input-resolution`: nombre corto → busca en `docs/specs/releases/`, ruta relativa → usa directamente, múltiples coincidencias → pide selección.
+**Elegido:** Las instrucciones del SKILL.md referencian explícitamente el comportamiento definido en `release-input-resolution`: nombre corto → busca en `$SPECS_BASE/specs/releases/`, ruta relativa → usa directamente, múltiples coincidencias → pide selección.
 
 **Alternativa descartada:** Lógica de resolución simplificada (solo ruta exacta).
 

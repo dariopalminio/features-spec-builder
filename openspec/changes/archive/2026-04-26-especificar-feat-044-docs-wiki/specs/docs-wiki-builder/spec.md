@@ -5,7 +5,7 @@ El sistema SHALL crear la estructura canónica de directorios wiki en `docs/` cu
 
 #### Scenario: Directorio docs/ no existe o está vacío
 - **WHEN** el usuario invoca el skill y `docs/` no existe o está vacío
-- **THEN** el sistema crea los directorios `docs/specs/projects/`, `docs/specs/releases/`, `docs/specs/stories/`, `docs/wiki/constitution/`, `docs/wiki/architecture/`, `docs/wiki/process/`, `docs/wiki/ux/`, `docs/wiki/guides/`, `docs/wiki/how-to/`
+- **THEN** el sistema crea los directorios `$SPECS_BASE/specs/projects/`, `$SPECS_BASE/specs/releases/`, `$SPECS_BASE/specs/stories/`, `docs/wiki/constitution/`, `docs/wiki/architecture/`, `docs/wiki/process/`, `docs/wiki/ux/`, `docs/wiki/guides/`, `docs/wiki/how-to/`
 - **THEN** el sistema genera `docs/index.md` con la estructura canónica del índice
 
 #### Scenario: Directorio docs/ existe con contenido no-wiki
@@ -55,7 +55,7 @@ El sistema SHALL añadir frontmatter YAML a cada archivo `.md` generado o reorga
 #### Scenario: Archivo nuevo generado por el skill
 - **WHEN** el skill crea un nuevo archivo `.md` en `docs/`
 - **THEN** el archivo incluye frontmatter YAML con los campos: `type`, `slug`, `title`, `date`, `status`, `substatus`, `parent`
-- **THEN** `type` = `wiki` para archivos en `docs/wiki/`; `project`, `release`, o `story` según el prefijo para archivos en `docs/specs/`
+- **THEN** `type` = `wiki` para archivos en `docs/wiki/`; `project`, `release`, o `story` según el prefijo para archivos en `$SPECS_BASE/specs/`
 - **THEN** `slug` = nombre del archivo sin extensión en kebab-case
 - **THEN** `date` = fecha actual en formato YYYY-MM-DD
 

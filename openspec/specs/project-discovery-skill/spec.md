@@ -8,7 +8,7 @@ El sistema SHALL incluir un skill en `.claude/skills/project-discovery/SKILL.md`
 - **THEN** el sistema MUST cargar y ejecutar `.claude/skills/project-discovery/SKILL.md`
 
 ### Requirement: project-discovery reads existing document state
-El skill SHALL leer el campo `**Estado**:` de `docs/specs/projects/project.md` si existe, aplicando la logica de `skill-state-detection`.
+El skill SHALL leer el campo `**Estado**:` de `$SPECS_BASE/specs/projects/project.md` si existe, aplicando la logica de `skill-state-detection`.
 
 #### Scenario: Document in Doing state
 - **WHEN** `requirement-spec.md` existe con `Estado: Doing`
@@ -19,7 +19,7 @@ El skill SHALL leer el campo `**Estado**:` de `docs/specs/projects/project.md` s
 - **THEN** el skill MUST informar al usuario y solicitar confirmacion antes de sobrescribir
 
 ### Requirement: project-discovery requires project-intent.md as input
-El skill `/project-discovery` SHALL verificar que `docs/specs/projects/project-intent.md` existe y tiene `Estado: Ready` antes de proceder.
+El skill `/project-discovery` SHALL verificar que `$SPECS_BASE/specs/projects/project-intent.md` existe y tiene `Estado: Ready` antes de proceder.
 
 #### Scenario: Input present and Ready
 - **WHEN** `project-intent.md` existe con `Estado: Ready`
@@ -30,11 +30,11 @@ El skill `/project-discovery` SHALL verificar que `docs/specs/projects/project-i
 - **THEN** el sistema MUST informar al usuario que debe ejecutar `/project-begin` primero y detener la ejecucion
 
 ### Requirement: project-discovery produces requirement-spec.md
-El skill `/project-discovery` SHALL producir `docs/specs/projects/project.md` como unico documento de salida, en una sola sesion que combina discovery de usuarios y especificacion de requisitos.
+El skill `/project-discovery` SHALL producir `$SPECS_BASE/specs/projects/project.md` como unico documento de salida, en una sola sesion que combina discovery de usuarios y especificacion de requisitos.
 
 #### Scenario: Single session produces final document
 - **WHEN** el usuario completa la sesion guiada por `/project-discovery`
-- **THEN** el sistema MUST crear `docs/specs/projects/project.md` usando el template `project-discovery/templates/project-template.md`
+- **THEN** el sistema MUST crear `$SPECS_BASE/specs/projects/project.md` usando el template `project-discovery/templates/project-template.md`
 
 #### Scenario: No intermediate files created
 - **WHEN** `/project-discovery` completa su ejecucion
@@ -71,7 +71,7 @@ El skill `project-discovery` SHALL resolver la ruta base de artefactos mediante 
 
 #### Scenario: Skill usa docs por defecto sin SDDF_ROOT
 - **WHEN** el usuario ejecuta `/project-discovery` sin `SDDF_ROOT` definida
-- **THEN** el skill opera sobre `docs/specs/projects/` (comportamiento previo)
+- **THEN** el skill opera sobre `$SPECS_BASE/specs/projects/` (comportamiento previo)
 
 ## ADDED Requirements
 

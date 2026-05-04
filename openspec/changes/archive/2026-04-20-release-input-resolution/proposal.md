@@ -5,7 +5,7 @@ El skill `release-format-validation` requiere que el usuario recuerde la ruta ex
 ## What Changes
 
 - Se formaliza y especifica el comportamiento de resolución de input del skill `release-format-validation` (actualmente implementado en Fase 0 del SKILL.md sin spec dedicada)
-- Se define explícitamente el algoritmo de búsqueda en `docs/specs/releases/`, incluyendo manejo de múltiples coincidencias y archivo no encontrado
+- Se define explícitamente el algoritmo de búsqueda en `$SPECS_BASE/specs/releases/`, incluyendo manejo de múltiples coincidencias y archivo no encontrado
 - El resultado de la resolución es el prerequisito para la fase de validación de estructura
 
 ## Capabilities

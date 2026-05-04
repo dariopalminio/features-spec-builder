@@ -28,8 +28,8 @@ Esta estructura no escala a múltiples proyectos simultáneos, no permite agrupa
 
 ### Decisión 1: Un directorio por workitem (no archivos planos)
 
-**Elegido:** `docs/specs/projects/PROJ-01-nombre/project.md`
-**Alternativa descartada:** `docs/specs/projects/project-intent-PROJ-01.md` (archivo plano con prefijo de ID)
+**Elegido:** `$SPECS_BASE/specs/projects/PROJ-01-nombre/project.md`
+**Alternativa descartada:** `$SPECS_BASE/specs/projects/project-intent-PROJ-01.md` (archivo plano con prefijo de ID)
 
 **Razón:** El directorio por workitem permite agrupar todos los artefactos secundarios (`project-intent.md`, `project-plan.md`, `story-map.md`) junto al artefacto principal sin ambigüedad. Es el patrón establecido en la guía y compatible con la convención de OpenSpec.
 
@@ -39,7 +39,7 @@ Esta estructura no escala a múltiples proyectos simultáneos, no permite agrupa
 
 **Elegido:** El skill `project-begin` solicita (o infiere del título) el ID del proyecto y lo usa como nombre del directorio: `PROJ-NN-nombre-kebab/`.
 
-**Alternativa descartada:** Leer el ID desde un índice central (`docs/specs/index.md`).
+**Alternativa descartada:** Leer el ID desde un índice central (`$SPECS_BASE/specs/index.md`).
 
 **Razón:** Un índice central introduce una dependencia de estado compartido que rompe el modelo de operación actual (un archivo → un skill). Derivar el ID en el momento de creación es más simple e independiente.
 
@@ -57,7 +57,7 @@ Esta estructura no escala a múltiples proyectos simultáneos, no permite agrupa
 
 ### Decisión 4: `projects/` en plural (no `project/`)
 
-**Elegido:** `docs/specs/projects/` (plural)
+**Elegido:** `$SPECS_BASE/specs/projects/` (plural)
 
 **Razón:** Consistencia con las carpetas ya existentes `releases/` y `stories/` (plural). La carpeta actual `project/` (singular) era un legado del diseño de un único proyecto activo; el nuevo nombre refleja mejor la estructura multi-proyecto.
 
@@ -65,7 +65,7 @@ Esta estructura no escala a múltiples proyectos simultáneos, no permite agrupa
 
 | Riesgo | Mitigación |
 |--------|-----------|
-| **Breaking change total** — artefactos existentes en `docs/specs/projects/` dejan de ser encontrados por los skills. | Documentar claramente que es un cambio disruptivo. Proporcionar guía de migración manual. Contemplar un skill de migración en un cambio futuro. |
+| **Breaking change total** — artefactos existentes en `$SPECS_BASE/specs/projects/` dejan de ser encontrados por los skills. | Documentar claramente que es un cambio disruptivo. Proporcionar guía de migración manual. Contemplar un skill de migración en un cambio futuro. |
 | **Skills no actualizados** — un skill consumidor que no actualice sus rutas fallará silenciosamente o leerá desde la ruta antigua. | El change incluye delta specs para todos los skills afectados, garantizando cobertura. |
 | **Asignación de ID en project-begin** — si el usuario no proporciona un ID explícito, el skill debe inferirlo del título, lo que puede generar IDs inconsistentes. | El skill propone el ID derivado del título (kebab-case) y solicita confirmación antes de crear el directorio. |
 | **Compatibilidad con SDDF_ROOT** — la nueva estructura de directorios debe funcionar tanto con `docs` (por defecto) como con rutas personalizadas via `SDDF_ROOT`. | Las rutas se construyen siempre como `$SPECS_BASE/specs/projects/...`, no como rutas absolutas. |
