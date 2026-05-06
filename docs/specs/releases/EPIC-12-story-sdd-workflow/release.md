@@ -1,0 +1,29 @@
+---
+alwaysApply: false
+type: release
+id: EPIC-12
+slug: EPIC-12-story-sdd-workflow
+title: "Story SDD Workflow - comandos del flujo de story"
+status: RELEASED
+substatus: READY
+parent: PROJ-01-agile-sddf
+created: 2026-05-05
+updated: 2026-05-05
+related:                              
+  - PROJ-01-agile-sddf
+---
+<!-- Referencias -->
+[[PROJ-01-agile-sddf]]
+
+# Release/Epic: Story SDD Workflow - comandos del flujo de story
+
+## Descripción <!-- sección obligatoria-->
+Centralizar templates de spec en directorio compartido.
+
+## Features
+- [ ] FEAT-056 - **Skill para Diseño:** crear un skill para diseño llamado `story-design` (algo equivalente al comando speckit.plan de speckit o a el design.md de openspec que se ejecuta cuando se llama a proposal). Debe analizar la historia input `story.md`, leer el contexto, realizar un proceso de diseño de software, generar el archivo `design.md` a partir de un template ubicado en `$SPECS_BASE/specs/templates/story-design-template.md`, con un frontmatter que incluya los campos necesarios para el workflow de story. El skill no prescribe ninguna metodología de diseño, tecnología, arquitectura ni patrón. La estructura del documento la define el template leído en tiempo de ejecución. El contenido técnico concreto (lenguajes, frameworks, esquemas, convenciones) se extrae del proyecto — nunca se inventa. El comando traduce el "qué" (de la especificación) en el "cómo" (la arquitectura, el stack tecnológico, los modelos de datos). El artefacto clave es el design.md, que se define explícitamente como el documento para explicar "cómo" se planea implementar una solución. Incluye una fase de "Research" para investigar alternativas y documentar decisiones. Esto es una parte crucial del diseño técnico.
+- [ ] FEAT-057 - **Skill para Tasking:** crear un skill generador de tareas para planificar tareas de implementación llamado `story-tasking` (algo equivalente al comando speckit.task de speckit o a el tasks.md de openspec que se crea cuando se llama a proposal). Este comando actúa como un "traductor", transformando la especificación (story.md) de alto nivel y el diseño técnico (design.md) en una lista de tareas de implementación detalladas y ordenadas por dependencias. Debe leer la historia foco `story.md`, debe leer el diseño `design.md`, realizar un proceso de planificación de tareas, generar el archivo `tasks.md` a partir de un template ubicado en `$SPECS_BASE/specs/templates/story-tasks-template.md`, con un frontmatter que incluya los campos necesarios para el workflow de story. La estructura del documento la define el template leído en tiempo de ejecución. El formato de salida (tasks.md) no es una simple lista, cada tarea sigue un formato estricto: Checkbox (- [x]): Para marcar el progreso; ID de Tarea (T001, T002, etc.) para un seguimiento único y secuencial; y marcador [P] que indica que una tarea es paralelizable.
+- [ ] FEAT-058 - **Comando de análisis transversal:** crear un comando llamado `/story-analyze` (similar a /speckit.analyze) que se ejecute idealmente después de `/story-tasking` y antes de `/story-implement`. Su objetivo es identificar inconsistencias y omisiones entre los artefactos clave (story.md, design.md, tasks.md) y verificar su alineación con el release y el contexto del proyecto. Es una auditoría de coherencia que ayuda a detectar problemas de diseño antes de empezar a codificar. El comando debe generar un reporte detallado que destaque cualquier discrepancia, como tareas sin diseño asociado, requisitos de historia no cubiertos por el diseño o tareas que no se alinean con la historia. Este paso es crucial para garantizar que el plan de implementación esté bien fundamentado y sea coherente antes de comenzar la fase de desarrollo.
+- [ ] FEAT-059 - **Orquestación del plan:** crear un skill de orquestación llamado `story-plan` que ejecute los skills anteriores en secuencia (story-design --> story-tasking --> story-analyze) para una historia objetivo `story.md`. Al ejecutar `/story-plan`, debe generar primero el `design.md` y luego el `tasks.md`, asegurándose de que ambos archivos se creen correctamente a partir de sus respectivos templates. Organización por Fases: Las tareas se agrupan siguiendo una estructura lógica (setup, tests, core, integration, polish) que refleja las mejores prácticas de implementación.
+- [ ] FEAT-060 - **Skill de implementación (El programador autónomo):** crear un skill llamado `story-implement` (similar a /speckit.implement) que se encargue de la fase de implementación de la historia `story.md`. Se encarga de ejecutar las tareas y generar el código automáticamente. Este skill debe desarrollar la historia foco `story.md` basado en el diseño `design.md` e implementando las tareas `tasks.md`. Una vez que el plan de acción está listo, este comando toma el relevo para ejecutar las tareas de tasks.md y escribir el código, siguiendo la metodología TDD (Test-Driven Development). El skill debe ser capaz de interpretar las tareas, generar código de prueba primero, luego el código de producción, y finalmente refactorizar según sea necesario. El resultado final es un conjunto de archivos de código fuente que implementan la historia según el diseño y las tareas planificadas. Reporte de Estado: El comando actualiza en tiempo real el archivo tasks.md, marcando las tareas completadas de - [ ] a - [X] para llevar un registro visual del progreso. Además, debe generar un reporte final al concluir la implementación, detallando qué tareas se completaron, qué código se generó y cualquier desviación del plan original.
+
