@@ -34,7 +34,7 @@ updated: 2026-05-06
 - [ ] No hay variables, imports ni funciones sin usar
 - [ ] El código pasa el linter y el formateador sin errores ni warnings
 - [ ] No se introducen dependencias nuevas sin aprobación del equipo
-
+- [ ] Se uso el skill `skill-creator` para crear skills nuevos
 ---
 
 ## 🧪 Criterios de Tests
@@ -46,6 +46,8 @@ updated: 2026-05-06
 - [ ] La cobertura de tests no disminuye respecto al baseline del proyecto
 - [ ] Los tests son deterministas (no flaky)
 - [ ] Los tests de integración cubren los flujos críticos de la historia
+- [ ] Se ejecutaron y evalúan los casos de prueba automáticamente según la sección "Test Cases" del skill `skill-creator`
+
 
 ---
 
@@ -56,6 +58,7 @@ updated: 2026-05-06
 - [ ] El `tasks.md` de la historia tiene todas las tareas marcadas como `[x]`
 - [ ] Si la historia modifica APIs públicas o contratos, el README o docs relevantes están actualizados
 - [ ] Si se toman decisiones de diseño relevantes no previstas, se documentan en `design.md`
+- [ ] Crear ejemplos (input/output) cuando se crea un skill nuevo
 - [ ] El CHANGELOG o historial de releases se actualiza si aplica
 
 ---
