@@ -4,8 +4,8 @@ type: story
 id: FEAT-056
 slug: FEAT-056-project-policies
 title: "Project policies"
-status: PLANNED
-substatus: TODO
+status: DELIVERED
+substatus: DONE
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-06
 updated: 2026-05-06
@@ -15,6 +15,9 @@ related:
 **FINVEST Score:** —
 **FINVEST Decisión:** —
 ---
+<!-- Referencias -->
+[[EPIC-12-story-sdd-workflow]]
+
 
 # 📖 Historia: Project policies
 
@@ -62,6 +65,9 @@ Se debe seguir y respetar los lineamientos estructurales de skills definido en `
 
 ## Requerimiento: skill-creator
 Usar en la creación del skill el skill `skill-creator` para asegurar que el nuevo skill siga los estándares de estructura, documentación y funcionalidad definidos para los skills en SDDF. Esto incluye la generación de un README.md con la descripción del skill, sus comandos, ejemplos de uso y cualquier configuración necesaria. Además, el skill debe incluir pruebas unitarias para validar su correcto funcionamiento y manejo de errores. El uso de `skill-creator` garantiza que el skill `project-policies-generation` esté bien diseñado, documentado y sea fácil de mantener a largo plazo.
+
+## Requerimiento: Inicializar políticas del proyecto
+Agregar un paso de "Inicializar políticas del proyecto (opcional)" en skills/sddf-init/SKILL.md.  Inicializar políticas del proyecto: pregunta (s/n) al usuario y, si acepta, invoca project-policies-generation antes de continuar. Si rechaza, registra [OMITIDO] en el informe. Paso 5 → Paso 6 (Informe final): renumerado; el ejemplo de informe ahora incluye las entradas de constitution.md y definition-of-done.md.
 
 ## ⚙️ Criterios no funcionales
 

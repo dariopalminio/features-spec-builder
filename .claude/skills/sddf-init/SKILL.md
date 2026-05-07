@@ -1,6 +1,6 @@
 ---
 name: sddf-init
-description: "Inicializa el entorno SDDF en un proyecto nuevo: crea la estructura de directorios base (`<SPECS_BASE>/specs/projects/`, `<SPECS_BASE>/specs/releases/`, `<SPECS_BASE>/specs/stories/`), genera `openspec/config.yaml` mínimo y `.env.template` documentando `SDDF_ROOT`. Idempotente — no sobrescribe archivos ni directorios existentes."
+description: "Inicializa el entorno SDDF en un proyecto nuevo: crea la estructura de directorios base (`<SPECS_BASE>/specs/projects/`, `<SPECS_BASE>/specs/releases/`, `<SPECS_BASE>/specs/stories/`), genera `openspec/config.yaml` mínimo y `.env.template` documentando `SDDF_ROOT`, y opcionalmente inicializa las políticas del proyecto (`constitution.md`, `definition-of-done.md`) invocando `project-policies-generation`. Idempotente — no sobrescribe archivos ni directorios existentes."
 ---
 
 # Skill: sddf-init
@@ -83,7 +83,24 @@ Verificar si `.env.template` existe en la raíz del proyecto:
   - No sobrescribirlo
   - Registrar `[YA EXISTÍA]  .env.template` y emitir `[INFO] .env.template ya existe — se mantiene sin cambios`
 
-### Paso 5 — Informe final
+### Paso 5 — Inicializar políticas del proyecto (opcional)
+
+Preguntar al usuario:
+
+```
+¿Deseas inicializar los documentos de políticas del proyecto?
+(constitution.md y definition-of-done.md en $SPECS_BASE/policies/)
+
+  (s) Sí — ejecutar project-policies-generation ahora
+  (n) No — omitir este paso
+```
+
+- **Si el usuario responde `s` / `sí`:** invocar el skill `project-policies-generation` y esperar a que complete su ejecución antes de continuar al Paso 6.
+- **Si el usuario responde `n` / `no`:** omitir este paso y continuar directamente al Paso 6. Registrar `[OMITIDO] project-policies-generation` en el informe final.
+
+> Las políticas pueden inicializarse en cualquier momento ejecutando `/project-policies-generation` de forma independiente.
+
+### Paso 6 — Informe final
 
 Emitir el informe consolidado con todos los artefactos verificados:
 
@@ -94,6 +111,8 @@ Emitir el informe consolidado con todos los artefactos verificados:
 [YA EXISTÍA] docs/specs/stories/
 [CREADO]     openspec/config.yaml
 [CREADO]     .env.template
+[CREADO]     docs/policies/constitution.md
+[CREADO]     docs/policies/definition-of-done.md
 ─────────────────────────────────────────────────
 ```
 

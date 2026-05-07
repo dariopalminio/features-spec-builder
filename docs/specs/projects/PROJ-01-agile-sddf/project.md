@@ -29,7 +29,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
 - **Para:** Builders, freelancers, desarrolladores y equipos ágiles que usan IA para acelerar el desarrollo de software
 - **Quiénes:** Sufren de procesos manuales, prompts inconsistentes y falta de estructura para transformar ideas en especificaciones y código de calidad de manera predecible
 - **Nuestro producto:** Agile SDDF (Spec-Driven Development Framework)
-- **Es un:** software AI-CLI tipo Framework de automatización de especificación (AI-native, multiagente, basado en Markdown) y un conjunto de skills preconstruidos para cubrir todo el ciclo de vida de la especificación de proyectos ágiles
+- **Es un:** software AI-CLI tipo Framework de automatización de especificación (AI-native, multiagente, basado en Markdown), un Harness de LLM y un conjunto de skills preconstruidos para cubrir todo el ciclo de vida de la especificación de proyectos ágiles y desarrollo de software
 - **Que provee:** Un workflow ágil y secuencial con control de WIP, automatización con IA con puntos de revisión humana integrados y trazabilidad completa desde la intención inicial hasta el backlog planificado de historias de usuario, todo gestionado con archivos Markdown
 - **A diferencia de:** Escribir prompts ad-hoc, usar herramientas monolíticas o frameworks rígidos que no se adaptan al contexto del proyecto
 - **Nuestro producto:** Es el único sistema que extrae dinámicamente la estructura de los templates en tiempo de ejecución para generar preguntas y comportamientos contextuales, integrando nativamente con OpenSpec y SpecKit, y siendo compatible con múltiples runtimes de IA (Claude Code, OpenCode, GitHub Copilot, Gemini) sin modificar el núcleo del framework

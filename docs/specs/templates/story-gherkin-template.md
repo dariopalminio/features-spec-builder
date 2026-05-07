@@ -15,6 +15,8 @@ related:
 **FINVEST Score:** [FINVEST Score]
 **FINVEST Decisión:** [APROBADA | REFINAR | RECHAZAR]
 ---
+<!-- Referencias -->
+[[<nombre-del-directorio-de-release o slug del release relacionado (si existe)>]]
 
 # 📖 Historia: [Título de la historia o nombre de historia]
 

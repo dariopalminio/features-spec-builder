@@ -1,6 +1,6 @@
 ## Why
 
-La validación de entorno (SDDF_ROOT, directorios de specs, templates y config.yaml) está duplicada manualmente en el Paso 0 de más de 20 skills, generando inconsistencias y dificulitando el mantenimiento. Centralizar esta lógica en un único skill de preflight elimina la duplicación y garantiza un contrato de entorno uniforme para todos los skills.
+La validación de entorno (SDDF_ROOT, directorios de specs, templates y config.yaml) está duplicada manualmente en el Paso 0 de más de 20 skills, generando inconsistencias y dificulitando el mantenimiento. Centralizar esta lógica en un único skill de preflight (FEAT-053-centralizar-validacion-entorno-sddf) elimina la duplicación y garantiza un contrato de entorno uniforme para todos los skills.
 
 ## What Changes
 

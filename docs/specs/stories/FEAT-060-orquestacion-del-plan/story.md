@@ -15,6 +15,8 @@ related:
 **FINVEST Score:** —
 **FINVEST Decisión:** —
 ---
+<!-- Referencias -->
+[[EPIC-12-story-sdd-workflow]]
 
 # 📖 Historia: Orquestación del plan (story-plan)
 

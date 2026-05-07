@@ -15,6 +15,8 @@ related:
 **FINVEST Score:** —
 **FINVEST Decisión:** —
 ---
+<!-- Referencias -->
+[[EPIC-12-story-sdd-workflow]]
 
 # 📖 Historia: Skill para Diseño (story-design)
 

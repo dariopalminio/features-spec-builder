@@ -84,3 +84,7 @@ skill (entry point + coordinator/orquestador)
 Esto es acorde a la arquitectura de Claude Code donde la sesión principal actúa como agente primario que orquesta la ejecución de skills y agentes especializados (Subagentes), manteniendo una estructura plana (Sesión → Subagente), clara y eficiente sin necesidad de múltiples niveles de delegación (agentes en .claude/agents/, invocados por la sesión principal).
 
 
+# Políticas del Proyecto
+
+@docs/policies/constitution.md
+@docs/policies/definition-of-done.md

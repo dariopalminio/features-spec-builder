@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-053-centralizar-validacion-entorno-sddf]]
+
 ## MODIFIED Requirements
 
 ### Requirement: Leer SDDF_ROOT para la ruta raíz de especificaciones

@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-053-centralizar-validacion-entorno-sddf]]
+
 ## ADDED Requirements
 
 ### Requirement: Verificar SDDF_ROOT al inicio de cada skill

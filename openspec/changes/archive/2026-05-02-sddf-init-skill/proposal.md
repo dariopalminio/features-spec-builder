@@ -1,6 +1,6 @@
 ## Why
 
-Los skills SDDF asumen que la estructura de directorios base (`$SPECS_BASE/specs/projects/`, `$SPECS_BASE/specs/releases/`, `$SPECS_BASE/specs/stories/`) y `openspec/config.yaml` ya existen, pero no hay ningún mecanismo que los cree. Esto obliga al desarrollador a crearlos manualmente al onboardear un proyecto nuevo, generando errores silenciosos en `skill-preflight` y en cualquier skill SDDF que los requiera.
+Los skills SDDF asumen que la estructura de directorios base (`$SPECS_BASE/specs/projects/`, `$SPECS_BASE/specs/releases/`, `$SPECS_BASE/specs/stories/`) y `openspec/config.yaml` ya existen, pero no hay ningún mecanismo que los cree. Esto obliga al desarrollador a crearlos manualmente al onboardear un proyecto nuevo, generando errores silenciosos en `skill-preflight` y en cualquier skill SDDF que los requiera (FEAT-054-inicializar-entorno-sddf).
 
 ## What Changes
 
