@@ -1,3 +1,5 @@
+[[FEAT-048-refactor-migrates-templates-to-assets]] 
+
 ## MODIFIED Requirements
 
 ### Requirement: Referencias actualizadas en SKILL.md y agentes

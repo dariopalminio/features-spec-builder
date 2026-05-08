@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-049-reading-of-sddf-root]]
+
 ## ADDED Requirements
 
 ### Requirement: Resolución dinámica de ruta raíz en release-generate-all-stories

@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-051-crear-release-por-preguntas-guiadas]]
+
 ## ADDED Requirements
 
 ### Requirement: Configuración de ruta base (SPECS_BASE)

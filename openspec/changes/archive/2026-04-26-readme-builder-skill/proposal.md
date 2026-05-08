@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-042-readme-builder]]
+
 ## Why
 
 Developers using SDDF invest effort producing spec artifacts (project-intent.md, requirement-spec.md, project-plan.md) but still have to write README.md manually, duplicating work and risking drift between docs and code. A `readme-builder` skill closes this gap by generating a ready-to-publish README.md from whatever artifacts are available, making documentation a zero-effort byproduct of spec-driven development.

@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-051-crear-release-por-preguntas-guiadas]]
+
 ## Why
 
 El pipeline SDDF tiene un skill `release-format-validation` que valida si un release ya creado cumple la estructura del template, pero no existe una forma guiada de *crear* ese release en primer lugar. Los usuarios deben construir manualmente el archivo o usar `releases-from-project-plan` (que requiere un `project-plan.md` previo). Se necesita un skill independiente que conduzca al usuario a través del template en tiempo de ejecución mediante preguntas, produciendo un archivo `release.md` válido y listo para pasar la validación.

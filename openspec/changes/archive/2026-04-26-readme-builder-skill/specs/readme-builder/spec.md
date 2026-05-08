@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-042-readme-builder]]
+
 ## ADDED Requirements
 
 ### Requirement: Generate README from formal spec artifacts

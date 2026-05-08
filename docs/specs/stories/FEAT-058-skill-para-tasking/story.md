@@ -29,7 +29,7 @@ related:
 ### Escenario principal – Generación exitosa de tasks.md
 ```gherkin
 Dado que existen story.md y design.md válidos en el directorio de la historia objetivo
-  Y existe el template $SPECS_BASE/specs/templates/story-tasks-template.md
+  Y existe el template $SPECS_BASE/specs/templates/tasks-template.md
 Cuando ejecuto el skill `story-tasking` con la ruta del directorio de la historia
 Entonces el skill lee story.md para obtener los criterios de aceptación
   Y lee design.md para obtener la arquitectura técnica y las decisiones de diseño
@@ -48,7 +48,7 @@ Entonces el skill muestra un mensaje de error indicando que design.md es requeri
 
 ### Escenario alternativo / error – Template de tareas no encontrado
 ```gherkin
-Dado que el archivo $SPECS_BASE/specs/templates/story-tasks-template.md no existe
+Dado que el archivo $SPECS_BASE/specs/templates/tasks-template.md no existe
 Cuando ejecuto el skill `story-tasking`
 Entonces el skill muestra un mensaje de error indicando la ruta del template faltante
   Y no genera ningún archivo tasks.md
@@ -76,6 +76,16 @@ Se debe seguir y respetar los lineamientos estructurales de skills definido en `
 ## Requerimiento: skill-creator
 Usar en la creación del skill el skill `skill-creator` para asegurar que el nuevo skill siga los estándares de estructura, documentación y funcionalidad definidos para los skills en SDDF. Esto incluye la generación de un README.md con la descripción del skill, sus comandos, ejemplos de uso y cualquier configuración necesaria. Además, el skill debe incluir pruebas unitarias para validar su correcto funcionamiento y manejo de errores. El uso de `skill-creator` garantiza que el skill `project-policies-generation` esté bien diseñado, documentado y sea fácil de mantener a largo plazo.
 
+## Requerimiento: tareas pequeñas
+- Las tareas deben ser lo suficientemente pequeñas como para completarse en una sesión
+
+## Requerimiento: orden de listado
+- Ordena las tareas por dependencia (¿qué debe hacerse primero?)
+
+## Requerimiento: agrupamiento de tareas
+- Agrupa las tareas relacionadas bajo encabezados numerados con ##
+
+
 ## ⚙️ Criterios no funcionales
 
 * Completitud: todas las tareas necesarias para cumplir los criterios de aceptación de story.md deben estar presentes
@@ -88,3 +98,16 @@ Generado automáticamente desde el release: EPIC-12-story-sdd-workflow
 Feature origen: FEAT-058 — Skill para Tasking
 
 Equivalente conceptual a `speckit.task` de SpecKit o al `tasks.md` de OpenSpec. El marcador `[P]` indica tareas que pueden ejecutarse en paralelo, optimizando el tiempo de implementación.
+
+Ejemplo de output esperado en el cuerpo de `tasks.md`:
+ ```
+## 1. Configuración
+
+- [ ] 1.1 Crear la estructura del nuevo módulo
+- [ ] 1.2 Agregar dependencias a package.json
+
+## 2. Implementación principal
+
+- [ ] 2.1 Implementar la función de exportación de datos
+- [ ] 2.2 Agregar utilidades de formato CSV
+```

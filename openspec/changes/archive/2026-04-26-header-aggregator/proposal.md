@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-043-header-aggregation]]
+
 ## Why
 
 Los archivos de spec del proyecto (project-intent, requirement-spec, project-plan, release-*, story-*) carecen de un frontmatter YAML estandarizado que permita navegarlos, enlazarlos y rastrear su estado sin abrir el contenido completo. Esta inconsistencia impide implementar el patrón LLM Wiki (índice-primero) donde los agentes leen `index.md` para decidir qué nodos abrir en O(índice) en lugar de O(todos-los-archivos).

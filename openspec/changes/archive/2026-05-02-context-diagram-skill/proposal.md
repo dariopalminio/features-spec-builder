@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-052-generar-diagrama-contexto-c4]]
+
 ## Why
 
 El pipeline SDDF carece de una forma de documentar y visualizar la arquitectura de contexto de un sistema. Los developers y arquitectos que usan el framework para especificar proyectos no tienen manera de generar un diagrama C4 Nivel 1 (System Context) a partir de su documentación existente ni de preguntas guiadas, lo que obliga a usar herramientas externas desconectadas del flujo de especificación.

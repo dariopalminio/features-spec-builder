@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-044-directorio-docs-tipo-wiki]]
+
 ## Why
 
 Los LLMs y el equipo humano que trabajan con el repositorio SDDF acceden a `docs/` de forma ineficiente: deben leer todos los archivos para entender el estado del proyecto. No existe un índice central ni un esquema de navegación definido, lo que hace que la recuperación de contexto sea O(todos-los-archivos) en lugar de O(índice). FEAT-044 introduce un skill que reorganiza `docs/` como una wiki navegable con índice central y wikilinks internos, implementando el patrón LLM Wiki (Karpathy).

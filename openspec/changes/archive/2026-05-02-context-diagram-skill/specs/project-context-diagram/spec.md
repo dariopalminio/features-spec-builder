@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-052-generar-diagrama-contexto-c4]]
+
 ## ADDED Requirements
 
 ### Requirement: Configuración de ruta base (SPECS_BASE)

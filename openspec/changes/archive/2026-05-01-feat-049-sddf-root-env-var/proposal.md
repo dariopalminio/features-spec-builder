@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-049-reading-of-sddf-root]]
+
 ## Why
 
 Los skills del framework SDDF tienen hardcodeada la ruta `docs` como directorio raíz de especificaciones, lo que impide que usuarios y equipos personalicen la ubicación de almacenamiento de artefactos sin modificar directamente los archivos del framework. Incorporar la variable de entorno `SDDF_ROOT` elimina esta rigidez y hace el framework adaptable a diferentes estructuras de proyecto sin cambios en el código.

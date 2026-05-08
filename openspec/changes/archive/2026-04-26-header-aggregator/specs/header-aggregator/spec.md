@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-043-header-aggregation]]
+
 ## ADDED Requirements
 
 ### Requirement: Aplicar frontmatter YAML a un archivo de spec individual

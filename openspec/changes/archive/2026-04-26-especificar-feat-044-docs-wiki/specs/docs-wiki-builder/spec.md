@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-044-directorio-docs-tipo-wiki]]
+
 ## ADDED Requirements
 
 ### Requirement: Generar estructura wiki en docs/

@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-049-reading-of-sddf-root]]
+
 ## ADDED Requirements
 
 ### Requirement: Leer SDDF_ROOT para la ruta raíz de especificaciones

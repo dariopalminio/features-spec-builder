@@ -1,3 +1,7 @@
+
+<!-- Referencias -->
+[[FEAT-048-refactor-migrates-templates-to-assets]]
+
 ## Why
 
 Skills en SDDF actualmente referencian sus templates con rutas absolutas relativas a la raíz del proyecto (`.claude/skills/<skill>/templates/<template>.md`), lo que ata cada skill al cliente LLM específico que monta los skills bajo `.claude/`. Esto impide distribuir los skills en clientes alternativos (OpenCode, GitHub Copilot, Jira Rovo, Gemini Gem) sin modificar manualmente las rutas en cada SKILL.md.
