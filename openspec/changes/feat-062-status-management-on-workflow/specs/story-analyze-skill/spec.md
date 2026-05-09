@@ -16,7 +16,7 @@ The system SHALL update `status: PLANNED` and `substatus: DONE` in `story.md` fr
 
 #### Scenario: Status NOT updated when ERROR inconsistencies exist
 - **WHEN** `story-analyze` detects one or more ERROR-level inconsistencies
-- **THEN** `story.md` frontmatter MUST NOT be updated to `PLANNED/DONE`; it remains at `PLANNING/DOING` to signal that the planning requires correction
+- **THEN** `story.md` frontmatter MUST NOT be updated to `PLANNED/DONE`; it remains at `PLANNING/IN‑PROGRESS` to signal that the planning requires correction
 
 #### Scenario: Status update in Agent mode (invoked by story-plan)
 - **WHEN** `story-analyze` is invoked in Agent mode by `story-plan`

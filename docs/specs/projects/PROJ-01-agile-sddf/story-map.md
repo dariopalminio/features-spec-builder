@@ -59,7 +59,7 @@ Releases 03–05            │ FEAT-015          │ FEAT-017–021      │ FE
                           │                   │ FEAT-023 --focus  │                   │                   │                   │                   │                   │
                           │                   │ FEAT-024 --update │                   │                   │                   │                   │                   │
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-Release 06 (Doing)        │ —                 │ —                 │ —                 │ —                 │ —                 │ —                 │ FEAT-027          │ —
+Release 06 (IN‑PROGRESS)        │ —                 │ —                 │ —                 │ —                 │ —                 │ —                 │ FEAT-027          │ —
 (Release & Story          │                   │                   │                   │                   │                   │                   │ Validar formato   │
  Generator)               │                   │                   │                   │                   │                   │                   │ de release spec   │
                           │                   │                   │                   │                   │                   │                   │ FEAT-028          │
@@ -118,7 +118,7 @@ Releases 07–08            │ FEAT-009          │ —                 │ �
 
 | Prioridad | Historia | FEAT | Release |
 |-----------|----------|------|---------|
-| Alta | Como Builder, quiero que el sistema detecte si hay un proyecto activo (Estado: Doing) y me ofrezca Sobrescribir o Retomar antes de crear uno nuevo | FEAT-008 | Release 02 |
+| Alta | Como Builder, quiero que el sistema detecte si hay un proyecto activo (Estado: IN‑PROGRESS) y me ofrezca Sobrescribir o Retomar antes de crear uno nuevo | FEAT-008 | Release 02 |
 | Alta | Como Builder, quiero que el sistema me haga preguntas guiadas para capturar nombre, problema, visión y criterios de éxito del proyecto | FEAT-001 | Release 02 |
 | Alta | Como Builder, quiero que las preguntas del agente se deriven dinámicamente de los comentarios del template, sin lógica hardcodeada | FEAT-002 | Release 00 |
 | Alta | Como Builder, quiero que el sistema ejecute las tres fases del pipeline en una sola sesión continua con gates de revisión entre cada etapa | FEAT-015 | Release 05 |
@@ -198,7 +198,7 @@ Releases 07–08            │ FEAT-009          │ —                 │ �
 | Release 03 — Reverse Engineering | Ready | Análisis automático de repositorios existentes con 4 agentes paralelos + sintetizador, scope acotado e incremental | FEAT-017, FEAT-018, FEAT-019, FEAT-020, FEAT-021, FEAT-023, FEAT-024 |
 | Release 04 — Refactor | Ready | Consolidación de calidad: renombrados, restricciones de input, ejemplos few-shot, sincronización multi-runtime | (mejoras de FEAT-006, FEAT-007, FEAT-012) |
 | Release 05 — Enhance Project Spec | Ready | Pipeline orquestado en una sesión, story mapping, refinamiento iterativo, integración story map en planning | FEAT-005, FEAT-011, FEAT-013, FEAT-015 |
-| Release 06 — Release & Story Generator | Doing | Automatizar generación de release specs y stories desde el plan | FEAT-027, FEAT-028, FEAT-029 |
+| Release 06 — Release & Story Generator | IN‑PROGRESS | Automatizar generación de release specs y stories desde el plan | FEAT-027, FEAT-028, FEAT-029 |
 | Release 07 — Robustez y Trazabilidad | Planificado | Retoma de proyectos interrumpidos, búsqueda de historias por término, backlog con trazabilidad ST-00X | FEAT-009, FEAT-014, FEAT-016 |
 | Release 08 — Meta-Framework y Distribución | Planificado | Creación de nuevas skills con ciclo iterativo, benchmarking comparativo y empaquetado para npm | FEAT-022, FEAT-025, FEAT-026 |
 
@@ -214,7 +214,7 @@ Releases 07–08            │ FEAT-009          │ —                 │ �
 
 - **Releases 00–05 como base consolidada**: Los primeros 6 releases (00–05) están en estado Ready y representan el pipeline completo de especificación. Se agrupan en el mapa en dos bandas para mantener la legibilidad del ASCII.
 
-- **Release 06 como slice actual**: Release 06 (Estado: Doing) es el slice de entrega activo. Completa el ciclo de artefactos: project-plan → release spec → stories.
+- **Release 06 como slice actual**: Release 06 (Estado: IN‑PROGRESS) es el slice de entrega activo. Completa el ciclo de artefactos: project-plan → release spec → stories.
 
 - **Release 07 enfocado en robustez**: FEAT-009 (retoma), FEAT-014 (búsqueda) y FEAT-016 (trazabilidad) son capacidades de madurez del pipeline, no blockers del valor central — van en Release 07.
 
@@ -230,6 +230,6 @@ Releases 07–08            │ FEAT-009          │ —                 │ �
 ### Riesgos
 
 - **Compatibilidad multi-runtime** (Claude Code, GitHub Copilot, OpenCode) es un requisito transversal no negociable. Se recomienda validar en cada release contra los tres runtimes antes de marcar como Ready.
-- **Deadline npm fines de mayo 2026**: con Release 06 en Doing y 2 releases más planificados (07 y 08), el scope de la publicación npm debe definirse explícitamente — probablemente Release 06 ó 07 como versión publicable.
+- **Deadline npm fines de mayo 2026**: con Release 06 en IN‑PROGRESS y 2 releases más planificados (07 y 08), el scope de la publicación npm debe definirse explícitamente — probablemente Release 06 ó 07 como versión publicable.
 - **FEAT-002 (extracción dinámica de templates)** es un enabler crítico transversal. Si falla, todos los agentes de entrevista fallan. Debe estar estabilizado desde Release 00.
 - **Proyecto unipersonal**: con un solo desarrollador y deadline a fines de mayo, Release 08 (Meta-Framework) podría quedar fuera del scope de la versión npm inicial.

@@ -7,15 +7,15 @@ El sistema SHALL proveer un agente `specifying-agent` en `.claude/agents/specify
 - **WHEN** el `specifying-agent` lee `discovery.md` y el campo `**Estado**` es `DONE`
 - **THEN** el agente continúa directamente a la entrevista sin interrumpir al usuario
 
-#### Scenario: discovery.md tiene Estado Doing
+#### Scenario: discovery.md tiene Estado IN‑PROGRESS
 - **WHEN** el `specifying-agent` lee `discovery.md` y el campo `**Estado**` es `IN‑PROGRESS`
 - **THEN** el agente pregunta al usuario con `AskUserQuestion` si confirma que el discovery está listo
 
-#### Scenario: Usuario confirma avanzar con Estado Doing
+#### Scenario: Usuario confirma avanzar con Estado IN‑PROGRESS
 - **WHEN** el usuario confirma avanzar a pesar del Estado `IN‑PROGRESS`
 - **THEN** el agente usa `Edit` para cambiar el campo `**Estado**` en `discovery.md` de `IN‑PROGRESS` a `DONE` y continúa
 
-#### Scenario: Usuario rechaza avanzar con Estado Doing
+#### Scenario: Usuario rechaza avanzar con Estado IN‑PROGRESS
 - **WHEN** el usuario rechaza avanzar
 - **THEN** el agente informa que debe completarse el discovery primero y detiene la ejecución
 
@@ -46,7 +46,7 @@ El sistema SHALL proveer que el `specifying-agent` escriba el documento final `$
 
 #### Scenario: Documento generado con metadatos
 - **WHEN** el agente finaliza la entrevista
-- **THEN** usa `Write` para crear `$SPECS_BASE/specs/projects/project.md` con metadatos: Versión 1.0, Estado Doing, Fecha actual, Generado por specifying-agent
+- **THEN** usa `Write` para crear `$SPECS_BASE/specs/projects/project.md` con metadatos: Versión 1.0, Estado IN‑PROGRESS, Fecha actual, Generado por specifying-agent
 
 #### Scenario: Comentarios HTML excluidos del output
 - **WHEN** el agente escribe el documento final

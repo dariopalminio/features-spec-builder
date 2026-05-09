@@ -10,8 +10,8 @@ El sistema SHALL incluir un skill en `.claude/skills/project-discovery/SKILL.md`
 ### Requirement: project-discovery reads existing document state
 El skill SHALL leer el campo `**Estado**:` de `$SPECS_BASE/specs/projects/project.md` si existe, aplicando la logica de `skill-state-detection`.
 
-#### Scenario: Document in Doing state
-- **WHEN** `requirement-spec.md` existe con `Estado: Doing`
+#### Scenario: Document in IN‑PROGRESS state
+- **WHEN** `requirement-spec.md` existe con `Estado: IN‑PROGRESS`
 - **THEN** el skill MUST activar el flujo de retoma definido en `project-retake`
 
 #### Scenario: Document in Ready state
@@ -25,8 +25,8 @@ El skill `/project-discovery` SHALL verificar que `$SPECS_BASE/specs/projects/pr
 - **WHEN** `project-intent.md` existe con `Estado: Ready`
 - **THEN** el skill continua al siguiente paso sin interrumpir al usuario
 
-#### Scenario: Input missing or Doing
-- **WHEN** `project-intent.md` no existe o tiene `Estado: Doing`
+#### Scenario: Input missing or IN‑PROGRESS
+- **WHEN** `project-intent.md` no existe o tiene `Estado: IN‑PROGRESS`
 - **THEN** el sistema MUST informar al usuario que debe ejecutar `/project-begin` primero y detener la ejecucion
 
 ### Requirement: project-discovery produces requirement-spec.md

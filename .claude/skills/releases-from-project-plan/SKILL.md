@@ -144,7 +144,7 @@ Por ejemplo:
 title: <"Nombre completo del release">
 date: <Fecha extraída o fecha actual con formato YYYY-MM-DD>
 status: DEFINITION
-substatus: <substatus extraido o DOING>
+substatus: <substatus extraido o IN‑PROGRESS>
 parent: <nombre del archivo de requirement-spec del proyecto del cual se genera el releaseo N/A>
 ---
 

@@ -49,7 +49,7 @@ slug: <kebab-case único en el repositorio>
 title: "<Título legible del documento>"
 tags: []                          # opcional
 status: <BACKLOG | IN-PROGRESS | COMPLETED>
-substatus: <N/A | DOING | READY>  # opcional
+substatus: <N/A | IN‑PROGRESS | READY>  # opcional
 parent: <slug del nodo padre>     # opcional
 related:                          # opcional
   - <slug de nodo relacionado>

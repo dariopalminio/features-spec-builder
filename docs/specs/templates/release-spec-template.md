@@ -5,7 +5,7 @@ id: <EPIC-NN>
 slug: <nombre-del-directorio-de-release>
 title: "<primer # heading del documento>"
 status: <ESTADO_INICIAL>
-substatus: DOING
+substatus: IN‑PROGRESS
 parent: null
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>

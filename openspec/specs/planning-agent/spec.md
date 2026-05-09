@@ -59,7 +59,7 @@ The agent SHALL read `.claude/skills/ps-plan/templates/project-plan-template.md`
 - **THEN** the agent produces `project-plan.md` with sections matching the template headers, without copying HTML comments into the output
 
 ### Requirement: Planning agent writes project-plan.md with metadata
-The agent SHALL write `$SPECS_BASE/specs/projects/project-plan.md` including: project name, document version, Estado: Doing, generation date (YYYY-MM-DD), and Generado por: planning-agent.
+The agent SHALL write `$SPECS_BASE/specs/projects/project-plan.md` including: project name, document version, Estado: IN‑PROGRESS, generation date (YYYY-MM-DD), and Generado por: planning-agent.
 
 #### Scenario: Output written
 - **WHEN** the agent completes analysis

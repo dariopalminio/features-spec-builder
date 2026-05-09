@@ -11,7 +11,7 @@
 - [x] 2.4 Add Paso 3: Extraer secciones del template en runtime (headers `##` + comentarios `<!-- -->`) — sin preguntas hardcodeadas
 - [x] 2.5 Add Paso 4: Análisis multi-lente — aplicar los tres perfiles (PM, Arquitecto, UX) para generar hallazgos diferenciados antes de formular preguntas
 - [x] 2.6 Add Paso 5: Entrevista interactiva — presentar preguntas agrupadas por tema (máx 3-4 por ronda), permitir seguimiento en respuestas críticas, registrar todas las respuestas
-- [x] 2.7 Add Paso 6: Escribir `$SPECS_BASE/specs/projects/clarifications.md` usando el template como estructura, sin copiar comentarios HTML, con metadatos completos (`Estado: Doing`, `Generado por: approval-agent`), y clasificando preguntas como Resueltas o Pendientes
+- [x] 2.7 Add Paso 6: Escribir `$SPECS_BASE/specs/projects/clarifications.md` usando el template como estructura, sin copiar comentarios HTML, con metadatos completos (`Estado: IN‑PROGRESS`, `Generado por: approval-agent`), y clasificando preguntas como Resueltas o Pendientes
 - [x] 2.8 Add Paso 7: Proponer al usuario que revise el resultado, lo edite si es necesario, y mencionar `/ps-plan` como siguiente paso
 
 ## 3. ps-approval Skill
@@ -26,4 +26,4 @@
 
 - [x] 4.1 Run `/ps-approval` end-to-end with an existing project that has `requirement-spec.md` in `DONE` state — verify `clarifications.md` is created with correct structure (**human validation required**)
 - [x] 4.2 Verify the template at `.claude/skills/ps-approval/templates/clarifications-template.md` is unchanged after a full run (**human validation required**)
-- [x] 4.3 Test the `IN‑PROGRESS` state guard: run `/ps-approval` with `requirement-spec.md` having `Estado: Doing`, confirm the skill prompts correctly (**human validation required**)
+- [x] 4.3 Test the `IN‑PROGRESS` state guard: run `/ps-approval` with `requirement-spec.md` having `Estado: IN‑PROGRESS`, confirm the skill prompts correctly (**human validation required**)

@@ -7,7 +7,7 @@ Hoy el flujo de refinamiento de historias requiere ejecutar tres skills por sepa
 - Agregar un nuevo skill orquestador `story-refine` en `.claude/skills/story-refine/SKILL.md`.
 - Ejecutar el flujo interactivo en secuencia: `story-creation` -> `story-evaluation` -> `story-split`.
 - Mantener intactos los skills existentes; `story-refine` solo orquesta su uso.
-- Gestionar estado por historia en cada archivo markdown con encabezado `**Estado**: Doing | Ready`.
+- Gestionar estado por historia en cada archivo markdown con encabezado `**Estado**: IN‑PROGRESS | Ready`.
 - Marcar una historia como `DONE` cuando la evaluacion FINVEST resulte `APROBADA`.
 - Cuando FINVEST resulte `REFINAR` o `RECHAZAR`, continuar ciclo de refinamiento con opcion explicita de seguir iterando o pausar en `IN‑PROGRESS`.
 - Mantener registro de cantidad e identificacion de historias derivadas tras `story-split`, y continuar refinamiento para todas.

@@ -7,7 +7,7 @@
 - [x] 2.1 Crear `.claude/skills/project-flow/SKILL.md` con frontmatter (name: project-flow, description, alwaysApply: false)
 - [x] 2.2 Implementar la sección de detección de estado inicial: leer los tres documentos de output y determinar desde qué fase comenzar
 - [x] 2.3 Implementar la Fase 1 (Begin Intention): delegar a `project-pm` con la misma instrucción que usa `/project-begin`
-- [x] 2.4 Implementar el gate de revisión post-Fase 1: presentar resumen, pedir confirmación y actualizar `Estado: Doing` → `Estado: Ready` en `project-intent.md`
+- [x] 2.4 Implementar el gate de revisión post-Fase 1: presentar resumen, pedir confirmación y actualizar `Estado: IN‑PROGRESS` → `Estado: Ready` en `project-intent.md`
 - [x] 2.5 Implementar la Fase 2 (Discovery): delegar a `project-pm` y luego a `project-architect` con las mismas instrucciones que usa `/project-discovery`
 - [x] 2.6 Implementar el gate de revisión post-Fase 2: presentar resumen y actualizar `Estado: Ready` en `requirement-spec.md`
 - [x] 2.7 Implementar la Fase 3 (Planning): delegar a `project-architect` con la misma instrucción que usa `/project-planning`

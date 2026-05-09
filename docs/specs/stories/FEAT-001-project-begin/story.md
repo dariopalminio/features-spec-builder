@@ -24,16 +24,16 @@ parent: EPIC-02-project-spec-builder
 
 ### Escenario principal � Generaci�n exitosa de project-intent.md
 ```gherkin
-Dado que no existe "docs/specs/projects/project-intent.md" y no hay ning�n proyecto en estado Doing
+Dado que no existe "docs/specs/projects/project-intent.md" y no hay ning�n proyecto en estado IN‑PROGRESS
 Cuando el desarrollador ejecuta el skill "project-begin"
 Entonces el agente project-pm conduce una entrevista interactiva con preguntas contextuales
   Y al finalizar genera "docs/specs/projects/project-intent.md" con Estado: Ready
   Y el documento incluye las secciones: problema, visi�n, beneficios, criterios de �xito, restricciones y non-goals
 ```
 
-### Escenario alternativo / error � Proyecto ya en estado Doing (WIP=1)
+### Escenario alternativo / error � Proyecto ya en estado IN‑PROGRESS (WIP=1)
 ```gherkin
-Dado que ya existe un archivo con Estado: Doing en "docs/specs/projects/"
+Dado que ya existe un archivo con Estado: IN‑PROGRESS en "docs/specs/projects/"
 Cuando el desarrollador ejecuta el skill "project-begin"
 Entonces el skill muestra el mensaje de conflicto WIP y no inicia una nueva sesi�n
   Pero sugiere completar el proyecto activo antes de iniciar uno nuevo

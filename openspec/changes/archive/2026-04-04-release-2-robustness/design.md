@@ -2,7 +2,7 @@
 
 Los tres skills del pipeline (`ps-begin-intention`, `ps-discovery`, `ps-planning`) son orchestrators en Markdown que instruyen al agente cómo actuar. Actualmente cada SKILL.md asume que siempre se ejecuta sobre un proyecto nuevo: lee el template, delega a los agentes, y escribe el output. No existe ninguna lógica de estado previo.
 
-El estado del proyecto vive íntegramente en el filesystem: los documentos en `$SPECS_BASE/specs/projects/` incluyen el campo `**Estado**: Doing | Ready` en su frontmatter. Este campo es la única fuente de verdad sobre el progreso de una fase.
+El estado del proyecto vive íntegramente en el filesystem: los documentos en `$SPECS_BASE/specs/projects/` incluyen el campo `**Estado**: IN‑PROGRESS | Ready` en su frontmatter. Este campo es la única fuente de verdad sobre el progreso de una fase.
 
 El cambio consiste en agregar una **fase de precondiciones** al inicio de cada SKILL.md que lea ese campo y bifurque el comportamiento antes de delegar al agente.
 
@@ -10,7 +10,7 @@ El cambio consiste en agregar una **fase de precondiciones** al inicio de cada S
 
 **Goals:**
 - Detectar automáticamente el estado del documento de cada fase al inicio del skill
-- Definir comportamiento explícito para los tres escenarios: inexistente, Doing, Ready
+- Definir comportamiento explícito para los tres escenarios: inexistente, IN‑PROGRESS, Ready
 - Implementar retoma de sesión cuando el documento está en `IN‑PROGRESS`
 - Implementar idempotencia cuando el documento está en `DONE`
 - Implementar detección de conflicto WIP=1 en `ps-begin-intention`
@@ -34,13 +34,13 @@ El cambio consiste en agregar una **fase de precondiciones** al inicio de cada S
 
 **Alternativa considerada:** Usar un archivo `.wip-lock` separado para rastrear estado activo.
 
-**Decisión:** El campo `**Estado**: Doing | Ready` ya existe en todos los documentos generados. Usarlo como fuente de verdad evita estado duplicado y mantiene el principio de "solo archivos Markdown". Un lock file externo sería estado adicional que puede desincronizarse.
+**Decisión:** El campo `**Estado**: IN‑PROGRESS | Ready` ya existe en todos los documentos generados. Usarlo como fuente de verdad evita estado duplicado y mantiene el principio de "solo archivos Markdown". Un lock file externo sería estado adicional que puede desincronizarse.
 
 ### Decisión 3: Para WIP=1, verificar todos los documentos de output, no solo el de la fase actual
 
-**Decisión:** Al ejecutar `/ps-begin-intention`, el skill verifica si existe cualquier documento en `$SPECS_BASE/specs/projects/` con `Estado: Doing`. Si encuentra uno, avisa y ofrece las opciones. Esto cubre el caso de un proyecto interrumpido en cualquier fase.
+**Decisión:** Al ejecutar `/ps-begin-intention`, el skill verifica si existe cualquier documento en `$SPECS_BASE/specs/projects/` con `Estado: IN‑PROGRESS`. Si encuentra uno, avisa y ofrece las opciones. Esto cubre el caso de un proyecto interrumpido en cualquier fase.
 
-### Decisión 4: En caso de retoma (`Estado: Doing`), el agente lee el documento existente y continúa
+### Decisión 4: En caso de retoma (`Estado: IN‑PROGRESS`), el agente lee el documento existente y continúa
 
 **Alternativa considerada:** Reiniciar la entrevista desde cero con el documento como contexto.
 

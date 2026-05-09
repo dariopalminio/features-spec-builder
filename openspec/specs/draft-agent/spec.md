@@ -16,11 +16,11 @@ El agente SHALL leer `$SPECS_BASE/specs/initial-prompt.md` y verificar que el ca
 - **WHEN** el agente lee `initial-prompt.md` y el campo `**Estado**` contiene `DONE`
 - **THEN** el agente continúa con la entrevista de refinamiento sin interrupciones
 
-#### Scenario: Estado es Doing — usuario confirma
+#### Scenario: Estado es IN‑PROGRESS — usuario confirma
 - **WHEN** el agente lee `initial-prompt.md` y el campo `**Estado**` contiene `IN‑PROGRESS`
 - **THEN** el agente pregunta al usuario si considera que el Funnel está completo y si desea avanzar; si el usuario confirma, el agente actualiza el campo `**Estado**` a `DONE` en el archivo usando `Edit` y continúa
 
-#### Scenario: Estado es Doing — usuario rechaza
+#### Scenario: Estado es IN‑PROGRESS — usuario rechaza
 - **WHEN** el agente lee `initial-prompt.md`, el campo `**Estado**` es `IN‑PROGRESS`, y el usuario indica que aún no está listo
 - **THEN** el agente informa al usuario que debe completar el Funnel primero (`/ps-funnel`) y detiene su ejecución
 

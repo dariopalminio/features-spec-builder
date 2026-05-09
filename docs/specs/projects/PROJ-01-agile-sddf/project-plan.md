@@ -5,7 +5,7 @@ slug: project-plan
 title: "Project Plan"
 date: 2026-04-20
 status: IN-PROGRESS
-substatus: DOING
+substatus: IN‑PROGRESS
 parent: null
 related:
   - project-requirement-spec
@@ -30,7 +30,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 - [ ] **FEAT-005: User Story Mapping Interactivo** — El sistema conduce una sesión colaborativa para identificar personas, construir el backbone de actividades, definir el walking skeleton y trazar release slices, escribiendo el resultado en `story-map.md`. _(deps: FEAT-003)_
 - [ ] **FEAT-006: Creación de Historias de Usuario** — El sistema genera historias completas en formato Como/Quiero/Para con criterios de aceptación Gherkin (mínimo 1 escenario principal y 1 alternativo), guardando el resultado en `story-{slug}.md`. _(deps: —)_
 - [ ] **FEAT-007: Evaluación de Calidad con Rúbrica FINVEST** — El sistema evalúa historias de usuario aplicando la rúbrica FINVEST (Formato + INVEST) con scores Likert 1-5 por dimensión y produce una decisión APROBADA / REFINAR / RECHAZAR / DIVIDIR. _(deps: FEAT-006)_
-- [ ] **FEAT-008: Control WIP=1 en el Pipeline** — El sistema detecta documentos con `Estado: Doing` al inicio de cada pipeline y ofrece exactamente dos opciones al usuario: Sobrescribir o Retomar, sin permitir proyectos activos simultáneos. _(deps: FEAT-001)_
+- [ ] **FEAT-008: Control WIP=1 en el Pipeline** — El sistema detecta documentos con `Estado: IN‑PROGRESS` al inicio de cada pipeline y ofrece exactamente dos opciones al usuario: Sobrescribir o Retomar, sin permitir proyectos activos simultáneos. _(deps: FEAT-001)_
 - [ ] **FEAT-009: Retoma de Proyecto Interrumpido** — El sistema detecta automáticamente el campo `Estado` de los documentos existentes y reanuda el trabajo desde la sección incompleta sin re-preguntar secciones ya completadas. _(deps: FEAT-008)_
 - [ ] **FEAT-010: Gates de Revisión Humana entre Fases** — El sistema presenta un resumen del documento generado y solicita confirmación del usuario antes de avanzar a la siguiente fase; el documento avanza a `Estado: Ready` solo tras confirmación. _(deps: FEAT-003, FEAT-004)_
 - [ ] **FEAT-011: Integración Story Map en Planning** — El sistema detecta si existe `story-map.md` durante la fase de Planning y lo usa como guía estructural para agrupar features en releases respetando el backbone. _(deps: FEAT-004, FEAT-005)_
@@ -135,7 +135,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 
 **Criterios de éxito:**
 - [ ] El pipeline ProjectSpecFactory produce los 3 documentos canónicos (`project-intent.md`, `requirement-spec.md`, `project-plan.md`) en una sesión continua sin errores, con `Estado: Ready` en cada documento al finalizar.
-- [ ] El control WIP=1 impide la creación de múltiples proyectos activos sin confirmación explícita; ante un documento con `Estado: Doing`, el sistema presenta exactamente las opciones "Sobrescribir" y "Retomar".
+- [ ] El control WIP=1 impide la creación de múltiples proyectos activos sin confirmación explícita; ante un documento con `Estado: IN‑PROGRESS`, el sistema presenta exactamente las opciones "Sobrescribir" y "Retomar".
 
 ---
 
@@ -212,7 +212,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 
 ### Release 06 — Release & Story Generator & Soporte Atlassian Rovo
 
-**Estado:** Doing | **Fecha:** 2026-04-20
+**Estado:** IN‑PROGRESS | **Fecha:** 2026-04-20
 
 **Objetivo:** Automatizar la creación de los dos artefactos clave posteriores al planning: el documento de release (a partir de `project-plan.md`) y las historias de usuario derivadas (a partir del release generado), cerrando el ciclo desde el plan hasta el backlog de historias listo para desarrollo.
 

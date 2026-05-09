@@ -36,11 +36,11 @@ Luego, lee los tres documentos de output para determinar desde dónde retomar:
   Si el usuario confirma: continúa desde la Fase 1.
   Si el usuario cancela: detén la ejecución.
 
-- Si `project-intent.md` tiene `substatus: DONE` y `requirement-spec.md` **no existe o es Doing**:
+- Si `project-intent.md` tiene `substatus: DONE` y `requirement-spec.md` **no existe o es IN‑PROGRESS**:
   > ℹ️ La Fase 1 ya está completa. Continuando desde la Fase 2 (Discovery).
   Salta directamente a la Fase 2.
 
-- Si `project-intent.md` tiene `substatus: DONE` y `requirement-spec.md` tiene `substatus: DONE` y `project-plan.md` **no existe o es Doing**:
+- Si `project-intent.md` tiene `substatus: DONE` y `requirement-spec.md` tiene `substatus: DONE` y `project-plan.md` **no existe o es IN‑PROGRESS**:
   > ℹ️ Las Fases 1 y 2 ya están completas. Continuando desde la Fase 3 (Planning).
   Salta directamente a la Fase 3.
 
@@ -83,7 +83,7 @@ Invoca al agente `project-pm` con la siguiente instrucción:
 
 > Lee el template en `project-begin/assets/project-intent-template.md`. Extrae las secciones del template en runtime.
 >
-> Si estás en flujo de retoma (documento existente en `Estado: Doing`), primero lee `$SPECS_BASE/specs/projects/project-intent.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
+> Si estás en flujo de retoma (documento existente en `substatus: IN‑PROGRESS`), primero lee `$SPECS_BASE/specs/projects/project-intent.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
 > Conduce la entrevista de intención de proyecto con el usuario en dos fases dentro de la misma sesión:
 >
@@ -152,7 +152,7 @@ Una vez completado el discovery, invoca al agente `project-architect` con la sig
 
 > Lee `$SPECS_BASE/specs/projects/project-intent.md` y el resumen del discovery de la fase anterior. Lee también el template `$SPECS_BASE/specs/templates/project-template.md`.
 >
-> Si estás en flujo de retoma (documento existente en `Estado: Doing`), primero lee `$SPECS_BASE/specs/projects/project.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
+> Si estás en flujo de retoma (documento existente en `substatus: IN‑PROGRESS`), primero lee `$SPECS_BASE/specs/projects/project.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
 > Extrae las secciones del template en runtime y conduce la entrevista de especificación de requisitos con el usuario por secciones (máx 3-4 preguntas por ronda).
 > Pre-rellena con la información ya disponible del discovery y el project-intent. Infiere contenido faltante marcándolo con `[inferido]`.
@@ -206,7 +206,7 @@ Invoca al agente `project-architect` con la siguiente instrucción:
 
 > Lee los documentos `$SPECS_BASE/specs/projects/project-intent.md` y `$SPECS_BASE/specs/projects/project.md`. Lee también el template `project-planning/assets/project-plan-template.md`.
 >
-> Si estás en flujo de retoma (documento existente en `Estado: Doing`), primero lee `$SPECS_BASE/specs/projects/project-plan.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
+> Si estás en flujo de retoma (documento existente en `Estado: IN‑PROGRESS`), primero lee `$SPECS_BASE/specs/projects/project-plan.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continúa solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
 > Extrae features atómicas con IDs FEAT-NNN, priorizalas, agrúpalas en releases con MVP en Release 1, y escribe el resultado en `$SPECS_BASE/specs/projects/project-plan.md` con `substatus: IN‑PROGRESS`.
 

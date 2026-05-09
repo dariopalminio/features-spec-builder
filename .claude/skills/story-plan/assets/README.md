@@ -34,10 +34,10 @@ Este directorio contiene recursos de referencia para el skill `story-plan`.
 
 | Evento | status | substatus |
 |--------|--------|-----------|
-| Al iniciar el pipeline (incondicional) | `PLANNING` | `DOING` |
+| Al iniciar el pipeline (incondicional) | `PLANNING` | `IN‑PROGRESS` |
 | Cuando `story-analyze` finaliza sin ERROREs | `PLANNED` | `DONE` (gestionado por `story-analyze`) |
 
-La transición a `PLANNING/DOING` se aplica siempre al inicio, independientemente del estado previo de la historia. Esto permite re-ejecutar el pipeline sobre historias en cualquier estado.
+La transición a `PLANNING/IN‑PROGRESS` se aplica siempre al inicio, independientemente del estado previo de la historia. Esto permite re-ejecutar el pipeline sobre historias en cualquier estado.
 
 ## Comportamiento de idempotencia
 

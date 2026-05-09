@@ -5,7 +5,7 @@ El MVP de ProjectSpecFactory (Release 1) permite recorrer el workflow completo e
 ## What Changes
 
 - Los tres orchestrators de skills (`ps-begin-intention`, `ps-discovery`, `ps-planning`) detectan automáticamente el `Estado:` del documento de su fase antes de actuar.
-- Se define un comportamiento explícito para tres escenarios: documento inexistente (ejecutar normalmente), `Estado: Doing` (retomar), `Estado: Ready` (avisar antes de sobrescribir).
+- Se define un comportamiento explícito para tres escenarios: documento inexistente (ejecutar normalmente), `Estado: IN‑PROGRESS` (retomar), `Estado: Ready` (avisar antes de sobrescribir).
 - Se agrega detección de conflicto WIP=1: al ejecutar `/ps-begin-intention` con proyectos en `IN‑PROGRESS`, el sistema ofrece sobrescribir o retomar.
 - Se formaliza el patrón de feedback al cierre de cada fase: path del documento generado + siguiente comando recomendado.
 
@@ -14,7 +14,7 @@ El MVP de ProjectSpecFactory (Release 1) permite recorrer el workflow completo e
 ### New Capabilities
 
 - `skill-state-detection`: Lógica de detección del campo `Estado:` en los documentos de output al inicio de cada skill, con rama de comportamiento según el valor detectado.
-- `project-retake`: Comportamiento de retoma cuando un documento está en `Estado: Doing` — el agente carga el documento existente y continúa desde la sección incompleta.
+- `project-retake`: Comportamiento de retoma cuando un documento está en `Estado: IN‑PROGRESS` — el agente carga el documento existente y continúa desde la sección incompleta.
 - `wip-conflict-detection`: Detección de conflicto WIP=1 en el skill `ps-begin-intention` cuando existe un proyecto activo, con prompt de decisión al usuario.
 - `transition-feedback`: Patrón de cierre de fase que informa el path del documento generado y el siguiente comando del workflow.
 

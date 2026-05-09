@@ -34,7 +34,7 @@
 | title | "Sistema de pagos" (aceptado) |
 | date | 2026-05-15 (usuario modifica la fecha sugerida) |
 | status | BACKLOG (default aceptado) |
-| substatus | DOING (default aceptado) |
+| substatus | IN‑PROGRESS (default aceptado) |
 | slug | `sistema-de-pagos` (confirmado) |
 
 ### Fase 3 — Secciones obligatorias

@@ -5,7 +5,7 @@ id: <FEAT-NNN>
 slug: <nombre-del-directorio-de-historia>
 title: "<primer # heading del documento>"
 status: <ESTADO_INICIAL>
-substatus: DOING
+substatus: IN‑PROGRESS
 parent: <nombre-del-directorio-de-release>
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>

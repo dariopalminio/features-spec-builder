@@ -4,11 +4,11 @@
 Al ejecutar `/project-begin`, el skill SHALL verificar si existe algun documento en `$SPECS_BASE/specs/projects/` con `**substatus**: IN‑PROGRESS` antes de iniciar la entrevista.
 
 #### Scenario: No active project detected
-- **WHEN** ningun documento en `$SPECS_BASE/specs/projects/` tiene `Estado: Doing`
+- **WHEN** ningun documento en `$SPECS_BASE/specs/projects/` tiene `Estado: IN‑PROGRESS`
 - **THEN** el skill MUST continuar con el flujo normal sin interrupciones
 
 #### Scenario: Active project detected
-- **WHEN** al menos un documento en `$SPECS_BASE/specs/projects/` tiene `Estado: Doing`
+- **WHEN** al menos un documento en `$SPECS_BASE/specs/projects/` tiene `Estado: IN‑PROGRESS`
 - **THEN** el skill MUST notificar al usuario que existe un proyecto activo e indicar que documento esta en `IN‑PROGRESS`
 
 #### Scenario: User chooses to overwrite

@@ -28,7 +28,7 @@ Y que existe un archivo de especificaci�n (ej. project-intent.md) sin encabeza
 Cuando el skill a�ade el encabezado estandarizado al archivo
 Entonces el archivo comienza con un bloque YAML frontmatter con los campos definidos (t�tulo, versi�n, estado, fecha, y campos de trazabilidad)
   Y el contenido existente del archivo se preserva intacto despu�s del bloque YAML
-  Y el campo "estado" tiene un valor v�lido del conjunto definido (ej. Draft, Doing, Done)
+  Y el campo "estado" tiene un valor v�lido del conjunto definido (ej. Draft, IN‑PROGRESS, Done)
 ```
 
 ### Escenario principal � Encabezado aplicado a todos los tipos de artefactos soportados
@@ -71,7 +71,7 @@ slug: FEAT-043-header-aggregation
 title: "Infraestructura de captura de emails: Brevo + n8n + Nginx"
 tags: [ spec, release ]
 status: [ BACKLOG | IN-PROGRESS | COMPLETED ]
-substatus: [ null | DOING | READY ]
+substatus: [ null | IN‑PROGRESS | READY ]
 parent: [ slug del nodo padre, si aplica ]
 related:
   - [ slug de nodo relacionado ]

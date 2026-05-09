@@ -10,7 +10,7 @@
 - [x] 2.3 Write agent Step 2: read template at `.claude/skills/ps-plan/templates/project-plan-template.md` and extract section structure dynamically from `##` headers and `<!-- -->` comments
 - [x] 2.4 Write agent Step 3: extract atomic features (FEAT-NNN IDs), one-sentence descriptions, and dependency relationships from input documents
 - [x] 2.5 Write agent Step 4: prioritize features (business value → dependency order → technical risk) and group into releases with MVP in Release 1
-- [x] 2.6 Write agent Step 5: write `$SPECS_BASE/specs/projects/project-plan.md` using template structure, including metadata (`Estado: Doing`, date, `Generado por: planning-agent`), full backlog with `- [ ]` checkboxes, release proposals with success criteria, and summary metrics table
+- [x] 2.6 Write agent Step 5: write `$SPECS_BASE/specs/projects/project-plan.md` using template structure, including metadata (`Estado: IN‑PROGRESS`, date, `Generado por: planning-agent`), full backlog with `- [ ]` checkboxes, release proposals with success criteria, and summary metrics table
 - [x] 2.7 Write agent closing message: inform user document is ready, suggest review, prompt to run `/ps-finish` when ready
 
 ## 3. ps-plan Skill (replace stub)

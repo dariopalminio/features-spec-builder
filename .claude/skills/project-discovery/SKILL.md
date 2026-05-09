@@ -44,7 +44,7 @@ Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md`.
 
 - Si el archivo **existe** pero `substatus` es `IN‑PROGRESS`: informa al usuario y deten la ejecucion.
 
-  > ❌ `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md` aun esta en `Estado: Doing`.
+  > ❌ `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md` aun esta en `Estado: IN‑PROGRESS`.
   > Debes completar Begin Intention y dejar el documento en `Estado: Ready` antes de ejecutar `/project-discovery`.
 
 - Si el archivo **existe** con `substatus: DONE`: continua al paso 2.
@@ -92,7 +92,7 @@ Una vez completado el discovery, invoca al agente `project-architect` con la sig
 
 > Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md` y el resumen del discovery de la fase anterior. Lee tambien el template `$SPECS_BASE/specs/templates/project-template.md`.
 >
-> Si estas en flujo de retoma (documento existente en `Estado: Doing`), primero lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continua solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
+> Si estas en flujo de retoma (documento existente en `Estado: IN‑PROGRESS`), primero lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continua solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
 > Extrae las secciones del template en runtime y conduce la entrevista de especificación de requisitos con el usuario por secciones (máx 3-4 preguntas por ronda).
 > Pre-rellena con la información ya disponible del discovery y el project-intent. Infiere contenido faltante marcándolo con `[inferido]`.

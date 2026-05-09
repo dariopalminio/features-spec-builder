@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
-### Requirement: Agent resumes from existing Doing document
-Cuando el skill detecta `Estado: Doing`, el agente delegado SHALL recibir instruccion de leer el documento existente, identificar las secciones incompletas y continuar solo con ellas, preservando el contenido ya capturado.
+### Requirement: Agent resumes from existing IN‑PROGRESS document
+Cuando el skill detecta `Estado: IN‑PROGRESS`, el agente delegado SHALL recibir instruccion de leer el documento existente, identificar las secciones incompletas y continuar solo con ellas, preservando el contenido ya capturado.
 
 #### Scenario: Agent loads existing document
 - **WHEN** el skill activa el flujo de retoma

@@ -22,11 +22,11 @@ The system SHALL provide a `ps-approval` skill at `.claude/skills/ps-approval/SK
 - **WHEN** `requirement-spec.md` exists and `**Estado**` equals `DONE`
 - **THEN** the skill proceeds directly to delegating to `approval-agent`
 
-#### Scenario: requirement-spec.md has Estado Doing — user confirms
+#### Scenario: requirement-spec.md has Estado IN‑PROGRESS — user confirms
 - **WHEN** `requirement-spec.md` has `**substatus**: IN‑PROGRESS` and the user confirms they want to proceed
 - **THEN** the skill changes `**Estado**` from `IN‑PROGRESS` to `DONE` using the Edit tool and then delegates to `approval-agent`
 
-#### Scenario: requirement-spec.md has Estado Doing — user rejects
+#### Scenario: requirement-spec.md has Estado IN‑PROGRESS — user rejects
 - **WHEN** `requirement-spec.md` has `**substatus**: IN‑PROGRESS` and the user declines to proceed
 - **THEN** the skill informs the user to complete the Specifying phase first and stops execution
 

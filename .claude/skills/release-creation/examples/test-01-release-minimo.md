@@ -35,7 +35,7 @@
 | title | "Autenticación básica" (aceptado) |
 | date | 2026-05-01 (fecha de hoy, aceptada) |
 | status | BACKLOG (default aceptado) |
-| substatus | DOING (default aceptado) |
+| substatus | IN‑PROGRESS (default aceptado) |
 | slug | `autenticacion-basica` (confirmado) |
 
 ### Fase 3 — Secciones obligatorias
@@ -70,7 +70,7 @@ slug: autenticacion-basica
 title: "Autenticación básica"
 date: 2026-05-01
 status: BACKLOG
-substatus: DOING
+substatus: IN‑PROGRESS
 parent: null
 ---
 

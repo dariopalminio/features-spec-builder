@@ -50,7 +50,7 @@ El skill `/ps-draft` existe como stub pero no tiene implementación real. El est
 
 ## Risks / Trade-offs
 
-- **[Riesgo] El usuario rechaza avanzar cuando Estado=Doing** → El agente detiene el proceso y le recuerda completar el Funnel con `/ps-funnel`
+- **[Riesgo] El usuario rechaza avanzar cuando Estado=IN‑PROGRESS** → El agente detiene el proceso y le recuerda completar el Funnel con `/ps-funnel`
 - **[Riesgo] `initial-prompt.md` no existe** → El skill lo verifica antes de invocar al agente y detiene la ejecución con mensaje claro
 - **[Trade-off] El agente puede inferir contenido incorrecto** → Aceptado; el contenido `[inferido]` es explícito y el usuario puede corregirlo antes de avanzar a Discovery
 

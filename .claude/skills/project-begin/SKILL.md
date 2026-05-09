@@ -72,7 +72,7 @@ Invoca al agente `project-pm` con la siguiente instrucción:
 
 > Lee el template en `assets/project-intent-template.md`. Extrae las secciones del template en runtime.
 >
-> Si estas en flujo de retoma (documento existente en `Estado: Doing`), primero lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continua solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
+> Si estas en flujo de retoma (documento existente en `Estado: IN‑PROGRESS`), primero lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md`, identifica secciones incompletas con placeholders como `[...]` o valores sin reemplazar, y continua solo con esas secciones. No vuelvas a preguntar ni sobrescribas secciones ya completas.
 >
 > Conduce la entrevista de intencion de proyecto con el usuario en dos fases dentro de la misma sesion:
 >

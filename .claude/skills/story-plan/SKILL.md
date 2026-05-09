@@ -21,7 +21,7 @@ Orquesta el flujo completo de planning de una historia SDD ejecutando los tres s
 [story.md: SPECIFIED/DONE]  ← precondición implícita (viene de story-refine)
      ↓
 story-plan   → Entry point: orquesta design → tasking → analyze  ← aquí
-     │   Al iniciar: story.md → PLANNING/DOING
+     │   Al iniciar: story.md → PLANNING/IN‑PROGRESS
      ↓
   story-design  → design.md
   story-tasking → tasks.md
@@ -39,10 +39,10 @@ analyze.md   → Check: coherencia entre los tres artefactos
 
 | Evento | status | substatus |
 |--------|--------|-----------|
-| Inicio del pipeline (siempre, sin condición) | `PLANNING` | `DOING` |
+| Inicio del pipeline (siempre, sin condición) | `PLANNING` | `IN‑PROGRESS` |
 | `story-analyze` finaliza sin ERROREs | `PLANNED` | `DONE` (gestionado por `story-analyze`) |
 
-La transición `PLANNING/DOING` se aplica **incondicionalmente** al iniciar, independientemente del estado previo de la historia. Esto permite re-ejecutar el pipeline sobre historias en cualquier estado.
+La transición `PLANNING/IN‑PROGRESS` se aplica **incondicionalmente** al iniciar, independientemente del estado previo de la historia. Esto permite re-ejecutar el pipeline sobre historias en cualquier estado.
 
 **Qué hace este skill:**
 - Invoca `story-design`, `story-tasking` y `story-analyze` en secuencia
@@ -114,9 +114,9 @@ Sugerencia: ejecuta /release-generate-stories para generar la historia primero.
 ```
 Detener la ejecución **sin invocar ningún sub-skill**.
 
-### 1d. Actualizar frontmatter a PLANNING/DOING
+### 1d. Actualizar frontmatter a PLANNING/IN‑PROGRESS
 
-Actualizar el frontmatter de `story.md` estableciendo `status: PLANNING` / `substatus: DOING`.
+Actualizar el frontmatter de `story.md` estableciendo `status: PLANNING` / `substatus: IN‑PROGRESS`.
 
 Esta actualización es **incondicional**: se aplica independientemente del estado previo de la historia. Si los campos `status`/`substatus` no existen, agregarlos.
 
@@ -124,7 +124,7 @@ Mostrar confirmación de inicio:
 ```
 🚀 Iniciando pipeline de planning para: <story_id>
    Directorio: <ruta_directorio>
-   Estado: PLANNING/DOING
+   Estado: PLANNING/IN‑PROGRESS
    Pasos: story-design → story-tasking → story-analyze
 ```
 
@@ -264,7 +264,7 @@ Estado de story.md: PLANNED/DONE ✓
 Se detectaron inconsistencias entre los artefactos. Revisa antes de implementar:
 → <ruta_directorio>/analyze.md
 
-Estado de story.md: PLANNING/DOING (no actualizado — hay ERROREs pendientes)
+Estado de story.md: PLANNING/IN‑PROGRESS (no actualizado — hay ERROREs pendientes)
 
 Puedes ajustar design.md o tasks.md y re-ejecutar /story-analyze cuando estés listo.
 ```
@@ -274,7 +274,7 @@ Puedes ajustar design.md o tasks.md y re-ejecutar /story-analyze cuando estés l
 ✗ Pipeline interrumpido en: <nombre_del_paso>
 
 Los artefactos generados antes del fallo están disponibles en: <ruta_directorio>
-Estado de story.md: PLANNING/DOING (no completado)
+Estado de story.md: PLANNING/IN‑PROGRESS (no completado)
 Corrige el problema indicado arriba y re-ejecuta /story-plan <story_id>.
 
 Nota: al re-ejecutar, cada sub-skill preguntará si deseas sobreescribir los artefactos existentes.

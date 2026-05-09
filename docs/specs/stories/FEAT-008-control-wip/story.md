@@ -17,23 +17,23 @@ parent: EPIC-02-project-spec-builder
 ## ?? Historia: Control WIP=1 � Detecci�n de proyecto activo
 
 **Como** developer que usa el framework SDDF para gestionar proyectos de software
-**Quiero** que el framework detecte autom�ticamente si ya existe un proyecto en estado Doing antes de iniciar uno nuevo
+**Quiero** que el framework detecte autom�ticamente si ya existe un proyecto en estado IN‑PROGRESS antes de iniciar uno nuevo
 **Para** evitar tener m�ltiples proyectos activos simult�neos y mantener el foco en un �nico proyecto a la vez
 
 ## ? Criterios de aceptaci�n
 
 ### Escenario principal � Bloqueo al intentar iniciar un segundo proyecto activo
 ```gherkin
-Dado que existe "docs/specs/projects/project-intent.md" con Estado: Doing
+Dado que existe "docs/specs/projects/project-intent.md" con Estado: IN‑PROGRESS
 Cuando el desarrollador ejecuta el skill "project-begin" para iniciar un nuevo proyecto
-Entonces el skill detecta el Estado: Doing en el archivo existente
+Entonces el skill detecta el Estado: IN‑PROGRESS en el archivo existente
   Y muestra el mensaje de conflicto WIP indicando que ya hay un proyecto activo
   Pero no sobrescribe ni modifica el proyecto existente
 ```
 
 ### Escenario alternativo / error � No hay proyecto activo
 ```gherkin
-Dado que no existe ning�n archivo con Estado: Doing en "docspecs/projects/t/"
+Dado que no existe ning�n archivo con Estado: IN‑PROGRESS en "docspecs/projects/t/"
 Cuando el desarrollador ejecuta el skill "project-begin"
 Entonces el skill procede normalmente sin mostrar advertencia de WIP
 ```

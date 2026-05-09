@@ -18,12 +18,12 @@ The system SHALL verify that `story.md` has `status: PLANNED` and `substatus: DO
 - **WHEN** `/story-implement` is invoked and `story.md` has no `status` field or `status: BACKLOG`
 - **THEN** the skill halts with an error suggesting running `/story-plan` to complete the planning pipeline
 
-### Requirement: story-implement sets IMPLEMENTING/DOING at the start of implementation
-The system SHALL update `status: IMPLEMENTING` and `substatus: DOING` in `story.md` frontmatter after verifying preconditions and before processing the first task.
+### Requirement: story-implement sets IMPLEMENTING/IN‑PROGRESS at the start of implementation
+The system SHALL update `status: IMPLEMENTING` and `substatus: IN‑PROGRESS` in `story.md` frontmatter after verifying preconditions and before processing the first task.
 
 #### Scenario: Status set before first task
 - **WHEN** all preconditions are met and the skill is about to start the TDD loop
-- **THEN** `story.md` frontmatter MUST be updated to `status: IMPLEMENTING` and `substatus: DOING` before `[T001] → implementando…` is displayed
+- **THEN** `story.md` frontmatter MUST be updated to `status: IMPLEMENTING` and `substatus: IN‑PROGRESS` before `[T001] → implementando…` is displayed
 
 ### Requirement: story-implement sets IMPLEMENTED/DONE upon completion
 The system SHALL update `status: IMPLEMENTED` and `substatus: DONE` in `story.md` frontmatter after all tasks have been processed (completed and/or blocked) and `implement-report.md` has been generated.

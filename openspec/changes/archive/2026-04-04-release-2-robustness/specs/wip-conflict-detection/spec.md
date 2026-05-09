@@ -4,11 +4,11 @@
 Al ejecutar `/ps-begin-intention`, el skill SHALL verificar si existe algún documento en `$SPECS_BASE/specs/projects/` con `**substatus**: IN‑PROGRESS` antes de iniciar la entrevista.
 
 #### Scenario: No active project detected
-- **WHEN** ningún documento en `$SPECS_BASE/specs/projects/` tiene `Estado: Doing`
+- **WHEN** ningún documento en `$SPECS_BASE/specs/projects/` tiene `Estado: IN‑PROGRESS`
 - **THEN** el skill MUST continuar con el flujo normal sin interrupciones
 
 #### Scenario: Active project detected
-- **WHEN** al menos un documento en `$SPECS_BASE/specs/projects/` tiene `Estado: Doing`
+- **WHEN** al menos un documento en `$SPECS_BASE/specs/projects/` tiene `Estado: IN‑PROGRESS`
 - **THEN** el skill MUST notificar al usuario que existe un proyecto activo e indicar qué documento está en `IN‑PROGRESS`
 
 #### Scenario: User chooses to overwrite

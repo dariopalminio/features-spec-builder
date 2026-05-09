@@ -7,7 +7,7 @@ Al inicio de su ejecucion, cada skill del pipeline SHALL leer el campo `**Estado
 - **WHEN** el documento de output de la fase no existe en `$SPECS_BASE/specs/projects/`
 - **THEN** el skill MUST continuar con el flujo normal de ejecucion (primera ejecucion)
 
-#### Scenario: Document exists with Estado Doing
+#### Scenario: Document exists with Estado IN‑PROGRESS
 - **WHEN** el documento existe y el campo `**Estado**:` tiene valor `IN‑PROGRESS`
 - **THEN** el skill MUST activar el flujo de retoma (invocar `project-retake`)
 

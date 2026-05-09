@@ -23,9 +23,9 @@ El skill `story-refine` SHALL orquestar el flujo interactivo usando los skills e
 - **THEN** el sistema MUST NOT modificar archivos ni comportamiento interno de `story-creation`, `story-evaluation` o `story-split`
 
 ### Requirement: story files maintain explicit state transitions
-Cada historia en refinamiento SHALL mantener el encabezado `**Estado**: Doing | Ready` y el orquestador SHALL gestionar la transicion segun resultado y decisiones del usuario.
+Cada historia en refinamiento SHALL mantener el encabezado `**Estado**: IN‑PROGRESS | Ready` y el orquestador SHALL gestionar la transicion segun resultado y decisiones del usuario.
 
-#### Scenario: Story remains Doing during active refinement
+#### Scenario: Story remains IN‑PROGRESS during active refinement
 - **WHEN** una historia aun no cumple criterios de cierre
 - **THEN** su archivo markdown MUST mantenerse con `**substatus**: IN‑PROGRESS`
 

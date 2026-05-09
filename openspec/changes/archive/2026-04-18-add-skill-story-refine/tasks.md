@@ -9,7 +9,7 @@
 - [x] 2.1 Crear `.claude/skills/story-refine/SKILL.md` con frontmatter valido (`name: story-refine`, `description`, `alwaysApply: false`)
 - [x] 2.2 Implementar flujo secuencial interactivo `story-creation` -> `story-evaluation` -> `story-split` sin modificar los skills existentes
 - [x] 2.3 Implementar cola de historias pendientes para procesar historia inicial y todas las historias derivadas por split
-- [x] 2.4 Implementar resumen recurrente de backlog de historias (total, identificadores, estado Doing/Ready)
+- [x] 2.4 Implementar resumen recurrente de backlog de historias (total, identificadores, estado IN‑PROGRESS/Ready)
 
 ## 3. Implementar reglas de estado y refinamiento iterativo
 

@@ -170,7 +170,7 @@ id: <FEAT-NNN>
 slug: <nombre-del-directorio-de-historia>
 title: "<primer # heading del documento o Nombre de la feature>"
 status: PLANNED
-substatus: DOING
+substatus: IN‑PROGRESS
 parent: <EPIC-NN>
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>

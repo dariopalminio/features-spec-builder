@@ -26,7 +26,7 @@ context: |
   - Conventional Commits (feat/fix/chore/hotfix) y Conventional Branch (main → release/ → feat/)
   - Skills como punto de entrada único (no comandos legacy en .claude/commands/)
   - Templates Markdown como fuente de verdad estructural, extraídos dinámicamente en runtime
-  - WIP=1: un proyecto activo a la vez; documentos con estados Doing/Ready
+  - WIP=1: un proyecto activo a la vez; documentos con estados IN‑PROGRESS/Ready
   - Estructura de branches: main → release/[ID]-[nombre] → feat/[ID]-[nombre]
 
 # Project context (optional)

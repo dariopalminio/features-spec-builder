@@ -3,8 +3,8 @@
 ### Requirement: ps-planning reads existing document state
 El skill SHALL leer el campo `**Estado**:` de `$SPECS_BASE/specs/projects/project-plan.md` si existe, aplicando la lógica de `skill-state-detection`.
 
-#### Scenario: Document in Doing state
-- **WHEN** `project-plan.md` existe con `Estado: Doing`
+#### Scenario: Document in IN‑PROGRESS state
+- **WHEN** `project-plan.md` existe con `Estado: IN‑PROGRESS`
 - **THEN** el skill MUST activar el flujo de retoma definido en `project-retake`
 
 #### Scenario: Document in Ready state
@@ -18,8 +18,8 @@ El skill SHALL verificar que `$SPECS_BASE/specs/projects/project.md` existe y ti
 - **WHEN** `requirement-spec.md` existe con `Estado: Ready`
 - **THEN** el skill continúa al siguiente paso
 
-#### Scenario: Input ausente o en Doing
-- **WHEN** `requirement-spec.md` no existe o tiene `Estado: Doing`
+#### Scenario: Input ausente o en IN‑PROGRESS
+- **WHEN** `requirement-spec.md` no existe o tiene `Estado: IN‑PROGRESS`
 - **THEN** el skill informa al usuario que debe completar la fase Discovery primero y detiene la ejecución
 
 ### Requirement: ps-planning confirms output with transition feedback

@@ -69,7 +69,7 @@ If `{outputs_dir}/user_notes.md` exists:
 
 After grading, consider whether the evals themselves could be improved. Only surface suggestions when there's a clear gap.
 
-Good suggestions test meaningful outcomes — assertions that are hard to satisfy without actually doing the work correctly. Think about what makes an assertion *discriminating*: it passes when the skill genuinely succeeds and fails when it doesn't.
+Good suggestions test meaningful outcomes — assertions that are hard to satisfy without actually IN‑PROGRESS the work correctly. Think about what makes an assertion *discriminating*: it passes when the skill genuinely succeeds and fails when it doesn't.
 
 Suggestions worth raising:
 - An assertion that passed but would also pass for a clearly wrong output (e.g., checking filename existence but not file content)
@@ -94,7 +94,7 @@ Save results to `{outputs_dir}/../grading.json` (sibling to outputs_dir).
 - Evidence contradicts the expectation
 - The expectation cannot be verified from available information
 - The evidence is superficial — the assertion is technically satisfied but the underlying task outcome is wrong or incomplete
-- The output appears to meet the assertion by coincidence rather than by actually doing the work
+- The output appears to meet the assertion by coincidence rather than by actually IN‑PROGRESS the work
 
 **When uncertain**: The burden of proof to pass is on the expectation.
 

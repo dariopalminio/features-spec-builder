@@ -23,7 +23,7 @@ Implementa una historia SDD tarea por tarea siguiendo TDD. Su propósito es **ce
 [story.md: PLANNED/DONE]    ← precondición requerida (viene de story-plan/story-analyze)
      ↓
 story-implement  → Entry point de la implementación: ejecuta TDD tarea por tarea  ← aquí
-     │   Al iniciar: story.md → IMPLEMENTING/DOING
+     │   Al iniciar: story.md → IMPLEMENTING/IN‑PROGRESS
      │   Al finalizar: story.md → IMPLEMENTED/DONE + release.md checklist actualizado
      ↓
 [story.md: IMPLEMENTED/DONE]
@@ -41,7 +41,7 @@ story-implement   → Entry point de la implementación: ejecuta TDD tarea por t
 | Evento | status | substatus |
 |--------|--------|-----------|
 | Precondición requerida para ejecutar | `PLANNED` | `DONE` |
-| Antes de la primera tarea (Paso 2) | `IMPLEMENTING` | `DOING` |
+| Antes de la primera tarea (Paso 2) | `IMPLEMENTING` | `IN‑PROGRESS` |
 | Después de generar `implement-report.md` (Paso 4) | `IMPLEMENTED` | `DONE` |
 
 **Precondición:** `story-implement` solo puede ejecutarse si `story.md` tiene `status: PLANNED` + `substatus: DONE`. Si la precondición no se cumple, la ejecución se detiene con error descriptivo.
@@ -232,11 +232,11 @@ Mostrar resumen de carga:
    Tareas ya completadas:  <N>
 ```
 
-### 2e. Actualizar frontmatter a IMPLEMENTING/DOING
+### 2e. Actualizar frontmatter a IMPLEMENTING/IN‑PROGRESS
 
 Antes de ejecutar la primera tarea, actualizar el frontmatter de `story.md`:
 - `status: IMPLEMENTING`
-- `substatus: DOING`
+- `substatus: IN‑PROGRESS`
 
 Esta actualización debe ocurrir antes de procesar cualquier tarea del Paso 3.
 

@@ -12,7 +12,7 @@
 
 ## 3. Detección de conflicto WIP=1 (wip-conflict-detection)
 
-- [x] 3.1 Agregar sección "Verificar WIP=1" al inicio de `.claude/skills/ps-begin-intention/SKILL.md`: verificar si existe algún documento en `$SPECS_BASE/specs/projects/` con `Estado: Doing`, notificar al usuario y ofrecer las opciones (sobrescribir / retomar)
+- [x] 3.1 Agregar sección "Verificar WIP=1" al inicio de `.claude/skills/ps-begin-intention/SKILL.md`: verificar si existe algún documento en `$SPECS_BASE/specs/projects/` con `Estado: IN‑PROGRESS`, notificar al usuario y ofrecer las opciones (sobrescribir / retomar)
 
 ## 4. Validación de precondición con Estado: Ready
 

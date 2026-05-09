@@ -83,7 +83,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
 ## 2.1 Pipeline de Especificación de Proyectos (ProjectSpecFactory)
 
 - **FR-001**: Captura de intención inicial del proyecto
-    - **Descripción**: El sistema SHALL conducir una entrevista interactiva guiada para capturar el nombre del proyecto, el problema que resuelve, la visión, los beneficios clave, los criterios de éxito, las restricciones y los non-goals. El resultado se escribe en `$SPECS_BASE/specs/projects/project-intent.md` con `Estado: Doing`.
+    - **Descripción**: El sistema SHALL conducir una entrevista interactiva guiada para capturar el nombre del proyecto, el problema que resuelve, la visión, los beneficios clave, los criterios de éxito, las restricciones y los non-goals. El resultado se escribe en `$SPECS_BASE/specs/projects/project-intent.md` con `Estado: IN‑PROGRESS`.
     - **Prioridad**: Alta
     - **Usuario**: US-001, US-002
     - **Fuente**: FEAT-001, `.claude/skills/project-begin/SKILL.md`
@@ -113,7 +113,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
     - **Fuente**: FEAT-005, BR-039, BR-040
 
 - **FR-006**: Control de Pipeline de Proyecto con Work-In-Progress (WIP=1)
-    - **Descripción**: El sistema SHALL verificar al inicio de cada pipeline si existe un documento con `Estado: Doing`. Si existe, presenta al usuario las opciones "Sobrescribir" o "Retomar". No permite proyectos activos simultáneos sin confirmación explícita.
+    - **Descripción**: El sistema SHALL verificar al inicio de cada pipeline si existe un documento con `Estado: IN‑PROGRESS`. Si existe, presenta al usuario las opciones "Sobrescribir" o "Retomar". No permite proyectos activos simultáneos sin confirmación explícita.
     - **Prioridad**: Alta
     - **Usuario**: US-001, US-002
     - **Fuente**: FEAT-006, BR-037, BR-038
@@ -165,7 +165,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
     - **Fuente**: FEAT-013, BR-006, BR-049
 
 - **FR-014**: Refinamiento iterativo de historias con ciclo completo
-    - **Descripción**: El sistema SHALL orquestar un ciclo completo de creación → evaluación → división → mejora de historias con control de backlog (Estado: Doing/Ready) y gate anti-bucle que solicita confirmación del usuario antes de reiterar. El sistema SHALL invocar al agente `story-product-owner` para fortalecer la redacción antes de re-evaluar.
+    - **Descripción**: El sistema SHALL orquestar un ciclo completo de creación → evaluación → división → mejora de historias con control de backlog (Estado: IN‑PROGRESS/Ready) y gate anti-bucle que solicita confirmación del usuario antes de reiterar. El sistema SHALL invocar al agente `story-product-owner` para fortalecer la redacción antes de re-evaluar.
     - **Prioridad**: Alta
     - **Usuario**: US-003
     - **Fuente**: FEAT-014, BR-028, BR-029, BR-030, BR-031, BR-036
@@ -294,7 +294,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
     - **Criterio de aceptación**: Todos los outputs del pipeline son archivos `.md` en `$SPECS_BASE/specs/projects/` y `$SPECS_BASE/specs/stories/`. No existe ningún archivo de configuración de base de datos en el repositorio.
 
 - **NFR-004**: Control de estado mediante campo `substatus` en documentos
-    - **Descripción**: El sistema SHALL usar el campo `**Estado**: Doing | Ready` en los documentos Markdown como mecanismo de control de flujo y lock distribuido. Este campo es el único mecanismo de estado persistente reconocido por todos los skills y agentes.
+    - **Descripción**: El sistema SHALL usar el campo `**Estado**: IN‑PROGRESS | Ready` en los documentos Markdown como mecanismo de control de flujo y lock distribuido. Este campo es el único mecanismo de estado persistente reconocido por todos los skills y agentes.
     - **Prioridad**: Alta
     - **Criterio de aceptación**: Ningún skill avanza al siguiente paso si el documento de entrada no tiene `Estado: Ready`.
 
@@ -315,7 +315,7 @@ Los builders, freelancers, desarrolladores y equipos ágiles que usan IA para ac
 - **NFR-007**: Control de acceso basado en precondiciones de documento
     - **Descripción**: El sistema SHALL implementar el control de avance de pipeline exclusivamente mediante verificación del campo `substatus` del documento de entrada requerido. No se implementa autenticación de usuarios ni roles de sistema.
     - **Prioridad**: Alta
-    - **Criterio de aceptación**: El skill `project-discovery` no ejecuta si `project-intent.md` no existe o tiene `Estado: Doing`. El skill `project-planning` no ejecuta si `requirement-spec.md` no está en `Estado: Ready`. [DIRECT — BR-013, BR-014, BR-015, BR-016]
+    - **Criterio de aceptación**: El skill `project-discovery` no ejecuta si `project-intent.md` no existe o tiene `Estado: IN‑PROGRESS`. El skill `project-planning` no ejecuta si `requirement-spec.md` no está en `Estado: Ready`. [DIRECT — BR-013, BR-014, BR-015, BR-016]
 
 ### 2.2.5 Usabilidad y Experiencia del Desarrollador
 
@@ -360,7 +360,7 @@ El sistema es un framework CLI/conversacional sin interfaz gráfica. La "interfa
 - **Entrevista conversacional**: Los agentes formulan preguntas en grupos de 3-4 por ronda, esperando respuesta antes de continuar.
 - **Gates de revisión explícitos**: Antes de avanzar entre fases, el sistema presenta un resumen y solicita confirmación con opciones binarias ("Sí, continuar" / "No, necesito ajustes").
 - **Control de conflictos WIP con opciones claras**: Ante conflicto WIP=1, el sistema presenta exactamente dos opciones ("Sobrescribir" / "Retomar") sin lógica ambigua.
-- **Gate anti-bucle en refinamiento**: En `story-refine`, el sistema siempre pide confirmación antes de reiterar, ofreciendo tres salidas explícitas: "Seguir iterando ahora" / "Cerrar manualmente en Ready" / "Dejar en Doing para retomar luego".
+- **Gate anti-bucle en refinamiento**: En `story-refine`, el sistema siempre pide confirmación antes de reiterar, ofreciendo tres salidas explícitas: "Seguir iterando ahora" / "Cerrar manualmente en Ready" / "Dejar en IN‑PROGRESS para retomar luego".
 
 # 3. Diseño de interfaz gráfica (UI) y experiencia de usuario (UX)
 
@@ -390,12 +390,12 @@ AGILE SDDF — Sistema de Invocación de Skills
 │   │
 │   ├── [Fase 1] project-begin 
 │   │   ├── Precondición: ninguna (entry point del pipeline)
-│   │   ├── Guard WIP=1: detecta doc en Estado: Doing 
+│   │   ├── Guard WIP=1: detecta doc en Estado: IN‑PROGRESS 
 │   │   ├── Agente delegado: project-pm
 │   │   ├── Output: docs/specs/projects/project-intent.md
 │   │   └── [Bifurcación] Estado del output:
 │   │       ├── No existe → Crear (flujo normal)
-│   │       ├── Estado: Doing → Retomar (flujo de retoma)
+│   │       ├── Estado: IN‑PROGRESS → Retomar (flujo de retoma)
 │   │       └── Estado: Ready → Confirmar sobrescritura
 │   │
 │   ├── [Fase 2] project-discovery 
@@ -405,7 +405,7 @@ AGILE SDDF — Sistema de Invocación de Skills
 │   │   ├── Output: docs/specs/projects/project.md
 │   │   └── [Bifurcación] Estado del output:
 │   │       ├── No existe → Crear
-│   │       ├── Estado: Doing → Retomar
+│   │       ├── Estado: IN‑PROGRESS → Retomar
 │   │       └── Estado: Ready → Confirmar sobrescritura
 │   │
 │   └── [Fase 3] project-planning 
@@ -417,7 +417,7 @@ AGILE SDDF — Sistema de Invocación de Skills
 │       ├── Output: docs/specs/projects/project-plan.md
 │       └── [Bifurcación] Estado del output:
 │           ├── No existe → Crear
-│           ├── Estado: Doing → Retomar
+│           ├── Estado: IN‑PROGRESS → Retomar
 │           └── Estado: Ready → Pipeline completo
 │
 ├── PIPELINE B: ProjectSpecFactory — Pasos individuales 
@@ -462,10 +462,10 @@ AGILE SDDF — Sistema de Invocación de Skills
 │   │   └── Output: N × docs/specs/stories/story-{slug}.md
 │   │
 │   └── story-refine   ← orquestador del ciclo completo
-│       ├── Precondición: ninguna (detecta historias en Estado: Doing en docs/specs/stories/)
+│       ├── Precondición: ninguna (detecta historias en Estado: IN‑PROGRESS en docs/specs/stories/)
 │       ├── [Bifurcación] Estado inicial:
-│       │   ├── Historias en Estado: Doing → ofrecer retomar o crear nueva
-│       │   └── Sin historias en Doing → crear historia nueva
+│       │   ├── Historias en Estado: IN‑PROGRESS → ofrecer retomar o crear nueva
+│       │   └── Sin historias en IN‑PROGRESS → crear historia nueva
 │       ├── Ciclo (por historia activa):
 │       │   ├── story-creation → genera historia
 │       │   ├── [Opcional] story-product-owner → aclarar contexto, mejorar redacción
@@ -473,7 +473,7 @@ AGILE SDDF — Sistema de Invocación de Skills
 │       │   ├── Si DIVIDIR/RECHAZAR → story-split → historias derivadas al backlog
 │       │   └── Si REFINAR/RECHAZAR → story-product-owner → mejorar → re-evaluar
 │       ├── Gate anti-bucle: pide confirmación al usuario antes de reiterar
-│       └── Output: historias en docs/specs/stories/ con Estado: Doing o Ready
+│       └── Output: historias en docs/specs/stories/ con Estado: IN‑PROGRESS o Ready
 │
 ├── PIPELINE E: OpenSpec Change Management 
 │   │
@@ -568,8 +568,8 @@ Sin referencias.
 | **Skill** | Archivo Markdown (SKILL.md) que define una habilidad especializada para un agente de IA. Actúa como punto de entrada y orquestador. |
 | **Agente** | Subprocesador especializado definido en un archivo Markdown (`.agent.md`). Invocado por un skill. |
 | **Pipeline ProjectSpecFactory** | Flujo secuencial de tres fases: Begin Intention → Discovery → Planning |
-| **WIP** | Work In Progress — en este sistema, restricción de máximo 1 proyecto activo (`Estado: Doing`) simultáneamente |
-| **Estado: Doing** | Campo de control de flujo que indica que un documento está en progreso y puede ser retomado |
+| **WIP** | Work In Progress — en este sistema, restricción de máximo 1 proyecto activo (`Estado: IN‑PROGRESS`) simultáneamente |
+| **Estado: IN‑PROGRESS** | Campo de control de flujo que indica que un documento está en progreso y puede ser retomado |
 | **Estado: Ready** | Campo de control de flujo que indica que un documento está completo y actúa como precondición para el siguiente paso del pipeline |
 | **FINVEST** | Rúbrica de evaluación de historias: Formato + INVEST (Independent, Negotiable, Valuable, Estimable, Small, Testable) |
 | **INVEST** | Criterios de calidad de historias de usuario: Independent, Negotiable, Valuable, Estimable, Small, Testable |

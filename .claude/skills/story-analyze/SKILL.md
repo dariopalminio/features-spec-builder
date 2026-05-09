@@ -21,7 +21,7 @@ El skill nunca modifica los artefactos que analiza. Solo lee, correlaciona y gen
 ## Posicionamiento
 
 ```
-[story.md: PLANNING/DOING]  ← seteado por story-plan al inicio del pipeline
+[story.md: PLANNING/IN‑PROGRESS]  ← seteado por story-plan al inicio del pipeline
      ↓
 story.md   → What: requisitos, criterios de aceptación, comportamiento esperado
 design.md  → How: arquitectura, componentes, interfaces, decisiones técnicas
@@ -36,7 +36,7 @@ analyze.md → Check: coherencia entre los tres ← aquí (ejecutar después de 
 | Condición al finalizar | status | substatus |
 |------------------------|--------|-----------|
 | Sin inconsistencias ERROR-level | `PLANNED` | `DONE` |
-| Con inconsistencias ERROR-level | `PLANNING` | `DOING` (sin cambio — dejar como está) |
+| Con inconsistencias ERROR-level | `PLANNING` | `IN‑PROGRESS` (sin cambio — dejar como está) |
 
 La actualización de estado ocurre tanto en modo manual como en modo Agent (invocado por `story-plan`).
 
@@ -347,8 +347,8 @@ Después de guardar `analyze.md`, evaluar si hay inconsistencias de tipo ERROR (
 
 **Si hay ERROREs (inconsistencias bloqueantes):**
 - NO actualizar el frontmatter de `story.md`
-- El estado permanece en `PLANNING/DOING` (o el que tuviera antes)
-- Registrar internamente: `Estado story.md: PLANNING/DOING (no actualizado — hay ERROREs)`
+- El estado permanece en `PLANNING/IN‑PROGRESS` (o el que tuviera antes)
+- Registrar internamente: `Estado story.md: PLANNING/IN‑PROGRESS (no actualizado — hay ERROREs)`
 
 ---
 
@@ -372,7 +372,7 @@ Mostrar al usuario:
    · <N> ERROR(ES) — requieren corrección antes de implementar
    · <N> WARNING(S) — revisar pero no bloquean
 
-   Estado story.md: <PLANNED/DONE ✓ | PLANNING/DOING — hay ERROREs pendientes>
+   Estado story.md: <PLANNED/DONE ✓ | PLANNING/IN‑PROGRESS — hay ERROREs pendientes>
 ```
 
 Si hay ERROREs:
@@ -381,7 +381,7 @@ Si hay ERROREs:
    Corrige los ERROREs en design.md o tasks.md antes de comenzar la implementación.
    Sugerencias en: <ruta>/analyze.md → sección "Recomendaciones"
 
-   Estado story.md: PLANNING/DOING (no se actualizó a PLANNED — hay ERROREs)
+   Estado story.md: PLANNING/IN‑PROGRESS (no se actualizó a PLANNED — hay ERROREs)
 ```
 
 Si solo hay WARNINGs o está todo OK:

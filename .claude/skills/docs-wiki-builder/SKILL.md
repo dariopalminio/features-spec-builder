@@ -139,7 +139,7 @@ Construye `$SPECS_BASE/index.md` listando todos los archivos `.md` encontrados e
    title: "Índice de documentación"
    date: <fecha-actual YYYY-MM-DD>
    status: IN-PROGRESS
-   substatus: DOING
+   substatus: IN‑PROGRESS
    parent: null
    ---
    ```

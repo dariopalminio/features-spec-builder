@@ -10,8 +10,8 @@ El sistema SHALL proveer un skill en `.claude/skills/ps-discovery/SKILL.md` que 
 ### Requirement: ps-discovery reads existing document state
 El skill SHALL leer el campo `**Estado**:` de `$SPECS_BASE/specs/projects/project.md` si existe, aplicando la lógica de `skill-state-detection`.
 
-#### Scenario: Document in Doing state
-- **WHEN** `requirement-spec.md` existe con `Estado: Doing`
+#### Scenario: Document in IN‑PROGRESS state
+- **WHEN** `requirement-spec.md` existe con `Estado: IN‑PROGRESS`
 - **THEN** el skill MUST activar el flujo de retoma definido en `project-retake`
 
 #### Scenario: Document in Ready state
@@ -25,8 +25,8 @@ Antes de delegar al agente, el skill SHALL verificar que `$SPECS_BASE/specs/proj
 - **WHEN** `project-intent.md` existe con `Estado: Ready`
 - **THEN** el skill continúa al siguiente paso sin interrumpir al usuario
 
-#### Scenario: Input ausente o en Doing
-- **WHEN** `project-intent.md` no existe o tiene `Estado: Doing`
+#### Scenario: Input ausente o en IN‑PROGRESS
+- **WHEN** `project-intent.md` no existe o tiene `Estado: IN‑PROGRESS`
 - **THEN** el skill informa al usuario que debe completar la fase Begin Intention primero y detiene la ejecución
 
 ### Requirement: ps-discovery confirms output with transition feedback

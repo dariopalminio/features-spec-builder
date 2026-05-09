@@ -5,7 +5,7 @@ id: <PROJ-NN>
 slug: < nombre-del-directorio-del-proyecto-project-plan >
 title: "<primer # heading del documento>"
 status: PLANNING
-substatus: DOING
+substatus: IN‑PROGRESS
 parent: null
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>

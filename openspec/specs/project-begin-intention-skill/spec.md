@@ -8,21 +8,21 @@ El sistema SHALL incluir un skill en `.claude/skills/project-begin/SKILL.md` con
 - **THEN** el sistema MUST cargar y ejecutar `.claude/skills/project-begin/SKILL.md`
 
 ### Requirement: project-begin checks WIP conflict before starting
-Al inicio, el skill SHALL verificar si existe un proyecto activo con `Estado: Doing` antes de comenzar la entrevista, aplicando la logica de `wip-conflict-detection`.
+Al inicio, el skill SHALL verificar si existe un proyecto activo con `Estado: IN‑PROGRESS` antes de comenzar la entrevista, aplicando la logica de `wip-conflict-detection`.
 
 #### Scenario: No WIP conflict
-- **WHEN** no existe ningun documento en `$SPECS_BASE/specs/projects/` con `Estado: Doing`
+- **WHEN** no existe ningun documento en `$SPECS_BASE/specs/projects/` con `Estado: IN‑PROGRESS`
 - **THEN** el skill MUST continuar directamente a verificar precondiciones del template
 
 #### Scenario: WIP conflict detected
-- **WHEN** existe al menos un documento con `Estado: Doing`
+- **WHEN** existe al menos un documento con `Estado: IN‑PROGRESS`
 - **THEN** el skill MUST notificar y ofrecer las opciones definidas en `wip-conflict-detection`
 
 ### Requirement: project-begin reads existing document state
 El skill SHALL leer el campo `**Estado**:` de `$SPECS_BASE/specs/projects/project-intent.md` si existe, aplicando la logica de `skill-state-detection`.
 
-#### Scenario: Document in Doing state
-- **WHEN** `project-intent.md` existe con `Estado: Doing`
+#### Scenario: Document in IN‑PROGRESS state
+- **WHEN** `project-intent.md` existe con `Estado: IN‑PROGRESS`
 - **THEN** el skill MUST activar el flujo de retoma definido en `project-retake`
 
 #### Scenario: Document in Ready state
