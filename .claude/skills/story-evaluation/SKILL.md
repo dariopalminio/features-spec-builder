@@ -13,6 +13,13 @@ Evalúa la calidad de una historia de usuario aplicando la rúbrica **FINVEST** 
 
 ---
 
+## Modos de Ejecución
+
+- **Modo manual** (`/story-evaluation`): el usuario proporciona el texto, identificador o ruta de la historia; el skill muestra el reporte completo con scores, decisión y recomendaciones
+- **Modo Agent** (invocado por `story-refine` u orquestador): automático, recibe la historia como contexto, retorna la decisión (`APROBADA` / `REFINAR` / `RECHAZAR` / `DIVIDIR`) y el reporte para que el orquestador actualice el estado de `story.md`
+
+---
+
 ## Restricciones de entrada
 
 **Imágenes adjuntas:** Si el input incluye imágenes adjuntas (wireframes, screenshots u otros archivos binarios de imagen), **ignóralas completamente**. No intentes procesarlas, interpretarlas ni extraer información de ellas. Evalúa únicamente el contenido en texto (Markdown) de la historia de usuario.

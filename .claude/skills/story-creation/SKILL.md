@@ -14,6 +14,13 @@ Crea una historia de usuario completa a partir de una necesidad o feature descri
 
 ---
 
+## Modos de Ejecución
+
+- **Modo manual** (`/story-creation {texto de descripción}`): el usuario proporciona la historia a crear en lenguaje natural, y el proceso es interactivo, muestra progreso en tiempo real
+- **Modo Agent** (invocado por orquestador de nivel superior): automático, reporta resultado
+
+---
+
 ## Template canónico (fuente de verdad)
 
 ### paso A. Verificar que el template existe y leerlo

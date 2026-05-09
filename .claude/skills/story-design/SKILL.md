@@ -281,11 +281,13 @@ Para cada sección y placeholder del template, seguir este procedimiento:
 ```yaml
 type: design
 id: <FEAT-NNN>              # ID de la historia origen
-slug: <slug-historia>
+slug: <slug-historia-design>
 title: "Design: <título>"
 story: <FEAT-NNN>
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>
+related:                              
+  - <slug-historia>
 ```
 
 ---

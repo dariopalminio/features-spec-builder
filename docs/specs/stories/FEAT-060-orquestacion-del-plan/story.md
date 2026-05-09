@@ -4,8 +4,8 @@ type: story
 id: FEAT-060
 slug: FEAT-060-orquestacion-del-plan
 title: "Orquestación del plan (story-plan)"
-status: PLANNED
-substatus: TODO
+status: DELIVERED
+substatus: DONE
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-06
 updated: 2026-05-06

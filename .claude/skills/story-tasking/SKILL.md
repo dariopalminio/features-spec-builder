@@ -249,7 +249,6 @@ story: <FEAT-NNN>
 design: <FEAT-NNN>
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>
-parent: null
 related:                              
   - <slug-de-la-story-relacionada>
 ```

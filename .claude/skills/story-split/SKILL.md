@@ -21,6 +21,13 @@ Toma una historia grande, épica o feature demasiado amplio y lo divide en histo
 
 ---
 
+## Modos de Ejecución
+
+- **Modo manual** (`/story-split {story_id}`): el usuario proporciona la historia a dividir (ruta de archivo o identificador de story)
+- **Modo Agent** (invocado por orquestador de nivel superior): automático, reporta resultado
+
+---
+
 ## Paso 0 — Verificar entorno (`skill-preflight`)
 
 Invocar `skill-preflight` antes de cualquier operación con archivos. El preflight verifica `SDDF_ROOT`, resuelve `SPECS_BASE` (fallback: `docs`) y confirma los subdirectorios de specs estándar. Si retorna `✗ Entorno inválido`, detener la ejecución.
