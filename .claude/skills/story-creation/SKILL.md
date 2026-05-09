@@ -217,7 +217,7 @@ Si el directorio `FEAT-{NNN}-{slug}/` ya existe, incrementar NNN hasta encontrar
 En el archivo `story.md`, completar los campos del frontmatter con los valores resueltos:
 - `id: FEAT-{NNN}`
 - `slug: FEAT-{NNN}-{slug}`
-- `status: REFINING` — estado inicial de toda historia creada directamente (pendiente de evaluación)
+- `status: SPECIFYING` — estado inicial de toda historia creada directamente (pendiente de evaluación)
 
 #### Mostrar resumen en pantalla
 

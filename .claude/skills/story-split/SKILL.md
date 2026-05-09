@@ -1,6 +1,6 @@
 ---
 name: story-split
-description: "Divide una historia de usuario grande en historias más pequeñas e independientes usando los 8 patrones de splitting. Cada historia resultante sigue el template story-gherkin (Como/Quiero/Para + Gherkin) y cumple INVEST."
+description: "Divide una historia de usuario épica o demasiado grande en historias más pequeñas e independientes. Usar cuando una historia tiene S≤2 en evaluación FINVEST, ≥4 escenarios Gherkin, múltiples flujos de usuario bundleados, o el equipo no puede estimarla. Aplica los 8 patrones de splitting de Richard Lawrence. Cada historia resultante sigue el template story-template.md (Como/Quiero/Para + Gherkin) y cumple criterios INVEST. El directorio original se reutiliza como historia core (happy path), las adicionales reciben IDs nuevos."
 ---
 
 # Skill: /story-split
@@ -18,6 +18,18 @@ Toma una historia grande, épica o feature demasiado amplio y lo divide en histo
 - La historia ya es pequeña y bien acotada (no sobre-dividir)
 - El splitting crearía dependencias que bloquean entrega
 - Es una tarea técnica sin valor de usuario directo
+
+## Flags opcionales
+
+| Flag | Comportamiento |
+|---|---|
+| `--dry-run` | Muestra el plan de splitting (patrón, historias propuestas, core designada) sin crear ni modificar ningún archivo |
+| `--pattern N` | Fuerza el patrón de splitting 1–8, saltando la selección automática de Fase 2 |
+| `--core N` | Designa manualmente qué historia del split (por número de orden) será la core; omite la selección automática de Fase 3.5 |
+
+## Idempotencia
+
+Si el directorio de la historia original ya fue renombrado (el slug no coincide con el directorio existente), el skill lo detecta y omite el renombrado sin error. Si los directorios de las historias adicionales ya existen, informa al usuario y no los sobreescribe.
 
 ---
 
@@ -220,6 +232,19 @@ Lee el archivo de plantilla (template canónico) `$SPECS_BASE/specs/templates/st
 
 ---
 
+### Fase 3.5 — Identificar la historia core
+
+Antes de escribir las historias, designar cuál de las historias resultantes será la **historia core**. La historia core hereda el ID original y su directorio (renombrado); no recibe un ID nuevo.
+
+**Criterios de selección (en orden de prioridad):**
+1. La historia que contiene el **escenario principal / happy path** del flujo original
+2. La historia que aporta el mayor valor independiente si se entrega sola
+3. La historia que el equipo implementaría primero
+
+Documentar internamente `CORE = Historia N` antes de continuar con la Fase 4.
+
+---
+
 ### Fase 4 — Escribir cada historia resultante
 
 Cada historia del split debe seguir **estrictamente** el template `$SPECS_BASE/specs/templates/story-template.md` anteriormente leido, adaptando el contenido a cada historia específica. No agregar ni eliminar secciones del template, solo llenar cada sección con la información correspondiente a la historia resultante. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución, infiriendo la información, para asegurar flexibilidad ante cambios futuros en la estructura del template.
@@ -282,19 +307,34 @@ Si alguna historia no cumple **V** (no entrega valor por sí sola), revisar el p
 
 ### Fase 6 — Guardar y entregar el output
 
-#### Derivar IDs consecutivos (FEAT-NNN)
+#### Derivar IDs para las historias resultantes
 
-Antes de escribir los archivos, determinar los IDs para todas las historias resultantes:
+La **historia core** (identificada en Fase 3.5) conserva el ID de la historia original — no se le asigna un ID nuevo.
+
+Las **historias adicionales** (las demás splits) reciben IDs nuevos consecutivos:
 
 1. Listar todos los subdirectorios de `$SPECS_BASE/specs/stories/` cuyo nombre comience con `FEAT-`.
 2. Extraer los números de todos los prefijos `FEAT-NNN` encontrados.
-3. Tomar el número más alto y asignar IDs consecutivos desde ese punto: `FEAT-(N+1)`, `FEAT-(N+2)`, etc.
-4. Si no hay ninguno, comenzar en `FEAT-001`.
+3. Tomar el número más alto y asignar IDs desde ese punto: `FEAT-(N+1)`, `FEAT-(N+2)`, etc.
+4. Si no hay ninguno, comenzar en `FEAT-002` (reservando `FEAT-001` para la core).
 5. Formatear con ceros a la izquierda hasta 3 dígitos.
 
-#### Guardar cada historia como directorio + archivo
+#### Repurpose del directorio original como historia core
 
-Por cada historia resultante del split, crear en `$SPECS_BASE/specs/stories/`:
+1. Renombrar el directorio `FEAT-{NNN}-{slug-original}/` a `FEAT-{NNN}-{slug-core}/`
+   - El `{slug-core}` se deriva del `Quiero` de la historia core (mismas reglas: kebab-case, máx. 5 palabras, sin acentos ni caracteres especiales)
+2. Reescribir `story.md` dentro del directorio renombrado con el contenido completo de la historia core
+3. Actualizar su frontmatter:
+   - `id: FEAT-{NNN}` (conservado)
+   - `slug: FEAT-{NNN}-{slug-core}` (actualizado)
+   - `status: SPECIFYING`
+   - `substatus: IN‑PROGRESS`
+   - Campo `related:` con los IDs de las historias adicionales: `[FEAT-{N+1}, FEAT-{N+2}, ...]`
+4. Advertir al usuario (en el resumen final) que el directorio fue renombrado y que cualquier referencia al slug anterior en otros documentos debe actualizarse manualmente
+
+#### Guardar cada historia adicional como directorio + archivo
+
+Por cada historia adicional (no-core) resultante del split, crear en `$SPECS_BASE/specs/stories/`:
 
 **Reglas de nomenclatura:**
 - **Directorio:** `FEAT-{NNN}-{slug}/`
@@ -305,7 +345,7 @@ Por cada historia resultante del split, crear en `$SPECS_BASE/specs/stories/`:
   - `$SPECS_BASE/specs/stories/FEAT-054-subir-imagenes-perfil/story.md`
   - `$SPECS_BASE/specs/stories/FEAT-055-recuperar-contrasena/story.md`
 
-**Actualizar frontmatter** de cada `story.md` con `id: FEAT-{NNN}`, `slug: FEAT-{NNN}-{slug}` y `status: REFINING` — estado inicial de toda historia resultante de un split (pendiente de re-evaluación).
+**Actualizar frontmatter** de cada `story.md` con `id: FEAT-{NNN}`, `slug: FEAT-{NNN}-{slug}` y `status: SPECIFYING` — estado inicial de toda historia resultante de un split (pendiente de re-evaluación).
 
 **Contenido de cada archivo:** la historia completa en formato `story-template.md`, sin encabezados adicionales de sección (`## Historia 1`, etc.) — solo el contenido de la historia.
 
@@ -336,9 +376,12 @@ Después de guardar los archivos, mostrar el siguiente resumen en la conversaci�
 [Qué quedó fuera de scope, dependencias entre historias si las hay, sugerencias de orden de implementación]
 
 ## Archivos generados
-- `$SPECS_BASE/specs/stories/FEAT-{NNN}-{slug-1}/story.md`
-- `$SPECS_BASE/specs/stories/FEAT-{NNN+1}-{slug-2}/story.md`
-- ...
+- `$SPECS_BASE/specs/stories/FEAT-{NNN}-{slug-core}/story.md` ← **repurposed** (era `FEAT-{NNN}-{slug-original}/`)
+- `$SPECS_BASE/specs/stories/FEAT-{N+1}-{slug-2}/story.md` ← nuevo
+- `$SPECS_BASE/specs/stories/FEAT-{N+2}-{slug-3}/story.md` ← nuevo
+
+> ⚠️ El directorio `FEAT-{NNN}-{slug-original}/` fue renombrado a `FEAT-{NNN}-{slug-core}/`.
+> Actualiza manualmente cualquier referencia al slug anterior en `release.md` u otros documentos.
 ```
 
 Si se generaron TADs en lugar de historias, explicar claramente que son experimentos previos a la escritura de historias. Los TADs **no se guardan como archivos**.
@@ -354,6 +397,7 @@ Si se generaron TADs en lugar de historias, explicar claramente que son experime
 | Splits con el mismo `Para` | Se dividió la acción pero no el valor | Cada split debe tener un beneficio diferenciado |
 | Dependencias duras entre splits: "el 2 bloquea al 3" | Anula el beneficio del splitting | Reordenar o replantear el patrón para minimizar bloqueos |
 | Split arbitrario: "primera mitad / segunda mitad" | Sin racionalidad de valor o workflow | Usar uno de los 8 patrones con justificación explícita |
+| Dejar la historia original con `status: SPLIT` como huérfana | El ID queda inutilizado; el backlog acumula ruido; git history pierde trazabilidad de la evolución | Repurpose el directorio y archivo originales como la historia core (Fase 3.5 + Fase 6) |
 
 ---
 
