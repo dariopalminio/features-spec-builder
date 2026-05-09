@@ -23,4 +23,4 @@ The `project-planning` skill currently jumps from `requirement-spec.md` directly
 - Modified file: `.claude/skills/project-planning/SKILL.md`
 - New input document consumed: `$SPECS_BASE/specs/projects/story-map.md` (produced by `project-story-mapping` skill)
 - No breaking changes: if story mapping is skipped or `story-map.md` is absent, the skill falls back to current behavior
-- Depends on: `project-story-mapping` skill and `project-story-mapper` agent (already implemented)
+- Depends on: `project-story-mapping` skill and `project-story-mapper` agent (already READY-FOR-CODE-REVIEW)

@@ -4,7 +4,7 @@ type: story
 id: FEAT-057
 slug: FEAT-057-skill-para-diseno
 title: "Skill para Diseño (story-design)"
-status: PLANNED
+status: READY-FOR-IMPLEMENT
 substatus: TODO
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-06

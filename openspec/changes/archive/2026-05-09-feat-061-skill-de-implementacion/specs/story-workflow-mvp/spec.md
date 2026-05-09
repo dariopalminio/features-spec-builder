@@ -7,7 +7,7 @@
 The system SHALL provide the `story-implement` skill as the code generation step of the SDD workflow, consuming `story.md`, `design.md`, and `tasks.md` to produce code following TDD methodology.
 
 #### Scenario: story-implement skill is available in the workflow
-- **WHEN** the repository is inspected after FEAT-061 is implemented
+- **WHEN** the repository is inspected after FEAT-061 is READY-FOR-CODE-REVIEW
 - **THEN** `.claude/skills/story-implement/SKILL.md` exists and can be invoked after `story-plan` to complete the full SDD cycle from specification to code
 
 ## MODIFIED Requirements

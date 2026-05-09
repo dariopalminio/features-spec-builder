@@ -11,7 +11,7 @@ Al finalizar exitosamente, cada skill SHALL confirmar al usuario con el path abs
 - **WHEN** el agente delegado completa su ejecución pero el documento de output no existe
 - **THEN** el skill MUST mostrar al usuario un mensaje de error y el comando a ejecutar para reintentar
 
-#### Scenario: Next command is accurately specified
+#### Scenario: Next command is accurately READY-FOR-PLAN
 - **WHEN** el skill `ps-begin-intention` confirma éxito
 - **THEN** el siguiente comando indicado MUST ser `/ps-discovery`
 

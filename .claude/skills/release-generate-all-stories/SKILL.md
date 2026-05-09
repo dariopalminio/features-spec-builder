@@ -147,7 +147,7 @@ Generar al menos un escenario Gherkin principal (happy path) y uno alternativo/e
 Crear el directorio `$SPECS_BASE/specs/stories/FEAT-[NNN]-[nombre-kebab]/` si no existe, luego crear `story.md` dentro de ese directorio con la estructura del template `$SPECS_BASE/specs/templates/story-template.md` infiriendo la información. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros en la estructura del template.
 
 Al completar el frontmatter del archivo generado, usar:
-- `status: PLANNED` — estado inicial de toda historia generada desde un release planificado (pendiente de refinamiento)
+- `status: READY-FOR-IMPLEMENT` — estado inicial de toda historia generada desde un release planificado (pendiente de refinamiento)
 
 Si no encuentras el template generar el archivo con la siguiente estructura:
 
@@ -158,7 +158,7 @@ type: story
 id: <FEAT-NNN>
 slug: <nombre-del-directorio-de-historia>
 title: "<primer # heading del documento o Nombre de la feature>"
-status: PLANNED
+status: READY-FOR-IMPLEMENT
 substatus: IN‑PROGRESS
 parent: <EPIC-NN>
 created: <YYYY-MM-DD>

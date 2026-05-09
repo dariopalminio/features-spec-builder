@@ -18,16 +18,16 @@ Orquesta el flujo completo de planning de una historia SDD ejecutando los tres s
 ## Posicionamiento
 
 ```
-[story.md: SPECIFIED/DONE]  ← precondición implícita (viene de story-refine)
+[story.md: READY-FOR-PLAN/DONE]  ← precondición implícita (viene de story-refine)
      ↓
 story-plan   → Entry point: orquesta design → tasking → analyze  ← aquí
      │   Al iniciar: story.md → PLANNING/IN‑PROGRESS
      ↓
   story-design  → design.md
   story-tasking → tasks.md
-  story-analyze → analyze.md + story.md → PLANNED/DONE (si sin ERROREs)
+  story-analyze → analyze.md + story.md → READY-FOR-IMPLEMENT/DONE (si sin ERROREs)
      ↓
-[story.md: PLANNED/DONE]   → listo para story-implement
+[story.md: READY-FOR-IMPLEMENT/DONE]   → listo para story-implement
 ──────────────────────────────────────────────────────────────
 story.md     → What: requisitos, criterios de aceptación, comportamiento esperado
 design.md    → How: arquitectura, componentes, interfaces, decisiones técnicas
@@ -40,7 +40,7 @@ analyze.md   → Check: coherencia entre los tres artefactos
 | Evento | status | substatus |
 |--------|--------|-----------|
 | Inicio del pipeline (siempre, sin condición) | `PLANNING` | `IN‑PROGRESS` |
-| `story-analyze` finaliza sin ERROREs | `PLANNED` | `DONE` (gestionado por `story-analyze`) |
+| `story-analyze` finaliza sin ERROREs | `READY-FOR-IMPLEMENT` | `DONE` (gestionado por `story-analyze`) |
 
 La transición `PLANNING/IN‑PROGRESS` se aplica **incondicionalmente** al iniciar, independientemente del estado previo de la historia. Esto permite re-ejecutar el pipeline sobre historias en cualquier estado.
 
@@ -254,7 +254,7 @@ Usar los estados registrados en los pasos anteriores. Leyenda de estados:
 ✅ Planning completo
 
 Todos los artefactos están listos. La historia puede pasar a implementación.
-Estado de story.md: PLANNED/DONE ✓
+Estado de story.md: READY-FOR-IMPLEMENT/DONE ✓
 ```
 
 **Si `story-analyze` reportó inconsistencias (⚠️):**

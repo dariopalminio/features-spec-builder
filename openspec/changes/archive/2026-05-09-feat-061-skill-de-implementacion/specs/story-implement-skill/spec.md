@@ -28,7 +28,7 @@ The system SHALL process each pending task in `tasks.md` in order, generating a 
 - **THEN** the skill generates a test file for that task before generating the production code
 
 #### Scenario: All tasks complete successfully
-- **WHEN** all pending tasks in `tasks.md` are implemented without blockers
+- **WHEN** all pending tasks in `tasks.md` are READY-FOR-CODE-REVIEW without blockers
 - **THEN** all task checkboxes are marked `- [x]` and `implement-report.md` is generated with status ✓ for each task
 
 ### Requirement: Skill updates tasks.md in real time

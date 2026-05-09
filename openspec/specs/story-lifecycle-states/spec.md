@@ -14,15 +14,15 @@ The system SHALL define the story lifecycle as a linear state machine with the f
 | State | Substatus | Set by | Meaning |
 |---|---|---|---|
 | `SPECIFYING` | `IN‑PROGRESS` | `story-creation` / `story-refine` | La historia está siendo especificada |
-| `SPECIFIED` | `DONE` | `story-creation` / `story-refine` | Especificación aprobada (FINVEST APROBADA) |
+| `READY-FOR-PLAN` | `DONE` | `story-creation` / `story-refine` | Especificación aprobada (FINVEST APROBADA) |
 | `PLANNING` | `IN‑PROGRESS` | `story-plan` | El pipeline de planning está en curso |
-| `PLANNED` | `DONE` | `story-analyze` | Planning completo y artefactos coherentes |
+| `READY-FOR-IMPLEMENT` | `DONE` | `story-analyze` | Planning completo y artefactos coherentes |
 | `IMPLEMENTING` | `IN‑PROGRESS` | `story-implement` | Implementación en curso |
-| `IMPLEMENTED` | `DONE` | `story-implement` | Historia completamente implementada |
+| `READY-FOR-CODE-REVIEW` | `DONE` | `story-implement` | Historia completamente implementada |
 
 #### Scenario: State machine defines valid transitions
 - **WHEN** a skill updates the story status
-- **THEN** the transition MUST follow the sequence: `SPECIFYING/IN‑PROGRESS → SPECIFIED/DONE → PLANNING/IN‑PROGRESS → PLANNED/DONE → IMPLEMENTING/IN‑PROGRESS → IMPLEMENTED/DONE`
+- **THEN** the transition MUST follow the sequence: `SPECIFYING/IN‑PROGRESS → READY-FOR-PLAN/DONE → PLANNING/IN‑PROGRESS → READY-FOR-IMPLEMENT/DONE → IMPLEMENTING/IN‑PROGRESS → READY-FOR-CODE-REVIEW/DONE`
 
 ### Requirement: Stories without explicit status are treated as BACKLOG/TODO
 The system SHALL treat any `story.md` without a `status` field (or with `status: BACKLOG`) as being in the initial `BACKLOG/TODO` state, allowing all skills to operate on it without precondition failures.

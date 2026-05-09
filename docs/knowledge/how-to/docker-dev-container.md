@@ -110,7 +110,7 @@ Crear archivo .devcontainer/devcontainer.json:
 
 ⚠️ Problema Común Solucionado
 Error:
-The system cannot find the file specified
+The system cannot find the file READY-FOR-PLAN
 
 ✔ Solución:
 Usar ruta relativa correcta:

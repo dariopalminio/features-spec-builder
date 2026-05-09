@@ -11,7 +11,7 @@ The system SHALL update `status: PLANNING` and `substatus: IN‑PROGRESS` in `st
 - **THEN** `story.md` frontmatter MUST be updated to `status: PLANNING` and `substatus: IN‑PROGRESS` before any sub-skill (`story-design`, `story-tasking`, `story-analyze`) is invoked
 
 #### Scenario: Status set regardless of previous state
-- **WHEN** `/story-plan` is invoked on a story in any state (BACKLOG, SPECIFIED, PLANNED, etc.)
+- **WHEN** `/story-plan` is invoked on a story in any state (BACKLOG, READY-FOR-PLAN, READY-FOR-IMPLEMENT, etc.)
 - **THEN** the skill sets `status: PLANNING` / `substatus: IN‑PROGRESS` unconditionally, allowing re-execution for artifact regeneration
 
 #### Scenario: Status update reported in pipeline summary

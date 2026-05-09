@@ -48,7 +48,7 @@ The `approval-agent` SHALL analyze the input documents from three distinct persp
 
 #### Scenario: Architect lens produces technical findings
 - **WHEN** the agent applies the Architect lens
-- **THEN** it identifies under-specified NFRs, missing integration points, and technical risk areas
+- **THEN** it identifies under-READY-FOR-PLAN NFRs, missing integration points, and technical risk areas
 
 #### Scenario: UX lens produces user-journey findings
 - **WHEN** the agent applies the UX lens

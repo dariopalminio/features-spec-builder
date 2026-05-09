@@ -4,7 +4,7 @@ type: story
 id: FEAT-099
 slug: FEAT-099-exportar-datos-csv
 title: "Exportar datos en CSV"
-status: PLANNED
+status: READY-FOR-IMPLEMENT
 substatus: TODO
 parent: EPIC-10-data-management
 created: 2026-05-07

@@ -10,12 +10,12 @@ The system SHALL update `status: SPECIFYING` and `substatus: IN‑PROGRESS` in `
 - **WHEN** `/story-refine` (or `/story-creation`) begins a new or existing story
 - **THEN** `story.md` frontmatter MUST be updated to `status: SPECIFYING` and `substatus: IN‑PROGRESS` before any sub-skill is invoked
 
-### Requirement: story-refine sets SPECIFIED/DONE when FINVEST approves
-The system SHALL update `status: SPECIFIED` and `substatus: DONE` in `story.md` frontmatter when `story-evaluation` returns `APROBADA`.
+### Requirement: story-refine sets READY-FOR-PLAN/DONE when FINVEST approves
+The system SHALL update `status: READY-FOR-PLAN` and `substatus: DONE` in `story.md` frontmatter when `story-evaluation` returns `APROBADA`.
 
 #### Scenario: Status updated on FINVEST approval
 - **WHEN** `story-evaluation` returns decision `APROBADA` during the `story-refine` flow
-- **THEN** `story.md` frontmatter MUST be updated to `status: SPECIFIED` and `substatus: DONE` before the skill terminates
+- **THEN** `story.md` frontmatter MUST be updated to `status: READY-FOR-PLAN` and `substatus: DONE` before the skill terminates
 
 #### Scenario: Status remains SPECIFYING/IN‑PROGRESS on non-approved evaluation
 - **WHEN** `story-evaluation` returns `REFINAR` or `RECHAZAR`
@@ -28,15 +28,15 @@ Cada historia en refinamiento SHALL mantener los campos `status` y `substatus` e
 
 Los valores válidos para el ciclo de refinement son:
 - `status: SPECIFYING` / `substatus: IN‑PROGRESS` — mientras el refinamiento está activo
-- `status: SPECIFIED` / `substatus: DONE` — cuando `story-evaluation` retorna `APROBADA`
+- `status: READY-FOR-PLAN` / `substatus: DONE` — cuando `story-evaluation` retorna `APROBADA`
 
 #### Scenario: Story remains SPECIFYING/IN‑PROGRESS during active refinement
 - **WHEN** una historia aún no cumple criterios de cierre (evaluación no aprobada)
 - **THEN** su `story.md` MUST tener `status: SPECIFYING` y `substatus: IN‑PROGRESS`
 
-#### Scenario: Story becomes SPECIFIED/DONE when FINVEST is approved
+#### Scenario: Story becomes READY-FOR-PLAN/DONE when FINVEST is approved
 - **WHEN** `story-evaluation` retorna decisión `APROBADA`
-- **THEN** el orquestador MUST actualizar `story.md` a `status: SPECIFIED` y `substatus: DONE`
+- **THEN** el orquestador MUST actualizar `story.md` a `status: READY-FOR-PLAN` y `substatus: DONE`
 
 #### Scenario: User decides to pause refinement
 - **WHEN** la decisión FINVEST es `REFINAR` o `RECHAZAR` y el usuario elige pausar

@@ -7,21 +7,21 @@ TBD - created by archiving change mvp-baseline. Update Purpose after archive.
 The system SHALL provide the `story-analyze` skill as a coherence audit step in the story SDD workflow, positioned after `story-tasking` and before implementation.
 
 #### Scenario: story-analyze skill is available in the workflow
-- **WHEN** the repository is inspected after FEAT-059 is implemented
+- **WHEN** the repository is inspected after FEAT-059 is READY-FOR-CODE-REVIEW
 - **THEN** `.claude/skills/story-analyze/SKILL.md` exists alongside `story-design` and `story-tasking` skills, completing the four-artifact story workflow
 
 ### Requirement: story-plan skill provides single-command planning entry point
 The system SHALL provide the `story-plan` skill as a pipeline orchestrator that executes the complete planning flow (`story-design → story-tasking → story-analyze`) with a single command.
 
 #### Scenario: story-plan skill is available in the workflow
-- **WHEN** the repository is inspected after FEAT-060 is implemented
+- **WHEN** the repository is inspected after FEAT-060 is READY-FOR-CODE-REVIEW
 - **THEN** `.claude/skills/story-plan/SKILL.md` exists and can be invoked as an alternative to running `story-design`, `story-tasking`, and `story-analyze` individually
 
 ### Requirement: story-implement skill provides single-command implementation entry point
 The system SHALL provide the `story-implement` skill as the code generation step of the SDD workflow, consuming `story.md`, `design.md`, and `tasks.md` to produce code following TDD methodology.
 
 #### Scenario: story-implement skill is available in the workflow
-- **WHEN** the repository is inspected after FEAT-061 is implemented
+- **WHEN** the repository is inspected after FEAT-061 is READY-FOR-CODE-REVIEW
 - **THEN** `.claude/skills/story-implement/SKILL.md` exists and can be invoked after `story-plan` to complete the full SDD cycle from specification to code
 
 ### Requirement: Core Workflow Skills Exist in Canonical Locations
@@ -33,7 +33,7 @@ The system SHALL provide the six story workflow skills at canonical paths under 
 
 #### Scenario: Full workflow produces observable status progression
 - **WHEN** a story goes through the complete workflow: `story-creation` → `story-plan` → `story-implement`
-- **THEN** the `status`/`substatus` sequence in `story.md` follows: `SPECIFYING/IN‑PROGRESS → SPECIFIED/DONE → PLANNING/IN‑PROGRESS → PLANNED/DONE → IMPLEMENTING/IN‑PROGRESS → IMPLEMENTED/DONE`
+- **THEN** the `status`/`substatus` sequence in `story.md` follows: `SPECIFYING/IN‑PROGRESS → READY-FOR-PLAN/DONE → PLANNING/IN‑PROGRESS → READY-FOR-IMPLEMENT/DONE → IMPLEMENTING/IN‑PROGRESS → READY-FOR-CODE-REVIEW/DONE`
 
 ### Requirement: Story Creation Produces Canonical Story-Gherkin Output
 The system SHALL generate a user story in canonical story-gherkin format from a natural-language need, including role, goal, measurable benefit, and at least one main acceptance scenario.

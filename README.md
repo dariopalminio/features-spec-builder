@@ -29,6 +29,8 @@ Los developers y equipos que trabajan con IA para desarrollar software carecen d
 - **User Story Mapping**: sesión colaborativa al estilo Jeff Patton para construir backbone, walking skeleton y release slices
 - **Gestión de épicas de releases**: planificación de releases con `project-plan.md` y generación automática de artefactos de release (feature specs, historias de usuario) con trazabilidad completa
 - **Gestión de historias de usuario**: creación (Como/Quiero/Para + Gherkin), evaluación con rúbrica FINVEST (Likert 1–5), splitting con 8 patrones y refinamiento iterativo
+- **Pipeline SDD completo de historia**: planning y implementación tarea a tarea — `story-plan` orquesta `story-design` → `story-tasking` → `story-analyze` en un solo comando; `story-implement` cierra el ciclo con TDD, generando test + código de producción por cada tarea con trazabilidad completa
+- **Políticas de proyecto**: generación de `constitution.md` y `definition-of-done.md` con `project-policies-generation`, registrando referencias automáticamente en `CLAUDE.md` / `AGENTS.md`
 - **Integración OpenSpec**: exploración, propuesta, implementación y archivado de cambios con trazabilidad completa
 - **Multi-runtime**: los mismos skills operan en Claude Code, GitHub Copilot, Codex/Cursor/OpenCode, Google Gemini Gems y Atlassian Rovo sin modificar el SKILL.md fuente
 - **Meta-framework**: crea, benchmarkea y distribuye nuevas skills con ciclo iterativo (skill-creator)
@@ -124,11 +126,15 @@ project-flow orquesta los 3 primeros pasos en una sola sesión con gates de revi
 
 releases-from-project-plan
 
-#### 3. L1: Pipeline de generación y refinamiento de historias
+#### 3. L1: Pipeline de generación y refinamiento de historias (SPECIFYING)
 
 release-generate-stories →
 
-story-creation → story-evaluation → story-split
+story-creation → story-evaluation → story-split → story-refine →
+
+story-plan ( story-design → story-tasking → story-analyze ) → story-implement
+
+`story-plan` orquesta los tres sub-skills de planning en secuencia con fail-fast y visibilidad de progreso. `story-implement` ejecuta TDD tarea por tarea y genera `implement-report.md` al finalizar.
 
 #### 4. L0: Pipeline granular SDD integración con OpenSpec
 
@@ -160,23 +166,26 @@ Cada archivo principal usa un nombre canónico (`project-intent.md`, `release.md
 
 ### Basic Usage
 
-**Crear y refinar una historia de usuario:**
+**Documentación y visualización de proyecto:**
 
 ```bash
-# Ciclo completo: creación → evaluación FINVEST → split → mejora
-/story-refine
+# Sesión interactiva de User Story Mapping (Jeff Patton) para construir backbone y release slices
+/project-story-mapping
 
-# Solo crear una historia
-/story-creation "Como usuario quiero poder registrarme para acceder al sistema"
+# Genera diagrama de contexto C4 Nivel 1 en PlantUML con preguntas guiadas
+/project-context-diagram --interactive
 
-# Evaluar una historia existente
-/story-evaluation docs/specs/stories/FEAT-001-nombre/story.md
+# Genera diagrama de contexto C4 Nivel 1 infiriendo desde documentos de specs existentes
+/project-context-diagram --from-files
 
-# Dividir una historia grande
-/story-split docs/specs/stories/FEAT-001-nombre/story.md
+# Genera README.md completo a partir de los artefactos de specs del proyecto
+/readme-builder
+
+# Políticas del proyecto: Genera o actualiza constitution.md y definition-of-done.md
+/project-policies-generation
 ```
 
-**Generar artefactos de release:**
+**Generar artefactos de release (Release Epics):**
 
 ```bash
 # Genera el plan de releases
@@ -195,21 +204,41 @@ Cada archivo principal usa un nombre canónico (`project-intent.md`, `release.md
 /release-format-validation EPIC-01-features-spec-builder
 ```
 
-**Documentación y visualización de proyecto:**
+**Crear y refinar una historia de usuario:**
 
 ```bash
-# Sesión interactiva de User Story Mapping (Jeff Patton) para construir backbone y release slices
-/project-story-mapping
+# Ciclo completo: creación → evaluación FINVEST → split → mejora
+/story-refine
 
-# Genera diagrama de contexto C4 Nivel 1 en PlantUML con preguntas guiadas
-/project-context-diagram --interactive
+# Solo crear una historia
+/story-creation "Como usuario quiero poder registrarme para acceder al sistema"
 
-# Genera diagrama de contexto C4 Nivel 1 infiriendo desde documentos de specs existentes
-/project-context-diagram --from-files
+# Evaluar una historia existente
+/story-evaluation docs/specs/stories/FEAT-001-nombre/story.md
 
-# Genera README.md completo a partir de los artefactos de specs del proyecto
-/readme-builder
+# Dividir una historia grande
+/story-split docs/specs/stories/FEAT-001-nombre/story.md
 ```
+
+**Planificar e implementar una historia (pipeline SDD completo):**
+
+```bash
+# Pipeline de planning completo: genera design.md + tasks.md + analyze.md
+/story-plan FEAT-001
+
+# Solo generar el diseño técnico de una historia
+/story-design FEAT-001
+
+# Solo generar el plan de tareas (requiere design.md previo)
+/story-tasking FEAT-001
+
+# Auditar coherencia entre story.md, design.md y tasks.md
+/story-analyze FEAT-001
+
+# Implementar una historia tarea por tarea con TDD (requiere READY-FOR-IMPLEMENT/DONE)
+/story-implement FEAT-001
+```
+
 
 ### Advanced Usage
 
@@ -227,6 +256,8 @@ Cada archivo principal usa un nombre canónico (`project-intent.md`, `release.md
 ```
 
 **Gestión de cambios con OpenSpec:**
+
+Usar OpenSpec es algo opcional. Esta sección asume que tienes OpenSpec configurado en tu proyecto. SDDF proporciona skills para integrar el proceso de gestión de cambios de OpenSpec directamente en tu flujo de especificación, permitiéndote generar propuestas de cambio, implementarlas y archivarlas sin salir del entorno SDDF.
 
 ```bash
 # Inicializar el contexto del proyecto en openspec/config.yaml

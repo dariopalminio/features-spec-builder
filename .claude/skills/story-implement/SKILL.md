@@ -20,13 +20,13 @@ Implementa una historia SDD tarea por tarea siguiendo TDD. Su propósito es **ce
 ## Posicionamiento
 
 ```
-[story.md: PLANNED/DONE]    ← precondición requerida (viene de story-plan/story-analyze)
+[story.md: READY-FOR-IMPLEMENT/DONE]    ← precondición requerida (viene de story-plan/story-analyze)
      ↓
 story-implement  → Entry point de la implementación: ejecuta TDD tarea por tarea  ← aquí
      │   Al iniciar: story.md → IMPLEMENTING/IN‑PROGRESS
-     │   Al finalizar: story.md → IMPLEMENTED/DONE + release.md checklist actualizado
+     │   Al finalizar: story.md → READY-FOR-CODE-REVIEW/DONE + release.md checklist actualizado
      ↓
-[story.md: IMPLEMENTED/DONE]
+[story.md: READY-FOR-CODE-REVIEW/DONE]
 ──────────────────────────────────────────────────────────────────────────────────────
 story.md          → What: requisitos, criterios de aceptación, comportamiento esperado
 design.md         → How: arquitectura, componentes, interfaces, decisiones técnicas
@@ -40,11 +40,11 @@ story-implement   → Entry point de la implementación: ejecuta TDD tarea por t
 
 | Evento | status | substatus |
 |--------|--------|-----------|
-| Precondición requerida para ejecutar | `PLANNED` | `DONE` |
+| Precondición requerida para ejecutar | `READY-FOR-IMPLEMENT` | `DONE` |
 | Antes de la primera tarea (Paso 2) | `IMPLEMENTING` | `IN‑PROGRESS` |
-| Después de generar `implement-report.md` (Paso 4) | `IMPLEMENTED` | `DONE` |
+| Después de generar `implement-report.md` (Paso 4) | `READY-FOR-CODE-REVIEW` | `DONE` |
 
-**Precondición:** `story-implement` solo puede ejecutarse si `story.md` tiene `status: PLANNED` + `substatus: DONE`. Si la precondición no se cumple, la ejecución se detiene con error descriptivo.
+**Precondición:** `story-implement` solo puede ejecutarse si `story.md` tiene `status: READY-FOR-IMPLEMENT` + `substatus: DONE`. Si la precondición no se cumple, la ejecución se detiene con error descriptivo.
 
 **Qué hace este skill:**
 - Lee los tres artefactos de planning como entrada
@@ -138,11 +138,11 @@ Si alguno de los tres artefactos falta, detener la ejecución **sin implementar 
 
 ### 1d. Verificar precondición de estado
 
-Leer el frontmatter de `story.md` y verificar que `status: PLANNED` y `substatus: DONE`.
+Leer el frontmatter de `story.md` y verificar que `status: READY-FOR-IMPLEMENT` y `substatus: DONE`.
 
 **Si la precondición NO se cumple:**
 ```
-❌ La historia <story_id> no está en estado PLANNED/DONE.
+❌ La historia <story_id> no está en estado READY-FOR-IMPLEMENT/DONE.
 
    Estado actual: status: <valor_actual> / substatus: <valor_actual>
 
@@ -159,7 +159,7 @@ Mostrar confirmación de inicio:
 🚀 Iniciando implementación para: <story_id>
    Directorio: <ruta_directorio>
    Artefactos: story.md ✓ | design.md ✓ | tasks.md ✓
-   Estado: PLANNED/DONE ✓
+   Estado: READY-FOR-IMPLEMENT/DONE ✓
 ```
 
 ---
@@ -403,10 +403,10 @@ Pasos recomendados:
 3. Consultar `design.md` para verificar que la implementación respeta las interfaces definidas
 ```
 
-### 4b. Actualizar frontmatter a IMPLEMENTED/DONE
+### 4b. Actualizar frontmatter a READY-FOR-CODE-REVIEW/DONE
 
 Después de generar `implement-report.md`, actualizar el frontmatter de `story.md`:
-- `status: IMPLEMENTED`
+- `status: READY-FOR-CODE-REVIEW`
 - `substatus: DONE`
 
 ### 4c. Actualizar checklist del release padre
@@ -426,7 +426,7 @@ Buscar el archivo `release.md` correspondiente en: `$SPECS_BASE/specs/releases/<
   ```
   ⚠️ Release checklist no actualizado: <razón>
   ```
-- Continuar sin bloquear — la transición a `IMPLEMENTED/DONE` ya fue aplicada
+- Continuar sin bloquear — la transición a `READY-FOR-CODE-REVIEW/DONE` ya fue aplicada
 
 ### 4d. Sección "Tareas Bloqueadas"
 
@@ -476,7 +476,7 @@ Al terminar, mostrar:
 ─────────────────────────────────────────────────────────────
 
 📄 Reporte generado: <ruta>/implement-report.md
-📋 Estado story.md: IMPLEMENTED/DONE ✓
+📋 Estado story.md: READY-FOR-CODE-REVIEW/DONE ✓
 📋 Release checklist: <✓ actualizado en <ruta>/release.md | ⚠️ no actualizado — <razón>>
 
 ✅ Implementación completa
@@ -487,6 +487,6 @@ O si hay bloqueos:
 ```
 ⚠️ Implementación completada con tareas pendientes de aclaración
    Revisa implement-report.md → sección "Tareas Bloqueadas"
-📋 Estado story.md: IMPLEMENTED/DONE ✓
+📋 Estado story.md: READY-FOR-CODE-REVIEW/DONE ✓
 📋 Release checklist: <✓ actualizado | ⚠️ no actualizado — <razón>>
 ```

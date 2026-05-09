@@ -7,7 +7,7 @@
 The system SHALL provide the `story-plan` skill as a pipeline orchestrator that executes the complete planning flow (`story-design → story-tasking → story-analyze`) with a single command.
 
 #### Scenario: story-plan skill is available in the workflow
-- **WHEN** the repository is inspected after FEAT-060 is implemented
+- **WHEN** the repository is inspected after FEAT-060 is READY-FOR-CODE-REVIEW
 - **THEN** `.claude/skills/story-plan/SKILL.md` exists and can be invoked as an alternative to running `story-design`, `story-tasking`, and `story-analyze` individually
 
 ## MODIFIED Requirements

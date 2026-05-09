@@ -14,8 +14,8 @@ El frontmatter actual de `story.md` ya tiene los campos; solo falta que los skil
 **Goals:**
 - Definir una máquina de estados finita para el ciclo de vida de una historia SDD
 - Hacer que cada skill responsable de una transición actualice el frontmatter de `story.md` al inicio y/o al finalizar
-- Agregar precondición en `story-implement`: solo ejecutable si `status: PLANNED` + `substatus: DONE`
-- Actualizar `- [ ]` → `- [x]` en `release.md` padre al alcanzar `IMPLEMENTED/DONE`
+- Agregar precondición en `story-implement`: solo ejecutable si `status: READY-FOR-IMPLEMENT` + `substatus: DONE`
+- Actualizar `- [ ]` → `- [x]` en `release.md` padre al alcanzar `READY-FOR-CODE-REVIEW/DONE`
 - Diseñar la actualización como una operación de escritura directa sobre el frontmatter YAML del archivo
 
 **Non-Goals:**
@@ -41,22 +41,22 @@ Alternativa descartada: un script `update-story-status.ts` auxiliar. Añade comp
 BACKLOG/TODO  (default implícito — sin transición explícita)
   ↓
 SPECIFYING/IN‑PROGRESS  → seteado por story-creation/story-refine al inicio
-SPECIFIED/DONE    → seteado por story-creation/story-refine al finalizar
+READY-FOR-PLAN/DONE    → seteado por story-creation/story-refine al finalizar
   ↓
 PLANNING/IN‑PROGRESS    → seteado por story-plan al inicio del pipeline
-PLANNED/DONE      → seteado por story-analyze al finalizar (último paso del pipeline)
+READY-FOR-IMPLEMENT/DONE      → seteado por story-analyze al finalizar (último paso del pipeline)
   ↓
 IMPLEMENTING/IN‑PROGRESS → seteado por story-implement al inicio
-IMPLEMENTED/DONE   → seteado por story-implement al finalizar
+READY-FOR-CODE-REVIEW/DONE   → seteado por story-implement al finalizar
 ```
 
-Convención: `status` en MAYÚSCULAS (SPECIFIED, PLANNING…), `substatus` en MAYÚSCULAS (IN‑PROGRESS, DONE).
+Convención: `status` en MAYÚSCULAS (READY-FOR-PLAN, PLANNING…), `substatus` en MAYÚSCULAS (IN‑PROGRESS, DONE).
 
 Alternativa descartada: estados en minúsculas o kebab-case. El frontmatter existente ya usa MAYÚSCULAS en las historias de ejemplo del proyecto (`status: BACKLOG`, `substatus: TODO`).
 
 ### Decisión 3: story-plan gestiona la transición inicial; story-analyze gestiona el cierre
 
-**Elegida:** `story-plan` (el orquestador) es el responsable de poner `PLANNING/IN‑PROGRESS` al inicio porque tiene el contexto del pipeline completo. `story-analyze` (el último sub-skill del pipeline) pone `PLANNED/DONE` al concluir porque es el punto de cierre natural.
+**Elegida:** `story-plan` (el orquestador) es el responsable de poner `PLANNING/IN‑PROGRESS` al inicio porque tiene el contexto del pipeline completo. `story-analyze` (el último sub-skill del pipeline) pone `READY-FOR-IMPLEMENT/DONE` al concluir porque es el punto de cierre natural.
 
 `story-design` y `story-tasking` no gestionan estado — son subskills y su estado está implícito en el pipeline de `story-plan`.
 
@@ -64,11 +64,11 @@ Alternativa descartada: que `story-plan` gestione ambas transiciones. Requiere e
 
 ### Decisión 4: Precondición en story-implement — no en story-plan
 
-**Elegida:** Solo `story-implement` verifica el estado antes de ejecutar (`PLANNED/DONE` requerido). `story-plan` no verifica el estado previo (puede ejecutarse sobre historias en cualquier estado para regenerar artefactos).
+**Elegida:** Solo `story-implement` verifica el estado antes de ejecutar (`READY-FOR-IMPLEMENT/DONE` requerido). `story-plan` no verifica el estado previo (puede ejecutarse sobre historias en cualquier estado para regenerar artefactos).
 
 Esto permite que `story-plan` sea idempotente y re-ejecutable, mientras que `story-implement` es el gate que protege la fase de implementación.
 
-### Decisión 5: Release checklist actualizado por story-implement al alcanzar IMPLEMENTED/DONE
+### Decisión 5: Release checklist actualizado por story-implement al alcanzar READY-FOR-CODE-REVIEW/DONE
 
 **Elegida:** Solo `story-implement` actualiza el checklist del `release.md` padre. Busca la historia por `story_id` en el archivo del release y cambia `- [ ] FEAT-NNN` → `- [x] FEAT-NNN`.
 

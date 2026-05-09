@@ -1,4 +1,4 @@
-## 0. Current Baseline Implemented
+## 0. Current Baseline READY-FOR-CODE-REVIEW
 
 - [x] 0.1 Create skill `.claude/skills/story-creation/` with `SKILL.md` and canonical template.
 - [x] 0.2 Create skill `.claude/skills/story-split/` with `SKILL.md` and template.

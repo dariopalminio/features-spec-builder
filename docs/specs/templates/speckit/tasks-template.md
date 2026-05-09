@@ -36,7 +36,7 @@ description: "Task list template for feature implementation"
   - Endpoints from contracts/
   
   Tasks MUST be organized by user story so each story can be:
-  - Implemented independently
+  - READY-FOR-CODE-REVIEW independently
   - Tested independently
   - Delivered as an MVP increment
   
@@ -56,7 +56,7 @@ description: "Task list template for feature implementation"
 
 ## Phase 2: Foundational (Blocking Prerequisites)
 
-**Purpose**: Core infrastructure that MUST be complete before ANY user story can be implemented
+**Purpose**: Core infrastructure that MUST be complete before ANY user story can be READY-FOR-CODE-REVIEW
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 

@@ -1,13 +1,13 @@
 ## Context
 
-The project has the three core skills created under `.claude/skills/` (`story-creation`, `story-split`, `finvest-evaluation`) and an implemented flow across them. This design captures that existing behavior as a baseline contract in OpenSpec.
+The project has the three core skills created under `.claude/skills/` (`story-creation`, `story-split`, `finvest-evaluation`) and an READY-FOR-CODE-REVIEW flow across them. This design captures that existing behavior as a baseline contract in OpenSpec.
 
 ## Goals / Non-Goals
 
 **Goals:**
-- Define a single baseline capability for the implemented end-to-end story workflow.
-- Ensure each stage has explicit input and output expectations as currently implemented.
-- Represent deterministic evaluation outcomes using implemented terminology (APROBADA, REFINAR, RECHAZAR).
+- Define a single baseline capability for the READY-FOR-CODE-REVIEW end-to-end story workflow.
+- Ensure each stage has explicit input and output expectations as currently READY-FOR-CODE-REVIEW.
+- Represent deterministic evaluation outcomes using READY-FOR-CODE-REVIEW terminology (APROBADA, REFINAR, RECHAZAR).
 - Produce requirements directly traceable to existing skill behavior.
 
 **Non-Goals:**

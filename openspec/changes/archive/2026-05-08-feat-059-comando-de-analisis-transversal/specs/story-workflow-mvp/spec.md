@@ -7,7 +7,7 @@
 The system SHALL provide the `story-analyze` skill as a coherence audit step in the story SDD workflow, positioned after `story-tasking` and before implementation.
 
 #### Scenario: story-analyze skill is available in the workflow
-- **WHEN** the repository is inspected after FEAT-059 is implemented
+- **WHEN** the repository is inspected after FEAT-059 is READY-FOR-CODE-REVIEW
 - **THEN** `.claude/skills/story-analyze/SKILL.md` exists alongside `story-design` and `story-tasking` skills, completing the four-artifact story workflow
 
 ## MODIFIED Requirements

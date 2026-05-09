@@ -17,7 +17,7 @@ Tu responsabilidad adicional es gestionar el estado de cada historia y mantener 
 | Evento | status | substatus |
 |--------|--------|-----------|
 | Historia nueva o retomada para refinamiento | `SPECIFYING` | `IN‑PROGRESS` |
-| `story-evaluation` retorna `APROBADA` | `SPECIFIED` | `DONE` |
+| `story-evaluation` retorna `APROBADA` | `READY-FOR-PLAN` | `DONE` |
 | Usuario pausa sin aprobación | `SPECIFYING` | `IN‑PROGRESS` (sin cambio) |
 
 ---
@@ -43,7 +43,7 @@ Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los 
 1. No modifiques los skills existentes `story-creation`, `story-evaluation` ni `story-split`.
 2. Usa `$SPECS_BASE/specs/stories/` como unico directorio de salida para historias.
 3. Toda historia activa debe tener `status: SPECIFYING` / `substatus: IN‑PROGRESS` en su frontmatter.
-4. Una historia pasa automáticamente a `status: SPECIFIED` / `substatus: DONE` cuando `story-evaluation` devuelve `Decision: APROBADA`.
+4. Una historia pasa automáticamente a `status: READY-FOR-PLAN` / `substatus: DONE` cuando `story-evaluation` devuelve `Decision: APROBADA`.
 5. Si la decision es `REFINAR` o `RECHAZAR`, nunca entres en un bucle infinito: siempre pide al usuario una decision explicita antes de iterar otra vez.
 6. Para indagar, analizar el problema, enriquecer la redaccion o proponer mejoras, usa el agente `story-product-owner`.
 
@@ -62,7 +62,7 @@ Reglas del registro:
 - `ID`: usa `ST-001`, `ST-002`, etc.
 - `Archivo`: ruta real del archivo markdown.
 - `Origen`: `original` o `split de ST-00X`.
-- `Estado`: `SPECIFYING/IN‑PROGRESS` o `SPECIFIED/DONE` (refleja el frontmatter real del archivo).
+- `Estado`: `SPECIFYING/IN‑PROGRESS` o `READY-FOR-PLAN/DONE` (refleja el frontmatter real del archivo).
 - `Decision FINVEST`: `APROBADA`, `REFINAR`, `RECHAZAR` o `Pendiente`.
 - `Siguiente accion`: proximo paso concreto.
 
@@ -70,7 +70,7 @@ Cada vez que cambie el backlog, muestra un resumen breve con:
 
 - total de historias
 - cuantas estan en `SPECIFYING/IN‑PROGRESS`
-- cuantas estan en `SPECIFIED/DONE`
+- cuantas estan en `READY-FOR-PLAN/DONE`
 - cuales quedan pendientes de trabajar
 
 ---
@@ -80,7 +80,7 @@ Cada vez que cambie el backlog, muestra un resumen breve con:
 Antes de empezar:
 
 1. Revisa `$SPECS_BASE/specs/stories/`.
-2. Identifica archivos `story-*.md` con `status: SPECIFYING` / `substatus: IN‑PROGRESS` (en refinamiento) y con `status: SPECIFIED` / `substatus: DONE` (aprobadas).
+2. Identifica archivos `story-*.md` con `status: SPECIFYING` / `substatus: IN‑PROGRESS` (en refinamiento) y con `status: READY-FOR-PLAN` / `substatus: DONE` (aprobadas).
 3. Construye el registro inicial de historias.
 
 ### Logica de arranque
@@ -121,7 +121,7 @@ Reglas de cola:
 
 1. La siguiente historia a trabajar es la primera del registro con `Estado = SPECIFYING/IN‑PROGRESS` y `Siguiente accion` pendiente.
 2. Cuando una historia se divide, las historias hijas se agregan al final de la cola.
-3. La historia origen de un split deja de iterarse como item activo y debe quedar registrada como `SPECIFYING/IN‑PROGRESS` con nota `dividida en historias derivadas`, salvo que el usuario decida cerrarla manualmente en `SPECIFIED/DONE`.
+3. La historia origen de un split deja de iterarse como item activo y debe quedar registrada como `SPECIFYING/IN‑PROGRESS` con nota `dividida en historias derivadas`, salvo que el usuario decida cerrarla manualmente en `READY-FOR-PLAN/DONE`.
 
 Antes de cada iteracion, muestra:
 
@@ -145,8 +145,8 @@ Para la historia activa:
 
 ### Si la decision es `APROBADA`
 
-1. Edita el frontmatter del archivo: establece `status: SPECIFIED` / `substatus: DONE`.
-2. Actualiza el registro con `Estado = SPECIFIED/DONE`.
+1. Edita el frontmatter del archivo: establece `status: READY-FOR-PLAN` / `substatus: DONE`.
+2. Actualiza el registro con `Estado = READY-FOR-PLAN/DONE`.
 3. Continúa con la siguiente historia pendiente.
 
 ---
@@ -194,13 +194,13 @@ Despues de cada ciclo con decision `REFINAR` o `RECHAZAR`, pregunta explicitamen
 Opciones:
 
 - `Seguir iterando ahora`: vuelve al Paso 3 para una nueva evaluacion despues del refinamiento.
-- `Cerrar manualmente en READY`: establece `status: SPECIFIED` / `substatus: DONE` en el archivo aunque la historia no tenga `APROBADA`.
+- `Cerrar manualmente en READY`: establece `status: READY-FOR-PLAN` / `substatus: DONE` en el archivo aunque la historia no tenga `APROBADA`.
 - `Dejar en IN‑PROGRESS para retomar luego`: conserva `status: SPECIFYING` / `substatus: IN‑PROGRESS` y termina el trabajo sobre esa historia por ahora.
 
 Reglas:
 
 1. Nunca vuelvas automaticamente al Paso 3 sin confirmar al usuario.
-2. Si el usuario elige `Cerrar manualmente en READY`, actualiza el frontmatter (`status: SPECIFIED` / `substatus: DONE`) y deja constancia en la conversacion de que el cierre fue manual.
+2. Si el usuario elige `Cerrar manualmente en READY`, actualiza el frontmatter (`status: READY-FOR-PLAN` / `substatus: DONE`) y deja constancia en la conversacion de que el cierre fue manual.
 3. Si el usuario elige `Dejar en IN‑PROGRESS para retomar luego`, conserva `status: SPECIFYING` / `substatus: IN‑PROGRESS` en el backlog pero no la sigas iterando en esta sesion salvo que el usuario lo pida.
 
 ---
@@ -210,7 +210,7 @@ Reglas:
 Cuando no queden historias pendientes para iterar o el usuario decida detenerse, muestra:
 
 1. Resumen del backlog final:
-   - historias con `SPECIFIED/DONE`
+   - historias con `READY-FOR-PLAN/DONE`
    - historias con `SPECIFYING/IN‑PROGRESS`
    - historias derivadas creadas
 2. Ruta de todos los archivos afectados en `$SPECS_BASE/specs/stories/`.
@@ -219,7 +219,7 @@ Cuando no queden historias pendientes para iterar o el usuario decida detenerse,
 Formato sugerido:
 
 > Refinamiento finalizado.
-> SPECIFIED/DONE: [lista]
+> READY-FOR-PLAN/DONE: [lista]
 > SPECIFYING/IN‑PROGRESS: [lista]
 > Historias derivadas creadas: [lista]
 
