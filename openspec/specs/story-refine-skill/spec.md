@@ -23,19 +23,41 @@ El skill `story-refine` SHALL orquestar el flujo interactivo usando los skills e
 - **THEN** el sistema MUST NOT modificar archivos ni comportamiento interno de `story-creation`, `story-evaluation` o `story-split`
 
 ### Requirement: story files maintain explicit state transitions
-Cada historia en refinamiento SHALL mantener el encabezado `**Estado**: IN‑PROGRESS | Ready` y el orquestador SHALL gestionar la transicion segun resultado y decisiones del usuario.
+Cada historia en refinamiento SHALL mantener los campos `status` y `substatus` en el frontmatter YAML de `story.md`, y el orquestador SHALL gestionar la transición según el resultado de `story-evaluation` y las decisiones del usuario.
 
-#### Scenario: Story remains IN‑PROGRESS during active refinement
-- **WHEN** una historia aun no cumple criterios de cierre
-- **THEN** su archivo markdown MUST mantenerse con `**substatus**: IN‑PROGRESS`
+Los valores válidos para el ciclo de refinement son:
+- `status: SPECIFYING` / `substatus: IN‑PROGRESS` — mientras el refinamiento está activo
+- `status: SPECIFIED` / `substatus: DONE` — cuando `story-evaluation` retorna `APROBADA`
 
-#### Scenario: Story becomes Ready when FINVEST is approved
-- **WHEN** `story-evaluation` retorna decision `APROBADA`
-- **THEN** el orquestador MUST actualizar el archivo de la historia a `**substatus**: DONE`
+#### Scenario: Story remains SPECIFYING/IN‑PROGRESS during active refinement
+- **WHEN** una historia aún no cumple criterios de cierre (evaluación no aprobada)
+- **THEN** su `story.md` MUST tener `status: SPECIFYING` y `substatus: IN‑PROGRESS`
+
+#### Scenario: Story becomes SPECIFIED/DONE when FINVEST is approved
+- **WHEN** `story-evaluation` retorna decisión `APROBADA`
+- **THEN** el orquestador MUST actualizar `story.md` a `status: SPECIFIED` y `substatus: DONE`
 
 #### Scenario: User decides to pause refinement
-- **WHEN** la decision FINVEST es `REFINAR` o `RECHAZAR` y el usuario elige pausar
-- **THEN** el orquestador MUST permitir finalizar la sesion dejando la historia en `**substatus**: IN‑PROGRESS`
+- **WHEN** la decisión FINVEST es `REFINAR` o `RECHAZAR` y el usuario elige pausar
+- **THEN** el orquestador MUST permitir finalizar la sesión dejando la historia en `status: SPECIFYING` / `substatus: IN‑PROGRESS`
+
+### Requirement: story-refine sets SPECIFYING/IN‑PROGRESS at the start of refinement
+The system SHALL update `status: SPECIFYING` and `substatus: IN‑PROGRESS` in `story.md` frontmatter when `story-refine` (or `story-creation` as the entry point) begins processing a story.
+
+#### Scenario: Status updated at refinement start
+- **WHEN** `/story-refine` (or `/story-creation`) begins a new or existing story
+- **THEN** `story.md` frontmatter MUST be updated to `status: SPECIFYING` and `substatus: IN‑PROGRESS` before any sub-skill is invoked
+
+### Requirement: story-refine sets SPECIFIED/DONE when FINVEST approves
+The system SHALL update `status: SPECIFIED` and `substatus: DONE` in `story.md` frontmatter when `story-evaluation` returns `APROBADA`.
+
+#### Scenario: Status updated on FINVEST approval
+- **WHEN** `story-evaluation` returns decision `APROBADA` during the `story-refine` flow
+- **THEN** `story.md` frontmatter MUST be updated to `status: SPECIFIED` and `substatus: DONE` before the skill terminates
+
+#### Scenario: Status remains SPECIFYING/IN‑PROGRESS on non-approved evaluation
+- **WHEN** `story-evaluation` returns `REFINAR` or `RECHAZAR`
+- **THEN** `story.md` frontmatter MUST remain at `status: SPECIFYING` and `substatus: IN‑PROGRESS` to signal that refinement is still in progress
 
 ### Requirement: story-refine tracks and processes derived stories
 El orquestador SHALL mantener registro de cuantas historias existen en el flujo, cuales son derivadas por split y cuales siguen pendientes de refinamiento.

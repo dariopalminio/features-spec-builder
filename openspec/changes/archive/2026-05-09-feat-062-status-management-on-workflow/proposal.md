@@ -1,3 +1,6 @@
+<!-- Referencias -->
+[[FEAT-062-status-management-on-workflow]]
+
 ## Why
 
 Los skills del flujo SDD generan artefactos pero no actualizan el estado de la historia en `story.md`, dejando el frontmatter (`status`/`substatus`) siempre estático y sin reflejo del progreso real. Esto impide detectar en qué etapa se encuentra una historia, fuerza al desarrollador a inferirlo manualmente revisando qué archivos existen, y no permite que los skills apliquen precondiciones basadas en estado.
