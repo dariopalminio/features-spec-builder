@@ -35,6 +35,7 @@ updated: 2026-05-06
 - [ ] El código pasa el linter y el formateador sin errores ni warnings
 - [ ] No se introducen dependencias nuevas sin aprobación del equipo
 - [ ] Se uso el skill `skill-creator` para crear skills nuevos
+- [ ] Si se agrega un nuevo skill, la ruta del skill debe haber sido incluida en el arreglo de "files" en package.json
 ---
 
 ## 🧪 Criterios de Tests

@@ -4,7 +4,7 @@ type: story
 id: FEAT-065
 slug: FEAT-065-revision-con-bloqueantes
 title: "Skill story-code-review: instrucciones de corrección cuando la revisión detecta bloqueantes"
-status: READY-FOR-IMPLEMENT
+status: READY-FOR-CODE-REVIEW
 substatus: DONE
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-09
@@ -52,6 +52,11 @@ Ejemplos:
   | HIGH      |
   | MEDIUM    |
 ```
+## Requerimiento: Patrones estructurales de Skills (Skill Structural patterns)
+Se debe seguir y respetar los lineamientos estructurales de skills definido en `docs\knowledge\guides\skill-structural-pattern.md`.
+
+## Requerimiento: skill-creator
+Seguir lineamientos establecidos por `skill-creator` para asegurar que el skill a modificar siga los estándares de estructura, documentación y funcionalidad definidos. 
 
 ## ⚙️ Criterios no funcionales
 
