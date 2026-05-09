@@ -4,7 +4,7 @@ Los templates en `$SPECS_BASE/specs/templates/` mezclan artefactos de entrada (p
 
 ## What Changes
 
-- Copiar `story-gherkin-template.md` al directorio `templates/` de los skills: `story-creation`, `story-evaluation`, `story-split`, `release-generate-all-stories`
+- Copiar `story-template.md` al directorio `templates/` de los skills: `story-creation`, `story-evaluation`, `story-split`, `release-generate-all-stories`
 - Copiar `evaluation-output-template.md` al directorio `templates/` del skill `story-evaluation`
 - Copiar `project-template.md` al directorio `templates/` del skill `project-discovery`
 - Copiar `release-spec-template.md` al directorio `templates/` de los skills: `releases-from-project-plan`, `release-generate-stories`, `release-format-validation`, `release-generate-all-stories`

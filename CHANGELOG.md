@@ -210,7 +210,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - **`/story-creation`** — creates a user story in story-gherkin format (Como/Quiero/Para + Gherkin) applying Mike Cohn, 3 C's, and INVEST principles
 - **`/story-split`** — splits a large story into smaller independent stories using 8 splitting patterns
 - **`/finvest-evaluation`** — evaluates story quality with the FINVEST rubric (Formato + INVEST) on a Likert 1–5 scale; produces per-dimension scores, global score, and Ready / Refine / Reject decision
-- **`story-gherkin-template.md`** — canonical template shared across story skills
+- **`story-template.md`** — canonical template shared across story skills
 - **`output-template.md`** — evaluation output template for finvest-evaluation
 - **Examples** — `example-ready.md`, `example-refinar.md`, `example-rechazar.md` for finvest-evaluation
 - **Dockerization** — Docker support for local development

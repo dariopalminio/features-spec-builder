@@ -23,7 +23,7 @@ related:
 # 📖 Historia: Centralizar templates de spec en directorio compartido
 
 **Como** maintainer del framework SDDF que evoluciona skills y templates con el tiempo  
-**Quiero** centralizar los templates de spec (`story-gherkin-template.md`, `release-spec-template.md`, `project-template.md`) en `$SPECS_BASE/specs/templates/` como única fuente de verdad  
+**Quiero** centralizar los templates de spec (`story-template.md`, `release-spec-template.md`, `project-template.md`) en `$SPECS_BASE/specs/templates/` como única fuente de verdad  
 **Para** eliminar la divergencia de frontmatter entre las copias distribuidas en cada skill y garantizar que cualquier cambio en la estructura de un template se propague automáticamente a todos los skills generadores
 
 ## ✅ Criterios de aceptación
@@ -35,13 +35,13 @@ Dado que el proyecto tiene 10 copias distribuidas de templates en directorios as
 Cuando se ejecuta la migración centralizando los 3 templates en docs/specs/templates/
   Y se actualizan todos los SKILL.md y archivos de agentes para referenciar $SPECS_BASE/specs/templates/<template>.md
   Y se eliminan las 10 copias distribuidas de assets/
-Entonces no existe ninguna referencia a assets/(story-gherkin-template|release-spec-template|project-template).md en ningún archivo .md del proyecto
-  Y los 3 archivos docs/specs/templates/story-gherkin-template.md, release-spec-template.md y project-template.md existen y coinciden con el esquema canónico de header-aggregation
+Entonces no existe ninguna referencia a assets/(story-template|release-spec-template|project-template).md en ningún archivo .md del proyecto
+  Y los 3 archivos docs/specs/templates/story-template.md, release-spec-template.md y project-template.md existen y coinciden con el esquema canónico de header-aggregation
 ```
 
 ### Escenario alternativo / error – Skill referencia template eliminado
 ```gherkin
-Dado que un skill actualizado referencia $SPECS_BASE/specs/templates/story-gherkin-template.md
+Dado que un skill actualizado referencia $SPECS_BASE/specs/templates/story-template.md
   Y el template central existe en esa ruta
 Cuando el skill ejecuta el Paso 0 (preflight + lectura de template)
 Entonces resuelve correctamente la ruta y lee el template

@@ -210,7 +210,7 @@ TAD 3: Construir el motor de recomendación más simple posible
 
 ### Fase 3 — Escribir cada historia resultante
 
-Cada historia del split debe seguir **estrictamente** el template `assets/story-gherkin-template.md`:
+Cada historia del split debe seguir **estrictamente** el template `assets/story-template.md`:
 
 ```markdown
 ## 📖 Historia
@@ -283,11 +283,11 @@ Mostrar resumen en pantalla. Mostrar el siguiente resumen en texto enriquecido e
 
 ### Historia 1 — {título corto}
 **Archivo:** `$SPECS_BASE/specs/features/story-{slug}.md`
-[Historia completa en formato story-gherkin-template.md]
+[Historia completa en formato story-template.md]
 
 ### Historia 2 — {título corto}
 **Archivo:** `$SPECS_BASE/specs/features/story-{slug}.md`
-[Historia completa en formato story-gherkin-template.md]
+[Historia completa en formato story-template.md]
 
 ...
 

@@ -35,8 +35,8 @@ Cada skill en `.claude/skills/` que requiera un template para operar SHALL tener
 Cuando un mismo template es necesario en m�ltiples skills, cada skill SHALL tener su propia copia local del template en su directorio `assets/`.
 
 #### Scenario: Mismo template usado por dos skills distintos
-- **WHEN** dos skills (`story-creation` y `story-evaluation`) requieren el mismo template `story-gherkin-template.md`
-- **THEN** cada uno tiene una copia en `.claude/skills/story-creation/assets/story-gherkin-template.md` y `.claude/skills/story-evaluation/assets/story-gherkin-template.md` respectivamente
+- **WHEN** dos skills (`story-creation` y `story-evaluation`) requieren el mismo template `story-template.md`
+- **THEN** cada uno tiene una copia en `.claude/skills/story-creation/assets/story-template.md` y `.claude/skills/story-evaluation/assets/story-template.md` respectivamente
 
 ### Requirement: Referencias actualizadas en SKILL.md y agentes
 Todos los archivos `SKILL.md` SHALL referenciar templates usando rutas relativas al directorio del skill (`assets/<template>.md`) en lugar de rutas absolutas con prefijo de cliente (`.claude/skills/<skill>/assets/<template>.md`). Como alternativa para clientes que requieren rutas absolutas expl�citas, se acepta el formato con variable de entorno `{{SKILL_ROOT}}/assets/<template>.md`. Ning�n SKILL.md SHALL hardcodear un prefijo de cliente (`.claude/`, `.github/`, `.opencode/`, etc.) en rutas a sus templates, ya que eso ata el skill a una plataforma espec�fica.

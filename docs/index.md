@@ -84,7 +84,7 @@ parent: null
 - [[readme-template]]
 - [[release-spec-template]]
 - [[project-template]]
-- [[story-gherkin-template]]
+- [[story-template]]
 
 ---
 

@@ -15,8 +15,8 @@ Cada skill en `.claude/skills/` que requiera un template para operar SHALL tener
 Cuando un mismo template es necesario en múltiples skills, cada skill SHALL tener su propia copia local del template en su directorio `templates/`.
 
 #### Scenario: Mismo template usado por dos skills distintos
-- **WHEN** dos skills (`story-creation` y `story-evaluation`) requieren el mismo template `story-gherkin-template.md`
-- **THEN** cada uno tiene una copia en `.claude/skills/story-creation/templates/story-gherkin-template.md` y `.claude/skills/story-evaluation/templates/story-gherkin-template.md` respectivamente
+- **WHEN** dos skills (`story-creation` y `story-evaluation`) requieren el mismo template `story-template.md`
+- **THEN** cada uno tiene una copia en `.claude/skills/story-creation/templates/story-template.md` y `.claude/skills/story-evaluation/templates/story-template.md` respectivamente
 
 ### Requirement: Referencias actualizadas en SKILL.md y agentes
 Todos los archivos `SKILL.md` y los archivos de agentes en `.claude/agents/` SHALL referenciar templates usando rutas locales (`.claude/skills/<skill>/templates/<template>.md`) en lugar de `$SPECS_BASE/specs/templates/<template>.md`.

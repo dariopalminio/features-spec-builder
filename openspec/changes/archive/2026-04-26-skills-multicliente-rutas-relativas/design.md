@@ -1,6 +1,6 @@
 ## Context
 
-Los skills de SDDF son archivos Markdown (`SKILL.md`) que contienen instrucciones para el agente. Cuando un skill necesita leer su template, las instrucciones le dicen al LLM dónde encontrarlo — usando actualmente rutas como `.claude/skills/story-creation/templates/story-gherkin-template.md`. Esto funciona en Claude Code porque sus skills viven bajo `.claude/`, pero falla en clientes que montan skills en rutas distintas (OpenCode usa `.opencode/`, GitHub Copilot usa `.github/copilot/`, etc.).
+Los skills de SDDF son archivos Markdown (`SKILL.md`) que contienen instrucciones para el agente. Cuando un skill necesita leer su template, las instrucciones le dicen al LLM dónde encontrarlo — usando actualmente rutas como `.claude/skills/story-creation/templates/story-template.md`. Esto funciona en Claude Code porque sus skills viven bajo `.claude/`, pero falla en clientes que montan skills en rutas distintas (OpenCode usa `.opencode/`, GitHub Copilot usa `.github/copilot/`, etc.).
 
 El refactoring es puramente textual: buscar y reemplazar el patrón de ruta en cada SKILL.md afectado. No hay cambios en la lógica de los skills, en los templates ni en los agentes.
 
@@ -52,7 +52,7 @@ Esto deja claro el comportamiento esperado en clientes que no sigan la convenci�
 
 - **[Risk] Clientes que no resuelven rutas relativas** — Un cliente LLM que no ejecute el skill desde su directorio podría no encontrar `templates/...`. → Mitigation: Se documenta `{{SKILL_ROOT}}` como alternativa en cada SKILL.md actualizado; es un escape hatch sin complejidad de código.
 - **[Risk] Búsquedas que asumen la ruta vieja** — Grep / documentación externa que busque `.claude/skills/.*/templates/` como evidencia de correctitud deberá actualizarse. → Mitigation: El spec actualizado es la fuente de verdad; cualquier lint/grep externo deberá adaptarse.
-- **[Trade-off] Menos explícito en la ruta** — `templates/story-gherkin-template.md` no incluye el nombre del skill; puede parecer ambiguo fuera de contexto. → Aceptado: el contexto de ejecución (el skill activo) hace la referencia inequívoca.
+- **[Trade-off] Menos explícito en la ruta** — `templates/story-template.md` no incluye el nombre del skill; puede parecer ambiguo fuera de contexto. → Aceptado: el contexto de ejecución (el skill activo) hace la referencia inequívoca.
 
 ## Migration Plan
 

@@ -2,7 +2,7 @@
 type: story
 id: FEAT-012
 slug: FEAT-012-story-split
-title: "story-split — Dividir épicas en historias pequeñas"
+title: "story-split ï¿½ Dividir ï¿½picas en historias pequeï¿½as"
 date: 2026-04-22
 status: COMPLETED
 substatus: READY
@@ -14,29 +14,29 @@ parent: EPIC-01-features-spec-builder
 
 # Historia de Usuario
 
-## ?? Historia: story-split — Dividir épicas en historias pequeñas
+## ?? Historia: story-split ï¿½ Dividir ï¿½picas en historias pequeï¿½as
 
 **Como** desarrollador o PM que tiene una historia de usuario demasiado grande para estimar o entregar en un sprint
-**Quiero** ejecutar el skill `story-split` sobre esa historia para obtener historias más pequeñas e independientes
+**Quiero** ejecutar el skill `story-split` sobre esa historia para obtener historias mï¿½s pequeï¿½as e independientes
 **Para** conseguir unidades de trabajo estimables, entregables de forma incremental y que cumplan el criterio S (Small) de INVEST
 
-## ? Criterios de aceptación
+## ? Criterios de aceptaciï¿½n
 
-### Escenario principal – División exitosa usando el patrón de pasos de flujo
+### Escenario principal ï¿½ Divisiï¿½n exitosa usando el patrï¿½n de pasos de flujo
 ```gherkin
-Dado que "docs/specs/stories/story-gestion-completa-pedidos.md" cubre creación, edición y cancelación de pedidos
+Dado que "docs/specs/stories/story-gestion-completa-pedidos.md" cubre creaciï¿½n, ediciï¿½n y cancelaciï¿½n de pedidos
 Cuando el desarrollador ejecuta el skill "story-split" sobre esa historia
-Entonces el skill identifica el patrón de splitting más adecuado (pasos de flujo)
+Entonces el skill identifica el patrï¿½n de splitting mï¿½s adecuado (pasos de flujo)
   Y genera tres historias independientes: crear pedido, editar pedido, cancelar pedido
-  Y cada historia resultante sigue el template story-gherkin-template.md con sus propios escenarios Gherkin
+  Y cada historia resultante sigue el template story-template.md con sus propios escenarios Gherkin
 ```
 
-### Escenario alternativo / error – Historia ya suficientemente pequeña
+### Escenario alternativo / error ï¿½ Historia ya suficientemente pequeï¿½a
 ```gherkin
 Dado que la historia indicada tiene un solo escenario principal y alcance acotado
-Cuando el skill evalúa si necesita división
+Cuando el skill evalï¿½a si necesita divisiï¿½n
 Entonces el skill informa que la historia ya cumple el criterio S de INVEST
-  Pero no genera historias derivadas sin confirmación del usuario
+  Pero no genera historias derivadas sin confirmaciï¿½n del usuario
 ```
 
 ## ?? Criterios no funcionales
@@ -45,5 +45,5 @@ Entonces el skill informa que la historia ya cumple el criterio S de INVEST
 
 ## ?? Notas / contexto adicional
 
-Generado automáticamente desde el release: release-01-features-spec-builder.md
-Feature origen: FEAT-012 — story-split
+Generado automï¿½ticamente desde el release: release-01-features-spec-builder.md
+Feature origen: FEAT-012 ï¿½ story-split

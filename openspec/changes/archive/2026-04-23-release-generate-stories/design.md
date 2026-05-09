@@ -9,7 +9,7 @@ El sistema es puramente Markdown: los skills son archivos `SKILL.md` con instruc
 **Goals:**
 - Implementar `.claude/skills/release-generate-stories/SKILL.md` que, dado un archivo de release, genera un archivo `story-[ID]-[nombre-kebab].md` por cada feature de la sección `## Features`
 - Reutilizar el patrón de resolución de input ya especificado en `release-input-resolution`
-- Generar historias con la estructura de `story-gherkin-template.md` con datos inferidos desde el nombre/descripción de la feature
+- Generar historias con la estructura de `story-template.md` con datos inferidos desde el nombre/descripción de la feature
 - Confirmar antes de sobreescribir stories existentes
 
 **Non-Goals:**

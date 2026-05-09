@@ -8,7 +8,7 @@
 
 - [x] 2.1 Actualizar el template de proyecto (o crear `project.md` canónico) con el frontmatter obligatorio: `type`, `id`, `title`, `status`, `parent: null`, `created`, `updated`
 - [x] 2.2 Actualizar el template de release (`release-spec-template.md`) con frontmatter canónico: `type: release`, `id`, `parent`, `created`, `updated`
-- [x] 2.3 Actualizar el template de historia (`story-gherkin-template.md`) con frontmatter canónico: `type: story`, `id`, `parent`, `created`, `updated`
+- [x] 2.3 Actualizar el template de historia (`story-template.md`) con frontmatter canónico: `type: story`, `id`, `parent`, `created`, `updated`
 
 ## 3. Skill: project-begin
 

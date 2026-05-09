@@ -21,7 +21,7 @@ Primera versión del framework. Establece la base del sistema: creación de hist
 
 ## Features
 
-- [x] **FEAT-006 — story-creation**: Skill para crear historias de usuario en formato `Como/Quiero/Para` con criterios de aceptación Gherkin siguiendo el template `story-gherkin-template.md`.
+- [x] **FEAT-006 — story-creation**: Skill para crear historias de usuario en formato `Como/Quiero/Para` con criterios de aceptación Gherkin siguiendo el template `story-template.md`.
 - [x] **FEAT-007 — story-finvest-evaluation** (luego renombrado a `story-evaluation`): Skill de evaluación de calidad de historias mediante la rúbrica FINVEST (Formato + INVEST), con score Likert 1–5 por dimensión, score global y decisión accionable (APROBADA / REFINAR / RECHAZAR / DIVIDIR).
 - [x] **FEAT-012 — story-split**: Skill para dividir épicas o historias grandes en historias más pequeñas e independientes usando los 8 patrones de splitting (pasos de flujo, variaciones de reglas, variaciones de datos, complejidad de criterios, esfuerzo incremental, dependencias externas, DevOps, TADs).
 - [x] **Soporte multi-runtime inicial**: Skills disponibles para Claude Code (`.claude/skills/`), GitHub Copilot (`.github/skills/`) y Codex/Cursor (`.agents/skills/`).

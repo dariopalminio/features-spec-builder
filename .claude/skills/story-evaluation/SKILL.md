@@ -39,11 +39,11 @@ El archivo de plantilla (template canónico) es la **única fuente de informaci�
 
 El archivo de plantilla (template canónico) es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla (template canónico) `$SPECS_BASE/specs/templates/story-gherkin-template.md`.
+Lee el archivo de plantilla (template canónico) `$SPECS_BASE/specs/templates/story-template.md`.
 
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/story-gherkin-template.md`.
+  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/story-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 - Si el archivo **existe**: continua con lo siguiente.
@@ -91,7 +91,7 @@ Ejemplos:
 Este es solo un ejemplo, recuerda que el archivo de plantilla (template canónico) es la guía a evaluar como formato.
 ```
 
-Una historia que no usa la plantilla story-gherkin-template.md (o este template) puede igual ser evaluada, pero obtendrá scores más bajos en F en función de cuánto se aleja de esta estructura.
+Una historia que no usa la plantilla story-template.md (o este template) puede igual ser evaluada, pero obtendrá scores más bajos en F en función de cuánto se aleja de esta estructura.
 
 ---
 
@@ -141,7 +141,7 @@ FINVEST_Score = (F_score + INVEST_Score) / 2
 
 ## Rúbricas Likert (1–5)
 
-### F – Formato (3 componentes ponderados, basados en `story-gherkin-template.md`)
+### F – Formato (3 componentes ponderados, basados en `story-template.md`)
 
 #### Componente 1: Sección Historia `## 📖 Historia` con `Como/Quiero/Para` (peso 40%)
 
@@ -268,7 +268,7 @@ Si la historia no tiene escenarios Gherkin, estimar por complejidad implícita d
 
 ## Ejemplos de referencia (few-shot)
 
-Los 3 ejemplos muestran historias escritas con el template `story-gherkin-template.md`:
+Los 3 ejemplos muestran historias escritas con el template `story-template.md`:
 
 - `examples/example-ready.md` — Historia con secciones completas → F_score 5.0, FINVEST Score 4.4 → **APROBADA**
 - `examples/example-refinar.md` — Historia sin encabezados de sección ni bloques gherkin → F_score 2.5, FINVEST Score 3.0 → **REFINAR**

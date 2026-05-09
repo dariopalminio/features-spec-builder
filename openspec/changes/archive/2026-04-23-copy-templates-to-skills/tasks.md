@@ -1,21 +1,21 @@
 ## 1. Copiar templates al skill story-creation
 
 - [x] 1.1 Crear directorio `.claude/skills/story-creation/templates/`
-- [x] 1.2 Copiar `$SPECS_BASE/specs/templates/story-gherkin-template.md` a `.claude/skills/story-creation/templates/story-gherkin-template.md`
-- [x] 1.3 Actualizar referencias en `.claude/skills/story-creation/SKILL.md`: reemplazar `$SPECS_BASE/specs/templates/story-gherkin-template.md` por `.claude/skills/story-creation/templates/story-gherkin-template.md`
+- [x] 1.2 Copiar `$SPECS_BASE/specs/templates/story-template.md` a `.claude/skills/story-creation/templates/story-template.md`
+- [x] 1.3 Actualizar referencias en `.claude/skills/story-creation/SKILL.md`: reemplazar `$SPECS_BASE/specs/templates/story-template.md` por `.claude/skills/story-creation/templates/story-template.md`
 
 ## 2. Copiar templates al skill story-evaluation
 
 - [x] 2.1 Crear directorio `.claude/skills/story-evaluation/templates/`
-- [x] 2.2 Copiar `$SPECS_BASE/specs/templates/story-gherkin-template.md` a `.claude/skills/story-evaluation/templates/story-gherkin-template.md`
+- [x] 2.2 Copiar `$SPECS_BASE/specs/templates/story-template.md` a `.claude/skills/story-evaluation/templates/story-template.md`
 - [x] 2.3 Copiar `$SPECS_BASE/specs/templates/evaluation-output-template.md` a `.claude/skills/story-evaluation/templates/evaluation-output-template.md`
 - [x] 2.4 Actualizar referencias en `.claude/skills/story-evaluation/SKILL.md`: reemplazar rutas `$SPECS_BASE/specs/templates/` por `.claude/skills/story-evaluation/templates/`
 
 ## 3. Copiar templates al skill story-split
 
 - [x] 3.1 Crear directorio `.claude/skills/story-split/templates/`
-- [x] 3.2 Copiar `$SPECS_BASE/specs/templates/story-gherkin-template.md` a `.claude/skills/story-split/templates/story-gherkin-template.md`
-- [x] 3.3 Actualizar referencias en `.claude/skills/story-split/SKILL.md`: reemplazar `$SPECS_BASE/specs/templates/story-gherkin-template.md` por `.claude/skills/story-split/templates/story-gherkin-template.md`
+- [x] 3.2 Copiar `$SPECS_BASE/specs/templates/story-template.md` a `.claude/skills/story-split/templates/story-template.md`
+- [x] 3.3 Actualizar referencias en `.claude/skills/story-split/SKILL.md`: reemplazar `$SPECS_BASE/specs/templates/story-template.md` por `.claude/skills/story-split/templates/story-template.md`
 
 ## 4. Copiar templates al skill project-discovery
 
@@ -38,14 +38,14 @@
 ## 7. Copiar templates al skill release-generate-stories
 
 - [x] 7.1 Crear directorio `.claude/skills/release-generate-stories/templates/`
-- [x] 7.2 Copiar `$SPECS_BASE/specs/templates/story-gherkin-template.md` a `.claude/skills/release-generate-stories/templates/story-gherkin-template.md`
-- [x] 7.3 Actualizar referencias en `.claude/skills/release-generate-stories/SKILL.md`: reemplazar `$SPECS_BASE/specs/templates/story-gherkin-template.md` por `.claude/skills/release-generate-stories/templates/story-gherkin-template.md`
+- [x] 7.2 Copiar `$SPECS_BASE/specs/templates/story-template.md` a `.claude/skills/release-generate-stories/templates/story-template.md`
+- [x] 7.3 Actualizar referencias en `.claude/skills/release-generate-stories/SKILL.md`: reemplazar `$SPECS_BASE/specs/templates/story-template.md` por `.claude/skills/release-generate-stories/templates/story-template.md`
 
 ## 8. Copiar templates al skill release-generate-all-stories
 
 - [x] 8.1 Crear directorio `.claude/skills/release-generate-all-stories/templates/`
-- [x] 8.2 Copiar `$SPECS_BASE/specs/templates/story-gherkin-template.md` a `.claude/skills/release-generate-all-stories/templates/story-gherkin-template.md`
-- [x] 8.3 Actualizar referencias en `.claude/skills/release-generate-all-stories/SKILL.md`: reemplazar `$SPECS_BASE/specs/templates/story-gherkin-template.md` por `.claude/skills/release-generate-all-stories/templates/story-gherkin-template.md`
+- [x] 8.2 Copiar `$SPECS_BASE/specs/templates/story-template.md` a `.claude/skills/release-generate-all-stories/templates/story-template.md`
+- [x] 8.3 Actualizar referencias en `.claude/skills/release-generate-all-stories/SKILL.md`: reemplazar `$SPECS_BASE/specs/templates/story-template.md` por `.claude/skills/release-generate-all-stories/templates/story-template.md`
 
 ## 9. Copiar templates al skill reverse-engineering
 

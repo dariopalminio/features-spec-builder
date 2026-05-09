@@ -18,7 +18,7 @@ parent: EPIC-06-release-and-story-generator
 
 **Como** desarrollador que tiene un archivo de release listo en `$SPECS_BASE/specs/releases/`
 **Quiero** ejecutar el skill `release-generate-stories` indicando el nombre o ruta relativa del archivo de release
-**Para** obtener autom�ticamente un archivo `story-[ID]-[Nombre-kebab].md` por cada feature del release, siguiendo el template `story-gherkin-template.md`, sin redactar cada historia manualmente
+**Para** obtener autom�ticamente un archivo `story-[ID]-[Nombre-kebab].md` por cada feature del release, siguiendo el template `story-template.md`, sin redactar cada historia manualmente
 
 ## ? Criterios de aceptaci�n
 
@@ -28,7 +28,7 @@ Dado que existe "docs/specs/releases/release-06-release-and-story-generator.md" 
   Y el directorio "docs/specs/stories/" existe o puede ser creado
 Cuando el desarrollador ejecuta el skill "release-generate-stories" indicando "release-06-release-and-story-generator.md"
 Entonces el skill genera un archivo "story-[ID]-[nombre-kebab].md" por cada feature encontrada
-  Y cada archivo sigue la estructura de "docs/specs/templates/story-gherkin-template.md"
+  Y cada archivo sigue la estructura de "docs/specs/templates/story-template.md"
   Y los archivos se guardan en "docs/specs/stories/"
 ```
 

@@ -52,7 +52,7 @@ Los templates de `others_references/` (openspec-*.md) quedan excluidos de este m
 Los templates de "docs/specs/templates/" solo quedan como referencia, no necesitan ser borrados, solo ser copiados en los skills correspondientes.
 
 ### Requerimiento: Duplicar templates si es necesario
-Los templates que son usados por varios skills ser�n copiados en cada skill que lo usa aunque queden duplicados. Por ejemplo `story-gherkin-template.md` es usado por los skills: release-generate-all-stories, story-creation, story-evaluation, story-split. Cada uno debe tener el template en su carpeta.
+Los templates que son usados por varios skills ser�n copiados en cada skill que lo usa aunque queden duplicados. Por ejemplo `story-template.md` es usado por los skills: release-generate-all-stories, story-creation, story-evaluation, story-split. Cada uno debe tener el template en su carpeta.
 
 ### Requerimiento: Actualizar referencias en SKILL.md y agentes  
 Actualizar referencias en SKILL.md y las referencias en los agentes que usan los templates en `.claude\agents`. No deben quedar referencias deprecadas a `$SPECS_BASE/specs/templates/` en ning�n lugar del c�digo activo.

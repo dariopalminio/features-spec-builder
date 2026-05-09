@@ -5,7 +5,7 @@ description: "Divide una historia de usuario grande en historias más pequeñas 
 
 # Skill: /story-split
 
-Toma una historia grande, épica o feature demasiado amplio y lo divide en historias más pequeñas e independientes. Cada historia resultante sigue **estrictamente** el template `$SPECS_BASE/specs/templates/story-gherkin-template.md`.
+Toma una historia grande, épica o feature demasiado amplio y lo divide en historias más pequeñas e independientes. Cada historia resultante sigue **estrictamente** el template `$SPECS_BASE/specs/templates/story-template.md`.
 
 **Usar cuando:**
 - Una historia tiene ≥ 4 escenarios Gherkin o ≥ 8 pasos totales
@@ -209,11 +209,11 @@ El archivo de plantilla (template canónico) es la **única fuente de informaci�
 
 El archivo de plantilla (template canónico) es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla (template canónico) `$SPECS_BASE/specs/templates/story-gherkin-template.md`.
+Lee el archivo de plantilla (template canónico) `$SPECS_BASE/specs/templates/story-template.md`.
 
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
 
-  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/story-gherkin-template.md`.
+  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/story-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 - Si el archivo **existe**: continua con lo siguiente.
@@ -222,7 +222,7 @@ Lee el archivo de plantilla (template canónico) `$SPECS_BASE/specs/templates/st
 
 ### Fase 4 — Escribir cada historia resultante
 
-Cada historia del split debe seguir **estrictamente** el template `$SPECS_BASE/specs/templates/story-gherkin-template.md` anteriormente leido, adaptando el contenido a cada historia específica. No agregar ni eliminar secciones del template, solo llenar cada sección con la información correspondiente a la historia resultante. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución, infiriendo la información, para asegurar flexibilidad ante cambios futuros en la estructura del template.
+Cada historia del split debe seguir **estrictamente** el template `$SPECS_BASE/specs/templates/story-template.md` anteriormente leido, adaptando el contenido a cada historia específica. No agregar ni eliminar secciones del template, solo llenar cada sección con la información correspondiente a la historia resultante. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución, infiriendo la información, para asegurar flexibilidad ante cambios futuros en la estructura del template.
 
 Por ejemplo:
 
@@ -307,7 +307,7 @@ Por cada historia resultante del split, crear en `$SPECS_BASE/specs/stories/`:
 
 **Actualizar frontmatter** de cada `story.md` con `id: FEAT-{NNN}`, `slug: FEAT-{NNN}-{slug}` y `status: REFINING` — estado inicial de toda historia resultante de un split (pendiente de re-evaluación).
 
-**Contenido de cada archivo:** la historia completa en formato `story-gherkin-template.md`, sin encabezados adicionales de sección (`## Historia 1`, etc.) — solo el contenido de la historia.
+**Contenido de cada archivo:** la historia completa en formato `story-template.md`, sin encabezados adicionales de sección (`## Historia 1`, etc.) — solo el contenido de la historia.
 
 #### Mostrar resumen en pantalla
 
@@ -324,11 +324,11 @@ Después de guardar los archivos, mostrar el siguiente resumen en la conversaci�
 
 ### Historia 1 — {título corto}
 **Archivo:** `$SPECS_BASE/specs/stories/FEAT-{NNN}-{slug}/story.md`
-[Historia completa en formato story-gherkin-template.md]
+[Historia completa en formato story-template.md]
 
 ### Historia 2 — {título corto}
 **Archivo:** `$SPECS_BASE/specs/stories/FEAT-{NNN+1}-{slug}/story.md`
-[Historia completa en formato story-gherkin-template.md]
+[Historia completa en formato story-template.md]
 
 ...
 
@@ -359,7 +359,7 @@ Si se generaron TADs en lugar de historias, explicar claramente que son experime
 
 ## Referencias
 
-- **Template canónico:** `$SPECS_BASE/specs/templates/story-gherkin-template.md`
+- **Template canónico:** `$SPECS_BASE/specs/templates/story-template.md`
 - **Creación de historias:** `/story-creation`
 - **Evaluación de calidad:** `/story-evaluation`
 - Richard Lawrence & Peter Green, *Humanizing Work Guide to Splitting User Stories* — origen de los 8 patrones

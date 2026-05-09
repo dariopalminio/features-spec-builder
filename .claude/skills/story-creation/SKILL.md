@@ -5,7 +5,7 @@ description: "Crea historias de usuario siguiendo el template story-gherkin (Com
 
 # Skill: /story-creation
 
-Crea una historia de usuario completa a partir de una necesidad o feature descrito en lenguaje natural. El output sigue **estrictamente** el template `$SPECS_BASE/specs/templates/story-gherkin-template.md` definido en este skill.
+Crea una historia de usuario completa a partir de una necesidad o feature descrito en lenguaje natural. El output sigue **estrictamente** el template `$SPECS_BASE/specs/templates/story-template.md` definido en este skill.
 
 **Usar cuando:**
 - Se necesita redactar una historia de usuario lista para sprint planning
@@ -29,17 +29,17 @@ El archivo de plantilla es la **única fuente de información estructural** para
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla `$SPECS_BASE/specs/templates/story-gherkin-template.md`.
+Lee el archivo de plantilla `$SPECS_BASE/specs/templates/story-template.md`.
 
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
-  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/story-gherkin-template.md`.
+  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/story-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 - Si el archivo **existe**: continua.
 
 ### paso B. Guía de estructura y formato
 
-Toda historia generada por este skill debe seguir **exactamente** la estructura de `$SPECS_BASE/specs/templates/story-gherkin-template.md` leida en el paso A. No asumas que las secciones siempre estarán en el mismo orden o que tendrán los mismos nombres. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución, infiriendo la información, para asegurar flexibilidad ante cambios futuros en la estructura del template.:
+Toda historia generada por este skill debe seguir **exactamente** la estructura de `$SPECS_BASE/specs/templates/story-template.md` leida en el paso A. No asumas que las secciones siempre estarán en el mismo orden o que tendrán los mismos nombres. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución, infiriendo la información, para asegurar flexibilidad ante cambios futuros en la estructura del template.:
 
 Por ejemplo:
 
@@ -226,7 +226,7 @@ Después de guardar el archivo, mostrar en la conversación:
 ```
 **Archivo generado:** `$SPECS_BASE/specs/stories/FEAT-{NNN}-{slug}/story.md`
 
-[Historia completa en formato story-gherkin-template.md]
+[Historia completa en formato story-template.md]
 
 ---
 **Nota FINVEST:** Esta historia está lista para evaluarse con `/story-evaluation`.
@@ -290,7 +290,7 @@ Flujo de recuperación vía email. SMS queda fuera de scope de esta historia.
 
 ## Referencias
 
-- **Template canónico:** `$SPECS_BASE/specs/templates/story-gherkin-template.md`
+- **Template canónico:** `$SPECS_BASE/specs/templates/story-template.md`
 - **Evaluación de calidad:** `/story-evaluation`
 - **División de historias grandes:** `/user-story-splitting`
 - Mike Cohn, *User Stories Applied* (2004)

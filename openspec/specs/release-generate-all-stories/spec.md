@@ -18,12 +18,12 @@ El skill SHALL ordenar los archivos de release por nombre de archivo en orden al
 - **THEN** el skill los procesa en el orden: release-00, release-02, release-06
 
 ### Requirement: El skill aplica el mismo flujo de generación que release-generate-stories para cada release
-Para cada archivo de release descubierto, el skill SHALL aplicar el mismo flujo de extracción de features y generación de historias definido en el skill `release-generate-stories`: leer la sección `## Features`, extraer cada feature con su ID y nombre, generar un archivo `story-[ID]-[nombre-kebab].md` en `$SPECS_BASE/specs/stories/` siguiendo la estructura de `story-gherkin-template.md`.
+Para cada archivo de release descubierto, el skill SHALL aplicar el mismo flujo de extracción de features y generación de historias definido en el skill `release-generate-stories`: leer la sección `## Features`, extraer cada feature con su ID y nombre, generar un archivo `story-[ID]-[nombre-kebab].md` en `$SPECS_BASE/specs/stories/` siguiendo la estructura de `story-template.md`.
 
 #### Scenario: Release con features definidas
 - **WHEN** un archivo de release contiene tres features en su sección `## Features`
 - **THEN** el skill genera exactamente tres archivos de historia en `$SPECS_BASE/specs/stories/`
-- **THEN** cada archivo sigue la estructura de `$SPECS_BASE/specs/templates/story-gherkin-template.md`
+- **THEN** cada archivo sigue la estructura de `$SPECS_BASE/specs/templates/story-template.md`
 
 #### Scenario: Release sin sección Features o sin entradas
 - **WHEN** un archivo de release no contiene la sección `## Features` o la sección está vacía

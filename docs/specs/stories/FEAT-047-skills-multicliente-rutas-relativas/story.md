@@ -22,7 +22,7 @@ parent: EPIC-09-docs-and-wiki-builders
 
 ### Escenario principal � Skill lee template correctamente en cliente distinto de Claude Code
 ```gherkin
-Dado que el skill referencia su template como `templates/story-gherkin-template.md`
+Dado que el skill referencia su template como `templates/story-template.md`
   Y el skill se ejecuta en un cliente LLM distinto de Claude Code (ej. OpenCode)
 Cuando el cliente resuelve la ruta del template
 Entonces el template se lee correctamente desde el directorio del skill activo
@@ -31,18 +31,18 @@ Entonces el template se lee correctamente desde el directorio del skill activo
 
 ### Escenario alternativo / error � Ruta hardcodeada falla en cliente no-Claude
 ```gherkin
-Dado que un skill referencia su template con ruta `.claude/skills/story-creation/templates/story-gherkin-template.md`
+Dado que un skill referencia su template con ruta `.claude/skills/story-creation/templates/story-template.md`
   Y el skill se ejecuta en un cliente que no monta skills bajo `.claude/`
 Cuando el cliente intenta leer el archivo
 Entonces el skill falla con error de archivo no encontrado
-  Pero si la ruta se reemplaza por `templates/story-gherkin-template.md`, el error no ocurre
+  Pero si la ruta se reemplaza por `templates/story-template.md`, el error no ocurre
 ```
 
 ### Escenario alternativo / error � Cliente no resuelve rutas relativas al skill autom�ticamente
 ```gherkin
 Dado que el cliente LLM no resuelve rutas relativas al directorio del skill activo
-Cuando el skill intenta leer `templates/story-gherkin-template.md`
-Entonces el skill puede usar `{{SKILL_ROOT}}/templates/story-gherkin-template.md` como alternativa expl�cita
+Cuando el skill intenta leer `templates/story-template.md`
+Entonces el skill puede usar `{{SKILL_ROOT}}/templates/story-template.md` como alternativa expl�cita
   Y el skill documenta que `{{SKILL_ROOT}}` debe estar configurada si el cliente no la inyecta autom�ticamente
   Pero nunca hardcodea una ruta que asuma `.claude/skills/` como directorio ra�z
 ```
@@ -64,10 +64,10 @@ Los siguientes skills contienen rutas hardcodeadas que deben actualizarse:
 - `project-discovery` ? `project-template.md`
 - `project-planning` ? `project-plan-template.md`
 - `release-format-validation` ? `release-spec-template.md`
-- `release-generate-stories` ? `story-gherkin-template.md`
+- `release-generate-stories` ? `story-template.md`
 - `reverse-engineering` ? `project-template.md`
-- `story-creation` ? `story-gherkin-template.md`
-- `story-split` ? `story-gherkin-template.md`
+- `story-creation` ? `story-template.md`
+- `story-split` ? `story-template.md`
 
 ### Requirement: Auto-descubrimiento de la ruta del skill
 El mecanismo, {{SKILL_ROOT}} es una variable que el cliente (Claude Code, OpenCode, etc.) debe expandir antes de ejecutar los comandos. Si el cliente no la expande (por ejemplo, en una versi�n antigua, o en otro asistente que no sigue esa convenci�n), el comando literal cat {{SKILL_ROOT}}/templates/mi-template.md fallar� porque intentar� leer un archivo llamado {{SKILL_ROOT}}/templates/... (que no existe). La mejor pr�ctica es no depender �nicamente de {{SKILL_ROOT}}, sino incluir un mecanismo de fallback que busque el template en ubicaciones est�ndar. Puedes hacerlo con un peque�o script shell dentro del SKILL.md que intente varias rutas hasta encontrar el archivo.

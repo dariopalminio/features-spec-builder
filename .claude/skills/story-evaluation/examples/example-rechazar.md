@@ -49,7 +49,7 @@ Dos sub-casos: (A) rechazado por formato insuficiente (sin template), (B) rechaz
 
 #### Comentarios y Recomendaciones
 
-La historia no cumple el formato mínimo. Reescribir usando el template `story-gherkin-template.md`:
+La historia no cumple el formato mínimo. Reescribir usando el template `story-template.md`:
 
 ```markdown
 ## 📖 Historia

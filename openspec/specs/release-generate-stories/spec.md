@@ -26,7 +26,7 @@ El skill SHALL leer la sección `## Features` del archivo de release y extraer c
 - **THEN** el skill no genera ningún archivo de historia
 
 ### Requirement: El skill genera un archivo de historia por feature
-El skill SHALL generar exactamente un archivo `story-[ID]-[nombre-kebab].md` por cada feature extraída del release. Cada archivo generado SHALL seguir exactamente la estructura de `$SPECS_BASE/specs/templates/story-gherkin-template.md` con las secciones mínimas obligatorias: frontmatter, `## 📖 Historia` (Como/Quiero/Para), y `## ✅ Criterios de aceptación` con al menos un escenario Gherkin principal y uno alternativo/error.
+El skill SHALL generar exactamente un archivo `story-[ID]-[nombre-kebab].md` por cada feature extraída del release. Cada archivo generado SHALL seguir exactamente la estructura de `$SPECS_BASE/specs/templates/story-template.md` con las secciones mínimas obligatorias: frontmatter, `## 📖 Historia` (Como/Quiero/Para), y `## ✅ Criterios de aceptación` con al menos un escenario Gherkin principal y uno alternativo/error.
 
 #### Scenario: Generación exitosa de historia desde feature
 - **WHEN** el release contiene "FEAT-029 — Generar stories"

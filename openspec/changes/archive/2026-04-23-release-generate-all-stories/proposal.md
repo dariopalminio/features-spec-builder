@@ -21,5 +21,5 @@ _(ninguna — no se modifican requisitos de specs existentes)_
 ## Impact
 
 - **Archivos nuevos**: `.claude/skills/release-generate-all-stories/SKILL.md`
-- **Dependencias funcionales**: reutiliza el flujo de generación de `release-generate-stories` (FEAT-029); necesita `$SPECS_BASE/specs/releases/` con archivos de release y `$SPECS_BASE/specs/templates/story-gherkin-template.md`
+- **Dependencias funcionales**: reutiliza el flujo de generación de `release-generate-stories` (FEAT-029); necesita `$SPECS_BASE/specs/releases/` con archivos de release y `$SPECS_BASE/specs/templates/story-template.md`
 - **Sin breaking changes**: no modifica el skill `release-generate-stories` ni ningún otro artefacto existente

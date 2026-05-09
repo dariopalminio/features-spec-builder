@@ -4,7 +4,7 @@ description: "Genera historias de usuario (directorio FEAT-NNN-nombre/story.md) 
 ---
 # Skill: /release-generate-all-stories
 
-Escanea todos los **directorios** de release en `$SPECS_BASE/specs/releases/`, lee `release.md` de cada uno, y genera automáticamente un directorio `FEAT-[ID]-[Nombre-kebab]/` con un archivo `story.md` por cada feature encontrada, siguiendo exactamente la estructura de `$SPECS_BASE/specs/templates/story-gherkin-template.md`. Es el equivalente batch de `/release-generate-stories`.
+Escanea todos los **directorios** de release en `$SPECS_BASE/specs/releases/`, lee `release.md` de cada uno, y genera automáticamente un directorio `FEAT-[ID]-[Nombre-kebab]/` con un archivo `story.md` por cada feature encontrada, siguiendo exactamente la estructura de `$SPECS_BASE/specs/templates/story-template.md`. Es el equivalente batch de `/release-generate-stories`.
 
 **Usar cuando:**
 - Se quiere poblar `$SPECS_BASE/specs/stories/` de forma completa a partir de todos los releases del proyecto
@@ -123,10 +123,10 @@ El archivo de plantilla es la **única fuente de información estructural** para
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
-Lee el archivo de plantilla `$SPECS_BASE/specs/templates/story-gherkin-template.md`.
+Lee el archivo de plantilla `$SPECS_BASE/specs/templates/story-template.md`.
 
 - Si el archivo **no existe**: informar al usuario y detener la ejecución:
-  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/story-gherkin-template.md`.
+  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/story-template.md`.
   > Por favor verifica que el archivo existe antes de continuar.
 
 - Si el archivo **existe**: continua.
@@ -144,7 +144,7 @@ Generar al menos un escenario Gherkin principal (happy path) y uno alternativo/e
 
 **5. Escribir el archivo:**
 
-Crear el directorio `$SPECS_BASE/specs/stories/FEAT-[NNN]-[nombre-kebab]/` si no existe, luego crear `story.md` dentro de ese directorio con la estructura del template `$SPECS_BASE/specs/templates/story-gherkin-template.md` infiriendo la información. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros en la estructura del template.
+Crear el directorio `$SPECS_BASE/specs/stories/FEAT-[NNN]-[nombre-kebab]/` si no existe, luego crear `story.md` dentro de ese directorio con la estructura del template `$SPECS_BASE/specs/templates/story-template.md` infiriendo la información. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros en la estructura del template.
 
 Al completar el frontmatter del archivo generado, usar:
 - `status: PLANNED` — estado inicial de toda historia generada desde un release planificado (pendiente de refinamiento)

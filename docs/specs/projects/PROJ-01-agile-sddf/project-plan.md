@@ -51,7 +51,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 - [ ] **FEAT-026: Empaquetado y Distribución de Skills** — El sistema permite empaquetar una skill finalizada en un archivo `.skill` para distribuirla e instalarla en otros entornos. _(deps: FEAT-022)_
 - [ ] **FEAT-027: Validación de Formato de Release** — El sistema valida que un archivo de especificación de release cumple la estructura obligatoria del template `release-spec-template.md`, produciendo resultado APROBADO, REFINAR o RECHAZADO. _(deps: FEAT-004)_
 - [ ] **FEAT-028: Generación de Especificaciones de Release** — El skill `releases-from-project-plan` crea `release-[ID]-[Nombre].md` a partir de `project-plan.md` usando el template `release-spec-template.md`. _(deps: FEAT-004, FEAT-027)_
-- [ ] **FEAT-029: Generación de Historias desde Release** — El skill `release-generate-stories` crea `story-[ID]-[Nombre].md` a partir del archivo de release usando el template `story-gherkin-template.md`. _(deps: FEAT-028, FEAT-006)_
+- [ ] **FEAT-029: Generación de Historias desde Release** — El skill `release-generate-stories` crea `story-[ID]-[Nombre].md` a partir del archivo de release usando el template `story-template.md`. _(deps: FEAT-028, FEAT-006)_
 - [ ] **FEAT-030: **Soporte Atlassian Rovo**: Agente `story-creator-agent.md` para el runtime Rovo. _(deps: FEAT-006)_
 - [ ] **FEAT-031: Soporte Atlassian Rovo expandido** — Agente `story-creator-agent.md` actualizado para operar con el conjunto completo de skills (creation, evaluation, split) en el runtime Rovo. _(deps: FEAT-030)_
 - [ ] **FEAT-032: Soporte Atlassian Rovo para Validar Release** — Agente `release-validator-agent.md` para el runtime Rovo. _(deps: FEAT-027, FEAT-030)_
@@ -106,7 +106,7 @@ Automatizar el ciclo completo de especificación de proyectos software — desde
 
 **Ítems de soporte (sin FEAT propio):**
 - Agente `story-creator-agent.md` para el runtime Atlassian Rovo
-- Template `story-gherkin-template.md` para historias de usuario
+- Template `story-template.md` para historias de usuario
 
 **Criterios de éxito:**
 - [ ] El skill `story-creation` genera una historia en formato Como/Quiero/Para con al menos 1 escenario principal y 1 alternativo en Gherkin para cualquier input de usuario válido.
