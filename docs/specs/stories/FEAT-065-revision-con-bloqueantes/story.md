@@ -4,8 +4,8 @@ type: story
 id: FEAT-065
 slug: FEAT-065-revision-con-bloqueantes
 title: "Skill story-code-review: instrucciones de corrección cuando la revisión detecta bloqueantes"
-status: READY-FOR-CODE-REVIEW
-substatus: DONE
+status: IMPLEMENTING
+substatus: IN-PROGRESS
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-09
 updated: 2026-05-09
@@ -64,6 +64,8 @@ Seguir lineamientos establecidos por `skill-creator` para asegurar que el skill 
 * Idempotencia: ejecutar el skill sobre el mismo código con los mismos problemas produce el mismo `fix-directives.md`
 
 ## 📎 Notas / contexto adicional
+
+El flujo needs-changes debe: generar fix-directives.md → añadir tarea en tasks.md → retroceder story.md a READY-FOR-IMPLEMENT/DONE, dejando la historia lista para que el desarrollador o el agente apliquen las correcciones desde tasks.md.
 
 `fix-directives.md` debe incluir la lista blanca de archivos permitidos para modificar, para que las correcciones no introduzcan cambios fuera del scope de la historia.
 

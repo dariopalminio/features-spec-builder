@@ -189,7 +189,7 @@ La implementación cumple todos los criterios de aceptación de `story.md` y la 
 El orquestador actualiza `story.md` **solo cuando** review-status = approved:
 ```
 status: READY-FOR-VERIFY
-substatus: IN-PROGRESS
+substatus: DONE
 ```
 
 La actualización se hace después de escribir `code-review-report.md`, garantizando que el artefacto existe antes de cambiar el estado.

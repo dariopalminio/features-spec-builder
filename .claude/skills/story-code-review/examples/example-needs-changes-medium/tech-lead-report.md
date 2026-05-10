@@ -15,6 +15,3 @@ max-severity: MEDIUM
 
 ## Veredicto
 needs-changes: Se detectó una función con responsabilidad múltiple de severidad MEDIUM que debe refactorizarse antes de aprobar.
-
----
-> Nota: Este ejemplo cubre el Scenario Outline AC-2 de FEAT-065: severidad MEDIUM → needs-changes.

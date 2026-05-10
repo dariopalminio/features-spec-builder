@@ -4,7 +4,8 @@ description: >-
   Ejecuta una revisión multi-agente del código implementado en una historia SDD, lanzando en paralelo
   tres subagentes especializados (Inspector de Código, Guardián de Requisitos, Inspector de Integración)
   y consolidando sus hallazgos en un code-review-report.md. Genera review-status: approved cuando no
-  hay hallazgos de severidad HIGH o MEDIUM, y actualiza story.md a READY-FOR-VERIFY/IN-PROGRESS.
+  hay hallazgos de severidad HIGH o MEDIUM y actualiza story.md a READY-FOR-VERIFY/DONE; si hay
+  bloqueantes genera fix-directives.md, agrega tarea en tasks.md y retrocede story.md a IMPLEMENTING/IN-PROGRESS.
   Usar siempre que el usuario quiera revisar el código de una historia implementada, validar que la
   implementación cumple los criterios de aceptación y la arquitectura antes de marcar Done,
   o ejecutar el quality gate posterior a story-implement.
@@ -32,7 +33,7 @@ Quality gate formal entre `/story-implement` y la marca final de Done. Lanza tre
 story-code-review  → Quality gate: revisión multi-agente del código  ← aquí
      │   Al iniciar: story.md → CODE-REVIEW/IN-PROGRESS
      │   Al finalizar (approved): story.md → READY-FOR-VERIFY/DONE
-     │   Al finalizar (needs-changes): story.md permanece en CODE-REVIEW/DONE
+     │   Al finalizar (needs-changes): story.md → IMPLEMENTING/IN-PROGRESS
      ↓
 [story.md: READY-FOR-VERIFY/DONE]
 ──────────────────────────────────────────────────────────────────────────────────────
@@ -49,7 +50,7 @@ code-review-report.md → Review: hallazgos por dimensión, decisión final  ←
 | Precondición requerida para ejecutar | `READY-FOR-CODE-REVIEW` | `DONE` |
 | Al iniciar la revisión (Paso 1) | `CODE-REVIEW` | `DONE` |
 | Finalización aprobada (Paso 6) | `READY-FOR-VERIFY` | `DONE` |
-| Finalización con bloqueantes (FEAT-065) | `CODE-REVIEW` | `DONE` |
+| Finalización con bloqueantes (Paso 4g) | `IMPLEMENTING` | `IN-PROGRESS` |
 
 **Precondición:** `story-code-review` solo puede ejecutarse si `story.md` tiene `status: READY-FOR-CODE-REVIEW` + `substatus: DONE`. Si la precondición no se cumple, la ejecución se detiene con error descriptivo.
 
@@ -59,7 +60,7 @@ code-review-report.md → Review: hallazgos por dimensión, decisión final  ←
 - Lanza tres subagentes revisores en paralelo con responsabilidades exclusivas
 - Consolida los informes parciales y calcula la severidad máxima
 - **Si `approved`**: genera `code-review-report.md`, elimina `fix-directives.md` (si existe) y avanza `story.md` a `READY-FOR-VERIFY/DONE`
-- **Si `needs-changes`**: genera `fix-directives.md` con instrucciones de corrección y lista blanca; `story.md` permanece en `CODE-REVIEW/DONE`
+- **Si `needs-changes`**: genera `fix-directives.md`, agrega tarea "Implementar fix-directives.md" en `tasks.md` y retrocede `story.md` a `IMPLEMENTING/IN-PROGRESS`
 
 **Qué NO hace este skill:**
 - Ejecutar ni compilar código (opera sobre Markdown y texto plano únicamente)
@@ -332,13 +333,32 @@ Mostrar:
 📋 Fix directives: <ruta>/fix-directives.md
 ```
 
-### 4g. [needs-changes] Mantener story.md en CODE-REVIEW/DONE
+### 4g. [needs-changes] Registrar tarea en `tasks.md` y retroceder story.md
 
-No actualizar el frontmatter de `story.md`. Permanece en el estado actual.
+**4g.1 — Agregar tarea en `tasks.md`:**
+
+Si existe `$STORY_DIR/tasks.md`, agregar al final del archivo la siguiente línea:
+
+```
+- [ ] Implementar fix-directives.md
+```
+
+Si `tasks.md` no existe, omitir este sub-paso sin error.
 
 Mostrar:
 ```
-⚠️  Review: needs-changes — story.md permanece en CODE-REVIEW/DONE
+📝 Tarea agregada en tasks.md: "Implementar fix-directives.md"
+```
+
+**4g.2 — Retroceder story.md a READY-FOR-IMPLEMENT/DONE:**
+
+Actualizar el frontmatter de `story.md`:
+- `status: READY-FOR-IMPLEMENT`
+- `substatus: DONE`
+
+Mostrar:
+```
+⚠️  Review: needs-changes — story.md → READY-FOR-IMPLEMENT/DONE
 → Revisa: <ruta>/fix-directives.md
 ```
 
@@ -389,7 +409,7 @@ Mostrar:
 📋 Estado story.md: READY-FOR-VERIFY/DONE ✓
 ```
 
-**Si `$REVIEW_STATUS = needs-changes`:** el frontmatter ya permanece en `CODE-REVIEW/DONE` (Paso 4g). No ejecutar este paso.
+**Si `$REVIEW_STATUS = needs-changes`:** el frontmatter ya fue actualizado a `READY-FOR-IMPLEMENT/DONE` en el Paso 4g.2. No ejecutar este paso.
 
 ---
 
@@ -433,7 +453,7 @@ O si hay bloqueantes:
 
 📋 Fix directives: <ruta>/fix-directives.md
 📄 Reporte:        <ruta>/code-review-report.md
-📋 Estado:         <story_id> → CODE-REVIEW/DONE (sin avance)
+📋 Estado:         <story_id> → IMPLEMENTING/IN-PROGRESS
 
 ⚠️  Revisión completada con hallazgos bloqueantes
 

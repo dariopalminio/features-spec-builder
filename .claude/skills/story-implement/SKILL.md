@@ -20,7 +20,8 @@ Implementa una historia SDD tarea por tarea siguiendo TDD. Su propósito es **ce
 ## Posicionamiento
 
 ```
-[story.md: READY-FOR-IMPLEMENT/DONE]    ← precondición requerida (viene de story-plan/story-analyze)
+[story.md: READY-FOR-IMPLEMENT/DONE]    ← precondición inicial (viene de story-plan/story-analyze)
+[story.md: IMPLEMENTING/IN-PROGRESS]    ← precondición reanudación (viene de story-code-review needs-changes)
      ↓
 story-implement  → Entry point de la implementación: ejecuta TDD tarea por tarea  ← aquí
      │   Al iniciar: story.md → IMPLEMENTING/IN‑PROGRESS
@@ -40,11 +41,12 @@ story-implement   → Entry point de la implementación: ejecuta TDD tarea por t
 
 | Evento | status | substatus |
 |--------|--------|-----------|
-| Precondición requerida para ejecutar | `READY-FOR-IMPLEMENT` | `DONE` |
-| Antes de la primera tarea (Paso 2) | `IMPLEMENTING` | `IN‑PROGRESS` |
+| Precondición inicial (ejecución nueva) | `READY-FOR-IMPLEMENT` | `DONE` |
+| Precondición reanudación (parcialmente implementada) | `IMPLEMENTING` | `IN-PROGRESS` |
+| Antes de la primera tarea (Paso 2) | `IMPLEMENTING` | `IN-PROGRESS` |
 | Después de generar `implement-report.md` (Paso 4) | `READY-FOR-CODE-REVIEW` | `DONE` |
 
-**Precondición:** `story-implement` solo puede ejecutarse si `story.md` tiene `status: READY-FOR-IMPLEMENT` + `substatus: DONE`. Si la precondición no se cumple, la ejecución se detiene con error descriptivo.
+**Precondición:** `story-implement` puede ejecutarse si `story.md` tiene `status: READY-FOR-IMPLEMENT / substatus: DONE` (ejecución inicial) o `status: IMPLEMENTING / substatus: IN-PROGRESS` (reanudación de implementación parcial). Cualquier otro estado detiene la ejecución con error descriptivo.
 
 **Qué hace este skill:**
 - Lee los tres artefactos de planning como entrada
@@ -138,28 +140,42 @@ Si alguno de los tres artefactos falta, detener la ejecución **sin implementar 
 
 ### 1d. Verificar precondición de estado
 
-Leer el frontmatter de `story.md` y verificar que `status: READY-FOR-IMPLEMENT` y `substatus: DONE`.
+Leer el frontmatter de `story.md` y verificar que se cumple alguna de las siguientes condiciones:
+
+```
+Precondición válida si:
+  (status: READY-FOR-IMPLEMENT  AND substatus: DONE)        ← ejecución inicial
+  OR
+  (status: IMPLEMENTING          AND substatus: IN-PROGRESS) ← reanudación de implementación parcial
+```
 
 **Si la precondición NO se cumple:**
 ```
-❌ La historia <story_id> no está en estado READY-FOR-IMPLEMENT/DONE.
+❌ La historia <story_id> no está en un estado válido para implementar.
 
    Estado actual: status: <valor_actual> / substatus: <valor_actual>
 
-   story-implement requiere que el planning esté completo y sin ERROREs.
-   Sugerencia: ejecuta /story-plan {story_id} para completar el planning.
+   story-implement requiere uno de los siguientes estados:
+   · READY-FOR-IMPLEMENT/DONE      → ejecución inicial
+   · IMPLEMENTING/IN-PROGRESS     → reanudación de implementación parcial
+
+   Para ejecución inicial: ejecuta /story-plan {story_id} para completar el planning.
    Si ya ejecutaste story-plan, verifica que story-analyze no reportó ERROREs.
 ```
 Detener la ejecución **sin implementar ninguna tarea**.
 
-**Si `status`/`substatus` no existen en el frontmatter**, tratar como `BACKLOG/TODO` y aplicar el mismo error anterior.
+**Si `status`/`substatus` no existen en el frontmatter**, tratar como `SPECIFYING/TODO` y aplicar el mismo error anterior.
+
+Registrar internamente:
+- `$ENTRADA_STATUS`: el valor de `status` leído del frontmatter
 
 Mostrar confirmación de inicio:
 ```
 🚀 Iniciando implementación para: <story_id>
    Directorio: <ruta_directorio>
    Artefactos: story.md ✓ | design.md ✓ | tasks.md ✓
-   Estado: READY-FOR-IMPLEMENT/DONE ✓
+   Estado: READY-FOR-IMPLEMENT/DONE ✓        (si $ENTRADA_STATUS = READY-FOR-IMPLEMENT)
+   Estado: IMPLEMENTING/IN-PROGRESS ✓        (si $ENTRADA_STATUS = IMPLEMENTING)
 ```
 
 ---
@@ -196,15 +212,38 @@ Construir la lista interna de componentes definidos:
 [ComponenteA, ComponenteB, InterfazX, ...]
 ```
 
-### 2c. Leer tasks.md y extraer tareas pendientes
+### 2c. Leer tasks.md, detectar modo y verificar fix-directives.md
 
 Leer `tasks.md` del directorio resuelto.
 
 Extraer:
-- Lista de tareas con patrón `- [ ] T\d+` — tareas pendientes
-- Lista de tareas con patrón `- [x] T\d+` — tareas ya completadas (no procesar)
-- IDs de tareas (`T001`, `T002`...) y sus descripciones completas
+- Lista de tareas con patrón `- [ ] T\d+` o `- [ ] \d+\.\d+` — tareas pendientes
+- Lista de tareas con patrón `- [x] T\d+` o `- [x] \d+\.\d+` — tareas ya completadas (no procesar)
+- IDs de tareas y sus descripciones completas
 - Agrupaciones por sección `##` como contexto de área técnica
+
+Calcular y registrar internamente:
+- `N_completadas` = número de tareas `[x]`
+- `N_pendientes` = número de tareas `[ ]`
+- `fix_directives_existe` = `true` si `$STORY_DIR/fix-directives.md` existe, `false` si no
+- `modo` = `inicial` si `N_completadas = 0`; `reanudación` si `N_completadas > 0`
+
+**Gate de salida anticipada (AC-3):** si `N_pendientes = 0` AND `N_completadas > 0`, mostrar el siguiente mensaje y terminar **sin modificar ningún archivo**:
+
+```
+ℹ️  No hay tareas pendientes en tasks.md — todas están completadas.
+   Tareas completadas: <N_completadas>
+   Sugerencia: ejecuta /story-code-review <story_id> si la historia está en IMPLEMENTING.
+```
+
+**Si `modo = reanudación`** (y `N_pendientes > 0`), mostrar el siguiente resumen antes de la primera tarea:
+
+```
+🔁 Modo reanudación detectado
+   Tareas ya completadas (omitidas): <N_completadas>
+   Tareas pendientes a ejecutar:     <N_pendientes>
+   fix-directives.md:                <detectado | no encontrado>
+```
 
 ### 2d. Verificar tamaño de la historia
 
@@ -232,13 +271,16 @@ Mostrar resumen de carga:
    Tareas ya completadas:  <N>
 ```
 
-### 2e. Actualizar frontmatter a IMPLEMENTING/IN‑PROGRESS
+### 2e. Actualizar frontmatter a IMPLEMENTING/IN-PROGRESS (si no está ya en ese estado)
 
-Antes de ejecutar la primera tarea, actualizar el frontmatter de `story.md`:
-- `status: IMPLEMENTING`
-- `substatus: IN‑PROGRESS`
+Antes de ejecutar la primera tarea, verificar el estado de entrada registrado en `$ENTRADA_STATUS`:
 
-Esta actualización debe ocurrir antes de procesar cualquier tarea del Paso 3.
+- Si `$ENTRADA_STATUS` es `IMPLEMENTING` (el frontmatter ya tiene `status: IMPLEMENTING / substatus: IN-PROGRESS`): **omitir la escritura** — el estado ya es correcto, no se realiza ninguna modificación al archivo.
+- Si `$ENTRADA_STATUS` es `READY-FOR-IMPLEMENT`: actualizar el frontmatter de `story.md`:
+  - `status: IMPLEMENTING`
+  - `substatus: IN-PROGRESS`
+
+Esta verificación debe ocurrir antes de procesar cualquier tarea del Paso 3.
 
 ---
 
@@ -276,12 +318,48 @@ Mostrar:
 
 Continuar con la siguiente tarea sin detener el pipeline.
 
-### 3c. Si tarea es implementable → Ciclo TDD
+### 3c. Si tarea es implementable → Detección de tarea especial o Ciclo TDD
 
 Mostrar:
 ```
 [T001] → implementando…
 ```
+
+**Detección de tarea especial:** al inicio del ciclo, antes del TDD estándar, evaluar la descripción de la tarea:
+
+```
+si descripción_tarea.trim().toLowerCase() == "implementar fix-directives.md":
+  ejecutar sub-flujo de fix-directives (ver abajo)
+sino:
+  ejecutar ciclo TDD estándar (Paso TDD-1, TDD-2, TDD-3)
+```
+
+> **Nota de diseño (D-3):** La comparación usa el literal exacto `"implementar fix-directives.md"` (normalizado con trim + lowercase). Este es el texto canónico generado por `story-code-review` en el Paso 4g.1. Si el nombre en `tasks.md` difiere por cualquier motivo (typo, traducción manual), la tarea se procesará como ciclo TDD estándar en lugar del sub-flujo — degradación controlada sin error fatal. Ver justificación en `design.md D-3`.
+
+**Sub-flujo: Implementar fix-directives.md**
+
+**Sub-paso 1 — Verificar existencia:**
+Verificar que `$STORY_DIR/fix-directives.md` existe.
+
+Si no existe:
+- Marcar la tarea como `[~]` en `tasks.md` con mensaje: `fix-directives.md no encontrado en <$STORY_DIR>`
+- Mostrar: `[T] ⚠️ bloqueada — fix-directives.md no encontrado en <ruta>`
+- Continuar con la siguiente tarea sin ejecutar el resto del sub-flujo.
+
+**Sub-paso 2 — Leer y aplicar correcciones:**
+Leer `fix-directives.md` y extraer la tabla "Instrucciones de corrección" (columnas: `#`, `Archivo:Línea`, `Dimensión`, `Severidad`, `Hallazgo`, `Acción requerida`).
+
+Para cada fila de la tabla:
+1. Extraer `archivo` y `línea` de la columna `Archivo:Línea` (texto antes y después del último `:`)
+2. Verificar que el archivo existe en el repositorio
+   - Si el archivo no existe: mostrar `⚠️ archivo no encontrado: <ruta>` y continuar con la siguiente corrección **sin abortar las correcciones restantes**
+3. Aplicar la corrección indicada en `Acción requerida` en el archivo y línea especificados
+4. Mostrar: `[T] 💻 corregido: <ruta>`
+
+**Sub-paso 3 — Marcar completada:**
+Al completar todas las correcciones (incluso si alguna fue omitida por archivo inexistente), continuar al Paso 3d para marcar la tarea como `[x]` en `tasks.md`.
+
+---
 
 **Paso TDD-1: Generar test fallido**
 
@@ -364,9 +442,9 @@ updated: <YYYY-MM-DD>
 |---|---|
 | Historia | <FEAT-NNN> |
 | Total de tareas | <N> |
-| Tareas completadas | <N_completadas> |
+| Tareas completadas | <N_completadas_en_esta_ejecución> |
 | Tareas bloqueadas | <N_bloqueadas> |
-| Tareas omitidas (ya completadas antes) | <N_previas> |
+| Tareas omitidas (ya completadas antes) | <N_completadas> |
 | Fecha de implementación | <YYYY-MM-DD> |
 
 **Estado:** ✅ Implementación completa / ⚠️ Implementación completada con tareas pendientes de aclaración
@@ -375,10 +453,15 @@ updated: <YYYY-MM-DD>
 
 ## Tabla de Estado por Tarea
 
+Si `N_completadas > 0` (modo reanudación), incluir primero las tareas previas:
+
 | ID | Descripción | Estado | Archivos generados |
 |---|---|---|---|
-| T001 | <descripción> | ✓ completado | `ruta/test.ts`, `ruta/codigo.ts` |
-| T002 | <descripción> | ⚠️ requiere aclaración | — |
+| T001 | <descripción tarea previa [x]> | ✓ completado (ejecución anterior) | — |
+| T002 | <descripción tarea nueva [x]> | ✓ completado | `ruta/test.ts`, `ruta/codigo.ts` |
+| T003 | <descripción tarea bloqueada> | ⚠️ requiere aclaración | — |
+
+Si `N_completadas = 0` (ejecución inicial), omitir las filas de "ejecución anterior".
 
 ---
 

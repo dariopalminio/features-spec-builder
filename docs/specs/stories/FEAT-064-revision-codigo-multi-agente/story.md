@@ -4,7 +4,7 @@ type: story
 id: FEAT-064
 slug: FEAT-064-revision-codigo-multi-agente
 title: "Skill story-code-review: revisión multi-agente aprobada del código implementado"
-status: READY-FOR-CODE-REVIEW
+status: READY-FOR-VERIFY
 substatus: DONE
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-09
@@ -35,7 +35,7 @@ related:
 Dado que existen "story.md", "design.md" e "implement-report.md" en "docs/specs/stories/FEAT-NNN/"
 Cuando ejecuto "/story-code-review FEAT-NNN" y ningún revisor detecta problemas de severidad HIGH o MEDIUM
 Entonces el skill genera "docs/specs/stories/FEAT-NNN/code-review-report.md" con review-status: approved
-  Y el frontmatter de "story.md" se actualiza a status: READY-FOR-VERIFY y substatus: IN-PROGRESS
+  Y el frontmatter de "story.md" se actualiza a status: READY-FOR-VERIFY y substatus: DONE
 ```
 
 ### Escenario con datos (Scenario Outline) – Decisión aprobada según severidad máxima

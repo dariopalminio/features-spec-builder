@@ -3,7 +3,7 @@ type: story
 id: FEAT-000
 slug: FEAT-000-test
 title: "Test: Fixture mínimo para verificar story-code-review"
-status: CODE-REVIEW
+status: READY-FOR-VERIFY
 substatus: DONE
 parent: EPIC-00-test
 created: 2026-05-09
@@ -24,7 +24,7 @@ Dado que existen story.md, design.md e implement-report.md en docs/specs/stories
 Cuando ejecuto /story-code-review FEAT-000
 Y ningún revisor detecta problemas de severidad HIGH o MEDIUM
 Entonces el skill genera code-review-report.md con review-status: approved
-  Y el frontmatter de story.md se actualiza a status: READY-FOR-VERIFY y substatus: IN-PROGRESS
+  Y el frontmatter de story.md se actualiza a status: READY-FOR-VERIFY y substatus: DONE
 ```
 
 ### Escenario – Severidad LOW aprobada

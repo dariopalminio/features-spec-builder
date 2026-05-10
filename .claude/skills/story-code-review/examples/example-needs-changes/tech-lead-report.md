@@ -17,7 +17,3 @@ max-severity: HIGH
 
 ## Veredicto
 needs-changes: Se detectó un secret hardcodeado de severidad HIGH que debe resolverse antes de aprobar.
-
----
-> Nota: Este es un ejemplo de referencia para el flujo de revisión con bloqueantes (FEAT-065).
-> En FEAT-064 (happy path), los informes tienen max-severity LOW o ninguna.

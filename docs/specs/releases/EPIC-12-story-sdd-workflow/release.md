@@ -38,6 +38,7 @@ Lee las siguientes políticas antes de cualquier acción:
   - [x] FEAT-064 — Revisión multi-agente y reporte de aprobación
   - [x] FEAT-065 — Fix-directives cuando la revisión detecta bloqueantes
   - [x] FEAT-066 — Validación de precondiciones antes de ejecutar
+  - [x] FEAT-067 — Continuar implementación parcial con tareas pendientes y fix-directives (esta historia se detalla en su propia sección de diseño, tareas e implementación debido a su complejidad e impacto en el skill de implementación)
 
 ## Requerimiento: Patrones estructurales de Skills (Skill Structural patterns)
 Se debe seguir y respetar los lineamientos estructurales de skills definido en `docs\knowledge\guides\skill-structural-pattern.md`.
