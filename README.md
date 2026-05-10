@@ -237,6 +237,9 @@ Cada archivo principal usa un nombre canónico (`project-intent.md`, `release.md
 
 # Implementar una historia tarea por tarea con TDD (requiere READY-FOR-IMPLEMENT/DONE)
 /story-implement FEAT-001
+
+# Revisión de código post-implementación
+/story-code-review
 ```
 
 
