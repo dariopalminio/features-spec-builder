@@ -10,6 +10,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- **Skill `/story-code-review`** (FEAT-064, FEAT-065) — ejecuta una revisión multi-agente del código implementado en una historia SDD; lanza en paralelo tres subagentes especializados: Inspector de Código (convenciones, complejidad, seguridad), Guardián de Requisitos (cobertura de ACs) e Inspector de Integración (contratos de interfaz); consolida hallazgos en `code-review-report.md` con severidades `HIGH / MEDIUM / LOW / INFO`; cuando no hay hallazgos HIGH ni MEDIUM establece `review-status: approved` y transiciona `story.md` a `READY-FOR-VERIFY/DONE`; cuando detecta bloqueantes genera `fix-directives.md` con instrucciones concretas por archivo y retrocede `story.md` a `IMPLEMENTING/IN-PROGRESS`; actúa como quality gate post-`story-implement` en el pipeline SDD
+
+### Changed
+
+- **Skill `/story-implement`** (FEAT-067) — soporte para continuar implementaciones parciales: al re-ejecutar, detecta tareas ya completadas en `tasks.md` (`[x]`) y procesa solo las pendientes (`[ ]`); integra automáticamente las correcciones de `fix-directives.md` si existe, permitiendo reanudar el ciclo de implementación tras un code review con bloqueantes sin perder el trabajo previo
+- **Máquina de estados** — extendida con el nuevo estado `READY-FOR-VERIFY/DONE` al final del pipeline: `... → READY-FOR-CODE-REVIEW/DONE → READY-FOR-VERIFY/DONE`; `story-code-review` es el skill responsable de esta transición final
+- Renombrado `DOING` → `IN-PROGRESS` en el campo `substatus` de todos los artefactos de spec para alinear con la nomenclatura canónica de la máquina de estados
+- Renombrado template `story-gherkin-template` → `story-template` como nombre canónico compartido
+- **`definition-of-done.md`** — criterios de despliegue actualizados con validación npm (`npm pack --dry-run`, instalación limpia) y criterios de skills (uso de `skill-creator`, inclusión en `files` de `package.json`)
+
+### Fixed
+
+- Eliminada historia `FEAT-000` usada solo para pruebas del pipeline
+
+### Added
+
 - **Skill `/story-design`** — genera `design.md` a partir de `story.md`, modelando el sistema antes de codificar; implementa 12 principios de diseño explícitos (P1-P12: alternativas consideradas, trazabilidad AC-N, reutilización, vocabulario de dominio, uniformidad, diseño para el cambio, degradación gradual, diseño ≠ programación, autoevaluación estructural, revisión conceptual, cohesión/acoplamiento, KISS/YAGNI); fallback chain de 3 niveles para template y resolución de historia por ID; extracción de contexto técnico del código real del proyecto (`package.json`, estructura de directorios, implementaciones similares); checklist de principios (Paso 6) antes de guardar; mecanismo de Change Requests (Paso 7) para retroalimentación ascendente a `story.md`; modos manual e invocable por orquestador; template de fallback interno si no existe template externo
 - **Template `story-design-template.md`** — template canónico del skill `/story-design`; añade tabla de Componentes Afectados (con columna AC que satisface), tabla de Interfaces explícitas, sección de Puntos de Variación, tabla de Comportamiento ante Fallos, sección "Decisiones de complejidad justificada" (P12) y sección Registro de Cambios (CR); instrucciones de trazabilidad `// satisface: AC-N` embebidas como comentarios guía
 - **Políticas del proyecto** — skill `/project-policies-generation` genera `docs/policies/constitution.md` y `docs/policies/definition-of-done.md` desde templates y registra referencias en `CLAUDE.md`; template `project-constitution-template.md` con stack, convenciones, metodologías y principios técnicos inamovibles; template `definition-of-done-template.md` con criterios de aceptación, código, tests, documentación y despliegue npm (versionado SemVer, `npm pack --dry-run`, validación de instalación limpia)
