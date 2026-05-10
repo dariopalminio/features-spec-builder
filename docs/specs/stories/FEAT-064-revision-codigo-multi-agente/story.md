@@ -4,7 +4,7 @@ type: story
 id: FEAT-064
 slug: FEAT-064-revision-codigo-multi-agente
 title: "Skill story-code-review: revisión multi-agente aprobada del código implementado"
-status: READY-FOR-VERIFY
+status: DELIVERED
 substatus: DONE
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-09

@@ -4,7 +4,7 @@ type: story
 id: FEAT-066
 slug: FEAT-066-revision-validacion-precondiciones
 title: "Skill story-code-review: validación de artefactos requeridos antes de revisar"
-status: READY-FOR-CODE-REVIEW
+status: DELIVERED
 substatus: DONE
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-09
