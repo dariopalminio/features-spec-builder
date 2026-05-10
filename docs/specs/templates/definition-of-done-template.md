@@ -9,11 +9,28 @@ updated: <YYYY-MM-DD>
 
 # Definition of Done (DoD)
 
-> Una historia de usuario se considera **DONE** cuando cumple todos los criterios marcados en este documento. Ninguna historia puede cerrar sprint ni desplegarse a producción sin satisfacer estos criterios.
+## Story Definition of Done
+
+> Una historia de usuario se considera **DONE** cuando cumple todos los criterios marcados en este documento. Ninguna historia puede cerrar su desarrollo ni desplegarse a producción sin satisfacer estos criterios.
 
 ---
 
-## ✅ Criterios de Aceptación
+### Definition of Done para el estado SPECIFYING
+
+#### ✅ Criterios de Especificación
+<!-- Criterios relacionados con la definición clara y completa de la historia. -->
+- [ ] La historia tiene un título descriptivo y claro
+- [ ] La descripción de la historia es completa y comprensible
+- [ ] Cumple los criterios de formato de historia de usuario (Como {rol} quiero {acción} para {beneficio}):
+- [ ] Tiene criterios de aceptación en formato Gherkin (Given-When-Then) que cubren los escenarios principales
+- [ ] Cumple los criterios INVEST (Independent, Negotiable, Valuable, Estimable, Small, Testable).
+- [ ] La historia tiene el frontmatter completo con metadata correcta (status, substatus, tags, etc.)
+- [ ] La historia tiene el frontmatter con referencia a la épica padre si está incluida en un epic release (`release.md`)
+- [ ] La historia tiene referencias a historias relacionadas cercanas (historias hermanas de división por split)
+
+### Definition of Done para el estado IMPLEMENTING
+
+#### ✅ Criterios de Aceptación
 
 <!-- Criterios funcionales que toda historia debe cumplir. -->
 
@@ -22,9 +39,7 @@ updated: <YYYY-MM-DD>
 - [ ] El comportamiento coincide con lo especificado en `design.md`
 - [ ] No hay regresiones en las funcionalidades previamente trabajadas
 
----
-
-## 💻 Criterios de Código
+#### 💻 Criterios de Código
 
 <!-- Estándares de calidad del código producido. -->
 
@@ -34,9 +49,7 @@ updated: <YYYY-MM-DD>
 - [ ] El código pasa el linter y el formateador sin errores ni warnings
 - [ ] No se introducen dependencias nuevas sin aprobación del equipo
 
----
-
-## 🧪 Criterios de Tests
+#### 🧪 Criterios de Tests
 
 <!-- Cobertura y calidad de las pruebas. -->
 
@@ -46,9 +59,7 @@ updated: <YYYY-MM-DD>
 - [ ] Los tests son deterministas (no flaky)
 - [ ] Los tests de integración cubren los flujos críticos de la historia
 
----
-
-## 📝 Criterios de Documentación
+#### 📝 Criterios de Documentación
 
 <!-- Actualización de documentación relevante. -->
 
@@ -57,17 +68,28 @@ updated: <YYYY-MM-DD>
 - [ ] Si se toman decisiones de diseño relevantes no previstas, se documentan en `design.md`
 - [ ] El CHANGELOG o historial de releases se actualiza si aplica
 
----
-
-## 🚀 Criterios de Despliegue
+#### 🚀 Criterios de Integración y Despliegue
 
 <!-- Condiciones necesarias para desplegar a producción. -->
 
 - [ ] El build de CI pasa sin errores (build + tests + lint)
-- [ ] La historia fue revisada y aprobada (code review o self-review según `constitution.md`)
 - [ ] No hay secrets ni credenciales expuestos en el código
 - [ ] Las variables de entorno necesarias están documentadas
 - [ ] El despliegue puede revertirse sin pérdida de datos si algo falla
+
+---
+
+### Definition of Done para el estado CODE-REVIEW
+
+- [ ] Definition of Done para el estado IMPLEMENTING es satisfactorio
+- [ ] Se cumplen los estándares del proyecto (`constitution.md`)
+- [ ] Cada escenario Gherkin tiene correspondencia en el código
+- [ ] Los componentes respetan la arquitectura de `design.md`
+- [ ] Sin hallazgo bloqueante de severidad HIGH o MEDIUM
+- [ ] Sin tareas pendientes en `tasks.md`
+- [ ] Metadatos frontmatter de `story.md` están completos y correctos con status y substatus actualizados
+- [ ] El reporte de revisión de código (`code-review-report.md`) está creado o actualizado
+- [ ] Revisión de código aprobada (Review status approved en `code-review-report.md`)
 
 ---
 

@@ -28,3 +28,7 @@ Un subestado representa el nivel de avance interno de un work item dentro de un 
 - **IN‑PROGRESS**: Alguien está trabajando activamente en esta etapa (ej. redactando la especificación, planificando, implementando) sobre el work item. Al completar la tarea de la etapa (ej. finishing spec.md), pasa a DONE.
 - **DONE**: El trabajo de esta etapa (status) ha terminado. El work item está listo para pasar a la siguiente etapa del flujo (listo para pasar al siguiente status). 
 
+## Story Workflow
+
+SPECIFYING --> PLANNING --> READY-FOR-IMPLEMENT --> IMPLEMENTING --> CODE-REVIEW --> VERIFY --> ACCEPTANCE --> INTEGRATION --> DELIVERED
+
