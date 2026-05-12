@@ -382,6 +382,8 @@ Minimalista y conversacional — el framework no tiene interfaz gráfica propia.
 
 Estilo Árbol Jerárquico (Tree)
 
+A continuación un ejemplo a modo de MVP:
+
 ```
 AGILE SDDF — Sistema de Invocación de Skills
 │
@@ -568,9 +570,9 @@ Sin referencias.
 | **Skill** | Archivo Markdown (SKILL.md) que define una habilidad especializada para un agente de IA. Actúa como punto de entrada y orquestador. |
 | **Agente** | Subprocesador especializado definido en un archivo Markdown (`.agent.md`). Invocado por un skill. |
 | **Pipeline ProjectSpecFactory** | Flujo secuencial de tres fases: Begin Intention → Discovery → Planning |
-| **WIP** | Work In Progress — en este sistema, restricción de máximo 1 proyecto activo (`Estado: IN‑PROGRESS`) simultáneamente |
-| **Estado: IN‑PROGRESS** | Campo de control de flujo que indica que un documento está en progreso y puede ser retomado |
-| **Estado: Ready** | Campo de control de flujo que indica que un documento está completo y actúa como precondición para el siguiente paso del pipeline |
+| **WIP** | Work In Progress — en este sistema, restricción de máximo 1 proyecto activo (`substatus: IN‑PROGRESS`) simultáneamente |
+| **status** | Campo de control de flujo que indica que un documento spec tipo workitem está en una fase determinada, por ejemplo en historia de usuario story: SPECIFYING, PLANNING, READY-FOR-IMPLEMENT, IMPLEMENTING, CODE-REVIEW, VERIFY, ACCEPTANCE, INTEGRATION, DELIVERED |
+| **substatus** | Campo de control de subestado que indica que un documento spec tipo workitem está en TODO, IN-PROGRESS o DONE |
 | **FINVEST** | Rúbrica de evaluación de historias: Formato + INVEST (Independent, Negotiable, Valuable, Estimable, Small, Testable) |
 | **INVEST** | Criterios de calidad de historias de usuario: Independent, Negotiable, Valuable, Estimable, Small, Testable |
 | **F_score** | Score de la dimensión Formato en la rúbrica FINVEST. Fórmula: `(puntaje_historia × 0.4) + (puntaje_criterios × 0.3) + (puntaje_gherkin × 0.3)` |

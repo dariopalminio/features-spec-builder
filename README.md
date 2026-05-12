@@ -29,7 +29,7 @@ Los developers y equipos que trabajan con IA para desarrollar software carecen d
 - **User Story Mapping**: sesión colaborativa al estilo Jeff Patton para construir backbone, walking skeleton y release slices
 - **Gestión de épicas de releases**: planificación de releases con `project-plan.md` y generación automática de artefactos de release (feature specs, historias de usuario) con trazabilidad completa
 - **Gestión de historias de usuario**: creación (Como/Quiero/Para + Gherkin), evaluación con rúbrica FINVEST (Likert 1–5), splitting con 8 patrones y refinamiento iterativo
-- **Pipeline SDD completo de historia**: planning y implementación tarea a tarea — `story-plan` orquesta `story-design` → `story-tasking` → `story-analyze` en un solo comando; `story-implement` cierra el ciclo con TDD, generando test + código de producción por cada tarea con trazabilidad completa
+- **Pipeline SDD completo de historia**: planning y implementación tarea a tarea — `story-plan` orquesta `story-design` → `story-tasking` → `story-analyze` en un solo comando; `story-implement` implementa con TDD, generando test + código de producción por cada tarea con trazabilidad completa y `story-code-review` para revisión de código post-implementación.
 - **Políticas de proyecto**: generación de `constitution.md` y `definition-of-done.md` con `project-policies-generation`, registrando referencias automáticamente en `CLAUDE.md` / `AGENTS.md`
 - **Integración OpenSpec**: exploración, propuesta, implementación y archivado de cambios con trazabilidad completa
 - **Multi-runtime**: los mismos skills operan en Claude Code, GitHub Copilot, Codex/Cursor/OpenCode, Google Gemini Gems y Atlassian Rovo sin modificar el SKILL.md fuente
