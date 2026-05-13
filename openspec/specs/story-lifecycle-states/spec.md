@@ -15,7 +15,7 @@ The system SHALL define the story lifecycle as a linear state machine with the f
 |---|---|---|---|
 | `SPECIFYING` | `IN‑PROGRESS` | `story-creation` / `story-refine` | La historia está siendo especificada |
 | `READY-FOR-PLAN` | `DONE` | `story-creation` / `story-refine` | Especificación aprobada (FINVEST APROBADA) |
-| `PLANNING` | `IN‑PROGRESS` | `story-plan` | El pipeline de planning está en curso |
+| `PLAN` | `IN‑PROGRESS` | `story-plan` | El pipeline de planning está en curso |
 | `READY-FOR-IMPLEMENT` | `DONE` | `story-analyze` | Planning completo y artefactos coherentes |
 | `IMPLEMENTING` | `IN‑PROGRESS` | `story-implement` | Implementación en curso |
 | `READY-FOR-CODE-REVIEW` | `DONE` | `story-implement` | Historia completamente implementada |

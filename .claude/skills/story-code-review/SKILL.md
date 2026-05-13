@@ -81,7 +81,7 @@ Los siguientes artefactos deben existir en `$STORY_DIR` para que el skill pueda 
 | `implement-report.md` | **Requerido** | Evidencia de implementación — sin él, ningún agente tiene qué revisar |
 | `tasks.md` | Opcional | El Tech-Lead-Reviewer puede revisar calidad sin lista de tareas |
 | `constitution.md` | Opcional | Mejora la revisión pero no la bloquea si no existe |
-| `definition-of-done.md` | Opcional | Mismo caso que `constitution.md` |
+| `definition-of-done-story.md` | Opcional | Mismo caso que `constitution.md` |
 
 > Para actualizar esta lista en el futuro, editar únicamente esta sección sin modificar el cuerpo del Paso 1.
 
@@ -210,7 +210,7 @@ Extraer y registrar internamente:
 
 Buscar los siguientes archivos en el repositorio:
 - `docs/policies/constitution.md` (o ruta alternativa detectada)
-- `docs/policies/definition-of-done.md` (o ruta alternativa detectada)
+- `docs/policies/definition-of-done-story.md` (o ruta alternativa detectada)
 
 Registrar las rutas resueltas como `$CONSTITUTION_PATH` y `$DOD_PATH`.
 
@@ -221,7 +221,7 @@ Mostrar resumen de carga:
    Escenarios Gherkin:       <N>
    Archivos implementados:   <N>
    constitution.md:          <ruta>
-   definition-of-done.md:    <ruta>
+   definition-of-done-story.md:    <ruta>
 ```
 
 ---
@@ -239,7 +239,7 @@ Esto garantiza que ejecuciones repetidas del skill producen el mismo resultado (
 Lanzar simultáneamente los siguientes subagentes, pasando a cada uno:
 - `$STORY_DIR`: ruta del directorio de la historia
 - `$CONSTITUTION_PATH`: ruta a constitution.md
-- `$DOD_PATH`: ruta a definition-of-done.md
+- `$DOD_PATH`: ruta a definition-of-done-story.md
 
 **Agente 1 — Tech-Lead-Reviewer** (`agents/tech-lead-reviewer.agent.md`):
 - Revisa calidad, legibilidad, duplicación y seguridad del código fuente

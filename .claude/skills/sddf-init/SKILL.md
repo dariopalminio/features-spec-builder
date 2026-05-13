@@ -1,6 +1,6 @@
 ---
 name: sddf-init
-description: "Inicializa el entorno SDDF en un proyecto nuevo: crea la estructura de directorios base (`<SPECS_BASE>/specs/projects/`, `<SPECS_BASE>/specs/releases/`, `<SPECS_BASE>/specs/stories/`), genera `openspec/config.yaml` mínimo y `.env.template` documentando `SDDF_ROOT`, y opcionalmente inicializa las políticas del proyecto (`constitution.md`, `definition-of-done.md`) invocando `project-policies-generation`. Idempotente — no sobrescribe archivos ni directorios existentes."
+description: "Inicializa el entorno SDDF en un proyecto nuevo: crea la estructura de directorios base (`<SPECS_BASE>/specs/projects/`, `<SPECS_BASE>/specs/releases/`, `<SPECS_BASE>/specs/stories/`), genera `openspec/config.yaml` mínimo y `.env.template` documentando `SDDF_ROOT`, y opcionalmente inicializa las políticas del proyecto (`constitution.md`, `definition-of-done-story.md`) invocando `project-policies-generation`. Idempotente — no sobrescribe archivos ni directorios existentes."
 ---
 
 # Skill: sddf-init
@@ -89,7 +89,7 @@ Preguntar al usuario:
 
 ```
 ¿Deseas inicializar los documentos de políticas del proyecto?
-(constitution.md y definition-of-done.md en $SPECS_BASE/policies/)
+(constitution.md y definition-of-done-story.md en $SPECS_BASE/policies/)
 
   (s) Sí — ejecutar project-policies-generation ahora
   (n) No — omitir este paso
@@ -112,7 +112,7 @@ Emitir el informe consolidado con todos los artefactos verificados:
 [CREADO]     openspec/config.yaml
 [CREADO]     .env.template
 [CREADO]     docs/policies/constitution.md
-[CREADO]     docs/policies/definition-of-done.md
+[CREADO]     docs/policies/definition-of-done-story.md
 ─────────────────────────────────────────────────
 ```
 

@@ -1,13 +1,13 @@
 ---
 name: project-policies-generation
-description: "Inicializa o actualiza los documentos de políticas y constitución del proyecto SDDF (`constitution.md` y `definition-of-done.md`) a partir de templates Markdown, y registra las referencias en CLAUDE.md / AGENTS.md. Usar cuando se quiere establecer o actualizar las reglas técnicas, convenciones y criterios de calidad del proyecto para que los agentes IA los lean automáticamente."
+description: "Inicializa o actualiza los documentos de políticas y constitución del proyecto SDDF (`constitution.md` y `definition-of-done-story.md`) a partir de templates Markdown, y registra las referencias en CLAUDE.md / AGENTS.md. Usar cuando se quiere establecer o actualizar las reglas técnicas, convenciones y criterios de calidad del proyecto para que los agentes IA los lean automáticamente."
 ---
 
 # Skill: /project-policies-generation
 
 Genera o actualiza los documentos de políticas del proyecto SDDF:
 - `$SPECS_BASE/policies/constitution.md` — principios técnicos inamovibles del proyecto (stack, convenciones, metodologías)
-- `$SPECS_BASE/policies/definition-of-done.md` — criterios de calidad para considerar una historia completada
+- `$SPECS_BASE/policies/definition-of-done-story.md` — criterios de calidad para considerar una historia completada
 
 Y registra las referencias en `CLAUDE.md` / `AGENTS.md` para que todos los agentes IA los lean automáticamente antes de cualquier acción.
 
@@ -26,7 +26,7 @@ Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los 
 
 Verificar adicionalmente que existen los templates requeridos:
 - `$SPECS_BASE/specs/templates/project-constitution-template.md`
-- `$SPECS_BASE/specs/templates/definition-of-done-template.md`
+- `$SPECS_BASE/specs/templates/definition-of-done-story-template.md`
 
 Si alguno de los templates no existe, mostrar el mensaje y detener la ejecución:
 
@@ -82,24 +82,24 @@ Esperar respuesta antes de continuar:
 
 ---
 
-## Fase 3 — Generar definition-of-done.md
+## Fase 3 — Generar definition-of-done-story.md
 
 ### 3a. Leer el template
 
-Leer el archivo `$SPECS_BASE/specs/templates/definition-of-done-template.md`.
+Leer el archivo `$SPECS_BASE/specs/templates/definition-of-done-story-template.md`.
 
 La estructura del output la define íntegramente el template.
 
 ### 3b. Verificar existencia previa
 
-Si `$SPECS_BASE/policies/definition-of-done.md` **no existe**:
+Si `$SPECS_BASE/policies/definition-of-done-story.md` **no existe**:
 - Crear el archivo con el contenido del template, completando el frontmatter con `created` y `updated`.
-- Informar: `✅ Creado: $SPECS_BASE/policies/definition-of-done.md`
+- Informar: `✅ Creado: $SPECS_BASE/policies/definition-of-done-story.md`
 
-Si `$SPECS_BASE/policies/definition-of-done.md` **ya existe**, preguntar al usuario:
+Si `$SPECS_BASE/policies/definition-of-done-story.md` **ya existe**, preguntar al usuario:
 
 ```
-El archivo $SPECS_BASE/policies/definition-of-done.md ya existe.
+El archivo $SPECS_BASE/policies/definition-of-done-story.md ya existe.
 ¿Qué deseas hacer?
   (e) Editar el contenido existente
   (s) Sobreescribir con el template en blanco
@@ -125,14 +125,14 @@ Verificar en la raíz del repositorio:
 Agrega las siguientes líneas manualmente a tu archivo de entrada del agente:
 
 @docs/policies/constitution.md
-@docs/policies/definition-of-done.md
+@docs/policies/definition-of-done-story.md
 ```
 
 ### 4b. Verificar referencias existentes
 
 Buscar en el archivo detectado si ya contiene referencias a los archivos de políticas:
 - `@$SPECS_BASE/policies/constitution.md` (o la ruta relativa equivalente)
-- `@$SPECS_BASE/policies/definition-of-done.md`
+- `@$SPECS_BASE/policies/definition-of-done-story.md`
 
 Si **ambas referencias ya existen**: informar que no es necesario modificar el archivo:
 ```
@@ -153,14 +153,14 @@ Si el formato del archivo es no estándar o no se puede determinar la sección c
 Agrega las siguientes líneas manualmente:
 
 @docs/policies/constitution.md
-@docs/policies/definition-of-done.md
+@docs/policies/definition-of-done-story.md
 ```
 
 Si se insertaron las referencias exitosamente:
 ```
 ✅ Referencias agregadas en CLAUDE.md:
    @docs/policies/constitution.md
-   @docs/policies/definition-of-done.md
+   @docs/policies/definition-of-done-story.md
 ```
 
 ---
@@ -174,7 +174,7 @@ Mostrar el resumen de la ejecución:
 
 📄 Archivos de políticas:
 - $SPECS_BASE/policies/constitution.md    [creado | actualizado | saltado]
-- $SPECS_BASE/policies/definition-of-done.md  [creado | actualizado | saltado]
+- $SPECS_BASE/policies/definition-of-done-story.md  [creado | actualizado | saltado]
 
 🔗 Referencias en CLAUDE.md:
 - [registradas | ya existían | requieren acción manual]

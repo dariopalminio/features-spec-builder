@@ -4,10 +4,10 @@
 ## ADDED Requirements
 
 ### Requirement: Generación de documentos de políticas desde templates
-El skill `project-policies-generation` SHALL leer los templates `$SPECS_BASE/specs/templates/project-constitution-template.md` y `$SPECS_BASE/specs/templates/definition-of-done-template.md` en tiempo de ejecución, y crear los archivos `$SPECS_BASE/policies/constitution.md` y `$SPECS_BASE/policies/definition-of-done.md` con el contenido inicial derivado de dichos templates.
+El skill `project-policies-generation` SHALL leer los templates `$SPECS_BASE/specs/templates/project-constitution-template.md` y `$SPECS_BASE/specs/templates/definition-of-done-story-template.md` en tiempo de ejecución, y crear los archivos `$SPECS_BASE/policies/constitution.md` y `$SPECS_BASE/policies/definition-of-done-story.md` con el contenido inicial derivado de dichos templates.
 
 #### Scenario: Generación exitosa cuando los archivos no existen
-- **WHEN** el usuario ejecuta el skill `project-policies-generation` y los archivos `$SPECS_BASE/policies/constitution.md` y `$SPECS_BASE/policies/definition-of-done.md` NO existen
+- **WHEN** el usuario ejecuta el skill `project-policies-generation` y los archivos `$SPECS_BASE/policies/constitution.md` y `$SPECS_BASE/policies/definition-of-done-story.md` NO existen
 - **THEN** el skill crea ambos archivos a partir de sus templates correspondientes, con un frontmatter válido que incluye `type`, `created` y `updated`
 
 #### Scenario: Error cuando el template de constitución no existe
@@ -15,7 +15,7 @@ El skill `project-policies-generation` SHALL leer los templates `$SPECS_BASE/spe
 - **THEN** el skill muestra un mensaje de error indicando la ruta del template faltante, no crea ningún archivo y sugiere ejecutar `sddf-init`
 
 ### Requirement: Modo edición cuando los archivos de políticas ya existen
-El skill SHALL detectar si `$SPECS_BASE/policies/constitution.md` o `$SPECS_BASE/policies/definition-of-done.md` ya existen y, en ese caso, MUST presentar las opciones de editar el archivo existente o sobreescribirlo previa confirmación del usuario.
+El skill SHALL detectar si `$SPECS_BASE/policies/constitution.md` o `$SPECS_BASE/policies/definition-of-done-story.md` ya existen y, en ese caso, MUST presentar las opciones de editar el archivo existente o sobreescribirlo previa confirmación del usuario.
 
 #### Scenario: Archivos de políticas ya existen
 - **WHEN** el usuario ejecuta el skill y ambos archivos de políticas ya existen
@@ -30,7 +30,7 @@ El skill SHALL agregar referencias `@` a los archivos de políticas en `CLAUDE.m
 
 #### Scenario: Referencias no presentes en CLAUDE.md
 - **WHEN** el skill genera los archivos de políticas y CLAUDE.md no contiene referencias a `docs/policies/constitution.md`
-- **THEN** el skill agrega las líneas `@docs/policies/constitution.md` y `@docs/policies/definition-of-done.md` al final de la sección de contexto de CLAUDE.md
+- **THEN** el skill agrega las líneas `@docs/policies/constitution.md` y `@docs/policies/definition-of-done-story.md` al final de la sección de contexto de CLAUDE.md
 
 #### Scenario: Referencias ya presentes en CLAUDE.md
 - **WHEN** CLAUDE.md ya contiene referencias a los archivos de políticas
@@ -59,4 +59,4 @@ El skill SHALL invocar `skill-preflight` como Paso 0 antes de cualquier operaci�
 - **THEN** el skill detiene la ejecución y muestra el reporte de preflight sin crear ningún archivo
 
 ## Requerimiento: Inicializar políticas del proyecto
-Agregar un paso de "Inicializar políticas del proyecto (opcional)" en skills/sddf-init/SKILL.md.  Inicializar políticas del proyecto: pregunta (s/n) al usuario y, si acepta, invoca project-policies-generation antes de continuar. Si rechaza, registra [OMITIDO] en el informe. Paso 5 → Paso 6 (Informe final): renumerado; el ejemplo de informe ahora incluye las entradas de constitution.md y definition-of-done.md.
+Agregar un paso de "Inicializar políticas del proyecto (opcional)" en skills/sddf-init/SKILL.md.  Inicializar políticas del proyecto: pregunta (s/n) al usuario y, si acepta, invoca project-policies-generation antes de continuar. Si rechaza, registra [OMITIDO] en el informe. Paso 5 → Paso 6 (Informe final): renumerado; el ejemplo de informe ahora incluye las entradas de constitution.md y definition-of-done-story.md.

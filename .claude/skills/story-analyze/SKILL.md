@@ -36,7 +36,7 @@ analyze.md → Check: coherencia entre los tres ← aquí (ejecutar después de 
 | Condición al finalizar | status | substatus |
 |------------------------|--------|-----------|
 | Sin inconsistencias ERROR-level | `READY-FOR-IMPLEMENT` | `DONE` |
-| Con inconsistencias ERROR-level | `PLANNING` | `IN‑PROGRESS` (sin cambio — dejar como está) |
+| Con inconsistencias ERROR-level | `PLANN` | `IN‑PROGRESS` (sin cambio — dejar como está) |
 
 La actualización de estado ocurre tanto en modo manual como en modo Agent (invocado por `story-plan`).
 
@@ -347,7 +347,7 @@ Después de guardar `analyze.md`, evaluar si hay inconsistencias de tipo ERROR (
 
 **Si hay ERROREs (inconsistencias bloqueantes):**
 - NO actualizar el frontmatter de `story.md`
-- El estado permanece en `PLANNING/IN‑PROGRESS` (o el que tuviera antes)
+- El estado permanece en `PLAN/IN‑PROGRESS` (o el que tuviera antes)
 - Registrar internamente: `Estado story.md: PLANNING/IN‑PROGRESS (no actualizado — hay ERROREs)`
 
 ---

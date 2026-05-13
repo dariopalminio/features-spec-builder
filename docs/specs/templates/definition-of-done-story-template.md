@@ -1,23 +1,21 @@
 ---
 alwaysApply: false
 type: definition-of-done
-slug: definition-of-done
+slug: definition-of-done-story-template
 title: "Definition of Done"
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>
 ---
 
-# Definition of Done (DoD)
-
-## Story Definition of Done
+# Definition of Done (DoD) para Story
 
 > Una historia de usuario se considera **DONE** cuando cumple todos los criterios marcados en este documento. Ninguna historia puede cerrar su desarrollo ni desplegarse a producción sin satisfacer estos criterios.
 
 ---
 
-### Definition of Done para el estado SPECIFYING
+## 📝 SPECIFYING (Definición de Hecho para la fase de Especificación)
 
-#### ✅ Criterios de Especificación
+### ✅ Criterios de Especificación
 <!-- Criterios relacionados con la definición clara y completa de la historia. -->
 - [ ] La historia tiene un título descriptivo y claro
 - [ ] La descripción de la historia es completa y comprensible
@@ -28,9 +26,17 @@ updated: <YYYY-MM-DD>
 - [ ] La historia tiene el frontmatter con referencia a la épica padre si está incluida en un epic release (`release.md`)
 - [ ] La historia tiene referencias a historias relacionadas cercanas (historias hermanas de división por split)
 
-### Definition of Done para el estado IMPLEMENTING
+## 🗺️ PLAN (Definición de Hecho para la fase de Planificación)
 
-#### ✅ Criterios de Aceptación
+
+### ✅Criterios de Planificación
+<!-- Criterios relacionados con la preparación de la historia para su desarrollo. -->
+- [ ] La historia tiene un diseño asociado en `design.md` si es necesario (UI/UX, arquitectura, etc.)
+- [ ] La historia tiene un `tasks.md` con las tareas necesarias para su implementación
+
+## 🛠️ IMPLEMENTING (Definición de Hecho para la fase de Implementación)
+
+### ✅ Criterios de Aceptación
 
 <!-- Criterios funcionales que toda historia debe cumplir. -->
 
@@ -39,7 +45,7 @@ updated: <YYYY-MM-DD>
 - [ ] El comportamiento coincide con lo especificado en `design.md`
 - [ ] No hay regresiones en las funcionalidades previamente trabajadas
 
-#### 💻 Criterios de Código
+### 💻 Criterios de Código
 
 <!-- Estándares de calidad del código producido. -->
 
@@ -49,7 +55,7 @@ updated: <YYYY-MM-DD>
 - [ ] El código pasa el linter y el formateador sin errores ni warnings
 - [ ] No se introducen dependencias nuevas sin aprobación del equipo
 
-#### 🧪 Criterios de Tests
+### 🧪 Criterios de Tests
 
 <!-- Cobertura y calidad de las pruebas. -->
 
@@ -59,7 +65,7 @@ updated: <YYYY-MM-DD>
 - [ ] Los tests son deterministas (no flaky)
 - [ ] Los tests de integración cubren los flujos críticos de la historia
 
-#### 📝 Criterios de Documentación
+### 📝 Criterios de Documentación
 
 <!-- Actualización de documentación relevante. -->
 
@@ -68,7 +74,7 @@ updated: <YYYY-MM-DD>
 - [ ] Si se toman decisiones de diseño relevantes no previstas, se documentan en `design.md`
 - [ ] El CHANGELOG o historial de releases se actualiza si aplica
 
-#### 🚀 Criterios de Integración y Despliegue
+### 🚀 Criterios de Integración Continua
 
 <!-- Condiciones necesarias para desplegar a producción. -->
 
@@ -79,7 +85,7 @@ updated: <YYYY-MM-DD>
 
 ---
 
-### Definition of Done para el estado CODE-REVIEW
+## 🔍 CODE-REVIEW (Definición de Hecho para la fase de Revisión de Código)
 
 - [ ] Definition of Done para el estado IMPLEMENTING es satisfactorio
 - [ ] Se cumplen los estándares del proyecto (`constitution.md`)
@@ -90,6 +96,29 @@ updated: <YYYY-MM-DD>
 - [ ] Metadatos frontmatter de `story.md` están completos y correctos con status y substatus actualizados
 - [ ] El reporte de revisión de código (`code-review-report.md`) está creado o actualizado
 - [ ] Revisión de código aprobada (Review status approved en `code-review-report.md`)
+
+---
+
+## ✅ VERIFY (Definición de Hecho para la fase de Verificación)
+- [ ] Las pruebas pasan exitosamente
+- [ ] No hay errores críticos ni bloqueantes
+- [ ] El comportamiento coincide con lo especificado en `design.md` y `story.md`
+- [ ] No fix que resolver
+
+---
+
+## 🚦 ACCEPTANCE  (Definición de Hecho para la fase de Aceptación)
+- [ ] El PO, PM o un TL humano ha validado la funcionalidad en el entorno de staging
+- [ ] Todos los criterios de aceptación se cumplen
+- [ ] No hay observaciones bloqueantes
+
+---
+
+## 🖇️ INTEGRATION (Definición de Hecho para la fase de Integración)
+
+---
+
+## ✔️ DELIVERED (DONE/COMPLETED)
 
 ---
 

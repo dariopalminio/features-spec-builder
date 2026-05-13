@@ -217,10 +217,10 @@ Construir el contexto técnico que se usará al generar el diseño. Leer todas l
        Para definir políticas del proyecto, ejecuta /project-policies-generation.
     ```
 **Documentos de Definition of Done:**
-- `$SPECS_BASE/policies/definition-of-done.md` — Definition of Done del proyecto, criterios de calidad y requisitos técnicos mínimos para considerar una historia como "hecha"
+- `$SPECS_BASE/policies/definition-of-done-story.md` — Definition of Done del proyecto, criterios de calidad y requisitos técnicos mínimos para considerar una historia como "hecha"
   - Si no existe: emitir advertencia y continuar
     ```
-    ⚠️ No se encontró $SPECS_BASE/policies/definition-of-done.md
+    ⚠️ No se encontró $SPECS_BASE/policies/definition-of-done-story.md
        El diseño se generará sin criterios de calidad explícitos del proyecto.
        Para definir la Definition of Done del proyecto, ejecuta /project-policies-generation.
     ```

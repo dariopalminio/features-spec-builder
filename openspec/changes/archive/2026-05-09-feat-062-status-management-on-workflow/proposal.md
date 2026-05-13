@@ -23,7 +23,7 @@ Los skills del flujo SDD generan artefactos pero no actualizan el estado de la h
 ### Modified Capabilities
 
 - `story-refine-skill`: Agrega transiciones de estado al inicio (`SPECIFYING/IN‑PROGRESS`) y al finalizar (`READY-FOR-PLAN/DONE`).
-- `story-plan-skill`: Agrega transición de estado al inicio del pipeline (`PLANNING/IN‑PROGRESS`). Delega la transición de cierre (`READY-FOR-IMPLEMENT/DONE`) a `story-analyze`.
+- `story-plan-skill`: Agrega transición de estado al inicio del pipeline (`PLAN/IN‑PROGRESS`). Delega la transición de cierre (`READY-FOR-IMPLEMENT/DONE`) a `story-analyze`.
 - `story-analyze-skill`: Agrega actualización de estado al finalizar (`READY-FOR-IMPLEMENT/DONE`).
 - `story-implement-skill`: Agrega precondición de estado (`READY-FOR-IMPLEMENT/DONE` requerido), transición al inicio (`IMPLEMENTING/IN‑PROGRESS`), transición al finalizar (`READY-FOR-CODE-REVIEW/DONE`) y actualización del checklist en `release.md`.
 - `story-workflow-mvp`: Actualiza el workflow canónico para reflejar los estados visibles entre cada skill.

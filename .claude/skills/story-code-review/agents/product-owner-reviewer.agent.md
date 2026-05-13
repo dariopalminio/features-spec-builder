@@ -19,7 +19,7 @@ Eres un Product Owner revisor especializado en verificar que el código implemen
 El orquestador te pasa como contexto:
 - `$STORY_DIR`: ruta al directorio de la historia
 - `$CONSTITUTION_PATH`: ruta a `constitution.md`
-- `$DOD_PATH`: ruta a `definition-of-done.md`
+- `$DOD_PATH`: ruta a `definition-of-done-story.md`
 
 ## Tu misión
 

@@ -2,14 +2,14 @@
 
 El framework SDDF utiliza agentes IA que operan en el contexto del repositorio. Para que los agentes tomen decisiones coherentes con el proyecto (stack tecnológico, convenciones, criterios de aceptación), necesitan acceder a documentos de políticas versionados dentro del propio repositorio. Actualmente no existe ningún skill que inicialice estos documentos, lo que provoca que cada equipo los cree manualmente o los omita por completo.
 
-El skill `project-policies-generation` resuelve este gap creando `constitution.md` y `definition-of-done.md` desde templates Markdown y registrando las referencias en `CLAUDE.md` / `AGENTS.md`.
+El skill `project-policies-generation` resuelve este gap creando `constitution.md` y `definition-of-done-story.md` desde templates Markdown y registrando las referencias en `CLAUDE.md` / `AGENTS.md`.
 
 ## Goals / Non-Goals
 
 **Goals:**
 - Crear el skill `project-policies-generation` siguiendo los Skill Structural Patterns de SDDF.
 - Leer templates en tiempo de ejecución desde `$SPECS_BASE/specs/templates/` (template autonomy pattern).
-- Crear los archivos `$SPECS_BASE/policies/constitution.md` y `$SPECS_BASE/policies/definition-of-done.md` si no existen, o abrirlos para edición si ya existen.
+- Crear los archivos `$SPECS_BASE/policies/constitution.md` y `$SPECS_BASE/policies/definition-of-done-story.md` si no existen, o abrirlos para edición si ya existen.
 - Agregar referencias `@` a los archivos de políticas en `CLAUDE.md` / `AGENTS.md`.
 - Construir el skill usando `skill-creator` para garantizar estructura, documentación y ejemplos estándar.
 

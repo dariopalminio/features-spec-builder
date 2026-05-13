@@ -39,10 +39,10 @@ analyze.md   → Check: coherencia entre los tres artefactos
 
 | Evento | status | substatus |
 |--------|--------|-----------|
-| Inicio del pipeline (siempre, sin condición) | `PLANNING` | `IN‑PROGRESS` |
+| Inicio del pipeline (siempre, sin condición) | `PLAN` | `IN‑PROGRESS` |
 | `story-analyze` finaliza sin ERROREs | `READY-FOR-IMPLEMENT` | `DONE` (gestionado por `story-analyze`) |
 
-La transición `PLANNING/IN‑PROGRESS` se aplica **incondicionalmente** al iniciar, independientemente del estado previo de la historia. Esto permite re-ejecutar el pipeline sobre historias en cualquier estado.
+La transición `PLAN/IN‑PROGRESS` se aplica **incondicionalmente** al iniciar, independientemente del estado previo de la historia. Esto permite re-ejecutar el pipeline sobre historias en cualquier estado.
 
 **Qué hace este skill:**
 - Invoca `story-design`, `story-tasking` y `story-analyze` en secuencia

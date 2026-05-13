@@ -87,4 +87,4 @@ Esto es acorde a la arquitectura de Claude Code donde la sesión principal actú
 # Políticas del Proyecto
 
 @docs/policies/constitution.md
-@docs/policies/definition-of-done.md
+@docs/policies/definition-of-done-story.md

@@ -86,7 +86,7 @@ docs/
     �   +-- tech-stack.md          # Stack de desarrollo (lenguajes, frameworks, herramientas)
     �   +-- principles.md          # Principios de desarrollo (SOLID, DRY, convenciones, etc.)
     +-- process/                   # Reglas y gu�as del proceso de desarrollo
-    �   +-- definition-of-done.md  # DoD (opcional)
+    �   +-- definition-of-done-story.md  # DoD (opcional)
     �   +-- definition-of-ready.md # DoR (opcional)
     �   +-- branching-strategy.md  # (si quieres documentar la estrategia Git)
     �   +-- code-review-guidelines.md

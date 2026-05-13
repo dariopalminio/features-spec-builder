@@ -11,7 +11,7 @@ The system SHALL verify that `story.md` has `status: READY-FOR-IMPLEMENT` and `s
 - **THEN** the skill proceeds with implementation normally
 
 #### Scenario: Precondition not met — story not READY-FOR-IMPLEMENT
-- **WHEN** `/story-implement` is invoked and `story.md` has any status other than `READY-FOR-IMPLEMENT/DONE` (e.g., `BACKLOG`, `SPECIFYING`, `PLANNING`)
+- **WHEN** `/story-implement` is invoked and `story.md` has any status other than `READY-FOR-IMPLEMENT/DONE` (e.g., `BACKLOG`, `SPECIFYING`, `PLAN`)
 - **THEN** the skill halts immediately with an error message indicating the current status and suggests running `/story-plan` first
 
 #### Scenario: Precondition not met — story has no status field

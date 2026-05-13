@@ -16,4 +16,4 @@ The system SHALL update `status: PLANNING` and `substatus: IN‑PROGRESS` in `st
 
 #### Scenario: Status update reported in pipeline summary
 - **WHEN** the pipeline completes or fails
-- **THEN** the final summary MUST indicate whether the story status was successfully updated to `PLANNING/IN‑PROGRESS` at the start
+- **THEN** the final summary MUST indicate whether the story status was successfully updated to `PLAN/IN‑PROGRESS` at the start

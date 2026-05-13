@@ -9,14 +9,14 @@
 
 - [x] 2.1 En `.claude/skills/story-plan/SKILL.md`, añadir en el Paso 1 (después de verificar `story.md`) la actualización del frontmatter a `status: PLANNING` / `substatus: IN‑PROGRESS`
 - [x] 2.2 Incluir en el resumen final del pipeline (Paso 5) una línea que confirme si la actualización de estado fue exitosa
-- [x] 2.3 Documentar en el SKILL.md que la transición `PLANNING/IN‑PROGRESS` se aplica incondicionalmente (incluso si la historia ya estaba en otro estado)
+- [x] 2.3 Documentar en el SKILL.md que la transición `PLAN/IN‑PROGRESS` se aplica incondicionalmente (incluso si la historia ya estaba en otro estado)
 
 ## 3. story-analyze — Transición READY-FOR-IMPLEMENT/DONE al finalizar
 
 - [x] 3.1 En `.claude/skills/story-analyze/SKILL.md`, añadir en el Paso 9 (guardar el reporte) la actualización del frontmatter de `story.md` a `status: READY-FOR-IMPLEMENT` / `substatus: DONE` si no hay ERROREs
-- [x] 3.2 Añadir la condición: si hay inconsistencias de tipo ERROR, NO actualizar el estado (dejar en `PLANNING/IN‑PROGRESS`)
+- [x] 3.2 Añadir la condición: si hay inconsistencias de tipo ERROR, NO actualizar el estado (dejar en `PLAN/IN‑PROGRESS`)
 - [x] 3.3 Asegurarse de que la actualización de estado ocurre tanto en modo manual como en modo Agent (invocado por `story-plan`)
-- [x] 3.4 Reflejar el estado resultante (`READY-FOR-IMPLEMENT/DONE` o `PLANNING/IN‑PROGRESS`) en la sección de confirmación del Paso 10
+- [x] 3.4 Reflejar el estado resultante (`READY-FOR-IMPLEMENT/DONE` o `PLAN/IN‑PROGRESS`) en la sección de confirmación del Paso 10
 
 ## 4. story-implement — Precondición + transiciones IMPLEMENTING y READY-FOR-CODE-REVIEW
 
@@ -37,7 +37,7 @@
 ## 6. Documentación del ciclo de vida
 
 - [x] 6.1 Actualizar el `assets/README.md` de `story-implement` para reflejar la precondición de estado y las nuevas transiciones
-- [x] 6.2 Actualizar el `assets/README.md` de `story-plan` (o el SKILL.md) para reflejar la transición `PLANNING/IN‑PROGRESS` al inicio
+- [x] 6.2 Actualizar el `assets/README.md` de `story-plan` (o el SKILL.md) para reflejar la transición `PLAN/IN‑PROGRESS` al inicio
 - [x] 6.3 Actualizar el `assets/README.md` de `story-refine` (o el SKILL.md) para reflejar las transiciones `SPECIFYING/IN‑PROGRESS` y `READY-FOR-PLAN/DONE`
 - [x] 6.4 Actualizar el posicionamiento en el flujo SDD en los SKILL.md afectados para mostrar los estados entre cada skill
 
@@ -45,7 +45,7 @@
 
 - [x] 7.1 Verificar que `story-refine` actualiza `story.md` a `SPECIFYING/IN‑PROGRESS` al inicio de una nueva historia
 - [x] 7.2 Verificar que al aprobar FINVEST en `story-refine`, `story.md` queda en `READY-FOR-PLAN/DONE`
-- [x] 7.3 Verificar que `story-plan` actualiza `story.md` a `PLANNING/IN‑PROGRESS` antes de invocar `story-design`
+- [x] 7.3 Verificar que `story-plan` actualiza `story.md` a `PLAN/IN‑PROGRESS` antes de invocar `story-design`
 - [x] 7.4 Verificar que `story-analyze` actualiza `story.md` a `READY-FOR-IMPLEMENT/DONE` cuando no hay ERROREs
 - [x] 7.5 Verificar que `story-analyze` NO actualiza el estado cuando hay inconsistencias ERROR-level
 - [x] 7.6 Verificar que `story-implement` falla con error descriptivo si `story.md` no está en `READY-FOR-IMPLEMENT/DONE`
