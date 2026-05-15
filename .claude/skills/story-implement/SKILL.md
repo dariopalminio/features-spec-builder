@@ -282,6 +282,32 @@ Antes de ejecutar la primera tarea, verificar el estado de entrada registrado en
 
 Esta verificación debe ocurrir antes de procesar cualquier tarea del Paso 3.
 
+### 2f. Cargar criterios DoD IMPLEMENTING
+
+Intentar localizar `$SPECS_BASE/policies/definition-of-done-story.md`.
+
+**Si el archivo no existe:**
+```
+⚠️ definition-of-done-story.md no encontrado en $SPECS_BASE/policies/ — se omitirá la validación DoD IMPLEMENTING
+```
+Registrar internamente `$DOD_IMPLEMENTING_CRITERIA = []` y continuar.
+
+**Si el archivo existe:**
+1. Buscar el primer encabezado h3 (`###`) cuyo texto contenga, case-insensitive, alguno de los términos: `IMPLEMENTING`, `IMPLEMENTANDO` o `IMPLEMENTACIÓN`
+2. Registrar en log el encabezado encontrado
+3. **Si no se encuentra ningún encabezado coincidente:**
+   ```
+   ⚠️ Sección IMPLEMENTING no encontrada en DoD — se omitirá la validación DoD IMPLEMENTING
+   ```
+   Registrar internamente `$DOD_IMPLEMENTING_CRITERIA = []` y continuar.
+4. **Si se encontró la sección:** extraer todas las líneas `- [ ] <texto>` y `- [x] <texto>` dentro de esa sección como lista de criterios planos; registrar internamente como `$DOD_IMPLEMENTING_CRITERIA`
+
+Mostrar resumen de carga DoD:
+```
+📋 DoD IMPLEMENTING: <N> criterios cargados desde <ruta>      (si encontrado)
+📋 DoD IMPLEMENTING: ⚠️ no disponible — se omitirá la validación  (si no encontrado)
+```
+
 ---
 
 ## Paso 3 — Implementar Tareas en Orden TDD
@@ -475,6 +501,26 @@ Si `N_completadas = 0` (ejecución inicial), omitir las filas de "ejecución ant
 
 ---
 
+## Cumplimiento DoD — Fase IMPLEMENTING
+
+<!-- Completar con resultados del sub-paso 4g -->
+
+**Si `$DOD_IMPLEMENTING_CRITERIA` está vacío:**
+```
+⚠️ DoD IMPLEMENTING no encontrado — se omitió la validación.
+   Verifica que $SPECS_BASE/policies/definition-of-done-story.md contiene la sección "IMPLEMENTING".
+```
+
+**Si hay criterios evaluados**, incluir la siguiente tabla con los resultados del sub-paso 4g:
+
+| # | Criterio | Estado | Evidencia / Justificación |
+|---|---|---|---|
+| 1 | <criterio del DoD> | ✓ / ❌ / ⚠️ | <descripción breve de la evidencia> |
+
+**Resumen:** N/Total criterios ✓
+
+---
+
 ## Nota sobre los Tests Generados
 
 Los tests generados deben ejecutarse manualmente con el runner del proyecto.
@@ -486,11 +532,56 @@ Pasos recomendados:
 3. Consultar `design.md` para verificar que la implementación respeta las interfaces definidas
 ```
 
-### 4b. Actualizar frontmatter a READY-FOR-CODE-REVIEW/DONE
+### 4g. Evaluar criterios DoD IMPLEMENTING
 
-Después de generar `implement-report.md`, actualizar el frontmatter de `story.md`:
-- `status: READY-FOR-CODE-REVIEW`
-- `substatus: DONE`
+**Si `$DOD_IMPLEMENTING_CRITERIA` está vacío** (no se cargó la sección DoD en el paso 2f):
+- Registrar `$DOD_RESULT = []` y `$DOD_BLOQUEADO = false`
+- Completar la sección "Cumplimiento DoD — Fase IMPLEMENTING" en `implement-report.md` con el aviso de sección no encontrada
+- Continuar sin bloquear la transición de estado
+
+**Si `$DOD_IMPLEMENTING_CRITERIA` tiene criterios:**
+
+Para cada criterio, evaluar semánticamente contra:
+- Contenido de `tasks.md` (tareas completadas con `[x]`)
+- Tabla de estado en `implement-report.md` (archivos generados por tarea)
+- Código generado durante la implementación
+
+Clasificar cada criterio como:
+- `✓` — evidencia clara de cumplimiento presente en los artefactos
+- `❌` — evidencia clara de incumplimiento (ej. tarea de código ignorada, criterio explícitamente violado)
+- `⚠️` — evidencia insuficiente, criterio requiere ejecución externa, o no evaluable desde los artefactos
+
+**Regla de duda obligatoria:** ante incertidumbre, usar `⚠️` en lugar de `❌`.
+
+**Criterios de ejecución de tests o CI:** clasificar siempre como `⚠️` con evidencia: `"Requiere ejecución de tests — no evaluable por story-implement"`.
+
+Registrar internamente `$DOD_RESULT` (tabla de criterio | resultado | evidencia).
+
+Calcular:
+- `N_dod_ok` = criterios con `✓`
+- `N_dod_warning` = criterios con `⚠️`
+- `N_dod_error` = criterios con `❌`
+- `$DOD_BLOQUEADO` = `true` si `N_dod_error > 0`; `false` en caso contrario
+
+Completar la sección "Cumplimiento DoD — Fase IMPLEMENTING" en `implement-report.md` con la tabla resultante y la línea de resumen `**Resumen:** N_dod_ok/Total criterios ✓`.
+
+### 4b. Actualizar frontmatter a READY-FOR-CODE-REVIEW/DONE (condicional según DoD)
+
+**Si `$DOD_BLOQUEADO = false`** (no hay criterios DoD con `❌`):
+- Actualizar el frontmatter de `story.md`:
+  - `status: READY-FOR-CODE-REVIEW`
+  - `substatus: DONE`
+
+**Si `$DOD_BLOQUEADO = true`** (hay al menos un criterio DoD con `❌`):
+- NO actualizar el frontmatter — `story.md` permanece en `IMPLEMENTING/IN-PROGRESS`
+- Mostrar al usuario los criterios DoD fallidos:
+  ```
+  ⚠️ Transición a READY-FOR-CODE-REVIEW bloqueada por DoD-ERRORs:
+
+  <lista de criterios con ❌ y su evidencia>
+
+  Resuelve los criterios pendientes antes de avanzar a code review.
+  ```
 
 ### 4c. Actualizar checklist del release padre
 
@@ -559,17 +650,30 @@ Al terminar, mostrar:
 ─────────────────────────────────────────────────────────────
 
 📄 Reporte generado: <ruta>/implement-report.md
-📋 Estado story.md: READY-FOR-CODE-REVIEW/DONE ✓
+📋 Estado story.md: READY-FOR-CODE-REVIEW/DONE ✓             (si $DOD_BLOQUEADO = false)
+📋 Estado story.md: IMPLEMENTING/IN-PROGRESS ✓               (si $DOD_BLOQUEADO = true)
 📋 Release checklist: <✓ actualizado en <ruta>/release.md | ⚠️ no actualizado — <razón>>
+📋 DoD IMPLEMENTING: {N_dod_ok}/{Total} criterios ✓          (si DoD fue evaluado)
+📋 DoD IMPLEMENTING: ⚠️ no evaluado (sección no encontrada)  (si DoD no disponible)
 
-✅ Implementación completa
+✅ Implementación completa                                    (si no hay DoD-ERRORs ni bloqueos)
 ```
 
-O si hay bloqueos:
+O si hay DoD-ERRORs:
+
+```
+⚠️ Implementación completada con DoD-ERRORs pendientes
+   Revisa implement-report.md → sección "Cumplimiento DoD — Fase IMPLEMENTING"
+📋 Estado story.md: IMPLEMENTING/IN-PROGRESS (transición bloqueada por DoD-ERRORs)
+📋 DoD IMPLEMENTING: {N_dod_ok}/{Total} criterios ✓ | {N_dod_error} criterios ❌
+```
+
+O si hay bloqueos de tareas (sin DoD-ERRORs):
 
 ```
 ⚠️ Implementación completada con tareas pendientes de aclaración
    Revisa implement-report.md → sección "Tareas Bloqueadas"
 📋 Estado story.md: READY-FOR-CODE-REVIEW/DONE ✓
 📋 Release checklist: <✓ actualizado | ⚠️ no actualizado — <razón>>
+📋 DoD IMPLEMENTING: {N_dod_ok}/{Total} criterios ✓
 ```

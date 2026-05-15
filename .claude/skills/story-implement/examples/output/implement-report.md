@@ -39,6 +39,23 @@ updated: 2026-05-01
 
 ---
 
+## Cumplimiento DoD — Fase IMPLEMENTING
+
+| # | Criterio | Estado | Evidencia / Justificación |
+|---|---|---|---|
+| 1 | La historia tiene criterios de aceptación en formato Gherkin que cubren los escenarios principales | ✓ | story.md contiene 3 escenarios Gherkin con Given/When/Then |
+| 2 | El código sigue las convenciones definidas en `constitution.md` (estilo, nombres, organización) | ✓ | Archivos generados usan kebab-case; TypeScript 5.x con tipos explícitos |
+| 3 | No hay código comentado ni `TODO` sin issue asociado | ✓ | Código generado no contiene comentarios ni TODOs |
+| 4 | Existe al menos un test por escenario principal de `story.md` | ✓ | 4 archivos de test generados cubriendo AC-1 a AC-4 |
+| 5 | Todos los tests existentes pasan (sin tests saltados sin justificación) | ⚠️ | Requiere ejecución de tests — no evaluable por story-implement |
+| 6 | La cobertura de tests no disminuye respecto al baseline del proyecto | ⚠️ | Requiere ejecución de tests — no evaluable por story-implement |
+| 7 | Los tests son deterministas (no flaky) | ⚠️ | Requiere ejecución de tests — no evaluable por story-implement |
+| 8 | El `tasks.md` de la historia tiene todas las tareas marcadas como `[x]` | ✓ | 7/7 tareas marcadas [x] en tasks.md |
+
+**Resumen:** 5/8 criterios ✓ | 3/8 criterios ⚠️ (requieren ejecución externa)
+
+---
+
 ## Nota sobre los Tests Generados
 
 Si la ejecución de test NO está definida explícitamente en el Definition of Done los tests generados deben ejecutarse manualmente con el runner del proyecto.
