@@ -4,8 +4,8 @@ type: story
 id: FEAT-071
 slug: FEAT-071-skill-story-verify
 title: "Skill story-verify: Orquestar la fase VERIFY de pruebas de una historia"
-status: SPECIFYING
-substatus: IN-PROGRESS
+status: READY-FOR-IMPLEMENT
+substatus: DONE
 parent: EPIC-13-quality-gates-con-dod-en-story-workflow
 created: 2026-05-14
 updated: 2026-05-14
