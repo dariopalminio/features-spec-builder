@@ -56,3 +56,12 @@ reviewers:
 ## Siguiente acción
 
 {{NEXT_ACTION}}
+
+---
+
+## Cumplimiento DoD — Fase CODE-REVIEW
+
+<!-- Si $DOD_CODE_REVIEW_CRITERIA estaba vacío, mostrar el aviso de abajo y omitir la tabla -->
+<!-- Si hay criterios evaluados, completar la tabla con resultados de $DOD_CODE_REVIEW_RESULT -->
+
+{{DOD_CODE_REVIEW_SECTION}}

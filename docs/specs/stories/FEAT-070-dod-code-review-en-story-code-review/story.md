@@ -4,7 +4,7 @@ type: story
 id: FEAT-070
 slug: dod-code-review-en-story-code-review
 title: "DoD CODE-REVIEW en story-code-review"
-status: READY-FOR-IMPLEMENT
+status: READY-FOR-CODE-REVIEW
 substatus: DONE
 parent: EPIC-13-quality-gates-con-dod-en-story-workflow
 created: 2026-05-13

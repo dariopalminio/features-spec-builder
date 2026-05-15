@@ -206,13 +206,31 @@ Extraer y registrar internamente:
 - Lista de archivos generados por tarea (tests y código de producción)
 - Tareas completadas y bloqueadas
 
-### 2d. Localizar políticas del proyecto
+### 2d. Localizar políticas del proyecto y extraer criterios DoD CODE-REVIEW
 
 Buscar los siguientes archivos en el repositorio:
 - `docs/policies/constitution.md` (o ruta alternativa detectada)
 - `docs/policies/definition-of-done-story.md` (o ruta alternativa detectada)
 
 Registrar las rutas resueltas como `$CONSTITUTION_PATH` y `$DOD_PATH`.
+
+**Extracción de criterios DoD CODE-REVIEW:**
+
+**Si `$DOD_PATH` está vacío o el archivo no existe:**
+```
+⚠️ definition-of-done-story.md no encontrado — se omitirá la validación DoD CODE-REVIEW
+```
+Registrar internamente `$DOD_CODE_REVIEW_CRITERIA = []` y continuar.
+
+**Si el archivo existe:**
+1. Buscar el primer encabezado h3 (`###`) cuyo texto contenga, case-insensitive, alguno de los términos: `CODE-REVIEW`, `CODE REVIEW`, `REVISIÓN DE CÓDIGO` o `REVISION DE CODIGO`
+2. Registrar en log el encabezado encontrado
+3. **Si no se encuentra ningún encabezado coincidente:**
+   ```
+   ⚠️ Sección CODE-REVIEW no encontrada en DoD — se omitirá la validación DoD CODE-REVIEW
+   ```
+   Registrar internamente `$DOD_CODE_REVIEW_CRITERIA = []` y continuar.
+4. **Si se encontró la sección:** extraer todas las líneas `- [ ] <texto>` y `- [x] <texto>` dentro de esa sección, con su número de línea en el archivo, como lista de criterios planos; registrar internamente como `$DOD_CODE_REVIEW_CRITERIA`
 
 Mostrar resumen de carga:
 ```
@@ -222,6 +240,7 @@ Mostrar resumen de carga:
    Archivos implementados:   <N>
    constitution.md:          <ruta>
    definition-of-done-story.md:    <ruta>
+   DoD CODE-REVIEW: <N criterios cargados | ⚠️ no encontrado>
 ```
 
 ---
@@ -299,6 +318,50 @@ Registrar internamente:
 - `$MAX_SEVERITY`: valor calculado
 - Hallazgos consolidados por dimensión (tabla con columnas: #, Archivo:Línea, Dimensión, Severidad, Hallazgo, Recomendación)
 
+### 4c.1. Evaluar criterios DoD CODE-REVIEW
+
+**Si `$DOD_CODE_REVIEW_CRITERIA` está vacío** (no se cargó en el Paso 2d):
+- Registrar `$DOD_CODE_REVIEW_RESULT = []`
+- No modificar `$MAX_SEVERITY` ni `$REVIEW_STATUS`
+- Continuar al paso 4d
+
+**Si `$DOD_CODE_REVIEW_CRITERIA` tiene criterios:**
+
+Para cada criterio, evaluar semánticamente contra:
+- El código revisado (inferido del implement-report y los informes de agentes)
+- Los informes de los tres agentes (tech-lead-report, product-owner-report, integration-report)
+- El contenido de `story.md` (criterios de aceptación, escenarios Gherkin)
+
+Clasificar cada criterio como:
+- `✓` — evidencia clara de cumplimiento en los artefactos revisados
+- `❌ + severidad` — criterio claramente no cumplido; asignar severidad:
+  - `HIGH`: criterios funcionales y de regresión (ej. "Gherkin pasan", "no hay regresiones")
+  - `MEDIUM`: criterios de calidad de código (ej. "pasa el linter", "sin código comentado")
+  - `LOW`: criterios de documentación opcionales
+- `⚠️` — evidencia insuficiente o criterio no evaluable desde los artefactos disponibles (no bloquea)
+
+**Regla de duda obligatoria:** ante incertidumbre, usar `⚠️` en lugar de `❌`.
+
+**Criterios que requieren acceso a CI/CD o ejecución de tests:** clasificar siempre como `⚠️` con evidencia: `"Requiere acceso a CI/CD — no evaluable desde artefactos disponibles"`.
+
+**Para cada hallazgo `❌`**, añadir a la tabla consolidada interna con:
+- `Dimensión`: `DoD-CODE-REVIEW`
+- `Archivo:Línea`: `docs/policies/definition-of-done-story.md:<número_de_línea>`
+- `Severidad`: valor asignado (HIGH/MEDIUM/LOW)
+- `Hallazgo`: texto del criterio DoD
+- `Acción requerida`: acción concreta derivada semánticamente del criterio
+
+Registrar internamente `$DOD_CODE_REVIEW_RESULT` (tabla de criterio | resultado | severidad | evidencia).
+
+**Recalcular `$MAX_SEVERITY` y `$REVIEW_STATUS`** considerando todos los hallazgos (agentes + DoD):
+```
+max_severity = máxima severidad entre hallazgos de agentes y hallazgos DoD
+review-status = approved      si max_severity ∈ {LOW, ninguna}
+review-status = needs-changes  si max_severity ∈ {HIGH, MEDIUM}
+```
+
+Registrar los valores actualizados como `$MAX_SEVERITY` y `$REVIEW_STATUS`.
+
 ### 4d. Bifurcación post-árbitro
 
 **Si `$REVIEW_STATUS = needs-changes`:** ejecutar los pasos 4e–4g y después el Paso 5, luego saltar al Paso 7.
@@ -322,8 +385,11 @@ Leer `assets/fix-directives-template.md` como fuente de verdad de la estructura.
 
 Completar el template con:
 - Frontmatter: `story_id`, fecha actual, `$MAX_SEVERITY`
-- Sección "Resumen de bloqueantes": título de la historia, severidad máxima, total de hallazgos HIGH/MEDIUM
-- Tabla "Instrucciones de corrección": una fila por hallazgo bloqueante con columnas `#`, `Archivo:Línea`, `Dimensión` (del agente que lo detectó), `Severidad`, `Hallazgo` (descripción exacta), `Acción requerida`
+- Sección "Resumen de bloqueantes": título de la historia, severidad máxima, total de hallazgos HIGH/MEDIUM (incluyendo hallazgos DoD si los hay)
+- Tabla "Instrucciones de corrección": una fila por hallazgo bloqueante (HIGH o MEDIUM) numeradas correlativamente, con columnas `#`, `Archivo:Línea`, `Dimensión`, `Severidad`, `Hallazgo`, `Acción requerida`
+  - Hallazgos de agentes: `Dimensión` = nombre del agente (code-quality, requirements-coverage, integration-architecture)
+  - Hallazgos DoD: `Dimensión` = `DoD-CODE-REVIEW`, `Archivo:Línea` = `docs/policies/definition-of-done-story.md:<número_de_línea>`
+  - Los hallazgos DoD se numeran correlativamente continuando la numeración de los hallazgos de agentes (sin IDs duplicados)
 - Sección "Lista blanca de archivos permitidos": una línea por archivo de `$WHITELIST` con sus referencias de hallazgo
 
 Guardar en `$STORY_DIR/fix-directives.md`, sobreescribiendo si ya existe.
@@ -386,6 +452,9 @@ Completar el template con:
 - Sección Resumen: título de la historia, revisores, severidad máxima
 - Sección Hallazgos por dimensión: contenido de cada informe parcial
 - Sección Decisión final: `$REVIEW_STATUS` con justificación
+- Sección "Cumplimiento DoD — Fase CODE-REVIEW":
+  - **Si `$DOD_CODE_REVIEW_CRITERIA` estaba vacío:** mostrar `⚠️ DoD CODE-REVIEW no encontrado — se omitió la validación. Verifica que $SPECS_BASE/policies/definition-of-done-story.md contiene la sección "CODE-REVIEW".`
+  - **Si hay criterios evaluados:** completar tabla `| # | Criterio | Estado | Severidad | Evidencia |` con los resultados de `$DOD_CODE_REVIEW_RESULT` y línea de resumen `**Resumen:** N/Total criterios ✓`
 
 Guardar en `$STORY_DIR/code-review-report.md`.
 
@@ -431,6 +500,8 @@ Mostrar:
 
 📄 Reporte: <ruta>/code-review-report.md
 📋 Estado:  <story_id> → <nuevo_estado>
+📋 DoD CODE-REVIEW: {N}/{Total} criterios ✓          (si DoD fue evaluado)
+📋 DoD CODE-REVIEW: ⚠️ no evaluado (sección no encontrada)  (si DoD no disponible)
 
 ✅ Revisión aprobada — historia lista para verificación final
 ```
@@ -446,6 +517,7 @@ O si hay bloqueantes:
  Calidad de Código          │ <sev>     │ <N> hallazgos
  Cobertura de Requisitos    │ <sev>     │ <N> hallazgos
  Integración y Arquitectura │ <sev>     │ <N> hallazgos
+ DoD CODE-REVIEW            │ <sev>     │ <N> criterios no cumplidos
 ─────────────────────────────────────────────────────────────────────
  Severidad máxima: <max_severity>
  Review status:   needs-changes
@@ -454,6 +526,7 @@ O si hay bloqueantes:
 📋 Fix directives: <ruta>/fix-directives.md
 📄 Reporte:        <ruta>/code-review-report.md
 📋 Estado:         <story_id> → IMPLEMENTING/IN-PROGRESS
+📋 DoD CODE-REVIEW: {N}/{Total} criterios ✓ | {N_error} criterios ❌
 
 ⚠️  Revisión completada con hallazgos bloqueantes
 
