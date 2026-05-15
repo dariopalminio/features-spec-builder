@@ -61,12 +61,19 @@ Check available MCPs - if useful for research (searching docs, finding similar s
 
 ### Write the SKILL.md
 
-Based on the user interview, fill in these components:
+**Before writing anything**, read `assets/skill-template.md` to get the canonical structure. Use the template's sections as the contract for the output — don't hardcode section names from memory. If the template evolves, the skill you produce will follow automatically.
 
-- **name**: Skill identifier
-- **description**: When to trigger, what it does. This is the primary triggering mechanism - include both what the skill does AND specific contexts for when to use it. All "when to use" info goes here, not in the body. Note: currently Claude has a tendency to "undertrigger" skills -- to not use them when they'd be useful. To combat this, please make the skill descriptions a little bit "pushy". So for instance, instead of "How to build a simple fast dashboard to display internal Anthropic data.", you might write "How to build a simple fast dashboard to display internal Anthropic data. Make sure to use this skill whenever the user mentions dashboards, data visualization, internal metrics, or wants to display any kind of company data, even if they don't explicitly ask for a 'dashboard.'"
-- **compatibility**: Required tools, dependencies (optional, rarely needed)
-- **the rest of the skill :)**
+**Fallback chain** if the file can't be found:
+1. `assets/skill-template.md` — relative path from the skill's own directory (primary)
+2. Search for `skill-template.md` inside an `assets/` folder near the active skill-creator directory using available context
+3. If still unavailable, generate a SKILL.md with the minimum valid structure: YAML frontmatter (`name`, `description`, `triggers`) + body sections inferred from the interview
+
+**How to complete the template sections:**
+
+- **`name`**: Skill identifier in kebab-case.
+- **`description`**: When to trigger and what it does — this is the primary triggering mechanism. Include specific phrases/contexts that should invoke the skill. Make it slightly "pushy": instead of *"How to build a dashboard"*, write *"How to build a dashboard. Use this whenever the user mentions dashboards, data visualization, or internal metrics, even if they don't say 'dashboard' explicitly."* All "when to use" logic goes here, not in the body.
+- **`triggers`**: List of key phrases that reliably signal this skill (used for description optimization).
+- **Body sections**: Fill each section from the template with information gathered during the interview. Adapt or omit sections that don't apply to the skill's domain — the template is a starting point, not a rigid checklist.
 
 ### Skill Writing Guide
 
@@ -120,7 +127,11 @@ If your skill uses templates (document structures the model fills in at runtime)
 
 **Standard fallback chain.** The runtime may install the skill in different directories depending on the client. When the primary relative path fails, resolve in this order:
 
-Use this exact chain in every skill that reads a template — it's the established project pattern.
+1. `assets/<template>.md` — relative to the active skill directory (primary)
+2. Search for the template filename inside an `assets/` folder using runtime context (e.g., sibling directories, known skill roots)
+3. Generate a minimal valid structure from the prose instructions in SKILL.md
+
+Use this exact chain in every skill that reads a template — it's the established project pattern. **The skill-creator itself applies this chain** when reading `assets/skill-template.md` to author new SKILL.md files (see "Write the SKILL.md" section above).
 
 **Multi-client principle.** A skill is multi-client when it works identically in any AI runtime without modifying its SKILL.md. Achieving this requires: (1) relative template paths + fallback chain, (2) no hardcoded client-specific directories, (3) instructions that don't assume a specific tool or UI (e.g., don't assume `AskUserQuestion` is always available — the runtime may not support it).
 

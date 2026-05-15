@@ -50,7 +50,7 @@ updated: <YYYY-MM-DD>
 
 ### Proceso
 <!-- Reglas del proceso de desarrollo -->
-- [[definition-of-done]] ⚠️ nodo pendiente
+- [[definition-of-done-story]] ⚠️ nodo pendiente
 - [[definition-of-ready]] ⚠️ nodo pendiente
 
 ### UX

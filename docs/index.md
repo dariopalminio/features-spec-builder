@@ -98,7 +98,7 @@ parent: null
 - [[principles]] ⚠️ nodo pendiente
 
 ### Proceso
-- [[definition-of-done]] ⚠️ nodo pendiente
+- [[definition-of-done-story]] ⚠️ nodo pendiente
 - [[definition-of-ready]] ⚠️ nodo pendiente
 
 ### UX

@@ -5,7 +5,7 @@ description: >-
   Usar siempre que el usuario quiera verificar la alineación de artefactos de una historia, detectar
   inconsistencias entre el diseño y las tareas, auditar la cobertura de criterios de aceptación,
   o necesite el paso de validación previo a story-implement.
-  Invocar también cuando el usuario mencione "analizar historia", "coherencia de artefactos",
+  Invocar también cuando el usuario mencione "analizar plan de historia", "coherencia de artefactos del plan de historia",
   "verificar alineación", "auditar historia", "story-analyze", "inconsistencias de diseño",
   "chequear story antes de implementar" o equivalentes.
 alwaysApply: false

@@ -32,6 +32,12 @@
       "sourceType": "github",
       "computedHash": "7e3c9cd74e9e2b4828527a857170e86310f2dab5ea8030a9043df2c7e6c88857"
     },
+    "test-master": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/test-master/SKILL.md",
+      "computedHash": "4ebd69e573e2a5596703340810e734505f102a76062cf836303758addea17cbd"
+    },
     "user-story-mapping": {
       "source": "melodic-software/claude-code-plugins",
       "sourceType": "github",

@@ -55,7 +55,7 @@ Ejemplos:
   | admin     | /admin    | "Panel de control"    |
 ```
 
-### Requirement: [Título del requerimiento] <!-- sección opcional-->
+### Requerimiento: [Título del requerimiento] <!-- sección opcional-->
 [Requerimiento específicos (como regla de negocio) relacionado con la historia, si aplica]
 
 ## ⚙️ Criterios no funcionales <!-- sección opcional-->
