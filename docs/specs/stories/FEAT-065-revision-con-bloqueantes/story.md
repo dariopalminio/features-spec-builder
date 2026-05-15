@@ -4,7 +4,7 @@ type: story
 id: FEAT-065
 slug: FEAT-065-revision-con-bloqueantes
 title: "Skill story-code-review: instrucciones de corrección cuando la revisión detecta bloqueantes"
-status: DELIVERED
+status: COMPLETED
 substatus: DONE
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-09

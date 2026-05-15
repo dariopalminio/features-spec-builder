@@ -38,7 +38,7 @@ description: "Task list template for feature implementation"
   Tasks MUST be organized by user story so each story can be:
   - READY-FOR-CODE-REVIEW independently
   - Tested independently
-  - Delivered as an MVP increment
+  - COMPLETED as an MVP increment
   
   DO NOT keep these sample tasks in the generated tasks.md file.
   ============================================================================

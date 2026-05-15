@@ -18,7 +18,7 @@ Integra la lectura y validación del Definition of Done en los tres skills del p
 ## Features
 - [ ] Mejorar skill-creator con dynamic-template skill-creator lee assets/skill-template.md en runtime al crear un skill nuevo
 Cuando el skill-creator genera el SKILL.md de un skill nuevo, SHALL leer `assets/skill-template.md` antes de escribir cualquier contenido. El modelo SHALL extraer las secciones del template dinámicamente y completarlas con la información del skill en lugar de generar estructura hardcodeada.
-- [ ] FEAT-068 - **DoD PLAN en story-analyze:** Leer sección PLAN del DoD y validar criterios antes de avanzar a READY-FOR-IMPLEMENT
+- [x] FEAT-068 - **DoD PLAN en story-analyze:** Leer sección PLAN del DoD y validar criterios antes de avanzar a READY-FOR-IMPLEMENT
 - [ ] FEAT-069 - **DoD IMPLEMENTING en story-implement:** Leer sección IMPLEMENTING del DoD y validar criterios antes de avanzar a READY-FOR-CODE-REVIEW
 - [ ] FEAT-070 - **DoD CODE-REVIEW en story-code-review:** Leer sección CODE-REVIEW del DoD y validar criterios, influyendo en `review-status`
 - [ ] FEAT-071 - **VERIFY con story-verify:** un SKILL que se encargue de la etapa de pruebas llamada VERIFY que implica implica la ejecución de los casos de prueba en el entorno de pruebas (pruebas automáticas, e2e, integración, regresión, etc.), la documentación de los resultados para su análisis y la identificación, detección y registro de los defectos. Lo ideal es que el SKIL sea o refleje el proceso genérico de pruebas que se quiera implementar, y que se pueda configurar para cada proyecto o equipo. Este SKILL se integraría al pipeline después de CODE-REVIEW y antes de ACCEPTANCE, como un quality gate adicional basado en la validación de los criterios de prueba definidos en el DoD.

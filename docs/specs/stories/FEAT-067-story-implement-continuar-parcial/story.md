@@ -4,7 +4,7 @@ type: story
 id: FEAT-067
 slug: FEAT-067-story-implement-continuar-parcial
 title: "skill story-implement: continuar implementación parcial con tareas pendientes y fix-directives"
-status: DELIVERED
+status: COMPLETED
 substatus: DONE
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-09

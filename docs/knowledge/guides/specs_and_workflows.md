@@ -30,5 +30,5 @@ Un subestado representa el nivel de avance interno de un work item dentro de un 
 
 ## Story Workflow
 
-SPECIFYING --> PLANNING --> READY-FOR-IMPLEMENT --> IMPLEMENTING --> CODE-REVIEW --> VERIFY --> ACCEPTANCE --> INTEGRATION --> DELIVERED
+SPECIFYING --> PLANNING --> READY-FOR-IMPLEMENT --> IMPLEMENTING --> CODE-REVIEW --> VERIFY --> ACCEPTANCE --> INTEGRATION --> COMPLETED
 

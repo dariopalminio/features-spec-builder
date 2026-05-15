@@ -4,7 +4,7 @@ type: story
 id: FEAT-062
 slug: FEAT-062-status-management-on-workflow
 title: "Status Management on Workflow"
-status: DELIVERED
+status: COMPLETED
 substatus: DONE
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-09

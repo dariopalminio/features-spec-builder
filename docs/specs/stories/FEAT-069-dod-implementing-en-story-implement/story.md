@@ -5,7 +5,7 @@ id: FEAT-069
 slug: dod-implementing-en-story-implement
 title: "DoD IMPLEMENTING en story-implement"
 status: READY-FOR-IMPLEMENT
-substatus: IN-PROGRESS
+substatus: DONE
 parent: EPIC-13-quality-gates-con-dod-en-story-workflow
 created: 2026-05-13
 updated: 2026-05-13

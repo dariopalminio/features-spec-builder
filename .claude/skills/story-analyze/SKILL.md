@@ -141,6 +141,27 @@ El archivo analyze.md ya existe en: <ruta>
 - `n` / `no modificar`: informar que se saltó y terminar
 - `r` / `regenerar`: continuar
 
+### 1g. Cargar criterios DoD — Fase PLAN
+
+Intentar localizar `$SPECS_BASE/policies/definition-of-done-story.md`.
+
+**Si el archivo no existe:**
+- Emitir: `⚠️ definition-of-done-story.md no encontrado — se omitirá la validación DoD PLAN`
+- Registrar internamente: `$DOD_PLAN_CRITERIA = []`
+- Continuar con el Paso 2 (no detener la ejecución)
+
+**Si el archivo existe:**
+- Buscar el primer encabezado h3 (`###`) cuyo texto contenga, case-insensitive, alguno de los términos: `PLAN`, `PLANNING`, `PLANIFICACIÓN`
+- Registrar en el log qué encabezado fue encontrado (ej. `⚠️ Buscando sección PLAN en DoD...`)
+- **Si no hay coincidencia:**
+  - Emitir: `⚠️ Sección PLAN no encontrada en DoD — se omitirá la validación DoD PLAN`
+  - Registrar: `$DOD_PLAN_CRITERIA = []`
+  - Continuar con el Paso 2
+- **Si se encontró la sección:**
+  - Extraer todas las líneas de checkbox (`- [ ] <texto>` y `- [x] <texto>`) dentro de esa sección como lista de criterios planos
+  - Registrar internamente: `$DOD_PLAN_CRITERIA = [<criterio_1>, <criterio_2>, ...]`
+  - Emitir: `✓ DoD PLAN cargado: <N> criterios encontrados`
+
 ---
 
 ## Paso 2 — Leer story.md y Extraer Requisitos
@@ -273,6 +294,28 @@ Registrar elementos sin tarea como inconsistencia **TIPO C** (advertencia, no er
 Si la verificación del release encontró desalineaciones:
 - Registrar como inconsistencia **TIPO D**.
 
+### Correlación 5 — Cumplimiento DoD PLAN
+
+**Si `$DOD_PLAN_CRITERIA` está vacío** (sección no encontrada o archivo ausente):
+- Registrar esta correlación como: `⚠️ No evaluada — DoD PLAN no disponible`
+- No añadir ningún hallazgo de tipo E al reporte
+
+**Si `$DOD_PLAN_CRITERIA` tiene criterios:**
+
+Para cada criterio en `$DOD_PLAN_CRITERIA`, evaluar semánticamente contra el contenido combinado de `story.md`, `design.md` y `tasks.md`:
+- `✓` — evidencia clara de cumplimiento presente en los artefactos
+- `❌` — evidencia clara de incumplimiento presente → clasificar como **ERROR** (TIPO E)
+- `⚠️` — evidencia insuficiente o criterio no evaluable desde los artefactos disponibles → clasificar como **WARNING**
+
+**Regla de duda:** ante incertidumbre, usar `⚠️` en lugar de `❌` para no bloquear indebidamente.
+
+Construir tabla interna de resultados DoD:
+```
+criterio | resultado (✓/❌/⚠️) | severidad (ERROR/WARNING/—) | evidencia breve
+```
+
+Registrar internamente: `$DOD_ERROR_COUNT` = número de criterios con resultado `❌`.
+
 ### Clasificación de severidad
 
 | Tipo | Descripción | Severidad |
@@ -281,6 +324,7 @@ Si la verificación del release encontró desalineaciones:
 | B | Tarea sin diseño asociado | ERROR |
 | C | Elemento de diseño sin tarea | WARNING |
 | D | Desalineación con release | WARNING |
+| E | Criterio DoD PLAN no cumplido | ERROR |
 
 ---
 
@@ -319,13 +363,16 @@ related:
 
 Completar el reporte con los resultados de la correlación del Paso 6:
 
-- **Resumen ejecutivo**: estado general (✓ Coherente / ⚠️ Advertencias / ❌ Inconsistencias)
+- **Resumen ejecutivo**: estado general (✓ Coherente / ⚠️ Advertencias / ❌ Inconsistencias). Completar la fila `Cumplimiento DoD — Fase PLAN` con `{dod_status}` = ✓ / ⚠️ / ❌ según los resultados de Correlación 5, y `{dod_n}/{dod_total}` con el conteo de criterios ✓. Si `$DOD_PLAN_CRITERIA` estuvo vacío, usar `{dod_status}` = `⚠️` y `{dod_n}/{dod_total}` = `—`.
 - **Tabla de cobertura de ACs**: cada AC + estado + elemento de diseño que lo cubre
 - **Tabla de alineación tareas ↔ diseño**: cada tarea + estado + justificación
 - **Tabla de cobertura diseño → tareas**: cada componente/interfaz + estado
 - **Alineación con release**: estado + detalles
 - **Inconsistencias detectadas**: lista numerada con tipo, descripción, archivo afectado, sección específica
 - **Recomendaciones**: para cada inconsistencia, una acción concreta
+- **Sección "Cumplimiento DoD — Fase PLAN"**: completar usando los resultados de la tabla interna de Correlación 5:
+  - Si `$DOD_PLAN_CRITERIA` estuvo vacío: mostrar `⚠️ DoD PLAN no encontrado — se omitió la validación. Verifica que $SPECS_BASE/policies/definition-of-done-story.md contiene una sección con el término "PLAN".`
+  - Si hay criterios: completar la tabla `| Criterio DoD | Estado | Severidad | Evidencia |` con una fila por criterio evaluado en Correlación 5
 
 **Regla crítica**: el reporte referencia secciones y líneas específicas de los archivos afectados para cada inconsistencia. No se admiten mensajes genéricos del tipo "el diseño no cubre este AC" sin indicar qué sección del diseño debería cubrirlo.
 
@@ -339,16 +386,17 @@ Si el directorio no existe, crearlo.
 
 ### 9a. Actualizar frontmatter de story.md
 
-Después de guardar `analyze.md`, evaluar si hay inconsistencias de tipo ERROR (TIPO A o TIPO B de la correlación del Paso 6):
+Después de guardar `analyze.md`, evaluar si hay inconsistencias de tipo ERROR (TIPO A, TIPO B o TIPO E de la correlación del Paso 6):
 
 **Si no hay ERROREs (solo WARNINGs o todo OK):**
 - Actualizar el frontmatter de `story.md`: `status: READY-FOR-IMPLEMENT` / `substatus: DONE`
 - Esta actualización ocurre tanto en modo manual como en modo Agent
 
-**Si hay ERROREs (inconsistencias bloqueantes):**
+**Si hay ERROREs (inconsistencias bloqueantes — TIPO A, B o E):**
 - NO actualizar el frontmatter de `story.md`
 - El estado permanece en `PLAN/IN‑PROGRESS` (o el que tuviera antes)
 - Registrar internamente: `Estado story.md: PLANNING/IN‑PROGRESS (no actualizado — hay ERROREs)`
+- Si hay DoD-ERRORs (TIPO E): registrar adicionalmente: `DoD PLAN: <$DOD_ERROR_COUNT> criterios ❌ — transición bloqueada`
 
 ---
 
@@ -367,6 +415,7 @@ Mostrar al usuario:
    Cobertura de diseño:  <N>/<Total> elementos de diseño con tarea
 
    Release (<EPIC-NN>):  <alineado ✓ / desalineado ❌ / no verificado ⚠️>
+   DoD PLAN:             <N>/<Total> criterios ✓  |  ⚠️ no evaluado (sección no encontrada)
 
    Inconsistencias:
    · <N> ERROR(ES) — requieren corrección antes de implementar
@@ -380,6 +429,9 @@ Si hay ERROREs:
 ⛔ Se encontraron <N> inconsistencias bloqueantes.
    Corrige los ERROREs en design.md o tasks.md antes de comenzar la implementación.
    Sugerencias en: <ruta>/analyze.md → sección "Recomendaciones"
+
+   DoD PLAN: <$DOD_ERROR_COUNT> criterios ❌ — revisar artefactos de planning
+   (omitir esta línea si $DOD_ERROR_COUNT = 0)
 
    Estado story.md: PLANNING/IN‑PROGRESS (no se actualizó a READY-FOR-IMPLEMENT — hay ERROREs)
 ```
@@ -419,6 +471,7 @@ updated: {date}
 | Alineación tareas → diseño | {tasks_coverage_status} | {tasks_covered_N}/{tasks_total} tareas con diseño |
 | Cobertura diseño → tareas | {design_coverage_status} | {design_covered_N}/{design_total} elementos con tarea |
 | Alineación con release {parent} | {release_status} | {release_detail} |
+| Cumplimiento DoD — Fase PLAN | {dod_status} | {dod_n}/{dod_total} criterios ✓ |
 
 **Estado general:** {overall_status}
 
@@ -478,4 +531,15 @@ updated: {date}
 <!-- Para cada inconsistencia, una acción concreta con el archivo y sección a modificar. -->
 
 1. {recommendation_1}
+
+---
+
+## Cumplimiento DoD — Fase PLAN
+
+<!-- Si $DOD_PLAN_CRITERIA estuvo vacío al ejecutar Correlación 5, mostrar el texto de aviso a continuación y omitir la tabla. -->
+<!-- ⚠️ DoD PLAN no encontrado — se omitió la validación. Verifica que $SPECS_BASE/policies/definition-of-done-story.md contiene una sección con el término "PLAN". -->
+
+| Criterio DoD | Estado | Severidad | Evidencia |
+|---|---|---|---|
+| {criterio_dod_1} | ✓ / ❌ / ⚠️ | ERROR / WARNING / — | {evidencia_breve} |
 ```

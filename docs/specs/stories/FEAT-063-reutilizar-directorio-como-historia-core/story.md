@@ -4,7 +4,7 @@ type: story
 id: FEAT-063
 slug: FEAT-063-reutilizar-directorio-como-historia-core
 title: "Reutilizar directorio original como historia core al dividir"
-status: DELIVERED
+status: COMPLETED
 substatus: DONE
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-09

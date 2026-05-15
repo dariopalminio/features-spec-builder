@@ -28,6 +28,18 @@ updated: <YYYY-MM-DD>
 - [ ] La historia tiene el frontmatter con referencia a la épica padre si está incluida en un epic release (`release.md`)
 - [ ] La historia tiene referencias a historias relacionadas cercanas (historias hermanas de división por split)
 
+### Definition of Done para el estado PLAN
+
+#### ✅ Criterios de Artefactos de Planning
+<!-- Criterios que verifican la calidad y completitud de los artefactos story.md, design.md y tasks.md antes de iniciar la implementación. -->
+- [ ] story.md tiene criterios de aceptación en formato Gherkin (Dado/Cuando/Entonces) que cubren los escenarios principales
+- [ ] design.md existe y cubre todos los ACs de story.md con al menos un elemento de diseño por criterio
+- [ ] tasks.md existe con tareas atómicas ordenadas por dependencia (setup → componentes → soporte → verificación)
+- [ ] Todos los elementos de diseño en design.md tienen trazabilidad explícita al AC que satisfacen (`// satisface: AC-N`)
+- [ ] No hay decisiones de arquitectura aplazadas — toda ambigüedad técnica está resuelta en design.md o registrada como CR
+
+---
+
 ### Definition of Done para el estado IMPLEMENTING
 
 #### ✅ Criterios de Aceptación

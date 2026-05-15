@@ -51,7 +51,7 @@ specs/[###-feature]/
 <!--
   ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
   for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
+  real paths (e.g., apps/admin, packages/something). The COMPLETED plan must
   not include Option labels.
 -->
 

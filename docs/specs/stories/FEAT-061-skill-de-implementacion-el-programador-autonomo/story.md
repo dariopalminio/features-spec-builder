@@ -4,7 +4,7 @@ type: story
 id: FEAT-061
 slug: FEAT-061-skill-de-implementacion-el-programador-autonomo
 title: "Skill de implementación — El programador autónomo (story-implement)"
-status: DELIVERED
+status: COMPLETED
 substatus: DONE
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-06

@@ -24,8 +24,9 @@ updated: 2026-05-07
 | Alineación tareas → diseño | ✓ | 20/20 tareas con diseño |
 | Cobertura diseño → tareas | ✓ | 3/3 componentes con tarea |
 | Alineación con release EPIC-10-data-management | ⚠️ | release.md no encontrado — verificación omitida |
+| Cumplimiento DoD — Fase PLAN | ❌ | 1/3 criterios ✓ |
 
-**Estado general:** ⚠️ Advertencias — sin inconsistencias bloqueantes. Puedes proceder con la implementación.
+**Estado general:** ❌ Inconsistencias bloqueantes — corrige los ERROREs antes de implementar.
 
 ---
 
@@ -92,10 +93,26 @@ updated: 2026-05-07
 
 ## Inconsistencias Detectadas
 
-Sin inconsistencias detectadas.
+### INC-001 [ERROR]
+
+- **Tipo:** E: Criterio DoD PLAN no cumplido
+- **Descripción:** El criterio "tasks.md existe con tareas atómicas ordenadas por dependencia" no se cumple — tasks.md no ordena las tareas por dependencia explícita.
+- **Archivo afectado:** tasks.md — sección "Listado de tareas"
+- **Acción requerida:** Reordenar las tareas en tasks.md siguiendo el criterio setup → componentes → tests → verificación.
 
 ---
 
 ## Recomendaciones
 
 1. **Verificar alineación con release**: El archivo `release.md` para `EPIC-10-data-management` no fue encontrado. Ejecuta `/releases-from-project-plan` para generarlo o verifica que el directorio `docs/specs/releases/EPIC-10-data-management-*/` existe. Una vez disponible, vuelve a ejecutar `/story-analyze FEAT-099` para completar la verificación de alineación.
+2. **Corregir criterio DoD PLAN — tasks.md**: Reordenar las tareas en `tasks.md` de modo que queden agrupadas por dependencia lógica (setup → componentes core → soporte → tests → verificación).
+
+---
+
+## Cumplimiento DoD — Fase PLAN
+
+| Criterio DoD | Estado | Severidad | Evidencia |
+|---|---|---|---|
+| story.md tiene criterios de aceptación en formato Gherkin | ✓ | — | story.md sección "Criterios de aceptación" contiene bloques Gherkin (Dado/Cuando/Entonces) para los 3 escenarios principales |
+| design.md existe y cubre todos los ACs de story.md | ✓ | — | design.md presente; sección "Componentes Afectados" referencia AC-1, AC-2 y AC-3 con anotaciones `// satisface: AC-N` |
+| tasks.md existe con tareas atómicas ordenadas por dependencia | ❌ | ERROR | tasks.md presente con 20 tareas, pero el orden no sigue dependencias explícitas — T006 (test unitario) aparece antes de T008 (controller) sin relación de dependencia documentada |

@@ -4,7 +4,7 @@ type: story
 id: FEAT-056
 slug: FEAT-056-project-policies
 title: "Project policies"
-status: DELIVERED
+status: COMPLETED
 substatus: DONE
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-06

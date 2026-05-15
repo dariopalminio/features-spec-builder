@@ -4,7 +4,7 @@ type: story
 id: FEAT-059
 slug: FEAT-059-comando-de-analisis-transversal
 title: "Comando de análisis transversal (story-analyze)"
-status: DELIVERED
+status: COMPLETED
 substatus: DONE
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-06

@@ -118,7 +118,7 @@ updated: <YYYY-MM-DD>
 
 ---
 
-## ✔️ DELIVERED (DONE/COMPLETED)
+## ✔️ COMPLETED (DONE/COMPLETED)
 
 ---
 

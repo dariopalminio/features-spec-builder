@@ -4,7 +4,7 @@ type: story
 id: FEAT-055
 slug: FEAT-055-centralizar-templates-en-specs-templates
 title: "Centralizar templates de spec en directorio compartido"
-status: DELIVERED
+status: COMPLETED
 substatus: READY
 parent: EPIC-11-centralizar-templates
 created: 2026-05-02

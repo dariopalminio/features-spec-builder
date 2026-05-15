@@ -23,6 +23,7 @@ updated: {date}
 | Alineación tareas → diseño | {tasks_alignment_status} | {tasks_aligned_n}/{tasks_total} tareas con diseño |
 | Cobertura diseño → tareas | {design_coverage_status} | {design_covered_n}/{design_total} elementos con tarea |
 | Alineación con release {parent} | {release_status} | {release_detail} |
+| Cumplimiento DoD — Fase PLAN | {dod_status} | {dod_n}/{dod_total} criterios ✓ |
 
 **Estado general:** {overall_status}
 <!-- overall_status: ✓ Coherente | ⚠️ Advertencias | ❌ Inconsistencias bloqueantes -->
@@ -89,3 +90,14 @@ updated: {date}
 <!-- Para cada inconsistencia, una acción concreta indicando el archivo y sección a modificar. -->
 
 1. {recomendacion_1}
+
+---
+
+## Cumplimiento DoD — Fase PLAN
+
+<!-- Si $DOD_PLAN_CRITERIA estuvo vacío al ejecutar Correlación 5, mostrar el texto de aviso a continuación y omitir la tabla. -->
+<!-- ⚠️ DoD PLAN no encontrado — se omitió la validación. Verifica que $SPECS_BASE/policies/definition-of-done-story.md contiene una sección con el término "PLAN". -->
+
+| Criterio DoD | Estado | Severidad | Evidencia |
+|---|---|---|---|
+| {criterio_dod_1} | ✓ / ❌ / ⚠️ | ERROR / WARNING / — | {evidencia_breve} |

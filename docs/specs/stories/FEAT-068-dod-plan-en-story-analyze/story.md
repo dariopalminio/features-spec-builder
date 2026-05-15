@@ -4,7 +4,7 @@ type: story
 id: FEAT-068
 slug: dod-plan-en-story-analyze
 title: "DoD PLAN en story-analyze"
-status: READY-FOR-IMPLEMENT
+status: CODE-REVIEW
 substatus: DONE
 parent: EPIC-13-quality-gates-con-dod-en-story-workflow
 created: 2026-05-13

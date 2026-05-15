@@ -4,7 +4,7 @@ type: story
 id: FEAT-058
 slug: FEAT-058-skill-para-tasking
 title: "Skill para Tasking (story-tasking)"
-status: DELIVERED
+status: COMPLETED
 substatus: DONE
 parent: EPIC-12-story-sdd-workflow
 created: 2026-05-06
