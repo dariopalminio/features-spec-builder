@@ -24,7 +24,7 @@ Los developers y equipos que trabajan con IA para desarrollar software carecen d
 ## Features
 
 - **Ingeniería inversa de repositorios**: genera `requirement-spec.md` automáticamente desde código existente mediante análisis paralelo de 4 agentes especializados
-- **Pipeline ProjectSpecFactory**: workflow secuencial Begin Intention → Discovery → Planning con gates de revisión humana entre cada fase
+- **Pipeline a nivel de proyecto**: workflow secuencial Begin Intention → Discovery → Planning con gates de revisión humana entre cada fase
 - **Control WIP=1**: impide proyectos activos simultáneos, ofreciendo exactamente las opciones Sobrescribir o Retomar
 - **User Story Mapping**: sesión colaborativa al estilo Jeff Patton para construir backbone, walking skeleton y release slices
 - **Gestión de épicas de releases**: planificación de releases con `project-plan.md` y generación automática de artefactos de release (feature specs, historias de usuario) con trazabilidad completa
@@ -36,6 +36,7 @@ Los developers y equipos que trabajan con IA para desarrollar software carecen d
 - **Meta-framework**: crea, benchmarkea y distribuye nuevas skills con ciclo iterativo (skill-creator)
 - **Trazabilidad completa**: IDs únicos FEAT-NNN y manejo de sub-estados IN‑PROGRESS/Ready en cada documento del pipeline
 - **Docs as Wiki**: skill docs-wiki-builder para generar documentación de proyecto en formato wiki navegable. Incluye un skill header-aggregation para generar encabezados frontmatter de archivo '.md'. Permite navegación bidireccional entre documentos, generación de índices automáticos y visualización de grafos con "Foam for VSCode".
+- **Auditoría de seguridad**: skill `security-audit` para análisis automático de vulnerabilidades en código fuente, con evaluación OWASP Top 10, OWASP API Top 10 y OWASP Top 10 para LLMs.
 
 ## Installation
 
