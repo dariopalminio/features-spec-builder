@@ -12,7 +12,13 @@ triggers:
 
 ## Objetivo
 
-[Descripción concisa de qué hace y por qué. Una o dos oraciones.]
+[Descripción concisa de qué debe hacer y por qué. Una o dos oraciones.] <!-- Obligatorio -->
+
+**Qué hace este skill:**  <!-- Optativo -->
+[Listado de funcionalidades o acciones específicas que realiza el skill.]
+
+**Qué NO hace este skill:** <!-- Optativo -->
+[Listado de acciones o comportamientos que el skill no realiza.]
 
 ## Entrada
 
@@ -22,6 +28,10 @@ triggers:
 
 - `--id <id>`: identificador del workitem (opcional)
 - `--auto`: modo automático sin interacción
+
+## Precondiciones
+- [Condición 1: por ejemplo, "El usuario debe tener permisos de escritura en el repositorio."]
+- [Condición 2: por ejemplo, "El documento de entrada debe existir y estar en formato Markdown."] 
 
 ## Dependencias
 

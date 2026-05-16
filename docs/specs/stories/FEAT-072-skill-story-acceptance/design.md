@@ -39,6 +39,7 @@ story-implement → story-code-review → story-verify → story-acceptance → 
 - Output de historias en `docs/specs/stories/FEAT-NNN/`
 - Directorio temporal de trabajo entre agentes: `.tmp/{skill-name}/`
 - Gestión de estado de historia mediante frontmatter YAML (`status` / `substatus`)
+- Skill para creación de nuevos skills: `/skill-creator` y la estructura canónica de skills `.claude\skills\skill-creator\assets\skill-template.md`
 
 ---
 
@@ -53,7 +54,7 @@ story-implement → story-code-review → story-verify → story-acceptance → 
 - Verificar precondiciones de estado antes de iniciar la sesión // satisface: AC-4
 - Definir el template `acceptance-report-template.md` en `assets/` // satisface: Req-10
 - Garantizar que el skill no modifica código fuente ni artefactos distintos de `story.md` (frontmatter) y `acceptance-report.md` // satisface: Req-12
-
+- Garantizar que se usa el skill /skill-creator y se sigue la estructura canónica de skills .claude\skills\skill-creator\assets\skill-template.md
 **Non-Goals:**
 - Ejecutar pruebas automáticas (responsabilidad de `story-verify`)
 - Revisar código fuente (responsabilidad de `story-code-review`)
@@ -134,7 +135,7 @@ Estado inicial permitido: VERIFY/DONE
 ACCEPTANCE/IN-PROGRESS
   ↓ (consolidación)
   ├── todos PASS/APPROVED → ACCEPTANCE/DONE + mensaje "ACCEPTANCE APROBADO"
-  └── ≥1 FAIL o BLOCKED   → VERIFY/BLOCKED + mensaje "ACCEPTANCE BLOQUEADO"
+  └── ≥1 FAIL o BLOCKED   → READY-FOR-IMPLEMENT/DONE + mensaje "ACCEPTANCE BLOQUEADO"
 
 Cualquier otro estado inicial → ERROR (no se modifica story.md)
 ```
@@ -147,11 +148,12 @@ El skill verifica el estado de `story.md` antes de modificar cualquier archivo. 
 |--------|--------|-----------|
 | Inicio de sesión de acceptance | `ACCEPTANCE` | `IN-PROGRESS` |
 | Todos los criterios PASS/APPROVED | `ACCEPTANCE` | `DONE` |
-| ≥1 criterio FAIL o BLOCKED | `VERIFY` | `BLOCKED` |
+| ≥1 criterio FAIL o BLOCKED | `READY-FOR-IMPLEMENT` | `DONE` |
 
 **Alternativas rechazadas:**
 - Actualizar story.md solo al finalizar (no al inicio): el story.md quedaría en `VERIFY/DONE` mientras la sesión está en curso; otro skill podría interpretar incorrectamente que la historia está disponible para re-verificar.
-- Estado intermedio `ACCEPTANCE/BLOCKED` en lugar de regresar a `VERIFY/BLOCKED`: introduce un estado no definido en constitution.md; "VERIFY/BLOCKED" comunica claramente que la historia debe volver al ciclo de verify antes de intentar acceptance nuevamente.
+- Estado intermedio `ACCEPTANCE/BLOCKED`: introduce un estado no definido en constitution.md y no comunica qué acción debe tomar el desarrollador.
+- `VERIFY/BLOCKED`: rechazado porque la historia ya superó `story-verify` (pruebas automáticas) para llegar a acceptance. Regresar a ese estado implicaría que las pruebas automáticas fallaron, lo cual no es el caso. El rechazo en acceptance significa que hay trabajo de implementación pendiente (fixes, refinamiento de UX, nuevas tareas). `READY-FOR-IMPLEMENT/DONE` es semánticamente correcto: señala que la historia vuelve a la cola de implementación para que el desarrollador añada tasks de corrección y re-ejecute el pipeline completo.
 
 ---
 
@@ -171,6 +173,9 @@ dod-version: <fecha del DoD leído>
 session-status: complete | partial
 final-status: ACCEPTANCE-APPROVED | ACCEPTANCE-BLOCKED
 ---
+
+### D-6: Uso de skill-creator
+Garantizar que se usa el skill /skill-creator y se sigue la estructura canónica de skills .claude\skills\skill-creator\assets\skill-template.md
 
 # Acceptance Report: FEAT-NNN — <título>
 
@@ -332,8 +337,8 @@ Los mecanismos de `story-verify` (pruebas automáticas que preceden a acceptance
 ```
 ... (pasos 1-8 iguales, pero step 8b: FAIL → REJECTED + observación obligatoria)
 9. Consolidar: ≥1 REJECTED/BLOCKED → generar acceptance-report.md con criterios fallidos
-10. Actualizar story.md: VERIFY/BLOCKED
-11. Mostrar: "ACCEPTANCE BLOQUEADO: N criterios no aprobados. La historia regresa a VERIFY."
+10. Actualizar story.md: READY-FOR-IMPLEMENT/DONE
+11. Mostrar: "ACCEPTANCE BLOQUEADO: N criterio(s) no aprobado(s). La historia regresa a la cola de implementación."
 ```
 
 ### Flujo de reanudación (AC-3)

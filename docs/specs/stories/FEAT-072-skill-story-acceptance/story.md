@@ -4,11 +4,11 @@ type: story
 id: FEAT-072
 slug: FEAT-072-skill-story-acceptance
 title: "Skill story-acceptance: Validación final humana de criterios de aceptación antes de INTEGRATION"
-status: READY-FOR-IMPLEMENT
+status: ACCEPTANCE
 substatus: DONE
 parent: EPIC-13-quality-gates-con-dod-en-story-workflow
 created: 2026-05-14
-updated: 2026-05-14
+updated: 2026-05-16
 related:
   - FEAT-071-skill-story-verify
   - FEAT-070-dod-code-review-en-story-code-review
@@ -117,7 +117,7 @@ Cada criterio evaluado debe registrar en `acceptance-report.md`: identificador d
 Se debe seguir y respetar los lineamientos estructurales de skills definido en `docs\knowledge\guides\skill-structural-pattern.md`.
 
 ### Requerimiento: Seguir lineamientos de skill-creator
-Se debe seguir y respetar los lineamientos del skill `skill-creator` para asegurar que el skill siga los estándares de estructura, documentación, funcionalidad y pruebas con ejemplos.
+Se debe seguir y respetar los lineamientos del skill `skill-creator` para asegurar que el skill siga los estándares de estructura, documentación, funcionalidad y pruebas con ejemplos. - Se debe seguir lineamientos de `skill-creator`.md y se sigue la estructura canónica de skills .claude\skills\skill-creator\assets\skill-template.md
 
 ### Requerimiento: No modifica código ni artefactos 
 El skill `story-acceptance` no debe modificar ningún código fuente ni artefacto de la historia (excepto el frontmatter de `story.md` para reflejar el resultado de la aceptación si es necesario). No debe eliminar ni sobreescribir archivos existentes sin confirmación explícita del usuario. Su función es exclusivamente orquestar la validación manual, interactuar con humano usuario y documentar resultados, sin alterar la implementación de la historia.
