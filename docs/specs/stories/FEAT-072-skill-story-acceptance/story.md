@@ -4,7 +4,7 @@ type: story
 id: FEAT-072
 slug: FEAT-072-skill-story-acceptance
 title: "Skill story-acceptance: Validación final humana de criterios de aceptación antes de INTEGRATION"
-status: ACCEPTANCE
+status: COMPLETED
 substatus: DONE
 parent: EPIC-13-quality-gates-con-dod-en-story-workflow
 created: 2026-05-14
