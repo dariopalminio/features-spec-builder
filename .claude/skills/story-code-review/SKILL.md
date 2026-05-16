@@ -11,21 +11,37 @@ description: >-
   o ejecutar el quality gate posterior a story-implement.
   Invocar también cuando el usuario mencione "revisar código", "code review", "story-code-review",
   "revisión multi-agente", "quality gate post-implement", "validar implementación" o equivalentes.
+triggers:
+  - "revisar código"
+  - "code review"
+  - "story-code-review"
+  - "revisión multi-agente"
+  - "quality gate post-implement"
+  - "validar implementación"
 alwaysApply: false
 invocable: true
-outputs:
-  - $SPECS_BASE/specs/stories/FEAT-NNN/code-review-report.md
-  - $SPECS_BASE/specs/stories/FEAT-NNN/fix-directives.md (solo si needs-changes)
-  - .tmp/story-code-review/tech-lead-report.md
-  - .tmp/story-code-review/product-owner-report.md
-  - .tmp/story-code-review/integration-report.md
 ---
 
 # Skill: /story-code-review
 
+## Objetivo
+
 Quality gate formal entre `/story-implement` y la marca final de Done. Lanza tres subagentes revisores en paralelo, consolida sus hallazgos y genera `code-review-report.md` con la decisión final.
 
-## Posicionamiento
+**Qué hace este skill:**
+- Verifica precondiciones antes de revisar (fail-fast ante artefactos faltantes)
+- Limpia `.tmp/story-code-review/` para garantizar idempotencia
+- Lanza tres subagentes revisores en paralelo con responsabilidades exclusivas
+- Consolida los informes parciales y calcula la severidad máxima
+- **Si `approved`**: genera `code-review-report.md`, elimina `fix-directives.md` (si existe) y marca `story.md` como `CODE-REVIEW/DONE`
+- **Si `needs-changes`**: genera `fix-directives.md`, agrega tarea "Implementar fix-directives.md" en `tasks.md` y retrocede `story.md` a `READY-FOR-IMPLEMENT/DONE`
+
+**Qué NO hace este skill:**
+- Ejecutar ni compilar código (opera sobre Markdown y texto plano únicamente)
+- Aplicar automáticamente las correcciones de `fix-directives.md`
+- Corregir el código implementado
+
+### Posicionamiento
 
 ```
 [story.md: IMPLEMENTING/DONE]   ← precondición requerida (viene de story-implement)
@@ -43,34 +59,9 @@ implement-report.md   → Done: código generado, archivos, estado por tarea
 code-review-report.md → Review: hallazgos por dimensión, decisión final  ← aquí
 ```
 
-## Ciclo de vida de estados en este skill
-
-| Evento | status | substatus |
-|--------|--------|-----------|
-| Precondición requerida para ejecutar | `IMPLEMENTING` | `DONE` |
-| Al iniciar la revisión (Paso 1) | `CODE-REVIEW` | `DONE` |
-| Finalización aprobada (Paso 6) | `CODE-REVIEW` | `DONE` |
-| Finalización con bloqueantes (Paso 4g) | `READY-FOR-IMPLEMENT` | `DONE` |
-
-**Precondición:** `story-code-review` solo puede ejecutarse si `story.md` tiene `status: IMPLEMENTING` + `substatus: DONE`. Si la precondición no se cumple, la ejecución se detiene con error descriptivo.
-
-**Qué hace este skill:**
-- Verifica precondiciones antes de revisar (fail-fast ante artefactos faltantes)
-- Limpia `.tmp/story-code-review/` para garantizar idempotencia
-- Lanza tres subagentes revisores en paralelo con responsabilidades exclusivas
-- Consolida los informes parciales y calcula la severidad máxima
-- **Si `approved`**: genera `code-review-report.md`, elimina `fix-directives.md` (si existe) y marca `story.md` como `CODE-REVIEW/DONE`
-- **Si `needs-changes`**: genera `fix-directives.md`, agrega tarea "Implementar fix-directives.md" en `tasks.md` y retrocede `story.md` a `READY-FOR-IMPLEMENT/DONE`
-
-**Qué NO hace este skill:**
-- Ejecutar ni compilar código (opera sobre Markdown y texto plano únicamente)
-- Aplicar automáticamente las correcciones de `fix-directives.md`
-- Validar precondiciones de artefactos faltantes con mensajes enriquecidos (FEAT-066)
-- Corregir el código implementado
-
 ---
 
-## Artefactos requeridos
+## Entrada
 
 Los siguientes artefactos deben existir en `$STORY_DIR` para que el skill pueda ejecutarse. Si alguno falta, el skill detiene la ejecución antes de realizar cualquier efecto secundario.
 
@@ -87,16 +78,54 @@ Los siguientes artefactos deben existir en `$STORY_DIR` para que el skill pueda 
 
 ---
 
-## Modos de Ejecución
+## Parámetros
+
+- `{story_id}` — identificador de la historia (ej. `FEAT-064`)
+- `{story_path}` — ruta explícita al directorio de la historia (opcional)
+- `--single-agent` — modo agente único para historias ≤3 archivos modificados (lanza solo el Tech-Lead-Reviewer)
+
+---
+
+## Precondiciones
+
+- `story.md` debe tener `status: IMPLEMENTING` y `substatus: DONE`
+- Los tres artefactos requeridos (`story.md`, `design.md`, `implement-report.md`) deben existir en `$STORY_DIR`
+
+---
+
+## Dependencias
+
+- Skills: [`skill-preflight`]
+- Agentes: [`tech-lead-reviewer`], [`product-owner-reviewer`], [`integration-reviewer`]
+
+---
+
+## Modos de ejecución
 
 - **Modo manual** (`/story-code-review {story_id}`): interactivo, muestra progreso de cada agente en tiempo real
 - **Modo Agent** (invocado por orquestador): automático, reporta resultado consolidado al finalizar
 
-Flag opcional `--single-agent` disponible para historias muy pequeñas (≤3 archivos modificados): lanza solo el agente Tech-Lead-Reviewer. El flujo por defecto es siempre el equipo de tres agentes.
+El flujo por defecto es siempre el equipo de tres agentes. El flag `--single-agent` es la excepción para historias muy pequeñas.
 
 ---
 
-## Paso 0 — Verificar entorno (`skill-preflight`)
+## Restricciones / Reglas
+
+| Evento | status | substatus |
+|--------|--------|-----------|
+| Precondición requerida para ejecutar | `IMPLEMENTING` | `DONE` |
+| Al iniciar la revisión (Paso 1) | `CODE-REVIEW` | `IN-PROGRESS` |
+| Finalización aprobada (Paso 6) | `CODE-REVIEW` | `DONE` |
+| Finalización con bloqueantes (Paso 4g) | `READY-FOR-IMPLEMENT` | `DONE` |
+
+- La ejecución es idempotente: `.tmp/story-code-review/` se limpia al inicio de cada ejecución
+- `story-code-review` solo puede ejecutarse si `story.md` tiene `status: IMPLEMENTING` + `substatus: DONE`. Si la precondición no se cumple, la ejecución se detiene con error descriptivo.
+
+---
+
+## Flujo de ejecución
+
+### Paso 0 — Verificar entorno (`skill-preflight`)
 
 Invocar el skill `skill-preflight` antes de cualquier operación.
 
@@ -108,12 +137,9 @@ Usar `$SPECS_BASE` para todas las rutas en los pasos siguientes.
 
 ---
 
-## Paso 1 — Resolver input y verificar precondiciones
+### Paso 1 — Resolver input y verificar precondiciones
 
-### 1a. Argumentos aceptados
-
-- `{story_id}` — identificador de la historia (ej. `FEAT-064`)
-- `{story_path}` — ruta explícita al directorio de la historia (opcional)
+#### 1a. Argumentos aceptados
 
 Si no se proporcionó ningún argumento, preguntar:
 ```
@@ -121,7 +147,7 @@ Si no se proporcionó ningún argumento, preguntar:
 Proporciona el ID (ej. FEAT-064) o la ruta completa al directorio.
 ```
 
-### 1b. Resolución del directorio de la historia
+#### 1b. Resolución del directorio de la historia
 
 1. Ruta explícita `{story_path}` si se proporcionó
 2. Glob `$SPECS_BASE/specs/stories/{story_id}-*/` — primera coincidencia cuyo nombre comienza con el ID
@@ -132,9 +158,9 @@ Proporciona el ID (ej. FEAT-064) o la ruta completa al directorio.
    ```
    Detener la ejecución.
 
-### 1c. Validar artefactos requeridos (all-at-once)
+#### 1c. Validar artefactos requeridos (all-at-once)
 
-Comprobar simultáneamente la existencia de los tres artefactos requeridos (ver sección `## Artefactos requeridos`):
+Comprobar simultáneamente la existencia de los tres artefactos requeridos (ver sección `## Entrada`):
 - `story.md`
 - `design.md`
 - `implement-report.md`
@@ -153,7 +179,7 @@ Completa los artefactos faltantes y vuelve a ejecutar /story-code-review <story_
 
 Si todos los artefactos requeridos están presentes, continuar al paso 1d.
 
-### 1d. Verificar precondición de estado
+#### 1d. Verificar precondición de estado
 
 Leer el frontmatter de `story.md` y verificar `status: IMPLEMENTING` y `substatus: DONE`.
 
@@ -168,11 +194,11 @@ Leer el frontmatter de `story.md` y verificar `status: IMPLEMENTING` y `substatu
 ```
 Detener la ejecución **sin modificar ningún archivo**.
 
-### 1e. Actualizar frontmatter a CODE-REVIEW/DONE
+#### 1e. Actualizar frontmatter a CODE-REVIEW/IN-PROGRESS
 
 Solo después de que los pasos 1c y 1d han pasado sin error, actualizar el frontmatter de `story.md`:
 - `status: CODE-REVIEW`
-- `substatus: DONE`
+- `substatus: IN-PROGRESS`
 
 Mostrar confirmación de inicio:
 ```
@@ -184,9 +210,9 @@ Mostrar confirmación de inicio:
 
 ---
 
-## Paso 2 — Cargar contexto
+### Paso 2 — Cargar contexto
 
-### 2a. Leer story.md
+#### 2a. Leer story.md
 
 Extraer y registrar internamente:
 - `story_id` del frontmatter
@@ -194,19 +220,19 @@ Extraer y registrar internamente:
 - Criterios de aceptación numerados como AC-1, AC-2 … AC-N
 - Todos los escenarios Gherkin (Dado/Cuando/Entonces o Given/When/Then)
 
-### 2b. Leer design.md
+#### 2b. Leer design.md
 
 Extraer y registrar internamente:
 - Componentes afectados y sus rutas de archivos
 - Interfaces definidas y sus contratos
 
-### 2c. Leer implement-report.md
+#### 2c. Leer implement-report.md
 
 Extraer y registrar internamente:
 - Lista de archivos generados por tarea (tests y código de producción)
 - Tareas completadas y bloqueadas
 
-### 2d. Localizar políticas del proyecto y extraer criterios DoD CODE-REVIEW
+#### 2d. Localizar políticas del proyecto y extraer criterios DoD CODE-REVIEW
 
 Buscar los siguientes archivos en el repositorio:
 - `docs/policies/constitution.md` (o ruta alternativa detectada)
@@ -245,15 +271,15 @@ Mostrar resumen de carga:
 
 ---
 
-## Paso 3 — Preparar ejecución paralela
+### Paso 3 — Preparar ejecución paralela
 
-### 3a. Limpiar directorio temporal (idempotencia)
+#### 3a. Limpiar directorio temporal (idempotencia)
 
 Eliminar el directorio `.tmp/story-code-review/` si existe y recrearlo vacío.
 
 Esto garantiza que ejecuciones repetidas del skill producen el mismo resultado (NF-2).
 
-### 3b. Lanzar tres agentes en paralelo
+#### 3b. Lanzar tres agentes en paralelo
 
 Lanzar simultáneamente los siguientes subagentes, pasando a cada uno:
 - `$STORY_DIR`: ruta del directorio de la historia
@@ -284,9 +310,9 @@ Esperar a que los tres finalicen antes de continuar.
 
 ---
 
-## Paso 4 — Consolidar resultados (árbitro)
+### Paso 4 — Consolidar resultados (árbitro)
 
-### 4a. Leer los tres informes parciales
+#### 4a. Leer los tres informes parciales
 
 Leer los archivos de `.tmp/story-code-review/`:
 - `tech-lead-report.md`
@@ -296,7 +322,7 @@ Leer los archivos de `.tmp/story-code-review/`:
 **Si algún informe falta o tiene frontmatter inválido:**
 Asumir `max-severity: HIGH` para ese agente (fail-safe).
 
-### 4b. Calcular severidad máxima
+#### 4b. Calcular severidad máxima
 
 Para cada informe parcial, leer el campo `max-severity` del frontmatter.
 
@@ -306,7 +332,7 @@ Orden de severidad: `HIGH > MEDIUM > LOW > ninguna`
 max_severity = máxima severidad entre los tres informes
 ```
 
-### 4c. Derivar review-status
+#### 4c. Derivar review-status
 
 ```
 review-status = approved      si max_severity ∈ {LOW, ninguna}
@@ -318,7 +344,7 @@ Registrar internamente:
 - `$MAX_SEVERITY`: valor calculado
 - Hallazgos consolidados por dimensión (tabla con columnas: #, Archivo:Línea, Dimensión, Severidad, Hallazgo, Recomendación)
 
-### 4c.1. Evaluar criterios DoD CODE-REVIEW
+#### 4c.1. Evaluar criterios DoD CODE-REVIEW
 
 **Si `$DOD_CODE_REVIEW_CRITERIA` está vacío** (no se cargó en el Paso 2d):
 - Registrar `$DOD_CODE_REVIEW_RESULT = []`
@@ -362,13 +388,13 @@ review-status = needs-changes  si max_severity ∈ {HIGH, MEDIUM}
 
 Registrar los valores actualizados como `$MAX_SEVERITY` y `$REVIEW_STATUS`.
 
-### 4d. Bifurcación post-árbitro
+#### 4d. Bifurcación post-árbitro
 
 **Si `$REVIEW_STATUS = needs-changes`:** ejecutar los pasos 4e–4g y después el Paso 5, luego saltar al Paso 7.
 
 **Si `$REVIEW_STATUS = approved`:** ejecutar el Paso 4h, después los Pasos 5–6, luego el Paso 7.
 
-### 4e. [needs-changes] Construir lista blanca de archivos
+#### 4e. [needs-changes] Construir lista blanca de archivos
 
 Iterar los hallazgos consolidados filtrando solo los de `Severidad ∈ {HIGH, MEDIUM}`:
 
@@ -379,7 +405,7 @@ Iterar los hallazgos consolidados filtrando solo los de `Severidad ∈ {HIGH, ME
 
 Registrar internamente como `$WHITELIST`: lista de `(archivo, [hallazgos])`.
 
-### 4f. [needs-changes] Generar `fix-directives.md`
+#### 4f. [needs-changes] Generar `fix-directives.md`
 
 Leer `assets/fix-directives-template.md` como fuente de verdad de la estructura.
 
@@ -399,7 +425,7 @@ Mostrar:
 📋 Fix directives: <ruta>/fix-directives.md
 ```
 
-### 4g. [needs-changes] Registrar tarea en `tasks.md` y retroceder story.md
+#### 4g. [needs-changes] Registrar tarea en `tasks.md` y retroceder story.md
 
 **4g.1 — Agregar tarea en `tasks.md`:**
 
@@ -428,7 +454,7 @@ Mostrar:
 → Revisa: <ruta>/fix-directives.md
 ```
 
-### 4h. [approved] Limpiar fix-directives.md residual
+#### 4h. [approved] Limpiar fix-directives.md residual
 
 Si existe `$STORY_DIR/fix-directives.md` (de una revisión anterior con bloqueantes), eliminarlo antes de continuar.
 
@@ -439,13 +465,13 @@ Mostrar (solo si se eliminó):
 
 ---
 
-## Paso 5 — Generar `code-review-report.md`
+### Paso 5 — Generar `code-review-report.md`
 
-### 5a. Leer template
+#### 5a. Leer template
 
 Leer `assets/code-review-report-template.md` como fuente de verdad de la estructura del output.
 
-### 5b. Completar y guardar
+#### 5b. Completar y guardar
 
 Completar el template con:
 - Frontmatter: `story_id`, `$REVIEW_STATUS`, fecha actual, `$MAX_SEVERITY`
@@ -465,7 +491,7 @@ Mostrar:
 
 ---
 
-## Paso 6 — Actualizar frontmatter de `story.md`
+### Paso 6 — Actualizar frontmatter de `story.md`
 
 **Solo si `$REVIEW_STATUS = approved`:**
 
@@ -482,7 +508,7 @@ Mostrar:
 
 ---
 
-## Paso 7 — Mostrar resumen final
+### Paso 7 — Mostrar resumen final
 
 ```
 ─────────────────────────────────────────────────────────────────────
@@ -534,3 +560,19 @@ O si hay bloqueantes:
 Consulta fix-directives.md para las instrucciones de corrección.
 Ejecuta /story-code-review {story_id} nuevamente tras corregir los hallazgos.
 ```
+
+---
+
+## Salida
+
+| Artefacto | Condición |
+|-----------|-----------|
+| `$SPECS_BASE/specs/stories/FEAT-NNN/code-review-report.md` | Siempre |
+| `$SPECS_BASE/specs/stories/FEAT-NNN/fix-directives.md` | Solo si `needs-changes` |
+| `.tmp/story-code-review/tech-lead-report.md` | Temporal (intermedio) |
+| `.tmp/story-code-review/product-owner-report.md` | Temporal (intermedio) |
+| `.tmp/story-code-review/integration-report.md` | Temporal (intermedio) |
+
+Estado final de `story.md`:
+- `CODE-REVIEW/DONE` si la revisión es aprobada
+- `READY-FOR-IMPLEMENT/DONE` si hay hallazgos bloqueantes

@@ -7,15 +7,35 @@ description: >-
   historia antes de codificar, o necesite el tercer artefacto del trío story → design → tasks.
   Invocar también cuando el usuario mencione "tasking", "plan de implementación", "tareas de la historia",
   "generar tasks", "qué hay que hacer para implementar" o "cómo implemento esta historia".
+triggers:
+  - "tasking"
+  - "plan de implementación"
+  - "tareas de la historia"
+  - "generar tasks"
+  - "qué hay que hacer para implementar"
+  - "cómo implemento esta historia"
 alwaysApply: false
 invocable: true
 ---
 
 # Skill: /story-tasking
 
+## Objetivo
+
 Produce el documento de tareas de implementación de una historia de usuario. Su propósito es **descomponer el diseño técnico en pasos ejecutables**, transformando los criterios de aceptación y los componentes del diseño en una lista de tareas concretas, ordenadas y trazables.
 
-## Posicionamiento
+**Qué hace este skill:**
+- Genera tareas atómicas completables en una sesión con IDs secuenciales (`T001`, `T002`...)
+- Agrupa las tareas bajo encabezados `##` numerados por área técnica
+- Ordena por dependencias: setup → componentes → soporte → verificación
+- Marca con `[P]` las tareas paralelizables sin dependencias entre sí
+- Toma el template en tiempo de ejecución como fuente de verdad de la estructura de salida
+
+**Qué NO hace este skill:**
+- Escribir código de implementación (el código va directamente al repositorio)
+- Tomar decisiones de arquitectura o diseño (esas pertenecen a `design.md`)
+
+### Posicionamiento
 
 ```
 story.md   → What: requisitos, criterios de aceptación, comportamiento esperado
@@ -23,27 +43,70 @@ design.md  → How: arquitectura, componentes, interfaces, decisiones técnicas
 tasks.md   → When: tareas de implementación, orden, seguimiento  ← aquí
 ```
 
-**Qué debe incluir tasks.md:**
-- Tareas atómicas completables en una sesión
-- IDs secuenciales (`T001`, `T002`...) por orden de ejecución
-- Marcador `[P]` en tareas paralelizables (sin dependencias entre sí en el mismo grupo)
-- Agrupamiento bajo encabezados `##` numerados por área técnica
-- Ordenamiento por dependencias: setup → componentes base → dependientes → tests → docs
+---
 
-**Qué NO debe contener tasks.md:**
-- Código de implementación — el código va directamente al repositorio
-- Decisiones de arquitectura o diseño — esas pertenecen a `design.md`
+## Entrada
+
+| Artefacto | Categoría | Justificación |
+|---|---|---|
+| `story.md` | **Requerido** | Fuente de criterios de aceptación y comportamiento esperado |
+| `design.md` | **Requerido** | Fuente de componentes e interfaces a implementar; el skill no puede generar tareas sin diseño técnico |
+| `$SPECS_BASE/specs/templates/tasks-template.md` | **Requerido** | Estructura del documento de salida — sin este template no se genera ningún archivo (sin fallback) |
 
 ---
 
-## Modos de Ejecución
+## Parámetros
+
+- `{story_id}` — identificador de la historia (ej. `FEAT-058`)
+- `{story_path}` — ruta explícita al directorio de la historia (opcional)
+- `--output {path}` — ruta de salida del documento (opcional)
+
+---
+
+## Precondiciones
+
+- `story.md` debe existir en el directorio de la historia
+- `design.md` debe existir en el directorio de la historia
+- `$SPECS_BASE/specs/templates/tasks-template.md` debe existir
+
+---
+
+## Dependencias
+
+- Skills: [`skill-preflight`]
+
+---
+
+## Modos de ejecución
 
 - **Modo manual** (`/story-tasking {story_id}`): interactivo, muestra resumen y pide confirmación antes de cerrar
 - **Modo Agent** (invocado por orquestador): automático, guarda directamente sin confirmación y reporta al orquestador
 
 ---
 
-## Paso 0 — Verificar entorno (`skill-preflight`)
+## Restricciones / Reglas
+
+**Reglas de calidad de tareas:**
+- Cada tarea es completable en una sesión (≤ 2 horas de trabajo)
+- La descripción es suficientemente específica para saber exactamente cuándo está hecha
+- No hay decisiones de diseño aplazadas: si algo es incierto, está documentado en `design.md`
+- Todas las tareas de verificación cubren los escenarios de los ACs
+
+**Formato de líneas de tarea:**
+
+| Tipo | Formato |
+|---|---|
+| Secuencial (pendiente) | `- [ ] T001 Descripción de tarea` |
+| Paralelizable (pendiente) | `- [ ] T002 [P] Descripción de tarea` |
+| Completada | `- [x] T003 Descripción de tarea` |
+
+**Criterio de paralelización `[P]`:** marcar solo si la tarea no tiene dependencias con otras del mismo grupo y su resultado no es input de otra tarea pendiente en el mismo grupo.
+
+---
+
+## Flujo de ejecución
+
+### Paso 0 — Verificar entorno (`skill-preflight`)
 
 Invocar el skill `skill-preflight` antes de cualquier operación.
 
@@ -55,13 +118,9 @@ Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los 
 
 ---
 
-## Paso 1 — Resolver Parámetros de Entrada
+### Paso 1 — Resolver parámetros de entrada
 
-### 1a. Argumentos aceptados
-
-- `{story_id}` — identificador de la historia (ej. `FEAT-058`)
-- `{story_path}` — ruta explícita al directorio de la historia (opcional)
-- `--output {path}` — ruta de salida del documento (opcional)
+#### 1a. Argumentos aceptados
 
 Si no se proporcionó ningún argumento, preguntar:
 ```
@@ -69,7 +128,7 @@ Si no se proporcionó ningún argumento, preguntar:
 Proporciona el ID (ej. FEAT-058) o la ruta completa al directorio.
 ```
 
-### 1b. Resolución del directorio de la historia (primera coincidencia)
+#### 1b. Resolución del directorio de la historia (primera coincidencia)
 
 1. Ruta explícita `{story_path}` si se proporcionó
 2. Glob `$SPECS_BASE/specs/stories/{story_id}-*/` — directorio cuyo nombre comienza con el ID
@@ -80,7 +139,7 @@ Proporciona el ID (ej. FEAT-058) o la ruta completa al directorio.
    Verifica el ID o ejecuta /release-generate-stories para generar la historia.
    ```
 
-### 1c. Verificación de story.md
+#### 1c. Verificación de story.md
 
 Verificar que el directorio resuelto contiene `story.md`. Si no:
 ```
@@ -90,7 +149,7 @@ Sugerencia: ejecuta /release-generate-stories para generar la historia primero.
 ```
 Detener la ejecución.
 
-### 1d. Verificación de design.md (precondición obligatoria)
+#### 1d. Verificación de design.md (precondición obligatoria)
 
 Verificar que el directorio resuelto contiene `design.md`. Si no:
 ```
@@ -101,7 +160,7 @@ Sugerencia: ejecuta /story-design {story_id} para generar el diseño técnico pr
 ```
 Detener la ejecución. **No se genera ningún archivo.**
 
-### 1e. Verificación del template de tareas (sin fallback)
+#### 1e. Verificación del template de tareas (sin fallback)
 
 Verificar que `$SPECS_BASE/specs/templates/tasks-template.md` existe. Si no:
 ```
@@ -117,7 +176,7 @@ Informar qué template se está usando:
 ✓ Template: $SPECS_BASE/specs/templates/tasks-template.md
 ```
 
-### 1f. Resolución de la ruta de salida
+#### 1f. Resolución de la ruta de salida
 
 1. Ruta explícita `--output {path}` si se proporcionó
 2. `{directorio_historia}/tasks.md`
@@ -134,7 +193,7 @@ El archivo tasks.md ya existe en: <ruta>
 
 ---
 
-## Paso 2 — Leer story.md y Extraer Criterios de Aceptación
+### Paso 2 — Leer story.md y extraer criterios de aceptación
 
 Leer el archivo `story.md` del directorio resuelto.
 
@@ -150,7 +209,7 @@ Los criterios de aceptación son la fuente de verdad del **comportamiento espera
 
 ---
 
-## Paso 3 — Leer design.md y Extraer Contexto Técnico
+### Paso 3 — Leer design.md y extraer contexto técnico
 
 Leer el archivo `design.md` del directorio resuelto.
 
@@ -166,7 +225,7 @@ Los componentes e interfaces del diseño son la fuente de verdad de las **tareas
 
 ---
 
-## Paso 4 — Leer el Template en Tiempo de Ejecución
+### Paso 4 — Leer el template en tiempo de ejecución
 
 Leer el archivo `$SPECS_BASE/specs/templates/tasks-template.md`.
 
@@ -179,11 +238,11 @@ Identificar:
 
 ---
 
-## Paso 5 — Derivar las Tareas
+### Paso 5 — Derivar las tareas
 
 Combinar los ACs del Paso 2 y los componentes del Paso 3 para derivar la lista completa de tareas.
 
-### 5a. Fuentes de tareas
+#### 5a. Fuentes de tareas
 
 | Fuente | Genera tareas de tipo |
 |---|---|
@@ -194,11 +253,11 @@ Combinar los ACs del Paso 2 y los componentes del Paso 3 para derivar la lista c
 | Comportamiento ante fallos de `design.md` | Manejo de errores y casos edge |
 | Artefactos de soporte (examples, assets) | Documentación y ejemplos |
 
-### 5b. Asignación de IDs
+#### 5b. Asignación de IDs
 
 Asignar IDs secuenciales `T001`, `T002`... en el orden definitivo de ejecución (después del ordenamiento del paso 5c).
 
-### 5c. Ordenamiento por dependencias lógicas
+#### 5c. Ordenamiento por dependencias lógicas
 
 Ordenar las tareas siguiendo este esquema:
 
@@ -209,7 +268,7 @@ Ordenar las tareas siguiendo este esquema:
 
 Las tareas dentro de cada grupo que no dependen entre sí pueden marcarse `[P]`.
 
-### 5d. Marcador [P] para tareas paralelizables
+#### 5d. Marcador [P] para tareas paralelizables
 
 Marcar con `[P]` las tareas que:
 - No tienen dependencias entre sí dentro del mismo grupo
@@ -218,24 +277,17 @@ Marcar con `[P]` las tareas que:
 
 **No marcar [P]** si la tarea depende del output de otra tarea pendiente en el mismo grupo.
 
-### 5e. Formato de líneas de tarea
+#### 5e. Formato de líneas de tarea
 
-| Tipo | Formato |
-|---|---|
-| Secuencial (pendiente) | `- [ ] T001 Descripción de tarea` |
-| Paralelizable (pendiente) | `- [ ] T002 [P] Descripción de tarea` |
-| Completada | `- [x] T003 Descripción de tarea` |
+Aplicar los formatos definidos en `## Restricciones / Reglas`.
 
-### 5f. Reglas de calidad de tareas
+#### 5f. Reglas de calidad de tareas
 
-- Cada tarea es completable en una sesión (≤ 2 horas de trabajo)
-- La descripción es suficientemente específica para saber exactamente cuándo está hecha
-- No hay decisiones de diseño aplazadas: si algo es incierto, está documentado en `design.md`
-- Todas las tareas de verificación cubren los escenarios de los ACs
+Aplicar las reglas de calidad definidas en `## Restricciones / Reglas` al evaluar cada tarea derivada.
 
 ---
 
-## Paso 6 — Completar el Template
+### Paso 6 — Completar el template
 
 Usar la estructura del template del Paso 4 como base.
 
@@ -249,7 +301,7 @@ story: <FEAT-NNN>
 design: <FEAT-NNN>
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>
-related:                              
+related:
   - <slug-de-la-story-relacionada>
 ```
 
@@ -257,7 +309,7 @@ Distribuir las tareas del Paso 5 en los grupos del template, usando encabezados 
 
 ---
 
-## Paso 7 — Guardar el Documento
+### Paso 7 — Guardar el documento
 
 Guardar el documento completado en la ruta de salida resuelta en el Paso 1.
 
@@ -265,7 +317,7 @@ Si el directorio no existe, crearlo.
 
 ---
 
-## Paso 8 — Confirmación Interactiva (solo modo manual)
+### Paso 8 — Confirmación interactiva (solo modo manual)
 
 Mostrar al usuario:
 
@@ -284,3 +336,10 @@ Mostrar al usuario:
 ```
 
 Preguntar: "¿El plan de implementación refleja correctamente el diseño? ¿Necesita ajustes?"
+
+---
+
+## Salida
+
+- `{story_dir}/tasks.md` — plan de implementación con tareas atómicas en orden de ejecución (o la ruta indicada con `--output`)
+- No modifica `story.md` ni otros artefactos existentes
