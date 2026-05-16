@@ -35,7 +35,9 @@ Orquesta la fase ACCEPTANCE del pipeline SDD: guía al validador humano a travé
 story-acceptance    ← aquí
      │   Al iniciar sesión nueva:       story.md → ACCEPTANCE/IN-PROGRESS
      │   Todos APPROVED:                story.md → ACCEPTANCE/DONE
-     │   ≥1 REJECTED/BLOCKED:           story.md → READY-FOR-IMPLEMENT/DONE
+     │   ≥1 REJECTED (sin BLOCKED):      story.md → READY-FOR-IMPLEMENT/DONE
+     │   ≥1 BLOCKED (sin REJECTED):      story.md → ACCEPTANCE/BLOCKED
+     │   ≥1 REJECTED + ≥1 BLOCKED:       story.md → READY-FOR-IMPLEMENT/DONE
      │   Estado incorrecto:             → error sin modificar archivos
      ↓
 [story.md: ACCEPTANCE/DONE]
@@ -351,8 +353,9 @@ $TOTAL_BLOCKED   = criterios con BLOCKED
 #### 7b. Determinar resultado final
 
 ```
-si $TOTAL_REJECTED = 0 AND $TOTAL_BLOCKED = 0 → $FINAL_STATUS = ACCEPTANCE-APPROVED
-sino                                           → $FINAL_STATUS = ACCEPTANCE-BLOCKED
+si $TOTAL_REJECTED = 0 AND $TOTAL_BLOCKED = 0  → $FINAL_STATUS = ACCEPTANCE-APPROVED
+si $TOTAL_REJECTED > 0                         → $FINAL_STATUS = ACCEPTANCE-REJECTED
+si $TOTAL_REJECTED = 0 AND $TOTAL_BLOCKED > 0  → $FINAL_STATUS = ACCEPTANCE-BLOCKED
 ```
 
 #### 7c. Preservar historial si existe acceptance-report.md previo
@@ -373,14 +376,14 @@ Leer `assets/acceptance-report-template.md` y completar todos los placeholders:
 | `{validator}` | `$VALIDATOR_NAME` |
 | `{dod_version}` | Fecha de modificación del DoD leído, o "no disponible" |
 | `{session_status}` | `complete` |
-| `{final_status}` | `ACCEPTANCE-APPROVED` o `ACCEPTANCE-BLOCKED` |
+| `{final_status}` | `ACCEPTANCE-APPROVED`, `ACCEPTANCE-REJECTED` o `ACCEPTANCE-BLOCKED` |
 | `{total_criterios}` | Total de criterios evaluados |
 | `{total_approved}` | Criterios APPROVED |
 | `{total_rejected}` | Criterios REJECTED |
 | `{total_blocked}` | Criterios BLOCKED |
 | `{criterios_detalle}` | Tabla con filas: `\| N \| texto \| RESULTADO \| observación \| HH:MM \|` |
 | `{dod_criterios}` | Filas: `\| texto criterio DoD \| ✓ cumplido / ✗ no cumplido \|` según resultados |
-| `{estado_final_texto}` | `**ACCEPTANCE APROBADO**` o `**ACCEPTANCE BLOQUEADO: N criterios no aprobados**` |
+| `{estado_final_texto}` | `**ACCEPTANCE APROBADO**`, `**ACCEPTANCE RECHAZADO: N criterios no aprobados**` o `**ACCEPTANCE BLOQUEADO: N criterios sin evaluar**` |
 | `{historial_sesiones}` | Historial de sesiones previas o `<!-- Sin sesiones anteriores -->` |
 
 Escribir el archivo en `$STORY_DIR/acceptance-report.md`.
@@ -406,13 +409,21 @@ updated: {fecha}
 ```
 Mostrar: `✅ ACCEPTANCE APROBADO: historia {story_id} lista para INTEGRATION`
 
-**Si `$FINAL_STATUS = ACCEPTANCE-BLOCKED`:**
+**Si `$FINAL_STATUS = ACCEPTANCE-REJECTED`:**
 ```yaml
 status: READY-FOR-IMPLEMENT
 substatus: DONE
 updated: {fecha}
 ```
-Mostrar: `⚠️ ACCEPTANCE BLOQUEADO: {N} criterio(s) no aprobado(s). La historia regresa a la cola de implementación para corrección.`
+Mostrar: `⚠️ ACCEPTANCE RECHAZADO: {N} criterio(s) no cumplen los criterios de aceptación. La historia regresa a READY-FOR-IMPLEMENT/DONE.`
+
+**Si `$FINAL_STATUS = ACCEPTANCE-BLOCKED`:**
+```yaml
+status: ACCEPTANCE
+substatus: BLOCKED
+updated: {fecha}
+```
+Mostrar: `⚠️ ACCEPTANCE BLOQUEADO: {N} criterio(s) no pudieron evaluarse. La historia permanece en ACCEPTANCE. Resuelve el impedimento y re-ejecuta /story-acceptance.`
 
 #### 8b. Mostrar resumen final
 
@@ -430,16 +441,22 @@ Mostrar: `⚠️ ACCEPTANCE BLOQUEADO: {N} criterio(s) no aprobado(s). La histor
 ─────────────────────────────────────────────────────────────
 
 📄 Reporte generado: {$STORY_DIR}/acceptance-report.md
-📋 Estado story.md: ACCEPTANCE/DONE ✓               (si ACCEPTANCE-APPROVED)
-📋 Estado story.md: READY-FOR-IMPLEMENT/DONE ⚠️      (si ACCEPTANCE-BLOCKED)
+📋 Estado story.md: ACCEPTANCE/DONE ✓                        (si ACCEPTANCE-APPROVED)
+📋 Estado story.md: READY-FOR-IMPLEMENT/DONE ⚠️               (si ACCEPTANCE-REJECTED)
+📋 Estado story.md: ACCEPTANCE/BLOCKED ⚠️                     (si ACCEPTANCE-BLOCKED)
 
 ✅ ACCEPTANCE APROBADO: historia {story_id} lista para INTEGRATION
 ```
 o bien:
 ```
-⚠️ ACCEPTANCE BLOQUEADO: {N} criterio(s) no aprobado(s).
-   La historia regresa a la cola de implementación (READY-FOR-IMPLEMENT) para corrección.
+⚠️ ACCEPTANCE RECHAZADO: {N} criterio(s) no cumplen los criterios de aceptación.
+   La historia regresa a READY-FOR-IMPLEMENT/DONE para corrección.
    Revisa acceptance-report.md para detalles de los criterios rechazados.
+```
+o bien (si ACCEPTANCE-BLOCKED):
+```
+⚠️ ACCEPTANCE BLOQUEADO: {N} criterio(s) no pudieron evaluarse.
+   La historia permanece en ACCEPTANCE/BLOCKED. Resuelve el impedimento y re-ejecuta /story-acceptance.
 ```
 
 ---
@@ -448,8 +465,9 @@ o bien:
 
 - `$SPECS_BASE/specs/stories/<story-id>/acceptance-report.md` — reporte de validación con trazabilidad por criterio, resumen ejecutivo, historial de sesiones e historial de versiones anteriores
 - `story.md` frontmatter actualizado:
-  - `status: ACCEPTANCE / substatus: DONE` — si todos los criterios APPROVED
-  - `status: READY-FOR-IMPLEMENT / substatus: DONE` — si ≥1 criterio REJECTED o BLOCKED
+  - `status: ACCEPTANCE / substatus: DONE` — si todos los criterios APPROVED (ACCEPTANCE-APPROVED)
+  - `status: READY-FOR-IMPLEMENT / substatus: DONE` — si ≥1 criterio REJECTED (ACCEPTANCE-REJECTED)
+  - `status: ACCEPTANCE / substatus: BLOCKED` — si ≥1 criterio BLOCKED sin ningún REJECTED (ACCEPTANCE-BLOCKED)
 
 ## Test Cases
 
@@ -467,9 +485,9 @@ o bien:
 **Input:** Historia `FEAT-NNN` con `status: VERIFY / substatus: DONE`
 **Acción:** Responder FAIL con observación "No muestra mensaje de error" al segundo criterio
 **Output esperado:**
-- `acceptance-report.md` con `final-status: ACCEPTANCE-BLOCKED`, criterio 2 como REJECTED con observación
+- `acceptance-report.md` con `final-status: ACCEPTANCE-REJECTED`, criterio 2 como REJECTED con observación
 - `story.md` actualizado a `status: READY-FOR-IMPLEMENT / substatus: DONE`
-- Mensaje: "ACCEPTANCE BLOQUEADO: 1 criterio(s) no aprobado(s)"
+- Mensaje: "ACCEPTANCE RECHAZADO: 1 criterio(s) no cumplen los criterios de aceptación. La historia regresa a READY-FOR-IMPLEMENT/DONE."
 
 ### Caso 3 — Estado incorrecto
 

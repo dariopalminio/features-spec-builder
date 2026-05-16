@@ -41,7 +41,7 @@ updated: 2026-05-15
 | 6.2 | Verificar AC-2 (e2e → playwright/cypress) | ✓ completado | Cubierto por SKILL.md Paso 4 (modo automatico-e2e) + Paso 5 |
 | 6.3 | Verificar AC-3 (manual → qa-engineer.agent.md) | ✓ completado | Cubierto por SKILL.md Paso 5 modo manual + agente |
 | 6.4 | Verificar AC-4 (precondición incorrecta → error sin archivos) | ✓ completado | Cubierto por SKILL.md Paso 1d con mensaje exacto de la historia |
-| 6.5 | Verificar AC-5 (tests fallan → VERIFY/BLOCKED) | ✓ completado | pytest-project/test_login_failure falla intencionalmente → BLOCKED |
+| 6.5 | Verificar AC-5 (tests fallan → VERIFY/REJECTED) | ✓ completado | pytest-project/test_login_failure falla intencionalmente → BLOCKED |
 | 6.6 | Verificar AC-7 (idempotencia) | ✓ completado | Cubierto por SKILL.md Paso 6a (extrae historial previo) |
 | 6.7 | Verificar AC-8 (DoD dinámico) | ✓ completado | SKILL.md Paso 3 lee DoD en runtime sin hardcoding |
 | 6.8 | Verificar mitigaciones de riesgos | ✓ completado | Las 5 mitigaciones de design.md implementadas en SKILL.md |

@@ -29,7 +29,7 @@ Su posicionamiento en el pipeline:
 story-verify    ← aquí
      │   Al iniciar: story.md → VERIFY/IN-PROGRESS
      │   Si todos los criterios DoD pasan: → VERIFY/DONE
-     │   Si criterios DoD fallan: → substatus: BLOCKED (sin cambio de status)
+     │   Si criterios DoD fallan: → substatus: REJECTED (sin cambio de status)
      │   Si estado incorrecto: → error, sin cambio
      ↓
 [story.md: VERIFY/DONE]
@@ -319,7 +319,7 @@ SKILL.md lee story.md frontmatter
 ```
 Tras ejecutar pruebas → algún criterio DoD falla o hay defectos CRITICAL/HIGH
 → genera verify-report.md con sección Findings (CRITICAL→LOW)
-→ actualiza story.md → VERIFY/substatus: BLOCKED
+→ actualiza story.md → VERIFY/substatus: REJECTED
 → muestra: "VERIFY BLOQUEADO: se encontraron N defectos. Revisa verify-report.md para detalles."
 → status principal NO cambia (solo substatus)
 ```

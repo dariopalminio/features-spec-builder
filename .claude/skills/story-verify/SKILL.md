@@ -25,12 +25,12 @@ Orquesta la fase VERIFY del pipeline SDD: detecta el modo de ejecución (delegad
 ## Posicionamiento
 
 ```
-[story.md: READY-FOR-VERIFY/DONE]     ← viene de story-code-review
+[story.md: CODE-REVIEW/DONE]          ← viene de story-code-review
      ↓
 story-verify    ← aquí
      │   Al iniciar: story.md → VERIFY/IN-PROGRESS
      │   Si todos los criterios DoD pasan: → VERIFY/DONE
-     │   Si criterios DoD fallan: → substatus: BLOCKED (sin cambio de status)
+     │   Si criterios DoD fallan: → READY-FOR-IMPLEMENT/DONE
      │   Si estado incorrecto: → error, sin cambio
      ↓
 [story.md: VERIFY/DONE]
@@ -79,7 +79,7 @@ story-verify    ← aquí
 - **No revisa código:** eso corresponde a `story-code-review`.
 - **No despliega:** el despliegue corresponde a `story-deploy`.
 - **Idempotente:** ejecutable múltiples veces; sobreescribe `verify-report.md` preservando el historial de ejecuciones anteriores.
-- **Precondición de estado:** solo ejecuta si `story.md` tiene `status: READY-FOR-VERIFY/DONE` o `IMPLEMENTING/DONE`; cualquier otro estado detiene la ejecución con error descriptivo sin modificar archivos.
+- **Precondición de estado:** solo ejecuta si `story.md` tiene `status: CODE-REVIEW/DONE` o `IMPLEMENTING/DONE`; cualquier otro estado detiene la ejecución con error descriptivo sin modificar archivos.
 - **DoD dinámico:** los criterios VERIFY se leen en runtime desde el DoD; nunca están hardcodeados en el skill.
 
 ## Flujo de ejecución
@@ -131,7 +131,7 @@ Leer el frontmatter de `story.md` y verificar:
 
 ```
 Precondición válida si:
-  (status: READY-FOR-VERIFY  AND substatus: DONE)      ← camino normal desde story-code-review
+  (status: CODE-REVIEW  AND substatus: DONE)            ← camino normal desde story-code-review
   OR
   (status: IMPLEMENTING      AND substatus: DONE)       ← mínimo aceptable (AC-4)
 ```
@@ -143,7 +143,7 @@ Si la precondición NO se cumple:
    Estado actual: status: {valor} / substatus: {valor}
 
    story-verify requiere uno de los siguientes estados:
-   · READY-FOR-VERIFY/DONE  → camino normal desde story-code-review
+   · CODE-REVIEW/DONE       → camino normal desde story-code-review
    · IMPLEMENTING/DONE      → mínimo aceptable
 
    La historia {story_id} tiene status {status}/{substatus}.
@@ -392,7 +392,7 @@ Para cada criterio en `$DOD_VERIFY_CRITERIA`, evaluar contra los resultados:
 Calcular:
 - `$DOD_OK` = criterios con `✓`
 - `$DOD_ERROR` = criterios con `❌`
-- `$VERIFY_BLOQUEADO = true` si `$DOD_ERROR > 0` o si hay defectos CRITICAL o HIGH sin resolver
+- `$VERIFY_RECHAZADO = true` si `$DOD_ERROR > 0` o si hay defectos CRITICAL o HIGH sin resolver
 
 #### 6f. Añadir entrada al historial
 
@@ -400,7 +400,7 @@ Añadir al final del `$HISTORY_CONTENT` la entrada de esta ejecución:
 ```markdown
 ### Ejecución {N} — {date}
 - **Modo**: {modo}
-- **Resultado**: VERIFY-PASSED / VERIFY-BLOCKED
+- **Resultado**: VERIFY-PASSED / VERIFY-REJECTED
 - **Tests**: {passed}/{total} pasados, {failed} fallados
 - **Findings**: {N} defectos ({CRITICAL} CRITICAL, {HIGH} HIGH)
 ```
@@ -415,24 +415,23 @@ Escribir `$STORY_DIR/verify-report.md` con el contenido construido.
 
 #### 7a. Actualizar frontmatter de story.md
 
-**Si `$VERIFY_BLOQUEADO = false`** (todos los criterios DoD VERIFY pasan):
+**Si `$VERIFY_RECHAZADO = false`** (todos los criterios DoD VERIFY pasan):
 ```
 status: VERIFY
 substatus: DONE
 updated: {fecha}
 ```
 
-**Si `$VERIFY_BLOQUEADO = true`** (hay criterios DoD fallidos o defectos CRITICAL/HIGH):
+**Si `$VERIFY_RECHAZADO = true`** (hay criterios DoD fallidos o defectos CRITICAL/HIGH):
 ```
-status: VERIFY
-substatus: BLOCKED
+status: READY-FOR-IMPLEMENT
+substatus: DONE
 updated: {fecha}
 ```
-No cambiar el status principal (queda en VERIFY).
 
-Mostrar en pantalla si hay bloqueo:
+Mostrar en pantalla si hay rechazo:
 ```
-⚠️ VERIFY BLOQUEADO: se encontraron {N} defectos. Revisa verify-report.md para detalles.
+⚠️ VERIFY RECHAZADO: se encontraron {N} defectos. Revisa verify-report.md para detalles.
 ```
 
 #### 7b. Mostrar resumen final
@@ -451,10 +450,10 @@ Mostrar en pantalla si hay bloqueo:
 
 📄 Reporte: {$STORY_DIR}/verify-report.md
 📋 Estado story.md: VERIFY/DONE ✓         (si no bloqueado)
-📋 Estado story.md: VERIFY/BLOCKED ⚠️     (si bloqueado)
+📋 Estado story.md: READY-FOR-IMPLEMENT/DONE (REJECTED) ⚠️     (si rechazado)
 
-✅ Verificación completa                  (si no bloqueado)
-⚠️ VERIFY BLOQUEADO: N defectos          (si bloqueado)
+✅ Verificación completa                  (si no rechazado)
+⚠️ VERIFY RECHAZADO: N defectos          (si rechazado)
 ```
 
 ## Salida
@@ -462,4 +461,4 @@ Mostrar en pantalla si hay bloqueo:
 - `$SPECS_BASE/specs/stories/<story-id>/verify-report.md` — reporte de verificación con summary, findings por severidad, criterios DoD evaluados e historial de ejecuciones.
 - `story.md` frontmatter actualizado:
   - `status: VERIFY / substatus: DONE` — si todos los criterios DoD VERIFY pasan
-  - `status: VERIFY / substatus: BLOCKED` — si hay criterios fallidos o defectos CRITICAL/HIGH sin resolver
+  - `status: READY-FOR-IMPLEMENT / substatus: DONE` — si hay criterios fallidos o defectos CRITICAL/HIGH sin resolver (REJECTED)

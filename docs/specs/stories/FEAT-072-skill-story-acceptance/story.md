@@ -145,7 +145,7 @@ story-implement → story-code-review → story-verify → story-acceptance → 
 - Resumen ejecutivo: total criterios, aprobados, rechazados, bloqueados
 - Detalle por criterio: texto, resultado, observaciones, timestamp
 - Criterios DoD ACCEPTANCE: lista con estado cumplido/no cumplido
-- Estado final: ACCEPTANCE-APPROVED / ACCEPTANCE-BLOCKED
+- Estado final: ACCEPTANCE-APPROVED / ACCEPTANCE-REJECTED
 - Historial de sesiones anteriores (si existen)
 
 **Precondiciones requeridas:**

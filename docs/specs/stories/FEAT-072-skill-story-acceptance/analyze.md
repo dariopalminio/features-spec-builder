@@ -37,7 +37,7 @@ related:
 | AC | Descripción resumida | Cubierto en design.md | Elemento de diseño |
 |---|---|---|---|
 | AC-1 | Happy path — todos los criterios aprobados | ✓ | D-4 (máquina de estados), D-5 (acceptance-report), D-6 (interacción) |
-| AC-2 | ≥1 criterio rechazado → VERIFY/BLOCKED | ✓ | D-4 (transición VERIFY/BLOCKED), D-5 (REJECTED en report) |
+| AC-2 | ≥1 criterio rechazado → VERIFY/REJECTED | ✓ | D-4 (transición VERIFY/REJECTED), D-5 (REJECTED en report) |
 | AC-3 | Sesión interrumpida y reanudada | ✓ | D-3 (detección partial/complete, resume/restart), D-7 (idempotencia) |
 | AC-4 | Historia en estado incorrecto | ✓ | D-4 (precondición VERIFY/DONE obligatoria, error sin modificar archivos) |
 | AC-5 | DoD sin sección ACCEPTANCE → fallback Gherkin | ✓ | D-2 (fuente de criterios: DoD primario + fallback Gherkin) |
@@ -67,7 +67,7 @@ related:
 | 3. Core | 3.8 Actualizar story.md a ACCEPTANCE/IN-PROGRESS | D-4 (transición al inicio) | ✓ |
 | 3. Core | 3.9 Paso 6 — bucle interactivo | D-6 (presentación uno por vez), AC-1, AC-2, AC-6, Req-9 | ✓ |
 | 3. Core | 3.10 Paso 7 — consolidación + generar report | D-5 (template), D-7 (historial), Req-9 | ✓ |
-| 3. Core | 3.11 Paso 8 — actualizar frontmatter final | D-4 (ACCEPTANCE/DONE o VERIFY/BLOCKED), AC-1, AC-2 | ✓ |
+| 3. Core | 3.11 Paso 8 — actualizar frontmatter final | D-4 (ACCEPTANCE/DONE o VERIFY/REJECTED), AC-1, AC-2 | ✓ |
 | 3. Core | 3.12 Flag --validator | D-6 (--validator), D-5 (campo validator en report), Req-9 | ✓ |
 | 4. DoD | 4.1 Agregar sección ACCEPTANCE al DoD | D-2 (criterios DoD como fuente primaria), Req-7 | ✓ |
 | 5. Ejemplos | 5.1 example-approved/ | AC-1, Req-11 | ✓ |

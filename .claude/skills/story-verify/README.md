@@ -5,7 +5,7 @@ Orquesta la fase VERIFY del pipeline SDD: ejecuta pruebas, evalúa los criterios
 ## Posición en el pipeline
 
 ```
-story-code-review → [READY-FOR-VERIFY/DONE] → story-verify → [VERIFY/DONE | VERIFY/BLOCKED]
+story-code-review → [READY-FOR-VERIFY/DONE] → story-verify → [VERIFY/DONE | VERIFY/REJECTED]
 ```
 
 ## Precondiciones
@@ -53,7 +53,7 @@ El skill detecta automáticamente el modo en este orden:
 | Archivo | Descripción |
 |---------|-------------|
 | `$SPECS_BASE/specs/stories/<ID>/verify-report.md` | Reporte completo de verificación |
-| `story.md` frontmatter | `status: VERIFY`, `substatus: DONE | BLOCKED` |
+| `story.md` frontmatter | `status: VERIFY`, `substatus: DONE | REJECTED` |
 
 ## Template del reporte
 

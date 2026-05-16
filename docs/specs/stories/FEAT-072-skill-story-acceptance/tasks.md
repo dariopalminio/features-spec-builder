@@ -40,7 +40,7 @@ related:
 - [x] 3.8 Implementar actualización de frontmatter de `story.md` a `ACCEPTANCE/IN-PROGRESS` al inicio de sesión nueva o al reiniciar (design.md D-4)
 - [x] 3.9 Implementar Paso 6 en SKILL.md: bucle interactivo de presentación de criterios — mostrar cada criterio uno por vez con instrucción clara; aceptar respuestas `[P] PASS`, `[F] FAIL + observación`, `[B] BLOCKED + razón`, `[Q] Salir` (guarda sesión parcial); validar que FAIL y BLOCKED incluyen texto no vacío; registrar resultado, observación y timestamp por criterio; soporte de `--dry-run` para listar criterios sin iniciar sesión (design.md D-6, AC-1, AC-2, AC-6)
 - [x] 3.10 Implementar Paso 7 en SKILL.md: consolidación al completar todos los criterios — calcular totales (aprobados/rechazados/bloqueados); generar `acceptance-report.md` desde `assets/acceptance-report-template.md` completando frontmatter y todas las secciones; si ya existe un `acceptance-report.md` con sesión previa, añadir el anterior como entrada en "Historial de sesiones anteriores" sin eliminarlo (design.md D-5, D-7, Req-9)
-- [x] 3.11 Implementar Paso 8 en SKILL.md: actualizar frontmatter de `story.md` según el resultado de consolidación — si todos APPROVED → `ACCEPTANCE/DONE` + mensaje "ACCEPTANCE APROBADO: historia FEAT-NNN lista para INTEGRATION"; si ≥1 REJECTED/BLOCKED → `VERIFY/BLOCKED` + mensaje "ACCEPTANCE BLOQUEADO: N criterios no aprobados. La historia regresa a VERIFY para corrección." (design.md D-4, AC-1, AC-2)
+- [x] 3.11 Implementar Paso 8 en SKILL.md: actualizar frontmatter de `story.md` según el resultado de consolidación — si todos APPROVED → `ACCEPTANCE/DONE` + mensaje "ACCEPTANCE APROBADO: historia FEAT-NNN lista para INTEGRATION"; si ≥1 REJECTED/BLOCKED → `VERIFY/REJECTED` + mensaje "ACCEPTANCE BLOQUEADO: N criterios no aprobados. La historia regresa a VERIFY para corrección." (design.md D-4, AC-1, AC-2)
 - [x] 3.12 Implementar soporte del flag `--validator "<nombre>"` en SKILL.md: si se proporciona, registrar el nombre en el campo `validator` del frontmatter de `acceptance-report.md` y en la sección "Resumen ejecutivo"; si no se proporciona, usar "no especificado" (design.md D-6, Req-9)
 
 ## 4. DoD — Agregar sección ACCEPTANCE
@@ -50,13 +50,13 @@ related:
 ## 5. Ejemplos
 
 - [x] 5.1 Crear `examples/example-approved/` con: `story.md` de ejemplo en `status: VERIFY / substatus: DONE` con 2 escenarios Gherkin, `definition-of-done-story.md` de ejemplo con sección ACCEPTANCE, y `acceptance-report.md` esperado con todos los criterios APPROVED y `final-status: ACCEPTANCE-APPROVED` (AC-1, Req-11)
-- [x] 5.2 [P] Crear `examples/example-rejected/` con: misma `story.md` de entrada y un `acceptance-report.md` esperado donde el segundo criterio tiene resultado REJECTED con observación, y `final-status: ACCEPTANCE-BLOCKED` (AC-2, AC-6)
+- [x] 5.2 [P] Crear `examples/example-rejected/` con: misma `story.md` de entrada y un `acceptance-report.md` esperado donde el segundo criterio tiene resultado REJECTED con observación, y `final-status: ACCEPTANCE-REJECTED` (AC-2, AC-6)
 - [x] 5.3 [P] Crear `examples/example-partial/` con: `acceptance-report.md` de sesión parcial (1 de 2 criterios evaluados, `session-status: partial`) que simula una sesión interrumpida (AC-3, Req-8)
 
 ## 6. Verificación
 
 - [x] 6.1 Verificar AC-1 (happy path): ejecutar `story-acceptance` sobre una historia con `status: VERIFY / substatus: DONE`, responder PASS a todos los criterios → confirmar que `acceptance-report.md` tiene `final-status: ACCEPTANCE-APPROVED` y `story.md` queda en `status: ACCEPTANCE / substatus: DONE`
-- [x] 6.2 Verificar AC-2 (criterio rechazado): responder FAIL con observación en ≥1 criterio → confirmar que `acceptance-report.md` registra el criterio como REJECTED con el texto de observación, y `story.md` queda en `status: VERIFY / substatus: BLOCKED`
+- [x] 6.2 Verificar AC-2 (criterio rechazado): responder FAIL con observación en ≥1 criterio → confirmar que `acceptance-report.md` registra el criterio como REJECTED con el texto de observación, y `story.md` queda en `status: VERIFY / substatus: REJECTED`
 - [x] 6.3 Verificar AC-3 (sesión interrumpida): responder [Q] después de validar el primer criterio; re-ejecutar el skill → confirmar que detecta la sesión parcial (N/M criterios), ofrece reanudar/reiniciar, y al reanudar continúa desde el criterio pendiente sin repetir los ya evaluados
 - [x] 6.4 Verificar AC-4 (estado incorrecto): ejecutar el skill sobre una historia con `status: IMPLEMENTING / substatus: IN-PROGRESS` → confirmar que muestra el mensaje de error con instrucción y no modifica ningún archivo (story.md ni acceptance-report.md)
 - [x] 6.5 Verificar AC-5 (DoD sin sección ACCEPTANCE): ejecutar el skill apuntando a un `definition-of-done-story.md` sin sección ACCEPTANCE → confirmar que muestra el aviso correspondiente y continúa usando los criterios Gherkin de `story.md` como lista de validación

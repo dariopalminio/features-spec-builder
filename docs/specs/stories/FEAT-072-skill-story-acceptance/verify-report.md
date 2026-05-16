@@ -36,7 +36,7 @@ verify-status: VERIFY-PASSED
 | AC | Título | Resultado | Notas |
 |---|---|---|---|
 | AC-1 | Happy path — todos APPROVED → ACCEPTANCE-APPROVED | ✅ PASS | SKILL.md Caso 1 describe el flujo completo; `example-approved/acceptance-report.md` corrobora `final-status: ACCEPTANCE-APPROVED` y `ACCEPTANCE/DONE` |
-| AC-2 | Criterio rechazado — ACCEPTANCE-BLOCKED + READY-FOR-IMPLEMENT/DONE | ✅ PASS | Paso 8a escribe `READY-FOR-IMPLEMENT/DONE`; Paso 8b dice "regresa a la cola de implementación"; `example-rejected` ya no menciona VERIFY |
+| AC-2 | Criterio rechazado — ACCEPTANCE-REJECTED + READY-FOR-IMPLEMENT/DONE | ✅ PASS | Paso 8a escribe `READY-FOR-IMPLEMENT/DONE`; Paso 8b dice "regresa a la cola de implementación"; `example-rejected` ya no menciona VERIFY |
 | AC-3 | Sesión interrumpida → reanudar desde donde quedó | ✅ PASS | Paso 3 Estado B detecta `session-status: partial`; `example-partial` muestra 1 de 2 criterios evaluados |
 | AC-4 | Historia en estado incorrecto → error sin modificar archivos | ✅ PASS | Paso 1d detiene sin escribir ningún archivo; Test Case 3 confirma comportamiento |
 | AC-5 | DoD sin sección ACCEPTANCE → fallback a Gherkin de story.md | ✅ PASS | Paso 2b tiene fallback explícito con aviso; Test Case 4 lo confirma |

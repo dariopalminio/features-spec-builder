@@ -6,7 +6,7 @@ date: 2026-05-16
 validator: "Darío Palminio"
 dod-version: "2026-05-15"
 session-status: complete
-final-status: ACCEPTANCE-BLOCKED
+final-status: ACCEPTANCE-REJECTED
 ---
 
 # Acceptance Report: FEAT-060 — Recuperación de contraseña por email

@@ -172,6 +172,10 @@ Lista los principios que NO pueden violarse bajo ninguna circunstancia.
 6. **Evita el "teléfono descompuesto":** cuando el agente padre crea subagentes, no debe pasarles todo su contexto heredado, en su lugar, los subagentes deben escribir sus resultados de forma independiente en un directorio `.tmp/<skill-name>/` para que otros agentes lean exclusivamente lo que necesiten. Ver patrón detallado en `[[best-practices-for-skills]]`.
 7. **Uso estricto de Protocolos de Inicialización:** La IA no puede empezar a trabajar hasta que un protocolo de verificación valide que el entorno es completamente sano. En este proyecto, ese protocolo está implementado como el skill `skill-preflight` (`[[skill-preflight]]`), que verifica la estructura de directorios, la existencia de templates y las dependencias requeridas antes de ejecutar cualquier skill. No se utiliza un script externo (`init.sh`) sino que la verificación está integrada como un skill reutilizable invocable desde cualquier otro skill.
 8. **Mantener buenas prácticas y estándares homogéneos:** El código base debe estar bien estructurado y definimos buenas prácticas y reglas claras para que los patrones de resultado esperado sean predecibles.
+9. **Spec-first:** Escribes la spec antes de codificar, la usas para la tarea en curso, y luego la descartas. Es el nivel más básico.
+10. **Spec-anchored:** La spec se mantiene después de completar la tarea y se usa para evolución y mantenimiento del feature.
+
+
 
 
 ---

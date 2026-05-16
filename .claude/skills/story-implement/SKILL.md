@@ -9,44 +9,21 @@ description: >-
   Invocar también cuando el usuario mencione "implementar historia", "story-implement",
   "generar código de la historia", "implementar tareas", "codificar historia",
   "programar historia", "TDD historia", "ejecutar story-implement" o equivalentes.
-alwaysApply: false
-invocable: true
+triggers:
+  - story-implement
+  - /story-implement
+  - implementar historia
+  - generar código de la historia
+  - implementar tareas
+  - codificar historia
+  - programar historia
+  - TDD historia
+  - ejecutar story-implement
 ---
 
-# Skill: /story-implement
+## Objetivo
 
 Implementa una historia SDD tarea por tarea siguiendo TDD. Su propósito es **cerrar el ciclo completo de Spec-Driven Development** transformando los artefactos de planning (`story.md`, `design.md`, `tasks.md`) en código de producción con tests, trazabilidad completa y visibilidad de progreso en tiempo real.
-
-## Posicionamiento
-
-```
-[story.md: READY-FOR-IMPLEMENT/DONE]    ← precondición inicial (viene de story-plan/story-analyze)
-[story.md: IMPLEMENTING/IN-PROGRESS]    ← precondición reanudación (viene de story-code-review needs-changes)
-     ↓
-story-implement  → Entry point de la implementación: ejecuta TDD tarea por tarea  ← aquí
-     │   Al iniciar: story.md → IMPLEMENTING/IN‑PROGRESS
-     │   Al finalizar: story.md → READY-FOR-CODE-REVIEW/DONE + release.md checklist actualizado
-     ↓
-[story.md: READY-FOR-CODE-REVIEW/DONE]
-──────────────────────────────────────────────────────────────────────────────────────
-story.md          → What: requisitos, criterios de aceptación, comportamiento esperado
-design.md         → How: arquitectura, componentes, interfaces, decisiones técnicas
-tasks.md          → When: tareas de implementación, orden, seguimiento
-implement-report.md → Done: código generado, estado por tarea, bloqueos documentados ← aquí
-story-plan        → Entry point del planning: orquesta design → tasking → analyze
-story-implement   → Entry point de la implementación: ejecuta TDD tarea por tarea  ← aquí
-```
-
-## Ciclo de vida de estados en este skill
-
-| Evento | status | substatus |
-|--------|--------|-----------|
-| Precondición inicial (ejecución nueva) | `READY-FOR-IMPLEMENT` | `DONE` |
-| Precondición reanudación (parcialmente implementada) | `IMPLEMENTING` | `IN-PROGRESS` |
-| Antes de la primera tarea (Paso 2) | `IMPLEMENTING` | `IN-PROGRESS` |
-| Después de generar `implement-report.md` (Paso 4) | `READY-FOR-CODE-REVIEW` | `DONE` |
-
-**Precondición:** `story-implement` puede ejecutarse si `story.md` tiene `status: READY-FOR-IMPLEMENT / substatus: DONE` (ejecución inicial) o `status: IMPLEMENTING / substatus: IN-PROGRESS` (reanudación de implementación parcial). Cualquier otro estado detiene la ejecución con error descriptivo.
 
 **Qué hace este skill:**
 - Lee los tres artefactos de planning como entrada
@@ -62,16 +39,107 @@ story-implement   → Entry point de la implementación: ejecuta TDD tarea por t
 - Gestionar dependencias externas ni hacer rollback de código generado
 - Corregir inconsistencias entre artefactos (eso es trabajo de `story-analyze`)
 
+### Posicionamiento
+
+```
+[story.md: READY-FOR-IMPLEMENT/DONE]    ← precondición inicial (viene de story-plan/story-analyze)
+[story.md: IMPLEMENTING/IN-PROGRESS]    ← precondición reanudación (viene de story-code-review needs-changes)
+     ↓
+story-implement  → Entry point de la implementación: ejecuta TDD tarea por tarea  ← aquí
+     │   Al iniciar: story.md → IMPLEMENTING/IN‑PROGRESS
+     │   Al finalizar: story.md → IMPLEMENTING/DONE + release.md checklist actualizado
+     ↓
+[story.md: IMPLEMENTING/DONE]
+──────────────────────────────────────────────────────────────────────────────────────
+story.md          → What: requisitos, criterios de aceptación, comportamiento esperado
+design.md         → How: arquitectura, componentes, interfaces, decisiones técnicas
+tasks.md          → When: tareas de implementación, orden, seguimiento
+implement-report.md → Done: código generado, estado por tarea, bloqueos documentados ← aquí
+story-plan        → Entry point del planning: orquesta design → tasking → analyze
+story-implement   → Entry point de la implementación: ejecuta TDD tarea por tarea  ← aquí
+```
+
 ---
 
-## Modos de Ejecución
+## Entrada
 
-- **Modo manual** (`/story-implement {story_id}`): interactivo, muestra progreso en tiempo real
-- **Modo Agent** (invocado por orquestador): automático, reporta resultado al finalizar
+| Artefacto | Ubicación | Requerido |
+|---|---|---|
+| `story.md` | `$SPECS_BASE/specs/stories/<FEAT-NNN>/story.md` | ✓ obligatorio |
+| `design.md` | `$SPECS_BASE/specs/stories/<FEAT-NNN>/design.md` | ✓ obligatorio |
+| `tasks.md` | `$SPECS_BASE/specs/stories/<FEAT-NNN>/tasks.md` | ✓ obligatorio |
+| `fix-directives.md` | `$SPECS_BASE/specs/stories/<FEAT-NNN>/fix-directives.md` | opcional |
+| `definition-of-done-story.md` | `$SPECS_BASE/policies/definition-of-done-story.md` | opcional |
 
 ---
 
-## Paso 0 — Verificar entorno (`skill-preflight`)
+## Parámetros
+
+| Parámetro | Tipo | Descripción |
+|---|---|---|
+| `{story_id}` | posicional | ID de la historia (ej. `FEAT-059`) |
+| `{story_path}` | posicional opcional | Ruta explícita al directorio; sobreescribe la resolución por glob |
+
+Si no se proporciona ningún argumento, el skill lo solicita interactivamente.
+
+---
+
+## Precondiciones
+
+El frontmatter de `story.md` debe cumplir alguna de las siguientes condiciones antes de ejecutar:
+
+| Condición | status | substatus | Descripción |
+|---|---|---|---|
+| Ejecución inicial o re-implementación | `READY-FOR-IMPLEMENT` | `DONE` | viene de story-plan / story-analyze / story-code-review (rejection) |
+| Reanudación | `IMPLEMENTING` | `IN-PROGRESS` | viene de una ejecución parcial o de story-code-review con cambios requeridos |
+
+Cualquier otro estado detiene la ejecución con error descriptivo.
+
+---
+
+## Dependencias
+
+| Skill / Herramienta | Rol |
+|---|---|
+| `skill-preflight` | Verifica SDDF_ROOT y resuelve SPECS_BASE antes de cualquier operación (Paso 0) |
+| `story-code-review` | Skill downstream que consume `implement-report.md` para revisar la implementación |
+
+---
+
+## Modos de ejecución
+
+| Modo | Invocación | Comportamiento |
+|---|---|---|
+| Manual | `/story-implement {story_id}` | Interactivo, muestra progreso en tiempo real por tarea |
+| Agent | Invocado por orquestador | Automático, reporta resultado al finalizar |
+
+---
+
+## Restricciones / Reglas
+
+### Ciclo de vida de estados
+
+| Evento | status | substatus |
+|--------|--------|-----------|
+| Precondición inicial (ejecución nueva) | `READY-FOR-IMPLEMENT` | `DONE` |
+| Precondición reanudación (parcialmente implementada) | `IMPLEMENTING` | `IN-PROGRESS` |
+| Antes de la primera tarea (Paso 2) | `IMPLEMENTING` | `IN-PROGRESS` |
+| Después de generar `implement-report.md` (Paso 4) | `IMPLEMENTING` | `DONE` |
+
+### Reglas de comportamiento
+
+- **Fail-fast en artefactos faltantes:** si falta cualquiera de los tres artefactos obligatorios, detener la ejecución antes de implementar cualquier tarea.
+- **Actualización incremental de tasks.md:** marcar cada tarea como `[x]` o `[~]` inmediatamente al completarla o bloquearla, nunca en batch al final.
+- **No bloquear el pipeline por tareas con componentes no definidos:** marcar como `[~]` y continuar con la siguiente tarea.
+- **Gate de tareas completadas:** si `N_pendientes = 0` y `N_completadas > 0`, detener la ejecución sin modificar ningún archivo.
+- **No reimplementar artefactos de planning:** si los artefactos ya existen y son válidos, no sobrescribirlos.
+- **Transición de estado bloqueada por DoD-ERRORs:** si hay criterios DoD con `❌`, el frontmatter permanece en `IMPLEMENTING/IN-PROGRESS`.
+
+---
+
+## Flujo de ejecución
+
+### Paso 0 — Verificar entorno (`skill-preflight`)
 
 Invocar el skill `skill-preflight` antes de cualquier operación.
 
@@ -83,9 +151,9 @@ Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los 
 
 ---
 
-## Paso 1 — Resolver Parámetros de Entrada
+### Paso 1 — Resolver Parámetros de Entrada
 
-### 1a. Argumentos aceptados
+#### 1a. Argumentos aceptados
 
 - `{story_id}` — identificador de la historia (ej. `FEAT-059`)
 - `{story_path}` — ruta explícita al directorio de la historia (opcional, sobreescribe la resolución por glob)
@@ -96,7 +164,7 @@ Si no se proporcionó ningún argumento, preguntar:
 Proporciona el ID (ej. FEAT-059) o la ruta completa al directorio.
 ```
 
-### 1b. Resolución del directorio de la historia
+#### 1b. Resolución del directorio de la historia
 
 1. Ruta explícita `{story_path}` si se proporcionó
 2. Glob `$SPECS_BASE/specs/stories/{story_id}-*/` — primera coincidencia cuyo nombre comienza con el ID
@@ -108,7 +176,7 @@ Proporciona el ID (ej. FEAT-059) o la ruta completa al directorio.
    ```
    Detener la ejecución.
 
-### 1c. Verificar existencia de artefactos de planning
+#### 1c. Verificar existencia de artefactos de planning
 
 Verificar que el directorio resuelto contiene los tres artefactos requeridos:
 
@@ -138,13 +206,13 @@ Sugerencia: ejecuta /story-plan {story_id} para generar los artefactos de planni
 
 Si alguno de los tres artefactos falta, detener la ejecución **sin implementar ninguna tarea**.
 
-### 1d. Verificar precondición de estado
+#### 1d. Verificar precondición de estado
 
 Leer el frontmatter de `story.md` y verificar que se cumple alguna de las siguientes condiciones:
 
 ```
 Precondición válida si:
-  (status: READY-FOR-IMPLEMENT  AND substatus: DONE)        ← ejecución inicial
+  (status: READY-FOR-IMPLEMENT  AND substatus: DONE)        ← ejecución inicial o re-implementación tras code review
   OR
   (status: IMPLEMENTING          AND substatus: IN-PROGRESS) ← reanudación de implementación parcial
 ```
@@ -180,9 +248,9 @@ Mostrar confirmación de inicio:
 
 ---
 
-## Paso 2 — Cargar Contexto de Planning
+### Paso 2 — Cargar Contexto de Planning
 
-### 2a. Leer story.md y extraer criterios de aceptación
+#### 2a. Leer story.md y extraer criterios de aceptación
 
 Leer `story.md` del directorio resuelto.
 
@@ -198,7 +266,7 @@ AC-2: <descripción>
 ...
 ```
 
-### 2b. Leer design.md y extraer componentes definidos
+#### 2b. Leer design.md y extraer componentes definidos
 
 Leer `design.md` del directorio resuelto.
 
@@ -212,7 +280,7 @@ Construir la lista interna de componentes definidos:
 [ComponenteA, ComponenteB, InterfazX, ...]
 ```
 
-### 2c. Leer tasks.md, detectar modo y verificar fix-directives.md
+#### 2c. Leer tasks.md, detectar modo y verificar fix-directives.md
 
 Leer `tasks.md` del directorio resuelto.
 
@@ -245,7 +313,7 @@ Calcular y registrar internamente:
    fix-directives.md:                <detectado | no encontrado>
 ```
 
-### 2d. Verificar tamaño de la historia
+#### 2d. Verificar tamaño de la historia
 
 Si el número de tareas pendientes supera 20, mostrar advertencia y pedir confirmación:
 ```
@@ -271,7 +339,7 @@ Mostrar resumen de carga:
    Tareas ya completadas:  <N>
 ```
 
-### 2e. Actualizar frontmatter a IMPLEMENTING/IN-PROGRESS (si no está ya en ese estado)
+#### 2e. Actualizar frontmatter a IMPLEMENTING/IN-PROGRESS (si no está ya en ese estado)
 
 Antes de ejecutar la primera tarea, verificar el estado de entrada registrado en `$ENTRADA_STATUS`:
 
@@ -282,7 +350,7 @@ Antes de ejecutar la primera tarea, verificar el estado de entrada registrado en
 
 Esta verificación debe ocurrir antes de procesar cualquier tarea del Paso 3.
 
-### 2f. Cargar criterios DoD IMPLEMENTING
+#### 2f. Cargar criterios DoD IMPLEMENTING
 
 Intentar localizar `$SPECS_BASE/policies/definition-of-done-story.md`.
 
@@ -310,11 +378,11 @@ Mostrar resumen de carga DoD:
 
 ---
 
-## Paso 3 — Implementar Tareas en Orden TDD
+### Paso 3 — Implementar Tareas en Orden TDD
 
 Para cada tarea pendiente (en el orden en que aparecen en `tasks.md`):
 
-### 3a. Pre-check de componentes
+#### 3a. Pre-check de componentes
 
 Antes de implementar la tarea, verificar si los componentes mencionados en la descripción de la tarea están presentes en la lista de componentes de `design.md`.
 
@@ -323,7 +391,7 @@ Estrategia de matching:
 2. Si la tarea pertenece a un grupo `##` cuyo nombre coincide con un componente del diseño, considerar implícitamente cubierta
 3. Si la descripción de la tarea no menciona ningún componente conocido, considerar implementable (no bloquear por ambigüedad de naming)
 
-### 3b. Si componente no definido → Bloquear tarea
+#### 3b. Si componente no definido → Bloquear tarea
 
 Si la búsqueda detecta que la tarea menciona explícitamente un componente que **no existe** en `design.md`:
 
@@ -344,7 +412,7 @@ Mostrar:
 
 Continuar con la siguiente tarea sin detener el pipeline.
 
-### 3c. Si tarea es implementable → Detección de tarea especial o Ciclo TDD
+#### 3c. Si tarea es implementable → Detección de tarea especial o Ciclo TDD
 
 Mostrar:
 ```
@@ -420,7 +488,7 @@ Mostrar la(s) ruta(s) de los archivos de producción generados:
 
 Si el código generado tiene duplicaciones obvias, nombres poco claros, o puede simplificarse sin cambiar el comportamiento, aplicar refactor mínimo. No refactorizar por convención si el código ya es claro.
 
-### 3d. Marcar tarea completada en tasks.md
+#### 3d. Marcar tarea completada en tasks.md
 
 Inmediatamente al completar los pasos TDD, actualizar `tasks.md`:
 ```
@@ -429,7 +497,7 @@ Inmediatamente al completar los pasos TDD, actualizar `tasks.md`:
 
 La actualización es por tarea, no en batch al final.
 
-### 3e. Mostrar progreso
+#### 3e. Mostrar progreso
 
 ```
 [T001] ✓ completado
@@ -437,17 +505,17 @@ La actualización es por tarea, no en batch al final.
 
 ---
 
-## Paso 4 — Generar Reporte Final y Actualizar Estado
+### Paso 4 — Generar Reporte Final y Actualizar Estado
 
 Al finalizar el procesamiento de todas las tareas (completadas + bloqueadas), ejecutar los siguientes pasos en orden:
 
-### 4a. Generar `implement-report.md`
+#### 4a. Generar `implement-report.md`
 
 Generar `implement-report.md` en el directorio de la historia.
 
 El reporte **no se actualiza incrementalmente**: se genera como artefacto de cierre al finalizar todas las tareas.
 
-### Estructura del reporte
+**Estructura del reporte:**
 
 ```markdown
 ---
@@ -532,7 +600,7 @@ Pasos recomendados:
 3. Consultar `design.md` para verificar que la implementación respeta las interfaces definidas
 ```
 
-### 4g. Evaluar criterios DoD IMPLEMENTING
+#### 4g. Evaluar criterios DoD IMPLEMENTING
 
 **Si `$DOD_IMPLEMENTING_CRITERIA` está vacío** (no se cargó la sección DoD en el paso 2f):
 - Registrar `$DOD_RESULT = []` y `$DOD_BLOQUEADO = false`
@@ -565,25 +633,25 @@ Calcular:
 
 Completar la sección "Cumplimiento DoD — Fase IMPLEMENTING" en `implement-report.md` con la tabla resultante y la línea de resumen `**Resumen:** N_dod_ok/Total criterios ✓`.
 
-### 4b. Actualizar frontmatter a READY-FOR-CODE-REVIEW/DONE (condicional según DoD)
+#### 4b. Actualizar frontmatter a IMPLEMENTING/DONE (condicional según DoD)
 
 **Si `$DOD_BLOQUEADO = false`** (no hay criterios DoD con `❌`):
 - Actualizar el frontmatter de `story.md`:
-  - `status: READY-FOR-CODE-REVIEW`
+  - `status: IMPLEMENTING`
   - `substatus: DONE`
 
 **Si `$DOD_BLOQUEADO = true`** (hay al menos un criterio DoD con `❌`):
 - NO actualizar el frontmatter — `story.md` permanece en `IMPLEMENTING/IN-PROGRESS`
 - Mostrar al usuario los criterios DoD fallidos:
   ```
-  ⚠️ Transición a READY-FOR-CODE-REVIEW bloqueada por DoD-ERRORs:
+  ⚠️ Transición a IMPLEMENTING bloqueada por DoD-ERRORs:
 
   <lista de criterios con ❌ y su evidencia>
 
   Resuelve los criterios pendientes antes de avanzar a code review.
   ```
 
-### 4c. Actualizar checklist del release padre
+#### 4c. Actualizar checklist del release padre
 
 Leer el campo `parent` del frontmatter de `story.md` (ej. `EPIC-12-story-sdd-workflow`).
 
@@ -600,13 +668,13 @@ Buscar el archivo `release.md` correspondiente en: `$SPECS_BASE/specs/releases/<
   ```
   ⚠️ Release checklist no actualizado: <razón>
   ```
-- Continuar sin bloquear — la transición a `READY-FOR-CODE-REVIEW/DONE` ya fue aplicada
+- Continuar sin bloquear — la transición a `IMPLEMENTING/DONE` ya fue aplicada
 
-### 4d. Sección "Tareas Bloqueadas"
+#### 4d. Sección "Tareas Bloqueadas"
 
 Incluir esta sección **solo si hay al menos una tarea con estado `- [~]`**. Listar cada tarea bloqueada con su razón de bloqueo y la acción recomendada para desbloquearla.
 
-### 4e. Estado final del reporte
+#### 4e. Estado final del reporte
 
 **Si todos los pasos completaron sin bloqueos:**
 ```
@@ -623,7 +691,7 @@ Todas las tareas han sido implementadas. Ejecuta los tests del proyecto para ver
 Revisa la sección "Tareas Bloqueadas" en implement-report.md para los detalles.
 ```
 
-### 4f. Nota sobre los tests
+#### 4f. Nota sobre los tests
 
 Siempre añadir al reporte:
 ```
@@ -632,7 +700,20 @@ Los tests generados deben ejecutarse manualmente con el runner del proyecto.
 
 ---
 
-## Resumen Final (mostrar al usuario)
+## Salida
+
+### Artefactos generados
+
+| Artefacto | Ruta | Descripción |
+|---|---|---|
+| `implement-report.md` | `$SPECS_BASE/specs/stories/<FEAT-NNN>/implement-report.md` | Reporte con estado por tarea, DoD y trazabilidad |
+| `story.md` (actualizado) | mismo directorio | Frontmatter → `IMPLEMENTING/DONE` (o `IMPLEMENTING/IN-PROGRESS` si hay DoD-ERRORs) |
+| `tasks.md` (actualizado) | mismo directorio | Tareas marcadas `[x]` (completadas) o `[~]` (bloqueadas) |
+| `release.md` (actualizado) | `$SPECS_BASE/specs/releases/<parent>/release.md` | Checklist con `[x]` para la historia completada (si existe) |
+| Archivos de test | según stack del proyecto | Tests generados por ciclo TDD (uno por tarea completada) |
+| Archivos de producción | según stack del proyecto | Código de producción generado por ciclo TDD |
+
+### Resumen para el usuario
 
 Al terminar, mostrar:
 
@@ -650,7 +731,7 @@ Al terminar, mostrar:
 ─────────────────────────────────────────────────────────────
 
 📄 Reporte generado: <ruta>/implement-report.md
-📋 Estado story.md: READY-FOR-CODE-REVIEW/DONE ✓             (si $DOD_BLOQUEADO = false)
+📋 Estado story.md: IMPLEMENTING/DONE ✓             (si $DOD_BLOQUEADO = false)
 📋 Estado story.md: IMPLEMENTING/IN-PROGRESS ✓               (si $DOD_BLOQUEADO = true)
 📋 Release checklist: <✓ actualizado en <ruta>/release.md | ⚠️ no actualizado — <razón>>
 📋 DoD IMPLEMENTING: {N_dod_ok}/{Total} criterios ✓          (si DoD fue evaluado)
@@ -673,7 +754,7 @@ O si hay bloqueos de tareas (sin DoD-ERRORs):
 ```
 ⚠️ Implementación completada con tareas pendientes de aclaración
    Revisa implement-report.md → sección "Tareas Bloqueadas"
-📋 Estado story.md: READY-FOR-CODE-REVIEW/DONE ✓
+📋 Estado story.md: IMPLEMENTING/DONE ✓
 📋 Release checklist: <✓ actualizado | ⚠️ no actualizado — <razón>>
 📋 DoD IMPLEMENTING: {N_dod_ok}/{Total} criterios ✓
 ```

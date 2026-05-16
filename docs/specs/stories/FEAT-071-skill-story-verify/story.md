@@ -297,7 +297,7 @@ El skill `story-verify` no debe modificar ningún código fuente ni artefacto de
 - [ ] Performance tests
 - [ ] Security tests
 ```
-- Estado final: VERIFY-PASSED / VERIFY-BLOCKED
+- Estado final: VERIFY-PASSED / VERIFY-REJECTED
 
 **Precondiciones requeridas:**
 - Historia con `status: CODE-REVIEW` (o `IMPLEMENTING/DONE` como mínimo aceptable)

@@ -30,9 +30,9 @@ reviewers:
 
 | Corrección | Estado | Evidencia |
 |-----------|--------|-----------|
-| Fix #1: Paso 8a YAML `ACCEPTANCE/BLOCKED` → `VERIFY/BLOCKED` | ✓ aplicada | SKILL.md líneas 409-415: bloque `Si $FINAL_STATUS = ACCEPTANCE-BLOCKED` escribe `status: VERIFY / substatus: BLOCKED` correctamente |
+| Fix #1: Paso 8a YAML `ACCEPTANCE/REJECTED` → `VERIFY/REJECTED` | ✓ aplicada | SKILL.md líneas 409-415: bloque `Si $FINAL_STATUS = ACCEPTANCE-REJECTED` escribe `status: VERIFY / substatus: REJECTED` correctamente |
 | Fix #2: Guard `--dry-run` al inicio de Paso 4 | ✓ aplicada | SKILL.md líneas 253-254: primera instrucción del Paso 4 es el guard dry-run, antes de cualquier escritura de frontmatter |
-| Fix: Test Case 2 documenta `VERIFY/BLOCKED` | ✓ aplicada | SKILL.md línea 471: `story.md actualizado a status: VERIFY / substatus: BLOCKED` |
+| Fix: Test Case 2 documenta `VERIFY/REJECTED` | ✓ aplicada | SKILL.md línea 471: `story.md actualizado a status: VERIFY / substatus: REJECTED` |
 
 ---
 
@@ -55,7 +55,7 @@ reviewers:
 | AC / Req | Descripción | Cobertura | Veredicto |
 |---|---|---|---|
 | AC-1 | Happy path: todos PASS → ACCEPTANCE-APPROVED + ACCEPTANCE/DONE | Paso 7b + 8a + example-approved + Test Case 1 | CUBIERTO |
-| AC-2 | ≥1 FAIL → ACCEPTANCE-BLOCKED + VERIFY/BLOCKED | Paso 7b + 8a + example-rejected + Test Case 2 | CUBIERTO |
+| AC-2 | ≥1 FAIL → ACCEPTANCE-REJECTED + VERIFY/REJECTED | Paso 7b + 8a + example-rejected + Test Case 2 | CUBIERTO |
 | AC-3 | Sesión interrumpida → reanudar desde donde quedó | Paso 3 Estados B/C + example-partial + Test Case 5 | CUBIERTO |
 | AC-4 | Estado incorrecto → error sin modificar archivos | Paso 1d + Test Case 3 | CUBIERTO |
 | AC-5 | DoD sin sección ACCEPTANCE → fallback a Gherkin | Paso 2b con aviso + Test Case 4 | CUBIERTO |
@@ -84,7 +84,7 @@ reviewers:
 | LOW | `SKILL.md:329-331` | El Paso 6 (registrar nombre del validador) está después del Paso 5 (sesión interactiva). En salida temprana con [Q], el `acceptance-report.md` parcial puede generarse sin `$VALIDATOR_NAME` resuelto. | Mover resolución de `--validator` al Paso 1 junto con los demás argumentos de entrada. |
 | LOW | `SKILL.md:329` | Numeración del Paso 6 genera ambigüedad de orden de ejecución en relación con el Paso 7 que ya lo referencia. | Reubicar o clarificar que `$VALIDATOR_NAME` se resuelve al inicio del flujo. |
 
-**Verificaciones satisfactorias:** D-1 (orquestador puro sin subagentes), D-2 (DoD + fallback Gherkin), D-3 (3 caminos de sesión + --restart), D-4 (VERIFY/BLOCKED para rechazo — CRÍTICO ✓), D-5 (template assets/ como fuente de verdad), D-6 (criterios uno por vez + validación observación), D-7 (idempotencia + historial acumulativo), estructura canónica, frontmatter YAML, skill-preflight en Paso 0, rutas predecibles, kebab-case, guard --dry-run antes de frontmatter update.
+**Verificaciones satisfactorias:** D-1 (orquestador puro sin subagentes), D-2 (DoD + fallback Gherkin), D-3 (3 caminos de sesión + --restart), D-4 (VERIFY/REJECTED para rechazo — CRÍTICO ✓), D-5 (template assets/ como fuente de verdad), D-6 (criterios uno por vez + validación observación), D-7 (idempotencia + historial acumulativo), estructura canónica, frontmatter YAML, skill-preflight en Paso 0, rutas predecibles, kebab-case, guard --dry-run antes de frontmatter update.
 
 **Veredicto:** approved — Todas las decisiones de diseño D-1 a D-7 correctamente implementadas. El hallazgo crítico D-4 está resuelto.
 

@@ -3,7 +3,7 @@ type: story
 id: FEAT-000
 slug: FEAT-000-example-approved
 title: "Ejemplo: Historia aprobada en code review"
-status: READY-FOR-CODE-REVIEW
+status: IMPLEMENTING
 substatus: DONE
 parent: EPIC-00-example
 created: 2026-05-09

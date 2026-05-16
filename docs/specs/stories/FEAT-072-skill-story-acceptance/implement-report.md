@@ -48,7 +48,7 @@ updated: 2026-05-16
 | 5.2 | Crear `examples/example-rejected/` | ✓ completado | `.claude/skills/story-acceptance/examples/example-rejected/acceptance-report.md` |
 | 5.3 | Crear `examples/example-partial/` | ✓ completado | `.claude/skills/story-acceptance/examples/example-partial/acceptance-report.md` |
 | 6.1 | Verificar AC-1 (happy path — ACCEPTANCE-APPROVED) | ✓ completado | Verificación estática sobre `example-approved/acceptance-report.md` |
-| 6.2 | Verificar AC-2 (criterio rechazado — ACCEPTANCE-BLOCKED) | ✓ completado | Verificación estática sobre `example-rejected/acceptance-report.md` |
+| 6.2 | Verificar AC-2 (criterio rechazado — ACCEPTANCE-REJECTED) | ✓ completado | Verificación estática sobre `example-rejected/acceptance-report.md` |
 | 6.3 | Verificar AC-3 (sesión parcial — session-status: partial) | ✓ completado | Verificación estática sobre `example-partial/acceptance-report.md` |
 | 6.4 | Verificar AC-4 (estado incorrecto detectado en SKILL.md) | ✓ completado | Verificación grep sobre SKILL.md |
 | 6.5 | Verificar AC-5 (fallback a Gherkin cuando DoD sin ACCEPTANCE) | ✓ completado | Verificación grep sobre SKILL.md |
@@ -57,7 +57,7 @@ updated: 2026-05-16
 | 6.8 | Verificar --dry-run | ✓ completado | Flag documentado e implementado en Paso 5 |
 | 6.9 | Verificar --validator | ✓ completado | Flag documentado e implementado en Paso 6 + Paso 7 |
 | 6.10 | Verificar estructura canónica skill-creator | ✓ completado | SKILL.md + assets/ + examples/ presentes |
-| 7 fix-1 | Implementar fix-directives.md — Corrección #1: Paso 8a YAML `ACCEPTANCE/BLOCKED` → `VERIFY/BLOCKED` + Test Case 2 | ✓ completado | `.claude/skills/story-acceptance/SKILL.md` |
+| 7 fix-1 | Implementar fix-directives.md — Corrección #1: Paso 8a YAML `ACCEPTANCE/REJECTED` → `VERIFY/REJECTED` + Test Case 2 | ✓ completado | `.claude/skills/story-acceptance/SKILL.md` |
 | 7 fix-2 | Implementar fix-directives.md — Corrección #2: Mover guard `--dry-run` al inicio del Paso 4 antes de actualizar frontmatter | ✓ completado | `.claude/skills/story-acceptance/SKILL.md` |
 | 7 pkg | package.json — verificar que `.claude/skills/story-acceptance` está en `files` array | ✓ completado (ejecución anterior) | `package.json` |
 

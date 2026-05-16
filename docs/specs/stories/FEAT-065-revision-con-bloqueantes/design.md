@@ -162,7 +162,7 @@ El árbitro registra en la salida del skill:
 
 **Alternativas rechazadas:**
 - Actualizar story.md a `status: NEEDS-CHANGES / substatus: IN-PROGRESS`: introduce un nuevo estado en el ciclo de vida del pipeline que no está definido en constitution.md; agrega complejidad sin beneficio sobre "permanecer en IMPLEMENTING".
-- Actualizar `substatus: BLOCKED`: semánticamente incorrecto; la historia no está bloqueada por dependencias externas, sino por hallazgos de revisión propios.
+- Actualizar `substatus: REJECTED`: semánticamente incorrecto; la historia no está bloqueada por dependencias externas, sino por hallazgos de revisión propios.
 
 ---
 

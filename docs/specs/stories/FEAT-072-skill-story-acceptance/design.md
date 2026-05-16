@@ -152,8 +152,8 @@ El skill verifica el estado de `story.md` antes de modificar cualquier archivo. 
 
 **Alternativas rechazadas:**
 - Actualizar story.md solo al finalizar (no al inicio): el story.md quedaría en `VERIFY/DONE` mientras la sesión está en curso; otro skill podría interpretar incorrectamente que la historia está disponible para re-verificar.
-- Estado intermedio `ACCEPTANCE/BLOCKED`: introduce un estado no definido en constitution.md y no comunica qué acción debe tomar el desarrollador.
-- `VERIFY/BLOCKED`: rechazado porque la historia ya superó `story-verify` (pruebas automáticas) para llegar a acceptance. Regresar a ese estado implicaría que las pruebas automáticas fallaron, lo cual no es el caso. El rechazo en acceptance significa que hay trabajo de implementación pendiente (fixes, refinamiento de UX, nuevas tareas). `READY-FOR-IMPLEMENT/DONE` es semánticamente correcto: señala que la historia vuelve a la cola de implementación para que el desarrollador añada tasks de corrección y re-ejecute el pipeline completo.
+- Estado intermedio `ACCEPTANCE/REJECTED`: introduce un estado no definido en constitution.md y no comunica qué acción debe tomar el desarrollador.
+- `VERIFY/REJECTED`: rechazado porque la historia ya superó `story-verify` (pruebas automáticas) para llegar a acceptance. Regresar a ese estado implicaría que las pruebas automáticas fallaron, lo cual no es el caso. El rechazo en acceptance significa que hay trabajo de implementación pendiente (fixes, refinamiento de UX, nuevas tareas). `READY-FOR-IMPLEMENT/DONE` es semánticamente correcto: señala que la historia vuelve a la cola de implementación para que el desarrollador añada tasks de corrección y re-ejecute el pipeline completo.
 
 ---
 
@@ -171,7 +171,7 @@ date: YYYY-MM-DD
 validator: <nombre o "no especificado">
 dod-version: <fecha del DoD leído>
 session-status: complete | partial
-final-status: ACCEPTANCE-APPROVED | ACCEPTANCE-BLOCKED
+final-status: ACCEPTANCE-APPROVED | ACCEPTANCE-REJECTED
 ---
 
 ### D-6: Uso de skill-creator

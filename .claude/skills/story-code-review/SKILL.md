@@ -4,8 +4,8 @@ description: >-
   Ejecuta una revisión multi-agente del código implementado en una historia SDD, lanzando en paralelo
   tres subagentes especializados (Inspector de Código, Guardián de Requisitos, Inspector de Integración)
   y consolidando sus hallazgos en un code-review-report.md. Genera review-status: approved cuando no
-  hay hallazgos de severidad HIGH o MEDIUM y actualiza story.md a READY-FOR-VERIFY/DONE; si hay
-  bloqueantes genera fix-directives.md, agrega tarea en tasks.md y retrocede story.md a IMPLEMENTING/IN-PROGRESS.
+  hay hallazgos de severidad HIGH o MEDIUM y actualiza story.md a CODE-REVIEW/DONE; si hay
+  bloqueantes genera fix-directives.md, agrega tarea en tasks.md y retrocede story.md a READY-FOR-IMPLEMENT/DONE.
   Usar siempre que el usuario quiera revisar el código de una historia implementada, validar que la
   implementación cumple los criterios de aceptación y la arquitectura antes de marcar Done,
   o ejecutar el quality gate posterior a story-implement.
@@ -28,14 +28,14 @@ Quality gate formal entre `/story-implement` y la marca final de Done. Lanza tre
 ## Posicionamiento
 
 ```
-[story.md: READY-FOR-CODE-REVIEW/DONE]   ← precondición requerida (viene de story-implement)
+[story.md: IMPLEMENTING/DONE]   ← precondición requerida (viene de story-implement)
      ↓
 story-code-review  → Quality gate: revisión multi-agente del código  ← aquí
      │   Al iniciar: story.md → CODE-REVIEW/IN-PROGRESS
-     │   Al finalizar (approved): story.md → READY-FOR-VERIFY/DONE
-     │   Al finalizar (needs-changes): story.md → IMPLEMENTING/IN-PROGRESS
+     │   Al finalizar (approved): story.md → CODE-REVIEW/DONE
+     │   Al finalizar (needs-changes): story.md → READY-FOR-IMPLEMENT/DONE
      ↓
-[story.md: READY-FOR-VERIFY/DONE]
+[story.md: CODE-REVIEW/DONE]
 ──────────────────────────────────────────────────────────────────────────────────────
 story.md              → What: requisitos, criterios de aceptación, escenarios Gherkin
 design.md             → How: arquitectura, componentes, interfaces, decisiones técnicas
@@ -47,20 +47,20 @@ code-review-report.md → Review: hallazgos por dimensión, decisión final  ←
 
 | Evento | status | substatus |
 |--------|--------|-----------|
-| Precondición requerida para ejecutar | `READY-FOR-CODE-REVIEW` | `DONE` |
+| Precondición requerida para ejecutar | `IMPLEMENTING` | `DONE` |
 | Al iniciar la revisión (Paso 1) | `CODE-REVIEW` | `DONE` |
-| Finalización aprobada (Paso 6) | `READY-FOR-VERIFY` | `DONE` |
-| Finalización con bloqueantes (Paso 4g) | `IMPLEMENTING` | `IN-PROGRESS` |
+| Finalización aprobada (Paso 6) | `CODE-REVIEW` | `DONE` |
+| Finalización con bloqueantes (Paso 4g) | `READY-FOR-IMPLEMENT` | `DONE` |
 
-**Precondición:** `story-code-review` solo puede ejecutarse si `story.md` tiene `status: READY-FOR-CODE-REVIEW` + `substatus: DONE`. Si la precondición no se cumple, la ejecución se detiene con error descriptivo.
+**Precondición:** `story-code-review` solo puede ejecutarse si `story.md` tiene `status: IMPLEMENTING` + `substatus: DONE`. Si la precondición no se cumple, la ejecución se detiene con error descriptivo.
 
 **Qué hace este skill:**
 - Verifica precondiciones antes de revisar (fail-fast ante artefactos faltantes)
 - Limpia `.tmp/story-code-review/` para garantizar idempotencia
 - Lanza tres subagentes revisores en paralelo con responsabilidades exclusivas
 - Consolida los informes parciales y calcula la severidad máxima
-- **Si `approved`**: genera `code-review-report.md`, elimina `fix-directives.md` (si existe) y avanza `story.md` a `READY-FOR-VERIFY/DONE`
-- **Si `needs-changes`**: genera `fix-directives.md`, agrega tarea "Implementar fix-directives.md" en `tasks.md` y retrocede `story.md` a `IMPLEMENTING/IN-PROGRESS`
+- **Si `approved`**: genera `code-review-report.md`, elimina `fix-directives.md` (si existe) y marca `story.md` como `CODE-REVIEW/DONE`
+- **Si `needs-changes`**: genera `fix-directives.md`, agrega tarea "Implementar fix-directives.md" en `tasks.md` y retrocede `story.md` a `READY-FOR-IMPLEMENT/DONE`
 
 **Qué NO hace este skill:**
 - Ejecutar ni compilar código (opera sobre Markdown y texto plano únicamente)
@@ -155,11 +155,11 @@ Si todos los artefactos requeridos están presentes, continuar al paso 1d.
 
 ### 1d. Verificar precondición de estado
 
-Leer el frontmatter de `story.md` y verificar `status: READY-FOR-CODE-REVIEW` y `substatus: DONE`.
+Leer el frontmatter de `story.md` y verificar `status: IMPLEMENTING` y `substatus: DONE`.
 
 **Si la precondición NO se cumple:**
 ```
-❌ La historia <story_id> no está en estado READY-FOR-CODE-REVIEW/DONE.
+❌ La historia <story_id> no está en estado IMPLEMENTING/DONE.
 
    Estado actual: status: <valor_actual> / substatus: <valor_actual>
 
@@ -179,7 +179,7 @@ Mostrar confirmación de inicio:
 🔍 Iniciando revisión de código para: <story_id>
    Directorio: <ruta_directorio>
    Artefactos: story.md ✓ | design.md ✓ | implement-report.md ✓
-   Estado: READY-FOR-CODE-REVIEW/DONE ✓
+   Estado: IMPLEMENTING/DONE ✓
 ```
 
 ---
@@ -470,12 +470,12 @@ Mostrar:
 **Solo si `$REVIEW_STATUS = approved`:**
 
 Actualizar el frontmatter de `story.md`:
-- `status: READY-FOR-VERIFY`
+- `status: CODE-REVIEW`
 - `substatus: DONE`
 
 Mostrar:
 ```
-📋 Estado story.md: READY-FOR-VERIFY/DONE ✓
+📋 Estado story.md: CODE-REVIEW/DONE ✓
 ```
 
 **Si `$REVIEW_STATUS = needs-changes`:** el frontmatter ya fue actualizado a `READY-FOR-IMPLEMENT/DONE` en el Paso 4g.2. No ejecutar este paso.
@@ -525,10 +525,10 @@ O si hay bloqueantes:
 
 📋 Fix directives: <ruta>/fix-directives.md
 📄 Reporte:        <ruta>/code-review-report.md
-📋 Estado:         <story_id> → IMPLEMENTING/IN-PROGRESS
+📋 Estado:         <story_id> → READY-FOR-IMPLEMENT/DONE
 📋 DoD CODE-REVIEW: {N}/{Total} criterios ✓ | {N_error} criterios ❌
 
-⚠️  Revisión completada con hallazgos bloqueantes
+⚠️  Revisión completada con hallazgos críticos
 
 <N> hallazgo(s) de severidad HIGH o MEDIUM requieren corrección.
 Consulta fix-directives.md para las instrucciones de corrección.
