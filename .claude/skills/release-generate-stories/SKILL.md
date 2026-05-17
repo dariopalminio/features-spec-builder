@@ -1,19 +1,83 @@
 ---
 name: release-generate-stories
 description: "Genera historias de usuario (directorio `<SPECS_BASE>/specs/stories/FEAT-NNN-nombre/story.md`) a partir de las features definidas en el release.md de un directorio de release, usando el template story-template.md. El usuario puede indicar el nombre del directorio de release."
+triggers:
+  - "release-generate-stories"
+  - "generar historias"
+  - "historias del release"
+  - "stories del release"
+  - "generar stories"
+  - "derivar historias de release"
 ---
-# Skill: /release-generate-stories
+
+# Skill: `/release-generate-stories`
+
+## Objetivo
 
 Lee `release.md` de un directorio de release en `$SPECS_BASE/specs/releases/` y genera automáticamente un directorio `FEAT-[ID]-[Nombre-kebab]/` con un archivo `story.md` por cada feature definida en la sección `## Features` del release. Cada archivo generado sigue exactamente la estructura de `$SPECS_BASE/specs/templates/story-template.md`.
 
-**Usar cuando:**
-- Se quiere derivar historias de usuario listas para sprint planning a partir de un archivo de release
-- Como paso siguiente a ejecutar `/releases-from-project-plan`
-- Para poblar `$SPECS_BASE/specs/stories/` de forma automatizada antes de refinar con `/story-refine`
+**Qué hace este skill:**
+- Resuelve el release a procesar por nombre de directorio (parcial o completo) o por ruta explícita
+- Extrae todas las features de la sección `## Features` del `release.md` indicado
+- Genera un `story.md` por feature, respetando el template canónico en tiempo de ejecución
+- Pregunta al usuario antes de sobreescribir historias existentes
+
+**Qué NO hace este skill:**
+- Validar la calidad FINVEST de las historias generadas → usar `/story-evaluation`
+- Modificar el archivo de release
+- Realizar evaluación INVEST ni splitting automático
 
 ---
 
-## Paso 0 — Verificar entorno (`skill-preflight`)
+## Entrada
+
+- Nombre de directorio de release (parcial o completo), o ruta relativa al directorio/archivo `release.md`
+
+---
+
+## Parámetros
+
+- `{release}` — nombre de directorio (parcial o completo) o ruta relativa al directorio de release o a `release.md` (obligatorio)
+
+---
+
+## Precondiciones
+
+- El directorio de release indicado debe existir en `$SPECS_BASE/specs/releases/` y contener `release.md`
+- `$SPECS_BASE/specs/templates/story-template.md` debe existir
+- `skill-preflight` retorna estado OK (entorno válido)
+
+---
+
+## Dependencias
+
+- Skills: [`skill-preflight`]
+- Archivos: [`$SPECS_BASE/specs/templates/story-template.md`]
+
+---
+
+## Modos de ejecución
+
+- **Manual** (`/release-generate-stories {release}`): interactivo cuando hay conflictos de sobreescritura — pregunta al usuario historia por historia
+- **Automático**: invocado por orquestador — reporta resultado sin interacción adicional
+
+---
+
+## Restricciones / Reglas
+
+1. El skill **no valida** calidad FINVEST — esa responsabilidad es de `/story-evaluation`
+2. El skill **no modifica** el archivo de release
+3. El skill procesa **todas** las features del release (pendientes `[ ]` y completadas `[x]`)
+4. Si dos features tienen el mismo ID (duplicado en el release), añadir sufijo `-bis` al segundo archivo (ej. `FEAT-029-nombre-bis/`) e informar al usuario
+5. Las secciones opcionales de cada historia se incluyen con placeholder `[Por completar]` para facilitar la edición posterior
+6. El skill no realiza evaluación INVEST ni splitting — si una historia parece demasiado grande, sugerirlo en las notas pero no dividirla automáticamente
+7. El template `story-template.md` es de solo lectura — nunca escribir en él ni usarlo como ruta de salida
+
+---
+
+## Flujo de ejecución
+
+### Paso 0 — Verificar entorno (`skill-preflight`)
 
 Invocar `skill-preflight` antes de cualquier operación con archivos. El preflight verifica `SDDF_ROOT`, resuelve `SPECS_BASE` (fallback: `docs`) y confirma los subdirectorios de specs estándar. Si retorna `✗ Entorno inválido`, detener la ejecución.
 
@@ -21,45 +85,33 @@ Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los 
 
 ---
 
-## Fase 0 — Resolver el input
+### Paso 1 — Resolver el input
 
 El skill acepta dos formatos de input:
 
-### Formato A — Nombre de directorio (parcial o completo)
+#### Formato A — Nombre de directorio (parcial o completo)
 
 **Señal:** el input no contiene separadores de directorio (`/` o `\`) o es un nombre de directorio sin `release.md`.
 
 **Acción:**
 1. Buscar en `$SPECS_BASE/specs/releases/` **subdirectorios** cuyo nombre contenga el término (sin distinguir mayúsculas).
-2. Si hay exactamente 1 coincidencia → usar ese directorio y leer `release.md` dentro. Continuar a Fase 1.
+2. Si hay exactamente 1 coincidencia → usar ese directorio y leer `release.md` dentro. Continuar al Paso 2.
 3. Si hay más de 1 coincidencia → mostrar la lista y pedir al usuario que especifique cuál usar antes de continuar.
-4. Si no hay ninguna coincidencia → mostrar el mensaje de error y terminar:
+4. Si no hay ninguna coincidencia → mostrar el mensaje de error y terminar (ver Manejo de errores).
 
-```
-No se encontró el directorio de release: <término>
-
-Asegúrate de que el directorio existe en $SPECS_BASE/specs/releases/ y vuelve a intentarlo.
-```
-
-### Formato B — Ruta relativa completa al directorio o al archivo `release.md`
+#### Formato B — Ruta relativa completa al directorio o al archivo `release.md`
 
 **Señal:** el input contiene separadores de directorio (`/` o `\`) o empieza con `$SPECS_BASE/`.
 
-**Acción:** resolver la ruta al archivo `release.md` del directorio indicado. Si el archivo no existe, mostrar el mensaje de error y terminar:
-
-```
-No se encontró release.md en: <ruta>
-
-Asegúrate de que la ruta es correcta y vuelve a intentarlo.
-```
+**Acción:** resolver la ruta al archivo `release.md` del directorio indicado. Si el archivo no existe, mostrar el mensaje de error y terminar (ver Manejo de errores).
 
 **En ambos casos, si `release.md` no se encuentra: terminar inmediatamente sin generar ningún archivo de historia.**
 
 ---
 
-## Fase 1 — Leer el release y extraer features
+### Paso 2 — Leer el release y extraer features
 
-Leer el archivo de release resuelto en Fase 0.
+Leer el archivo de release resuelto en el Paso 1.
 
 Localizar la sección `## Features`. Solo analizar el contenido dentro de esa sección.
 
@@ -75,17 +127,11 @@ Para cada feature, capturar:
 - **Descripción**: el texto después del separador, si existe
 - **Estado**: `[ ]` (pendiente) o `[x]` (completada) — se procesan todas independientemente del estado
 
-**Si la sección `## Features` no existe o no contiene ninguna entrada**, mostrar el siguiente mensaje y terminar sin generar ningún archivo:
-
-```
-No se encontraron features en el archivo de release indicado.
-
-Asegúrate de que el archivo contiene una sección "## Features" con al menos una entrada de feature.
-```
+**Si la sección `## Features` no existe o no contiene ninguna entrada**: terminar sin generar ningún archivo (ver Manejo de errores).
 
 ---
 
-## Fase 2 — Preparar directorio de destino
+### Paso 3 — Preparar directorio de destino
 
 Verificar si el directorio `$SPECS_BASE/specs/stories/` existe.
 
@@ -93,11 +139,11 @@ Si no existe, crearlo antes de continuar.
 
 ---
 
-## Fase 3 — Generar archivos de historia
+### Paso 4 — Generar archivos de historia
 
-Para cada feature extraída en Fase 1, ejecutar los siguientes pasos:
+Para cada feature extraída en el Paso 2, ejecutar los siguientes sub-pasos:
 
-### 3a. Construir el nombre del directorio
+#### 4a. Construir el nombre del directorio
 
 Convertir el nombre de la feature a kebab-case siguiendo estas reglas:
 1. Convertir a minúsculas
@@ -112,7 +158,7 @@ Ruta del archivo de salida: `$SPECS_BASE/specs/stories/FEAT-[NNN]-[nombre-kebab]
 
 **Ejemplo:** `FEAT-029 — Generar stories` → directorio `FEAT-029-generar-stories/` con archivo `story.md`
 
-### 3b. Verificar existencia previa
+#### 4b. Verificar existencia previa
 
 Si ya existe el **directorio** `$SPECS_BASE/specs/stories/FEAT-[NNN]-[nombre-kebab]/`, informar al usuario:
 
@@ -123,21 +169,16 @@ El directorio $SPECS_BASE/specs/stories/FEAT-[NNN]-[nombre-kebab]/ ya existe.
 
 Esperar confirmación antes de continuar. Si el usuario responde `n` o `no`, saltar esta feature y continuar con la siguiente.
 
-### 3c. Verificar que el template existe:
+#### 4c. Verificar que el template existe
 
-El archivo de plantilla es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derréglelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
+El archivo de plantilla es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca hardcodear los nombres o la estructura de las secciones — siempre derivarlos del template en tiempo de ejecución. El template es de **solo lectura**.
 
-El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
+Leer el archivo `$SPECS_BASE/specs/templates/story-template.md`.
 
-Lee el archivo de plantilla `$SPECS_BASE/specs/templates/story-template.md`.
+- Si el archivo **no existe**: detener la ejecución (ver Manejo de errores).
+- Si el archivo **existe**: continuar.
 
-- Si el archivo **no existe**: informar al usuario y detener la ejecución:
-  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/story-template.md`.
-  > Por favor verifica que el archivo existe antes de continuar.
-
-- Si el archivo **existe**: continua.
-
-### 3d. Inferir el contenido de la historia
+#### 4d. Inferir el contenido de la historia
 
 Usando el nombre y la descripción de la feature, inferir:
 
@@ -153,29 +194,26 @@ Si la feature tiene descripción detallada, usarla para enriquecer los escenario
 
 Las secciones opcionales (`⚙️ Criterios no funcionales`, `📎 Notas`) se incluyen con placeholder `[Por completar]` si no hay datos suficientes.
 
-### 3e. Escribir el archivo de historia
+#### 4e. Escribir el archivo de historia
 
-Crear el directorio `$SPECS_BASE/specs/stories/FEAT-[NNN]-[nombre-kebab]/` si no existe, luego crear el archivo `story.md` dentro de ese directorio con la estructura del template `$SPECS_BASE/specs/templates/story-template.md`. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros en la estructura del template.
+Crear el directorio `$SPECS_BASE/specs/stories/FEAT-[NNN]-[nombre-kebab]/` si no existe, luego crear el archivo `story.md` dentro de ese directorio con la estructura del template `$SPECS_BASE/specs/templates/story-template.md`. Completar dinámicamente la estructura de la plantilla en tiempo de ejecución para asegurar flexibilidad ante cambios futuros.
 
 Al completar el frontmatter del archivo generado, usar:
 - `status: READY-FOR-IMPLEMENT` — estado inicial de toda historia generada desde un release planificado (pendiente de refinamiento)
 
-Si no encuentras el template generar el archivo con la siguiente estructura:
+Si no se puede leer el template, generar el archivo con la siguiente estructura de fallback:
 
 ```markdown
 ---
-alwaysApply: false
 type: story
 id: <FEAT-NNN>
 slug: <nombre-del-directorio-de-historia>
-title: "<primer # heading del documento o Nombre de la feature>"
+title: "<Nombre de la feature>"
 status: READY-FOR-IMPLEMENT
 substatus: IN‑PROGRESS
 parent: <EPIC-NN>
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>
-**FINVEST Score:** —
-**FINVEST Decisión:** —
 ---
 
 # Historia de Usuario
@@ -213,13 +251,11 @@ Entonces [mensaje de error o comportamiento alternativo]
 
 Generado automáticamente desde el release: [nombre del archivo de release]
 Feature origen: [ID] — [Nombre de la feature]
-
-Este es solo un ejemplo, recuerda que el archivo de plantilla es la guía a completar.
 ```
 
 ---
 
-## Fase 4 — Resumen
+### Paso 5 — Resumen
 
 Al terminar de procesar todas las features, mostrar un resumen en pantalla:
 
@@ -247,11 +283,19 @@ Si alguna feature no pudo procesarse por formato inesperado, listarla como:
 
 ---
 
-## Notas de implementación
+### Manejo de errores
 
-- El skill **no valida** la calidad FINVEST de las historias generadas — esa responsabilidad es de `/story-evaluation`.
-- El skill **no modifica** el archivo de release.
-- El skill procesa **todas** las features del release (pendientes y completadas).
-- Si dos features tienen el mismo ID (duplicado en el release), añadir sufijo `-bis` al segundo archivo (ej. `story-FEAT-029-nombre-bis.md`) e informar al usuario.
-- Las secciones opcionales siempre se incluyen con placeholder `[Por completar]` para facilitar la edición posterior.
-- El skill no realiza evaluación INVEST ni splitting — si una historia generada parece demasiado grande, sugerirlo en las notas pero no dividirla automáticamente.
+| Condición | Mensaje | Acción |
+|---|---|---|
+| Entorno inválido (preflight) | `✗ Entorno inválido` | Detener inmediatamente |
+| Release no encontrado (Formato A, sin coincidencias) | `No se encontró el directorio de release: <término>. Asegúrate de que el directorio existe en $SPECS_BASE/specs/releases/ y vuelve a intentarlo.` | Detener sin generar archivos |
+| Release no encontrado (Formato B, ruta inválida) | `No se encontró release.md en: <ruta>. Asegúrate de que la ruta es correcta y vuelve a intentarlo.` | Detener sin generar archivos |
+| Sección `## Features` vacía o ausente | `No se encontraron features en el archivo de release indicado.` | Mostrar orientación y detener |
+| Template `story-template.md` no encontrado | `❌ No se encontró el template requerido en $SPECS_BASE/specs/templates/story-template.md.` | Detener la ejecución |
+
+---
+
+## Salida
+
+- Directorios `$SPECS_BASE/specs/stories/FEAT-[NNN]-[nombre-kebab]/story.md` creados — uno por feature del release
+- Resumen con: historias generadas, historias saltadas (por conflicto), features con formato no reconocido
