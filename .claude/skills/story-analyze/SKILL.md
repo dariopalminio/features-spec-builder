@@ -8,17 +8,40 @@ description: >-
   Invocar también cuando el usuario mencione "analizar plan de historia", "coherencia de artefactos del plan de historia",
   "verificar alineación", "auditar historia", "story-analyze", "inconsistencias de diseño",
   "chequear story antes de implementar" o equivalentes.
-alwaysApply: false
-invocable: true
+triggers:
+  - "story-analyze"
+  - "analizar historia"
+  - "coherencia de artefactos"
+  - "verificar alineación"
+  - "auditar historia"
+  - "analizar plan de historia"
+  - "chequear story antes de implementar"
+  - "inconsistencias de diseño"
 ---
 
-# Skill: /story-analyze
+# Skill: `/story-analyze`
+
+## Objetivo
 
 Audita la coherencia entre los tres artefactos del trío SDD de una historia. Su propósito es **detectar desalineaciones antes de codificar**, reduciendo retrabajo en la fase de implementación.
 
 El skill nunca modifica los artefactos que analiza. Solo lee, correlaciona y genera un reporte de coherencia.
 
-## Posicionamiento
+**Qué hace este skill:**
+- Detecta criterios de aceptación sin cobertura en design.md
+- Detecta tareas en tasks.md sin elemento de diseño asociado
+- Detecta elementos de diseño sin tarea correspondiente
+- Detecta objetivos de la historia desalineados con el release padre
+- Valida el cumplimiento del DoD para la fase PLAN
+- Genera `analyze.md` con el reporte de coherencia y recomendaciones accionables
+- Actualiza el estado de `story.md` a `READY-FOR-IMPLEMENT/DONE` si no hay ERROREs
+
+**Qué NO hace este skill:**
+- Modificar ningún artefacto analizado (story.md, design.md, tasks.md)
+- Generar diseño, tareas ni historia nuevos
+- Corregir inconsistencias automáticamente
+
+### Posicionamiento
 
 ```
 [story.md: PLANNING/IN‑PROGRESS]  ← seteado por story-plan al inicio del pipeline
@@ -31,36 +54,73 @@ analyze.md → Check: coherencia entre los tres ← aquí (ejecutar después de 
 [story.md: READY-FOR-IMPLEMENT/DONE]    ← seteado por story-analyze si no hay ERROREs
 ```
 
-## Ciclo de vida de estados en este skill
+### Ciclo de vida de estados
 
 | Condición al finalizar | status | substatus |
-|------------------------|--------|-----------|
+|---|---|---|
 | Sin inconsistencias ERROR-level | `READY-FOR-IMPLEMENT` | `DONE` |
-| Con inconsistencias ERROR-level | `PLANN` | `IN‑PROGRESS` (sin cambio — dejar como está) |
+| Con inconsistencias ERROR-level | `PLANNING` | `IN‑PROGRESS` (sin cambio — dejar como está) |
 
 La actualización de estado ocurre tanto en modo manual como en modo Agent (invocado por `story-plan`).
 
-**El análisis detecta:**
-- Criterios de aceptación sin cobertura en design.md
-- Tareas en tasks.md sin elemento de diseño asociado
-- Elementos de diseño sin tarea correspondiente
-- Objetivos de la historia desalineados con el release padre
+---
 
-**El análisis NO hace:**
-- Modificar ningún artefacto analizado
-- Generar diseño, tareas ni historia nuevos
-- Corregir inconsistencias automáticamente
+## Entrada
+
+- `story.md` — historia con criterios de aceptación numerados AC-1…AC-N (obligatorio)
+- `design.md` — diseño técnico con componentes, interfaces y decisiones (obligatorio)
+- `tasks.md` — plan de tareas de implementación (obligatorio)
+- `$SPECS_BASE/policies/definition-of-done-story.md` — criterios DoD fase PLAN (opcional)
+- `$SPECS_BASE/specs/releases/{parent}-*/release.md` — release padre para verificar alineación (opcional)
+- Template del reporte: `$SPECS_BASE/specs/templates/analyze-report-template.md` (opcional, hay fallback interno)
 
 ---
 
-## Modos de Ejecución
+## Parámetros
 
-- **Modo manual** (`/story-analyze {story_id}`): interactivo, muestra resumen y pide confirmación
-- **Modo Agent** (invocado por orquestador): automático, guarda directamente sin confirmación y reporta al orquestador
+- `{story_id}` — identificador de la historia (ej. `FEAT-059`)
+- `{story_path}` — ruta explícita al directorio de la historia (opcional)
+- `--output {path}` — ruta de salida del reporte (opcional)
 
 ---
 
-## Paso 0 — Verificar entorno (`skill-preflight`)
+## Precondiciones
+
+- El directorio de la historia existe bajo `$SPECS_BASE/specs/stories/`
+- `story.md` existe en el directorio de la historia
+- `design.md` existe en el directorio de la historia (requiere haber ejecutado `/story-design`)
+- `tasks.md` existe en el directorio de la historia (requiere haber ejecutado `/story-tasking`)
+- `skill-preflight` retorna estado OK (entorno válido)
+
+---
+
+## Dependencias
+
+- Skills: [`skill-preflight`]
+- Herramientas: ninguna externa requerida
+
+---
+
+## Modos de ejecución
+
+- **Manual**: `/story-analyze {story_id}` — interactivo, muestra resumen y pide confirmación
+- **Automático**: invocado por orquestador — guarda directamente sin confirmación y reporta al orquestador
+
+---
+
+## Restricciones / Reglas
+
+- El skill nunca modifica los artefactos que analiza — es estrictamente de solo lectura sobre story.md, design.md y tasks.md
+- Sin los tres artefactos obligatorios (story, design, tasks) la ejecución se detiene
+- Los hallazgos de tipo ERROR (TIPO A, B o E) bloquean la transición a `READY-FOR-IMPLEMENT`
+- Ante incertidumbre en la evaluación DoD, usar `⚠️` en lugar de `❌` (regla de duda — no bloquear indebidamente)
+- El reporte debe referenciar secciones y líneas específicas de los archivos afectados — no se admiten mensajes genéricos
+
+---
+
+## Flujo de ejecución
+
+### Paso 0 — Verificar entorno (`skill-preflight`)
 
 Invocar el skill `skill-preflight` antes de cualquier operación.
 
@@ -72,13 +132,9 @@ Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los 
 
 ---
 
-## Paso 1 — Resolver Parámetros de Entrada
+### Paso 1 — Resolver parámetros de entrada
 
-### 1a. Argumentos aceptados
-
-- `{story_id}` — identificador de la historia (ej. `FEAT-059`)
-- `{story_path}` — ruta explícita al directorio de la historia (opcional)
-- `--output {path}` — ruta de salida del reporte (opcional)
+#### 1a. Resolución del story_id
 
 Si no se proporcionó ningún argumento, preguntar:
 ```
@@ -86,47 +142,13 @@ Si no se proporcionó ningún argumento, preguntar:
 Proporciona el ID (ej. FEAT-059) o la ruta completa al directorio.
 ```
 
-### 1b. Resolución del directorio de la historia
+#### 1b. Resolución del directorio de la historia
 
 1. Ruta explícita `{story_path}` si se proporcionó
 2. Glob `$SPECS_BASE/specs/stories/{story_id}-*/` — directorio cuyo nombre comienza con el ID
-3. Si no se encuentra ninguno: notificar y detener
-   ```
-   ❌ No se encontró la historia {story_id} bajo $SPECS_BASE/specs/stories/
+3. Si no se encuentra: notificar y detener (ver sección Manejo de errores)
 
-   Verifica el ID o ejecuta /release-generate-stories para generar la historia.
-   ```
-
-### 1c. Verificación de story.md (obligatoria)
-
-Verificar que el directorio resuelto contiene `story.md`. Si no existe, detener:
-```
-❌ No se encontró story.md en: <ruta>
-
-Sugerencia: ejecuta /release-generate-stories para generar la historia primero.
-```
-
-### 1d. Verificación de design.md (obligatoria)
-
-Verificar que el directorio resuelto contiene `design.md`. Si no existe, detener:
-```
-❌ No se encontró design.md en: <ruta>
-
-El análisis de coherencia requiere el diseño técnico de la historia.
-Sugerencia: ejecuta /story-design {story_id} para generar el diseño primero.
-```
-
-### 1e. Verificación de tasks.md (obligatoria)
-
-Verificar que el directorio resuelto contiene `tasks.md`. Si no existe, detener:
-```
-❌ No se encontró tasks.md en: <ruta>
-
-El análisis de coherencia requiere el plan de tareas de la historia.
-Sugerencia: ejecuta /story-tasking {story_id} para generar las tareas primero.
-```
-
-### 1f. Resolución de la ruta de salida
+#### 1c. Resolución de la ruta de salida
 
 1. Ruta explícita `--output {path}` si se proporcionó
 2. `{directorio_historia}/analyze.md`
@@ -141,30 +163,23 @@ El archivo analyze.md ya existe en: <ruta>
 - `n` / `no modificar`: informar que se saltó y terminar
 - `r` / `regenerar`: continuar
 
-### 1g. Cargar criterios DoD — Fase PLAN
+#### 1d. Cargar criterios DoD — Fase PLAN
 
 Intentar localizar `$SPECS_BASE/policies/definition-of-done-story.md`.
 
 **Si el archivo no existe:**
 - Emitir: `⚠️ definition-of-done-story.md no encontrado — se omitirá la validación DoD PLAN`
 - Registrar internamente: `$DOD_PLAN_CRITERIA = []`
-- Continuar con el Paso 2 (no detener la ejecución)
+- Continuar (no detener la ejecución)
 
 **Si el archivo existe:**
-- Buscar el primer encabezado h3 (`###`) cuyo texto contenga, case-insensitive, alguno de los términos: `PLAN`, `PLANNING`, `PLANIFICACIÓN`
-- Registrar en el log qué encabezado fue encontrado (ej. `⚠️ Buscando sección PLAN en DoD...`)
-- **Si no hay coincidencia:**
-  - Emitir: `⚠️ Sección PLAN no encontrada en DoD — se omitirá la validación DoD PLAN`
-  - Registrar: `$DOD_PLAN_CRITERIA = []`
-  - Continuar con el Paso 2
-- **Si se encontró la sección:**
-  - Extraer todas las líneas de checkbox (`- [ ] <texto>` y `- [x] <texto>`) dentro de esa sección como lista de criterios planos
-  - Registrar internamente: `$DOD_PLAN_CRITERIA = [<criterio_1>, <criterio_2>, ...]`
-  - Emitir: `✓ DoD PLAN cargado: <N> criterios encontrados`
+- Buscar el primer encabezado `###` cuyo texto contenga, case-insensitive, alguno de: `PLAN`, `PLANNING`, `PLANIFICACIÓN`
+- **Si no hay coincidencia:** emitir `⚠️ Sección PLAN no encontrada en DoD — se omitirá la validación DoD PLAN`; registrar `$DOD_PLAN_CRITERIA = []`
+- **Si se encontró:** extraer todas las líneas de checkbox (`- [ ]` y `- [x]`) como lista de criterios planos; registrar `$DOD_PLAN_CRITERIA`; emitir `✓ DoD PLAN cargado: <N> criterios encontrados`
 
 ---
 
-## Paso 2 — Leer story.md y Extraer Requisitos
+### Paso 2 — Leer story.md y extraer requisitos
 
 Leer `story.md` del directorio resuelto.
 
@@ -184,7 +199,7 @@ AC-2: <descripción>
 
 ---
 
-## Paso 3 — Leer design.md y Extraer Elementos de Diseño
+### Paso 3 — Leer design.md y extraer elementos de diseño
 
 Leer `design.md` del directorio resuelto.
 
@@ -204,11 +219,11 @@ Para detectar cobertura buscar:
 1. Referencias explícitas `// satisface: AC-{n}` o `AC-{n}` junto a un componente/interfaz
 2. Mención del nombre del AC o su concepto clave en la sección de componentes
 
-Si el design.md no tiene anotaciones `satisface: AC-N`, realizar matching semántico: buscar si los conceptos clave del AC aparecen en los componentes y decisiones de diseño.
+Si design.md no tiene anotaciones `satisface: AC-N`, realizar matching semántico: buscar si los conceptos clave del AC aparecen en los componentes y decisiones de diseño.
 
 ---
 
-## Paso 4 — Leer tasks.md y Extraer Tareas
+### Paso 4 — Leer tasks.md y extraer tareas
 
 Leer `tasks.md` del directorio resuelto.
 
@@ -223,9 +238,9 @@ Construir la tabla interna de alineación tarea-diseño:
 
 ---
 
-## Paso 5 — Verificar Alineación con el Release Padre (si existe)
+### Paso 5 — Verificar alineación con el release padre
 
-### 5a. Localizar el release padre
+#### 5a. Localizar el release padre
 
 Buscar el ID del release en el frontmatter `parent:` de story.md (ej. `EPIC-12-story-sdd-workflow`).
 
@@ -237,14 +252,14 @@ Si no existe: emitir advertencia y continuar sin verificación de release:
    La verificación de alineación con el release se omitirá.
 ```
 
-### 5b. Leer objetivos del release
+#### 5b. Leer objetivos del release
 
-Si el release.md existe, extraer:
+Si release.md existe, extraer:
 - Objetivos del release / descripción del épica
 - Lista de features incluidas (buscar la feature correspondiente a la historia analizada)
 - Restricciones o criterios del release
 
-### 5c. Verificar alineación
+#### 5c. Verificar alineación
 
 Comparar:
 - ¿El objetivo de la historia ("Para ..." del user story) está alineado con los objetivos del release?
@@ -261,11 +276,11 @@ Release alineado: ✓ / ❌
 
 ---
 
-## Paso 6 — Correlacionar y Detectar Inconsistencias
+### Paso 6 — Correlacionar y detectar inconsistencias
 
-Con los datos de los Pasos 2-5, ejecutar las siguientes correlaciones:
+Con los datos de los Pasos 2–5, ejecutar las siguientes correlaciones:
 
-### Correlación 1 — Cobertura de ACs en design.md
+#### Correlación 1 — Cobertura de ACs en design.md
 
 Para cada AC de story.md:
 - ✓ **Cubierto**: existe al menos un componente, interfaz o decisión en design.md que lo referencia o cubre semánticamente
@@ -273,7 +288,7 @@ Para cada AC de story.md:
 
 Registrar ACs sin cobertura como inconsistencia **TIPO A**.
 
-### Correlación 2 — Tareas sin diseño asociado
+#### Correlación 2 — Tareas sin diseño asociado
 
 Para cada tarea de tasks.md:
 - ✓ **Con diseño**: su descripción o grupo corresponde a un componente/interfaz del diseño
@@ -281,7 +296,7 @@ Para cada tarea de tasks.md:
 
 Registrar tareas sin diseño como inconsistencia **TIPO B**.
 
-### Correlación 3 — Elementos de diseño sin tarea
+#### Correlación 3 — Elementos de diseño sin tarea
 
 Para cada componente e interfaz de design.md:
 - ✓ **Con tarea**: existe al menos una tarea que lo implementa
@@ -289,34 +304,26 @@ Para cada componente e interfaz de design.md:
 
 Registrar elementos sin tarea como inconsistencia **TIPO C** (advertencia, no error).
 
-### Correlación 4 — Alineación con release
+#### Correlación 4 — Alineación con release
 
-Si la verificación del release encontró desalineaciones:
-- Registrar como inconsistencia **TIPO D**.
+Si la verificación del release encontró desalineaciones, registrar como inconsistencia **TIPO D**.
 
-### Correlación 5 — Cumplimiento DoD PLAN
+#### Correlación 5 — Cumplimiento DoD PLAN
 
-**Si `$DOD_PLAN_CRITERIA` está vacío** (sección no encontrada o archivo ausente):
+**Si `$DOD_PLAN_CRITERIA` está vacío:**
 - Registrar esta correlación como: `⚠️ No evaluada — DoD PLAN no disponible`
 - No añadir ningún hallazgo de tipo E al reporte
 
 **Si `$DOD_PLAN_CRITERIA` tiene criterios:**
 
-Para cada criterio en `$DOD_PLAN_CRITERIA`, evaluar semánticamente contra el contenido combinado de `story.md`, `design.md` y `tasks.md`:
+Para cada criterio, evaluar semánticamente contra el contenido combinado de story.md, design.md y tasks.md:
 - `✓` — evidencia clara de cumplimiento presente en los artefactos
-- `❌` — evidencia clara de incumplimiento presente → clasificar como **ERROR** (TIPO E)
-- `⚠️` — evidencia insuficiente o criterio no evaluable desde los artefactos disponibles → clasificar como **WARNING**
-
-**Regla de duda:** ante incertidumbre, usar `⚠️` en lugar de `❌` para no bloquear indebidamente.
-
-Construir tabla interna de resultados DoD:
-```
-criterio | resultado (✓/❌/⚠️) | severidad (ERROR/WARNING/—) | evidencia breve
-```
+- `❌` — evidencia clara de incumplimiento → clasificar como **ERROR** (TIPO E)
+- `⚠️` — evidencia insuficiente o criterio no evaluable → clasificar como **WARNING**
 
 Registrar internamente: `$DOD_ERROR_COUNT` = número de criterios con resultado `❌`.
 
-### Clasificación de severidad
+#### Clasificación de severidad
 
 | Tipo | Descripción | Severidad |
 |---|---|---|
@@ -328,12 +335,12 @@ Registrar internamente: `$DOD_ERROR_COUNT` = número de criterios con resultado 
 
 ---
 
-## Paso 7 — Leer el Template en Tiempo de Ejecución
+### Paso 7 — Leer el template en tiempo de ejecución
 
 Intentar localizar el template del reporte en este orden:
 1. `$SPECS_BASE/specs/templates/analyze-report-template.md`
 2. `assets/analyze-report-template.md` (relativo al directorio del skill)
-3. Template de fallback interno (definido al final de este skill)
+3. Template de fallback interno (definido en la sección `## Salida`)
 
 Informar qué template se está usando:
 ```
@@ -342,7 +349,7 @@ Informar qué template se está usando:
 
 ---
 
-## Paso 8 — Generar el Reporte
+### Paso 8 — Generar el reporte
 
 Usar la estructura del template del Paso 7 como base.
 
@@ -357,36 +364,32 @@ design: <FEAT-NNN>
 tasks: <FEAT-NNN>
 created: <YYYY-MM-DD>
 updated: <YYYY-MM-DD>
-related:                              
+related:
   - <slug-historia>
 ```
 
 Completar el reporte con los resultados de la correlación del Paso 6:
 
-- **Resumen ejecutivo**: estado general (✓ Coherente / ⚠️ Advertencias / ❌ Inconsistencias). Completar la fila `Cumplimiento DoD — Fase PLAN` con `{dod_status}` = ✓ / ⚠️ / ❌ según los resultados de Correlación 5, y `{dod_n}/{dod_total}` con el conteo de criterios ✓. Si `$DOD_PLAN_CRITERIA` estuvo vacío, usar `{dod_status}` = `⚠️` y `{dod_n}/{dod_total}` = `—`.
+- **Resumen ejecutivo**: estado general (✓ Coherente / ⚠️ Advertencias / ❌ Inconsistencias). Completar la fila `Cumplimiento DoD — Fase PLAN` con `{dod_status}` = ✓ / ⚠️ / ❌ según los resultados de Correlación 5, y `{dod_n}/{dod_total}` con el conteo de criterios ✓. Si `$DOD_PLAN_CRITERIA` estuvo vacío, usar `{dod_status}` = `⚠️` y `{dod_n}/{dod_total}` = `—`
 - **Tabla de cobertura de ACs**: cada AC + estado + elemento de diseño que lo cubre
 - **Tabla de alineación tareas ↔ diseño**: cada tarea + estado + justificación
 - **Tabla de cobertura diseño → tareas**: cada componente/interfaz + estado
 - **Alineación con release**: estado + detalles
 - **Inconsistencias detectadas**: lista numerada con tipo, descripción, archivo afectado, sección específica
 - **Recomendaciones**: para cada inconsistencia, una acción concreta
-- **Sección "Cumplimiento DoD — Fase PLAN"**: completar usando los resultados de la tabla interna de Correlación 5:
-  - Si `$DOD_PLAN_CRITERIA` estuvo vacío: mostrar `⚠️ DoD PLAN no encontrado — se omitió la validación. Verifica que $SPECS_BASE/policies/definition-of-done-story.md contiene una sección con el término "PLAN".`
-  - Si hay criterios: completar la tabla `| Criterio DoD | Estado | Severidad | Evidencia |` con una fila por criterio evaluado en Correlación 5
-
-**Regla crítica**: el reporte referencia secciones y líneas específicas de los archivos afectados para cada inconsistencia. No se admiten mensajes genéricos del tipo "el diseño no cubre este AC" sin indicar qué sección del diseño debería cubrirlo.
+- **Sección "Cumplimiento DoD — Fase PLAN"**: si `$DOD_PLAN_CRITERIA` estuvo vacío, mostrar aviso de omisión; si hay criterios, completar la tabla con una fila por criterio evaluado en Correlación 5
 
 ---
 
-## Paso 9 — Guardar el Reporte y Actualizar Estado de la Historia
+### Paso 9 — Guardar el reporte y actualizar estado de la historia
 
 Guardar el reporte en la ruta resuelta en el Paso 1.
 
 Si el directorio no existe, crearlo.
 
-### 9a. Actualizar frontmatter de story.md
+#### 9a. Actualizar frontmatter de story.md
 
-Después de guardar `analyze.md`, evaluar si hay inconsistencias de tipo ERROR (TIPO A, TIPO B o TIPO E de la correlación del Paso 6):
+Después de guardar `analyze.md`, evaluar si hay inconsistencias de tipo ERROR (TIPO A, B o E):
 
 **Si no hay ERROREs (solo WARNINGs o todo OK):**
 - Actualizar el frontmatter de `story.md`: `status: READY-FOR-IMPLEMENT` / `substatus: DONE`
@@ -394,13 +397,12 @@ Después de guardar `analyze.md`, evaluar si hay inconsistencias de tipo ERROR (
 
 **Si hay ERROREs (inconsistencias bloqueantes — TIPO A, B o E):**
 - NO actualizar el frontmatter de `story.md`
-- El estado permanece en `PLAN/IN‑PROGRESS` (o el que tuviera antes)
+- El estado permanece en `PLANNING/IN‑PROGRESS` (o el que tuviera antes)
 - Registrar internamente: `Estado story.md: PLANNING/IN‑PROGRESS (no actualizado — hay ERROREs)`
-- Si hay DoD-ERRORs (TIPO E): registrar adicionalmente: `DoD PLAN: <$DOD_ERROR_COUNT> criterios ❌ — transición bloqueada`
 
 ---
 
-## Paso 10 — Confirmación Interactiva (solo modo manual)
+### Paso 10 — Confirmación interactiva (solo modo manual)
 
 Mostrar al usuario:
 
@@ -430,9 +432,6 @@ Si hay ERROREs:
    Corrige los ERROREs en design.md o tasks.md antes de comenzar la implementación.
    Sugerencias en: <ruta>/analyze.md → sección "Recomendaciones"
 
-   DoD PLAN: <$DOD_ERROR_COUNT> criterios ❌ — revisar artefactos de planning
-   (omitir esta línea si $DOD_ERROR_COUNT = 0)
-
    Estado story.md: PLANNING/IN‑PROGRESS (no se actualizó a READY-FOR-IMPLEMENT — hay ERROREs)
 ```
 
@@ -444,7 +443,30 @@ Si solo hay WARNINGs o está todo OK:
 
 ---
 
-## Template de Fallback
+### Manejo de errores
+
+| Condición | Mensaje | Acción |
+|---|---|---|
+| Historia no encontrada | `❌ No se encontró la historia {story_id} bajo $SPECS_BASE/specs/stories/` | Detener. Sugerir `/release-generate-stories` |
+| `story.md` ausente | `❌ No se encontró story.md en: <ruta>` | Detener. Sugerir `/release-generate-stories` |
+| `design.md` ausente | `❌ No se encontró design.md en: <ruta>` | Detener. Sugerir `/story-design {story_id}` |
+| `tasks.md` ausente | `❌ No se encontró tasks.md en: <ruta>` | Detener. Sugerir `/story-tasking {story_id}` |
+| Entorno inválido (preflight) | `✗ Entorno inválido` | Detener inmediatamente. No generar archivos |
+| `definition-of-done-story.md` ausente | `⚠️ definition-of-done-story.md no encontrado` | Advertir y continuar sin validación DoD |
+| Sección PLAN no encontrada en DoD | `⚠️ Sección PLAN no encontrada en DoD` | Advertir y continuar sin validación DoD |
+| Release padre no encontrado | `⚠️ No se encontró release.md para: <parent>` | Advertir y continuar sin verificación de release |
+| Template no encontrado | — | Usar template de fallback interno. Informar al usuario |
+
+---
+
+## Salida
+
+- `{directorio_historia}/analyze.md` — reporte de coherencia entre story.md, design.md y tasks.md
+- Estado del workitem actualizado en `story.md`:
+  - `READY-FOR-IMPLEMENT / DONE` si no hay ERROREs
+  - Sin cambio si hay ERROREs bloqueantes
+
+### Template de Fallback
 
 Usar solo si no se encontró ningún template externo en el Paso 7:
 
@@ -519,7 +541,7 @@ updated: {date}
 
 ### INC-001 [ERROR / WARNING]
 
-- **Tipo:** A / B / C / D
+- **Tipo:** A / B / C / D / E
 - **Descripción:** {description}
 - **Archivo afectado:** {file} — sección "{section}"
 - **Acción requerida:** {action}

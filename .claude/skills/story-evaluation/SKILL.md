@@ -1,103 +1,96 @@
 ---
 name: story-evaluation
-description: "Evalúa la calidad de una historia de usuario aplicando la rúbrica FINVEST (Formato + INVEST) con escala Likert 1–5. Produce un score por dimensión, score global, decisión (APROBADA / REFINAR / RECHAZAR) y recomendaciones accionables."
----
-# Skill: /story-evaluation
-
-Evalúa la calidad de una historia de usuario aplicando la rúbrica **FINVEST** (Format + INVEST) con escala Likert 1–5. Produce un score por dimensión, score global, decisión (APROBADA / REFINAR / RECHAZAR / DIVIDIR) y recomendaciones accionables.
-
-**Cuándo usar este skill:**
-- Antes de llevar una historia de usuario a sprint planning
-- Durante sesiones de backlog grooming o backlog refinement
-- Para comparar la madurez de un conjunto de historias
-
+description: "Evalúa la calidad de una historia de usuario aplicando la rúbrica FINVEST (Formato + INVEST) con escala Likert 1–5. Produce un score por dimensión, score global, decisión (APROBADA / REFINAR / RECHAZAR / DIVIDIR) y recomendaciones accionables."
+triggers:
+  - "story-evaluation"
+  - "evaluar historia"
+  - "FINVEST"
+  - "calidad de historia"
+  - "score historia"
+  - "revisar historia de usuario"
 ---
 
-## Modos de Ejecución
+# Skill: `/story-evaluation`
+
+## Objetivo
+
+Evalúa la calidad de una historia de usuario aplicando la rúbrica **FINVEST** (Formato + INVEST) con escala Likert 1–5. Produce un score por dimensión, score global, decisión (APROBADA / REFINAR / RECHAZAR / DIVIDIR) y recomendaciones accionables.
+
+**Qué hace este skill:**
+- Evalúa el formato de la historia contra el template canónico `story-template.md` (dimensión F)
+- Aplica las 6 dimensiones INVEST con rúbricas Likert 1–5
+- Calcula F_score, INVEST_Score y FINVEST_Score
+- Emite una decisión (APROBADA / REFINAR / RECHAZAR / DIVIDIR) con recomendaciones accionables
+- Si la decisión es `APROBADA` y el input fue una ruta de archivo, actualiza el frontmatter de `story.md` con `status: SPECIFYING` / `substatus: DONE`
+
+**Qué NO hace este skill:**
+- Generar diseño, tasks ni artefactos de planning
+- Corregir o reescribir la historia automáticamente
+- Crear archivos nuevos en `$SPECS_BASE/specs/`
+
+---
+
+## Entrada
+
+- Texto libre de historia de usuario
+- Identificador `FEAT-NNN` de una historia existente en `$SPECS_BASE/specs/stories/`
+- Ruta de archivo `story.md`
+
+---
+
+## Parámetros
+
+- `{story ID}` — texto libre, ID (ej. `FEAT-057`) o ruta de archivo de la historia a evaluar (obligatorio)
+
+---
+
+## Precondiciones
+
+- Si el input es una ruta de archivo: el archivo debe existir y ser legible
+- El template `$SPECS_BASE/specs/templates/story-template.md` debe existir (requerido para evaluar la dimensión F)
+
+---
+
+## Dependencias
+
+- Skills: ninguno
+- Archivos: [`$SPECS_BASE/specs/templates/story-template.md`], [`assets/evaluation-output-template.md`]
+
+---
+
+## Modos de ejecución
 
 - **Modo manual** (`/story-evaluation`): el usuario proporciona el texto, identificador o ruta de la historia; el skill muestra el reporte completo con scores, decisión y recomendaciones
-- **Modo Agent** (invocado por `story-refine` u orquestador): automático, recibe la historia como contexto, retorna la decisión (`APROBADA` / `REFINAR` / `RECHAZAR` / `DIVIDIR`) y el reporte para que el orquestador actualice el estado de `story.md`
+- **Modo Agent** (invocado por `story-refine` u orquestador): automático, recibe la historia como contexto, retorna la decisión y el reporte; si la decisión es `APROBADA` y el input fue una ruta de archivo, actualiza el frontmatter de `story.md` directamente
 
 ---
 
-## Restricciones de entrada
+## Restricciones / Reglas
 
-**Imágenes adjuntas:** Si el input incluye imágenes adjuntas (wireframes, screenshots u otros archivos binarios de imagen), **ignóralas completamente**. No intentes procesarlas, interpretarlas ni extraer información de ellas. Evalúa únicamente el contenido en texto (Markdown) de la historia de usuario.
-
-Si el usuario adjunta solo una imagen sin proporcionar texto de historia de usuario, responde indicando que el skill requiere el texto de la historia para poder evaluar.
-
----
-
-> **Nota preflight:** Este skill evalúa historias proporcionadas como input y no escribe artefactos en `$SPECS_BASE/specs/`. No es necesario invocar `skill-preflight` — `SDDF_ROOT` y `SPECS_BASE` no aplican a su flujo de ejecución.
-
----
-### Formato de referencia y fuente de la verdad
-
-### A. Verificar que el template existe y leerlo
-
-El archivo de plantilla (template canónico) es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derréglelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
-
-El archivo de plantilla (template canónico) es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
-
-Lee el archivo de plantilla (template canónico) `$SPECS_BASE/specs/templates/story-template.md`.
-
-- Si el archivo **no existe**: informar al usuario y detener la ejecución:
-
-  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/story-template.md`.
-  > Por favor verifica que el archivo existe antes de continuar.
-
-- Si el archivo **existe**: continua con lo siguiente.
-
-### B. Formato de referencia
-
-La dimensión **F (Formato)** evalúa qué tan cerca está la historia del archivo de plantilla (template canónico) definido y leido anteriormente:
-
-Por ejemplo:
-
-```markdown
-## 📖 Historia
-**Como** {rol}  
-**Quiero** {acción}  
-**Para** {beneficio}
-
-## ✅ Criterios de aceptación
-
-### Escenario principal – {título}
-Dado {contexto}
-  Y {condición adicional}
-Cuando {acción}
-Entonces {resultado}
-  Y {otro resultado}
-
-### Escenario alternativo / error – {título}
-Dado {contexto}
-Cuando {acción inválida}
-Entonces {error o comportamiento alternativo}
-  Pero {excepción}
-
-### Escenario con datos (Scenario Outline) – opcional
-Escenario: {título}
-  Dado que el usuario tiene el rol "<rol>"
-Ejemplos:
-  | col1 | col2 |
-  | val1 | val2 |
-
-### Requerimiento (opcional)
-{Requerimiento específico (como regla de negocio) relacionado con la historia, si aplica}
-
-## ⚙️ Criterios no funcionales (opcional)
-## 📎 Notas / contexto adicional (opcional)
-
-Este es solo un ejemplo, recuerda que el archivo de plantilla (template canónico) es la guía a evaluar como formato.
-```
-
-Una historia que no usa la plantilla story-template.md (o este template) puede igual ser evaluada, pero obtendrá scores más bajos en F en función de cuánto se aleja de esta estructura.
+1. Este skill no invoca `skill-preflight` — evalúa el input proporcionado sin generar artefactos en `$SPECS_BASE/specs/`. **Excepción:** si el input fue una ruta de archivo y la decisión es `APROBADA`, actualiza únicamente los campos `status` y `substatus` del frontmatter de ese archivo.
+2. El template `story-template.md` es de solo lectura — nunca escribir en él ni usarlo como ruta de salida.
+3. Si `F_score < 2.5`, no evaluar dimensiones INVEST — emitir `RECHAZAR` directamente por formato insuficiente.
+4. **Imágenes adjuntas:** si el input incluye imágenes adjuntas (wireframes, screenshots u otros archivos binarios de imagen), ignorarlas completamente. Evaluar únicamente el contenido en texto (Markdown) de la historia de usuario. Si el usuario adjunta solo una imagen sin texto de historia, indicar que el skill requiere texto para evaluar.
+5. Responder siempre en el mismo idioma que la historia de entrada.
 
 ---
 
-## Algoritmo de Evaluación FINVEST
+## Flujo de ejecución
 
-### FASE 1: Evaluar F (Formato) — Gateway
+### Paso 1 — Leer template canónico
+
+El archivo `$SPECS_BASE/specs/templates/story-template.md` es la **única fuente de información estructural** para la dimensión F. Define qué secciones existen, en qué orden y con qué propósito. Nunca hardcodear los nombres o la estructura de las secciones — siempre derivarlos del template en tiempo de ejecución. El template es de **solo lectura**.
+
+Leer el archivo `$SPECS_BASE/specs/templates/story-template.md`.
+
+- Si el archivo **no existe**: detener la ejecución (ver Manejo de errores).
+- Si el archivo **existe**: continuar al Paso 2.
+
+La dimensión **F (Formato)** evalúa qué tan cerca está la historia de este template. Una historia que no sigue el template puede igualmente evaluarse, pero obtendrá scores más bajos en F en función de cuánto se aleja de la estructura definida.
+
+---
+
+### Paso 2 — Evaluar F (Formato) — Gateway
 
 Evaluar tres componentes de forma independiente en escala 0–5, luego calcular el F_score ponderado:
 
@@ -107,13 +100,13 @@ F_score = (puntaje_historia × 0.4) + (puntaje_criterios × 0.3) + (puntaje_gher
 
 **Si F_score < 2.5 → RECHAZAR sin evaluar INVEST. Indicar el motivo y recomendaciones de formato.**
 
-**Si F_score ≥ 2.5 → Continuar con FASE 2.**
+**Si F_score ≥ 2.5 → Continuar con el Paso 3.**
 
 ---
 
-### FASE 2: Evaluar dimensiones INVEST (solo si F_score ≥ 2.5)
+### Paso 3 — Evaluar dimensiones INVEST
 
-Asignar un score 1–5 a cada dimensión usando las rúbricas de esta sección.
+Asignar un score 1–5 a cada dimensión usando las rúbricas de referencia al final de este flujo.
 
 ```
 INVEST_Score = (I + N + V + E + S + T) / 6
@@ -122,11 +115,11 @@ FINVEST_Score = (F_score + INVEST_Score) / 2
 
 **Reglas críticas:**
 1. Si la dimensión S – Small (Tamaño) es 1 → Decisión automática **DIVIDIR**, independientemente del score total — Tamaño muy grande para una historia única.
-2. Si cualquier dimensión INVE-T (cualquier dimensión INVEST excepto S) tiene score = 1 → Decisión automática **RECHAZAR**, independientemente del score total.
+2. Si cualquier dimensión INVEST (excepto S) tiene score = 1 → Decisión automática **RECHAZAR**, independientemente del score total.
 
 ---
 
-### Tabla de decisión final
+### Paso 4 — Aplicar tabla de decisión
 
 | Condición | Decisión |
 |-----------|----------|
@@ -139,11 +132,39 @@ FINVEST_Score = (F_score + INVEST_Score) / 2
 
 ---
 
-## Rúbricas Likert (1–5)
+### Paso 5 — Generar output
 
-### F – Formato (3 componentes ponderados, basados en `story-template.md`)
+1. Usar la estructura del template en `assets/evaluation-output-template.md`.
+2. Calcular F_score con dos decimales de precisión.
+3. Si F_score < 2.5, detenerse en el Paso 2 y no calcular INVEST.
+4. Para cada dimensión con score ≤ 3, incluir al menos 1 recomendación concreta y accionable en la sección "Comentarios".
+5. Marcar con ⚠️ las dimensiones con score = 1 (críticas).
+6. Si la historia no sigue el formato del template, indicar qué secciones faltan o están incorrectas y mostrar el fragmento del template correspondiente como guía.
+7. Responder en el mismo idioma que la historia de entrada.
 
-#### Componente 1: Sección Historia `## 📖 Historia` con `Como/Quiero/Para` (peso 40%)
+---
+
+### Paso 6 — Actualizar frontmatter si APROBADA
+
+**Condición:** decisión = `APROBADA` Y el input fue proporcionado como ruta de archivo (no como texto libre) o ID de story (ubicada en un archivo).
+
+1. Verificar que el archivo existe en la ruta proporcionada o con el `{story ID}` proporcionado.
+2. Actualizar únicamente los campos `status` y `substatus` en el frontmatter YAML del archivo:
+   - `status: SPECIFYING`
+   - `substatus: DONE`
+3. Si los campos no existen en el frontmatter, agregarlos.
+4. No modificar ningún otro campo del frontmatter ni el cuerpo del archivo.
+5. Confirmar en el output: `✓ Frontmatter actualizado: status: SPECIFYING / substatus: DONE`
+6. Si el archivo no es accesible o no tiene frontmatter YAML válido, emitir advertencia y continuar sin bloquear:
+   `⚠️ No se pudo actualizar el frontmatter de: <ruta> — verifica permisos y formato`
+
+---
+
+### Rúbricas de referencia (F, I, N, V, E, S, T)
+
+#### F – Formato (3 componentes ponderados, basados en `story-template.md`)
+
+##### Componente 1: Sección Historia `## 📖 Historia` con `Como/Quiero/Para` (peso 40%)
 
 | Score | Criterio |
 |:---:|---|
@@ -154,7 +175,7 @@ FINVEST_Score = (F_score + INVEST_Score) / 2
 | 1 | Las cláusulas presentes son semánticamente vacías (ej. "Como usuario, Quiero login, Para entrar") |
 | 0 | Sin intento de formato historia de usuario |
 
-#### Componente 2: Sección `## ✅ Criterios de aceptación` con escenarios nombrados (peso 30%)
+##### Componente 2: Sección `## ✅ Criterios de aceptación` con escenarios nombrados (peso 30%)
 
 | Score | Criterio |
 |:---:|---|
@@ -165,7 +186,7 @@ FINVEST_Score = (F_score + INVEST_Score) / 2
 | 1 | Criterios presentes pero completamente vagos o inchequeables (ej. "que funcione bien") |
 | 0 | Sin criterios de aceptación |
 
-#### Componente 3: Escenarios Gherkin en bloques ` ```gherkin ` (peso 30%)
+##### Componente 3: Escenarios Gherkin en bloques ` ```gherkin ` (peso 30%)
 
 | Score | Criterio |
 |:---:|---|
@@ -178,7 +199,7 @@ FINVEST_Score = (F_score + INVEST_Score) / 2
 
 ---
 
-### I – Independencia
+#### I – Independencia
 
 | Score | Criterio | Ejemplo |
 |:---:|---|---|
@@ -190,7 +211,7 @@ FINVEST_Score = (F_score + INVEST_Score) / 2
 
 ---
 
-### N – Negociable
+#### N – Negociable
 
 | Score | Criterio | Ejemplo |
 |:---:|---|---|
@@ -202,7 +223,7 @@ FINVEST_Score = (F_score + INVEST_Score) / 2
 
 ---
 
-### V – Valiosa
+#### V – Valiosa
 
 | Score | Criterio | Ejemplo |
 |:---:|---|---|
@@ -214,7 +235,7 @@ FINVEST_Score = (F_score + INVEST_Score) / 2
 
 ---
 
-### E – Estimable
+#### E – Estimable
 
 | Score | Criterio | Ejemplo |
 |:---:|---|---|
@@ -226,7 +247,7 @@ FINVEST_Score = (F_score + INVEST_Score) / 2
 
 ---
 
-### S – Small (Tamaño)
+#### S – Small (Tamaño)
 
 Usar la cantidad de escenarios Gherkin (incluyendo filas de Scenario Outline) como señal primaria:
 
@@ -242,7 +263,7 @@ Si la historia no tiene escenarios Gherkin, estimar por complejidad implícita d
 
 ---
 
-### T – Testeable
+#### T – Testeable
 
 | Score | Criterio | Ejemplo |
 |:---:|---|---|
@@ -254,19 +275,23 @@ Si la historia no tiene escenarios Gherkin, estimar por complejidad implícita d
 
 ---
 
-## Instrucciones de Output
+### Manejo de errores
 
-1. Usar la estructura del template en `assets/evaluation-output-template.md`.
-2. Calcular F_score con dos decimales de precisión.
-3. Si F_score < 2.5, detenerse en Fase 1 y no calcular INVEST.
-4. Para cada dimensión con score ≤ 3, incluir al menos 1 recomendación concreta y accionable en la sección "Comentarios".
-5. Marcar con ⚠️ las dimensiones con score = 1 (críticas).
-6. Si la historia no sigue el formato del template, indicar qué secciones faltan o están incorrectas y mostrar el fragmento del template correspondiente como guía.
-7. Responder en el mismo idioma que la historia de entrada.
+| Condición | Mensaje | Acción |
+|---|---|---|
+| Template no encontrado | `❌ No se encontró el template requerido en $SPECS_BASE/specs/templates/story-template.md. Por favor verifica que el archivo existe antes de continuar.` | Detener la ejecución |
+| Archivo de historia no accesible (input fue ruta) | `⚠️ No se pudo leer el archivo: <ruta>` | Notificar y detener |
+| Input es solo imagen sin texto de historia | `ℹ️ El skill requiere el texto de la historia para evaluar. Las imágenes adjuntas no pueden procesarse.` | Solicitar texto y detener |
+| Frontmatter no actualizable (APROBADA + ruta) | `⚠️ No se pudo actualizar el frontmatter de: <ruta> — verifica permisos y formato` | Emitir advertencia y continuar sin bloquear |
 
 ---
 
-## Ejemplos de referencia (few-shot)
+## Salida
+
+- Reporte de evaluación generado con la estructura de `assets/evaluation-output-template.md`
+- Frontmatter de `story.md` actualizado (únicamente si decisión = `APROBADA` y el input fue una ruta de archivo o `{story ID}`): `status: SPECIFYING` / `substatus: DONE`
+
+### Ejemplos de referencia
 
 Los 3 ejemplos muestran historias escritas con el template `story-template.md`:
 
@@ -275,4 +300,3 @@ Los 3 ejemplos muestran historias escritas con el template `story-template.md`:
 - `examples/example-rechazar.md` — Dos casos:
   - Caso A: Sin secciones ni Gherkin formal → F_score 1.4 → **RECHAZAR** por formato insuficiente
   - Caso B: Secciones completas pero dimensiones INVEST críticas → **RECHAZAR** por I, E, S = 1
-

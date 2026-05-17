@@ -10,6 +10,9 @@ triggers:
 
 # Skill: `/<nombre-del-skill>`
 
+**Cuándo usar este skill:** <!-- Obligatorio -->
+[Listado de situaciones o frases que deberían disparar el uso de este skill.]
+
 ## Objetivo
 
 [Descripción concisa de qué debe hacer y por qué. Una o dos oraciones.] <!-- Obligatorio -->

@@ -1,129 +1,140 @@
 ---
 name: story-creation
 description: "Crea historias de usuario siguiendo el template story-gherkin (Como/Quiero/Para + Gherkin). Aplica los principios 3 C's, INVEST y el formato Mike Cohn. Output diseñado para superar la evaluación FINVEST."
+triggers:
+  - "story-creation"
+  - "crear historia"
+  - "redactar historia de usuario"
+  - "nueva historia"
+  - "convertir requisito en historia"
+  - "historia de usuario"
+  - "como quiero para"
 ---
 
-# Skill: /story-creation
+# Skill: `/story-creation`
 
-Crea una historia de usuario completa a partir de una necesidad o feature descrito en lenguaje natural. El output sigue **estrictamente** el template `$SPECS_BASE/specs/templates/story-template.md` definido en este skill.
+## Objetivo
 
-**Usar cuando:**
-- Se necesita redactar una historia de usuario lista para sprint planning
-- Se quiere convertir un requisito o necesidad en una historia bien formada
-- Se va a evaluar la historia con `/story-evaluation` y se quiere maximizar el score
+Crea una historia de usuario completa a partir de una necesidad o feature descrito en lenguaje natural. El output sigue **estrictamente** el template `$SPECS_BASE/specs/templates/story-template.md` definido en el proyecto.
 
----
+**Qué hace este skill:**
+- Convierte texto libre, archivos existentes o términos de búsqueda en una historia de usuario bien formada
+- Aplica los criterios de calidad de Mike Cohn (Como/Quiero/Para) y el marco 3 C's
+- Genera escenarios Gherkin (Dado/Cuando/Entonces) con al menos 1 happy path y 1 escenario alternativo
+- Verifica el cumplimiento de INVEST antes de guardar
+- Asigna automáticamente el siguiente ID `FEAT-NNN` disponible y guarda en la ruta canónica
 
-## Modos de Ejecución
-
-- **Modo manual** (`/story-creation {texto de descripción}`): el usuario proporciona la historia a crear en lenguaje natural, y el proceso es interactivo, muestra progreso en tiempo real
-- **Modo Agent** (invocado por orquestador de nivel superior): automático, reporta resultado
-
----
-
-## Template canónico (fuente de verdad)
-
-### paso A. Verificar que el template existe y leerlo
-
-El archivo de plantilla es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derréglelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
-
-El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
-
-Lee el archivo de plantilla `$SPECS_BASE/specs/templates/story-template.md`.
-
-- Si el archivo **no existe**: informar al usuario y detener la ejecución:
-  > ❌ No se encontró el template requerido en `$SPECS_BASE/specs/templates/story-template.md`.
-  > Por favor verifica que el archivo existe antes de continuar.
-
-- Si el archivo **existe**: continua.
-
-### paso B. Guía de estructura y formato
-
-Toda historia generada por este skill debe seguir **exactamente** la estructura de `$SPECS_BASE/specs/templates/story-template.md` leida en el paso A. No asumas que las secciones siempre estarán en el mismo orden o que tendrán los mismos nombres. Siempre completa dinámicamente la estructura de la plantilla en tiempo de ejecución, infiriendo la información, para asegurar flexibilidad ante cambios futuros en la estructura del template.:
-
-Por ejemplo:
-
-```markdown
-## 📖 Historia
-
-**Como** {rol o persona específica}
-**Quiero** {acción concreta orientada al usuario}
-**Para** {beneficio medible o valor real}
-
-## ✅ Criterios de aceptación
-
-### Escenario principal – {título descriptivo}
-Dado {contexto inicial específico}
-  Y {otra condición si aplica}
-Cuando {acción del usuario}
-Entonces {resultado esperado concreto}
-  Y {otro resultado}
-
-### Escenario alternativo / error – {título}
-Dado {contexto}
-Cuando {acción inválida o límite}
-Entonces {mensaje de error o comportamiento alternativo}
-  Pero {excepción si aplica}
-
-### Escenario con datos (Scenario Outline) – opcional
-Escenario: {título}
-  Dado que el usuario tiene el rol "<rol>"
-  Cuando intenta acceder a "{recurso}"
-  Entonces ve "{mensaje}"
-Ejemplos:
-  | rol      | recurso | mensaje           |
-  | invitado | /admin  | "Acceso denegado" |
-
-### Requerimiento (opcional)
-{Requerimiento específico (como regla de negocio) relacionado con la historia, si aplica}
-
-## ⚙️ Criterios no funcionales (opcional)
-
-* Rendimiento: {ej. respuesta < 2s}
-* Seguridad: {ej. solo usuarios con rol X}
-* UX/Accesibilidad: {ej. compatible con lectores de pantalla}
-
-## 📎 Notas / contexto adicional
-{Información relevante para desarrollo o QA. Scope out explícito si aplica.}
-
-Este es solo un ejemplo, recuerda que el archivo de plantilla es la guía a completar.
-```
+**Qué NO hace este skill:**
+- Evaluar la calidad de la historia (eso corresponde a `/story-evaluation`)
+- Dividir historias grandes en historias más pequeñas (eso corresponde a `/story-split`)
+- Generar design, tasks ni artefactos de planning
 
 ---
 
-## Paso 0 — Verificar entorno (`skill-preflight`)
+## Entrada
 
-Invocar `skill-preflight` antes de cualquier operación con archivos. El preflight verifica `SDDF_ROOT`, resuelve `SPECS_BASE` (fallback: `docs`) y confirma los subdirectorios de specs estándar. Si retorna `✗ Entorno inválido`, detener la ejecución.
+El skill acepta tres tipos de input:
+
+- **Tipo A — Texto libre**: descripción de una necesidad o feature en lenguaje natural
+- **Tipo B — Ruta de archivo**: ruta relativa o absoluta a un archivo `.md` existente con contenido de historia incompleto
+- **Tipo C — Término de búsqueda**: palabra o frase corta para localizar una historia existente en `$SPECS_BASE/specs/stories/`
+
+Fuente estructural del output: `$SPECS_BASE/specs/templates/story-template.md` (leído en tiempo de ejecución)
+
+---
+
+## Parámetros
+
+- `{texto}` — descripción de la historia en lenguaje natural, ruta de archivo, o término de búsqueda (obligatorio)
+
+---
+
+## Precondiciones
+
+- El archivo `$SPECS_BASE/specs/templates/story-template.md` existe
+- `skill-preflight` retorna estado OK (entorno válido)
+
+---
+
+## Dependencias
+
+- Skills: [`skill-preflight`]
+- Archivos: [`$SPECS_BASE/specs/templates/story-template.md`]
+
+---
+
+## Modos de ejecución
+
+- **Manual**: `/story-creation {texto de descripción}` — interactivo, muestra progreso en tiempo real
+- **Automático**: invocado por orquestador de nivel superior — reporta resultado sin interacción
+
+---
+
+## Restricciones / Reglas
+
+- La estructura del output la dicta el template en tiempo de ejecución — nunca se hardcodea la estructura de secciones en el skill
+- El template es de solo lectura — nunca se escribe, modifica ni usa como ruta de salida
+- Toda historia debe tener mínimo 1 escenario principal (happy path) y 1 escenario alternativo o de error en formato Gherkin
+- Si alguna dimensión INVEST falla, se ajusta la historia antes de guardar; si `S` (Small) es demasiado grande, se sugiere `/story-split`
+- El rol en `Como` debe ser específico y contextualizado — nunca "usuario" genérico ni "el sistema"
+- El `Quiero` describe la acción del usuario, no la solución técnica
+- El `Para` expresa beneficio real y medible, no restatement del `Quiero`
+- Los pasos Gherkin (`Entonces`) deben ser verificables objetivamente — sin resultados subjetivos
+
+---
+
+## Flujo de ejecución
+
+### Paso 0 — Verificar entorno (`skill-preflight`)
+
+Invocar `skill-preflight` antes de cualquier operación con archivos.
+
+El preflight verifica `SDDF_ROOT`, resuelve `SPECS_BASE` (fallback: `docs`) y confirma los subdirectorios de specs estándar.
+
+Si retorna `✗ Entorno inválido`, detener la ejecución.
 
 Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los pasos siguientes.
 
 ---
 
-## Proceso de creación
+### Paso 1 — Leer template canónico
 
-### Paso 0 — Resolver el input
+Leer el archivo `$SPECS_BASE/specs/templates/story-template.md`.
 
-El skill acepta tres tipos de input. Detectar cuál aplica antes de continuar:
+El template es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca hardcodear los nombres o la estructura de las secciones — siempre derivarlos del template en tiempo de ejecución. Si el template cambia, el output generado se actualizará automáticamente.
 
-#### Tipo A — Texto libre (necesidad o feature en lenguaje natural)
+Identificar antes de continuar:
+- Todas las secciones y su jerarquía (encabezados `#`, `##`, `###`)
+- Todos los placeholders en formato `{nombre_placeholder}`
+- Comentarios `<!-- instrucción: ... -->` que indican cómo completar cada sección
+
+Si el archivo **no existe**, detener y notificar (ver sección Manejo de errores).
+
+---
+
+### Paso 2 — Resolver el input
+
+Detectar el tipo de input proporcionado:
+
+#### Tipo A — Texto libre
 **Señal:** El input es una descripción en prosa o una historia incompleta.
-**Acción:** Continuar directamente al Paso 1.
+**Acción:** Continuar directamente al Paso 3.
 
-#### Tipo B — Ruta de archivo relativa
+#### Tipo B — Ruta de archivo
 **Señal:** El input parece una ruta (contiene `/` o `\`, o termina en `.md`).
-**Acción:** Leer el archivo en esa ruta y usar su contenido como base para crear o mejorar la historia. Continuar al Paso 1 con ese contenido.
+**Acción:** Leer el archivo en esa ruta y usar su contenido como base para crear o mejorar la historia. Continuar al Paso 3 con ese contenido.
 
-#### Tipo C — Nombre de archivo o término de búsqueda
+#### Tipo C — Término de búsqueda
 **Señal:** El input es una palabra o frase corta que no parece texto de historia ni ruta explícita.
 **Acción:**
 1. Buscar en `$SPECS_BASE/specs/stories/` archivos cuyo nombre contenga el término (sin distinguir mayúsculas)
-2. Si hay exactamente 1 coincidencia → leerlo y usarlo como base. Continuar al Paso 1.
+2. Si hay exactamente 1 coincidencia → leerlo y usarlo como base. Continuar al Paso 3.
 3. Si hay más de 1 coincidencia → mostrar la lista y pedir al usuario que elija antes de continuar.
 4. Si no hay coincidencias → tratar el input como Tipo A (texto libre).
 
 ---
 
-### Paso 1 — Recopilar contexto
+### Paso 3 — Recopilar contexto
 
 Si el usuario no proporcionó suficiente información, preguntar:
 - **¿Quién?** Persona o rol específico que se beneficia (no "usuario" genérico)
@@ -133,7 +144,9 @@ Si el usuario no proporcionó suficiente información, preguntar:
 
 Si el input es suficiente, inferir los valores razonablemente sin preguntar.
 
-### Paso 2 — Redactar `Como/Quiero/Para`
+---
+
+### Paso 4 — Redactar `Como/Quiero/Para`
 
 Aplicar los criterios de calidad de Mike Cohn y el marco 3 C's:
 
@@ -155,7 +168,9 @@ Aplicar los criterios de calidad de Mike Cohn y el marco 3 C's:
 - ❌ "poder entrar" (restatement de Quiero)
 - ❌ "tener una mejor experiencia" (no medible)
 
-### Paso 3 — Definir escenarios Gherkin
+---
+
+### Paso 5 — Definir escenarios Gherkin
 
 Reglas obligatorias:
 1. **Mínimo 1 escenario principal** (happy path) en bloque ` ```gherkin `
@@ -172,9 +187,11 @@ Reglas obligatorias:
 - `Entonces ve el mensaje "Contraseña actualizada correctamente"` ✅ (verificable)
 - `Entonces funciona bien` ❌ (no testeable)
 
-### Paso 4 — Verificar INVEST antes de entregar
+---
 
-Antes de producir el output, hacer una revisión interna rápida:
+### Paso 6 — Verificar INVEST
+
+Antes de guardar, hacer una revisión interna:
 
 | Dimensión | Pregunta clave | Señal de alerta |
 |---|---|---|
@@ -185,17 +202,17 @@ Antes de producir el output, hacer una revisión interna rápida:
 | **S** Small | ¿Hay ≤3 escenarios Gherkin y ≤7 pasos totales? | Muchos `Y` anidados o múltiples flujos principales |
 | **T** Testeable | ¿Los `Entonces` son verificables objetivamente? | Resultados subjetivos o no observables |
 
-Si alguna dimensión falla, ajustar la historia antes de entregar. Si `S` es demasiado grande, sugerir splitting.
+Si alguna dimensión falla, ajustar la historia antes de continuar. Si `S` es demasiado grande, sugerir `/story-split`.
 
-### Paso 5 — Guardar y entregar el output
+---
+
+### Paso 7 — Guardar y entregar
 
 #### Derivar el siguiente ID (FEAT-NNN)
 
-Antes de escribir el archivo, determinar el próximo número de feature:
-
-1. Listar todos los subdirectorios de `$SPECS_BASE/specs/stories/` cuyo nombre comience con `FEAT-` o `FIX-`.
-2. Extraer los números de todos los prefijos `FEAT-NNN` encontrados.
-3. Tomar el número más alto y sumarle 1. Si no hay ninguno, comenzar en `FEAT-001`.
+1. Listar todos los subdirectorios de `$SPECS_BASE/specs/stories/` cuyo nombre comience con `FEAT-` o `FIX-`
+2. Extraer los números de todos los prefijos `FEAT-NNN` encontrados
+3. Tomar el número más alto y sumarle 1. Si no hay ninguno, comenzar en `FEAT-001`
 4. Formatear con ceros a la izquierda hasta 3 dígitos: `FEAT-001`, `FEAT-053`, etc.
 
 #### Reglas de nomenclatura
@@ -204,24 +221,19 @@ Antes de escribir el archivo, determinar el próximo número de feature:
 - **Archivo:** `story.md` dentro de ese directorio
 - El `{slug}` se deriva del `Quiero` de la historia: minúsculas, palabras separadas por guiones, máximo 5 palabras significativas, sin acentos ni caracteres especiales
 - Ruta final: `$SPECS_BASE/specs/stories/FEAT-{NNN}-{slug}/story.md`
-- Ejemplos:
-  - `$SPECS_BASE/specs/stories/FEAT-054-recuperar-contrasena-email/story.md`
-  - `$SPECS_BASE/specs/stories/FEAT-055-filtrar-pedidos-por-estado/story.md`
-
-#### Verificar conflicto de directorio
 
 Si el directorio `FEAT-{NNN}-{slug}/` ya existe, incrementar NNN hasta encontrar uno disponible.
 
-#### Actualizar frontmatter
+#### Completar frontmatter
 
 En el archivo `story.md`, completar los campos del frontmatter con los valores resueltos:
 - `id: FEAT-{NNN}`
 - `slug: FEAT-{NNN}-{slug}`
-- `status: SPECIFYING` — estado inicial de toda historia creada directamente (pendiente de evaluación)
+- `status: SPECIFYING` — estado inicial de toda historia creada directamente
 
-#### Mostrar resumen en pantalla
+#### Mostrar resumen
 
-Después de guardar el archivo, mostrar en la conversación:
+Después de guardar, mostrar en la conversación:
 
 ```
 **Archivo generado:** `$SPECS_BASE/specs/stories/FEAT-{NNN}-{slug}/story.md`
@@ -236,20 +248,23 @@ Si la historia fue simplificada para cumplir INVEST, explicar brevemente qué se
 
 ---
 
-## Anti-patrones frecuentes
+### Manejo de errores
 
-| Anti-patrón | Problema | Corrección |
+| Condición | Mensaje | Acción |
 |---|---|---|
-| `Como usuario, Quiero login, Para entrar` | Las 3 cláusulas son semánticamente vacías | Especificar rol, necesidad real y beneficio concreto |
-| Criterios de aceptación como lista libre sin Gherkin | No supera gateway F de FINVEST | Usar bloques ` ```gherkin ` con Dado/Cuando/Entonces |
-| Escenario único sin caso de error | Testeabilidad incompleta | Siempre agregar al menos 1 escenario alternativo |
-| `Quiero que se use React con Redux` | Prescribe la solución técnica | Describir la necesidad del usuario, no la implementación |
-| Historia que cubre 3 funcionalidades distintas | Épica disfrazada de historia | Usar `/user-story-splitting` para dividir |
-| `Entonces el sistema funciona correctamente` | Criterio no verificable | Especificar el estado, mensaje o comportamiento observable |
+| Entorno inválido (preflight) | `✗ Entorno inválido` | Detener inmediatamente |
+| Template no encontrado | `❌ No se encontró el template requerido en $SPECS_BASE/specs/templates/story-template.md` | Detener. Pedir al usuario que verifique que el archivo existe |
+| Más de 1 coincidencia en búsqueda (Tipo C) | Mostrar lista de coincidencias | Pedir al usuario que elija antes de continuar |
+| Historia demasiado grande (falla `S` de INVEST) | Informar qué la hace grande | Sugerir `/story-split` antes de guardar |
 
 ---
 
-## Ejemplo de output
+## Salida
+
+- `$SPECS_BASE/specs/stories/FEAT-{NNN}-{slug}/story.md` — historia de usuario generada
+- Estado del workitem: `SPECIFYING` (estado inicial; pendiente de evaluación con `/story-evaluation`)
+
+### Ejemplo de output
 
 ```markdown
 ## 📖 Historia
@@ -286,13 +301,10 @@ Entonces veo el mensaje "No encontramos una cuenta con ese email"
 Flujo de recuperación vía email. SMS queda fuera de scope de esta historia.
 ```
 
----
-
-## Referencias
+### Referencias
 
 - **Template canónico:** `$SPECS_BASE/specs/templates/story-template.md`
 - **Evaluación de calidad:** `/story-evaluation`
-- **División de historias grandes:** `/user-story-splitting`
+- **División de historias grandes:** `/story-split`
 - Mike Cohn, *User Stories Applied* (2004)
 - INVEST criteria — Bill Wake (2003)
-
