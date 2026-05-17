@@ -12,6 +12,12 @@ triggers:
 
 # Skill: `/release-generate-stories`
 
+**Cuándo usar este skill:**
+Usar cuando se quiera generar automáticamente las historias de usuario a partir de las
+features definidas en un `release.md`. Invocar también cuando el usuario mencione
+"generar historias", "historias del release", "stories del release", "generar stories",
+"derivar historias de release", "release-generate-stories" o equivalentes.
+
 ## Objetivo
 
 Lee `release.md` de un directorio de release en `$SPECS_BASE/specs/releases/` y genera automáticamente un directorio `FEAT-[ID]-[Nombre-kebab]/` con un archivo `story.md` por cada feature definida en la sección `## Features` del release. Cada archivo generado sigue exactamente la estructura de `$SPECS_BASE/specs/templates/story-template.md`.
@@ -27,19 +33,13 @@ Lee `release.md` de un directorio de release en `$SPECS_BASE/specs/releases/` y 
 - Modificar el archivo de release
 - Realizar evaluación INVEST ni splitting automático
 
----
-
 ## Entrada
 
 - Nombre de directorio de release (parcial o completo), o ruta relativa al directorio/archivo `release.md`
 
----
-
 ## Parámetros
 
 - `{release}` — nombre de directorio (parcial o completo) o ruta relativa al directorio de release o a `release.md` (obligatorio)
-
----
 
 ## Precondiciones
 
@@ -47,21 +47,15 @@ Lee `release.md` de un directorio de release en `$SPECS_BASE/specs/releases/` y 
 - `$SPECS_BASE/specs/templates/story-template.md` debe existir
 - `skill-preflight` retorna estado OK (entorno válido)
 
----
-
 ## Dependencias
 
 - Skills: [`skill-preflight`]
 - Archivos: [`$SPECS_BASE/specs/templates/story-template.md`]
 
----
-
 ## Modos de ejecución
 
 - **Manual** (`/release-generate-stories {release}`): interactivo cuando hay conflictos de sobreescritura — pregunta al usuario historia por historia
 - **Automático**: invocado por orquestador — reporta resultado sin interacción adicional
-
----
 
 ## Restricciones / Reglas
 
@@ -72,8 +66,6 @@ Lee `release.md` de un directorio de release en `$SPECS_BASE/specs/releases/` y 
 5. Las secciones opcionales de cada historia se incluyen con placeholder `[Por completar]` para facilitar la edición posterior
 6. El skill no realiza evaluación INVEST ni splitting — si una historia parece demasiado grande, sugerirlo en las notas pero no dividirla automáticamente
 7. El template `story-template.md` es de solo lectura — nunca escribir en él ni usarlo como ruta de salida
-
----
 
 ## Flujo de ejecución
 
