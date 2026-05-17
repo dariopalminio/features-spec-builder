@@ -1,27 +1,89 @@
 ---
-description: >-
-  Segundo paso del pipeline de ProjectSpecFactory. Verifica que
-  project-intent.md existe en el directorio del proyecto activo, conduce discovery de usuarios y especificación de
-  requisitos mediante project-pm y project-architect, produciendo
-  `<SPECS_BASE>/specs/projects/<PROJ-ID>-<nombre>/project.md` en una sola sesión.
-alwaysApply: false
 name: project-discovery
+description: >-
+  Segundo paso del pipeline de ProjectSpecFactory. Verifica que project-intent.md existe
+  en el directorio del proyecto activo, conduce discovery de usuarios con project-pm y
+  especificación de requisitos con project-architect, produciendo project.md en una sola sesión.
+  Usar siempre que el usuario quiera iniciar la fase de discovery, especificar requisitos
+  del proyecto, o generar project.md a partir de project-intent.md.
+  Invocar también cuando el usuario mencione "discovery del proyecto", "especificación de
+  requisitos", "project-discovery" o equivalentes.
+triggers:
+  - project-discovery
+  - /project-discovery
+  - discovery del proyecto
+  - especificación de requisitos
+  - project spec
 ---
-Eres el orchestrator del estado **Discovery** del pipeline de ProjectSpecFactory.
 
-## Tu tarea
+# Skill: `/project-discovery`
 
-Generar `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` a partir de `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md`, conduciendo una sesión que fusiona el discovery de usuarios y la especificación de requisitos.
+**Cuándo usar este skill:**
+Usar como segundo paso del pipeline de ProjectSpecFactory, después de completar
+`/project-begin`. Requiere que `project-intent.md` exista con `substatus: DONE`.
+Invocar también cuando el usuario mencione "discovery del proyecto", "especificación de
+requisitos", "project-discovery" o equivalentes.
 
-## Pasos
+## Objetivo
 
-### 0. Verificar entorno (`skill-preflight`)
+Orquesta el estado **Discovery** del pipeline de ProjectSpecFactory: conduce el discovery
+de usuarios con el agente `project-pm` y la especificación de requisitos con
+`project-architect`, produciendo `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`.
+
+**Qué hace este skill:**
+- Valida que `project-intent.md` esté completo (`substatus: DONE`) antes de iniciar
+- Delega el discovery de usuarios al agente `project-pm`
+- Delega la especificación de requisitos al agente `project-architect` (apoyado por `project-ux`)
+- Confirma la existencia del documento generado al finalizar
+
+**Qué NO hace este skill:**
+- No genera `project.md` directamente — esa responsabilidad es del agente `project-architect`
+- No avanza al siguiente estado del pipeline (`project-planning`)
+
+## Entrada
+
+- `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md` — input principal (precondición: `substatus: DONE`)
+- `$SPECS_BASE/specs/templates/project-template.md` — fuente de verdad estructural (solo lectura)
+- `$SPECS_BASE/specs/projects/` — directorio para resolver el proyecto activo
+
+## Parámetros
+
+- Ninguno — el skill opera de forma completamente interactiva mediante los agentes `project-pm` y `project-architect`
+
+## Precondiciones
+
+- El entorno debe superar el preflight (`skill-preflight`) sin errores
+- `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md` debe existir con `substatus: DONE`
+- `$SPECS_BASE/specs/templates/project-template.md` debe existir
+
+## Dependencias
+
+- Skills: [`skill-preflight`]
+- Agentes: [`project-pm`, `project-architect`, `project-ux`]
+- Archivos: [`$SPECS_BASE/specs/templates/project-template.md`]
+
+## Modos de ejecución
+
+- **Manual** (`/project-discovery`): siempre interactivo — conduce discovery y especificación con el usuario.
+- **Retoma**: si `project.md` existe con `substatus: IN-PROGRESS`, el agente `project-architect`
+  continúa solo las secciones incompletas sin reiniciar desde cero.
+
+## Restricciones / Reglas
+
+- **Precondición de entrada obligatoria:** `project-intent.md` con `substatus: DONE` es requerido; cualquier otro estado detiene la ejecución.
+- **Template de solo lectura:** `project-template.md` nunca se modifica ni se usa como ruta de salida.
+- **Extracción dinámica:** las secciones del documento se derivan en runtime del template; si el template cambia, el output se actualiza automáticamente.
+- **Sin avance automático:** el skill no invoca `project-planning` — el usuario decide cuándo continuar.
+
+## Flujo de ejecución
+
+### Paso 0 — Verificar entorno (`skill-preflight`)
 
 Invocar `skill-preflight` antes de cualquier operación con archivos. El preflight verifica `SDDF_ROOT`, resuelve `SPECS_BASE` (fallback: `docs`) y confirma los subdirectorios de specs estándar. Si retorna `✗ Entorno inválido`, detener la ejecución.
 
 Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los pasos siguientes.
 
-### 0b. Resolver directorio del proyecto activo (`PROJ_DIR`)
+### Paso 0b — Resolver directorio del proyecto activo (`PROJ_DIR`)
 
 1. Listar todos los subdirectorios de `$SPECS_BASE/specs/projects/`.
 2. Para cada subdirectorio, leer `project-intent.md` y verificar si `substatus` es `DONE`.
@@ -33,7 +95,7 @@ Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los 
 
 La ruta completa del proyecto activo es: `$SPECS_BASE/specs/projects/$PROJ_DIR/`
 
-### 1. Verificar precondicion de entrada (project-intent.md)
+### Paso 1 — Verificar precondición de entrada (`project-intent.md`)
 
 Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md`.
 
@@ -47,21 +109,21 @@ Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md`.
   > ❌ `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md` aun esta en `Estado: IN‑PROGRESS`.
   > Debes completar Begin Intention y dejar el documento en `Estado: Ready` antes de ejecutar `/project-discovery`.
 
-- Si el archivo **existe** con `substatus: DONE`: continua al paso 2.
+- Si el archivo **existe** con `substatus: DONE`: continua al Paso 2.
 
-### 2. Verificar estado del documento de output
+### Paso 2 — Verificar estado del documento de output
 
 Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` (si existe) y detecta el valor de `substatus:`.
 
-- Si el archivo **no existe**: continua al paso 3 (primera ejecucion).
-- Si existe con `substatus: IN‑PROGRESS`: activa flujo de retoma y continua al paso 3.
+- Si el archivo **no existe**: continua al Paso 3 (primera ejecucion).
+- Si existe con `substatus: IN‑PROGRESS`: activa flujo de retoma y continua al Paso 3.
 - Si existe con `substatus: DONE`: informa que el documento ya esta completo y pide confirmacion antes de sobrescribir.
-  - Si el usuario confirma sobrescribir: continua al paso 3.
+  - Si el usuario confirma sobrescribir: continua al Paso 3.
   - Si el usuario cancela: deten la ejecucion sin modificar el archivo.
 
-### 3. Verificar que el template existe
+### Paso 3 — Verificar que el template existe
 
-El archivo de plantilla es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derréglelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
+El archivo de plantilla es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derívelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
@@ -74,7 +136,7 @@ Lee el archivo de plantilla `$SPECS_BASE/specs/templates/project-template.md`.
 
 - Si el archivo **existe**: continua.
 
-### 4. Fase Discovery - Delegar al project-pm
+### Paso 4 — Fase Discovery: delegar al project-pm
 
 Invoca al agente `project-pm` con la siguiente instrucción:
 
@@ -86,7 +148,7 @@ Invoca al agente `project-pm` con la siguiente instrucción:
 > Al terminar, entrega un resumen estructurado del discovery para que el project-architect lo use en la siguiente fase.
 > Si necesitas apoyo para los flujos de usuario y usabilidad, invoca al agente `project-ux`.
 
-### 5. Fase Specifying - Delegar al project-architect
+### Paso 5 — Fase Specifying: delegar al project-architect
 
 Una vez completado el discovery, invoca al agente `project-architect` con la siguiente instrucción:
 
@@ -107,7 +169,7 @@ El `project-architect` se encargará de:
 - Inferir contenido faltante marcándolo con `[inferido]`
 - Escribir el documento final con metadatos de generación
 
-### 6. Confirmar output
+### Paso 6 — Confirmar output
 
 Cuando el `project-architect` termine:
 
@@ -117,3 +179,8 @@ Cuando el `project-architect` termine:
   > Path: `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`
   > Siguiente comando: `/project-planning`.
 3. Si no existe, informa al usuario que algo salió mal y sugiere ejecutar `/project-discovery` nuevamente.
+
+## Salida
+
+- `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` — documento de especificación de requisitos
+  generado por `project-architect`, con `status: DISCOVERY` al completarse.

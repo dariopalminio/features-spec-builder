@@ -1,26 +1,91 @@
 ---
-description: >-
-  Tercer paso del pipeline de ProjectSpecFactory. Verifica que
-  requirement-spec.md existe, conduce la generación del plan mediante el agente
-  project-architect y genera `<SPECS_BASE>/specs/projects/<PROJ-ID>-<nombre>/project-plan.md`.
-alwaysApply: false
 name: project-planning
+description: >-
+  Tercer paso del pipeline de ProjectSpecFactory. Verifica que project.md existe en el
+  directorio del proyecto activo, ofrece realizar Story Mapping previo, y delega la
+  generación del plan al agente project-architect, produciendo project-plan.md.
+  Usar siempre que el usuario quiera planificar el proyecto, generar el backlog inicial
+  de releases, o crear project-plan.md a partir de project.md.
+  Invocar también cuando el usuario mencione "planificación del proyecto", "plan del proyecto",
+  "project-planning" o equivalentes.
+triggers:
+  - project-planning
+  - /project-planning
+  - planificación del proyecto
+  - plan del proyecto
+  - project plan
 ---
-Eres el orchestrator del estado **Planning** del pipeline de ProjectSpecFactory.
 
-## Tu tarea
+# Skill: `/project-planning`
 
-Generar `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md` a partir de `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` y los documentos anteriores del pipeline, delegando el análisis y la generación al `project-architect`.
+**Cuándo usar este skill:**
+Usar como tercer paso del pipeline de ProjectSpecFactory, después de completar
+`/project-discovery`. Requiere que `project.md` exista con `substatus: DONE`.
+Invocar también cuando el usuario mencione "planificación del proyecto", "plan del
+proyecto", "project-planning" o equivalentes.
 
-## Pasos
+## Objetivo
 
-### 0. Verificar entorno (`skill-preflight`)
+Orquesta el estado **Planning** del pipeline de ProjectSpecFactory: delega al agente
+`project-architect` la extracción de features atómicas, su priorización y agrupación
+en releases, produciendo `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md`.
+
+**Qué hace este skill:**
+- Valida que `project.md` esté completo (`substatus: DONE`) antes de iniciar
+- Ofrece realizar un Story Mapping previo para enriquecer el plan estructuralmente
+- Delega la generación del plan al agente `project-architect`
+- Confirma la existencia del documento generado al finalizar
+
+**Qué NO hace este skill:**
+- No genera `project-plan.md` directamente — esa responsabilidad es del agente `project-architect`
+- No avanza al siguiente paso del pipeline automáticamente
+
+## Entrada
+
+- `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` — documento de especificación de requisitos (precondición: `substatus: DONE`)
+- `$SPECS_BASE/specs/projects/$PROJ_DIR/project-intent.md` — contexto adicional del proyecto
+- `$SPECS_BASE/specs/projects/$PROJ_DIR/story-map.md` — guía estructural opcional para el plan
+- `assets/project-plan-template.md` — fuente de verdad estructural (solo lectura)
+
+## Parámetros
+
+- Ninguno — el skill opera de forma completamente interactiva mediante el agente `project-architect`
+
+## Precondiciones
+
+- El entorno debe superar el preflight (`skill-preflight`) sin errores
+- `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` debe existir con `substatus: DONE`
+- `assets/project-plan-template.md` debe existir
+
+## Dependencias
+
+- Skills: [`skill-preflight`, `project-story-mapping`]
+- Agentes: [`project-architect`]
+- Archivos: [`assets/project-plan-template.md`]
+
+## Modos de ejecución
+
+- **Manual** (`/project-planning`): siempre interactivo — ofrece Story Mapping previo y delega la planificación.
+- **Retoma**: si `project-plan.md` existe con `substatus: IN-PROGRESS`, el agente `project-architect`
+  continúa solo las secciones incompletas sin reiniciar desde cero.
+
+## Restricciones / Reglas
+
+- **Precondición de entrada obligatoria:** `project.md` con `substatus: DONE` es requerido; cualquier otro estado detiene la ejecución.
+- **Template de solo lectura:** `assets/project-plan-template.md` nunca se modifica ni se usa como ruta de salida.
+- **Extracción dinámica:** la estructura del output se deriva en runtime del template; si el template cambia, el output se actualiza automáticamente.
+- **Story map como guía, no como restricción:** si `story-map.md` existe, el `project-architect` lo usa como referencia estructural pero no está obligado a replicarlo exactamente.
+- **Sin avance automático:** el skill no invoca el siguiente paso del pipeline — el usuario decide cuándo continuar.
+
+## Flujo de ejecución
+
+### Paso 0 — Verificar entorno (`skill-preflight`)
 
 Invocar `skill-preflight` antes de cualquier operación con archivos. El preflight verifica `SDDF_ROOT`, resuelve `SPECS_BASE` (fallback: `docs`) y confirma los subdirectorios de specs estándar. Si retorna `✗ Entorno inválido`, detener la ejecución.
 
 Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los pasos siguientes.
 
-### 0b. Resolver directorio del proyecto activo (`PROJ_DIR`)
+### Paso 0b — Resolver directorio del proyecto activo (`PROJ_DIR`)
 
 1. Listar todos los subdirectorios de `$SPECS_BASE/specs/projects/`.
 2. Para cada subdirectorio, leer `project-intent.md` y verificar si `substatus` es `DONE`.
@@ -32,7 +97,7 @@ Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los 
 
 La ruta completa del proyecto activo es: `$SPECS_BASE/specs/projects/$PROJ_DIR/`
 
-### 1. Verificar precondicion de entrada (requirement-spec.md)
+### Paso 1 — Verificar precondición de entrada (`project.md`)
 
 Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`.
 
@@ -46,21 +111,21 @@ Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md`.
   > ❌ `$SPECS_BASE/specs/projects/$PROJ_DIR/project.md` aun esta en `substatus: IN‑PROGRESS`.
   > Debes completar Discovery y dejar el documento en `Estado: Ready` antes de ejecutar `/project-planning`.
 
-- Si el archivo **existe** con `substatus: DONE`: continua al paso 2.
+- Si el archivo **existe** con `substatus: DONE`: continua al Paso 2.
 
-### 2. Verificar estado del documento de output
+### Paso 2 — Verificar estado del documento de output
 
 Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md` (si existe) y detecta el valor de `substatus:`.
 
-- Si el archivo **no existe**: continua al paso 3 (primera ejecucion).
-- Si existe con `substatus: IN‑PROGRESS`: activa flujo de retoma y continua al paso 3.
+- Si el archivo **no existe**: continua al Paso 3 (primera ejecucion).
+- Si existe con `substatus: IN‑PROGRESS`: activa flujo de retoma y continua al Paso 3.
 - Si existe con `substatus: DONE`: informa que el documento ya esta completo y pide confirmacion antes de sobrescribir.
-  - Si el usuario confirma sobrescribir: continua al paso 3.
+  - Si el usuario confirma sobrescribir: continua al Paso 3.
   - Si el usuario cancela: deten la ejecucion sin modificar el archivo.
 
-### 3. Verificar que el template existe
+### Paso 3 — Verificar que el template existe
 
-El archivo de plantilla es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derréglelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
+El archivo de plantilla es la **única fuente de información estructural** para generar el output. Define qué secciones existen, en qué orden y con qué propósito. Nunca codifique directamente los nombres o la estructura de las secciones en esta habilidad; siempre derívelos de la plantilla en tiempo de ejecución. Si la plantilla cambia, el output generado se actualizará automáticamente.
 
 El archivo de plantilla es de **solo lectura**. Nunca escriba en él, lo modifique ni lo use como ruta de salida.
 
@@ -73,7 +138,7 @@ Lee el archivo de plantilla `assets/project-plan-template.md`.
 
 - Si el archivo **existe**: continua.
 
-### 4. Story Mapping (fase previa a la planificación)
+### Paso 4 — Story Mapping (fase previa opcional)
 
 Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/story-map.md`:
 
@@ -81,7 +146,7 @@ Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/story-map.md`:
 
 - Informa al usuario:
   > ✅ Se encontró `$SPECS_BASE/specs/projects/$PROJ_DIR/story-map.md`. Se usará como guía estructural para el plan de proyecto.
-- Continúa al paso 5 con el story map disponible como contexto adicional.
+- Continúa al Paso 5 con el story map disponible como contexto adicional.
 
 **Si el archivo NO existe:**
 
@@ -92,10 +157,10 @@ Lee `$SPECS_BASE/specs/projects/$PROJ_DIR/story-map.md`:
   > 1. **Sí, hacer Story Mapping ahora** — invoca el skill `project-story-mapping` y luego continúa con la planificación.
   > 2. **No, continuar sin Story Mapping** — salta directamente a la planificación (comportamiento anterior).
 
-  - Si el usuario elige **opción 1**: invoca el skill `project-story-mapping`. Cuando termine y `story-map.md` esté generado, continúa al paso 5 con el story map como contexto.
-  - Si el usuario elige **opción 2**: continúa al paso 5 sin story map (comportamiento idéntico a la versión anterior).
+  - Si el usuario elige **opción 1**: invoca el skill `project-story-mapping`. Cuando termine y `story-map.md` esté generado, continúa al Paso 5 con el story map como contexto.
+  - Si el usuario elige **opción 2**: continúa al Paso 5 sin story map (comportamiento idéntico a la versión anterior).
 
-### 5. Delegar al project-architect
+### Paso 5 — Delegar al project-architect
 
 Invoca al agente `project-architect` con la siguiente instrucción:
 
@@ -118,7 +183,7 @@ El `project-architect` se encargará de:
 - Agrupar en releases con MVP en Release 1, incluyendo criterios de éxito
 - Escribir el documento final con metadatos y checkboxes vacíos `- [ ]`
 
-### 6. Confirmar output
+### Paso 6 — Confirmar output
 
 Cuando el `project-architect` termine:
 
@@ -128,3 +193,8 @@ Cuando el `project-architect` termine:
   > Path: `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md`
   > Workflow completo: el documento esta listo para revision.
 3. Si no existe, informa al usuario que algo salió mal y sugiere ejecutar `/project-planning` nuevamente.
+
+## Salida
+
+- `$SPECS_BASE/specs/projects/$PROJ_DIR/project-plan.md` — plan del proyecto con features FEAT-NNN
+  agrupadas en releases priorizados, generado por `project-architect`.

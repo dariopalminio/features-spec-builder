@@ -1,27 +1,99 @@
 ---
 name: docs-wiki-builder
 description: >-
-  Reorganizes the $SPECS_BASE/ directory as a navigable wiki with a central index ($SPECS_BASE/index.md)
-  and internal wikilinks [[slug]]. Implements the LLM Wiki pattern (Karpathy): the LLM reads
-  index.md first to get the full documentation map before opening individual nodes, making
-  context retrieval O(index) instead of O(all-files). Use when you want to generate or update
-  the docs wiki structure, create the index, or validate internal wikilinks.
-alwaysApply: false
+  Reorganiza el directorio $SPECS_BASE/ como una wiki navegable con un índice central
+  ($SPECS_BASE/index.md) y wikilinks internos [[slug]]. Implementa el patrón LLM Wiki
+  (Karpathy): el LLM lee index.md primero para obtener el mapa completo de la documentación
+  antes de abrir nodos individuales, haciendo el acceso O(index) en lugar de O(all-files).
+  Usar cuando se quiere generar o actualizar la estructura wiki de docs, crear el índice
+  central o validar wikilinks internos.
+  Invocar también cuando el usuario mencione "wiki de docs", "índice de documentación",
+  "wikilinks", "LLM wiki", "docs-wiki-builder" o equivalentes.
+triggers:
+  - docs-wiki-builder
+  - /docs-wiki-builder
+  - wiki de docs
+  - índice de documentación
+  - generar wiki
+  - wikilinks
 ---
 
-Eres el orquestador del skill `docs-wiki-builder`. Tu responsabilidad es reorganizar el directorio $SPECS_BASE (SDDF_ROOT) como una wiki navegable, generar `$SPECS_BASE/index.md` como mapa principal y validar los wikilinks internos. Operas completamente inline — sin delegar a subagentes.
+# Skill: `/docs-wiki-builder`
 
----
+**Cuándo usar este skill:**
+Usar cuando se quiere generar o actualizar la estructura wiki de `$SPECS_BASE/`, crear el
+índice central de documentación, validar wikilinks internos, o reorganizar el directorio de
+docs como una wiki navegable que el LLM puede leer eficientemente. Invocar también cuando
+el usuario mencione "wiki de docs", "índice de documentación", "wikilinks", "LLM wiki",
+"docs-wiki-builder" o equivalentes.
 
-## Paso 0 — Verificar entorno (`skill-preflight`)
+## Objetivo
+
+Reorganiza el directorio `$SPECS_BASE/` como una wiki navegable, genera `$SPECS_BASE/index.md`
+como mapa principal de toda la documentación y valida los wikilinks internos. Implementa el
+patrón LLM Wiki (Karpathy): el LLM lee `index.md` primero para obtener el mapa completo antes
+de abrir nodos individuales, haciendo el acceso O(index) en lugar de O(all-files).
+
+Opera completamente inline — sin delegar a subagentes.
+
+**Qué hace este skill:**
+- Detecta el estado actual de `$SPECS_BASE/` y elige el flujo adecuado (crear, reorganizar o actualizar)
+- Crea la estructura de directorios de la wiki si no existe
+- Reorganiza archivos `.md` dispersos en los subdirectorios correctos (con confirmación previa)
+- Genera `$SPECS_BASE/index.md` con wikilinks `[[slug]]` organizados por sección
+- Valida wikilinks y marca nodos pendientes (archivos referenciados que aún no existen)
+- Aplica frontmatter YAML a archivos procesados que no lo tengan
+
+**Qué NO hace este skill:**
+- No elimina archivos existentes bajo ninguna circunstancia
+- No sobreescribe frontmatter existente en archivos — el usuario puede invocar `/header-aggregation` para eso
+- No renderiza el grafo de wikilinks — se recomienda la extensión Foam en VS Code
+
+## Entrada
+
+- `$SPECS_BASE/` — directorio base de documentación (resuelto por `skill-preflight`)
+- `assets/wiki-index-template.md` — template base para `$SPECS_BASE/index.md` (solo lectura)
+- Argumentos opcionales del usuario: `--update`, `--dry-run`
+
+## Parámetros
+
+- `--update`: modo actualización — solo regenera `$SPECS_BASE/index.md` sin modificar estructura de directorios
+- `--dry-run`: modo simulación — muestra el plan completo sin ejecutar ninguna acción
+
+## Precondiciones
+
+- El entorno debe superar el preflight (`skill-preflight`) sin errores
+- `assets/wiki-index-template.md` debe existir en el directorio del skill
+
+## Dependencias
+
+- Skills: [`skill-preflight`]
+- Archivos: [`assets/wiki-index-template.md`]
+- Extensión recomendada: Foam (`foam.foam-vscode`) para visualizar el grafo de wikilinks en VS Code
+
+## Modos de ejecución
+
+- **Manual** (`/docs-wiki-builder`): modo completo — analiza el estado de `$SPECS_BASE/`, propone plan, confirma con el usuario y ejecuta.
+- **`--update`**: regenera solo `$SPECS_BASE/index.md` incorporando archivos nuevos; no modifica la estructura de directorios.
+- **`--dry-run`**: muestra el plan completo (directorios, movimientos, frontmatter) sin escribir ni crear ningún archivo.
+
+## Restricciones / Reglas
+
+- **No-eliminación:** este skill NUNCA elimina archivos existentes. Solo crea nuevos archivos o directorios, o propone mover archivos con confirmación explícita del usuario.
+- **Confirmación obligatoria antes de mover:** en el Flujo B, siempre solicitar confirmación antes de ejecutar cualquier movimiento.
+- **No sobreescritura de frontmatter:** si un archivo ya tiene frontmatter, se preserva sin modificación. No fusionar automáticamente.
+- **Wikilinks no bloqueantes:** nodos pendientes (wikilinks sin archivo correspondiente) no detienen la generación del índice — se marcan con ⚠️.
+- **Template de solo lectura:** `assets/wiki-index-template.md` nunca se modifica ni se usa como ruta de salida.
+
+## Flujo de ejecución
+
+### Paso 0 — Verificar entorno (`skill-preflight`)
 
 Invocar `skill-preflight` antes de cualquier operación con archivos. El preflight verifica `SDDF_ROOT`, resuelve `SPECS_BASE` (fallback: `docs`) y confirma los subdirectorios de specs estándar. Si retorna `✗ Entorno inválido`, detener la ejecución.
 
 Usar `$SPECS_BASE` (resuelto por `skill-preflight`) para todas las rutas en los pasos siguientes.
 
----
-
-## Paso 1 — Detectar modo de invocación
+### Paso 1 — Detectar modo de invocación
 
 Antes de cualquier acción, determina el modo de ejecución según los argumentos del usuario:
 
@@ -31,9 +103,7 @@ Antes de cualquier acción, determina el modo de ejecución según los argumento
 | `--update` | Modo actualización — solo regenerar `$SPECS_BASE/index.md` |
 | `--dry-run` | Modo simulación — mostrar plan sin ejecutar nada |
 
----
-
-## Paso 2 — Detectar estado actual de $SPECS_BASE/
+### Paso 2 — Detectar estado actual de $SPECS_BASE/
 
 1. Verifica si el directorio `$SPECS_BASE/` existe en la raíz del repositorio.
 2. Si existe, verifica si contiene `$SPECS_BASE/index.md`.
@@ -47,9 +117,7 @@ Con esa información, determina el flujo a seguir:
 | `$SPECS_BASE/` existe pero sin `index.md` ni subdirectorios wiki | → Flujo B: reorganizar estructura existente |
 | `$SPECS_BASE/` existe con `index.md` | → Flujo C: actualizar índice existente |
 
----
-
-## Paso 3 — Flujo A: Crear estructura desde cero
+### Paso 3 — Flujo A: Crear estructura desde cero
 
 Si `$SPECS_BASE/` no existe o está vacío:
 
@@ -67,11 +135,7 @@ Si `$SPECS_BASE/` no existe o está vacío:
    ```
 2. Continúa al **Paso 5** para generar el índice.
 
-**Regla de no-eliminación:** Este skill NUNCA elimina archivos existentes. Solo crea nuevos archivos o directorios, o propone mover archivos con confirmación explícita del usuario.
-
----
-
-## Paso 4 — Flujo B: Reorganizar estructura existente
+### Paso 4 — Flujo B: Reorganizar estructura existente
 
 Si `$SPECS_BASE/` existe con archivos pero sin estructura wiki:
 
@@ -106,11 +170,9 @@ Si `$SPECS_BASE/` existe con archivos pero sin estructura wiki:
 
 4. Si el usuario confirma, ejecuta los movimientos. Si cancela, detiene la ejecución sin modificar nada.
 
-5. **Regla de no-eliminación:** NUNCA eliminar archivos. Solo mover o crear. Si un movimiento requería sobreescribir un archivo existente, avisar al usuario y saltarlo.
+5. Si un movimiento requeriría sobreescribir un archivo existente, avisar al usuario y saltarlo.
 
----
-
-## Paso 5 — Generar $SPECS_BASE/index.md
+### Paso 5 — Generar $SPECS_BASE/index.md
 
 Lee el template `assets/wiki-index-template.md`.
 
@@ -148,9 +210,7 @@ Construye `$SPECS_BASE/index.md` listando todos los archivos `.md` encontrados e
 
 **Modo `--update`:** En este modo, solo regenera `$SPECS_BASE/index.md` incorporando archivos nuevos. No modifica la estructura de directorios ni el contenido de otros archivos. Los archivos ya referenciados en el índice previo se mantienen.
 
----
-
-## Paso 6 — Validar wikilinks y detectar nodos pendientes
+### Paso 6 — Validar wikilinks y detectar nodos pendientes
 
 Para cada wikilink `[[slug]]` que aparezca en el índice generado:
 
@@ -173,13 +233,11 @@ Crea estos archivos cuando estés listo para expandir la wiki.
 
 Si no hay nodos pendientes, omite el resumen.
 
----
-
-## Paso 7 — Aplicar frontmatter YAML a nodos
+### Paso 7 — Aplicar frontmatter YAML a nodos
 
 Para cada archivo `.md` procesado (creado o movido) por el skill:
 
-### Reglas de derivación de frontmatter
+#### Reglas de derivación de frontmatter
 
 - **`type`**: Se deriva según la ubicación del archivo:
   - Archivos en `$SPECS_BASE/knowledge/` → `knowledge`
@@ -190,18 +248,16 @@ Para cada archivo `.md` procesado (creado o movido) por el skill:
 - **`slug`**: Nombre del archivo sin extensión, en kebab-case. Ejemplo: `project-intent.md` → `project-intent`.
 - **`title`**: Primer heading `#` del documento. Si no hay heading, usar el nombre de archivo formateado.
 - **`date`**: Fecha actual en formato YYYY-MM-DD.
-- **`status`**: `**substatus**: IN‑PROGRESS` → `IN-PROGRESS`; `**substatus**: DONE` → `COMPLETED`; ausente → `BACKLOG`.
-- **`substatus`**: `**substatus**: IN‑PROGRESS` → `IN‑PROGRESS`; `**substatus**: DONE` → `DONE`; ausente → `N/A`.
+- **`status`**: `substatus: IN‑PROGRESS` → `IN-PROGRESS`; `substatus: DONE` → `COMPLETED`; ausente → `BACKLOG`.
+- **`substatus`**: `substatus: IN‑PROGRESS` → `IN‑PROGRESS`; `substatus: DONE` → `DONE`; ausente → `N/A`.
 - **`parent`**: `N/A` por defecto (sin nodo padre).
 
-### Comportamiento según estado del archivo
+#### Comportamiento según estado del archivo
 
 - **Archivo sin frontmatter**: añadir el bloque YAML al inicio del archivo preservando el contenido original intacto debajo del bloque.
 - **Archivo con frontmatter existente**: preservarlo sin modificación. No sobreescribir ni fusionar automáticamente — el usuario puede invocar `/header-aggregation` si necesita actualizar el frontmatter de archivos existentes.
 
----
-
-## Paso 8 — Modo --dry-run
+### Paso 8 — Modo --dry-run
 
 Si el usuario invocó el skill con `--dry-run`:
 
@@ -230,9 +286,7 @@ Si el usuario invocó el skill con `--dry-run`:
    No se realizó ningún cambio. Invoca el skill sin --dry-run para ejecutar.
    ```
 
----
-
-## Paso 9 — Resumen final
+### Paso 9 — Resumen final
 
 Al completar la ejecución, muestra un resumen:
 
@@ -262,3 +316,9 @@ Siguiente paso: Invoca con --update para regenerar el índice cuando añadas nue
 ```
 
 > 💡 Para visualizar el grafo de la wiki, instala la extensión [Foam](https://marketplace.visualstudio.com/items?itemName=foam.foam-vscode) en VS Code.
+
+## Salida
+
+- `$SPECS_BASE/index.md` — índice central de la wiki con wikilinks `[[slug]]` organizados por sección.
+- Estructura de directorios de la wiki creada o actualizada en `$SPECS_BASE/`.
+- Archivos `.md` procesados con frontmatter YAML añadido (solo los que no tenían frontmatter previo).
