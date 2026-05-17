@@ -16,8 +16,7 @@ updated: 2026-05-13
 Integra la lectura y validación del Definition of Done en los tres skills del pipeline de historias SDD. Cada skill leerá su sección correspondiente del archivo `$SPECS_BASE/policies/definition-of-done-story.md` (PLAN, IMPLEMENTING, CODE-REVIEW) y validará que los criterios de esa fase estén cumplidos antes de avanzar al siguiente estado. Convierte el DoD en un quality gate ejecutable dentro del flujo automatizado.
 
 ## Features
-- [ ] Mejorar skill-creator con dynamic-template skill-creator lee assets/skill-template.md en runtime al crear un skill nuevo
-Cuando el skill-creator genera el SKILL.md de un skill nuevo, SHALL leer `assets/skill-template.md` antes de escribir cualquier contenido. El modelo SHALL extraer las secciones del template dinámicamente y completarlas con la información del skill en lugar de generar estructura hardcodeada.
+- [x] Mejorar skill-creator con dynamic-template skill-creator lee assets/skill-template.md en runtime al crear un skill nuevo. Cuando el skill-creator genera el SKILL.md de un skill nuevo, SHALL leer `assets/skill-template.md` antes de escribir cualquier contenido. El modelo SHALL extraer las secciones del template dinámicamente y completarlas con la información del skill en lugar de generar estructura hardcodeada.
 - [x] FEAT-068 - **DoD PLAN en story-analyze:** Leer sección PLAN del DoD y validar criterios antes de avanzar a READY-FOR-IMPLEMENT
 - [x] FEAT-069 - **DoD IMPLEMENTING en story-implement:** Leer sección IMPLEMENTING del DoD y validar criterios antes de avanzar a READY-FOR-CODE-REVIEW
 - [x] FEAT-070 - **DoD CODE-REVIEW en story-code-review:** Leer sección CODE-REVIEW del DoD y validar criterios, influyendo en `review-status`
@@ -26,7 +25,7 @@ Cuando el skill-creator genera el SKILL.md de un skill nuevo, SHALL leer `assets
 - [x] FEAT-073 - **Construir skill `security-audit` para auditoría automática condicional de seguridad**. El security-audit ejecuta un análisis estático de seguridad. El skill story-code-review debe invocar al security-audit para analizar los cambios de la story foco. Si el security-audit reporta hallazgos de seguridad con severidad HIGH o MEDIUM, story-code-review debe indicar el `review-status` del reporte a `needs-changes` y los hallazgos se documentan en fix-directives.md como parte de las directivas de corrección para el desarrollador.
 
 ## Flujos Críticos / Smoke Tests
-*Si alguno de estos falla, se debe detener el despliegue (o se debe hacer rollback automático).*con
+*Si alguno de estos falla, se debe detener el despliegue (o se debe hacer rollback automático).*
 
 ### Escenario 1: story-analyze detecta criterio DoD PLAN no cumplido
 **DADO** una historia con `status: PLANNING/IN-PROGRESS` y los artefactos story.md, design.md y tasks.md presentes  
